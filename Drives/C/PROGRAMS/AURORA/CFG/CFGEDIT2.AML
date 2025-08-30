@@ -1,0 +1,88 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGEDIT2.AML
+// Configuration for Edit Options 2
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+constant default_eotline = "ננננננ End of Text ננננננ"
+
+variable enterins, enterovl, options, eotline
+
+// create dialog box
+dialog "Edit Options 2" 64 19 "cp"
+
+// insert mode <enter> key
+groupbox 'Enter in Insert Mode:' 3 2
+  (menu ''
+     item " ( ) &Split Line"
+     item " ( ) &Insert Line"
+     item " ( ) Go to &Next Line "
+   end) '' (if? _EnterIns _EnterIns 'n') "sin"
+
+// overstrike mode <enter> key
+groupbox 'Enter in Overstrike Mode:' 26 2
+  (menu ''
+     item " ( ) &Split Line"
+     item " ( ) &Insert Line"
+     item " ( ) Go to &Next Line"
+   end)  '' (if? _EnterOvl _EnterOvl 'n') "sin"
+
+// option switches
+groupbox 'Options:' 3 7
+  (menu ''
+     item " [ ] &Join Lines on Delete Character at End-of-Line"
+     item " [ ] Join Lines on &Backspace at Column One"
+     item " [ ] &Rubout on Backspace in Overstrike Mode"
+     item " [ ] Copy/Move/Paste Line Blocks &Above the Current Line    "
+     item " [ ] &Use Current Line on Clipboard Cut/Copy when no Mark"
+     item " [ ] Repeat Current Line on &Copyblock when no Mark"
+     item " [ ] Delete Current Line on &Deleteblock when no Mark"
+     item " [ ] &Highlight the Cursor Line"
+   end) '' (if? _DelJoin  == 'y' 'b') +
+           (if? _BakJoin  == 'y' 'c') + (if? _BakOvl   == 'y' 'd') +
+           (if? _InsAbove == 'y' 'e') + (if? _ClipLine == 'y' 'f') +
+           (if? _CopyLine == 'y' 'g') + (if? _DelLine  == 'y' 'h') +
+           (if? _CurHigh  == 'y' 'i')
+           'bcdefghi'
+
+// end-of-text line
+field "&End-of-Text Line:"  3 17 59
+      (if? _EOTLine _EOTLine default_eotline)
+
+// ok/cancel buttons
+button "O&k"    54  3 8
+button "Cancel" 54  5 8
+
+// display dialog box
+if (getdialog ref enterins ref enterovl ref options
+              ref eotline) == 'Ok' then
+  prf.EnterIns = enterins
+  prf.EnterOvl = enterovl
+  prf.DelJoin  = if? (pos 'b' options) 'y' 'n'
+  prf.BakJoin  = if? (pos 'c' options) 'y' 'n'
+  prf.BakOvl   = if? (pos 'd' options) 'y' 'n'
+  prf.InsAbove = if? (pos 'e' options) 'y' 'n'
+  prf.ClipLine = if? (pos 'f' options) 'y' 'n'
+  prf.CopyLine = if? (pos 'g' options) 'y' 'n'
+  prf.DelLine  = if? (pos 'h' options) 'y' 'n'
+  prf.CurHigh  = if? (pos 'i' options) 'y' 'n'
+  prf.EOTLine  = if? eotline <> default_eotline eotline ''
+
+  // apply CurHigh and EOTLine immediately
+  w = getcurrwin
+  while w do
+    if wintype? "edit" w then
+      colorcursor (if? _CurHigh == 'y' (getpalette 4) -2) (getwincurs w)
+      if _EOTLine then
+        settitle _EOTLine 'z' 4 w
+        eotstring 4 w
+      else
+        eotstring -1 w
+      end
+    end
+    w = getprevwin w
+  end
+end

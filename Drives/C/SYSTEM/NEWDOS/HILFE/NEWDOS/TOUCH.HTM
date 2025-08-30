@@ -1,0 +1,83 @@
+<HTML><HEAD><TITLE>TOUCH</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>TOUCH</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>ndert Datum und/oder Uhrzeit von Dateien.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">TOUCH [Dateiname/n] [Parameter1..x]</FONT>
+
+<FONT COLOR="green">[Dateiname/n]</FONT>
+
+Hier k”nnen Sie einen Pfadnamen, einen einzelnen Dateinamen oder Ersatz-
+zeichen (Wildcards wie z.B. *.*, *.bak) eingeben. Ggf. durchsucht Touch
+auch ein Verzeichnis oder einen ganzen Datentr„ger nach einer Datei, so
+daá Sie auf genaue Pfadeingaben verzichten k”nnen. Benutzen Sie dann
+Parameter /s.
+
+<FONT COLOR="green">[Parameter1..x]</FONT>
+
+/d:tt.mm.jj     (Tag.Monat.Jahr oder Tag-Monat-Jahr)
+                Hiermit geben Sie das Datum an, mit dem die Datei versehen
+                werden soll. Wenn Sie nur /d eingeben, wird das aktuelle
+                Datum verwendet und wenn Sie diesen Parameter ganz weglassen,
+                bleibt das ursprngliche Dateidatum erhalten. Geben Sie das
+                Datum immer vollst„ndig ein (z.B. /d:01.09.99) ein, weil
+                ansonsten das aktuelle Datum eingesetzt wird.
+
+/t:hh:mm:ss     (Stunden:Minuten:Sekunden)
+                Hiermit geben Sie die Uhrzeit an, mit dem die Datei versehen
+                werden soll. Wenn Sie nur /t eingeben, wird die aktuelle
+                Zeit verwendet und wenn Sie diesen Parameter ganz weglassen,
+                bleibt die ursprngliche Dateizeit erhalten. Geben Sie die
+                Zeit immer vollst„ndig ein (z.B. /d:01:03:00) ein, weil
+                ansonsten die aktuelle Zeit eingesetzt wird.
+
+Wenn Sie beide Parameter weglassen, wird Touch nicht ausgefhrt.
+
+/y              ver„ndert auch Systemdateien. Dies sollten Sie jedoch nur
+                tun, wenn Sie wissen, daá das ndern von Systemdateien Ihren
+                PC lahmlegen kann und wie Sie diesen Zustand wieder beheben.
+
+/s              bearbeitet auch alle Dateien in Unterverzeichnissen
+
+/p              fragt bei jeder Datei nach, ob deren Datum und/oder Zeit
+                ge„ndert werden soll. Antworten Sie mit j oder ENTER fr Ja,
+                mit n fr Nein oder a fr Alle (keine weiteren Rckfragen).
+
+/h              verarbeitet auch versteckte Dateien
+
+/r              verarbeitet auch schreibgeschtzte Dateien
+
+/o              TOUCH l„uft ohne Benutzerabfrage durch und protokolliert 
+                evtl. aufgetretene Fehler in der <A HREF="logfile.htm">LOG-Datei</A>.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">TOUCH *.bak /s /d:02.07.1999 /t:12:00:00 /h</FONT>
+
+Hier werden alle Dateien (auch in Unterverzeichnissen) mit dem Datum
+01.07.1996 und der Uhrzeit 12:00 Uhr versehen. Versteckte Dateien werden
+ebenfalls ge„ndert.
+
+<FONT COLOR="blue">TOUCH *.bak /s /d:02-07-1999 /t:12-00-00 /h</FONT>
+
+Auch so funktioniert der erste Befehl. Wichtig ist, daá keine Leerzeichen
+in Datum und Uhrzeit enthalten sind und ggf. fhrende Nullen gesetzt werden.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT>
+
+Es ist vorgekommen, daá einige Pack- und Kopierprogramme das Datum der 
+Zieldatei nicht korrekt setzen. Wenn Sie z.B. Betriebssystemdateien gepackt
+haben, kann es vorkommen, daá diese nach dem Entpacken ihren Dienst versagen.
+In diesem Fall mssen Sie das Datum mit Touch an das Originaldatum anpassen.
+
+Programmierer k”nnen damit ihr gesamtes Programmpaket auf ein einheitliches
+Datum setzen (wegen der Optik).</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

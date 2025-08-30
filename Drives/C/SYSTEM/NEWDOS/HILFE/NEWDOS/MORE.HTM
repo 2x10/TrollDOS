@@ -1,0 +1,47 @@
+<HTML><HEAD><TITLE>MORE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>MORE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>gibt eine Datei oder einen Befehl seitenweise aus.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">MORE &lt; Datei
+Befehl | MORE</FONT>     
+
+Datei  : Name der auf dem Bildschirm anzuzeigenden Datei
+Befehl : DOS-Befehl, der seitenweise angezeigt werden soll<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+Seitenweise Anzeige einer langen Textdatei:
+
+<FONT COLOR="blue">MORE &lt; TextFile.txt</FONT>              oder
+<FONT COLOR="blue"><A HREF="help:type">TYPE</A> TextFile.txt | MORE</FONT>  
+
+Seitenweise Anzeige einer Befehlsausgabe (z.B. DIR-Befehl):
+
+<FONT COLOR="blue"><A HREF="help:dir">Dir</A> | MORE</FONT>
+
+MORE hÑlt nach jeder Bildschirmseite an und fordert Sie zu einem Tastendruck 
+auf. Dadurch kînnen auch lange Ausgaben betrachtet werden, die ansonsten Åber
+den Monitor wegscrollen wÅrden. Verwenden Sie zum Abbrechen einer Anzeige 
+immer die Esc-Taste, niemals CTRL+C oder CTRL+Pause. Um den Cursor Åber den
+angezeigten Bildschirm zu bewegen, verwenden Sie die Pfeil-Tasten  sowie
+Pos1 (Home) und Ende (End).
+
+Ausgaben von More kînnen auch in eine Datei umgeleitet werden. Die 
+Aufforderung zum BetÑtigen einer Taste wird jedoch weiterhin nur am 
+Bildschirm angezeigt. Auf diese Weise kînnen Sie z.B. den ersten Teil 
+einer Datei in eine neue Datei kopieren:
+
+<FONT COLOR="blue">MORE &lt; Original &gt; Kopie</FONT>
+
+Falls MORE nicht funktioniert, prÅfen Sie bitte, ob die Variable TEMP in der 
+AUTOEXEC.BAT oder NEWDOS.BAT auf ein geeignetes Verzeichnis gesetzt ist.
+(z.B. <A HREF="help:set">SET</A> TEMP=C:\DOS\TEMP)</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

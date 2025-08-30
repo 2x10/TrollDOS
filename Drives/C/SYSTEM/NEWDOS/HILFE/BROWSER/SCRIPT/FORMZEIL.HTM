@@ -1,0 +1,35 @@
+<HTML><HEAD><TITLE>Format der Formular-Zeile</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Format der Formular-Zeile</FONT>
+<HR noshade color="silver">
+<A HREF="back:">zurck zum letzten Dokument</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A><BR>
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A>
+<HR noshade color="silver">
+Der Browser kann aus den in ein Formular eingetragenen Angaben eine 
+Formularzeile zusammenstellen, die dann von Script-Befehlen 
+weiterverarbeitet werden kann.
+<P>
+Die Formularzeile entsteht durch die Aneinanderreihung der Inhalte 
+("Value"-Werte) <FONT color=maroon>aller</FONT> im Dokument vorhandenen 
+Eingabefelder in einer einzigen Zeile. Diese Zeile kann maximal 255 
+Buchstaben in sich aufnehmen, berz„hlige Zeichen werden ignoriert. Die 
+Reihenfolge der Feldwerte innerhalb dieser Zeile ist identisch mit der 
+Reihenfolge der Eingabefelder im Dokument (genauer: im Quellcode).
+<P>
+Wird die Formularzeile vom Script-Befehl "<A HREF="exec.htm">Exec</A>" 
+weiterverarbeitet, dann fgt der Browser zwischen die einzelnen Werte je 
+ein Leerzeichen ein. 
+<P>
+Soll die Formularzeile jedoch von den Dateiverarbeitungs-Befehlen bernommen 
+werden, werden die einzelnen Werte durch ein Semikolon voneinander getrennt. 
+<P>
+Dieses Format ist kompatibel zu handelsblichen Datenbankprogrammen: durch 
+deren Funktion, eine Datenbankdatei als "Text" einzulesen bzw. abzuspeichern,
+k”nnen somit Daten mit Fremdprogrammen ausgetauscht werden.
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

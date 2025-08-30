@@ -1,0 +1,9 @@
+Load RIVAFIX.COM before loading VBEHZ.COM if you use a video card with NVIDIA
+chipset and want to use the text modes 80x60, 132x25, 132x43, 132x50 or
+132x60.
+RIVAFIX may not work correctly if you use refresh rates higher than 70 Hz
+for the 132 cloumn modes and 100 Hz for 80x60.
+
+
+If you don't like this limitation, contact your video card manufacturer
+and nvidia and ask them to remove the bugs in their BIOSes.

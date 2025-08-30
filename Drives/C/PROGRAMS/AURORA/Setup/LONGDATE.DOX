@@ -1,0 +1,14 @@
+
+ÿÿLONGDATE.AML
+ ÿGet Current Date in Long Formatÿ
+
+  This macro displays the current date and time in long format, i.e.
+  '2:18pm Friday, December 20, 1996'.
+
+  Longdate can be run from an edit window or file manager window. If run
+  from an edit window, the user will be prompted to enter the date into
+  the edit window text.
+
+  This macro calls Cfg\Cfgintnl.x to retrieve the long date in
+  international format.
+

@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+  <TITLE>TREE</TITLE>
+</HEAD>
+<BODY>
+<BR>
+<FONT COLOR="teal">&nbsp;&nbsp;TREE - Eingabemaske</FONT>
+<HR noshade>
+<FORM>
+<PRE>  anzuzeigendes Verzeichnis oder Laufwerk (leer=aktuelles)
+  <INPUT TYPE=File Name=Verzeichnis Maxlength=79 size=74 Value="">
+
+  anzuzeigende Dateien (wenn Auswahl gew&uuml;nscht, z.B. mit *.TXT o.&auml;)
+  <INPUT TYPE=Text Name=Datei Maxlength=79 size=74 Value="">
+
+  <INPUT TYPE=checkbox Name=ASCII     Value="/a"> verwendet einfachen ASCII-Zeichensatz 
+  <INPUT TYPE=checkbox Name=AllFiles  Value="/f"> zeigt auch alle Dateien 
+  <INPUT TYPE=checkbox Name=LowerCase Value="/l"> verwendet Kleinschreibung 
+  <INPUT TYPE=checkbox Name=UpperCase Value="/p"> verwendet Gro&szlig;schreibung f&uuml;r Dateinamen 
+ 
+  <INPUT TYPE=Radio Name=ViewMode Value="/x" checked> normale Darstellung
+  <INPUT TYPE=Radio Name=ViewMode Value="/s"> schmale Darstellung 
+  <INPUT TYPE=Radio Name=ViewMode Value="/v"> sehr schmale Darstellung
+
+  <INPUT TYPE=Button Value="  Ausf&uuml;hren  " 
+   Click="exec:tree &gt; tree.txt;Href:tree.txt">  <INPUT TYPE=Button 
+   Value="   Zur&uuml;ck    " Click="back:">  <INPUT TYPE=Button  
+   Value="    Hilfe    " Click="help:tree">  <INPUT TYPE=Button  
+   Value="   Drucken   " Click="exec:tree &gt; PRN">
+
+</PRE>
+</FORM>
+</BODY></HTML>

@@ -1,0 +1,235 @@
+//--------------------------------------------------------------------
+// SCAN.AML
+// Scan Files, (C) 1993-1996 by nuText Systems
+//
+// (see Scan.dox for user help)
+//
+// This macro searches multiple files on disk for a search string or
+// regular expression pattern.
+//
+// The following search options can be specified:
+//
+//   i - ignore case
+//   u - search within subdirectories also
+//   w - whole words only
+//   x - regular expressions
+//
+// If a directory buffer is passed to the macro (arg 3), then only then
+// only the files in the directory buffer are searched, otherwise the
+// user us prompted to enter a directory or file specification where
+// files will be searched.
+//
+// After the search has completed, a file manager window will be
+// displayed listing all the files where the search string was found.
+// Selecting a file from the file manager will move the cursor to the
+// first oeccurrence of the search string. The 'findlast' command can be
+// used to find other occurrences.
+//
+// This macro calls the Scandlg macro.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//
+// This macro can be run by selecting the Scan Files item on the edit
+// window Search menu or the file manager window Command menu. If run
+// from the file manager window Command menu, then only the files listed
+// in the file manager will be searched.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include  bootpath "define.aml"
+
+// scan status window dimensions
+constant scan_qwidth  = 70  // (for fully qualified scans only)
+constant scan_height  = 16
+
+// scan status window colors
+constant scan_border_color        = color white on gray
+constant scan_text_color          = color black on gray
+constant scan_found_color         = color brightgreen on gray
+constant scan_south_title_color   = color darkgray on green
+
+// this object inherits functions from 'fmgr'
+settype "fmgr"
+
+// use a file list, if passed to this macro
+if bufferflag "d?" (arg 3) then
+  passedbuf = arg 3
+end
+
+// create status window
+private function createstatus (width)
+  createwindow
+  setframe ">b"
+  setcolor  border_color   scan_border_color
+  setcolor  text_color     scan_text_color
+  settitle "Scanning" 'c'
+  setborder "1i"
+  setshadow 2 1
+
+  // center the window
+  height = scan_height
+  ox = (getvidcols - width) / 2
+  oy = (getvidrows - height) / 2
+  sizewindow ox oy ox + width oy + height "ad"
+end
+
+
+variable searchstr, filespec, options, delimit
+variable fileoptions, diroptions, subdir
+
+// scan the current buffer
+private function scanfiles
+  loop
+    // get the next file
+    file = fgetfile
+
+    // check for subdirectories
+    if file [LAST_CHAR] == '\\' then
+      delline
+      if subdir and not (pos ".." file) then
+        insertbuf file + (getname filespec) '' '' fileoptions '' '' (getlines)
+        while not (getlinelen (getlines)) do
+          delline 1 (getlines)
+        end
+        insertbuf file + "*.*" '' '' diroptions  '' '' (getlines)
+      elseif not getlinelen then
+        break
+      end
+
+    else
+      writestr file
+      display
+      if scanfile file searchstr options delimit then
+        writestr "FOUND" scan_found_color (getcoord 'x1') - 7
+        if not down then
+          break
+        end
+      else
+        if delline > getrow or (not getlinelen) then
+          break
+        end
+      end
+      writeline
+      display
+    end
+  end
+end
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+// get the scan multistring from the user
+scanstring = runmacro (bootpath "macro\\scandlg.x") '' passedbuf
+
+// use defaults if needed
+n = splitstr '' scanstring ref searchstr ref filespec ref options
+if n < 3 then
+  options = _SearchOpt
+end
+if not filespec then
+  filespec = '.'
+end
+
+if not scanstring or not searchstr then
+  return
+end
+
+addhistory "_scan" scanstring
+addhistory "_find" (joinstr '' searchstr options)
+
+// copy passed buffer
+if passedbuf then
+  markline 1 (getlines) 'T' passedbuf
+  scanbuf = if? (getbinarylen passedbuf) (createbbuf) (createbuf)
+  copyblock 'T'
+  destroymark 'T'
+  delline
+  filespec = onname (getbufname passedbuf)
+  setbufname filespec
+
+// load new buffer if none passed
+else
+  subdir = pos 'u' options
+  filespec = onname (qualify filespec (getbufname))
+  fileoptions = (sub 'd' '' _FmgrOpt) + 'f' + _NameStyle + (if? subdir 'vq' '')
+  scanbuf = loadbuf filespec '' '' fileoptions
+  if subdir then
+    diroptions = (sub 'f' '' fileoptions) + 'd'
+    insertbuf (qualify "*.*" filespec) '' '' diroptions '' '' (getlines)
+  end
+end
+
+if not scanbuf then
+  return
+end
+
+if not getlinelen or not (dir? filespec) then
+  destroybuf
+  display
+  queue "msgbox" filespec + " not found"
+  return
+end
+
+// create scan status window
+createstatus (if? (getbinarylen)
+                length (getpath filespec) + 24 scan_qwidth)
+display
+
+// set line delimiter to use for the scan
+delimit = hex2bin _LineDlm
+
+scanfiles
+breakoff
+
+// <ctrl break> was pressed, delete remainder
+if down then
+  markline getrow - 1 (getlines) 'T'
+  deleteblock 'T'
+end
+destroywindow
+
+if getlinelen then
+  openbuf scanbuf
+  setwinobj (getcurrobj)
+
+// not found
+else
+  destroybuf
+  queue "msgbox"  "'" + searchstr + "' not found"
+  return
+end
+
+// stay resident
+resident ON
+
+
+// scan windows are fmgr windows with the following modifications:
+
+key <enter>
+  // turn off FmgrQuit temporarily to prevent window from being closed
+  fquit = prf.FmgrQuit
+  fmgr.FmgrQuit = ''
+  pass
+  fmgr.FmgrQuit = fquit
+  addhistory "_find" (joinstr '' searchstr options)
+  // position cursor to first occurrence of the search string
+  gotopos 1 (if? (pos 'r' options) (getlines) 1)
+  queue "onfound" (search (joinstr '' searchstr options + '*'))
+end
+
+
+// destroy this object when the scan window is closed
+function onclose
+  pass
+  destroyobject
+end

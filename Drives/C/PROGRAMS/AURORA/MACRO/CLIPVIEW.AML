@@ -1,0 +1,134 @@
+//--------------------------------------------------------------------
+// CLIPVIEW.AML
+// Clipboard Viewer, (C) 1993-1996 by nuText Systems
+//
+// (See Clipview.dox for user help)
+//
+// This macro displays the contents of the current clipboard.
+// A menu is also displayed which allows you to clear the clipboard,
+// paste from the clipboard, and change the current (displayed)
+// clipboard.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// initial popup window dimensions
+constant view_width  = 71
+constant view_height = 13
+
+// colors
+constant view_title_color        = color black on gray
+constant view_menu_color         = color white on blue
+constant view_menu_hotkey_color  = color yellow on blue
+constant view_menu_hilite_color  = color white on cyan
+
+variable emptybuf, emptycurs, clipbuf
+
+// inherit from the 'popup' object
+settype "popup"
+
+// clear the clipboard
+function vclear
+  setwincurs
+  if clipbuf then
+    destroybuf clipbuf
+    clipbuf = ''
+  end
+  if not emptybuf then
+    emptybuf = createbuf
+    emptycurs = createcursor
+  end
+  setwincurs emptycurs
+end
+
+// paste from the clipboard
+function vpaste (options)
+  if getwinbuf == emptybuf then
+    msgbox "Nothing to paste."
+  else
+    close
+    queue "paste" options
+  end
+end
+
+// change the current (displayed) clipboard
+function vview
+  buffer = ask "Enter the Clipboard to view" '' (if? clipbuf clipbuf _ClipName)
+  if buffer
+    if buffer? buffer then
+      colormark (getpalette 6) (getcurrmark clipbuf)
+      clipbuf = buffer
+      // change the current clipboard
+      prf.ClipName = clipbuf
+      setwincurs
+      cursor = getcurrcurs clipbuf
+      if not cursor then
+        cursor = createcursor '' clipbuf
+      end
+      setwincurs cursor
+      colormark -2 (getcurrmark clipbuf)
+      settitle "Clipboard '" + clipbuf + "'"
+    else
+      msgbox "Clipboard '" + buffer + "' not found."
+    end
+  end
+end
+
+// called when the popup window is created
+function onopen
+  colormark -2 (getcurrmark)
+  setcolor north_title_color  view_title_color
+  setcolor menu_color         view_menu_color
+  setcolor menu_hotkey_color  view_menu_hotkey_color
+  setcolor menu_hilite_color  view_menu_hilite_color
+  setframe "+4"
+  menubar '' 4
+    item "{Ctrl-C}=Clear"       vclear
+    item "{Ctrl-P}=Paste"       vpaste
+    item "{Ctrl-O}=Paste Over"  vpaste 'o'
+    item "{Ctrl-V}=View"        vview
+    item "{Esc}=Exit"           close
+  end
+  if (getcoord 'y') + 2 <= getvidrows then
+    sizewindow 0 0 0 2
+  end
+  setwinctrl "ð" 2
+end
+
+// called when the popup window is destroyed
+function onclose
+  colormark (getpalette 6) (getcurrmark)
+end
+
+// macro help
+macrofile = arg 1
+key <f1>
+  helpmacro macrofile
+end
+
+key <ctrl c>  vclear
+key <ctrl p>  vpaste
+key <ctrl o>  vpaste 'o'
+key <ctrl v>  vview
+end
+// (<esc> is handled by 'popup' object)
+
+if not _ClipName or not (buffer? _ClipName) then
+  emptybuf = createbuf
+  emptycurs = createcursor
+else
+  clipbuf = _ClipName
+end
+
+// display the clipboard window
+popup (if? emptybuf emptybuf clipbuf)  "Clipboard '" + _ClipName + "'"
+      view_width view_height (getcurrobj)
+
+if emptybuf then
+  destroybuf emptybuf
+end

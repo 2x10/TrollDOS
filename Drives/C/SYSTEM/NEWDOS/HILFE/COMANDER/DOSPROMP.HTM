@@ -1,0 +1,87 @@
+<HTML><HEAD><TITLE>Internes DOS-Prompt</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Internes DOS-Prompt</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver"><PRE><FONT COLOR="maroon">Schnellkurs</FONT>
+
+1. Q oder CTRL+Q zeigt ein DOS-Prompt im Comander; W oder CTRL+W ein
+   DOS-Fenster. CTRL+E erzeugt ein "echtes <A HREF="#gateway">DOS-Gateway</A>".
+2. CTRL oder die DOS-Standardparameter /p und | <A HREF="../newdos/more.htm">more</A> verhindern das
+   šberblenden der letzten Anzeigeseite durch den Comander.
+3. Befehlsstapel; editierbare Befehlszeile.
+4. CRTL+J holt den im Comander markierten Dateinamen in die Befehlszeile
+5. Stapelh”he im <A HREF="konfix.htm">Konfix</A>-Men einstellbar (Seite 2)<HR 
+noshade color="silver"><FONT COLOR="maroon">Beschreibung</FONT>
+
+Mit der Taste Q oder der Kombination CTRL+Q rufen Sie ein internes DOS-Prompt
+auf. Die Zeile mit den F-Tasten wird hierzu gel”scht. Mit Esc kehren Sie zum
+Comander zurck.
+
+Taste W oder Kombination CTRL+W hingegen ”ffnet ein groáes DOS-Fenster.
+Ansonsten ist die Funktionsweise identisch.
+
+Das Comander-Prompt bietet gegenber dem "echten" DOS-Prompt weit mehr
+Komfort:
+
+Mit der Tastenkombination CTRL+J wird der Dateiname in die Befehlszeile
+eingefgt, auf dem im Comander der Lichtbalken steht.
+
+Es legt einen Befehlsstapel an, d.h. jeder dort eingegebene Befehl wird in
+der Datei STAPEL.LOG im New-DOS-Verzeichnis gespeichert. Wenn Sie das DOS-
+Prompt aktiviert haben und - anstatt einen Befehl einzugeben - die 
+Pfeiltasten Auf/Ab drcken, wird diese Stapeldatei geladen. Durch weiteres 
+Bet„tigen der Pfeiltasten k”nnen Sie nun die Befehle nacheinander in die 
+Eingabezeile zurckholen und mit ENTER ausfhren lassen. Vor der Ausfhrung 
+des gewnschten Befehls wird die Stapeldatei auf der Festplatte gespeichert, 
+so daá sie keinen Arbeitsspeicher belegt. Das hat den angenehmen Nebeneffekt,
+daá sie auch nach dem Ausschalten des Rechners noch vorhanden ist und am
+n„chsten Tag weitergenutzt werden kann.
+
+Das Prompt ist gleichzeitig ein kleiner Editor, d.h. Sie k”nnen die
+Kommandozeile beliebig bearbeiten. Mit den Richtungstasten bewegen Sie den
+Cursor und mit der Rcktaste oder der Entfernen-Taste werden Zeichen
+gel”scht. Die Taste Einfg (Ins) schaltet zwischen Einfge- und šberschreib-
+modus hin und her.
+
+Die Stapeldatei wird sehr sparsam verwaltet: Wenn der zuletzt gespeicherte
+Befehl ein weiteres mal ausgefhrt werden soll, wird er nicht noch einmal in
+der Datei gespeichert. Sie k”nnen also den letzten Befehl beliebig oft
+wiederholen, ohne daá er nach und nach die Stapeldatei fllt.
+
+Das Prompt erkennt selbst„ndig, wenn Sie einen Befehl mit den Parametern /p
+oder | more (fr seitenweises Anzeigen) ausfhren lassen. Der Comander wartet
+mit dem Wiedereinschalten, bis Sie auch die letzte Anzeigeseite betrachtet
+und eine Taste gedrckt haben.
+
+Die H”he des Befehlsstapels l„át sich im Konfix-Men (Seite 2) auf 30 oder
+60 Befehle einstellen. Ist diese maximale Zeilenzahl erreicht, wird immer
+der jeweils „lteste Befehl gel”scht, damit der neue Platz findet.
+
+Der Comander verl„át vor der Ausfhrung des eingegebenen Befehles fast
+vollst„ndig den Arbeitsspeicher, so daá Sie in dieser Hinsicht wie unter dem
+echten DOS-Prompt arbeiten.
+
+Die Tastenkombination CTRL+Q sorgt dafr, daá der DOS-Bildschirm auch dann
+nicht vom Comander berblendet wird, wenn Sie keinen der obengenannten
+Parameter (/p oder | more) eingegeben haben (z.B. bei Befehlen, die sowieso
+nur eine einzige Bildschirmseite anzeigen). Die gleiche Wirkung hat die
+Kombination CTRL+W im DOS-Fenster.
+
+Einen Befehl kann das Comander-Prompt jedoch nicht ausfhren: einen
+Verzeichniswechsel. Den macht der Comander beim Wiedereinschalten
+n„mlich rckg„ngig.
+
+<A NAME="gateway"> 
+<A HREF="#top"> </A><FONT COLOR="maroon">DOS-GateWay</FONT>
+
+Dies ist kein internes DOS-Prompt, sondern ein echtes. D.h., daá COMMAND.COM
+gestartet wird, w„hrend der DOS-Comander im Hintergrund wartet. Dadurch
+steht natrlich weitaus weniger Arbeitsspeicher zur Verfgung, so daá sich
+gr”áere Anwendungsprogramme oft nicht starten lassen. Der Vorteil des
+Gateways ist jedoch, daá Sie auch dann an "Ihr" DOS gelangen, wenn im
+Comander Hintergrundprozesse im Gange sind. Diese werden nur angehalten und
+nach Beendigung des Gateways fortgesetzt.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

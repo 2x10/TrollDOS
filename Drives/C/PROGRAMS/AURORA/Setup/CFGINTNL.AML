@@ -1,0 +1,299 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGINTNL.AML
+// Configuration for International Options
+//
+// This macro is called as a utility from other macros such as Calen4,
+// Calendar, Clock, and Filestat to retrieve international settings
+// and formatted dates/times.
+//
+// When called as a utility from other macros, one of the following
+// options may be passed in arg 3:
+//
+//   'f' - return formatted date (do not display anything).
+//   'n' - return an array of 2-elements: the day and month arrays (do
+//         not display anything).
+//
+// The year, month, day, and day-of-the-week can also be passed as args
+// 4-7. If not specified, the current date is assumed.
+//
+// In the long date format string, the following tokens will be
+// substituted with their actual values:
+//
+//   $D - the day name (Sunday, Monday, etc.)
+//   $d - the day of the month (1-31)
+//   $M - the month name (January, February, etc.)
+//   $y - the year
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// dialog box controls
+variable dlgwindow, wlang, wtime, wdate, wtimesep, wdatesep,
+         wlongdate, wthousands
+
+// return values
+variable language, langname, timeopt, timesep, thousandsep,
+         dateopt, datesep, longformat
+
+variable options, year, month, day, dow
+
+// language data fields
+constant Longformat = 1
+constant Format     = 2
+constant Daynames   = 3
+constant Monthnames = 4
+
+// format fields
+constant Timeformat  = 1
+constant Timesep     = 2
+constant Dateformat  = 3
+constant Datesep     = 4
+constant Thousandsep = 5
+
+// language data
+langdata = {
+  // bokmÜl
+  { "$d. $M $y"  "1:1. "
+    {"sondag" "mandag" "tirsdag" "onsdag" "torsdag" "fredag" "lordag"  }  //¯ in 1,7??
+    {"januar" "februar" "mars" "april" "mai" "juni"
+     "juli" "august" "september" "oktober" "november" "desember"}
+  }
+  // dansk
+  { "$d. $M $y"  "1:1-."
+    {"sondag" "mandag" "tirsdag" "onsdag" "torsdag" "fredag" "lordag"  }  //¯ in 1,7??
+    {"januar" "februar" "marts" "april" "maj" "juni"
+     "juli" "august" "september" "oktober" "november" "december"}
+  }
+  // Deutsch
+  { "$D, $d. $M $y"  "1:1.."
+    {"Sonntag" "Montag" "Dienstag" "Mittwoch" "Donnerstag" "Freitag" "Samstag"}
+    {"Januar" "Februar" "MÑrz" "April" "Mai" "Juni"
+     "Juli" "August" "September" "Oktober" "November" "Dezember"}
+  }
+  // English
+  { "$D, $M $d, $y"  "0:0-,"
+    {"Sunday" "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday"}
+    {"January" "February" "March" "April" "May" "June"
+     "July" "August" "September" "October" "November" "December"}
+  }
+  // espa§ol
+  { "$D $d de $M de $y"  "1:1/."
+    {"domingo" "lunes" "martes" "miÇrcoles" "jueves" "viernes" "s†bado"}
+    {"enero" "febrero" "marzo" "abril" "mayo" "junio"
+     "julio" "agosto" "septiembre" "octubre" "noviembre" "diciembre"}
+  }
+  // franáais
+  { "$D $d $M $y"  "1:1/ "
+    {"dimanche" "lundi" "mardi" "mercredi" "jeudi" "vendredi" "samedi"}
+    {"janvier" "fÇvrier" "mars" "avril" "mai" "juin"
+     "juillet" "aoñt" "septembre" "octobre" "novembre" "däcembre"}
+  }
+  // italiano
+  { "$D $d $M $y"  "1.1/."
+    {"domenica" "lunedç" "martedç" "mercoledç" "giovedç" "venerdç" "sabato"}
+    {"gennaio" "febraio" "marzo" "aprile" "maggio" "giugno"
+     "luglio" "agosto" "settembre" "ottobre" "novembre" "dicembre"}
+  }
+  // Nederlands
+  { "$D $d $M $y"  "1:1-."
+    {"zondag" "manndag" "dinsdag" "woensdag" "donderdag" "vrijdag" "zaterdag"}
+    {"januari" "februari" "maart" "april" "mei" "juni"
+     "juli" "augustus" "september" "oktober" "november" "december"}
+  }
+  // portuguàs
+  { "$D, $d de $M de $y"  "1:1-."
+    {"domingo" "segunda-feira" "teráa-feira" "quarta-feira" "quinta-feira" "sexta-feira" "s†bado"}
+    {"janiero" "fevereiro" "marco" "abril" "maio" "junho"
+     "julho" "agosto" "setembro" "outubro" "novembro" "dezembro"}
+  }
+  // Suomi
+  { "$d. $Mta $y"  "1:1. "
+    {"sunnuntai" "maanantai" "tiistai" "keskiviikko" "torstai" "perjantai" "lauantai"}
+    {"tammikuu" "helmikuu" "maaliskuu" "huhtikuu" "toukokuu" "kesÑkuu"
+     "heinÑkuu" "elokuu" "syyskuu" "lokakuu" "marraskuu" "joulukuu"}
+  }
+  // svenska
+  { "den $d $M $y"  "1:2- "
+    {"sîndag" "mÜndag" "tisdag" "onsdag" "torsdag" "fredag" "lîrdag"}
+    {"januari" "februari" "mars" "april" "maj" "juni"
+     "juli" "augusti" "september" "oktober" "november" "december"}
+  }
+}
+
+
+options = arg 3
+
+// return day and month names only, if requested
+if pos 'n' options then
+  return {langdata [_Language].Daynames langdata [_Language].Monthnames}
+end
+
+// get the current date in long format
+private function longdate (language format)
+  if not year then
+    // note: getrawtime returns "YYYYMMDDWhhmmssuu"  where:
+    // YYYY = year                       hh = hour (0-23)
+    // MM   = month (1-12)               mm = minutes (0-59)
+    // DD   = day (1-31)                 ss = seconds (0-59)
+    // W    = day of week (0=sunday)     uu = hundredths of a sec (0-99)
+    rawtime = getrawtime
+    year  = rawtime [1:4]
+    month = rawtime [5:2]
+    day   = rawtime [7:2]
+    dow   = rawtime [9]
+  end
+  // return long date
+  return (sub '$D' langdata [language].Daynames[dow + 1] (
+          sub '$M' langdata [language].Monthnames[month] (
+          sub '$d' day (
+          sub '$y' year (if? format format langdata [language].Longformat)))))
+end
+
+// return formatted date, if requested
+if pos 'f' options then
+  year = arg 4
+  if year then
+    month = arg 5
+    day   = arg 6
+    dow   = arg 7
+  end
+  return (longdate _Language)
+end
+
+// write samples
+function setsamples
+  international (getrow (getwinbuf wdate)) - 1
+                (gettext '' '' '' (getwinbuf wdatesep))
+                (getrow (getwinbuf wtime)) - 1
+                (gettext '' '' '' (getwinbuf wtimesep))
+                (gettext '' '' '' (getwinbuf wthousands))
+  oldwindow  = gotowindow dlgwindow
+  writestr (thousands 1234567890):13    ''  18 13
+  writestr (gettime):-10                ''  40  6
+  writestr (getdate)                    ''  51  6
+  writestr (longdate (getrow (getwinbuf wlang)) (gettext '' '' '' (getwinbuf wlongdate))):-40  ''  40 13
+  gotowindow oldwindow
+end
+
+// set dlgbox fields with the listbox language
+function setlanguage
+  language = getrow (getwinbuf wlang)
+
+  oldbuf = gotobuf (getwinbuf wlongdate)
+  delchar 16000 1
+  instext langdata [language].Longformat 1
+
+  oldwindow = gotowindow wtime
+  gotobuf (getwinbuf wtime)
+  setgroupbox langdata [language].Format.Timeformat '0123'
+
+  gotobuf (getwinbuf wtimesep)
+  delchar 16000 1
+  instext langdata [language].Format.Timesep
+
+  gotowindow wdate
+  gotobuf (getwinbuf wdate)
+  setgroupbox langdata [language].Format.Dateformat '012'
+
+  gotobuf (getwinbuf wdatesep)
+  delchar 16000 1
+  instext langdata [language].Format.Datesep
+
+  gotobuf (getwinbuf wthousands)
+  delchar 16000 1
+  instext langdata [language].Format.Thousandsep
+
+  gotobuf oldbuf
+  gotowindow oldwindow
+
+  setsamples
+end
+
+// <enter>,<ldouble> on listbox
+function selectlang
+  setlanguage
+  queue "close" "Ok"
+end
+
+// create dialog box
+dlgwindow = dialog "International Options" 72 14 "cp"
+
+// language listbox
+filespec = bootpath "macro\\*.aml"
+databuf "lang"
+  "bokmÜl"      // Norwegian
+  "dansk"       // Danish
+  "Deutsch"     // German
+  "English"     // English
+  "espa§ol"     // Spanish
+  "franáais"    // French
+  "italiano"    // Italian
+  "Nederlands"  // Dutch
+  "portuguàs"   // Portuguese
+  "Suomi"       // Finnish
+  "svenska"     // Swedish
+end
+wlang = listbox "&Language:" 3 2 (getcurrbuf) 12 11
+whenselect "setlanguage"
+whenenter "selectlang"
+
+// set initial language
+row _Language
+language = getrow
+
+// time format
+wtime = groupbox '&Time:' 18 2
+  (menu ''
+     item " ( ) hh mm pm"
+     item " ( ) hh mm"
+     item " ( ) hh mm ss pm   "
+     item " ( ) hh mm ss"
+   end) '' _TimeOpt '0123'
+whenselect "setsamples"
+
+// time separator
+wtimesep = field "T&ime Separator: >"  18 8 3 _TimeSep
+
+// thousands separator
+wthousands = field "T&housands Separator"  18 10 19 _ThousandSep
+
+// date format
+wdate = groupbox '&Date:' 40 2
+  (menu ''
+     item " ( ) mm dd yy      "
+     item " ( ) dd mm yy"
+     item " ( ) yy mm dd"
+   end) '' _DateOpt '012'
+whenselect "setsamples"
+
+// date separator
+wdatesep = field "D&ate Separator: >"  40 8 3 _DateSep
+
+// long date format
+wlongdate = field "L&ong Date:"  40 10 19 _LDateOpt
+
+// buttons
+button "O&k"     62 3  8
+button "Cancel"  62 5  8
+button "&Show"   62 8  8
+  whenenter "setsamples"
+
+// write samples
+setsamples
+
+// display dialog box
+if (getdialog ref langname ref timeopt ref timesep ref thousandsep
+              ref dateopt  ref datesep ref longformat) == 'Ok' then
+  prf.Language = language
+  prf.DateOpt  = dateopt
+  prf.DateSep  = datesep
+  prf.LDateOpt = longformat
+  prf.TimeOpt  = timeopt
+  prf.TimeSep  = timesep
+  prf.ThousandSep = thousandsep
+end
+
+// reset date and time formats
+international _DateOpt _DateSep _TimeOpt _TimeSep _ThousandSep

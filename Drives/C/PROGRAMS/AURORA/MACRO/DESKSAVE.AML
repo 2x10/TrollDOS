@@ -1,0 +1,32 @@
+//--------------------------------------------------------------------
+// DESKSAVE.AML
+// Save Desktop, (C) 1993-1996 by nuText Systems
+//
+// (see Desksave.dox for user help)
+//
+// This macro saves the current desktop layout to a file. If the filename
+// is not passed as arg 3, then the user is prompted to enter the
+// filename of the desktop layout.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+file = arg 3
+if not file then
+  file = ask "Save current desktop to file" "_load"
+end
+
+if file then
+  currdesk
+  if savedesk (qualify (defext file "dst") (getbufname)) then
+    display
+  else
+    msgbox "Can't save " + file
+  end
+end

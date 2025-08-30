@@ -1,0 +1,50 @@
+PROGRAM testunit
+USES test;
+
+PROCEDURE Fenster;
+BEGIN
+  Window (15, 5, 65, 14);
+  TextColor (white); TextBackGround (Blue);
+  ClrScr;
+  WinShadow
+  Einfachrahmen
+  Window (17, 6, 63, 15);
+  WriteLn ('StartmenÅ')
+  Line (#196)
+  WriteLn ('M    Minesweeper');
+  WriteLn ('D    DIR');
+  WriteLn ('P    PC-INFO');
+  WriteLn ('A    Alarm');
+  GotoXY  (1, 8);
+  WriteLn ('Esc  Beenden');
+  MouseOn; CursorOff;
+END;
+
+
+
+PROCEDURE Tastenabfrage;
+BEGIN
+  GetKey
+  MouseOff
+  GetScreen
+  Init;
+  If (#key = 'M') or (@MouseY = 3) Then exec  ('dosmine AO')
+  If (#key = 'D') or (@MouseY = 4) Then exec  ('dir /p')
+  If (#key = 'P') or (@MouseY = 5) Then run   ('pcinfo')
+  If (#key = 'A') or (@MouseY = 6) Then call Alarm;
+  SetScreen
+  MouseOn;
+END;
+
+
+{--------------------------- HauptProgramm ---------------------------} 
+
+BEGIN-MAIN
+  Call FirstScreen
+  REPEAT
+    Call Fenster
+    Call Tastenabfrage
+  UNTIL (#key=#27) or (@MouseY=8);
+  MouseOff; CursorOn;
+  Init
+END.

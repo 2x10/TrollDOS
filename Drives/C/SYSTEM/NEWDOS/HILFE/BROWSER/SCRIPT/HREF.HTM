@@ -1,0 +1,47 @@
+<HTML><HEAD><TITLE>Dokument anzeigen mit HREF:</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Dokument anzeigen mit HREF:</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+
+Mit "Href" befehlen Sie dem Browser, ein neues Dokument auf dem Bildschirm 
+anzuzeigen. Die Angabe eines <A HREF="../html/anker.htm">Ankers</A> ist 
+m”glich.
+
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>href:main.htm</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+In diesem Beispiel wird das HTML-Dokument mit dem Dateinamen "main.htm" 
+angezeigt. Es sind hier auch <A HREF="../relpath.htm">relative
+Pfadangaben</A> m”glich. 
+<P>
+Die "Href"-Anweisung eignet sich dazu, nach der Ausfhrung von anderen 
+Script-Anweisungen zu einem Dokument umzuschalten, welches von diesen 
+Anweisungen erzeugt wurde. Ein Beispiel dafr finden Sie in der 
+Beschreibung zur "<A HREF="print.htm">Print</A>"-Anweisung.
+<BR>
+ 
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>print:c:\druck.tmp<FONT 
+Color="yellow">;</FONT>href:c:\druck.tmp</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Hierbei wird das aktuelle Dokument zun„chst in eine Datei gedruckt und 
+anschlieáend mit "href" zu dieser Datei umgeschaltet.
+<P>
+Beachten Sie, daá die "Href"-Anweisung in einer Folge mehrerer Anweisungen 
+immer an letzter Stelle stehen muá. Sobald Sie n„mlich via "Href" zu einem 
+anderen Dokument umschalten, werden alle Scripte des verlassenen Dokumentes 
+abgebrochen, d.h., alle Anweisungen hinter "Href" werden nicht mehr 
+ausgefhrt.
+
+
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

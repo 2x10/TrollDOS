@@ -1,0 +1,65 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// SYNTAX.AML
+// Initial Syntax Highlighting Definitions (included by Main.aml)
+//
+// Notes:
+//
+// This file contains the initial syntax highlighting objects defined
+// when the editor is started. To conserve editor resources, this file
+// should only contain syntax objects which are used on a regular basis.
+// Other syntax objects are contained in the Syn\ directory, and are
+// loaded on-demand as needed.
+//
+// If you have made any changes, save this file and select Recompile
+// the Editor from the Set menu. Exit and re-enter the editor for your
+// changes to take effect.
+//--------------------------------------------------------------------
+
+object a
+
+  public forward getext
+
+  // The 'onsyntax' function is called by the editor to return the
+  // syntax object associated with a file name. If the syntax object
+  // is defined in this file, it is loaded when the editor is started,
+  // otherwise this function will load it on-demand from the Syn\
+  // directory (based on the filename extension).
+
+  function onsyntax (file)
+    extension = locase (getext file) [2..TO_END]
+    // get the object name from the filename extension
+    obj = case extension
+            when "h", "cpp", "hpp"  "xc"
+            otherwise               'x' + extension
+          end
+    // attempt to load the object from the Syn\ directory,
+    // if it doesn't already exist
+    if not object? obj then
+      obj = loadobject (bootpath "syn\\" + obj + ".x")  obj
+    end
+    return obj
+  end
+
+
+// initial resident syntax objects:
+
+#if directory? (bootpath "syn\\")
+// Aurora Macro Language files (.Aml)
+object xaml
+  include bootpath "syn\\xaml.aml"
+
+// C/C++ files (.C, .Cpp, .H)
+object xc
+  include bootpath "syn\\xc.aml"
+
+// Aurora highlighted document files (.Dox)
+object xdox
+  include bootpath "syn\\xdox.aml"
+
+// Words in documents
+// (used by the hiliteword command in Ext.aml)
+object xword
+  include bootpath "syn\\xword.aml"
+#end

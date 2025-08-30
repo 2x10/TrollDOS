@@ -1,0 +1,78 @@
+<HTML><HEAD><TITLE>DELTREE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>DELTREE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>lîscht ganze Verzeichnisse mit Unterverzeichnissen und Dateien. 
+System-Dateien werden generell nicht gelîscht.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT color="blue">DELTREE [Verzeichnis] [/y /w /r /h]</FONT>
+
+Statt eines Verzeichnisses kann auch ein Dateiname angegeben werden (z.B.
+*.bak oder t*.*). In diesem Falle werden keine Unterverzeichnisse nach zu 
+lîschenden Dateien durchsucht (dazu verwenden Sie den Befehl <A HREF="cleandsk.htm">CLEANDSK</A>).
+
+/y  lîscht alle angegebenen Verzeichnisse und Dateien ohne weitere RÅckfrage.
+    Verwenden Sie /y nur, wenn Sie ganz sicher sind, da· sich im 
+    Lîschverzeichnis keine wichtigen Dateien mehr befinden.
+
+/w  wartet vor dem Lîschen, bis der Anwender eine Taste drÅckt. Verwenden Sie
+    /w, wenn Sie DELTREE von einer Diskette starten und die zu lîschende 
+    Diskette erst noch einlegen mÅssen.
+
+/r  lîscht keine schreibgeschÅtzten Dateien. Um ganz sicher zu gehen, da· 
+    Sie nicht doch einmal versehentlich wichtige Dateien mit DELTREE lîschen,
+    sollten Sie derartige Dateien mit <A HREF="attrib.htm">dem Attribut "schreibgeschÅtzt"</A> 
+    versehen und generell den Parameter /r beim Lîschen einsetzen.
+
+/h  lîscht keine versteckten Dateien. Dateien mit dem Attribut "versteckt" 
+    entgehen oftmals einer Kontrolldurchsicht nach wichtigen Dateien, da sie 
+    in den meisten Dateilisten (<A HREF="help:dir">DIR</A>-Befehl z.B.) nicht angezeigt werden. Um 
+    das versehentliche Lîschen solcher "vergessenen" Dateien zu verhindern, 
+    sollten Sie den Parameter /h verwenden. Wenn der Verzeichnisbaum nach dem
+    Lîschen der anderen Dateien immer noch existiert, dann hat DELTREE eine 
+    solche versteckte Datei gefunden.
+
+/o  DELTREE lÑuft ohne Benutzerabfrage durch und protokolliert evtl. 
+    aufgetretene Fehler in der <A HREF="logfile.htm">LOG-Datei</A>.<HR 
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT> 
+
+<FONT COLOR="blue">DELTREE a:</FONT>             oder
+<FONT COLOR="blue">DELTREE a:\</FONT>            oder
+<FONT COLOR="blue">DELTREE a:\*.*</FONT> 
+
+lîscht alle Dateien und Verzeichnisse auf der Diskette in Laufwerk A:
+
+<FONT COLOR="blue">DELTREE *.*</FONT> 
+lîscht alle Dateien und Unterverzeichnisse im gerade geîffneten Verzeichnis
+
+<FONT COLOR="blue">DELTREE *.TXT</FONT> 
+lîscht alle Dateien mit der Endung TXT im gerade geîffneten Verzeichnis. 
+Vorsicht: Ein Unterverzeichnis mit der Endung TXT wird eventuell ebenfalls 
+zum Lîschen vorgelegt.
+
+<FONT COLOR="blue">DELTREE C:\TEMP</FONT> 
+lîscht das gesamte Verzeichnis C:\TEMP
+
+<FONT COLOR="blue">DELTREE C:\TEMP\*.*</FONT> 
+lîscht alle Dateien und Verzeichnisse IM Verzeichnis C:\TEMP<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Warnung</FONT>
+
+Verwenden Sie DELTREE nur mit gro·er Sorgfalt, da sich einmal gelîschte 
+Unterverzeichnisse und die darin befindlichen Dateien nur sehr schwer oder 
+gar nicht mehr wiederherstellen lassen.
+
+Wenn Sie nicht sicher sind, starten Sie DELTREE immer OHNE Parameter /Y. 
+Dann nÑmlich werden Sie bei jeder gefundenen Datei gefragt, ob Sie sie 
+lîschen wollen.
+
+Ein bereits laufender Lîschvorgang lÑ·t sich durch schnelles DrÅcken der 
+Esc-Taste abbrechen.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

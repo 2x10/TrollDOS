@@ -1,0 +1,108 @@
+<HTML><HEAD><TITLE>OPEN_ARC</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>OPEN_ARC</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver"><PRE>™ffnet ein gepacktes Archiv, als sei es ein normales Verzeichnis. Die darin
+enthaltenen Dateien werden im Fenster des Comanders angezeigt. Bewegen Sie
+den Lichtbalken auf die Archiv-Datei und drcken Sie Taste o bzw. klicken Sie
+das entsprechende Tastensymbol an.
+
+Untersttzt werden die Packer ARJ, PKZIP, LHA und (mit Einschr„nkungen)
+LHARC. Die genannten Programme werden NICHT ben”tigt, da der Comander das
+anzuzeigende Archiv selbst auswertet. Die darin enthaltenen Dateien werden
+im Berichtfenster so beschrieben, als seien sie ungepackt. (Es wird also u.a.
+die Gr”áe der Dateien im entpackten Zustand angezeigt.)
+
+Der Name des Archives wird an den ber dem Fenster angezeigten Pfadnamen an-
+geh„ngt. Die beiden Punkte (..), die Sie anklicken mssen, um ein Verzeichnis
+zu schlieáen, werden hier ebenfalls angezeigt und haben die gleiche Funktion.
+Als Dateiendung der Punkte wird der Name des Packprogrammes angezeigt, mit
+dem dieses Archiv gepackt wurde. Der Comander ermittelt den Namen des Packers
+automatisch, so daá Sie auch Selbstextraktoren mit der Endung EXE/COM ”ffnen
+k”nnen, ohne zu wissen, mit welchem Packprogramm sie erzeugt wurden. Als
+Verzeichnisgr”áe fr .. wird nicht - wie bei normalen Verzeichnissen blich -
+0 Byte angezeigt, sondern die Gr”áe des ge”ffneten Archives. Bei einem sehr
+groáen Archiv kann das Aufbauen der Inhaltsanzeige etwas l„nger dauern. 
+
+Falls Sie eine Datei ”ffnen, die von keinem der genannten Packer erzeugt
+wurde, wird ein leeres Unterverzeichnis angezeigt. Die Dateiendung der beiden
+Punkte sind in diesem Falle drei Fragezeichen (..     ???). Drcken Sie
+ENTER, um dieses "Verzeichnis" wieder zu schlieáen.
+
+Wenn Sie ein Archiv mit Open_Arc ge”ffnet haben, k”nnen Sie die darin ent-
+haltenen Dateien beinahe wie ganz normale ungepackte Dateien bearbeiten.
+
+<FONT COLOR="blue">F3</FONT> : Datei in den Textbetrachter laden. Die Datei kann von dort aus auch
+     gedruckt werden. Die gewnschte Datei wird (tempor„r) entpackt und
+     anschlieáend wieder gel”scht.
+
+<FONT COLOR="blue">F4</FONT> : Datei editieren. Die Datei wird entpackt, in den Editor geladen und nach
+     Beenden des Editors wieder in das Archiv hineingepackt (Update).
+
+<FONT COLOR="blue">F8</FONT> : Datei l”schen. Datei wird aus dem Archiv entfernt.
+
+<FONT COLOR="blue">F5</FONT> : Datei ins gegenberliegende Fenster kopieren. Dort kann ein normales
+     Verzeichnis oder ebenfalls ein Archiv ge”ffnet sein. 
+
+Die im zweiten Satz beschriebenen Dateioperationen werden automatisch
+ausgefhrt. Das Kopieren und L”schen funktioniert auch mit mehreren Dateien
+zugleich. Klicken Sie diese mit der rechten Maustaste an, um sie mit einem
+roten K„stchen zu markieren.
+
+Beachten Sie jedoch bitte folgende Besonderheiten:
+
+<FONT COLOR="green">1.</FONT>
+Fr die letztgenannten Operationen ist das dazugeh”rige Packprogramm n”tig.
+Dieses wird normalerweise vom Programm <A HREF="../newdos/setup.htm">SETUP</A> automatisch in den Comander
+eingebunden. Wenn dies noch nicht geschehen ist, installieren Sie es nach
+(SETUP-Untermen im Hilfemen).
+
+<FONT COLOR="green">2.</FONT> 
+Nach der Eingabe eines Befehles muá die Datei vom Packprogramm zun„chst
+entpackt werden. Selbst wenn Sie die Datei nur betrachten wollen, muá dies
+geschehen. Nach dem Beenden des Textbetrachters wird die entpackte Datei
+automatisch wieder gel”scht. Deshalb sollten Sie vorher sicher gehen,
+daá sich im Verzeichnis mit dem Archiv keine gleichnamige Datei befindet.
+In diesem Falle fragt Sie der Comander, ob er die bereits vorhandene Datei
+berschreiben (also l”schen) soll.
+
+<FONT COLOR="green">3.</FONT> 
+Dateien, die samt Verzeichnisbaum gepackt wurden, werden zwar angezeigt, doch
+ohne den dazugeh”rigen Pfad. Auáerdem l„át sich eine solche Datei nicht wie
+oben beschrieben bearbeiten. Wenn Sie den Archiv-Manager des Comanders also
+voll ausnutzen wollen, sollten Sie das Packen von ganzen Verzeichnisb„umen
+m”glichst vermeiden.
+
+<FONT COLOR="green">4.</FONT> 
+In sehr ungnstigen (aber im Normalfall nicht auftretenden) F„llen kann es
+passieren, daá zum Starten der Packprogramme nicht gengend Arbeitsspeicher
+vorhanden ist. Dies k”nnte der Fall sein, wenn Sie „uáerst viele Treiber
+in den konventionellen Speicher geladen haben oder Ihr PC nur ber 512 kB
+(oder noch weniger) Speicher verfgt. Probieren Sie bitte alle m”glichen
+Packbefehle vorher aus und lassen Sie Ihren PC dazu mit der Konfiguration
+laufen, die Sie auch im Normalfall verwenden. Sollten Sie hin und wieder
+zus„tzliche Treiber oder dgl. laden, sollten Sie die Konfiguration ein-
+stellen, die am meisten Speicherplatz verbraucht. Wenn alle Befehle dort
+tadellos ablaufen, k”nnen Sie sicher sein, daá in Zukunft alles funktioniert.
+
+Wichtig ist dieser Test vor allem dann, wenn Sie verschiedene Packer be-
+nutzen. Sie k”nnen zum Beispiel eine Datei aus einem selbstextrahierenden
+ARJ-Archiv in ein normales LHA-Archiv kopieren und umgekehrt. Da hier zwei
+verschiedene Packprogramme aufgerufen werden, k”nnte es m”glich sein, daá das
+eine l„uft und das andere nicht. Testen Sie ein Von-Archiv-Zu-Archiv-Kopieren
+mit allen Packern, die Sie verwenden.
+
+Wie gesagt: Der Fall, daá der Speicher nicht reicht, drfte mit den Packern
+ARJ, ZIP, LHA und LHARC in der Praxis nur in Extremf„llen vorkommen. Der
+Comander kann das Fehlschlagen eines Programmstarts leider nicht erkennen, da
+die COMMAND.COM vorgeschaltet wird. Sie bekommen nur das kurze Aufblitzen
+des DOS-Fensters zu sehen. Deshalb sollten Sie beim Testen (und m”glichst
+auch hin und wieder im Normalbetrieb) das Zielarchiv daraufhin berprfen, ob
+die kopierten Dateien auch wirklich "angekommen" sind.
+
+Um Datenverluste zu vermeiden, ist der Befehl <A HREF="schieben.htm">VERSCHIEBEN</A> bei ge”ffnetem
+Archiv nicht m”glich.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

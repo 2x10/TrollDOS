@@ -1,0 +1,123 @@
+<HTML><HEAD><TITLE>PRINTER</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>PRINTER</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A><BR>
+<A HREF="ddd.htm">Allgemeines zu DDD</A> 
+<HR noshade color="silver"><PRE>PRINTER fhrt alle Druckauftr„ge, die von handelsblichen 
+Anwendungsprogrammen gesendet werden, automatisch im Hintergrund aus 
+(Multitasking). 
+
+<FONT COLOR="maroon">Installation</FONT>
+
+<FONT COLOR="blue">PRINTER [/b]</FONT> oder <A HREF="help:lh">LH</A> <FONT COLOR="blue">PRINTER [/b]</FONT>   
+
+/b  hiermit stellen Sie die Gr”áe des Druckpuffers ein sowie die Druck-
+    Geschwindigkeit.
+    Erste  Ziffer = Puffergr”áe in 10000 Byte   (Erlaubt: 1-6)
+    Zweite Ziffer = Druckgeschwindigkeit mal 16 (Erlaubt: 1-9)
+
+    PRINTER /b<FONT COLOR="red">5</FONT><FONT COLOR="blue">4</FONT>  
+
+    - Puffergr”áe <FONT COLOR="red">5</FONT> mal 10.000 Byte (= 50.000 Zeichen)
+    - <FONT COLOR="blue">4</FONT> mal 16 Zeichen (= 64) pro System-TimerTick
+      Je schneller ein Drucker arbeitet, desto h”her k”nnen Sie diesen Wert
+      einstellen.
+
+Fehlt /b, startet PRINTER mit folgender Standard-Einstellung: 
+- Puffergr”áe 60000 Zeichen
+  (optimale Einstellung fr "Vieldrucker")
+- Druckgeschwindigkeit 16 Zeichen pro System-Tick (ca. 288 Zeichen/sek)
+  (optimale Einstellung fr mittelschnelle Nadeldrucker)
+
+Zur Feinabstimmung der Druckgeschwindigkeit lesen Sie bitte weiter unten.
+
+Beim Versuch, mit /b unzul„ssige Werte einzustellen, startet Printer 
+ebenfalls mit den o.g. Standardwerten. (Zu Testzwecken kann die Puffergr”áe 
+(erste Ziffer) durch Angabe von 0 auf 500 Byte eingestellt werden).
+ 
+Am besten laden Sie PRINTER gleich beim Starten des PC, indem Sie den
+Befehl in Ihre AUTOEXEC.BAT einfgen.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Steuerung</FONT> 
+ 
+Mit folgenden Standard-DDD-Parametern kann PRINTER nach der Installation
+gesteuert werden:
+
+/x  aus dem Speicher entfernen
+/s  stillegen
+/r  reaktivieren
+
+/d  sofortiger Abbruch der Druckausgabe<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Drucken mit PRINTER</FONT>
+
+Nach dem Installieren von PRINTER sind keine weiteren Maánahmen erforderlich.
+Alle Druckauftr„ge von Anwendungen (Editoren, Datenbanken, usw.) oder DOS-
+Befehlsumleitungen (TYPE xxx &gt; LPT1) u.„. werden automatisch erkannt und im
+Hintergrund ausgefhrt.
+
+Druckauftr„ge k”nnen bereits bei ausgeschaltetem oder gerade warmlaufendem
+Drucker abgeschickt werden. PRINTER nimmt die Zeichen entgegen und wartet 
+dann, bis der Drucker bereit ist. Auch wenn Papier fehlt, wartet PRINTER, 
+bis das Papierfach wieder gefllt und geschlossen wurde. Sie sollten diese 
+St”rungen jedoch baldigst beheben, da PRINTER einen Fehler meldet, wenn 
+sich zu viele Daten angestaut haben.
+
+Mit dem Device-Manager DEVMAN k”nnen Sie nachsehen, wieviele Zeichen sich
+noch im Puffer von PRINTER befinden, also noch gedruckt werden mssen.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Installations-Empfehlungen</FONT>
+
+PRINTER sollte m”glichst als einer der letzten Treiber geladen werden, da 
+er viel Speicher fr den Puffer (Druckwarteschlange) ben”tigt. Reicht der 
+verfgbare Speicher fr die gewnschte Puffergr”áe nicht aus, paát sich 
+PRINTER automatisch an und verkleinert den Pufferbereich selbstt„tig. 
+Wenn Sie in den UMBs noch eine Hand voll Kilobytes frei haben, sollten 
+Sie Printer dort "hineinquetschen". Auch Puffer-Gr”áen von 10000 Byte 
+bringen bereits einen merklichen Geschwindigkeitsvorteil und der freie 
+Speicher in den UMB wird sinnvoll genutzt.
+ 
+Es gilt jedoch die Regel: Je gr”áer der Puffer, desto besser. Beim Drucken
+sehr groáer Datenmengen kann es n„mlich passieren, daá PRINTER nicht alle 
+gesendeten Zeichen sofort verarbeiten kann. In dieser Situation erzwingt
+PRINTER vorbergehend das direkte Drucken im Vordergrund, sodaá doch
+wieder Wartezeiten auftreten k”nnen. 
+
+Sie k”nnen mehrere Dateien ohne Verz”gerung problemlos hintereinander zum 
+Drucker senden. Falls Sie mehrere Drucker an Ihr System angeschlossen haben,
+erkennt PRINTER automatisch, an welchen Drucker Sie die Daten abgeschickt
+haben. 
+
+PRINTER kann auch mehrmals in den Arbeitsspeicher geladen werden. Diese
+M”glichkeit kann vorteilhaft sein, wenn Sie zeitgleich auf verschiedenenen 
+Druckern drucken wollen. Mehrere geladene PRINTER erkennen sich n„mlich
+automatisch und teilen die Arbeit dann unter sich auf. Ebenso kann ein
+mehrmaliges Laden sinnvoll sein, wenn Sie besonders groáe Datenmengen im
+Hintergrund drucken wollen, die ein PRINTER allein wegen seiner auf max.
+60000 Byte begrenzten Puffergr”áe nicht in einem Rutsch auffangen kann.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Feinabstimmung</FONT> 
+
+PRINTER besitzt die F„higkeit, sich w„hrend des Druckens an die Ausgabe-
+geschwindigkeit des Druckers anzupassen. Bei langsamen bzw. ausgelasteten
+Druckern wird das Tempo also ein wenig gedrosselt, so daá in der Regel genug
+Rechenzeit fr die im Vordergrund laufende Anwendung zur Verfgung steht.
+
+Trotzdem kann es w„hrend des Druckens vorbergehend dazu kommen, daá z.B. die
+Tastatur zu "schleppen" beginnt ODER daá der Drucker hin und wieder kurz
+stehenbleibt. Treten diese F„lle jedoch h„ufiger auf, sollten Sie mit dem 
+eingangs beschriebenen Parameter /b experimentieren:
+
+Tastatur reagiert zu langsam: setzen Sie die Druckgeschwindigkeit herab,
+z.B. von /b6<FONT COLOR="red">4</FONT> auf /b6<FONT COLOR="red">3</FONT>.
+
+Drucker pausiert zu oft: setzen Sie die Druckgeschwindigkeit herauf,
+z.B. von /b6<FONT COLOR="red">4</FONT> auf /b6<FONT COLOR="red">5</FONT>.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

@@ -1,0 +1,2993 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// EXT.AML
+// Library Extensions (included by Main.aml)
+//
+// You should be very familiar with the macro language before making
+// changes to this file. If you have made any changes, save this file
+// and select Recompile the Editor from the Set menu. Exit and
+// re-enter the editor for your changes to take effect.
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+// All windows
+//--------------------------------------------------------------------
+
+object a
+
+  // get the drive and path portion of a filespec
+  function getpath (file)
+    file [1..pos "\\" file 'r']
+  end
+
+  // get the name and extension portion of a filespec
+  function getname (file)
+    file [(pos "\\" file 'r') + 1..TO_END]
+  end
+
+  // get the extension portion of a filespec
+  function getext (file)
+    p = pos '.' file 'r'
+    if? p file [p..TO_END] ''
+  end
+
+  // append a default extension for filenames that don't have one
+  function defext (file extension)
+    if pos '.' file then
+      file
+    else
+      file + '.' + extension
+    end
+  end
+
+  // force a filename to have an extension
+  function forceext (file ext)
+    p = pos '.' file 'r'
+    return (if? p  file [1..p]  file + '.') + ext
+  end
+
+  // generate shiftkey events from raw <shiftkey> event
+  event <shiftkey> (newstate oldstate)
+    send ( if newstate & 3 and not (oldstate & 3) then
+             "shiftdown"
+           elseif oldstate & 3 and not (newstate & 3) then
+             "shiftup"
+           elseif newstate & 10h and not (oldstate & 10h) then
+             "scrlockdown"
+           elseif oldstate & 10h and not (newstate & 10h) then
+             "scrlockup"
+           end )
+    pass
+  end
+
+  // generate multi-key events
+  function prefix (keycode)
+    keyname = locase (geteventname keycode)
+    say  keyname + "<more...>"
+    keyname2 = locase (geteventname (getkey))
+    queue  keyname + keyname2
+    // allow the <ctrl> key to be held down...
+    if keyname [1..5] == "<ctrl" and keyname2 [1..5] == "<ctrl" then
+      queue keyname + '<' + keyname2 [7 : TO_END]
+    end
+    display
+  end
+
+  // repeat keys for a user-specified number of times
+  function askrepkey
+    say "Enter keys to repeat, then <esc>:"
+    hidecursor
+    keycode = getkey
+    while keycode <> <esc> do
+      keystring = keystring + (char2 keycode)
+      keycode = getkey
+    end
+    if keystring then
+      strlen = length keystring
+      loop (ask "Number of repetitions") times
+        j = 1
+        while j < strlen do
+          queuekey (bin2int keystring [j : 2])
+          j = j + 2
+        end
+        repeat
+          dispatch
+        until not event?
+      end
+    end
+  end
+
+  // write to the screen background
+  function writebak (string attr x y)
+    w = getcurrwin
+    while w do
+      hidewindow w
+      w = getprevwin w
+    end
+    gotoscreen
+    writestr string attr x y
+  end
+
+  // file prompt with picklist
+  function askfile (pstring pstring2)
+    file = ask pstring "_load"
+    if file == ' ' then
+      file = "*.*"
+    end
+    if (dir? file) or (directory? file) then
+      filespec = qualify file (getbufname)
+      file = pickfile filespec (onname filespec 't') pstring2
+    end
+    return file
+  end
+
+  // execute a fully qualified Dos program
+  // (saving and restoring the current path)
+  private function os (program options)
+    cp = getcurrpath
+    currpath (getpath (getbufname))
+    r = system program options
+    currpath cp
+    return r
+  end
+
+  // shell to Dos by executing Command.com
+  function shell
+    os (getenv "COMSPEC") "ch"
+  end
+
+  // execute Dos commands, programs, and .bat files
+  function run (file options)
+    if file then
+      os (getenv "COMSPEC") + " /c " + file  options
+    else
+      shell
+    end
+  end
+
+  // execute Dos commands or programs and capture the output
+  // via Dos redirection (will not capture .bat file output)
+  function runcap (command options)
+    _cap = _cap + 1
+    capfile = qualify  "capture." + _cap  (getbufname)
+    run  command + '>' + capfile  options
+    open capfile
+    deletefile capfile
+  end
+
+  // translate an AML compiler error code to an error message
+  function errormsg (error)
+    runmacro (bootpath "macro\\erroraml.x") '' error
+  end
+
+  // compile a macro with error messages
+  // the cursor is moved to any syntax errors
+  function compilemacro2 (source dest msg)
+    if not source then
+      source = getbufname
+    end
+    if msg then
+      say msg
+    end
+    source = qualify (defext source "aml") (getbufname)
+    error = compilemacro source (if? dest dest (forceext source 'x'))
+
+    if error then
+
+      // get additional error info
+      column = geterror 'k'
+      line = geterror 'l'
+      file = geterror 'f'
+
+      // translate error code to an error message
+      msg = errormsg error
+      if not msg then
+        msg = "Error " + error
+      end
+
+      // position the cursor to the error
+      if error <> 1001 and (open file) then
+        gotopos column line
+        send "onfound"
+      end
+
+      // display the error
+      location = file + " (line " + line + ", col " + column + "): "
+      // 1 or 2 line msgbox
+      msgbox location +
+             (if? (length location + length msg) > getvidcols - 8 "\n") +
+             msg  "Error!" 'b'
+    else
+      if wintype? "edit_fmgr" then
+        say "Done."
+      end
+    end
+
+    return error
+  end
+
+  // regenerate the editor boot macro (A.x)
+  function regen (msg)
+    dest = bootpath "main.x"
+    error = compilemacro2 (bootpath "main.aml") dest msg
+    if not error then
+      bootfile = bootpath "a.x"
+      deletefile bootfile
+      renamefile dest bootfile
+    end
+    return error
+  end
+
+  // regenerate the editor boot macro (a.x) with a message
+  function recompile
+    if not regen then
+      msgbox "Exit and re-enter for changes to take effect. "
+    end
+  end
+
+  // macro picklist
+  function pickmacro
+    runmacro2 (pickfile getbootpath + "macro\\*.x" "Select a macro to run"
+                        '' "maclist")
+  end
+
+  // execute a compiled macro file w/error msg - force .x extension
+  // (run in the Macro\ subdirectory, if no path is specified)
+  function runmacro2 (macrofile)
+    if macrofile then
+      if macrofile == ' ' then
+        pickmacro
+      else
+        runmacro (qualify (forceext (if? macrofile macrofile (getbufname)) 'X')
+                   getbootpath + "macro\\")
+        if geterror then
+          msgbox (errormsg (geterror))
+        end
+      end
+    end
+  end
+
+  function helpmacro (macro)
+    runmacro (bootpath "macro\\helpmac.x") '' macro
+  end
+
+  // run a configuration macro
+  function runcfg (macrosuffix)
+    runmacro getbootpath + "cfg\\cfg" + macrosuffix + ".x"
+  end
+
+  // save current configuration to Config.aml and Color.aml and recompile
+  function savecfg runcfg "upd"
+
+  // send a string to the default printer device
+  function printstr (string)
+    if string then
+      if (openfile _PrtDev 'w') <> -1 then
+        writefile string
+        closefile
+      end
+    end
+  end
+
+  // open a new file
+  function opennew (file options)
+    prevbufname = getbufname
+    buffer = createbuf
+    if buffer then
+      setbufname (qualify (if? file file "new.txt") prevbufname)
+      openbuf buffer options
+    end
+  end
+
+  // toggle the video mode between 80x25 and 80x50
+  function togglemode
+    videomode 80 (if? getvidrows == 25  50 25)
+  end
+
+  // search/replace with verification
+  // (returns the number of replacements made)
+  function replver (searchstr replstr options)
+
+    variable title
+
+    repeat
+      len = find searchstr options
+      if len then
+
+        if not title then
+          title = gettitle
+          settitle  "Replace (Yes/No/All/One/Reverse/Undo/Quit)? "
+          // remove global for next find
+          options = sub 'g' '' options
+        end
+
+        send "onfound" len
+
+        // get keycode and convert to lower case
+        p = getkey | 020h
+        case p
+
+          when <y>, <o>, <a>
+            undobegin
+            l = (replace searchstr replstr  (sub 'r' '' options) + "*") - 1
+            if not (pos 'r' options) then
+              right l
+              if (pos 'x' options) and (getcol == getlinelen) then
+                right
+              end
+            end
+            count = count + 1
+            if p <> <y> then
+              len = ''
+              if p == <a> then
+                count = count + (replace searchstr replstr  options + "a")
+              end
+            end
+            undoend
+
+          when <u>
+            if count then
+              undo
+              count = count - 1
+              if pos 'r' options then
+                right 1
+              else
+                if getcol == 1 then
+                  if up then
+                    col MAX_COL
+                  end
+                else
+                  left l
+                end
+              end
+            end
+
+          when <n>
+             // do nothing
+
+          when <r>
+             options = if? (pos 'r' options) (sub 'r' '' options)  options + 'r'
+
+          otherwise
+            if not count then
+              count = '0'
+            end
+            break
+        end
+      end
+    until not len
+
+    if title then
+      settitle title
+    end
+
+    return count
+  end
+
+
+  // search for a multi-string search argument
+  function search (searchstr reverse rep refopt refrepl)
+
+    variable replstr, options
+
+    // split up search multi-string
+    if pos '/' searchstr then
+      n = splitstr '' searchstr  ref searchstr  ref replstr  ref options
+      if n > 1 then
+        if n == 2 then
+          options = replstr
+          replstr = ''
+          // case sensitive
+          if not options then
+            options = 'c'
+          end
+        end
+      end
+    end
+
+    if searchstr then
+
+      // default options
+      if not options then
+        options = _SearchOpt
+        if n > 2 then
+          options = options + _ReplaceOpt
+        end
+      end
+
+      // reverse search direction if specified
+      if reverse then
+        options = if pos 'r' options then
+                    sub 'r' '' options
+                  else
+                    options + 'r'
+                  end
+      end
+
+      // remove global for repeat find
+      if rep and (pos 'g' options) then
+        options = sub 'g' '' options
+      end
+
+      // return values for calling function to check
+      refopt  = options
+      refrepl = n >= 3
+
+      // resurface marked window for block search
+      if pos 'b' options then
+        buffer = getmarkbuf
+        if buffer and buffer <> getcurrbuf then
+          currwin (getcurswin (getcurrcurs buffer))
+        end
+      end
+
+      // search and replace
+      if n >= 3 then
+
+        // do the replace
+        if pos 'a' options then
+          replace searchstr replstr options
+        else
+          replver searchstr replstr options
+        end
+
+      // search only
+      else
+        find searchstr options
+      end
+    end
+  end
+
+  // hot key for the file mgr and file picklists
+  function onhotkey (character)
+    if _oL == getrow then
+      // backspace
+      if character == '\x08' then
+        popcursor
+        _oS = if? (length _oS > 1) _oS [1..length _oS - 1] ''
+      else
+        _oS = _oS + character
+        pushcursor
+      end
+    else
+      if character == '\\' then
+        character = '\x00'
+      end
+      _oS = character
+      pushcursor
+    end
+    searchstr = '^ *' + _oS
+    if bufferflag '?d' then
+      if getbinarylen then
+        startcol = 17
+      else
+        find "\xff\x00" '[lgr'
+        startcol = getcol
+        searchstr [2] = '\xff'
+      end
+    else
+      startcol = 1
+    end
+    markcolumn startcol MAX_COL 1 (getlines) 'T'
+    len = (find searchstr 'bxi*' 'T') or (find searchstr 'bxig' 'T')
+    destroymark 'T'
+    if len then
+      if getrow > getviewbot or getrow < getviewtop then
+        adjustrow getviewrows / 3
+      end
+      if _oS then
+        display
+        hilite len 1 (getpalette (if? (wintype? "fmgr") 33 18)) (getcol)
+      end
+      _oL = getrow
+    else
+      popcursor 'ad'
+      _oL = ''
+      if length _oS > 1 then
+        onhotkey character
+      // not found
+      else
+        beep 320 70
+      end
+    end
+  end
+
+  // generic prompt for a string
+  function ask (prompt history init title options width)
+
+    variable value
+
+    if not options then
+      options = _PromptStyle
+      suffix = if? (pos '2' options) ':' '>'
+    end
+
+    // highlight cursor position
+    if wintype? "edit" then
+      hilite 1 1 (getpalette (if? (inmark?) 9 8))
+    end
+
+    // dialog box prompt
+    if pos 'd' options then
+      if suffix then
+        prompt = prompt + ':'
+      end
+      if not width then
+        width = 48
+      end
+
+      dialog (if? title title "Prompt")  18 + width  5 'cp'
+      field  prompt 3 2 width - (if? prompt [0] == '>' (length prompt - 3) -2)
+             init history
+      // disable character highlighting
+      settitle prompt (if? prompt [0] == '>' 'w1' 'nl1') 1
+      button "O&k"    width + 8 2 8
+      button "Cancel" width + 8 4 8
+
+      if (getdialog ref value) == 'Ok' then
+        return (if? value value ' ')
+      end
+    else
+      // other prompt styles
+      if (case options
+            when 'c' askline ref value prompt + suffix       history init
+            when '1' askbox1 ref value prompt + suffix + ' ' history init
+            when '2' askbox  ref value prompt + suffix       history init
+          end) then
+        return (if? value value ' ')
+      end
+    end
+  end
+
+  // replace/append/cancel or ok/cancel menus
+  function askrac (file menuname)
+    if _ConRpl == 'y' and (locatefile file) then
+      locase (popup (if? menuname menuname "rac" )
+                      (onname file) + " Exists" +
+                      (if? menuname == "ok" ". Replace?")) [1]
+    else
+      'r'
+    end
+  end
+
+  // print the current buffer or mark
+  function print (options)
+    header = _PrtHdr
+    printformat '' _PrtOpt _PrtPag _PrtLeft _PrtTop _PrtRight _PrtBot
+                   _PrtSpace _PrtCop
+    if not (posnot ' ' header) or (dir? (getbufname)) then
+      date = getdate
+      header = getbufname + "   (" + date [posnot ' ' date : TO_END] +
+                               ' ' + gettime + ')'
+    end
+    if not ( if pos 'b' options  then printblock _PrtDev header '' _PrtIni
+              else    printbuf _PrtDev header '' _PrtIni end ) then
+      say "Print failed" 'b'
+    end
+  end
+
+  // print a file or directory with the current printer settings
+  function printfile (file)
+    if loadbuf (if? file [LAST_CHAR] == '\\' file + "*.*" file)
+               '' '' _FmgrOpt _TruncLength then
+      if not break? then
+        print
+        destroybuf
+        return TRUE
+      end
+    end
+  end
+
+  // backup a file and return the backup filename if sucessful
+  function backup (file)
+    if locatefile file then
+      dir = _BackupDir
+      if dir then
+        if length dir > 3 and dir [LAST_CHAR] == "\\" then
+          dir = dir [1..length dir - 1]
+        end
+        createdir dir
+        dir = qualify dir
+        backup_file = if pos "*.*" dir then
+                        qualify (getname file) dir
+                      else
+                        msgbox "Unable to create backup file!"
+                               "Warning!"
+                        return 1
+                      end
+      else
+        backup_file = forceext file _BackupExt
+      end
+
+      if not icompare file backup_file then
+        // delete the old backup file
+        deletefile backup_file
+
+        // attempt a rename
+        if not renamefile file backup_file then
+          // try copy if rename fails
+          if (copyfile file backup_file) <= 0 then
+            msgbox "File backup failed!" "Error"
+            return 0
+          end
+        end
+      end
+      return backup_file
+    else
+      return 1
+    end
+  end
+
+  // save the current file to disk
+  function save (file options)
+    variable c1, c2
+
+    // check for a truncated file
+    if (bufferflag 't?') and
+       not (icompare (popup "ok" "Truncated file - are you sure?") "Ok") then
+      return
+    end
+
+    file = if file then
+             qualify file (getbufname)
+           else
+             getbufname
+           end
+    // check for read/only
+    if (bufferflag 'r?') or (fileattr? file 'r') then
+      say "Read Only!" 'b'
+    else
+      backup_file = 1
+      if send "setting?" 'B' then
+        backup_file = backup file
+      end
+      if not backup_file then
+        say "Backup failed" 'b'
+      else
+        send "onsave" file
+
+        // get fold comments for the file (if any)
+        send "oncomment" file ref c1 ref c2
+        options = _SaveOpt + options
+        if not savebuf file
+                 (if? (pos 'e' options) 'e' + _TabWidth) + options  ''
+                 (if not getbinarylen then hex2bin _LineDlm end) ''
+                 (if? c1 c1 + _FoldSign) c2 then
+
+          // restore the backup after save failure
+          if backup_file <> 1 then
+            if not renamefile backup_file file then
+              copyfile backup_file file
+            end
+          end
+          msgbox "Save failed!  Check file path / file attributes / disk space"  "Error!" 'b'
+          return 0
+        else
+          1
+        end
+      end
+    end
+  end
+
+  // save-as prompt
+  function asksaveas (options name dext)
+    file = ask "Save " + (onname (if? name name (getname (getbufname)))) +
+               " as"  "_load"
+    if file then
+      file = qualify file (getbufname)
+      if dext then
+        file = defext file dext
+      end
+      addhistory "_load" file
+      action = locase (askrac file)
+      if pos action "ra" then
+        save file options + (if? action == 'a' 'a')
+      end
+    end
+  end
+
+  // generic prompt with command execution
+  function askx (pstring history func parm2)
+    parm1 = ask pstring history
+    if parm1 then
+      send func parm1 parm2
+      if history then
+        addhistory history parm1
+      end
+      return 1
+    end
+  end
+
+  // open prompt
+  function askopen
+    file = ask "[file/ibcenz] Open" "_load"
+    if file then
+      // addhistory not needed for open
+      open file
+    end
+  end
+
+  // open binary prompt
+  function askopenb
+    file = askfile "File to open in Binary Mode" "Open Binary"
+    if file then
+      open file 'b'
+    end
+  end
+
+  // macro expression prompt
+  function askeval
+    if askx "Macro Expression" "_cmd" "eval" then
+      error = geterror 'c'
+      if error then
+        msgbox "Expression column " + (geterror 'k') +
+               ": " + (errormsg error)  "Error" 'b'
+      end
+    end
+  end
+
+
+object mon
+
+  // erase key macros
+  function erasekey2 (options)
+    if erasekey options then
+      _kd = TRUE
+      display
+      say (if? (pos options 'a') "All keys macros erased"
+                                 "Scrap key macro erased")
+    end
+  end
+
+  // toggle the key macro record mode
+  function record
+    if not playing? then
+      _kd = TRUE
+      if not setting? 'R' then
+        erasekey
+        record_on = TRUE
+      end
+      setting 'R' TOGGLE
+      say "Record" + (if? record_on "ing..." " Off")
+    end
+  end
+
+  // play a key macro
+  function play (keymacro)
+    setdisplay OFF
+    if not (playkey keymacro) then
+      say "No key macro to play." 'b'
+    end
+    setdisplay ON
+  end
+
+
+//--------------------------------------------------------------------
+// Edit windows and File Manager windows
+//--------------------------------------------------------------------
+
+object edit_fmgr
+
+  // close all windows
+  function closeall (options)
+    a.__G = ON
+    begdesk
+    while getwincount and (send "close" options) end
+    enddesk
+    a.__G = OFF
+  end
+
+  // move the cursor to top or bottom of a mark
+  function gotomark (options)
+    if mark? then
+      window = getcurswin (getcurrcurs (getmarkbuf))
+      if window then
+        currwin window
+      end
+      // (use 'down' since it adjusts for real tabs)
+      down (if? (pos 'b' options) (getmarkbot) (getmarktop)) - getrow
+      if window then
+        send "onfound"
+      end
+    else
+      say "Block not found" 'b'
+    end
+  end
+
+  // goto a bookmark with message
+  function gotobook2 (bookmark)
+    msg = "Bookmark " + (if? bookmark bookmark)
+    bookbuf = getbookbuf bookmark
+    if bookbuf <> getwinbuf then
+      open (getbufname bookbuf)
+    end
+    if gotobook bookmark then
+      display
+      say msg
+    else
+      say msg + " not found"  'b'
+    end
+  end
+
+  // prompt to goto a bookmark
+  function askbook (msg)
+    askx (if? msg msg "Bookmark Name") "_book" "gotobook2"
+  end
+
+  // cycle though all existing bookmarks
+  function cyclebook
+    l = _lb
+    bookmark = if? l (getprevbook l) (getcurrbook)
+    if not bookmark then
+      buffer = getcurrbuf
+      while buffer do
+        if getcurrbook buffer then
+          bookmark = getcurrbook buffer
+        end
+        buffer = getprevbuf buffer
+      end
+    end
+    _lb = bookmark
+    gotobook2 bookmark
+  end
+
+  // generic prompt to change a configuration variable
+  private function askc (pstring configvar history)
+    newvalue = ask pstring history prf [configvar]
+    if newvalue then
+      prf [configvar] = newvalue
+    end
+  end
+
+  // prompts to change specific configuration variables
+  function askclip    askc "Clipboard Name" "ClipName"
+  function askprthdr  askc "Current Header/Footer" "PrtHdr"
+
+  // prompt to run a macro
+  function askrmacro  askx "Run Macro File"  "_load" "runmacro2"
+
+  // prompt to compile a macro
+  function askcmacro  askx "Compile Macro File"  "_load" "compilemacro2"
+
+  // Dos command prompt
+  function askrun     askx "Dos Command" "_os" "run" "ck"
+
+  // prompt to capture Dos output
+  function askruncap  askx "Capture Dos Output" "_os" "runcap" 'c'
+
+  // open key macro file with messages
+  function openkey2 (file)
+    if openkey file then
+      say (getname file) + " loaded"
+    else
+      say "Load failed" 'b'
+    end
+  end
+
+  // prompt to open a key macro file
+  function askopenkey
+    file = ask "Key macro filename" "_load"
+    if file then
+      openkey2 (qualify (defext file "mac") (getbufname))
+    end
+  end
+
+  // prompt to save current key macros
+  function asksavekey
+    file = ask "Save current key macros as" "_load"
+    if file then
+      file = qualify (defext file "mac") (getbufname)
+      if pos (askrac file "ok") "or" 'i' then
+        if not savekey file then
+          say "Save failed" 'b'
+        end
+      end
+    end
+  end
+
+  // prompt to scan files for a string
+  function askscan (list)
+    runmacro (bootpath "macro\\scan.x") '' (if? list (getcurrbuf))
+  end
+
+  // reload the current file from disk
+  function reopen (file)
+    open (if? file file (getbufname)) 'r'
+    fbreak
+  end
+
+  // open last file or directory
+  function openlast
+    file = gethiststr "_load"
+    if file then
+      open file
+    end
+  end
+
+  // open an AML configuration file in boot directory
+  function opencfg (file)
+    open (bootpath  file + ".aml")
+  end
+
+  // quick reference help
+  function quickref (options openopt)
+    quickfile = getbootpath + (if? options <> 'o' "doc\\") +
+                  case options [1]
+                    when 'l'  "language.dox"
+                    when 'f'  "function.dox"
+                    when 'q'  "quickfun.dox"
+                    when 'o'  "orderfrm.doc"
+                    when 't'  "tips.dox"
+                    otherwise "user.dox"
+                  end
+
+    if (wintype? "edit") and (pos 'w' options) then
+      wordstr = send "getword" "a-zA-Z0-9?<>"
+    end
+
+    if file? quickfile then
+
+      open quickfile openopt
+
+      // make read/only
+      if options [1] <> 'o' then
+        bufferflag '+r'
+      end
+
+      if wordstr then
+        gotopos 1 1
+
+        // find string in reference
+        if find '\xff' + wordstr + '\xff' then
+          right
+          send "onfound"  length wordstr
+
+        // not found? then try function header in Ext.aml
+        elseif poschar 'fq' options then
+          close
+          ext = bootpath "ext.aml"
+          closeit = _MultCopy == 'n' and not (findbuf ext)
+          open ext openopt
+          gotopos 1 1
+          n = find "function #" + wordstr  'xw'
+          if n then
+            send "onfound" n
+
+          else
+            // still not found? then go back to the reference
+            if closeit then
+              close
+            end
+            open quickfile openopt
+            // make read/only
+            bufferflag '+r'
+          end
+        end
+      end
+    else
+      msgbox quickfile + " not found."
+    end
+  end
+
+
+//--------------------------------------------------------------------
+// Prompts and Edit windows
+//--------------------------------------------------------------------
+
+object prompt
+
+  // support for cua-style <shift> key marking
+  function smark
+    if shiftkey? then
+      if _shfx then
+        undobegin
+        destroymark
+        markstream _shfx _shfx _shfy _shfy
+        _shfx = ''
+        _shfy = ''
+      end
+      extendmark
+    end
+  end
+
+  // set anchor for shift-key marking
+  function shiftdown
+    _shfx = getcol
+    _shfy = getrow
+    pass
+  end
+
+  // end shift-key mark
+  function shiftup
+    if not _shfx then
+      stopmark
+      undoend
+    end
+    pass
+  end
+
+  // backspace in a prompt
+  function backsp
+    if getcol > 1 then
+      left
+      delchar
+    end
+  end
+
+  // get the word at the cursor
+  function getword (charset column mark)
+    variable a
+    if not column then
+      column = getcol
+    end
+    if column <= getlinelen then
+      if not charset then
+        charset = _CSet
+      end
+      b = posnot charset (gettext column)
+      if b <> 1 then
+        b = if? b  column + b - 2  getlinelen
+        a = posnot charset (gettext 1 column) 'r'
+        a = if? a  a + 1  1
+        if mark then
+          undobegin
+          destroymark
+          markchar a b
+          undoend
+        else
+          gettext a  b - a + 1
+        end
+      end
+    end
+  end
+
+  // mark the word at the cursor using getword
+  function markword (charset)
+    getword charset '' 1
+  end
+
+  // mark to end-of-line
+  function markeol
+    undobegin
+    destroymark
+    if getcol <= getlinelen then
+      markchar '' (getlinelen)
+    end
+    undoend
+  end
+
+  // delete a block
+  function deleteblock2
+    if getmarkbuf == getcurrbuf then
+      deleteblock
+    else
+      if wintype? "edit" then
+        if _DelLine == 'y' then
+          delline
+        end
+      end
+    end
+  end
+
+  // prompt to enter character literally
+  function literal
+    say "Enter Literal..."
+    queue <char> (char getkey & 0ffh)
+  end
+
+  // ascii chart with character entry
+  function asciilist
+    buffer = asciibuf
+    // name it so the position can be remembered
+    setbufname "_asc"
+    character = (popup buffer '' 13) [10]
+    destroybuf
+    if character then
+      queue <char> character
+    end
+  end
+
+  // support for file name completion (open prompts only)
+  function askcomplete
+    if gethistname == "_load" then
+      filespec = gettext
+      if filespec then
+        if not pos "*.*" filespec then
+          filespec = filespec + (if? (pos '.' filespec) '*' "*.*")
+        end
+      else
+        filespec = "*.*"
+      end
+      filespec = qualify filespec (getbufname (getwinbuf (getprevwin (getcurrwin))))
+      file = pickfile filespec (onname filespec 't')
+      if file then
+        col 1
+        delchar (getlinelen)
+        writetext file
+        return file
+      end
+    end
+  end
+
+  // get the first line of text in the default mark
+  function getmarktext
+    if mark? then
+      oldbuf = gotobuf (getmarkbuf)
+      pushcursor
+      row (getmarktop)
+      text = case getmarktype
+               // line mark
+               when 'l'
+                 gettext (getlinebeg)
+               // column mark
+               when 'k'
+                 // convert left,right to actual columns
+                 // (in case there are real tabs)
+                 start = actualcol (getmarkleft)
+                 gettext start (actualcol (getmarkright)) - start + 1
+               // char/stream marks
+               otherwise
+                 gettext (getmarkleft) (getmarkcols)
+             end
+      popcursor
+      gotobuf oldbuf
+      return text
+    end
+  end
+
+  // copy or copy-append to the clipboard
+  function copy (options)
+
+    if not mark? then
+      // use current line if nothing marked?
+      if _ClipLine <> 'y' then
+        say "No mark exists"
+        return
+      end
+      undobegin
+      markline
+      tempmark = TRUE
+    end
+
+    // copy to ms windows
+    if pos 'w' options then
+      if not saveblock "^:c"
+         (if? getmarktype <> 'l' and getmarkrows == 1 'bx' 'x') then
+        msgbox "The Windows clipboard is not available."
+      end
+      display
+    else
+      currentbuf = getcurrbuf
+      clip = _ClipName
+      destroymark clip
+      copymark (getmarkuse) clip
+
+      // copy append
+      if (pos 'a' options) and (buffer? clip) then
+        if getmarktype <> 'l' then
+          insline '' '' (getlines clip) clip
+        end
+        copyblock clip clip 1 (getlines clip)
+        markline 1 (getlines clip) clip clip
+
+      // copy
+      else
+        destroybuf clip
+        createbuf clip
+        copyblock clip clip
+        if getmarktype == 'l' then
+          delline 1 1 clip
+        end
+      end
+      currbuf currentbuf
+    end
+    if pos 'd' options then
+      deleteblock
+    end
+    if tempmark then
+      if not pos 'd' options then
+        destroymark
+      end
+      undoend
+    end
+  end
+
+  // cut or cut-append to the clipboard
+  function cut (options)
+    copy options + 'd'
+  end
+
+  // enter a character or string into the current prompt
+  function write (charstring)
+    writetext charstring
+  end
+
+
+//--------------------------------------------------------------------
+// Edit windows
+//--------------------------------------------------------------------
+
+object edit
+
+  // mark a paragraph
+  function markpara (options)
+
+    if getlinelen then
+
+      undobegin
+      destroymark
+
+      // find the beginning of the paragraph
+      pushcursor
+      // check for mark-to-end of paragraph
+      if not pos 'e' options then
+        while up and getlinelen end
+        if not getlinelen then down end
+        markline
+      end
+      popcursor
+
+      // find the end of the paragraph
+      pushcursor
+      while down and getlinelen end
+      if not getlinelen then up end
+      markline
+      popcursor
+
+      undoend
+
+      return 1
+    end
+  end
+
+  private variable baflag
+
+  // setup for insert-above (copy, move, paste - lineblocks only)
+  private function begabove (lineop)
+    baflag = ''
+    undobegin
+    if (lineop or getmarktype == 'l') and _InsAbove == 'y' then
+      baflag = 1
+      if not up then
+        insabove
+        up
+        baflag = 2
+      end
+    end
+  end
+
+  // end insert-above
+  private function endabove
+    case baflag
+      when 1 down
+      when 2 delline
+    end
+    undoend
+  end
+
+  // paste or paste-over from the clipboard
+  function paste (options)
+    // paste from ms windows
+    if pos 'w' options then
+      oldbuf = getcurrbuf
+      markname = 'T'
+      if loadbuf "^:c" then
+        markchar 1 (getlinelen (getlines)) 1 (getlines) markname
+        tempbuf = gotobuf oldbuf
+      end
+    else
+      markname = _ClipName
+    end
+    if mark? markname then
+      destroymark
+      copymark markname (getmarkuse)
+      if pos 'o' options then
+        copyblockover
+      else
+        begabove
+        copyblock
+        endabove
+      end
+      if tempbuf then
+        destroybuf tempbuf
+      end
+    else
+      display
+      say "Nothing to paste"
+    end
+  end
+
+  // clear the clipboard
+  function clear
+    destroybuf _ClipName
+  end
+
+  // copy a block
+  function copyblock2
+    if mark? then
+      begabove
+      if not copyblock then
+        say "Copy failed" 'b'
+      end
+      endabove
+    else
+      if _CopyLine == 'y' then
+        copyblock '*l'
+      end
+    end
+  end
+
+  // move a block
+  function moveblock2
+    begabove
+    if getmarktop < getviewtop then
+      y = 1 + getrow - (apparentrow  getviewtop - getrow)
+    end
+    if moveblock then
+      if y then
+        adjustrow y
+      end
+    else
+      say "Move failed" 'b'
+    end
+    endabove
+  end
+
+  // move a block over text
+  function moveblockover
+    if mark? then
+      undobegin
+      // use a temporary clipboard
+      clip = _ClipName
+      prf.ClipName = 'T'
+      copy
+      fillblock ' '
+      paste 'o'
+      prf.ClipName = clip
+      destroybuf 'T'
+      undoend
+    end
+  end
+
+  // reformat a block or the current paragraph
+  function formatblock2 (options)
+    if not options then
+      options = _FormatOpt
+    end
+
+    // advance cursor
+    if not getlinelen and (pos 'c' options) then
+      loop
+        if not down then
+          return
+        end
+        if getlinelen then
+          break
+        end
+      end
+    end
+
+    undobegin
+    if not mark? then
+      if markpara options then
+        markcolumn (apparentcol (getcol)) _RMargin (getmarktop) (getmarkbot)
+        flag = ON
+      end
+    end
+    // special case for single lines
+    if getmarkrows == 1 and getcol < getlinebeg then
+      delchar getlinebeg - getcol
+    else
+      formatblock _LMargin _RMargin options
+    end
+
+    if flag then
+      // advance cursor
+      if pos 'c' options then
+        row getmarkbot + 1
+      end
+      destroymark
+    end
+    undoend
+  end
+
+  // simple text quoting support for a block or the current paragraph
+  function quote
+    undobegin
+    if getmarkbuf <> getcurrbuf then
+      tempmark = TRUE
+      oldmark = usemark 'T'
+      markpara
+    end
+    if mark? then
+      shiftblock 1 '' '>'
+      if tempmark then
+        destroymark
+        usemark oldmark
+      end
+    else
+      say "Nothing to quote"
+    end
+    undoend
+  end
+
+  // sort a block
+  function sortblock2
+    if mark? then
+      if runcfg "sort" then
+        say "Sorting..."
+        sortblock _SortOpt
+        display
+      end
+    else
+      say "No block"
+    end
+  end
+
+  // prompt to fill a block with a string
+  function fillblock2
+    askx "Enter fill string" '' "fillblock"
+  end
+
+  // prompt to save a block
+  function saveblock2 (options file)
+    variable c1, c2
+    if mark? then
+      if not file then
+        file = ask "Save block as" "_load"
+      end
+      if file then
+        file = qualify file (getbufname)
+        addhistory "_load" file
+        if fileattr? file 'r' then
+          say "Read Only!" 'b'
+        else
+          action = locase (askrac file)
+          if pos action "ra" then
+            send "oncomment" file ref c1 ref c2
+            options = _SaveOpt + options
+            if not saveblock file
+                    (if? (pos 'e' options) 'e' + _TabWidth) + options +
+                    (if? action == 'a' 'a')
+                    '' '' '' (if? c1 c1 + _FoldSign) c2 then
+              msgbox "Save Failed!" "Error!" 'b'
+            end
+          end
+        end
+      end
+    else
+      say "No marked block" 'b'
+    end
+  end
+
+  // left justify, center, or right justify a block
+  function justblock2 (options)
+    justblock options '' _LMargin _RMargin
+  end
+
+  // destroy open and closed folds
+  function destroyfold2
+    undobegin
+    if not fold? then
+      closefold
+    end
+    destroyfold
+    undoend
+  end
+
+  // do fold operations on entire file
+  function foldall (options)
+    foldblock options '*a'
+  end
+
+  // fold a block or the current paragraph
+  function foldblock2
+    undobegin
+    if mark? then
+      foldblock
+    elseif markpara then
+      foldblock
+      destroymark
+    end
+    undoend
+  end
+
+  // fold a block and destroy subfolds
+  function foldflat
+    undobegin
+    foldblock 'ds'
+    foldblock
+    undoend
+  end
+
+  // fold or unfold a line
+  function foldline (options)
+    undobegin
+    oldmark = usemark 'T'
+    markline
+    unfold = pos 'u' options
+    if fold? then
+      foldblock 'd'
+      if not unfold or getmarkrows > 1 then
+        bottom = actualrow (if? unfold -1 1) (getmarkbot)
+        if not (getfold 'o' bottom) then
+          markline (getrow) bottom
+        end
+        foldblock
+      end
+    else
+      if not unfold then
+        foldblock
+      end
+    end
+    destroymark
+    usemark oldmark
+    undoend
+  end
+
+  // detab or entab the current file
+  // (+width=detab, -width=entab)
+  function tabfile (width)
+    tabblock (if? width width _TabWidth) '*a'
+  end
+
+  // insert a line after the current line with autoindent
+  function insline2
+    undobegin
+    insline
+    if setting? 'A' then
+      if getlinelen then
+        col (getlinebeg)
+      else
+        nextline = getrow + 2
+        if getlinelen nextline then
+          col (getlinebeg nextline)
+        end
+      end
+    end
+    down
+    undoend
+  end
+
+  // swap the current line with the next line
+  function swapline
+    moveblock '*l' '' '' (actualrow 1)
+  end
+
+  // center the current line
+  function centerline
+    justblock 'c' '*l' _LMargin _RMargin
+  end
+
+  // comment or uncomment a line
+  function commentline (c1 c2)
+    if not c1 then
+      send "oncomment" (getbufname) ref c1 ref c2
+      if not c1 then
+        c1 = '>'
+      end
+    end
+    undobegin
+    column = getlinebeg
+    if (gettext column  length c1) == c1 then
+      delchar  length c2  getlinelen - length c2 + 1
+      delchar  length c1  column
+    elseif getlinelen then
+      instext c1 (getlinebeg)
+      if column then
+        ovltext c2 getlinelen + 1
+      end
+    end
+    down
+    undoend
+  end
+
+  // find previous word
+  function prevword
+    oldcolumn = getcol
+    while (poschar _CSet (getchar)) and left do end
+    if oldcolumn <> getcol then
+      if poschar _CSet (getchar) then
+        return
+      end
+      if oldcolumn - getcol > 1 then
+        right
+        return
+      end
+    end
+    find _CSet '[r'
+    while (poschar _CSet (getchar getcol - 1)) and left do end
+  end
+
+  // find next word
+  function nextword
+    while poschar _CSet (getchar) do
+      right
+    end
+    find _CSet '['
+  end
+
+  // change the case of the word at the cursor
+  function caseword (options charset)
+    undobegin
+    oldmark = usemark 'T'
+    markword charset
+    caseblock options
+    destroymark
+    usemark oldmark
+    undoend
+  end
+
+  // open the filename at the cursor
+  function openword (charset)
+    file = getword (if? charset charset _CSetB)
+    if file then
+      open file
+    end
+  end
+
+  // delete the character at the cursor
+  function delchar2
+    undobegin
+    if getcol > getlinelen and _DelJoin == 'y' then
+      joinline
+    else
+      delchar
+      if setting? 'L' then
+        livewrap
+      end
+    end
+    undoend
+  end
+
+  // backspace
+  function backsp
+    undobegin
+    if getcol > 1 then
+      left
+      if not insert? and _BakOvl == 'y' then
+        ovltext ' '
+      else
+        delchar
+        if setting? 'L' then
+          livewrap
+        end
+      end
+    elseif getrow > 1 and _BakJoin == 'y' then
+      up
+      col getlinelen + 1
+      joinline
+    end
+    undoend
+  end
+
+  // delete right word
+  function delword (charset)
+    if not charset then
+      charset = _CSet
+    end
+    undobegin
+    if getcol > getlinelen then
+      joinline
+    else
+      p = posnot charset (gettext (getcol))
+      if p > 1 then
+        delchar p - 1
+      end
+      delchar (
+        if p then
+          if (pos (getchar) ' \t') and
+                (p == 1 or getcol == 1 or
+                (posnot charset (getchar getcol - 1))) then
+            (posnot ' \t' (gettext (getcol))) - 1
+          else
+            p == 1
+          end
+        else
+          getlinelen
+        end
+      )
+    end
+    if setting? 'L' then
+      livewrap
+    end
+    undoend
+  end
+
+  // splitline with autoindent
+  function splitline2
+    undobegin
+    b = apparentcol (getlinebeg)
+    if splitline then
+      if not setting? 'A' then
+        b = _LMargin
+      end
+      if b > 1 then
+        pushcursor
+        down
+        oldmark = usemark 'T'
+        markline
+        c = apparentcol (getcol)
+        shiftblock (if? c > b b c) - 1
+        destroymark
+        usemark oldmark
+        popcursor
+      end
+    end
+    undoend
+  end
+
+  // <enter> key behavior
+  function enter
+
+    // terminate a word for text translation
+    lastrow = getrow
+    if getcol == getlinelen + 1 and getlinelen then
+      if setting? 'T' then
+        send <char> ' '
+      end
+    end
+
+    if getrow == lastrow then
+      case (if? (insert?) _EnterIns _EnterOvl)
+        when 'i'
+          insline2
+        when 's'
+          if fold? then
+            insline2
+          else
+            startcolumn = apparentcol (getlinebeg)
+            len = getlinelen
+            splitline2
+            down
+            if setting? 'A' then
+              if len then
+                col (actualcol startcolumn)
+              end
+            else
+              startcolumn = _LMargin
+              col (actualcol (if? startcolumn startcolumn 1))
+            end
+          end
+        otherwise
+          down
+          col (if? (getlinelen) (getlinebeg) (actualcol _LMargin))
+      end
+    end
+  end
+
+
+  // for use by variable tab right
+  function vtabr
+    column = apparentcol (getcol)
+    for i = 1 to arg do
+      if (arg i) > column then
+        return arg i
+      end
+    end
+    return 0
+  end
+
+  // for use by variable tab left
+  function vtabl
+    column = apparentcol (getcol)
+    for i = arg downto 1 do
+      if (arg i) < column then
+        return arg i
+      end
+    end
+    return 0
+  end
+
+  // tab support
+  function tabfunc (next)
+
+    // toggle between hex display/entry mode
+    if windowflag 'h?' then
+      windowflag (if? (windowflag "12?") "-12" "+1")
+      return
+    end
+
+    oldcolumn = apparentcol (getcol)
+
+    // smart tabs
+    if setting? 'S' then
+      prevline = getrow - 1
+      while prevline and not (getlinelen prevline) do
+        prevline = prevline - 1
+      end
+      if prevline then
+        pushcursor
+        row prevline
+        send (if? next "nextword" "prevword")
+        if prevline == getrow then
+          newcolumn = apparentcol (getcol)
+        end
+        popcursor
+      end
+    end
+
+    // variable tabs
+    if not newcolumn then
+      if setting? 'V' then
+        newcolumn = eval (if? next "vtabr " "vtabl ") + _VarTabs
+      end
+
+      // standard fixed interval tabs
+      if not newcolumn then
+        width = getbuftabs
+        if not width then
+          width = _TabWidth
+          if not width then
+            width = 8
+          end
+        end
+        newcolumn = oldcolumn +
+                      if next then
+                        width - (oldcolumn - 1) mod width
+                      elseif oldcolumn > 1 then
+                        -((oldcolumn - 2) mod width + 1)
+                      end
+      end
+    end
+
+    // move to tabstop and shift text if needed
+    // (check for real tabs)
+    if newcolumn then
+      newcolumn = actualcol newcolumn
+      if (pos 'h' _TabOpt) and insert? then
+        realtab = (pos 'r' _TabOpt) and getbuftabs and not (setting? "SV")
+        oldcolumn = actualcol oldcolumn
+        if newcolumn < oldcolumn then
+          if not posnot ' \t' (gettext newcolumn oldcolumn - newcolumn) then
+            delchar oldcolumn - newcolumn newcolumn
+          end
+        elseif newcolumn > oldcolumn then
+          // insert real tab or spaces
+          writetext (if? realtab '\t'
+                        '': ((apparentcol newcolumn) - (apparentcol oldcolumn)))
+          return
+        end
+      end
+      col newcolumn
+    end
+  end
+
+  // tab left and right
+  function tabright    tabfunc 1
+  function tableft     tabfunc
+
+  // prompt to verify close
+  function close?
+    if bufchanged? and not getprevcurs then
+      queue "row" 1
+      savechanges = popup "ync" "Save changes to " +
+                                 (onname (getname (getbufname)) 't') + '?'
+      if savechanges == "Yes" then
+        if not save then
+          return ''
+        end
+      end
+      icompare savechanges "Yes" "No"
+    else
+      1
+    end
+  end
+
+  // close an edit window
+  function close (options)
+    if pos 's' options then
+      if save then
+        pass
+      end
+    elseif close? then
+      pass
+    end
+  end
+
+  // open and insert prompt
+  function askinsert (file)
+    if not file then
+      file = askfile "File to insert into " + (onname (getname (getbufname)))
+                     "Open and Insert"
+    end
+    if file then
+      begabove TRUE
+      old_size = getlines
+      // addhistory not needed for open
+      if open file 'i' then
+        // mark the inserted text
+        if not (dir? (getbufname)) then
+          if getlines > old_size then
+            markline  getrow + 1  getrow + getlines - old_size
+          end
+        end
+      end
+      endabove
+    end
+  end
+
+  // prompt to change the current file name
+  function askname
+    newname = ask  "Rename " + (onname (getname (getbufname))) + " to"  "_load"
+    if newname then
+      case setname newname
+        when -1 say "Failed" 'b'
+        when -2 say "Failed - file already loaded" 'b'
+        otherwise
+          addhistory "_load" (getbufname)
+      end
+    end
+  end
+
+  // search and replace with messages and highlighting
+  function search2 (search_str reverse again)
+    variable opt, rpl
+    n = search search_str reverse again ref opt ref rpl
+    if n then
+      // replace occurred
+      if rpl then
+        display
+        say (thousands n) + " changes made"
+      // count occurrences
+      elseif pos 'a' opt then
+        display
+        say (thousands n) + " occurrences of '" + search_str + "' found"
+      // search only
+      else
+        onfound n
+      end
+    else
+      display
+      say "'" + search_str + "' not found"  'b'
+    end
+    return n
+  end
+
+  // edit fields/group boxes for find/repl dialog boxes
+  variable f1, f2, g1, g2
+
+  // retrieve history in find/repl dlgbox fields and options
+  function findupd
+    variable searchstr, replstr, options
+
+    n = splitstr '' (gettext) ref searchstr ref replstr ref options
+    if n == 2 then
+      options = replstr
+      replstr = ''
+    end
+
+    // default options
+    if not options and n <= 1 then
+      options = _SearchOpt + (if? f2 _ReplaceOpt '')
+    end
+
+    // find string
+    buffer = getwinbuf f1
+    delchar MAX_COL 1 '' buffer
+    instext searchstr 1 '' buffer
+
+    // replace string/filestr
+    if f2 then
+      buffer = getwinbuf f2
+      delchar MAX_COL 1 '' buffer
+      instext replstr 1 '' buffer
+    end
+
+    // set search/replace options
+    setgroupbox options "iwxa"  g1
+    setgroupbox options "rbgs"  g2
+    col getlinelen + 1
+  end
+
+  // find/repl option group boxes
+  private function frdlg (y options)
+    // group box 1
+    g1 = groupbox '' 3 y
+      (menu ''
+         item " [ ] &Ignore Case"
+         item " [ ] &Whole Words"
+         item " [ ] Regular E&Xpression "
+         item (if? f2
+                  " [ ] Replace &All"
+                  " [ ] &Count Occurrences")
+       end ) '' _SearchOpt + (if? f2 _ReplaceOpt '')
+               'iwxa'
+
+    // group box 2
+    g2 = groupbox '' 29 y
+      (menu ''
+         item " [ ] &Reverse Search"
+         item " [ ] Marked &Block Only  "
+         item " [ ] &Global Search"
+         item " [ ] Skip &Folds"
+       end) '' _SearchOpt "rbgs"
+
+    button "O&k"    56 2 8
+    button "Cancel" 56 4 8
+  end
+
+  // find dialog box
+  function finddlg
+    variable searchstr, options1, options2
+    dialog "Find" 66 8 'cp'
+    f1 = field "&Search for: >" 3 2  38 '' "_find" whenselect "findupd"
+    f2 = ''
+    frdlg 4
+    if (getdialog ref searchstr ref options1 ref options2) == 'Ok' then
+      joinstr '' searchstr options1 + options2
+    end
+  end
+
+  // replace dialog box
+  function repldlg
+    variable searchstr, replstr, options1, options2
+    dialog "Replace" 66 10 'cp'
+    f1 = field "&Search for:   >" 3 2  36 '' "_find" whenselect "findupd"
+    f2 = field "Re&place with: >" 3 4  36 '' "_find" whenselect "findupd"
+    frdlg 6 'r'
+    if (getdialog ref searchstr ref replstr ref options1 ref options2) == 'Ok' then
+      joinstr '' searchstr replstr options1 + options2
+    end
+  end
+
+  // find prompt
+  function askfind (reverse)
+    search_string = if _PromptStyle == 'd' then
+                      finddlg
+                    else
+                      ask "[string/abgirswx] Find"  "_find"
+                    end
+    if search_string then
+      search2 search_string reverse
+      addhistory "_find" search_string
+    end
+  end
+
+  // replace prompt
+  function askrepl (reverse)
+    search_string = if _PromptStyle == 'd' then
+                      repldlg
+                    else
+                      ask "[string/replstr/abgirswx] Repl"  "_find"
+                    end
+    if search_string then
+      if (splitstr '' search_string) < 3 then
+        search_string = search_string + '/'
+      end
+      search2 search_string reverse
+      addhistory "_find" search_string
+    end
+  end
+
+  // do the last find/replace operation
+  // (reverse=r reverses the search direction)
+  function findlast (reverse)
+    search2 (gethiststr "_find") reverse TRUE
+  end
+
+  // incremental search
+  function isearch
+
+    variable search_string
+
+    oldtitle = gettitle
+    repeat
+
+      settitle  "I-search for [" + search_string + "] "
+      keycode = getkey
+      options = _SearchOpt
+      new_char = ''
+
+      case  keycode
+
+        when <backspace>
+          if search_string then
+            popcursor
+            search_string = if length search_string > 1 then
+                              search_string [1 .. length search_string - 1]
+                            else
+                              ''
+                            end
+            if not search_string then
+              display
+            end
+            options = '*'
+          end
+
+        when <ctrl p>, <ctrl r>
+          options = 'r'
+
+        when <ctrl n>, <ctrl l>
+          // do nothing
+
+        when <ctrl g>, <ctrl b>
+          options = 'g'
+
+        otherwise
+          keyname = geteventname keycode
+          if length keyname == 3 then
+            pushcursor
+            new_char = keyname [2]
+            options = '*'
+          else
+
+            // restore window title
+            settitle oldtitle
+            display
+
+            // clear all pushed cursors
+            popcursor "ad"
+            addhistory "_find" search_string
+
+            if keycode <> <enter> and keycode <> <esc> then
+              queuekey keycode
+            end
+
+            done = TRUE
+          end
+      end
+
+      if not done and (search_string or new_char) then
+        new_string = concat search_string new_char
+        str_length = find new_string  _SearchOpt + options
+        if str_length then
+          onfound str_length
+          search_string = new_string
+        else
+          say  new_string + " not found"  'b'
+          if new_char then
+            popcursor
+          end
+          onfound  length search_string
+        end
+      end
+
+    until done
+  end
+
+  // prompt to find occurrences
+  function askfindo
+    runmacro (bootpath "macro\\findo.x")
+  end
+
+  // find all occurrences of last find string
+  function findlasto
+    runmacro (bootpath "macro\\findo.x") '' (gethiststr "_find")
+  end
+
+  // find matching character (){}[]<>
+  function gotomatch2
+    if gotomatch "(){}[]<>" then
+      onfound 1
+    else
+      say "Not found" 'b'
+    end
+  end
+
+  // goto line
+  function row2 (line)
+    case line [1]
+      when '+'   down line [2 : TO_END]
+      when '-'   up   line [2 : TO_END]
+      otherwise  row (if? line > getlines (getlines) line)
+    end
+    onfound
+  end
+
+  // goto line prompt
+  function askrow
+    askx "Line number" "_line" "row2"
+  end
+
+  // set a quick bookmark
+  function quickbook
+    loop
+      i = i + 1
+      bookmark = "Book" + i
+      if not book? bookmark then
+        break
+      end
+    end
+    setbook bookmark
+    display
+    say "Bookmark " + bookmark + " set"
+  end
+
+  // place a bookmark
+  function placebook (bookmark)
+    if not bookmark then
+      bookmark = ask "Bookmark Name" "_book"
+    end
+    if bookmark then
+      setbook bookmark
+      display
+      say "Bookmark '" + bookmark + "' set"
+    end
+  end
+
+
+  // Go to the compiler error on the current line of a compiler
+  // error output file. This function recognizes compiler errors
+  // of the form:
+  //
+  //   <text>  Filename.ext  <text>  Linenumber  <text> : Message
+  //
+  // (implemented by using the 'parse' builtin function with regular
+  // expression searching)
+
+  function gotoerror
+    variable filename, line, message
+
+    // filename charclass to use (max closure without the period)
+    fileset = "[a-zA-Z0-9_\-/\\\\@~:^!#$%&`']#"
+
+    // parse the current line into filename/line/message variables
+    if parse '.*{' + fileset + '\\.' + fileset + "}.*{[0-9]#}.*:{.*}$"
+             (gettext) 'x' ref filename ref line ref message then
+
+      // open the file
+      if open filename then
+
+        // get the real line number if folds are present
+        if (getfold 'n') and
+           (loadbuf (getbufname) '' (hex2bin _LineDlm) 'x') then
+          row line
+          line = line - (find _FoldSign 'ar')
+          destroybuf
+        end
+
+        row line
+
+        // open folds until the line is exposed
+        while (getfold 'c') and getrow <> line do
+          openfold
+          row line
+        end
+
+        col (getlinebeg)
+        send "onfound"
+        say  message + '  '
+        return
+      end
+    end
+    display
+    say "Compiler message not recognized. "
+  end
+
+
+  // start, stop, or do autosave
+  function autosave (seconds)
+    if not arg then
+      if bufchanged? then
+        save
+      end
+    elseif seconds <= 0 then
+      destroytimer "asav"
+    else
+      setrepeat "asav" seconds * 1000  '' "autosave"
+    end
+  end
+
+  // prompt for autosave interval in seconds
+  function askasave
+    seconds = ask "Autosave interval in secs (-1=disable)"
+    if seconds then
+      autosave seconds
+    end
+  end
+
+  // highlight all occurrences of the word at the cursor
+  function hiliteword
+    runmacro2 "hilitewd"
+  end
+
+  // live word wrap support
+  function livewrap
+
+    if fold? then
+      return
+    end
+
+    startcol = apparentcol (getlinebeg)
+    nextrow = getrow + 1
+    if getrow < getlines and (getlinelen nextrow) then
+      c = apparentcol (getlinebeg nextrow) nextrow
+      startcol = if? c < startcol  c  startcol
+    elseif not getlinelen or not (setting? 'A') then
+      startcol = _LMargin
+    end
+
+    c = apparentcol (getcol)
+    if c < startcol then
+      startcol = c
+    end
+
+    if getlinelen then
+      undobegin
+      saved_char = getchar
+      ovltext '\xFD'
+
+      // mark to the end of the paragraph
+      pushcursor
+      top = getrow
+      while down and getlinelen do end
+      if not getlinelen then
+        up
+      end
+      bottom = getrow
+      popcursor
+
+      // reformat
+      oldmark = usemark 'T'
+      markcolumn startcol _RMargin top bottom
+      formatblock '' '' "kr"
+      destroymark
+      usemark oldmark
+
+      // find the original cursor position
+      col 1
+      find '\xFD' '*'
+      ovltext (if? saved_char saved_char ' ')
+
+      undoend
+    end
+  end
+
+  // enter a character or string at the cursor, with support for:
+  //   - match character
+  //   - translate
+  //   - standard word wrap
+  //   - live word wrap
+  //   - hex entry mode
+
+  function write (write_str)
+
+    // group together as one undoable operation
+    undobegin
+
+    // hex entry mode
+    if windowflag 'h?' then
+      if windowflag '12?' then
+        while write_str do
+          hexchar = upcase write_str [1]
+          write_str = ''
+          if poschar '0-9A-F' hexchar then
+            if hexchar >= 'A' then
+              hexchar = (bin2int hexchar) - 55
+            end
+            fullchar = bin2int (getchar)
+            if windowflag '2?' then
+              ovltext (char hexchar | (fullchar & 0xf0))
+              right
+            else
+              writetext (char (hexchar shl 4) | (if? (insert?) 0 (fullchar & 0x0f)))
+              left
+              windowflag '+2'
+              keycode = getkey
+              if keycode <> <left> then
+                keyname = geteventname keycode
+                if length keyname == 3 then
+                  write_str = keyname [2]
+                else
+                  queuekey keycode
+                end
+              end
+            end
+          end
+        end
+        windowflag '-2'
+        undoend
+        return
+      end
+    end
+
+    // enter the character or string at the cursor and
+    // advance the cursor
+    writetext write_str
+
+    // get the current window settings
+    setting_str = getsettings
+
+    // match character
+    if pos 'M' setting_str then
+      instext (case write_str
+                 when '"'  '"'
+                 when '('  ')'
+                 when '['  ']'
+                 when '{'  '}'
+                 otherwise ''
+               end)
+    end
+
+    // translate
+    if pos 'T' setting_str then
+
+      // delimited lookup?
+      to_word_end = if? (posnot _TranCSet write_str) 2 1
+
+      // get the last word typed
+      word_str = getword _TranCSet (getcol - to_word_end)
+      if word_str then
+        lookup_str = word_str + (if? to_word_end == 2 '*')
+
+        if (object? _TranObj) or
+           (loadobject (bootpath "tran.x") _TranObj) then
+
+          // lookup the word in the translate object
+          value = lookup lookup_str _TranObj
+
+          if value then
+            // is it a function? then evaluate it..
+            if function? lookup_str _TranObj then
+              eval value
+
+            // otherwise replace the word
+            else
+              word_column = getcol - length word_str - to_word_end + 1
+              delchar length word_str word_column
+              instext value word_column
+              col word_column + length value + to_word_end - 1
+            end
+          end
+        end
+      end
+    end
+
+    // check for word wrap and live wrap
+    if (apparentcol (getlinelen)) > _RMargin then
+
+      // live word wrap
+      if pos 'L' setting_str then
+        livewrap
+
+      // standard word wrap
+      elseif (pos 'W' setting_str) and (not fold?) then
+        column = apparentcol (getcol)
+        limit = _RMargin + 1
+        if column > limit then
+          if write_str <> ' ' then
+            first_col = if? (setting? 'A') (apparentcol (getlinebeg)) _LMargin
+            split_col = apparentcol (pos ' ' (gettext 1 (actualcol limit)) 'r')
+            split_col = if? split_col > first_col  split_col + 1  limit
+            splitline (actualcol split_col)
+            down
+            shiftblock  first_col - 1 '*l'
+            col (actualcol column - split_col + first_col)
+          end
+        end
+      end
+    end
+
+    undoend
+  end
+
+  // enter a date/time stamp at the cursor
+  function timestamp
+    //write getdate + ' ' + gettime
+    write gettime + ' ' + (runmacro (bootpath "cfg\\cfgintnl.x") '' 'f')
+  end
+
+
+//--------------------------------------------------------------------
+// File Manager windows
+//--------------------------------------------------------------------
+
+object fmgr
+
+  // error notification
+  function ferror (s)
+    msgbox  s + " Failed"  "Error!" 'b'
+    fbreak
+  end
+
+  // fmgr confirmation prompt
+  private function fconfirm (confirm pstring func)
+    if (icompare confirm 'n') or
+       (icompare (popup "ok" pstring + ' ' + fname + '?') "ok") then
+      fcommand func
+    end
+  end
+
+  // run external fmgr commands
+  private function frunmacro (file p1 p2)
+    runmacro (bootpath "macro\\" + file + ".x") '' p1 p2
+  end
+
+  // insert a new file into the list
+  function finsert (file)
+    insline
+    down
+    fupdate file
+    up
+  end
+
+  // return reduced file name for fmgr commands
+  function fname
+    if fmark? then
+      "Marked Files and Directories"
+    else
+      file = fgetfile
+      if file [LAST_CHAR] == '\\' then
+        (getname file [1..length file - 1]) + '\\'
+      else
+        getname file
+      end
+    end
+  end
+
+  // internal fopen
+  function fopen2 (file options)
+    if file then
+      open file options
+    else
+      fcommand "fopen2" options
+    end
+  end
+
+  // fmgr open file(s) command
+  function fopen (options)
+
+    fmgrwin = getcurrwin
+    fopt = fgetopt
+
+    // force one file/directory only
+    if pos '1' options then
+      if shiftkey? then
+        options = options + 'v'
+      end
+      file = fgetfile
+      if file [LAST_CHAR] == '\\' then
+        options = options + 'r'
+      end
+      open file options
+
+    // one or more files/directories
+    else
+      fopen2 '' options
+    end
+
+    if not (pos 'r' options) and
+       (_FmgrQuit == 'y' or (pos 'q' options)) then
+      // do not quit fully-qualified listings
+      if not pos 'q' fopt then
+        if gotowindow fmgrwin then
+          if gotobuf (getwinbuf) then
+            file = fgetfile
+            fmgr.close
+            addhistory "_load" file
+          end
+        end
+      end
+    end
+  end
+
+  // fmgr run file/macro command (one file only)
+  function frun (options)
+    file = fgetfile
+    if (locase (getext file)) == '.x' then
+      runmacro2 file
+    else
+      run file options
+    end
+  end
+
+  // fmgr print file(s) command
+  function fprint (file)
+    if file then
+      if not printfile file then
+        ferror "Print"
+      end
+    else
+      fconfirm 'y' "Print" "fprint"
+    end
+  end
+
+  // fmgr remove file(s) from list
+  function fremove (file)
+    if file then
+      delline
+    else
+      fcommand "fremove"
+    end
+  end
+
+  // fmgr get file/directory statistics (one file only)
+  function fstat
+    runmacro (bootpath "macro\\filestat.x") '' (fgetfile)
+  end
+
+  // fmgr touch file(s) command
+  function ftouch (file)
+    if file then
+      if touchfile file then
+        fupdate file
+      else
+        ferror "Touch"
+      end
+    else
+      fconfirm _ConTch "Touch" "ftouch"
+    end
+  end
+
+  // fmgr change attributes command
+  function fattr  frunmacro "fattr"
+
+  // fmgr rename file command (one file only)
+  function frename
+    file = fgetfile
+    if file [LAST_CHAR] == '\\' then
+      file [LAST_CHAR] = ''
+      d = '\\'
+    end
+    newname = ask "Rename " + (getname file) + d + " to"  "_load"
+    if newname then
+      newname = qualify newname (getbufname)
+      if renamefile file newname then
+        fupdate newname
+      else
+        ferror "Rename"
+      end
+    end
+  end
+
+  // fmgr delete file(s) command
+  function fdelete (file)
+    if file then
+      // delete directory
+      if file [LAST_CHAR] == '\\' then
+        if pos ".." file then
+          return
+        else
+          display
+          //queue "onalarm"
+          if (okbox "Deleting: " + (onname file 't') +
+                    "\nCAUTION!! All files and subdirectories will be deleted. Proceed?"
+                   "Warning!") == 'Ok' then
+            success = runmacro (bootpath "macro\\sweep.x") '' file '' 'd'
+          else
+            return
+          end
+        end
+      else
+        success = deletefile file
+      end
+      if success then
+        delline
+      else
+        ferror "Delete"
+      end
+    else
+      file = fgetfile
+      if not (pos ".." file) or fmark? then
+        fconfirm (if? (not fmark? and (directory? file)) 'n' _ConDel)
+                  "Delete" "fdelete"
+      end
+    end
+  end
+
+  // copy/move files/directories
+  function fcopy  frunmacro "fcopy"
+  function fmove  frunmacro "fcopy" 'm'
+
+  // open/replace a file list
+  function flopen (file options)  frunmacro "flopen" file options
+
+  // save/edit a file list
+  function flsave (options) frunmacro "flsave" options
+
+  // fmgr create new directory command
+  function fmkdir
+    dir = ask "Create directory" "_load"
+    if dir then
+      dir = qualify dir (getbufname)
+      if createdir dir then
+        if (getpath dir) == (getpath (getbufname)) then
+          finsert dir
+        end
+      else
+        ferror "Create directory"
+      end
+    end
+  end
+
+//--------------------------------------------------------------------
+// Event functions called by the editor
+//--------------------------------------------------------------------
+
+// edit windows & file manager windows only
+object edit_fmgr
+
+  // called while loading files
+  event <loading> (file lines)
+    say (if? lines  "Loading [" + lines + "]..."  gettitle)
+  end
+
+  // called while saving files
+  event <saving> (file lines)
+    say (if? lines  "Saving [" + lines + "]..."  gettitle)
+  end
+
+  // called while printing files
+  event <printing> (file lines)
+    say (if? lines  "Printing [" + lines + "]... <ctrl break> to stop "
+         gettitle)
+  end
+
+  // called while compiling files
+  event <compiling> (file lines)
+    say (if? lines  "Compiling " + (onname file) + " [" + lines + "]..."
+                     gettitle)
+  end
+
+// edit windows only
+object edit
+
+  // called after a file is opened and before it's displayed
+  function onopen (options)
+
+    // set window event object
+    setwinobj "edit"
+    foldoptions 'l'
+
+    // default window settings (if not remembered by open)
+    if not posnot ' ' (getsettings [1:13]) then
+      setting _DefaultSet ON
+    end
+
+    // real tabs
+    if not getbinarylen then
+      // handle option to display tabs as spaces, if found on open
+      // (check only last 200 lines in the file)
+      if pos 'o' _TabOpt then
+        oldmark = usemark 'T'
+        markline getlines - 200 (getlines)
+        found = find "\t" "bgn*"
+        destroymark
+        usemark oldmark
+        setbuftabs (if? found _TabWidth)
+      // always display tabs as spaces, without checking
+      elseif pos 's' _TabOpt then
+        setbuftabs _TabWidth
+      end
+    end
+
+    // hex open option
+    if pos 'x' options then
+      setting 'H' ON
+    end
+
+    // check for file truncation
+    if bufferflag 't?' then
+      display
+      say "File Truncated!" 'b'
+    end
+
+    pass options
+  end
+
+  // called immediately before a file is saved
+  //function onsave (file)
+    //pass file
+  //end
+
+  // called when switching to a file or window
+  //function onfocus
+    //pass
+  //end
+
+  // called when closing a file
+  //function onclose
+    //pass
+  //end
+
+  // called after a search to change the window view and
+  // optionally highlight a string
+  function onfound (stringlength)
+
+    // check if the cursor is outside the window view
+    x = apparentcol (getcol)
+    if x < getviewcols then
+      adjustcol x
+    elseif x < getviewleft then
+      if x < getviewcols then
+        rollcol -getviewleft
+      else
+        adjustcol 3
+      end
+    elseif x + stringlength >= getviewright then
+      adjustcol
+    end
+
+    if getrow > getviewbot then
+      adjustrow 3
+    elseif getrow < getviewtop then
+      adjustrow
+    end
+    display
+
+    // highlight a string if stringlength is specified
+    if stringlength then
+      hilite stringlength 1 (getpalette (if? (inmark?) 9 8))
+    end
+  end
+
+
+// file Manager windows only
+object fmgr
+
+  // called after a fmgr window is opened and before it's displayed
+  function onopen (options)
+    // set the window event object
+    setwinobj "fmgr"
+    pass options
+  end
+
+
+// all windows
+object a
+
+  // called when sounding an alarm (customizable alarm sound)
+  function onalarm
+    beep 750 70
+  end
+
+  // get default comments for a filename (c1, c2 passed by reference)
+  // (associates a filename with comment symbols)
+  function oncomment (file c1 c2)
+    case locase (getext file)
+      when ".c", ".aml", ".cpp", ".h"   c1 = "//"
+      when ".asm"                       c1 = ';'
+      when ".pas"                       c1 = '{'   c2 = '}'
+      otherwise                         c1 = '>'
+    end
+  end
+
+  // get a formatted filespec
+  // (note: this function is not called for each file in a file manager
+  // listing when the listing is initially opened)
+  function onname (file options)
+    case _NameStyle
+      // capitalize
+      when 'c'
+        file = locase file
+        file [1] = upcase file [1]
+        i = 1
+        loop
+          j = pos '\\' file [i..TO_END]
+          if j then
+            i = i + j
+            file [i] = upcase file [i]
+          else
+            return file
+          end
+        end
+      // lowercase
+      when 'l'
+        locase file
+      // uppercase
+      when 'u'
+        upcase file
+      // as-is
+      otherwise
+        file
+    end
+  end
+
+  // called when entering the editor before any windows are open.
+  // Dos command-line parameters are passed to this function
+  function onentry
+
+    // save the Dos entry path
+    _cp = getcurrpath
+
+    // open prompt and window history
+    if _SaveHistory == 'y' then
+      openhistory (bootpath "default.prj")
+    end
+
+    // process command-line parameters passed to the editor
+    param_num = 1
+    parameter = arg 1
+    while parameter do
+
+      // check for command-line events
+      if parameter [1..2] == "-e"  then
+        send parameter [3 : TO_END]
+
+      // check for command-line external macros
+      elseif parameter [1..2] == "-r"  then
+        send "runmacro2" parameter [3 : TO_END]
+
+      // open files/directories
+      else
+        open parameter
+      end
+
+      // next command line parm
+      param_num = param_num + 1
+      parameter = arg param_num
+    end
+
+    window = getcurrwin
+    while window and not (wintype? "edit_fmgr" window) do
+      window = getprevwin
+    end
+
+    // do bootoptions if no edit/fmgr windows are open
+    if not window then
+      case _BootOpt
+        when 'd'  restoredesk
+        when 'f'  open '.'
+        when 'n'  opennew
+        when 't'  runmacro2 "tree"
+        otherwise
+          filespec = ask "File or Directory" "_load"
+          if filespec then
+            open filespec
+          else
+            halt
+          end
+      end
+    end
+
+    // initialize the mouse
+    if _Mouse == 'y' then
+      if openmouse _MouseOpt then
+        mousepos  15999 + getvidcols  15999 + getvidrows
+        y_sens = _MouSenY
+        if (getos 'v') > 9 then
+          mousesense (_MouSenX * 5) / 8  (y_sens * 5) / 8  _MouDST
+        else
+          mousesense _MouSenX y_sens _MouDST
+        end
+      end
+    end
+
+    // open key macros if configured
+    if _SaveMac == 'y' then
+      openkey (bootpath "a.mac")
+    end
+
+    // set autosave timer
+    send "autosave" _AutoSave
+  end
+
+
+  // called when exiting the editor after all windows are closed
+  function onexit
+
+    // open prompt on non-global exit (if configured)
+    if not __G then
+      if _ExitOpen == 'y' then
+        filespec = ask "File or Directory" "_load"
+        if filespec then
+          open filespec
+        end
+      end
+    end
+
+    // final exit if no windows open
+    if not getcurrwin then
+
+      // save prompt and window history
+      if _SaveHistory == 'y' then
+        savehistory (bootpath "default.prj")
+      end
+
+      // save key macros if configured
+      if _SaveMac == 'y' then
+        // check if record occurred
+        if lookup "kd" "mon" then
+          savekey (bootpath "a.mac")
+        end
+      end
+
+      // restore entry path saved in onentry
+      currpath _cp
+
+      closemouse
+      halt
+    end
+  end

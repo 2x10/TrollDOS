@@ -1,0 +1,10 @@
+echo c   = config
+echo d   = desktop
+echo a   = autoexec
+echo e   = error
+echo l   = load
+echo b   = bluescreen(s)
+echo 4d  = 4dos
+echo b   = boot
+echo nf  = not found
+echo ne  = not exist

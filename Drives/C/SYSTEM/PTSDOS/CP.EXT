@@ -1,0 +1,33 @@
+COM:	!.!
+EXE:	!.!
+BAT:	!.!
+BTM:    !.!
+PRN:	print !.!
+LST:	print !.!
+DEF:	sr !.!
+LSV:	print !.!
+LZH:	lha x !.!
+ICE:	ice x !.!
+GIF:	vgif !.!
+ZIP:	pkunzip !.!
+ARJ:	arj x -v !
+MAK:	make -f !.!
+DMF:    %mmdos%\sound\cubic\cp !.!
+MOD:    %mmdos%\sound\cubic\cp !.!
+XM:     %mmdos%\sound\cubic\cp !.!
+MTM:    %mmdos%\sound\cubic\cp !.!
+S3M:    %mmdos%\sound\cubic\cp !.!
+669:    %mmdos%\sound\cubic\cp !.!
+Ult:    %mmdos%\sound\cubic\cp !.!
+NST:    %mmdos%\sound\cubic\cp !.!
+WOW:    %mmdos%\sound\cubic\cp !.!
+OKT:    %mmdos%\sound\cubic\cp !.!
+PTM:    %mmdos%\sound\cubic\cp !.!
+AMS:    %mmdos%\sound\cubic\cp !.!
+MID:    %mmdos%\sound\cubic\cp !.!
+TXT:    edit !.!
+DOC:    edit !.!
+CFG:    edit !.!
+INI:    edit !.!
+HLP:    edit !.!
+DAT:    edit !.!

@@ -1,0 +1,57 @@
+<HTML><HEAD><TITLE>VIEWVOL</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>VIEWVOL</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>zeigt Informationen zu einem Teilstck einer mit <A HREF="multivol.htm">MULTIVOL</A> auf mehrere
+Disketten verteilten Datei.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">VIEWVOL [Laufwerk]</FONT>
+
+viewvol a: checkt also alle Disketten, die Sie in Laufwerk A: einlegen, bis
+Sie mit Escape abbrechen.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT> 
+
+Mit Viewvol k”nnen Sie sich Informationen ber den Inhalt der Disketten 
+verschaffen, auf denen sich Dateiteilstcke befinden.
+
+<A HREF="addvol.htm">ADDVOL</A> kann eine Datei nur dann wieder zusammensetzen, wenn alle Disketten
+vollst„ndig und in der richtigen Reihenfolge vorliegen. Mit VIEWVOL k”nnen
+Sie also diese ben”tigte Ordnung herstellen. Legen Sie eine der Disketten
+in das Laufwerk und starten Sie VIEWVOL. Wenn sich auf der eingelegten
+Diskette ein gltiges Teilstck einer Datei befindet, werden ausfhrliche
+Informationen hierzu ausgegeben. Wenn sich zwei Dateien auf einer Diskette
+berschneiden, sich also zwei Dateiteile auf der Diskette befinden, werden
+zu beiden Bruchstcken Infos ausgegeben.
+
+VIEWVOL zeigt folgende Dateieigenschaften an:
+
+Volume-Name.: Name des Teilstckes, z.B. VOLUME.001
+
+Kennwort....: Kennwort der zerlegten Datei. Mehr dazu unter <A HREF="addvol.htm#kennwort">ADDVOL</A>  
+
+Teil-Nr.....: Nummer des Teilstckes. Alle Teilstcke werden in der richtigen
+              Reihenfolge durchnumeriert, sodaá Sie anhand dieser Nummer die
+              Disketten in der richtigen Reihenfolge ordnen k”nnen. Das erste
+              Teilstck tr„gt die Nummer 1.
+
+letztes Teil? Wenn hier NEIN steht, folgen noch weitere Disketten mit Teil-
+              stcken der Datei. Steht dort JA, dann haben Sie das letzte
+              Teil der Datei vor sich.
+
+Anschlieáend folgen die Gr”áe des Teilstckes und wann es angelegt wurde
+(Datum und Uhrzeit)
+
+Dateiname...: Name der Originaldatei, also der Datei, die Sie mit MULTIVOL
+              zerlegt haben.
+
+Hier folgen dann ursprngliche Gr”áe, Datum, Uhrzeit und Attribute der
+Originaldatei. ADDVOL erstellt sp„ter anhand dieser Daten die 
+zusammengesetzte Datei, die daher mit dem Original vollkommen identisch ist.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

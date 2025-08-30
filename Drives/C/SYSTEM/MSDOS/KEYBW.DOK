@@ -1,0 +1,184 @@
+    ----------------------------------------------------------------------
+    KEYBW.COM  Version 4.1              (c) Horst Schaeffer -   Juli 1999
+    ----------------------------------------------------------------------
+
+    KEYBW.COM ist ein alternativer deutscher Tastaturtreiber, der nur
+    knapp 500 Bytes residenten Speicherplatz belegt (inkl. MEM CB).
+
+    Die spezifischen deutschen Tastenbelegungen sind in einer Tabelle
+    gespeichert, die sowohl in der Programmdatei enthalten ist, als auch
+    als separate ASCII-Datei KEYBW.INI geladen werden kann. Diese INI-
+    Datei kann nach Wunsch modifiziert werden.
+
+        Syntax:   [LH] KEYBW [Ini-Datei] [Optionen]
+
+    KEYBW.COM verhÑlt sich Ñhnlich wie der MS-Treiber, mit folgenden
+    wichtigen Abweichungen:
+
+    > Die Erzeugung von z.B. "Ç" durch zwei Tasten "'" und "e" wird nicht
+      unterstÅtzt. Alle Tasten (Kombinationen) liefern sofort das
+      zugeordnete Zeichen.
+
+    > Die Kombination Ctrl+Alt (Strg+Alt) wirkt immer wie Alt-Gr
+
+    > Die alberne Behandlung der CAPS-Lock Taste (Umschalt-Feststelltaste)
+      nach der deutschen DIN-Norm fÅr Typenhebel-Schreibmaschinen wird
+      nicht unterstÅtzt. Statt dessen wirkt CAPS-Lock nur auf Buchstaben
+      (nicht auf Ziffern und Sonderzeichen), und das ZurÅcksetzen der
+      Funktion erfolgt mit der selben Taste (nicht mit der Shift-Taste).
+
+      WÑhrend CAPS-Lock gedrÅckt ist, wirkt die Shift-Taste normal auf
+      alle Ziffern-/Sonderzeichen-Tasten. Buchstaben kommen in diesem
+      Falle klein (Umkehrung der Funktion).
+
+      Diese Caps-Lock Behandlung entspricht dem Tastatur-Layout
+      "Deutsch (EDV)" unter Windows 9x.
+
+
+    WINDOWS-Tasten:
+
+    FÅr die WINDOWS-Tasten auf neueren Keyboards werden Funktionstasten-
+    Codes produziert, auch in Kombination mit Shift/Ctrl/Alt (s. Programm
+    SCANTEST). Dies entspricht dem Original MS-Treiber. Die Tasten kînnen
+    (fÅr DOS) ebenfalls mit ASCII-Codes belegt werden.
+
+    Bitte beachten, dass die beiden WIN-Logo-Tasten nur bei gebootetem
+    DOS genutzt werden kînnen. Unter WINDOWS'95 (im DOS Vollbild-Modus)
+    schalten diese Tasten gnadenlos ins GUI, sofern dies nicht durch
+    ein besonderes Utility (DOSWINKY aus KERNEL TOYS) verhindert wird.
+
+
+    Befehlsoptionen:
+
+    Beim Aufruf des Programms kînnen folgende Optionen angegeben werden
+    (Buchstaben gro· oder klein):
+
+    /.   fÅr Punkt statt Dezimalkomma im Ziffernblock
+    /,   wieder Komma (Default-Zustand)
+
+    /E+  Erweiterung des Tastaturpuffers auf 127 Tasten (normal: 15).
+         Der dafÅr verwendete Speicherbereich wird nach aller Erfahrung
+         nicht anderweitig genutzt. Probleme sind nicht bekannt, aber
+         keine Garantie!
+         Hinweis: Es kînnte noch uralte Programme geben, die direkt auf
+         den Tastaturpuffer zugreifen, ohne sich um die dokumentierten
+         Konventionen zu kÅmmern. Dann gibt's Probleme.
+
+    /E-  RÅcksetzen der Erweiterung (auf 15 Tasten, Default-Zustand)
+
+    /Y-  Vertauschung von Y und Z unterbinden
+    /Y+  Vertauschung von Y und Z aktivieren (default)
+
+    /!   Standard- (eingebaute) Umwandlungstabelle aktivieren
+         (um eine zuvor geladene INI-Datei zu deaktivieren)
+
+
+    Wiederholter Aufruf:
+
+    KEYBW.COM kann jederzeit erneut aufgerufen werden, um eine andere
+    Tastenbelegung zu laden oder um Optionen zu Ñndern. Zum Einrichten
+    und Testen einer eigenen Tastenbelegung braucht also nicht immer
+    wieder neu gebootet werden.
+
+    Wird keine INI-Datei beim wiederholten Aufruf angegeben, dann bleibt
+    die aktuelle Belegungstabelle aktiv. S.a. Option /!
+
+
+    Installation:
+
+    ZunÑchst sollte KEYBW ohne ZusÑtze in die AUTOEXEC.BAT aufgenommen
+    und dann neu gebootet werden. Nun kann ausprobiert werden, ob die
+    Tasten wunschgemÑ· belegt sind. Das Programm SCANTEST liefert alle
+    nîtigen Codes, um eventuelle énderungen in der Datei KEYBW.INI
+    vorzunehmen. NÑheres s. SCANTEST.DOK.
+
+    Nach énderung der INI-Datei kann diese sofort geladen werden, um
+    weitere Tests durchzufÅhren:
+
+              KEYBW KEYBW.INI
+
+    LH (load high) sollte beim wiederholten Aufruf nicht verwendet werden.
+    Die INI-Datei kann einen beliebigen Namen haben. Es empfiehlt sich,
+    Eine Kopie der Originaldatei zu erstellen, um damit zu arbeiten.
+
+
+    INI-Datei:
+
+    Die Original-Datei enthÑlt alle Belegungen fÅr die deutsche Standard-
+    Tastatur, inkl. Drittbelegungen, sowie die Zeichen:  Ç ê § • á Ä
+
+    Diese Belegungen sind auch in der Programm-Datei KEYBW.COM enthalten.
+    Nur wenn eine abweichende bzw. erweiterte Belegung gewÅnscht wird,
+    ist die INI-Datei zu bearbeiten und beim Start in der AUTOEXEC.BAT
+    anzugeben.
+
+
+    Die INI-Datei enthÑlt 8 Gruppen [0]..[7] fÅr jede mîgliche Kombination
+    der Tasten Shift/Ctrl/Alt (deutsch: Umschalt/Strg/Alt). Die Gruppe [0]
+    gilt, wenn keine der Tasten gedrÅckt ist.
+
+    Jede Gruppe enthÑlt eine Anzahl Umwandlungsanweisungen, bestehend aus:
+
+        >> SCAN-Code (hexadezimal, immer 2 Stellen)
+        >> Zeichen, entweder als ASCII-Zeichen (ohne AnfÅhrungsstriche)
+                    oder als Hex-Wert (in diesem Falle 2-stellig!)
+
+    Beispiel:
+        [6] ---------------- Ctrl+Alt = AltGr, Drittbelegung
+               10 @          ;"@" auf der "Q"-Taste
+               ....
+
+    Wenn also Ctrl+Alt (oder ALT-GR) gedrÅckt sind und somit der Code 10
+    (hex) von der Tastatur gemeldet wird, dann wird das Zeichen "@"
+    geliefert.
+
+    Gruppen kînnen auch leer sein, aber die Reichenfolge darf nicht
+    verÑndert werden. Leerzeilen und Kommentare (ab Semikolon) werden
+    ignoriert.
+
+    Die INI-Datei enthÑlt zusÑtzlich einige VorschlÑge, die durch ein
+    Semikolon deaktiviert sind (z.B.: ´ ¨  und Belegung der Win-Menue
+    Taste mit \ und / ).
+
+    Es kînnen Umwandlungsanweisungen geÑndert, gelîscht oder hinzugefÅgt
+    werden. Bitte zunÑchst prÅfen ob der SCAN-Code in der betreffenden
+    Gruppe bereits vorhanden ist!
+
+    Die INI-Datei darf maxinmal 80 Umwandlungsanweisungen enthalten
+    (Original-Datei: 56). Die Anzahl der Anweisungen beeinflusst NICHT
+    den Speicherbedarf des residenten Tastaturtreibers.
+
+
+    Feste Umwandlungen fÅr deutsche Sprache:
+
+    Folgende Umwandlungen sind im Programm "fest verdrahtet" und kînnen
+    nicht verÑndert werden:
+
+        >>   Ctrl+Alt = Alt-Gr
+        >>   gro·/klein Umschaltung per CapsLock fÅr "ÑîÅÇ§á"
+        >>   WIN-Tasten (die Codes werden derzeit vom BIOS nicht
+             wie bei den Funktionstasten fertig geliefert)
+
+    Au·erdem (per Option Ñnderbar):
+
+        >>   Dezimalkomma im Ziffernblock
+        >>   Vertauschung von Y und Z (inkl. ALT- und Ctrl-Codes)
+
+
+    Programm History:
+
+    KEYBW.COM ist ein Update des Programms KEYBOARD.COM, das bereits
+    zum Download angeboten wurde. Ab Version 3 wurden die WIN95-Tasten
+    unterstÅtzt. Die Versionen bis KEYBW 3.2 waren mit Hilfe eines DEBUG-
+    Skripts anzupassen. Mit der Version 4.0 wurde das Verfahren durch
+    eine einfacher zu handhabende INI-Datei ersetzt.
+
+
+    KEYBW.COM ist Freeware (c) Horst Schaeffer
+    Eine Haftung jeglicher Art ist ausgeschlossen.
+
+    Kontakt -  Email: horst.schaeffer@gmx.net
+               FIDO: 2:240/2188.14
+    Homepage:  http://home.nikocity.de/horst.muc/
+
+***

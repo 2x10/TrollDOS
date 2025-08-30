@@ -1,0 +1,65 @@
+<HTML><HEAD><TITLE>UNPACK</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>UNPACK</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Steuerprogramm zum manuellen Nachinstallieren von DOS-Originaldateien.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">UNPACK [Quellverzeichnis] [Zielverzeichnis]</FONT>   oder
+ 
+<FONT COLOR="blue">UNPACK [Quelldatei(en)] [Zielverzeichnis]</FONT>
+
+Das DOS-Dienstprogramm <A HREF="help:expand">EXPAND</A> muá sich in einem <A HREF="help:path">Suchpfad</A> (oder
+im gerade ge”ffneten Verzeichnis) befinden, was in der Regel aber der Fall 
+ist. Andernfalls mssen Sie als dritten Parameter noch den vollst„ndigen 
+Pfadnamen von EXPAND.EXE angeben.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT>
+
+Bei den meisten DOS-Versionen sind die Dateien auf den Originaldisketten mit
+einem speziellen Packprogramm komprimiert. Sie erkennen solche Dateien an
+dem Unterstrich in der Dateiendung (z.B. ATTRIB.EX_ ). Bei der Installation
+werden diese Dateien automatisch entpackt und auf dem Zieldatentr„ger mit
+ihrem richtigen Namen abgelegt. Das Entpacken wird von dem Programm
+EXPAND.EXE vorgenommen. Es befindet sich im DOS-Verzeichnis. EXPAND l„át
+sich jedoch auch sp„ter ausfhren, z.B. wenn eine einzelne DOS-Datei nach-
+installiert werden soll. Die Bedienung von EXPAND ist jedoch recht mhselig,
+vor allem, weil Sie EXPAND sagen mssen, wie die entpackte Datei heiáen soll.
+
+Auch Windows 3.x enth„lt ein Programm namens EXPAND.EXE. Sie unterscheidet 
+sich von der DOS-Version jedoch nur optisch, verwendet werden kann fr beide
+Betriebssysteme jedoch ein beliebiges EXPAND.
+ 
+UNPACK kann ggf. auch zum Entpacken von Windows 3.x - Dateien verwendet
+werden. Hier kann es jedoch zu einzelnen Verwechslungen kommen, da einige
+Windows-Dateien im gepackten Zustand zwar die gleiche Endung wie eine DOS-
+Datei tragen, beim Entpacken statt des Unterstrichs jedoch ein anderes
+Zeichen eingesetzt werden muá.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiel</FONT>
+
+<FONT COLOR="blue">UNPACK A:\*.*_ C:\DOS</FONT>
+
+UNPACK entpackt jetzt alle Dateien mit dem Unterstrich am Ende des Namens. 
+Die Quelle ist hierbei Laufwerk A:, das Zielverzeichnis C:\DOS. Statt 
+*.*_ kann auch *.??_ oder ein vollst„ndiger Dateiname angegeben werden 
+(z.B. ATTRIB.EX_).
+
+Erkennt UNPACK eine Dateiendung nicht, setzt es als Dateiendung drei 
+Ausrufezeichen (.!!!) ein. Sie mssen dann anhand der Systemhandbcher 
+herausfinden, welchen Namen die Datei tragen muá. Dieser Fall kommt jedoch 
+nur bei "exotischen" Windows-Dateien vor. Um solchen Fehlern auf die 
+Schliche zu kommen, geben Sie anschlieáend an den Unpack-Befehl folgenden 
+DOS-Befehl:
+
+<FONT COLOR="blue"><A HREF="help:dir">DIR</A> *.!!! /s /b</FONT>
+
+Findet DIR keine Dateien mit der Endung .!!!, dann sind alle Daten richtig
+entpackt worden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

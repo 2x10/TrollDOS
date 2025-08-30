@@ -1,0 +1,52 @@
+//--------------------------------------------------------------------
+// PALETTE.AML
+// Change Color Palette, (C) 1993-1996 by nuText Systems
+//
+// (see Palette.dox for user help)
+//
+// This macro changes the current color palette (Color.aml) and
+// re-compiles the editor.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include  bootpath "define.aml"
+
+menu "colors"
+  item " &Blue and green"   "blugreen"
+  item " &Fluorescent"      "fluoresc"
+  item " &Green charcoal"   "greench"
+  item " &Red and blue"     "redblue"
+  item " &Wimbledon"        "wimbledn"
+end
+
+settype "popup"
+
+// macro help
+macrofile = arg 1
+function <f1>
+  helpmacro macrofile
+end
+
+// display the palette menu
+palette = popup "colors" "Select a color palette to install" 37 '' (getcurrobj)
+if palette then
+
+  // backup the existing color palette
+  copyfile (bootpath "color.aml") (bootpath "color.old")
+
+  // copy the selected palette to COLOR.AML
+  if copyfile (getbootpath + "palette\\" + palette + ".aml")
+              (bootpath "color.aml") then
+    // recompile the editor
+    seteventobj (getwinobj)
+    send "recompile"
+  end
+end
+
+// destroy the palette menu
+destroybuf "colors"

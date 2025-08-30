@@ -1,0 +1,4076 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       4DOS * 4NT * Take Command/32
+
+
+
+                    Introduction and Installation Guide
+
+
+                               Developed By
+                          Rex Conn and Tom Rawson
+
+                             Documentation By
+                 Hardin Brothers, Tom Rawson, and Rex Conn
+
+                               Published By
+                             JP Software Inc.
+                               P.O. Box 1470
+                         East Arlington, MA 02474
+                                  U.S.A.
+                              (781) 646-3975
+                            fax (781) 646-0904
+
+
+
+
+
+
+
+                              ACKNOWLEDGMENTS
+
+          We couldn't produce a product like Take Command without the
+          dedication and quality work of many people.  Our thanks to:
+
+               JP Software Staff:  Mike Bessy, Steve Nazarian, Elena
+               Stone.
+
+               On-line Support:  Blueberry Hill Communications (Palm
+               Desert, CA).
+
+               Installation Scripting:  Mark Zembrzuski, Spudsian
+               Software & Service.
+
+               Beta Testers:  We can't list all of our beta testers
+               here!  A special thanks to all of you who helped make
+               4DOS, 4NT, and Take Command elegant, reliable, and
+               friendly.
+
+          The following tools are used in creating and maintaining
+          4DOS, 4NT, and Take Command:
+
+               Compilers:       Microsoft Visual C++ / Macro Assembler
+               Installer:       Wise Installer (Wise Solutions)
+               Editors:         Visual SlickEdit (MicroEdge), Boxer
+                                (Boxer Software)
+               Debuggers:       Soft-ICE and Bounds Checker (Nu-Mega)
+               Version Control: PVCS (PVCS), TLIB (Burton Systems)
+               Documentation:   Microsoft Word 97
+
+          Copyright (c) 2001, JP Software Inc., All Rights Reserved.
+
+          4DOS(r) , 4OS2, and 4NT are JP Software Inc.'s trademarks for
+          its family of character-mode command processors.  4DOS (r) and
+          Take Command (r) are registered trademarks and JP Software,
+          jpsoft.com, and all JP Software designs and logos are
+          trademarks of JP Software Inc. Other product and company names
+          are trademarks of their respective owners.
+
+                                                                 06-01
+                                                               CONTENTS
+
+
+
+
+     CONTENTS
+
+     Introduction...............................................1
+         How to Use This Manual.................................2
+         Contacting JP Software.................................3
+         Technical Support......................................4
+             Support Plans......................................4
+             Before You Contact Us..............................4
+             Online Support.....................................6
+         Registration and Upgrade Information...................7
+     Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32.....8
+         Built-In Commands......................................9
+         The Command Line......................................11
+         Networks and Remote Systems...........................14
+         The Take Command Window...............................14
+         Working with Windows..................................15
+         Configuration.........................................15
+         Aliases and Batch Files...............................16
+     Chapter 2 / Installation..................................19
+         Preparing for Installation............................19
+         Performing the Installation...........................19
+             Installing an Upgrade.............................20
+             Branding..........................................20
+             Desktop, Registry, and System File Changes........22
+         Extracting or Repairing Product Files.................23
+         Uninstalling the Program..............................24
+     Chapter 3 / The Help System...............................26
+         Using the Help System.................................26
+         Important Help Topics.................................27
+     Chapter 4 / 4DOS and 4NT Startup..........................29
+         Primary and Secondary Shells..........................29
+         Command Line Options..................................30
+         Creating or Modifying Startup Files...................35
+         Exit Codes............................................36
+     Chapter 5 / 4DOS Configuration and Notes..................37
+         4DOS Installation Notes...............................37
+             Older Versions of DOS.............................37
+         Manual Installation of 4DOS...........................38
+             Extracting or Copying the Program Files...........38
+             Branding 4DOS.....................................38
+             Updating CONFIG.SYS and AUTOEXEC.BAT..............39
+             Creating or Copying 4DOS.INI......................40
+             4DOS Files and Directories........................40
+             Creating 4DOS Shortcuts...........................41
+         The 4DOS Help System..................................42
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / i
+                                                               CONTENTS
+
+
+
+         4DOS and Your Computer................................43
+         4DOS and DOS..........................................44
+         4DOS and Microsoft Windows 95, 98, and ME.............45
+             Installing 4DOS Under Windows 95 and Windows 98...46
+             Installing the KSTACK Program in Windows 95/98....46
+         Using 4DOS on a Network...............................47
+             4DOS and Novell Netware...........................47
+         Uninstalling 4DOS Manually............................48
+     Chapter 6 / 4NT Configuration and Notes...................50
+         4NT Installation Notes................................50
+         Using 4NT Under Windows 95, 98, and ME................50
+         Manual Installation of 4NT............................52
+             Extracting or Copying the Program Files...........52
+             Branding 4NT......................................53
+             4NT Files and Directories.........................53
+         The 4NT Help System...................................55
+         Uninstalling 4NT Manually.............................56
+     Chapter 7 / Take Command/32 Startup and Configuration.....57
+         Starting Take Command.................................57
+         Command Line Options..................................57
+         Creating or Modifying Startup Files...................60
+         Exit Codes............................................61
+         Manual Installation of Take Command/32................61
+             Extracting or Copying the Program Files...........62
+             Branding Take Command/32..........................62
+             Take Command/32 Files and Directories.............62
+             Creating Take Command/32 Shortcuts................63
+         Character-Mode Applications...........................64
+             Caveman...........................................65
+         Uninstalling Take Command/32 Manually.................65
+     Index.....................................................71
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / ii
+                                                           INTRODUCTION
+
+
+
+
+     INTRODUCTION
+
+     Welcome, and thanks for using 4DOS, 4NT, or Take Command!
+
+     We started developing these products when we realized that our
+     computers could be a lot more powerful and a lot more helpful
+     than they were.  Whether you are a computer novice or an
+     experienced power user, we think that our products will help you
+     get the most out of your computer.
+
+     We offer three different products which work with different
+     operating systems:
+
+          * You can use 4DOS with all versions of MS-DOS and PC-DOS
+            from 3.1 through 7.1 and above, including Windows 95, 98,
+            and ME ("MS-DOS 7" is the DOS portion of Microsoft
+            Windows 95/98/ME).  You can also use it with all versions
+            of DR DOS / Novell DOS / OpenDOS from 3.4 through 7.0 and
+            above, and in DOS sessions started under Windows
+            95/98/ME, and also under Windows 3.x and OS/2 Warp.
+
+          * You can use 4NT with Windows NT 4.0, Windows 2000, and
+            Windows 95, 98, and ME.
+
+          * Take Command/32 brings the power of 4DOS and 4NT to the
+            Windows desktop and adds many new features.  You can use
+            it with Windows 95, Windows 98, Windows ME, Windows NT
+            4.0, and Windows 2000.
+
+     Once you have 4DOS, 4NT, or Take Command/32 installed, you can
+     learn to use it at your own pace.  Each program has more than 100
+     commands and hundreds of enhanced features, but you don't have to
+     learn them all, or learn them all at once.  Relax, enjoy the
+     program's power, and browse through the manual occasionally.
+     Press the F1 key whenever you need help.  These programs will
+     soon become an essential part of your computer, and you'll wonder
+     how you ever got along without them.
+
+     We are constantly working to improve our products.  If you have
+     suggestions for features or commands that you think we should
+     include in the next version, or any other way we could improve
+     our product, please let us know.  Many of the improvements in
+     this version were suggested by our users, and while we can't
+     promise to include every suggested feature, we really do
+     appreciate and consider your comments.
+
+     4DOS, 4NT, and Take Command/32 are related programs.  You can use
+     them to maintain a common working environment and run the same
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / 1
+                                                           INTRODUCTION
+
+
+
+     commands, batch files, and aliases under DOS, Windows 95/98/ME,
+     and Windows NT/2000.  Additional products for use on the same
+     system are available at a discounted price for current 4DOS, 4NT,
+     and Take Command/32 users.
+
+     If you use Windows 3.x or OS/2, we also offer three additional
+     legacy products with many similar features (these products are
+     not covered in this manual):  Take Command/16 (for Windows 3.x,
+     Windows for Workgroups, and Windows sessions in OS/2), and 4OS2
+     and Take Command for OS/2 (for OS/2 Warp).
+
+     Our JP CD Suite includes all six products.  Licenses for multiple
+     systems are also available.  Contact your software reseller or JP
+     Software for more information.
+
+     How to Use This Manual
+
+          This manual is only one part of the documentation that you
+          will need for 4DOS, 4NT, or Take Command/32.  It introduces
+          the products and will help you install them correctly on
+          your computer.  It also gives you specific information about
+          using the program in your particular environment (for
+          example, using 4DOS under Windows 98).
+
+          The second part of our documentation is the online help and
+          the Reference Manual.  They contain complete information
+          about the commands and features of 4DOS, 4NT, and Take
+          Command/32.
+
+          You should start with this introductory manual whether you
+          are new to our programs or you are upgrading from a previous
+          version.  Once you have successfully installed the program,
+          you can move on to the online help or the Reference Manual
+          for detailed information on commands, features, and
+          configuration.
+
+          The first three chapters of this manual introduce the
+          products and help you install the program and its built-in
+          help system.  Chapters 4 - 7 contain additional details
+          about each product and operating environment.  We encourage
+          you to review the material in the later chapters to see what
+          applies to you (particularly if you are using 4DOS under
+          Windows 95/98/ME).  However, in many cases you will not need
+          the information in Chapters 4 - 7 unless you are working at
+          a more technical level, or run into some unexpected
+          difficulty.
+
+          Most of the first part of this manual describes commands and
+          features which are available in all three products.  When we
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / 2
+                                                           INTRODUCTION
+
+
+
+          need to discuss the features or behavior of a single
+          product, we mention it specifically in the text.  When an
+          entire paragraph or section applies to a specific product,
+          we use marginal text to identify that product:
+
+     4DOS marks sections that apply only to 4DOS.
+
+     4NT  marks sections that apply only to 4NT.
+
+     TC   marks sections that apply only to Take Command.
+
+          Each of our products also includes complete online help for
+          all commands.  The 4DOS help system can be configured to
+          link to help on standard DOS commands as well, if the
+          corresponding help files and programs are available on your
+          system.  Our online help provides much of the same
+          information that is available in this manual and the
+          Reference Manual, but in an electronic form which you can
+          access quickly.  The online help also includes details about
+          changes in the latest version of our products, compatibility
+          with other products, and additional technical information.
+          See page 26 for more information about the online help.
+
+          Finally, be sure to check README.TXT for last-minute notes
+          on the current release, or if you are installing a
+          downloaded update to 4DOS, 4NT, or Take Command/32.
+
+     Contacting JP Software
+
+          You can contact JP Software at the following addresses and
+          numbers.  Our normal business hours are 9:00 AM to 5:00 PM
+          weekdays, eastern US time, except on holidays.  Please
+          review the following section before contacting us for
+          technical support.
+
+               Address:         JP Software Inc.
+                                P.O. Box 1470
+                                East Arlington, MA 02474
+                                USA
+
+               Main number:     (781) 646-3975
+               Fax:             (781) 646-0904
+               Order Line:      (800) 368-8777   (US / Canada, orders
+                                only)
+
+               Online:          Web site:  http://www.jpsoft.com/
+
+                                FTP site:  ftp.jpsoft.com
+
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / 3
+                                                           INTRODUCTION
+
+
+
+                                Sales / Customer Service:
+                                sales@jpsoft.com
+
+               Technical        Standard (no-charge) support:  Available
+               Support:         via our online support forum, accessible
+                                from the support area of our web site.
+                                See page 6 for additional details.  See
+                                Technical Support below for additional
+                                information on paid support options.
+
+          For access to JP Software files use our web site or FTP site
+          listed above.  Our files may also be available from other
+          on-line locations, but we can't promise that files
+          downloaded from other sites will be the same as files
+          provided directly by us, or that they will be up to date.
+
+     Technical Support
+
+          (If you need help with sales, ordering, shipments, brand
+          codes, or other similar non-technical issues please contact
+          our Sales and Customer Service department.  See the previous
+          section for our addresses.)
+
+          Support Plans
+
+          Standard, no-charge support is available electronically
+          through our support forum (see page 6).
+
+          We also offer paid support options which include automatic
+          upgrades, an email newsletter, and support by private email
+          or telephone.  A premium plan with a guaranteed response
+          time is also available.
+
+          For complete details on all support options, including plans
+          currently offered and support terms and conditions, see our
+          web site at http://www.jpsoft.com/.  Support plan
+          availability and pricing can change, so be sure to check web
+          site for the most up to date information.
+
+          Before You Contact Us
+
+          Before contacting us for support, please check this manual,
+          the online help, the Reference Manual if available to you,
+          and other documentation for answers to your question.  If
+          you can't find what you need, try the Index.  If you're
+          having trouble getting 4DOS, 4NT, or Take Command/32 to run
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / 4
+                                                           INTRODUCTION
+
+
+
+          properly, see the Troubleshooting, Service, and Support
+          topic in the online help for any relevant information (in
+          4DOS, check the Compatibility section as well), and look
+          through the README.TXT file for any last-minute information
+          for your product.
+
+          If you do need to contact us for support, it helps if you
+          can give us some basic information.  The first four items
+          listed below are essential for us to be able to understand
+          and assist you with your problem:
+
+               * What environment are you working in?  This includes
+                 the operating system version you are using, the
+                 version of the JP Software product involved, and
+                 related information such as network connections and
+                 the name and version number of any other software
+                 which appears to be involved in the problem.  Use
+                 the VER /R command to determine the command
+                 interpreter and operating system version.
+
+               * What exactly did you do?  A concise description of
+                 what steps you must take to make the problem appear
+                 is much more useful than a long analysis of what
+                 might be happening.
+
+               * What did you expect to happen?  Tell us the result
+                 you expected from the command or operation in
+                 question, so that we understand what you are trying
+                 to do.
+
+               * What actually happened?  At what point did the
+                 failure occur?  If you saw an error message or other
+                 important or unusual information on the screen, what
+                 exactly did it say?
+
+               * Briefly, what techniques did you use to try to
+                 resolve the problem?  What results did you get?
+
+               * If the problem seems related to startup and
+                 configuration issues, what are the contents of any
+                 startup files you use (such as CONFIG.SYS,
+                 AUTOEXEC.BAT, 4START, 4EXIT, TCSTART, TCEXIT, and
+                 the .INI file), any batch files they call, and any
+                 alias or environment variable files they load?
+
+               * Can you repeat the problem or does it occur
+                 randomly?  If it's random, does it seem related to
+                 the programs you're using when the problem occurs?
+
+
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / 5
+                                                           INTRODUCTION
+
+
+
+          If you have a problem with a batch file or complex alias,
+          please include an exact copy of the batch file or alias in
+          question, as part of the text of your message (not as an
+          attachment).  If your batch file is longer than about 25
+          lines, please try to reproduce the problem in a smaller test
+          file; otherwise it will probably be impossible for us to
+          understand and recreate the difficulty you found.
+
+          If you need more in-depth assistance with the development of
+          complex batch files or other procedures, please contact us
+          for information on consulting services.
+
+          Online Support
+
+          The best way to contact us for technical support is via our
+          online support forum, where our support personnel can read
+          and respond to your messages, and other users can respond as
+          well.  The forum is accessible via several methods; for
+          complete details and access links see the support area of
+          our web site at http://www.jpsoft.com/.
+
+          A number of other support resources are available from our
+          web site, including error message listings, documentation
+          files, product histories, technical tips and discussions,
+          other technical information, and links to other companies'
+          sites.  We update this information regularly, and we
+          encourage you to check the Technical Support area of the web
+          site to see if the information there will address any
+          questions you have.
+
+          If you are unable to gain access to the forum, or you need
+          to include confidential information in your support request,
+          contact us via email at support@jpsoft.com and we will
+          assist you in resolving the problem with forum access, or
+          assist you with your request privately if appropriate.
+          Please do not use this address for standard support
+          questions which can be posted on the forum.
+
+          If you are a paid support customer you should use the
+          electronic support forum for routine questions.  To create a
+          private support incident refer to the materials sent to you
+          with your subscription for contact information, or email
+          priority_support@jpsoft.com and include your support ID
+          (mail to this address may not be answered if it does not
+          include a valid support ID).
+
+          Technical support messages should be sent as standard ASCII
+          text.  Please do not transmit attached files, binary files,
+          screen images, or any file over 10K bytes in size to any of
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / 6
+                                                           INTRODUCTION
+
+
+
+          our electronic technical support addresses unless asked to
+          do so by our support staff.
+
+     Registration and Upgrade Information
+
+          If you purchased 4DOS, 4NT, or Take Command/32 from a
+          software dealer, your copy came with a registration card.
+          Please fill out this card and return it promptly to JP
+          Software.  It ensures that we have a record of your
+          registration so that we can give you ongoing technical
+          support and notices of upgrades.  If you purchased the
+          programs directly from JP Software, or ordered an electronic
+          copy via our web site, you are already registered and no
+          registration card is necessary.
+
+          Once you are a registered user, with each notice of a major
+          upgrade you will receive The Prompt Solution, JP Software's
+          customer newsletter (newsletters may be delivered physically
+          or via email).  The Prompt Solution also includes tips for
+          using 4DOS, 4NT, and Take Command/32 and information about
+          other products from JP Software.
+
+          Our products are upgraded regularly through maintenance
+          releases, designed to fix minor problems or improve
+          compatibility, and major upgrades which contain enhancements
+          and additional features.  Maintenance releases are
+          identified by a change in the hundredths digit of the
+          version number, for example from 7.0 to 7.01 or 7.02, or in
+          a letter suffix (e.g. 7.01B).  Major upgrades are identified
+          by a change in the tenths digit or "ones" digit, for
+          example from 7.0 to 7.1 or 8.0.
+
+          Major upgrades can be purchased from JP Software or your
+          dealer.  You can download maintenance releases from our web
+          site (http://www.jpsoft.com/) or FTP site (ftp.jpsoft.com).
+          You can also order physical copies on disk at a nominal
+          cost.
+
+          If you want to know when a product update is available,
+          visit our web site at http://www.jpsoft.com/.  Notices are
+          posted there whenever one or more of our products is
+          updated, and email or other automated methods for upgrade
+          notification may become available on the web site in the
+          future.
+
+
+
+
+
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / 7
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+
+     Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+     4DOS and 4NT are command interpreters or "Shells."  That means
+     that they display a C:\> or [C:\] prompt, wait for you to type
+     something, and then react to your commands (we use the [C:\]
+     fomat in this manual, but you can customize the prompt to use any
+     format you prefer).  Our programs replace the default command
+     interpreters that are supplied with your operating system.  4DOS
+     replaces COMMAND.COM for DOS, Windows 95/98/ME, and for DOS
+     sessions under OS/2.  4NT replaces CMD.EXE for command sessions
+     under Windows NT and Windows 2000.
+
+     We've designed our products so that you don't have to change your
+     computing habits or unlearn anything to use them.  If you know
+     how to display a directory, copy a file, or start an application
+     program from a command prompt, you already know how to use our
+     command interpreters -- and if you're not used to using the
+     command line, you'll quickly come to value its power and
+     flexibility, and appreciate our programs' comprehensive online
+     help and the way they make the command prompt straightforward and
+     easy to use.
+
+     4DOS and 4NT understand all of the commands you may already know
+     and add to them.  Their purpose is to make the command line
+     friendlier, easier to use, and much more powerful and versatile
+     without requiring you to use or learn a new program, a new set of
+     commands, or a new style of work.
+
+     Take Command brings the power and convenience of 4DOS and 4NT to
+     the Windows desktop.  You're probably already familiar with
+     graphical applications running under Windows and with the command
+     line, but you may not be used to seeing them combined in one
+     product.  Most graphical applications offer limited command-line
+     capability at best, and most command-line utilities aren't
+     designed for a graphical environment like Windows desktop.
+
+     We designed Take Command to give you the best of both worlds.
+     You'll probably find it most useful when you need to perform
+     tasks like managing your hard disk, scripting a series of steps
+     with an alias or batch file, or starting applications.  There are
+     graphical utilities that perform some of these tasks, but often
+     you may find it more convenient or productive to perform them
+     from the command line.  Take Command can use fewer resources than
+     starting a command-line session, and, unlike a traditional
+     command line session, it looks and feels like the other graphical
+     programs you use.
+
+
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / 8
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+     Take Command also offers a host of features that couldn't exist
+     at all in a command-line utility.  For example, you can pop up
+     simple dialogs from a batch file, pass keystrokes to other
+     graphical applications, and use a dialog to find files or text on
+     any of your disks.
+
+     In this section, we introduce a few of the features we have built
+     into our products.  We don't have room to list them all or to
+     explain all of the options available in each; that's what the
+     online help and Reference Manual are for.  This section will just
+     give you a taste of what you can expect from your computer once
+     you have your new command interpreter installed.
+
+     As you read through this section, remember that you don't have to
+     use any of these features except the ones that appeal to you.
+     Learn just the parts that will make your computer easier for you
+     to use, and add more features to your repertoire as you find that
+     you need them.
+
+     Built-In Commands
+
+          The 4DOS and 4NT command lines, and Take Command's command
+          window (see page 14) are the heart of our products.  It is
+          here that you type commands for the program to execute, and
+          here that the program displays the output of each command.
+
+          Our products support every command you already know, add to
+          the features of each command, and also add dozens of new
+          commands.
+
+          For example, the traditional DIR command, which displays a
+          list of files, has about a dozen options.  The DIR command
+          in our products has most of the same options plus about 20
+          more.  With the enhanced DIR command, you can:
+
+               * Display a list of files in 1, 2, 4, or 5 columns
+                 with the commands:
+
+                      [c:\] dir
+                      [c:\] dir /2
+                      [c:\] dir /4
+                      [c:\] dir /w
+
+               * Use colors to indicate different kinds of files,
+                 display file descriptions (text to remind you of the
+                 contents of a file) along with file names, and sort
+                 files according to several different criteria.
+
+
+
+
+     Copr. 2001 JP Software Inc.      4DOS, 4NT, TC32 Install Guide / 9
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+               * Display hidden and system files, along with normal
+                 files.  For example, this command displays all of
+                 the files in the current directory, whether they are
+                 "hidden" or not:
+
+                      [c:\] dir /a
+
+               * Display files of one type or of several types
+                 together.  For example, this command lists all .TXT,
+                 .DOC, and .ASC files in the current directory:
+
+                      [c:\] dir *.txt;*.doc;*.asc
+
+               * Display files from a single directory or folder,
+                 from one part of the directory tree, from a single
+                 drive, or from several drives.
+
+               * Use wildcards to display all file names that start
+                 with the letter "A", end with the letter "A", or
+                 have an "A" anywhere in the name:
+
+                      [c:\] dir a*
+                      [c:\] dir *a
+                      [c:\] dir *a*
+
+               * If you use Windows 95/98/ME or Windows NT/2000, you
+                 can view either "long" file names, "short" file
+                 names, or both.
+
+          That's just an example of some of the enhancements we have
+          added to one command.  4DOS, 4NT, and Take Command have
+          added enhancements to virtually every command you've used
+          before and include dozens of new commands as well.  You
+          don't have to learn to use them all, but you will find many
+          commands and enhancements that will make your computer more
+          powerful and easier to use.  For example:
+
+               * COLOR lets you set the default colors to use on your
+                 display or in the Take Command window:
+
+                      [c:\] color bright white on blue
+
+                 Additional features let you customize the colors you
+                 want to use for parts of the display, for input and
+                 output, and for specific kinds of files.
+
+               * LIST displays the contents of files in text or
+                 hexadecimal mode, lets you search a file, and can
+                 print either an entire file or a single page from a
+                 file:
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 10
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+                      [c:\] list readme.txt
+
+               * The FFIND command and the Find Files / Text  option
+                 in Take Command's Utilities menu search for files
+                 based on their names and their contents.  For
+                 example, to find all files on drive C: with the
+                 string "now" somewhere within their names:
+
+                      [c:\] ffind /s *now*
+
+                 To find all .TXT files in the current directory
+                 which contain the string "then" somewhere in the
+                 file:
+
+                      [c:\] ffind /t"then" *.txt
+
+               * SELECT lets you pick the files you want to work with
+                 from a "point and shoot" display.  This command,
+                 for example, lets you select files from the current
+                 directory to copy to the floppy in drive A:
+
+                      [c:\] select copy (*.*) a:
+
+               * EXCEPT lets you work with all of the files in a
+                 directory except those that you want to exclude.  It
+                 is something like wildcards in reverse.  (A related
+                 feature, "exclude" ranges, also works like reverse
+                 wildcards, and can be used to exclude files from any
+                 internal command.)  This command copies all files
+                 from the current directory to drive A: except backup
+                 (.BAK and .BK!) files:
+
+                      [c:\] except (*.bak;*.bk!) copy *.* a:
+
+     The Command Line
+
+          4DOS, 4NT, and Take Command are much more than just a
+          collection of commands.  They include a number of features
+          which make the command line easier to use:
+
+               * Interactive help appears whenever you ask for it and
+                 also any time you use a command incorrectly.  Type:
+
+                      [c:\] help
+
+                 when you need help. In Take Command, you can also
+                 select Contents from the Help menu.  You can also
+                 press F1 to view the help Table of Contents.  If you
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 11
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+                 have typed part of a command, F1 displays help on
+                 the first word on the command line.
+
+               * The command line works like a single-line word
+                 processor.  You can edit any part of the line at any
+                 time before you press Enter to execute it or Esc to
+                 erase it.  You can move the cursor left and right by
+                 a single character, a single word, or jump to the
+                 beginning or end of the line.  You can delete,
+                 insert, or type over characters anywhere on the
+                 command line.
+
+               * 4DOS, 4NT, and Take Command keep track of each
+                 command you execute.  You can display past commands,
+                 execute them again, or make changes before you
+                 execute them.  The past commands can appear on the
+                 command line if you press ., or in a pop-up window
+                 if you press PgUp.  In Take Command, use Ctrl-. and
+                 Ctrl- PgUp.
+
+               * If you don't want to type a complete file name as
+                 part of a command, you don't have to.  Just type
+                 part of the name and then press the Tab key:  a
+                 matching file or directory name will appear on the
+                 command line.  Press the Tab key again to see the
+                 next matching file.  To choose from all matching
+                 files in a pop-up window, press F7 or Ctrl-Tab.
+
+                 The ability to complete filenames easily can be
+                 invaluable on a drive with long filenames -- all you
+                 have to do is type part of a lengthy file or
+                 directory name and press Tab.  The command
+                 interpreter fills in the rest, including any
+                 quotation marks required for long filenames.
+
+               * 4DOS, 4NT, and Take Command keep track of each
+                 directory you have visited.  There are many ways to
+                 return to previous directories; perhaps the easiest
+                 is to press Ctrl-PgUp in 4DOS and 4NT, or F6 in Take
+                 Command, to view past directories in a pop-up
+                 window.  Select the directory you want, press Enter,
+                 and you will immediately change to that directory,
+                 even if it is on a different drive.
+
+               * Our programs also use an extended directory search
+                 "database" that will help you move, almost
+                 instantly, to any directory on any hard drive on
+                 your system when you type just part of the directory
+                 name.
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 12
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+               * Our programs include features that let you select
+                 files by size, date, and time; to use multiple sets
+                 of wildcards at once; and to associate applications
+                 with their data files.  For example, this command
+                 makes it simple to copy all files in the current
+                 directory that have been updated in the last week to
+                 a backup disk:
+
+                      [c:\] copy /[d-7] *.* a:\
+
+                 Or you can delete all .BAK files that are greater
+                 than 1 MB in size:
+
+                      [c:\] del /[s1M] *.bak
+
+                 With a simple change you can make the command delete
+                 the same files, but from the entire drive rather
+                 than just the current directory (use a command like
+                 this with caution!):
+
+                      [c:\] del /[s1M] /s *.bak
+
+               * 4DOS, 4NT, and Take Command let you associate file
+                 extensions with particular applications.  For
+                 example, it's easy to start your word processor and
+                 load a letter anytime you type the name of an .LTR
+                 file:
+
+                      [c:\] set .LTR=c:\wp\wordproc.exe
+
+                 After you have defined the association, you can
+                 start your word processor and have it load your
+                 letter to Mom, MOM.LTR, with this command (assuming
+                 the file is in the current directory):
+
+                      c:\letters> mom
+
+               * You can also run multiple commands at one time.  If
+                 you know the next 3 commands you need to run, you
+                 can type them all at once and then sit back while
+                 they are executed one at a time.  For example, to
+                 copy all of your .TXT files to drive A: and then
+                 display the directory of drive A:
+
+  4DOS                c:\> copy *.txt a: ^ dir a:
+
+  4NT, TC             [c:\] copy *.txt a: & dir a:
+
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 13
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+     Accessing Networks and Remote Systems
+
+          All of our products can work with accessible files on your
+          LAN, whether through mapped drive letters, or standard
+          network names like \\SERVER\VOL\filename.
+
+     4NT, In addition, built-in features of 4NT and Take Command let
+     TC   you work with any system that's accessible via Internet FTP.
+          You can use standard commands like DEL, DIR, COPY, MOVE, and
+          REN to  manage files on FTP servers.  Many other features
+          also support FTP access, and the IFTP command lets you
+          create a persistent FTP connection for use with subsequent
+          commands.  Some commands (COPY, MOVE, and REN) can also
+          manipulate files on HTTP and HTTPS servers.
+
+     The Take Command Window
+
+          The Take Command window is similar to other applications
+          that run on the Windows desktop.  The title bar at the top
+          is similar to the one used in most Windows applications,
+          with a system menu button on the left and the maximize,
+          minimize, and close buttons at the right.  You can move the
+          window and adjust its size with a mouse or the keyboard, and
+          you can change the text on the title bar and change the
+          window's size or position with the WINDOW command.
+
+          The menu bar is also similar to many other applications:
+
+               * The File menu allows you to save or print the screen
+                 buffer or exit from Take Command.
+
+               * The Edit menu lets you copy text between the Take
+                 Command window and the clipboard.
+
+               * The Apps menu lets you start applications from
+                 within Take Command.
+
+               * The Options menu lets you configure Take Command and
+                 turn various display options on and off.
+
+               * The Utilities menu lets you use several built-in
+                 utilities interactively.
+
+               * The Help menu gives you access to Take Command's
+                 online help.
+
+          Most of the menu bar features can also be invoked with typed
+          commands if you prefer (for example, OPTION starts the
+          option dialogs, and HELP starts the help system).
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 14
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+          The Tool bar lets you execute programs, utilities, and
+          commands with the click of a mouse.  You can configure the
+          tool bar with any collection of commands and labels you
+          wish.
+
+          The Command window accepts your input and displays Take
+          Command's output.  You can scroll through the window, save
+          or print text from the window, and transfer text between the
+          Command Window and the clipboard.
+
+          The Status bar displays information about Take Command and
+          your system.
+
+          The use of each portion of the Take Command window and of
+          each menu option is explained in detail in the online help
+          and in the Reference Manual.
+
+     Working with Windows
+
+          Take Command works with Windows in several ways to make your
+          computing more productive:
+
+               * You can use the Windows clipboard to copy text onto
+                 the command line, or to transfer text from Take
+                 Command to another application.
+
+               * You can use the Windows Drag and Drop feature to
+                 insert file names from other applications onto the
+                 command line.
+
+               * You can use Take Command to send messages to other
+                 Windows applications using Dynamic Data Exchange
+                 (DDE).  You can also use DDE to send commands to
+                 Take Command from other applications.
+
+               *  Take Command automatically uses Windows' File
+                 Associations to associate data files with
+                 applications.
+
+     Configuration
+
+          We don't know how you use your computer, or how you would
+          like it to work, so we have made our programs as flexible as
+          possible.  You can configure almost every part of our
+          programs to suit your needs or your whims.  To start the
+          configuration utility, type
+
+               [c:\] option
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 15
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+          For example, you can decide what colors to use for what
+          purposes, how file names are displayed in command output,
+          and command line editing details ranging from the size and
+          location of pop-up windows to the shape of the cursor.
+
+     4DOS If conventional memory is tight on your DOS computer, you
+          can configure 4DOS to squeeze out every last possible byte,
+          using extended (XMS) memory, expanded (EMS) memory, upper
+          memory blocks (UMBs), or conventional memory.  In many
+          installations, 4DOS uses just 256 bytes of conventional
+          memory, leaving as much room free as possible for memory-
+          hungry DOS application programs, memory-resident utilities,
+          and games.
+
+     Aliases and Batch Files
+
+          We've left two of the most popular and powerful features,
+          aliases and batch files, for last.
+
+          Aliases
+
+          Aliases are short sequences of commands which are stored in
+          memory for very fast execution.  Aliases can assign complex
+          tasks to simple names or single keystrokes, define new
+          commands, and set defaults for internal commands and for
+          almost any application on your computer.  They are the
+          primary method we offer for customizing your command line to
+          suit your needs.
+
+          Here are a few examples of how you could define simple
+          aliases to make the command line easier to use.  The first
+          two provide shorthand names for the DIR command -- D
+          displays a directory, and D2 displays a 2-column directory,
+          sorted vertically, with a pause at the end of each page:
+
+               [c:\] alias d dir
+               [c:\] alias d2 dir /2pv
+
+          Once these definitions have been entered, all you have to do
+          is type D or D2 at the prompt to execute the corresponding
+          alias.
+
+          You can also define aliases as shorthand ways to execute
+          applications, usually without having to add the
+          application's directory to your PATH.  For example, this
+          alias allows you to just type EDIT to run your editor, even
+          if its directory is not on the PATH:
+
+               [c:\] alias edit e:\edfiles\editor.exe
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 16
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+          You can put a whole group of commands into an alias so that
+          you can invoke them without typing each one.  This alias
+          changes directories, runs the FINPROC program, and changes
+          back to the original directory (the back-quotes [`] are used
+          to enclose an alias when it contains more than one command).
+          This alias should be entered on a single line:
+
+     4DOS      c:\> alias monthly `pushd c:\monthly ^ finproc ^ popd`
+
+     4NT, TC   [c:\] alias monthly `pushd c:\monthly & finproc & popd`
+
+          This short description explains only the basics of what
+          aliases can do.  Like most 4DOS, 4NT, and Take Command
+          features, aliases can be as simple or as complex as you
+          like.  You can save your aliases in a file and reload them
+          each time the command interpreter starts (otherwise, you'd
+          have to redefine them each time); assign aliases to
+          keystrokes so they can be invoked quickly; write aliases
+          which use other aliases; and use aliases within batch files.
+          For complete information on aliases see the online help,
+          Chapter 5 of the Reference Manual, and the ALIAS command in
+          Chapter 7 of the Reference Manual.
+
+          Batch Files
+
+          A batch file or batch program is a text file that contains a
+          list of commands to execute.  4DOS, 4NT, and Take Command
+          read and interpret each line as if it had been typed at the
+          keyboard.  If you're an experienced batch file programmer,
+          or if you want an easy introduction to batch file
+          programming, you won't find anything more powerful than our
+          built-in batch language.
+
+          The batch language includes simple commands to display
+          menus, boxes, lines, and colored text to dress up your batch
+          file displays; a full range of user input commands; over 70
+          built-in variables that let your batch files test system
+          configuration, device status, and free memory and disk
+          space; and almost 100 built-in functions that let your batch
+          files read from files, find the date, perform calculations,
+          and manipulate strings.
+
+          Our batch files run 2 to 10 times faster than traditional
+          ones.  They can include subroutines, loops, IF/THEN/ELSE
+          logic, and even exception handling.  And you can run them in
+          single-step mode to debug them easily, learn exactly what
+          each line does, or view changes to environment variables and
+          other information as the batch file executes.
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 17
+                 Chapter 1 / Introducing 4DOS, 4NT, and Take Command/32
+
+
+
+          Here are a couple of examples of simple batch files.  The
+          first example displays several pieces of information about
+          your system status, using built-in variables provided with
+          4DOS, 4NT, and Take Command:
+
+               cls
+               echo System status as of %_date at %_time:
+               echo CPU:  %_cpu
+               echo Coprocessor:  %_ndp
+               echo Screen size:  %_rows x %_columns
+               echo Boot drive:  %_boot
+               echo DOS version:  %_dosver
+               echo Command processor version:  %_4ver
+               echo Country code:  %_country
+
+          The next example clears the screen, displays a short menu,
+          accepts some input from the user, and displays the result (a
+          more useful version of this file would actually perform the
+          requested action; for now we're just trying to give you the
+          overall flavor of our batch enhancements).  The TEXT command
+          displays a block of text on the screen, the SCREEN command
+          positions the cursor, and the INKEY command accepts a single
+          keystroke from the user:
+
+               cls
+               screen 5 0
+               text
+                    Choose an option:
+                         1 - Word processing
+                         2 - Spreadsheet
+                         3 - Load the network
+               endtext
+               screen +1 0
+               inkey Enter your selection: %%sel
+               screen +2 0
+               echo You entered: %sel
+
+  4NT,   This example prompts for a user name (8 characters
+  TC     maximum) and a password (echoed as "*"s, 6 characters
+          maximum), in a Windows dialog:
+
+               cls
+               querybox /L8 "User Name" Enter user name %%name
+               querybox /L6 /P "Password" Enter password %%pword
+
+
+
+
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 18
+                                               Chapter 2 / Installation
+
+
+
+
+     Chapter 2 / Installation
+
+     4DOS, 4NT, and Take Command normally come with Windows-based
+     installation software that makes product installation simple and
+     straightforward.  If you are installing our products under
+     Windows 95/98/ME or Windows NT/2000, we recommend that you follow
+     the directions for automated installation below.
+
+     If you are running in a non-Windows environment, or prefer to set
+     up the program yourself, you can extract the installation files
+     and perform all installation steps manually.  Manual file
+     extraction and installation is covered in detail for each product
+     in Chapters 4 - 7.
+
+     Preparing for Installation
+
+          You can install and use each of our products under most
+          recent operating system versions.  If you are using an older
+          version of any operating system, or you want to use a
+          product under a different operating system than the one for
+          which it is sold, consult Chapters 4 - 7 (depending on the
+          product) for details on compatibility before proceeding with
+          installation.
+
+          We strongly recommend that you install your new version of
+          4DOS, 4NT, or Take Command in a new directory or folder,
+          rather than using the same directory as a previous version,
+          or a directory used by other software.
+
+     4DOS When installing 4DOS under Windows 95/98, we also strongly
+          recommend that you use a short name for the 4DOS directory
+          (i.e. a name where each element of the path uses no more
+          than eight characters for the name and three characters for
+          the extension, with no white space or other special
+          characters).  If you install 4DOS in a directory with a long
+          name, you will have to determine the equivalent short name
+          and use it throughout the installation process.
+
+     Performing the Installation
+
+          Our products are distributed using several methods.  This
+          section explains how to start the automated installation
+          software in each case.  In all cases see Chapters 4 - 7 if
+          you want a manual rather than automated install.
+
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 19
+                                               Chapter 2 / Installation
+
+
+
+          To start the installation software you can use a command
+          prompt, the Run option on the Windows Start menu, or from
+          Windows Explorer.
+
+               * If your copy of 4DOS, 4NT, or Take Command was
+                 downloaded as an .EXE file from our web site or FTP
+                 site, or as part of an electronic purchase, simply
+                 store the file in a directory of your choosing, and
+                 execute it to start the installation process.  The
+                 file name will be based on the product and version
+                 (e.g. 4DOS700.EXE for 4DOS 7.00).
+
+               * If your copy came on a diskette from JP Software,
+                 simply run the installation software from the
+                 diskette.  The program name will be SETUP.EXE.
+
+               * If your copy came on a multi-product CD-ROM from JP
+                 Software, simply run the installation software from
+                 the directory for the desired product.  The program
+                 name will be SETUP.EXE.  For example, to  install
+                 4NT you would run D:\4NT\SETUP.EXE, where "d:" is
+                 the drive letter used for your CD-ROM.
+
+               * If your copy came in a downloaded .ZIP file from our
+                 web site or FTP site, then there is no automated
+                 installation software.  In this case you must use
+                 the manual installation instructions in chapters 4 -
+                 - 7.
+
+          Installing an Upgrade
+
+          Use the standard installation instructions below to install
+          an upgrade.  The installation procedure is essentially the
+          same as when you are installing a new copy of the program.
+
+          If you are upgrading from a previous version, you may have a
+          4DOS.INI, 4NT.INI, TCMD.INI and / or 4START, 4EXIT, TCSTART,
+          or TCEXIT files in the previous version's directory.  To use
+          these files with the new version, you must copy them to the
+          new directory, and update the .INI file in some cases.  You
+          can allow the installation software to perform these steps
+          automatically, or you can perform them yourself at a later
+          time (see Chapters 4 - 7 for details).
+
+          "Branding"
+
+          If you received your copy of 4DOS, 4NT, or Take Command on a
+          JP Software diskette or CD-ROM, you will have a document
+          with a serial number and validation code (in some cases you
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 20
+                                               Chapter 2 / Installation
+
+
+
+          will have a separate document for each product).  If your
+          diskette or CD was purchased directly from JP Software the
+          brand document will also include your registered name
+          (company or individual).
+
+          Similarly, if your copy was purchased electronically the
+          registered name, serial number, and validation code are
+          included in the materials you received as part of the
+          purchase transaction.
+
+          The serial number and validation code constitute your
+          license, and are provided only with purchased copies, not
+          with trial copies.
+
+          A program which comes with each product checks your
+          registered name, serial number, and validation code, and
+          saves them for use by 4DOS, 4NT, or Take Command.  This
+          process, which we call "branding," personalizes your copy
+          and removes the "trial copy" or other similar message
+          which is displayed if you skip this step.  The actual brand
+          program name is based on the product name:
+
+               BR4DOS.EXE     brands 4DOS
+               BR4NT.EXE brands 4NT
+               BRTC32.EXE     brands Take Command/32
+
+          The way that you obtain and run the branding program depends
+          on how you obtained your software:
+
+               * If you purchased your software electronically,
+                 either as a new copy or as a major upgrade, and
+                 received the branding information via email, the
+                 brand program(s) you need will come to you attached
+                 to the email message.  Download a trial version of
+                 the product from our web site and install it, if you
+                 have not done so already.  Then copy the brand
+                 program to the directory where the product was
+                 installed, and run it from the prompt in that
+                 directory, for example:
+
+                    [c:\4nt400] br4nt.exe
+
+               * If you purchased your software on a diskette or CD-
+                 ROM from JP Software, either as a new copy or as a
+                 major upgrade, the branding program will be
+                 installed and run automatically during installation.
+
+               * If you downloaded a trial copy as a minor upgrade
+                 from our web site or FTP site, you will need to copy
+                 the brand program from the directory where you
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 21
+                                               Chapter 2 / Installation
+
+
+
+                 installed the previous version.  If the trial copy
+                 you downloaded is an .EXE file with automated
+                 installation software it will copy the brand program
+                 for you if it can find the previous installation.
+                 Otherwise, you will have to copy the program to the
+                 new directory manually.
+
+          As you follow the instructions from the branding program to
+          enter your name, serial number, and validation code, be sure
+          that all information is entered exactly as shown in the
+          brand document or electronic branding information you
+          received.  You cannot change spelling, capitalization, or
+          punctuation.
+
+          You may also need to run the branding program when you
+          download a maintenance upgrade to any product.  Branding a
+          downloaded copy converts it from a timed trial copy to one
+          fully registered to you.  For this reason you should save
+          your brand document or electronically delivered branding
+          information,  in case it is needed for an upgrade.  If you
+          lose the branding information there may be a charge to
+          replace it, as it must be generated each time you request
+          it.
+
+          You can rerun the branding program manually at any time to
+          reinstall your name and serial number.  To do so simply
+          start the corresponding product, change to the product
+          directory, and run the program, for example:
+
+                    [c:\4nt400] br4nt.exe
+
+          Desktop, Registry, and System File Changes
+
+          During automated installation for any product some changes
+          are made to the Windows desktop and registry.  These
+          changes:
+
+               * Create a JP Software program group on the Start Menu
+                 under Programs, and include shortcuts in that group
+                 to start the command processor and its online help;
+
+               * Optionally add a shortcut to the Windows desktop to
+                 start the command processor;
+
+               * Designate the .BTM files (enhanced batch files) used
+                 by JP Software products as batch files.  They will
+                 then be recognized as such by the Windows Explorer;
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 22
+                                               Chapter 2 / Installation
+
+
+
+               * Provide an additional "open" option in the context
+                 (mouse button 2) menu of all batch files, to
+                 explicitly run the file with 4DOS, 4NT, or Take
+                 Command/32; and
+
+               * Create a new entry in the context menu of drives and
+                 directories to launch 4DOS, 4NT or Take Command/32
+                 in that drive / directory.
+
+          If you need to make these changes manually, or reinstall
+          them without reinstalling the software, see the support area
+          of our web site for a set of registry extension (.INF) files
+          you can download and install.  These files create shortcuts
+          and registry changes similar to those made by the
+          installation software.  The comments within each file
+          explain how to install and uninstall it.
+
+          Automated installation for 4DOS may also modify CONFIG.SYS
+          to make 4DOS the primary shell.  See chapter 5 for details
+          on performing or reversing this step manually if necessary.
+
+          All of these changes are reversed by the automated uninstall
+          process.
+
+     Extracting or Repairing Product Files
+
+          If you need to recover or reinstall individual 4DOS, 4NT, or
+          Take Command files you can do so manually, or using the
+          automated installation software.  The methods described here
+          can also be used to extract the files you need to perform a
+          manual installation for any product.
+
+          The method you use depends on what files you have:
+
+               * If you have a downloaded .EXE file, execute the file
+                 with a /X switch, for example:
+
+                      c:\download\4nt400.exe /x
+
+                 /X disables the normal automated installation and
+                 allows you to select which files you want to
+                 extract.  You can also extract files from the .EXE
+                 file with an unzip program; see below for details.
+
+               * If you have a diskette from JP Software, run the
+                 SETUP.EXE program from the diskette with the /X
+                 switch as explained above.  You can also extract
+                 files from SETUP.EXE with an unzip program; see
+                 below for details.
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 23
+                                               Chapter 2 / Installation
+
+
+
+               * If you have a multi-product CD-ROM from JP Software,
+                 in most cases you can simply copy the desired files
+                 from the appropriate directory, as the files are
+                 stored individually on the CD and are accessible as
+                 normal files.  If you prefer to use the installation
+                 software, or cannot find the files you want, run
+                 SETUP.EXE from the directory for the desired
+                 product, with the /X switch as explained above.
+
+               * If your copy came in a downloaded .ZIP file from our
+                 web site or FTP site, then simply extract the files
+                 you want using an unzip program.
+
+          Because the .EXE files used for automated installation are
+          created in .ZIP format, you can also use an unzip program
+          like PKZIP or WinZip to view and/or unzip a downloaded .EXE
+          file, or SETUP.EXE from a JP Software diskette.  This allows
+          you to extract the files even if  you are not running under
+          Windows and cannot use the automated installation system.
+          Note that when viewed in .ZIP format the installation .EXE
+          file also contains a number of auxiliary files used during
+          the automated installation process.  You should avoid
+          extracting these files as they perform no useful purpose on
+          their own, and will only clutter up the product directory.
+
+     Uninstalling the Program
+
+          We don't expect you to have trouble using our programs, but
+          we know some people feel more comfortable knowing how to
+          uninstall a product as well as install it.  Or, you may need
+          to remove the program from one system to move it to another
+          system.
+
+          If you installed your product using the automated
+          installation software, go to the Windows Control Panel,
+          select Add/Remove Programs, and select the product you want
+          to uninstall from there.  You can also start the automated
+          uninstall process by manually executing the UNWISE.EXE
+          program in the product directory, but in most cases this
+          should not be necessary.
+
+          Once the uninstall starts you can select Automatic or
+          Custom.  The Automatic option is the simplest and fastest,
+          but if you want to control each step of the uninstall
+          process select Custom.
+
+          Note that the automated uninstall software normally removes
+          the registry changes which designate JP Software .BTM files
+          as batch files.  These registry changes affect all JP
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 24
+                                               Chapter 2 / Installation
+
+
+
+          Software products (see page 22 for details).  If you are
+          using multiple products and only uninstalling one of them
+          you may not want to remove these registry changes.  In this
+          case use the Custom uninstall option, and when prompted for
+          the registry changes to reverse, select all changes except
+          those made to the Software\Classes registry keys.
+
+          The automated uninstall software will attempt to reverse all
+          of the changes made during installation, including
+          modifications to your system files and registry.  However,
+          in some circumstances (for example, if you manually moved
+          the product files to a new directory after automated
+          installation was complete), the program may not be able to
+          complete all of the steps automatically.  In this case you
+          will need to perform some of them manually.
+
+          You will also need to uninstall the program manually if you
+          did not use the automated software to install it, or if
+          UNWISE.EXE has been deleted.
+
+          See Chapters 5 - 7 for manual uninstall instructions for
+          each product.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 25
+                                            Chapter 3 / The Help System
+
+
+
+
+     Chapter 3 / The Help System
+
+     All of our products include complete online help.  This chapter
+     provides a basic description of how to use the help system, and
+     lists important help topics you may want to refer to.
+
+     Using the Help System
+
+          If 4DOS, 4NT, or Take Command is running, you can start the
+          help system by typing HELP (or HELP plus a command name) at
+          the prompt, by pressing the F1 key at any time when the
+          command processor is accepting keyboard input at the prompt,
+          or from the Help menu in Take Command.  Each of our help
+          systems is fully cross-referenced, so you can move easily
+          among related topics.
+
+          If you type part or all of a command on the command line and
+          then press F1, the help system will provide "context-
+          sensitive" help by using the first word on the line as a
+          help topic.  If the first word is not a valid help topic you
+          will see the Table of Contents.  For example, if you press
+          F1 after entering each of the command lines shown below you
+          will get the display indicated:
+
+               [c:\]               Table of Contents
+               [c:\] copy *.* a:   Help on COPY
+               [c:\] c:\util\map   Table of Contents
+
+          If you type the name of any internal command at the prompt,
+          followed by a slash and a question mark [/?] like this
+
+               [c:\] copy /?
+
+          then you will see help for the command in a quick-reference
+          style.
+
+          Once you've started the help system, you can use a standard
+          set of keystrokes or mouse actions to navigate through the
+          help text.
+
+          Each help system can also be started "manually" (i.e.,
+          without 4DOS, 4NT, or Take Command running), and contains
+          information which may be helpful if you encounter
+          difficulties setting up the program or configuring it for
+          your system.  See Chapters 4 - 7 for details on starting the
+          help system manually.
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 26
+                                            Chapter 3 / The Help System
+
+
+
+     Important Help Topics
+
+          The help system includes documentation for all 4DOS, 4NT, or
+          Take Command commands and features.  It also includes many
+          other topics which may be of interest to you as you use the
+          program or which you may need for advanced installations.
+
+          This section lists some topics in the help system which you
+          may find useful:
+
+               * The sections titled 4DOS.INI, 4NT.INI, or
+                 Configuring Take Command cover the .INI file and the
+                 related dialogs, including reference information on
+                 all .INI file directives.
+
+               * Starting Take Command, Starting 4DOS, or Starting
+                 4NT (under Setup and Troubleshooting) explains the
+                 startup command line, and contain links to related
+                 startup and configuration topics such as 4START and
+                 TCSTART.
+
+               * What's New explains changes in recent versions of
+                 the command processor.  Be sure to review this
+                 information before working with any upgrade.  This
+                 section covers the current release and any prior
+                 releases of the same major version.  For older
+                 historical information see our web site at
+                 http://www.jpsoft.com/.
+
+               * Troubleshooting, Service, and Support (under Setup
+                 and Troubleshooting) includes a list of error
+                 messages and a discussion of useful diagnostic and
+                 troubleshooting techniques.  It also contains
+                 information on contacting JP Software for technical
+                 support, sales, customer service, and other similar
+                 matters.
+
+               * Reference Tables (under Reference Information)
+                 includes comprehensive lists of ASCII characters and
+                 keyboard codes.
+
+     4DOS      * Compatibility discusses using 4DOS with products
+                 from other companies, including additional details
+                 on using 4DOS with Windows 95/98/ME.
+
+     4DOS      * External (DOS) Help provides access to the MS-DOS /
+                 PC-DOS help system.  This feature will only work if
+                 the 4DOS help program can find the DOS help program
+                 on your disk (see the External Help topic itself for
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 27
+                                            Chapter 3 / The Help System
+
+
+
+                 details), and if the 4DOS help program has enough
+                 memory to execute DOS help.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 28
+                                       Chapter 4 / 4DOS and 4NT Startup
+
+
+
+
+     Chapter 4 / 4DOS and 4NT Startup
+
+     This chapter explains startup options for 4DOS and 4NT under
+     various operating systems.  For additional details on manual
+     installation and configuration of 4DOS see chapter 5 on page 37;
+     for 4NT see chapter 6 on page 50.  For information on Take
+     Command, see chapter 7 on page 57.
+
+     Once you have 4DOS or 4NT installed on your computer, the program
+     is ready to run.  However, you can configure each program in
+     various ways to suit your needs and preferences.  Most of the
+     configuration or behavior of each program is controlled by
+     aliases you create (explained in the online help and in Chapter 4
+     of the Reference Manual) and by the .INI file (explained briefly
+     below, and in detail in the online help and in Chapter 5 of the
+     Reference Manual).
+
+     A few configuration options can also be set on the startup
+     command line, which is explained here.  In order to understand
+     the startup command line you will also need to understand primary
+     and secondary shells, so that topic is covered first.
+
+     If you do not need to alter the startup behavior of 4DOS or 4NT,
+     you can skip the remainder of this chapter.  If you are using our
+     products under any flavor of Windows, we recommend that you read
+     through this chapter, since each time you create a desktop object
+     to run the command interpreter you will have to create a startup
+     command line for that object.
+
+     Primary and Secondary Shells
+
+          4DOS and 4NT can be run as either primary or secondary
+          shells.
+
+          Under DOS and Windows 95/98, a primary shell is started from
+          the CONFIG.SYS file with a SHELL= command.  Secondary shells
+          are started when a program "shells" to the DOS prompt or
+          runs a "transient" (temporary) shell to execute a specific
+          command, or when you explicitly start a new shell from a
+          desktop object under Windows 95/98.
+
+          Under Windows NT/2000, a primary shell is started each time
+          you start a new command-line session or window from the
+          desktop.  A secondary shell is started when a program
+          "shells" to the command prompt, or runs a "transient"
+          (temporary) shell to execute a specific command.
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 29
+                                       Chapter 4 / 4DOS and 4NT Startup
+
+
+
+          Whenever you start a primary or secondary shell, you can
+          control the way that 4DOS or 4NT starts by adjusting the
+          startup command line.
+
+     Command Line Options
+
+          A few of the command-line switches or options that 4DOS and
+          4NT recognize are required in certain circumstances; most
+          others are needed only if you want finer control over the
+          way the program starts.
+
+          The line that starts 4DOS or 4NT will typically include the
+          program name with drive and path, repeat the name of the
+          directory where the program is stored, and finally include
+          any switches for the program, for example:
+
+               e:\4dos700\4dos.com e:\4dos700 /p
+
+          This command line may appear on its own (for example, in a
+          Windows desktop object), or in an operating system directive
+          (e.g. the SHELL command in the DOS or Windows 95/98
+          CONFIG.SYS file).  Specific details on where you should
+          enter the command line for each product are included in
+          Chapters 5 and 6.
+
+          Although the startup command line is usually very simple,
+          you can add a number of options if you need to customize the
+          way the command interpreter starts.  The complete syntax for
+          the startup command line is:
+
+               d:\path\program [d:\path] [@d:\path\inifile]
+               [//iniline] [/D /E:nnnn /F /L /LA /LD /LH /P[:filename]
+               /Q /S /T:bf /X /Y] [[/C | /K] command]
+
+          Do not include the square brackets shown in the command line
+          above.  They are there to indicate that the items within the
+          brackets are optional.  Not all options are available in
+          both 4DOS and 4NT; see below for details.
+
+          If you include any of the options below, you should use them
+          in the order that they are described.  If you do not do so,
+          you may find that they do not operate properly.
+
+          The following items can be included on the command line:
+
+               * d:\path\program:  The path and name of the
+                 executable program file (4DOS.COM or 4NT.EXE).  It
+                 is required to start 4DOS or 4NT.
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 30
+                                       Chapter 4 / 4DOS and 4NT Startup
+
+
+
+               * d:\path:  This is the second d:\path in the command
+                 line above.  It sets the drive and directory where
+                 the program is stored, called the COMSPEC path.
+                 4DOS and 4NT use this path to find their files and
+                 to set the COMSPEC environment variable (see your
+                 online help or Reference Manual for more information
+                 on COMSPEC).
+
+     4DOS        Under 4DOS, this option is generally required for
+                 the primary shell, but not for secondary shells.  In
+                 some cases the primary 4DOS shell can find its
+                 directory automatically and this option is not
+                 needed, but we recommend that you use it on all
+                 primary shells to ensure that the directory is
+                 found.
+
+                 If you are running Windows 95/98 and you do not load
+                 4DOS as the primary shell in CONFIG.SYS, or if you
+                 are running Windows ME, you must use this option in
+                 each desktop object or shortcut command line to
+                 allow 4DOS to find its files.
+
+     4NT         4NT normally knows what drive and directory it is
+                 started from, so this option is not usually
+                 necessary, though it is allowed.
+
+               * @d:\path\inifile:  This option sets the path and
+                 name of the .INI file.  You don't need this option
+                 if you aren't using an .INI file at all, or if the
+                 file has the default name (4DOS.INI or 4NT.INI) and
+                 it is either in the same directory as the executable
+                 program or in the root directory of the boot drive.
+                 This option is most useful if you want to start the
+                 program with a specific and unique .INI file.
+
+               * //iniline:  This option tells 4DOS or 4NT to treat
+                 the text appearing between the // and the next space
+                 or tab as an .INI directive.  The directive should
+                 be in the same format as a line in the .INI file,
+                 but may not contain spaces, tabs, or comments.
+                 Directives on the command line override any
+                 corresponding directive in the .INI file.  This
+                 option may be repeated.  It is a convenient way to
+                 place a few simple directives on the startup line
+                 without having to modify or create a new .INI file.
+
+     4DOS      * /D:  In 4DOS only, this option disables execution of
+                 AUTOEXEC.BAT (or the file named in the AutoExecPath
+                 directive in 4DOS.INI).  It is intended for internal
+                 use by DOS and Windows 95/98.  When you press the F8
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 31
+                                       Chapter 4 / 4DOS and 4NT Startup
+
+
+
+                 or Ctrl key during the boot process, MS-DOS prompts
+                 for whether to run AUTOEXEC.BAT.  If you answer
+                 "No", the /D switch is used to relay your choice to
+                 4DOS.  This option is not available in 4NT.
+
+     4DOS      * /E:nnnn:  In 4DOS only, this option sets the size of
+                 the environment in bytes.  If you don't use this
+                 option, 4DOS will allocate 512 bytes for the
+                 environment.  You can use any value from 160 to
+                 32767 as the environment size.  For example, to set
+                 an environment of 1,000 bytes, you would enter the
+                 option as /E:1000.
+
+                 You can also set the environment size with the
+                 Environment directive in the 4DOS.INI file (see your
+                 online help or Reference Manual).  We recommend that
+                 you use the directive instead of the /E switch, so
+                 that all configuration information is kept in one
+                 place in the 4DOS.INI file.
+
+     4NT         4NT allocates space in the environment dynamically
+                 instead of using a fixed amount of space.
+                 Therefore, this option is not available in 4NT.
+
+     4DOS      * /F:  This option tells 4DOS to automatically provide
+                 a Fail response to all critical errors, without
+                 prompting or waiting for a user response.  It is
+                 rarely used except on systems that must run
+                 unattended.  We do not recommend use of this option
+                 on a normal system, because you will not have a
+                 chance to react to a critical error and correct the
+                 problem that caused it.  For more information on
+                 critical errors see the online help or the Reference
+                 Manual.  /F only affects critical errors detected by
+                 4DOS, and will not affect critical error handling
+                 for many application programs which perform this
+                 function themselves.  It is equivalent to the
+                 directive CritFail=Yes in 4DOS.INI.
+
+                 The /F option is not available in 4NT.
+
+               * /L, /LA, /LD, and /LH:  These options force 4DOS or
+                 4NT to use a local alias, directory history, and /
+                 or command history list.  They can be used to
+                 override any LocalAlias=No, LocalHistory=No, or
+                 LocalDirHistory=No settings in the .INI file.  This
+                 allows you to use global lists as the default, but
+                 start a specific shell or session with local aliases
+                 or histories.  See your online help or Reference
+                 Manual for details on local and global aliases and
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 32
+                                       Chapter 4 / 4DOS and 4NT Startup
+
+
+
+                 histories.  /LA forces local aliases, /LD forces
+                 local directory history, /LH forces local command
+                 history, and /L forces all three -- local aliases,
+                 command history, and directory history.
+
+     4DOS      * /P[:filename]:  This option tells 4DOS to load
+                 permanently and to run AUTOEXEC.BAT.  If you specify
+                 a filename after the /P, that file will be run
+                 instead of AUTOEXEC.BAT.  You should specify the
+                 full name of the file, including drive and
+                 directory.  A filename after /P will override the
+                 AutoExecPath option in 4DOS.INI.
+
+                 When 4DOS is loaded from the SHELL= command in
+                 CONFIG.SYS it will normally detect that it is the
+                 primary shell and set the /P option automatically.
+                 Under very rare circumstances, you may want to load
+                 4DOS permanently and have it run AUTOEXEC.BAT even
+                 though you are not loading it from CONFIG.SYS; in
+                 such cases you must set /P yourself.  4DOS will not
+                 run AUTOEXEC.BAT without either an automatic or an
+                 explicit /P.  Do not use this option in secondary
+                 shells, or you will be unable to return to the
+                 primary shell.
+
+                 The /P option is not available in 4NT.
+
+     4NT       * /Q:  This option, which is only available in 4NT,
+                 has no effect.  It is included only for
+                 compatibility with CMD.EXE.
+
+     4NT       * /S:  This option tells 4NT that you do not want it
+                 to set up a Ctrl-C / Ctrl-Break handler.  It is
+                 included for compatibility with CMD.EXE, but it may
+                 cause the system to operate incorrectly if you use
+                 this option without other software to handle Ctrl-C
+                 and Ctrl-Break.  This option should be avoided by
+                 most users.  It is not available under 4DOS.
+
+     4NT       * /T:bf:  This option sets the foreground and
+                 background colors in the 4NT window.  Both b and f
+                 are hexadecimal digits; b specifies the background
+                 color and f specifies the foreground color.  This
+                 option is included only for compatibility with
+                 CMD.EXE; in most cases you should set default colors
+                 with the StdColors directive in 4NT.INI, or the
+                 corresponding Output Colors option on the Display
+                 page of the 4NT configuration dialogs.
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 33
+                                       Chapter 4 / 4DOS and 4NT Startup
+
+
+
+     4NT       * /X:  This option forces 4NT to alter the operation
+                 of the MD and MKDIR command to automatically create
+                 all necessary intermediate directories when it
+                 creates a new subdirectory.  Its effect is the same
+                 as adding a /S option to all MD and MKDIR commands
+                 (see the online help or Reference Manual for details
+                 about the MD /S command).  This option is included
+                 for compatibility with CMD.EXE.  In CMD.EXE it
+                 enables other options as well, but in 4NT the only
+                 option not enabled by default is the implicit MD /S.
+
+     4DOS      * /Y:  This option forces 4DOS to enable the batch
+                 file debugger for 4START and AUTOEXEC.BAT (or the
+                 file named in the AutoExecPath directive in
+                 4DOS.INI).  It is intended for internal use by DOS
+                 and Windows 95/98.  When you press the F8 key to
+                 enable single-stepping during the boot process and
+                 then elect to single-step through AUTOEXEC.BAT, the
+                 /Y switch is used to relay your choice to 4DOS.
+                 This option is not available in 4NT.
+
+               * [/C | /K] command:  This option tells 4DOS or 4NT to
+                 run a specific command after starting.  The command
+                 will be run after 4START, and after AUTOEXEC.BAT in
+                 a 4DOS primary shell.  The command will be run
+                 before the prompt is displayed.  The command can be
+                 any valid alias, internal or external command, or
+                 batch file.  All other startup options must be
+                 placed before the command, because the command
+                 interpreter will treat characters after the command
+                 as part of the command and not as additional startup
+                 options.
+
+                 When the command is preceded by a /C, 4DOS or 4NT
+                 will execute the command and then exit and return to
+                 the parent program or the desktop without displaying
+                 a prompt.  This is sometimes called a "transient"
+                 command interpreter session.
+
+                 In 4NT, and in 4DOS when it is started as a
+                 secondary shell (for example from the Windows
+                 desktop), the /K switch has no effect; using it is
+                 the same as placing the command (without a /C or /K)
+                 at the end of the startup command line.  It is
+                 included only for compatibility with COMMAND.COM
+                 and CMD.EXE.
+
+     4DOS        When you start 4DOS from the SHELL= line in MS-DOS /
+                 PC-DOS 6.x and use /K, the command will be executed
+                 instead of AUTOEXEC.BAT (for compatibility with MS-
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 34
+                                       Chapter 4 / 4DOS and 4NT Startup
+
+
+
+                 DOS / PC-DOS 6.x COMMAND.COM).  This behavior occurs
+                 only in MS-DOS / PC-DOS 6.x, not in other DOS
+                 versions or in Windows 95/98.
+
+          For example, this command line will start 4DOS, execute any
+          4START file you have created, execute the file START.BTM,
+          and then display the prompt:
+
+               c:\4dos700\4dos.exe c:\4dos700\start.btm
+
+          This command line will start 4NT, select local aliases,
+          execute any 4START file you have created, execute the file
+          PROCESS.BTM, and then exit when PROCESS.BTM is done.  The
+          prompt will not be displayed by this session:
+
+               c:\4nt\4nt.exe /la /c c:\4nt\process.btm
+
+     Creating or Modifying Startup Files
+
+          Each of our products uses two files to control the way it
+          starts:  a file of configuration information called the .INI
+          file (named 4DOS.INI or 4NT.INI), and a startup batch file
+          called 4START (depending on your operating system, 4START
+          may have the extension .BTM, .BAT, or .CMD).
+
+          The .INI file is optional in 4NT and required in 4DOS (see
+          page 40 for details).  The .INI file for each command
+          processor should be placed in the same directory as the
+          other files for that product.  You can add additional
+          information to the .INI file manually with an ASCII editor,
+          or you can use the OPTION command to aid you in selecting
+          configuration options.
+
+          The 4START file is also optional.  It is executed each time
+          4DOS or 4NT starts, and gives you a convenient way to load
+          aliases and environment variables, and otherwise initialize
+          the command processor -- especially under 4NT, which does
+          not use an AUTOEXEC.BAT file.  4START is normally placed in
+          the same directory as the other product files, but this may
+          vary if you use the same 4START file for more than one
+          product.
+
+          For complete details on startup files, on the OPTION
+          command, and on the 4EXIT file (executed when the command
+          processor exits), see the online help or the Reference
+          Manual.
+
+          If you are upgrading from a previous version of 4DOS or 4NT,
+          you may have a .INI file and / or a 4START (or 4EXIT) file
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 35
+                                       Chapter 4 / 4DOS and 4NT Startup
+
+
+
+          in the previous version's directory.  To use these files
+          with your new version, you must copy them to the new
+          directory, and then update any paths in either file which
+          point to the old program directory.
+
+     Exit Codes
+
+          If you start 4DOS or 4NT from another program (e.g. to run a
+          batch file or internal command), it will return a numeric
+          code to the other program when it is finished.  This code is
+          usually used to indicate whether the operation performed was
+          successful or not, with 0 often indicating success and a
+          non-zero value indicating a failure or other numeric result.
+
+     4DOS In 4DOS, the exit code is normally the numeric exit code
+          from the last external command.  Internal commands do not
+          set the exit code.
+
+     4NT  In 4NT, the exit code is normally the numeric exit code from
+          the last internal or external command.  However, for
+          compatibility reasons and to avoid conflicts with external
+          commands, only some internal commands set the exit code;
+          others leave it unchanged from the most recent external
+          command.
+
+          If you enter an unknown command the exit code will be 2,
+          which is the internal 4DOS and 4NT unknown command error
+          number.
+
+          In both 4DOS and 4NT you can use the EXIT n command to
+          explicitly set the exit code.  If you do, this will override
+          the rules above, and set the return code to the value in
+          your EXIT command.
+
+          The normal rules described above may not return a code that
+          indicates the success or failure of the specific operation
+          that concerns you.  Therefore, if you need to rely on the
+          exit code from 4DOS or 4NT, we recommend that you use a
+          batch file or alias to create the exit code you want, and
+          then set the code explicitly with EXIT n.
+
+
+
+
+
+
+
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 36
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+
+     Chapter 5 / 4DOS Configuration and Notes
+
+     This chapter covers manual installation and configuration of
+     4DOS.  For information on startup options for 4DOS and 4NT under
+     various operating systems see chapter 4 on page 29.   For 4NT
+     configuration see chapter 6 on page 50.  For information on Take
+     Command, see chapter 7 on page 57.
+
+     4DOS works well with virtually all PC hardware; with a wide range
+     of operating systems and environments, including MS DOS, PC-DOS,
+     Novell DOS / OpenDOS / DR-DOS, Windows 3.x, Windows 95 / 98 / ME,
+     and OS/2; and with all DOS-based, Windows-based, and OS/2-based
+     networks.  Each environment makes different demands on 4DOS and
+     the user.
+
+     4DOS is not recommended for use under Windows NT or Windows 2000,
+     or supported in those environments.  If you are running Windows
+     NT/2000, use 4NT or Take Command/32.
+
+     This chapter provides the basic information you need to run 4DOS
+     in any of the standard PC environments.  If you need more
+     detailed technical information or troubleshooting assistance on
+     any of these topics, consult the Troubleshooting, Service, and
+     Support and Compatibility topics in the 4DOS online help.
+
+     4DOS Installation Notes
+
+          When installing 4DOS under Windows 95/98/ME, we strongly
+          recommend that you use a short name for the 4DOS directory
+          (i.e. a name where each element of the path uses no more
+          than eight characters for the name and three characters for
+          the extension, with no white space or other special
+          characters).  If you install 4DOS in a directory with a long
+          name, you will have to determine the equivalent short name
+          and use it throughout the installation process.
+
+          Older Versions of DOS
+
+          If you're running DOS 5 or earlier, we recommend that you
+          make a bootable system diskette before you install 4DOS (or
+          any other software, for that matter).  This allows you to
+          recover in case of a power failure, error, or other
+          interruption during the installation process.  See your DOS
+          documentation for details about creating a bootable floppy
+          disk.
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 37
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+          In DOS 6 and above and in Windows 95/98/ME, a bootable disk
+          usually is not necessary because the F5 and F8 keys can be
+          used to skip steps in the boot process and recover from
+          errors in configuration files.
+
+     Manual Installation of 4DOS
+
+          This section is for advanced users, and assumes you are
+          generally familiar with CONFIG.SYS, AUTOEXEC.BAT, and other
+          concepts such as ASCII editors and batch files.  In most
+          cases, manual installation is not necessary because you can
+          use the automated installation program.
+
+          In order to install 4DOS manually, you must extract or copy
+          the necessary files, brand 4DOS if necessary, create or
+          modify any configuration files you need, and then create the
+          necessary commands to start the program on your system.
+
+          Extracting or Copying the Program Files
+
+          When you extract or copy the 4DOS files, be sure to place
+          them in their own directory, rather than using the same
+          directory as a previous version of the program, a directory
+          used by other JP Software products, or a directory used by
+          other software.
+
+          We strongly recommend that you place all of the 4DOS files
+          in the same directory.  See 4DOS Files and Directories on
+          page 40 for some important considerations if you choose not
+          to follow this recommendation.
+
+          The method used to extract or copy the files depends on how
+          you obtained your copy of the program.  The various methods
+          are described on page 23.
+
+          "Branding" 4DOS
+
+          (If you are not familiar with branding, refer to the general
+          information on page 20 before continuing with this section.)
+
+          If you performed an automated installation the installation
+          software will normally run the BR4DOS program to install
+          your name, serial number, and validation code in 4DOS.  If
+          you need to brand 4DOS manually, go to a 4DOS or COMMAND.COM
+          prompt, change to the directory where 4DOS is stored, and
+          enter the command:
+
+               c:\4dos700> br4dos
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 38
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+          Follow the instructions displayed by BR4DOS to enter your
+          name, serial number, and validation code.  All information
+          must be entered exactly as shown on your original brand
+          card, label, or electronically delivered branding
+          information; you cannot change spelling, capitalization, or
+          punctuation.
+
+          Updating CONFIG.SYS and AUTOEXEC.BAT
+
+          (Please Note:  If you installed 4DOS to a directory with a
+          long name under Windows 95/98, you must determine the
+          equivalent short name for use when updating CONFIG.SYS and
+          AUTOEXEC.BAT.  Paths in these files can not be entered in
+          long name format.)
+
+          When you're ready to finish installing 4DOS, you need to add
+          one line to your DOS or Windows 95/98 CONFIG.SYS file:
+
+               SHELL=d:\path\4DOS.COM d:\path /P
+
+          "d:\path" means the drive and directory where 4DOS.COM is
+          stored.  The second "d:\path" on the SHELL= line should be
+          the same as the first, and is used to set the COMSPEC
+          environment variable properly.  Be sure to delete or REMark
+          out any old SHELL= line when you add the new line for 4DOS.
+
+          You can add any command line options to the end of the line.
+          See Chapter 4 on page 29 for information on command line
+          options.
+
+          If you are running 4DOS under DOS 4.01 or earlier, see the
+          Compatibility section in the online help for notes on the
+          length of the SHELL= line.
+
+          Next, if you are running under DOS (without Windows
+          95/98/ME), add the following line to your AUTOEXEC.BAT file:
+
+               d:\path\KSTACK.COM
+
+          where "d:\path" is the drive and directory where your 4DOS
+          files are stored.  KSTACK.COM is a memory-resident program
+          used to support the KEYSTACK command.  It requires about 1K
+          of memory, and can be left out of AUTOEXEC.BAT if you do not
+          use KEYSTACK.
+
+          Do not add the KSTACK line to AUTOEXEC.BAT if you are using
+          Windows 95/98.  Under these operating systems, KSTACK should
+          be loaded separately for each 4DOS session; see page 46 for
+          details.
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 39
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+          If you have a line in AUTOEXEC.BAT which sets the COMSPEC
+          environment variable to point to COMMAND.COM, remove it or
+          REMark it out.  If you set up the CONFIG.SYS file properly,
+          4DOS will set this variable automatically; setting it in
+          AUTOEXEC.BAT is likely to cause trouble later on (for
+          example, if you install an update to 4DOS in a different
+          directory, but forget to change the COMSPEC setting).
+
+          When you've finished modifying CONFIG.SYS and AUTOEXEC.BAT,
+          you can reboot your system to start 4DOS.
+
+          Creating or Copying 4DOS.INI
+
+          (For general information on the .INI file see page 35.)
+
+          4DOS requires a 4DOS.INI file with at least one line in it:
+
+               InstallPath = d:\path
+
+          where "d:\path" is the drive and directory where your 4DOS
+          files are stored (under Windows 95/98, this must be the
+          short name of the directory; long names cannot be used).
+          This will help 4DOS locate its auxiliary files, such as the
+          help files and OPTION.EXE.  The automated installation
+          process always places this line in 4DOS.INI.  If you need to
+          create the file manually, you can do so with any ASCII file
+          editor.  The InstallPath setting should be the first line in
+          the file.
+
+          If you are upgrading from a previous version of 4DOS, you
+          should copy any 4DOS.INI file you have in the old directory
+          to the new one.  Then add or modify the InstallPath
+          directive at the beginning of 4DOS.INI, and update any paths
+          in the file which point to the old program directory (e.g.
+          4StartPath).
+
+          4DOS Files and Directories
+
+          We strongly recommend that you place all 4DOS files in the
+          same directory.  If you do not do so, you will have to
+          explicitly set the locations of 4DOS files to avoid
+          problems.
+
+          You may feel that you should place 4DOS.COM in the root
+          directory because it is a system-related file.  We do not
+          recommend this practice; 4DOS will run just fine from its
+          own directory, and keeping it there makes configuration much
+          simpler.
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 40
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+          If you do wish to move files to different directories, the
+          following information will help you set up the programs
+          correctly:
+
+               4DOS.COM is the 4DOS program file.  It must be in the
+               directory specified by the SHELL= line in your DOS or
+               Windows 95/98 CONFIG.SYS file, or the directory
+               specified on the command line in every desktop object
+               used to start 4DOS.
+
+               4HELP.EXE is the 4DOS help program.  For online help to
+               work, this file must be in the 4DOS installation
+               directory shown in the InstallPath directive in
+               4DOS.INI, or in a directory included in your PATH.
+
+               4DOS.HLP contains the text for the 4DOS help program.
+               It must be in the same directory as 4HELP.EXE, or in a
+               directory included in your PATH.
+
+               KSTACK.COM is the used by the KEYSTACK command.  If you
+               wish to use the KEYSTACK command, this file should be
+               loaded in your AUTOEXEC.BAT file (under DOS) or
+               separately for each 4DOS session (under Windows
+               95/98/ME; see page 46 for details).  This file does not
+               have to be in the 4DOS directory.  If KSTACK.COM has
+               not been loaded, you will see an error message when you
+               attempt to use the KEYSTACK command.
+
+               OPTION.EXE is a utility used by the OPTION command to
+               configure 4DOS.  For the OPTION command to work, this
+               file must be in the 4DOS installation directory shown
+               in the InstallPath directive in 4DOS.INI, or in a
+               directory included in your PATH.
+
+          Creating 4DOS Shortcuts and Registry Extensions
+
+          When 4DOS is installed using automated installation software
+          it normally creates Start menu entries and registry
+          extensions as described on page 22.  The installation
+          software can also create a desktop shortcut for 4DOS.
+
+          If you need to create a Start menu entries or desktop
+          shortcuts manually -- for example, if the JP Software group
+          on the Start menu is inadvertently damaged or deleted --
+          you can use the Windows Explorer's facilities to do so:
+
+               * To create additional shortcuts elsewhere on the
+                 Start menu, or modify the Programs entries, click
+                 mouse button 2 in an open area of the Task Bar, and
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 41
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+                 select Properties on the popup menu.  Select the
+                 Start Menu Programs tab and modify or adjust the
+                 menus as required.
+
+               * To create one or more shortcuts on the desktop to
+                 run 4DOS, click with mouse button 2 in any open area
+                 of the desktop.  On the popup menu click New, then
+                 Shortcut.  Fill in the drive and path as
+                 d:\path\4DOS.COM (use the appropriate drive and path
+                 for your system).
+
+          You can also put command-line switches, a command, or the
+          name of a batch file at the end of the command line for any
+          shortcut.  This allows you to run specific commands or set
+          configuration options when you start 4DOS from that
+          shortcut.  For details on the command line options
+          available, see Chapter 4 and the Starting 4DOS section of
+          the online help.
+
+          For more information on creating and configuring shortcuts
+          or modifying the Start Menu, see your Windows documentation.
+
+          If you want to make these changes as a group, or reinstall
+          shortcuts and registry extensions without reinstalling 4DOS,
+          see the support area of our web site for a set of registry
+          extension (.INF) files you can download and install.  These
+          files create shortcuts and registry changes similar to those
+          made by the installation software.  The comments within each
+          file explain how to install and uninstall it.
+
+     The 4DOS Help System
+
+          The 4DOS help program is called 4HELP.EXE; the help text is
+          stored in the file 4DOS.HLP.  The 4DOS help system provides
+          complete help for 4DOS commands and features; on most
+          systems it can also launch the DOS help program to display
+          help on external DOS commands like FORMAT or SORT.
+
+          The section entitled The 4DOS Help System within the help
+          system itself explains navigation keystrokes and mouse usage
+          in more detail, as well as instructions on linking the help
+          system to DOS help or other help programs.
+
+          If you do not have 4DOS running, you can start the help
+          system by moving into the directory that contains your 4DOS
+          files (we assume that you are using C:\4DOS700 in this
+          example) and typing this command:
+
+               C:\4dos700> 4help
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 42
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+          You can use this command if you are unable to install 4DOS
+          completely for some reason; information in the help system
+          will likely help you solve the problem.
+
+     4DOS and Your Computer
+
+          4DOS will work on any IBM PC-compatible hardware, regardless
+          of the CPU type, amount of memory (assuming the minimum 256K
+          or so required to run 4DOS is available), disk
+          configuration, or video hardware.  The notes below briefly
+          cover memory, video, and disk issues.
+
+          Memory
+
+          4DOS knows how to use XMS memory, EMS memory, and Upper
+          Memory Blocks (UMBs) in order to minimize the amount of
+          space it takes in the 640K of DOS memory available to your
+          application programs.  You can control 4DOS's memory usage
+          with directives in the 4DOS.INI file.  For more details
+          about configuring 4DOS's memory usage see Initialization
+          Directives under .INI File Directives in the 4DOS.INI
+          section of the online help.  You can also set most memory
+          usage options easily from the Startup page of the OPTION
+          command's dialogs.
+
+          By default, 4DOS uses normal DOS memory ("low memory") for
+          its small resident portion of about 3 - 4K.  4DOS can reduce
+          its low memory usage by moving most of this information to
+          Upper Memory Blocks (UMBs), when requested with UMBLoad and
+          other UMB-related directives in the 4DOS.INI file.
+
+          Low memory is also used to hold the larger (about 230K)
+          transient portion of 4DOS while your system is at the
+          prompt, or executing an internal 4DOS command or batch file.
+          When an external application is running 4DOS moves its
+          transient portion to EMS or XMS memory (or the hard disk),
+          so the memory is available to the application.  For
+          additional details see the online help or the Reference
+          Manual, and in particular the documentation on the Swapping
+          directive in 4DOS.INI.
+
+          Video
+
+          4DOS can normally adjust itself to your video hardware
+          automatically, regardless of your video adapter and the
+          number of rows and columns on your screen.
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 43
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+          Most video problems turn out to be unrelated to 4DOS, and
+          are often due to the underlying operating environment (for
+          example, attempting to display blinking text in a window
+          when the underlying environment does not support this
+          feature).
+
+          If you experience scrolling or color problems, you should
+          also check whether you have an ANSI driver installed, and if
+          so verify that it is configured correctly and can support
+          your video hardware.
+
+          Disk Drives
+
+          4DOS supports all types of disks including floppy disks,
+          hard disks, high-capacity removable disks, compressed
+          drives, network drives, and RAM disks.  4DOS never directly
+          modifies the FAT, root directory, subdirectories, or other
+          system areas of the disk, and it doesn't write any data on
+          your disk itself.  It always calls on DOS to perform these
+          actions, just like most application programs do.  As a
+          result, 4DOS is compatible with all disk sizes, formats, and
+          structures that your DOS or Windows version supports.
+
+          If you receive unexpected results related to a disk drive or
+          disk file (for example, an apparent error in the amount of
+          free space on a drive, or an "access denied" message when
+          attempting to use a file you thought was available), chances
+          are that 4DOS is merely reporting information provided by
+          the operating system, and is not the original source of the
+          problem.
+
+     4DOS and DOS
+
+          4DOS is compatible with MS-DOS or PC-DOS 3.1 and above, DR
+          DOS / Novell DOS / OpenDOS 3.4 and above, Windows 95 / 98 /
+          ME (and their built-in version of DOS, "MS-DOS 7"), and
+          OS/2 DOS sessions.  See page 45 for additional important
+          information on Windows 95/98.  See the online help for
+          information on OS/2.
+
+          More detailed information on 4DOS and DOS is covered in the
+          Compatibility section of the online help.  If you use any of
+          the DOS versions or features listed below, you may want to
+          check that topic for additional information.  This is only a
+          partial list of the DOS-related items discussed in the
+          online help.  Inclusion of an item here does not mean it is
+          incompatible with 4DOS, but only that more information on it
+          is available in the help system.  The help system includes
+          information you may need if you use:
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 44
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+               * Any version of DR DOS, Novell DOS, or OpenDOS.
+
+               * Utilities which allow multiple configurations in
+                 your DOS CONFIG.SYS file, including the MS-DOS or
+                 Windows 95/98 multiple configuration feature.
+
+               * The MS-DOS APPEND utility.
+
+               * The FORMAT /S and SYS commands (used to create a
+                 bootable floppy disk) under MS-DOS or PC-DOS version
+                 4.0 or above.
+
+               * The DBLSPACE and DRVSPACE disk compression
+                 utilities.
+
+               * The MS-DOS 6.x and Windows 95/98 HELP command.
+
+               * The FASTOPEN utility.
+
+               * The MS-DOS 6.x and Windows 95/98 MOVE command.
+
+               * The MS-DOS / PC-DOS 6.x SMARTDRV disk cache.
+
+     4DOS and Microsoft Windows 95/98/ME
+
+          This section provides basic information on using 4DOS under
+          Windows 95, Windows 98, and Windows ME.  For additional
+          details see the Compatibility section in the online help.
+
+          4DOS works well as both the primary shell, loaded before
+          Windows 95/98, and when loaded from the Windows 95/98
+          desktop.  Under Windows ME 4DOS can only be loaded from the
+          desktop, not as a primary shell before Windows starts.
+
+          If you are using 4DOS under Windows 95 or Windows 98, we
+          strongly recommend that you install it as the primary shell
+          in CONFIG.SYS (this is the way 4DOS is normally installed).
+          If you do not install 4DOS as the primary shell, individual
+          4DOS sessions will not be able to share global alias and
+          history lists; each 4DOS session will have to process the
+          .INI file before it starts; and, if you have two or more
+          4DOS sessions running simultaneously from the Windows
+          desktop, they will use more system resources than they would
+          if 4DOS were installed as the primary shell.
+
+          If you have a typical Windows configuration, and install
+          4DOS as the primary shell, generally you must have an
+          AUTOEXEC.BAT file, even if it only consists of a single REM
+          statement.  In most cases Windows 95/98 will not load the
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 45
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+          primary shell if it cannot find an AUTOEXEC.BAT file in the
+          root directory of your boot drive.
+
+          Installing 4DOS Under Windows 95/98/ME
+
+          The 4DOS installation program will install and configure
+          4DOS correctly for Windows 95, 98, and ME.  If you are
+          installing 4DOS manually, follow the instructions under
+          Manual Installation on page 38.
+
+          If you reinstall Windows, your SHELL= line will be removed
+          from CONFIG.SYS by the Windows installation process.  To
+          correct this, simply boot the new version and use Notepad or
+          another ASCII editor to put the SHELL= line back in
+          CONFIG.SYS as described in the manual installation
+          instructions on page 38, then restart Windows.
+
+          If you load Windows 95/98 in "safe mode" your startup
+          files (CONFIG.SYS and AUTOEXEC.BAT) are ignored, and 4DOS
+          will not be loaded as the primary shell.  When you start
+          Windows in "safe mode" use caution if you load 4DOS after
+          the GUI starts.  DOS applications sometimes do not work
+          properly in "safe mode."
+
+          For information on desktop shortcuts and registry extensions
+          for 4DOS under Windows 95/98/ME, see page 41.
+
+          Installing the KSTACK Program in Windows 95/98
+
+          If you want to load KSTACK.COM (required for the KEYSTACK
+          command) it should be loaded separately for each 4DOS
+          session in Windows 95 and Windows 98.  To do so, include the
+          KSTACK command as the last item on the startup command line
+          when you set up the corresponding shortcut(s).  For example,
+          the command line for your shortcut might read:
+
+               c:\4dos700\4dos.com c:\4dos700\kstack.com
+
+          This will load KSTACK when 4DOS starts, then display a
+          prompt.
+
+          If you install KSTACK in AUTOEXEC.BAT, it may not work
+          properly when multiple 4DOS windows are open, as stacked
+          keystrokes may "bleed through" from one window to another.
+
+          You can also address this issue by loading KSTACK in 4START
+          (see page 35), with an IF command to make sure it is not
+          loaded from AUTOEXEC.BAT in the primary shell.  To do so,
+          use a line like this in 4START:
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 46
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+               if %_shell ne 0 c:\4dos700\kstack.com
+
+     Using 4DOS on a Network
+
+          This section will give you some tips on using 4DOS on a
+          network, and on the proper locations for 4DOS files on a
+          network.  For additional details, and any additional
+          information about compatibility with your particular
+          network, see the Compatibility section in the online help.
+
+          In general, you'll find that you can load and run your
+          network software normally under 4DOS.  Network drives will
+          be accessible as normal drives once the network is loaded,
+          and files on the network will be accessible just as if they
+          were on a local hard disk.
+
+          Some networks support file and directory names beginning
+          with a double backslash [\\], also called "UNC" names, or
+          with a server name followed by a colon, to identify files by
+          their location on the network.  4DOS detects such names and
+          passes them through to the network unaltered, allowing the
+          network software to process them.
+
+          Some networks support server disk partitions which exceed
+          the standard DOS 2 GB partition size limit, but don't
+          provide DOS applications with access to information about
+          the drive size.  On these drives, 4DOS may not be able to
+          return proper free space or total space figures because the
+          drive size information returned by DOS is not accurate.  If
+          you have such a drive you may need to use a network or
+          server utility to obtain accurate partition size and free
+          space information.
+
+          If you need to boot a diskless workstation from a network
+          drive, see the Novell Netware topic under Software in the
+          Compatibility section of the online help.  The techniques
+          described there will allow you to set your system up under
+          Netware to avoid accesses to the boot drive once 4DOS is
+          running, and can generally be used for other networks as
+          well.
+
+          4DOS and Novell Netware
+
+          4DOS includes a special 4DOS.INI directive for Netware
+          called NetwareNames. You must set NetwareNames = Yes on
+          systems which load Netware, in order to avoid problems with
+          destroyed environment variables during LOGIN.  See
+          Compatibility in the online help for more information.
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 47
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+          4DOS can also be set up to run on Novell Netware diskless
+          workstations which boot from the server.  To do so, you must
+          make several changes to 4DOS.INI and your other startup
+          files; see the Compatibility section of the online help for
+          complete details.
+
+     Uninstalling 4DOS Manually
+
+          For automated uninstall instructions, see page 24.
+
+          The steps required to remove 4DOS from your system manually
+          depend on the operating system you are using:
+
+               * If you are running 4DOS under Windows 95/98/ME, and
+                 you installed the 4DOS shortcuts or registry
+                 extensions from a downloaded .INF file, remove them
+                 as described in the file.
+
+               * Next, delete any remaining Windows desktop objects
+                 or Start menu entries that refer directly to 4DOS.
+
+               * Find the location of COMMAND.COM on your disk (for
+                 example, in the root directory, or the DOS
+                 directory).  Then use your editor to edit the
+                 CONFIG.SYS file in the root directory of the boot
+                 drive.  (If you are running DOS 5 or below, before
+                 modifying the CONFIG.SYS file be sure you have a
+                 bootable floppy disk as described on page 37).
+
+                 Look for the line which begins with SHELL=, and
+                 either delete it, or insert the characters "REM "
+                 at the beginning of the line.  Next, add a new line
+                 like this:
+
+                      SHELL=d:\path\COMMAND.COM d:\path /P
+
+                 where "d:\path" is the drive and directory for
+                 COMMAND.COM (this same directory name is repeated
+                 after the full name of COMMAND.COM and before the
+                 /P).  If you were previously running COMMAND.COM
+                 with a /E:nnnn switch to set the size of your
+                 environment, add it to this line as well.
+
+               * After CONFIG.SYS has been modified, edit your
+                 AUTOEXEC.BAT file to remove any changes made to
+                 accommodate 4DOS.  Look for a command beginning SET
+                 COMSPEC= and another which loads the 4DOS file
+                 KSTACK.COM.  The SET COMSPEC command will not be
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 48
+                               Chapter 5 / 4DOS Configuration and Notes
+
+
+
+                 present on most systems.  If it's there, remove it,
+                 or change it to read:
+
+                      SET COMSPEC=d:\path\COMMAND.COM
+
+                 where "d:\path" is replaced by the correct drive
+                 and directory for COMMAND.COM.  Then add "REM " in
+                 front of  the KSTACK.COM command to convert it to a
+                 comment, or delete the line entirely.
+
+          Now reboot your system, and you should be back up and
+          running under COMMAND.COM.  You can check the 4DOS directory
+          for any files you placed there that you want to save.  Then
+          delete the 4DOS files and remove the 4DOS directory if you
+          wish to do so.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 49
+                                Chapter 6 / 4NT Configuration and Notes
+
+
+
+
+     Chapter 6 / 4NT Configuration and Notes
+
+     This chapter covers manual installation and configuration of 4NT.
+     For information on startup options for 4DOS and 4NT under various
+     operating systems see chapter 4 on page 29.   For 4DOS
+     configuration see chapter 5 on page 37.  For information on Take
+     Command, see chapter 7 on page 57.
+
+     4NT works well with virtually all Intel-based computers that run
+     Windows NT 4.0 or Windows 2000.  This chapter provides the basic
+     information you need to run 4NT.  If you need more detailed
+     technical information or troubleshooting assistance on any of
+     these topics, consult the Troubleshooting, Service, and Support
+     topic in the 4NT online help.
+
+     If you used the automated installation program to install 4NT,
+     you can safely skip this chapter, and return to it only if you
+     have difficulty with the program or want to fine-tune it meet
+     your needs.
+
+     4NT Installation Notes
+
+          If you regularly run 16-bit character-mode applications
+          which "shell to DOS" (i.e., start a secondary command
+          prompt session), including 16-bit MAKE utilities, we
+          recommend that you enable the NTCMDPROMPT directive in the
+          \WINNT\SYSTEM32\CONFIG.NT file.  This is a Windows NT
+          feature which affects operation of shells started from 16-
+          bit programs, and is not specifically related to 4NT.
+          However, in our experience using it improves operation, and
+          prevents certain problems with secondary shells (e.g.,
+          requiring you to type an extra EXIT command to return to the
+          parent application).  NTCMDPROMPT may or may not work well
+          in your particular situation, and experimentation is usually
+          required to determine the best configuration.  For further
+          documentation on NTCMDPROMPT read the comments provided by
+          Microsoft in CONFIG.NT.
+
+     Using 4NT Under Windows 95, 98, and ME
+
+          4NT is designed principally to run under Windows NT and
+          Windows 2000.  However it is also supported under Windows
+          95, 98, and ME.  This section explains the reasons for using
+          4NT in this environment, as compared to our standard Windows
+          95/98/ME product, 4DOS.  For additional details and
+          discussion of any minor issues that may arise with 4NT under
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 50
+                                Chapter 6 / 4NT Configuration and Notes
+
+
+
+          Windows 95/98/ME, see the Setup and Troubleshooting section
+          of 4NT's online help.
+
+          The following list shows the major areas where 4DOS and 4NT
+          differ in their behavior when used under Windows 95, 98, and
+          ME
+
+               System startup:  Under Windows 95 and 98 4DOS is
+               normally loaded as the DOS primary shell in CONFIG.SYS,
+               which means that its capabilities are available when
+               booting to a command prompt (without loading Windows).
+               4NT cannot be loaded in this way and its capabilities
+               will not be available when booting to a command prompt,
+               as it requires Windows to be loaded before it can
+               function.  This difference is immaterial under Windows
+               ME, where a command prompt boot option is not
+               available.
+
+               Command line length:  4DOS accepts commands up to 511
+               characters long.  4NT accepts typed commands up to 2047
+               characters long, and can allow these lines to expand to
+               up to 4095 characters during processing.  4NT's support
+               for much longer command lines may be important for
+               software developers who must use long commands to set
+               compiler environment variables, and for other similar
+               tasks.
+
+               Performance:  4DOS can produce very fast text output
+               under Windows 95, 98, and ME.  Text output from 4NT is
+               often somewhat slower -- for example, under Windows
+               95/98/ME the 4DOS DIR command will probably display a
+               directory more quickly than 4NT's DIR.  This is due to
+               the way Windows is designed; Windows 95, 98, and ME
+               produce faster output from 16-bit text mode programs
+               like 4DOS, while Windows NT and 2000 generally produce
+               faster output from 32-bit programs like 4NT.  This
+               effect is less noticeable on faster systems, but you
+               may want to check the speed on your system before
+               deciding to use 4NT under Windows 95, 98, or ME.
+
+               Features:  While 4DOS and 4NT are highly compatible,
+               they do not have the exact same feature set.  4NT
+               offers certain features not available in 4DOS (e.g. FTP
+               support, the MSGBOX and QUERYBOX commands).  4DOS also
+               offers some features not available in 4NT (e.g. the
+               LOCK command), and is also somewhat better integrated
+               with Windows 9x and ME.
+
+               Windows Bugs:  The portion of Windows 95 and 98 which
+               provides support to 32-bit console applications like
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 51
+                                Chapter 6 / 4NT Configuration and Notes
+
+
+
+               4NT has a number of minor but annoying long-standing
+               bugs that do not affect 4DOS, which is a 16-bit
+               application.  For example, the window close button does
+               not work in 4NT, only a limited range of text window
+               dimensions can be supported for 32-bit programs, etc.
+               These problems are less prevalent in Windows ME.
+
+          In sum, if you need 4NT's features, such as long command
+          lines, FTP support, and additional commands, it can be an
+          excellent choice under Windows 95, 98, and ME as long as you
+          are willing to put up with slightly slower output and a few
+          minor problems of integration with the Windows GUI.  If you
+          don't need these features, it's important to you to be able
+          to boot to a JP Software command prompt, or you want the
+          fastest text output and the best Windows integration, use
+          4DOS.
+
+          Many customers find that the best solution is the one we use
+          at JP Software, which is to install both products, using one
+          most of the time and the other where its benefits are
+          particularly important.  (If you choose to install both we
+          generally offer a significant discount for purchasing or
+          upgrading the second product.)
+
+     Manual Installation of 4NT
+
+          This section is for advanced users and assumes you are
+          generally familiar with ASCII editors, batch files, and
+          other similar concepts.  In most cases you can select the
+          installation options you need using the automated
+          installation program, and manual installation is not
+          necessary.
+
+          In order to install 4NT manually, you must extract or copy
+          the necessary files, "brand" 4NT if necessary, and then
+          create shortcuts to start the program on your system.
+
+          In order to install 4NT manually, you must extract or copy
+          the necessary files, brand 4NT if necessary, create or
+          modify any configuration files you need, and then create the
+          necessary commands to start the program on your system.
+
+          Extracting or Copying the Program Files
+
+          When you extract or copy the 4NT files, be sure to place
+          them in their own directory, rather than using the same
+          directory as a previous version of the program, a directory
+          used by other JP Software products, or a directory used by
+          other software.
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 52
+                                Chapter 6 / 4NT Configuration and Notes
+
+
+
+          We strongly recommend that you place all of the 4NT files in
+          the same directory.  See 4NT Files and Directories on page
+          53 for some important considerations if you choose not to
+          follow this recommendation.
+
+          The method used to extract or copy the files depends on how
+          you obtained your copy of the program.  The various methods
+          are described on page 23.
+
+          "Branding" 4NT
+
+          (If you are not familiar with branding, refer to the general
+          information on page 20 before continuing with this section.)
+
+          If you performed an automated installation the installation
+          software will normally run the BR4NT program to install your
+          name, serial number, and validation code in 4NT.  If you
+          need to brand 4NT manually, go to a 4NT or CMD.EXE prompt,
+          change to the directory where 4NT is stored, and enter the
+          command:
+
+               [c:\4nt400] br4nt
+
+          Follow the instructions displayed by BR4NT to enter your
+          name, serial number, and validation code.  All information
+          must be entered exactly as shown on your original brand
+          card, label, or electronically delivered branding
+          information; you cannot change spelling, capitalization, or
+          punctuation.
+
+          4NT Files and Directories
+
+          We strongly recommend that you place all 4NT files in the
+          same directory.  If you do not do so, you will probably have
+          to explicitly set the locations of 4NT files to avoid
+          problems.
+
+          If you do wish to move files to different directories, the
+          following information will help you set up the programs
+          correctly:
+
+               4NT.EXE is the 4NT program file.  It must be in the
+               directory specified in the Command Line field of every
+               4NT object.
+
+               4NT.HLP contains the text for the 4NT help system.
+               4NT.HLP must be in the same directory as 4NT.EXE.  The
+               help table of contents file, 4NT.CNT, must be in the
+               same directory as well.
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 53
+                                Chapter 6 / 4NT Configuration and Notes
+
+
+
+               KEYSTACK.EXE is a small utility that is used by the
+               KESYTACK command to send keystrokes to application
+               programs.  For the KEYSTACK command to work this file
+               must be in the same directory as 4NT.EXE, or in a
+               directory included in your PATH.
+
+               SHRALIAS.EXE is a small utility that is used by the
+               SHRALIAS command to save the shared alias and history
+               lists between 4NT sessions.  For the SHRALIAS command
+               to work this file must be in the same directory as
+               4NT.EXE, or in a directory included in your PATH.
+
+          Creating 4NT Shortcuts and Registry Extensions
+
+          When 4NT is installed using automated installation software
+          it normally creates Start menu entries and registry
+          extensions as described on page 22.  The installation
+          software can also create a desktop shortcut for 4NT.
+
+          If you need to create a Start menu entries or desktop
+          shortcuts manually -- for example, if the JP Software group
+          on the Start menu is inadvertently damaged or deleted --
+          you can use the Windows Explorer's facilities to do so:
+
+               * To create additional shortcuts elsewhere on the
+                 Start menu, or modify the Programs entries, click
+                 mouse button 2 in an open area of the Task Bar, then
+                 select Properties on the menu.  Select the Advanced
+                 tab and modify or adjust the menus as required.
+
+               * To create one or more shortcuts on the desktop to
+                 run 4NT, click with mouse button 2 in any open area
+                 of the desktop.  On the popup menu click New, then
+                 Shortcut.  Fill in the drive and path as
+                 d:\path\4NT.EXE (adjust the drive and path for your
+                 system).
+
+          You can also put command-line switches, a command, or the
+          name of a batch file at the end of the command line for any
+          shortcut.  This allows you to run specific commands or set
+          configuration options when you start 4NT from that shortcut.
+          For details on the command line options available, see
+          Chapter 4, and Starting 4NT under Setup and Troubleshooting
+          in the online help.
+
+          For more information on creating and configuring shortcuts
+          or modifying the Start Menu, see your Windows documentation.
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 54
+                                Chapter 6 / 4NT Configuration and Notes
+
+
+
+          If you want to make these changes as a group, or reinstall
+          shortcuts and registry extensions without reinstalling 4NT,
+          see the support area of our web site for a set of registry
+          extension (.INF) files you can download and install.  These
+          files create shortcuts and registry changes similar to those
+          made by the installation software.  The comments within each
+          file explain how to install and uninstall it.
+
+     The 4NT Help System
+
+          When you start the 4NT help system, 4NT opens a new window
+          to run the standard Windows NT help program.  The help
+          program displays the help text from the file 4NT.HLP, and
+          lets you browse through it.
+
+          4NT's help text does not cover the Windows NT external
+          commands because they are included in Windows NT's built-in
+          Command Reference.
+
+          If you start the help system from a 4NT window on the
+          Windows NT desktop, you will be returned to that window when
+          you close the help program.  However, if you have switched
+          the window to full-screen mode before invoking the help
+          system, you must return to 4NT manually (using standard
+          Windows NT methods for switching between windows).  This is
+          due to the design of Windows NT Help and is not a limitation
+          of 4NT.
+
+          You can also keep the help window on the screen and return
+          to the 4NT window, switching between the two windows as
+          needed.  This may be useful when you are writing a batch
+          file, working on a complex command, or experimenting with
+          4NT.
+
+          In order for the 4NT help system to work properly, the help
+          text file, 4NT.HLP, must be in the same directory as
+          4NT.EXE.
+
+          The 4NT installation program sets up a separate object for
+          the help system so that you can load the help file directly.
+          To create a similar object manually, create an object with a
+          command line like this:
+
+               WINHLP32 C:\4NT400\4NT.HLP
+
+          (Change the drive and path to reflect the location of
+          4NT.HLP on your system.)
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 55
+                                Chapter 6 / 4NT Configuration and Notes
+
+
+
+          4NT also supports the /? switch to display "quick help"
+          for any command.
+
+     Uninstalling 4NT Manually
+
+          For automated uninstall instructions, see page 24.
+
+          To remove 4NT manually perform the following steps:
+
+               * If you installed the 4NT shortcuts or registry
+                 extensions from a downloaded .INF file, remove them
+                 as described in the file.
+
+               * Delete any remaining Windows desktop objects or
+                 Start menu entries that refer directly to 4NT.
+
+               * Check the 4NT directory for any files you placed
+                 there that you want to save.  Then delete the 4NT
+                 files and directory from your hard drive.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 56
+                  Chapter 7 / Take Command/32 Startup and Configuration
+
+
+
+
+     Chapter 7 / Take Command/32 Startup and Configuration
+
+     This chapter covers startup options, manual installation, and
+     configuration of Take Command.  For information on 4DOS and 4NT
+     see chapters 4 - 6.
+
+     This chapter provides basic information about Take Command/32.
+     If you need more detailed technical information or
+     troubleshooting assistance on any of these topics, consult the
+     Troubleshooting, Service, and Support topic in the online help.
+
+     Once you have Take Command installed on your computer, the
+     program is ready to run.  However, you can configure Take Command
+     in various ways to suit your needs and preferences.  Most of the
+     configuration or behavior of Take Command is controlled by
+     aliases you create (explained in the online help and in Chapter 5
+     of the Reference Manual) and by the .INI file (explained briefly
+     below, and in detail in the online help and Chapter 6 of the
+     Reference Manual).
+
+     A few configuration options can also be set on the startup
+     command-line, which is explained here.  If Take Command works the
+     way you want it to after installation, you can skip this section.
+     You may, however, want to skim this material to see what options
+     are available.
+
+     Starting Take Command
+
+          You will typically start Take Command from a Windows desktop
+          shortcut or from the Programs section of the Start menu.
+          The automated installation software will create a JP
+          Software entry on the Start Menu, and objects within it to
+          start Take Command and its online help.  A desktop shortcut
+          for Take Command can be created during installation as well.
+
+          Usually these are sufficient, but if you prefer you can
+          create multiple shortcuts to start Take Command with
+          different startup commands or options, or to run different
+          batch files or commands.  You can use these items to run
+          commonly-used commands and batch files directly from the
+          desktop.
+
+     Command Line Options
+
+          Some of the options that Take Command recognizes are
+          required in certain circumstances; others are available if
+          you want finer control over the way the program starts.
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 57
+                  Chapter 7 / Take Command/32 Startup and Configuration
+
+
+
+          The shortcut command that starts Take Command will typically
+          include the program name with drive and path then include
+          any switches for the program, for example:
+
+               c:\tcmd300\tcmd32.exe
+
+          Although the startup command line is usually very simple,
+          you can add a number of options if you need to customize the
+          way Take Command starts.  The complete syntax for the
+          startup command line is:
+
+               d:\path\program [d:\path] [@d:\path\inifile]
+               [//iniline] [/L /LA /LD /LH /T:bf] [[/C] command]
+
+          Do not include the square brackets shown in the command line
+          above.  They are there to indicate that the items within the
+          brackets are optional.
+
+          If you include any of the options below, you should use them
+          in the order that they are described.  If you do not, they
+          may not operate properly.
+
+          The following items can be included on the command line:
+
+               * d:\path\program:  The path and name of the
+                 executable program file (TCMD32.EXE).  It is
+                 required to start Take Command.
+
+               * d:\path:  This is the second d:\path in the command
+                 line above.  It sets the drive and directory where
+                 the program is stored, called the COMSPEC path.
+                 This option is included for compatibility with
+                 character-mode command processors, but is not needed
+                 in normal use.  Take Command can find its own
+                 directory without a COMSPEC path.
+
+               * @d:\path\inifile:  This option sets the path and
+                 name of the .INI file.  You don't need this option
+                 if your .INI file has the default name (TCMD32.INI)
+                 and it is either in the same directory as the
+                 executable program, or in the Windows directory.
+                 This option is most useful if you want to start the
+                 program with a specific and unique .INI file.
+
+               * //iniline:  This option tells Take Command to treat
+                 the text appearing between the // and the next space
+                 or tab as an .INI directive.  The directive should
+                 be in the same format as a line in the .INI file,
+                 but may not contain spaces, tabs, or comments.
+                 Directives on the command line override any
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 58
+                  Chapter 7 / Take Command/32 Startup and Configuration
+
+
+
+                 corresponding directive in the .INI file.  This
+                 option may be repeated.  It is a convenient way to
+                 place a few simple directives on the startup line
+                 without having to modify or create a new .INI file.
+
+               * /L, /LA, /LD, and /LH:  These options force Take
+                 Command to use a local alias, directory history,
+                 and / or command history list.  They can be used to
+                 override any LocalAlias=No, LocalHistory=No, or
+                 LocalDirHistory=No settings in the .INI file.  This
+                 allows you to use global lists as the default, but
+                 start a specific shell or session with local aliases
+                 or histories.  See the online help or the Reference
+                 Manual for details on local and global aliases and
+                 histories.  /LA forces local aliases, /LD forces
+                 local directory history, /LH forces local command
+                 history, and /L forces all three.
+
+               * /T:bf:  This option sets the foreground and
+                 background colors in Take Command/32's command
+                 window.  Both b and f are hexadecimal digits; b
+                 specifies the background color and f specifies the
+                 foreground color. This option is included only for
+                 compatibility with Windows NT's CMD.EXE; in most
+                 cases you should set default colors with the
+                 StdColors directive in TCMD32.INI, or the
+                 corresponding Output Colors option on the Display
+                 page of the option dialogs (see page 60).
+
+               * [/C ] command:  This option tells Take Command to
+                 run a specific command after starting.  The command
+                 will be run after TCSTART (see page 60), and before
+                 the prompt is displayed.  The command can be any
+                 valid alias, internal or external command, or batch
+                 file.  All other startup options must be placed
+                 before the command, because Take Command will treat
+                 characters after the command as part of the command
+                 and not as additional startup options.
+
+                 When the command is preceded by a /C, Take Command
+                 will execute the command and then exit and return to
+                 the parent program or the desktop without displaying
+                 a prompt.
+
+          For example, this command line will start Take Command/32,
+          execute the TCSTART file (if any), execute START.BTM, and
+          then display the prompt:
+
+               c:\tcmd300\tcmd32.exe c:\tcmd300\start.btm
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 59
+                  Chapter 7 / Take Command/32 Startup and Configuration
+
+
+
+          This command line will start Take Command/32, select local
+          aliases, execute any TCSTART file you have created, execute
+          the file PROCESS.BTM, and then exit when PROCESS.BTM is
+          done.  The prompt will not be displayed by this session:
+
+               c:\tcmd300\tcmd32.exe /la /c c:\tcmd300\process.btm
+
+     Creating or Modifying Startup Files
+
+          Take Command uses two files to control the way it starts:  a
+          file of configuration information called the .INI file
+          (TCMD32.INI), and a startup batch file called TCSTART
+          (depending on your operating system, TCSTART may have the
+          extension .BTM, .BAT, or .CMD).
+
+          The .INI file is required, and is normally created during
+          installation, or the first time you run Take Command.  The
+          .INI file should be placed in the same directory as the
+          other files for Take Command/32.
+
+          You can add additional information to the .INI file manually
+          with an ASCII editor.  Many of the .INI options can also be
+          set directly from within Take Command using the
+          configuration dialogs which are accessible from the
+          Configure Take Command selection on the Options menu, or
+          with the OPTION command.  There are several pages of options
+          within the dialog.
+
+          The .INI file is divided into sections.  Each section begins
+          with a section name in square brackets, for example [Fonts].
+          The options you can set are all in the [TakeCommand]
+          section, which is normally the first one in the file.  Take
+          Command maintains all other sections of the file itself; you
+          should not modify them unless you are instructed to do so by
+          our support personnel.
+
+          The TCSTART file is optional.  It is executed each time Take
+          Command starts, and gives you a convenient way to load
+          aliases and environment variables, and otherwise initialize
+          Take Command.  TCSTART is normally placed in the same
+          directory as the other product files, but this may vary if
+          you use the same TCSTART file for more than one of our
+          products.
+
+          For complete details on startup files, on the option dialogs
+          and OPTION command, and on the TCEXIT file (executed when
+          the command processor exits), see the online help or the
+          Reference Manual.
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 60
+                  Chapter 7 / Take Command/32 Startup and Configuration
+
+
+
+          If you are upgrading from a previous version of Take Command
+          you may have a .INI file or a TCSTART (or TCEXIT) file in
+          the previous version's directory.  To use these files with
+          your new version, copy them to the new directory, and then
+          update any paths which point to the old program directory.
+
+     Exit Codes
+
+          If you start Take Command from another program (e.g. to run
+          a batch file or internal command), it will return a numeric
+          code to the other program when it is finished.  This code is
+          usually used to indicate whether the operation performed was
+          successful or not, with 0 often indicating success and a
+          non-zero value indicating a failure or other numeric result.
+
+          Take Command's exit code is normally the numeric exit code
+          from the last internal or external command.  However, for
+          compatibility reasons and to avoid conflicts with external
+          commands, only some internal commands set the exit code;
+          others leave it unchanged from the most recent external
+          command.
+
+          If you enter an unknown command the exit code will be 2,
+          which is the internal Take Command unknown command error
+          number.
+
+          You can use the EXIT n command to explicitly set the exit
+          code.  If you do, this will override the rules above, and
+          set the return code to the value in your EXIT command.
+
+          The normal rules described above may not return a code that
+          indicates the success or failure of the specific operation
+          that concerns you.  Therefore, if you need to rely on the
+          exit code from Take Command, we recommend that you use a
+          batch file or alias to create the exit code you want, and
+          then set the code explicitly with EXIT n.
+
+     Manual Installation of Take Command/32
+
+          This section is for advanced users, and assumes you are
+          generally familiar with the Windows desktop shell, the
+          Windows directory, and other similar topics.  In most cases
+          you can select the installation options you need using the
+          automated installation program, and manual installation is
+          not necessary.
+
+          In order to install Take Command manually, you must extract
+          or copy the necessary files, "brand" Take Command if
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 61
+                  Chapter 7 / Take Command/32 Startup and Configuration
+
+
+
+          necessary, modify configuration files as required, and then
+          create shortcuts to start the program on your system.
+
+          Extracting or Copying the Program Files
+
+          When you extract or copy the Take Command/32 files, be sure
+          to place them in their own directory, rather than using the
+          same directory as a previous version of the program, a
+          directory used by other JP Software products, or a directory
+          used by other software.
+
+          We strongly recommend that you place all of the Take
+          Command/32 files in the same directory.  See Take Command/32
+          Files and Directories on page 62 for some important
+          considerations if you choose not to follow this
+          recommendation.
+
+          The method used to extract or copy the files depends on how
+          you obtained your copy of the program.  The various methods
+          are described on page 23.
+
+          "Branding" Take Command/32
+
+          (If you are not familiar with branding, refer to the general
+          information on page 20 before continuing with this section.)
+
+          If you performed an automated installation the installation
+          software will normally run the BRTC32 program to install
+          your name, serial number, and validation code in Take
+          Command/32.  If you need to brand Take Command/32 manually,
+          go to a Take Command/32 or CMD.EXE prompt, change to the
+          directory where Take Command/32 is stored, and enter the
+          command:
+
+               [c:\tc32300] brtc32
+
+          Follow the instructions displayed by BRTC32 to enter your
+          name, serial number, and validation code.  All information
+          must be entered exactly as shown on your original brand
+          card, label, or electronically delivered branding
+          information; you cannot change spelling, capitalization, or
+          punctuation.
+
+          Take Command/32 Files and Directories
+
+          We strongly recommend that you place all Take Command/32
+          files in the same directory.  If you do not do so, you will
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 62
+                  Chapter 7 / Take Command/32 Startup and Configuration
+
+
+
+          probably have to explicitly set the locations of some files
+          to avoid problems.
+
+          If you do wish to move files to different directories, the
+          following information will help you set up the programs
+          correctly:
+
+               TCMD32.EXE is the Take Command/32 program file.  It
+               must be in the directory specified in the Command Line
+               field of every shortcut that starts Take Command/32 .
+
+               TCMD32.HLP contains the text for the Take Command/32
+               help system.  It must be in the same directory as
+               TCMD32.EXE.  The help table of contents file,
+               TCMD32.CNT, must be in the same directory as well.
+
+               SHRALIAS.EXE is a utility that saves the shared alias
+               and history list between Take Command sessions.  It is
+               used by the internal command SHRALIAS.  This file
+               should be stored in the Take Command directory, or in a
+               directory included in your PATH.  If it is not, the
+               SHRALIAS command will not work.
+
+          Creating Take Command/32 Shortcuts and Registry Extensions
+
+          When Take Command/32 is installed using automated
+          installation software it normally creates Start menu entries
+          and registry extensions as described on page 22.  The
+          installation software can also create a desktop shortcut for
+          Take Command/32.
+
+          If you need to create a Start menu entries or desktop
+          shortcuts manually -- for example, if the JP Software group
+          on the Start menu is inadvertently damaged or deleted --
+          you can use the Windows Explorer's facilities to do so:
+
+               * To create additional shortcuts elsewhere on the
+                 Start menu, or modify the Programs entries, click
+                 mouse button 2 in an open area of the Task Bar, then
+                 select Properties on the menu.  Select the Advanced
+                 tab and modify or adjust the menus as required.
+
+               * To create one or more shortcuts on the desktop to
+                 run Take Command/32, click with mouse button 2 in
+                 any open area of the desktop.  On the popup menu
+                 click New, then Shortcut.  Fill in the drive and
+                 path as d:\path\TCMD32.EXE (adjust the drive and
+                 path for your system).
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 63
+                  Chapter 7 / Take Command/32 Startup and Configuration
+
+
+
+          You can also put command-line switches, a command, or the
+          name of a batch file at the end of the command line for any
+          shortcut.  This allows you to run specific commands or set
+          configuration options when you start Take Command/32 from
+          that shortcut.  For details on the command line options
+          available, see Chapter 4, and Starting Take Command under
+          Setup and Troubleshooting in the online help.
+
+          For more information on creating and configuring shortcuts
+          or modifying the Start Menu, see your Windows documentation.
+
+          If you want to make these changes as a group, or reinstall
+          shortcuts and registry extensions without reinstalling Take
+          Command/32, see the support area of our web site for a set
+          of registry extension (.INF) files you can download and
+          install.  These files create shortcuts and registry changes
+          similar to those made by the installation software.  The
+          comments within each file explain how to install and
+          uninstall it.
+
+     Character-Mode Applications
+
+          When you start a DOS program or a 32-bit Windows character-
+          mode program under Take Command/32, it runs in a special
+          "console session."  The console session displays a
+          separate window without a standard menu bar or other Windows
+          features.
+
+          This section gives a brief overview of how the console
+          window works, and how you can run character-mode
+          applications from Take Command/32.  For complete details see
+          Console Applications and the Console Window in the online
+          help (under "Using the Take Command Interface").
+
+          The console session window is connected to Take Command/32,
+          and is created when Take Command starts.  You can view it at
+          any time with the Alt-V key or the View Console selection on
+          the Apps menu.
+
+          When you start a DOS or character-mode application from Take
+          Command/32 it is run in the console session.  The console
+          window automatically becomes visible when the application
+          starts, and is normally hidden when the application exits.
+
+          If you run a DOS or character-mode program which does not
+          exit immediately (for example, a DOS word processor or
+          editor) you will be able to work in the console session, and
+          return automatically to Take Command when you exit the
+          application.  If you run a DOS or character-mode application
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 64
+                  Chapter 7 / Take Command/32 Startup and Configuration
+
+
+
+          from Take Command and the application exits quickly, without
+          waiting for any input (for example, a utility like PKUNZIP),
+          you may have to use Alt-V to return to the console window
+          and view the output.
+
+          Caveman
+
+          To make it easier to use character-mode applications from
+          within Windows, Take Command/32 includes a technology called
+          "Caveman."  Caveman allows DOS and 32-bit Windows
+          character-mode programs to run directly within the Take
+          Command window, and eliminates the need to switch to a
+          separate console window.
+
+          When Caveman is running in Take Command/32, it continually
+          scans the console window and updates the Take Command window
+          with any changes it finds.  It also sends keystrokes from
+          the Take Command window to the console window.  Caveman
+          makes a character mode program appear to run in the Take
+          Command window even though it is, in reality, running in a
+          console session window.
+
+          For complete details on Caveman see the Console Applications
+          and the Console Window and Caveman topics in the online help
+          (both accessible under "Using the Take Command
+          Interface").  Due to limitations in the way character-mode
+          programs can operate under Windows, the techniques used by
+          Caveman do not work well with all programs.  The online help
+          explains how to enable Caveman, and how to set up your
+          system to make the best use of Take Command/32 and Caveman.
+
+     Uninstalling Take Command/32 Manually
+
+          For automated uninstall instructions, see page 24.
+
+          To uninstall Take Command manually, follow these steps:
+
+               * If you installed the Take Command/32 shortcuts or
+                 registry extensions from a downloaded .INF file,
+                 remove them as described in the file.
+
+               * Delete any remaining Windows desktop objects or
+                 Start menu entries that refer directly to Take
+                 Command/32.
+
+               * Check the Take Command/32 directory for any files
+                 you placed there that you want to save.  Then delete
+                 the Take Command/32 files and directory from your
+                 hard drive.
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 65
+                                                                  Index
+
+
+
+     Index                              AUTOEXEC.BAT
+                                            and installation, 42
+                                            and startup command, 36
+     4                                      disabling, 34
+                                            running, 35
+     4DOS                                   single-step option, 36
+         branding, 41                       starting KSTACK.COM, 42
+         compatibility with
+             memory, 46                 B
+             older DOS versions, 40
+             operating system           Batch files, 19
+               versions, 40                                                    technical support for, 6
+             video display, 47          Branding, 23
+         configuration, 40                  4DOS, 41
+         installation                       4NT, 57
+             directory, 41, 44              of diskette or CD-ROM
+             manual, 41                       copies, 24
+             uninstalling, 51               of downloaded minor
+     4DOS.HLP, 44, 46                         upgrades, 24
+     4EXIT, 37                              of electronic purchases,
+     4HELP.EXE, 44, 46                        23
+     4NT                                    Take Command/32, 66
+         and operating system               upgrades, 24
+           versions, 54
+         branding, 57                   C
+         configuration, 54
+         installation                   Caveman, 69
+             directory, 57              Clipboard, 16
+             manual, 56                 Colors
+             uninstalling, 60               problems with, in 4DOS, 47
+         under Microsoft Windows            setting, in 4NT, 36
+           95, 98, and ME, 54           Colors, setting, in Take
+     4NT.HLP, 58, 59                      Command/32, 63
+     4START, 37                         Command history, local and
+         and startup command, 36          global, 35, 63
+         single-step option, 36         Command line enhancements, 13
+                                        Command window, 16
+     A                                  Commands, 10
+                                        Compatibility (4DOS)
+     Alias list, local and global,          and DOS, 48
+       47                                   and Microsoft Windows
+     Aliases, 17                              95/98/ME, 49
+         local and global, 35, 63           and networks, 50
+         technical support for, 6           and Novell Netware, 51
+     ANSI driver, and 4DOS, 47          COMSPEC
+     APPEND command, and 4DOS, 48           environment variable
+     Applications, character-mode               setting automatically,
+       and DOS, under Take                        33
+       Command/32, 68                           setting manually, 43
+     Apps menu, 16                          path, 33, 42
+                                        COMSPEC path, 62
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 66
+                                                                  Index
+
+
+
+     CONFIG.NT, 54                      Enhancements (continued)
+     CONFIG.SYS                             configuration, 17
+         and installation, 42           Environment, memory for, 34
+         DOS configuration              Exit codes
+           utilities, 48                    4DOS and 4NT, 38
+     Configuration, 17, 31                  Take Command, 65
+         .INI file, 37, 64
+         4DOS, 40                       F
+         4NT, 54
+         4START and 4EXIT, 37           FASTOPEN, and 4DOS, 48
+         dialogs, 64                    File associations, 17
+         OPTION command, 37, 64         File menu, 16
+         primary and secondary          File names, on networks, and
+           shells, 31                     4DOS, 51
+         starting Take Command, 61      FORMAT /S command, and 4DOS,
+         startup options, 32, 62          48
+         Take Command/32, 61            FTP site, JP Software, 4
+         TCSTART and TCEXIT, 64
+
+     Console session, in Take           H
+       Command/32, 68
+     Contacting JP Software, 3          Hard drives, and 4DOS, 47
+     Critical errors, 34                HELP command, MS-DOS, 48
+     Customer service, 3                Help menu, 16
+                                        Help system, 3, 28
+     D                                      /? option, 28
+                                            4DOS, 46
+     DBLSPACE, and 4DOS, 48                 4NT, 59
+     DDE, 17                                key topics in, 29
+     Directory history list, local          location of files
+       and global, 35, 63                       4DOS, 44
+     Diskless workstations, 51                  4NT, 58
+     Disks                                      Take Command/32, 67
+         drives, and 4DOS, 47           History list, local and
+         free space, and 4DOS, 48         global, 47
+     DOS
+         older versions, and 4DOS,      I
+           40
+         shell, 9                       .INI directives, on startup
+         versions of, 1                   command line, 33, 63
+     DR DOS, and 4DOS, 1, 48            .INI file, 37, 64
+     Drag and Drop, 17                      and manual installation of
+     DRVSPACE, and 4DOS, 48                   4DOS, 43
+                                            location of, 33, 62
+     E                                      sections, 64
+                                        Installation, 21
+     Edit menu, 16                          directory
+     Enhancements                               4DOS, 41, 44
+         aliases and batch files,               4NT, 57
+           17                                   Take Command/32, 66,
+         command line, 13                         67
+         commands, 10
+
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 67
+                                                                  Index
+
+
+     Installation (continued)           Microsoft Windows 95/98/ME
+         extracting individual              and 4DOS, 1, 49
+           files, 25                        and 4DOS primary shell, 49
+         manual                             and 4NT, 1, 54
+             4DOS, 41                       and and Take Command, 1
+             4NT, 56                        and KSTACK.COM, 50
+             Take Command/32, 66            AUTOEXEC.BAT, 49
+         of upgrades, 22                    CONFIG.SYS, 49
+         reversing, 26                      HELP command, 48
+             4DOS, 51                       installing 4DOS, 49
+             4NT, 60                    Microsoft Windows NT/2000
+             Take Command/32, 70            and 4NT, 1
+     InstallPath, 43                        and Take Command, 1
+                                            CONFIG.NT, 54
+     J                                      NTCMDPROMPT, 54
+                                        MOVE command, 4DOS, 48
+     JP Software, contacting, 3         MS-DOS / PC-DOS
+                                            and 4DOS, 1, 48
+                                            APPEND command, 48
+     K                                      FORMAT /S command, 48
+                                            HELP command, 48
+     KSTACK.COM, 42                         version 6.x, 37, 38
+         and Windows 95/98, 50
+                                        N
+     L
+                                        Networks, 50
+     Local and global aliases and           accessing, 15
+       history, 35, 47, 63                  diskless workstations on,
+                                              51
+     M                                      file and directory names
+                                              on, and 4DOS, 51
+     Memory, and 4DOS, 46               Novell DOS, and 4DOS, 1, 48
+     Menu bar, 15                       Novell Netware, 51
+     Microsoft Windows                      diskless workstations on,
+         desktop, changes during              51
+           installation, 24             NTCMDPROMPT, 54
+         registry extensions
+             for 4DOS, 45               O
+             for 4NT, 58
+             for Take Command/32,       OpenDOS, and 4DOS, 1, 48
+               67                       OPTION command, 37, 64
+         registry, changes during       Options menu, 16
+           installation, 24
+         shortcuts                      P
+             for 4DOS, 45
+             for 4NT, 58                Primary shell, 31
+             for Take Command/32,           and Windows 95/98, 49
+               67                       Prompt Solution newsletter, 7
+         versions of, 1
+                                        Q
+
+                                        Quick help, 28
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 68
+                                                                  Index
+
+
+     R                                  TCSTART, 64
+                                            and startup command, 63
+     README.TXT, 3                      Technical support, 4
+     Reference manual, 2                Title bar, 15
+     Registration, 7                    Tool bar, 16
+     Resident portion (of 4DOS), 47     Transient portion (of 4DOS),
+                                          47
+
+     S                                  U
+
+     Scrolling problems, and 4DOS,      Uninstalling
+       47                                   4DOS, 51
+     Secondary shell, 31                    4NT, 60
+         4NT, 54                            automated, 26
+     Service, 3                             Take Command/32, 70
+     Shell                              Upgrades, 7
+         DOS shell, 9                       branding, 24
+         primary, 31                        installing, 22
+         secondary, 31                  Utilities menu, 16
+             4NT, 54
+     SMARTDRV, and 4DOS, 49             V
+     Start menu
+         adding 4DOS, 45                Video display, and 4DOS, 47
+         adding 4NT, 58
+         adding Take Command/32, 67     W
+     Starting Take Command, 61
+     Startup files                      Web site, JP Software, 4
+         4DOS and 4NT, 37
+         Take Command/32, 64
+     Startup options
+         4DOS and 4NT, 32
+         Take Command/32, 62
+     Status bar, 16
+     System files, changes during
+       installation, 24
+
+     T
+
+     Take Command products, 2
+     Take Command/32
+         and character-mode or DOS
+           applications, 68
+         and Windows features, 16
+         branding, 66
+         configuration, 61
+         installation
+             directory, 66, 67
+             manual, 66
+             uninstalling, 70
+         window, 15
+     TCEXIT, 64
+     TCMD32.HLP, 67
+
+
+     Copr. 2001 JP Software Inc.     4DOS, 4NT, TC32 Install Guide / 69

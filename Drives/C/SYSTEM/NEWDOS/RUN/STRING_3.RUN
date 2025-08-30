@@ -1,0 +1,43 @@
+PROGRAM StringOperationen;
+{Diese Beispielprogramm beschreibt die Verwendung von Befehlen, mit dem}
+{Zeichenketten (Strings) manipuliert werden kînnen. Zum Befehl CONCAT}
+{siehe auch Beispielprogramm STRING_2.RUN.}
+
+BEGIN-MAIN
+  Init;
+
+  !a:= 'Dies ist eine ';
+  !b:= 'Zeichenkette';
+
+  !c:= !CONCAT (!a, !b);  {Die Strings !a und !b werden mit CONCAT zusammen-}
+                          {gefa·t. Das Ergebnis ist in !c gespeichert}
+  WriteLn (!c);           {Bildschirmausgabe des Ergebnisses}
+
+  !a:= !COPY (!c, 1, 6);  {Die Zeichen 1 bis 6 werden von !c nach !a}
+                          {kopiert.}
+  WriteLn (!a);
+
+  @a:= @POS ('ist', !c);  {in @a wird die Position gespeichert, an der sich}
+                          {das Wort "ist" in der Zeichenkette !c befindet.}
+
+  DELETE (!c, @a, 3);     {lîscht in der Zeichenkette !c 3 Zeichen ab der}
+                          {Position @a (an der das Wort "ist" beginnt).}
+  WriteLn;
+  WriteLn (!c);
+
+  INSERT ('ist immer noch', !c, @a);
+
+                          {fÅgt an der Position, an der vorher das Wort "ist"}
+                          {begann, die Worte "ist immer noch" in die}
+                          {Zeichenkette !c ein}
+  WriteLn;
+  WriteLn (!c);
+
+  !c:= !UPSTRING (!c);    {Verwandelt alle Zeichen von !c in Gro·buchstaben}
+                          {Das Ergebnis wird wieder in !c gespeichert}
+
+  WriteLn;
+  WriteLn (!c);
+
+  Getkey;
+END.

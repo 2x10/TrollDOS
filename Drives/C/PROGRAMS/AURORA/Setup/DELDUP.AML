@@ -1,0 +1,67 @@
+//--------------------------------------------------------------------
+// DELDUP.AML
+// Delete Duplicate Lines, (C) 1993-1996 by nuText Systems
+//
+// This macro deletes contiguous duplicate lines in the current edit
+// window. The total number of lines removed is displayed. Note: this
+// macro will run faster if Undo is turned Off on the Set menu.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable lastline, shownext
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+oldsize = getlines          // save the number of lines in file
+undobegin                   // group this together as one undoable action
+row 1                       // goto the first line
+lasttext = gettext          // get first line in variable lasttext
+
+if down then                // goto the next line
+
+  // do for all lines
+  loop
+
+    // show progress every 150 lines
+    if getrow > shownext then
+      say (getrow)
+      shownext = shownext + 150
+    end
+
+    // if this line is the same as the last line then delete it
+    if gettext == lasttext then
+
+      // delete line and test for end-of-file
+      if delline > getrow then
+        break
+      end
+
+    // ..otherwise save line text for the next comparision
+    // and goto the next line
+    else
+      lasttext = gettext
+      if not down then
+        break
+      end
+    end
+
+  end
+
+end
+breakoff
+
+undoend                       // end of undoable group
+display                       // update display
+
+// tell the user how many lines were removed
+say  (thousands oldsize - getlines) + " lines were removed"

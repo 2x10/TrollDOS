@@ -1,0 +1,109 @@
+
+UMBPCI.SYS - Kurzanleitung
+
+
+UMBPCI.SYS ist ein Upper-Memory-Treiber fuer MS-DOS ab Version 5.0, und
+damit ein Ersatz fuer EMM386.
+
+UMBPCI missbraucht fuer die UMBs Speicher, der fuer's Shadow-RAM gedacht
+und normalerweise abgeschaltet ist, also brachliegt. Er selbst belegt nur
+240 Bytes und laesst die CPU im Real-Mode.
+
+EMM386 funktioniert auf allen Rechnern mit 386-CPU oder h”her, dagegen ist
+UMBPCI abh„ngig vom Chipsatz, was verschiedene Probleme bereitet - dazu
+spaeter mehr.
+
+Ab V3.00 hat UMBPCI eine Autoscan-Funktion. Die Bereiche die UMBPCI
+benutzen soll, muessen nicht mehr manuell per Kommandozeile uebergeben
+werden. Der Parameter /I=xxxx-yyyy wird aber weiterhin unterstuetzt.
+Er deaktiviert die Autoscan-Funktion vollstaendig.
+Der von EMM386 bekannte Exclude-Parameter /E=xxxx-yyyy wird NICHT
+unterstuetzt.
+
+UMBPCI ist eine Erweiterung von HIMEM.SYS. HIMEM.SYS muss also vor
+UMBPCI geladen werden.
+
+Beispiel fuer die CONFIG.SYS und der Annahme, dass Win9x in c:\windows
+und UMBPCI in c:\umbpci liegt:
+
+dos=high,umb
+device=c:\windows\himem.sys
+device=c:\umbpci\umbpci.sys
+devicehigh=
+installhigh=
+
+
+In der UMBPCI.TXT gibts eine List der Chipsaetze und ihrer bekannten Probleme.
+
+
+Auf AMD K7-CPUs funktioniert in den UMB kein PCI-Busmastering. Hier
+ggf. in der MSDOS.SYS von DOS 7.x DoubleBuffer=1 setzen. 
+Bei anderen DOS-Versionen nichts direkt von der Festoplatte hochladen.
+
+Auf vielen Chipsaetzen funktioniert in den UMBs kein ISA-DMA.
+Um die Funktion von ISA-DMA zu ueberpruefen ist DMACHK.COM gedacht
+(Dank an Heiko Nocon). Dazu ist UMBPCI in der CONFIG.SYS zu laden.
+Wo ist egal, ebenso ob die UMBs benutzt werden. DMACHK zeigt dann,
+in welchen Bereichen ISA-DMA funktioniert.
+
+Wenn ISA-DMA nicht funktioniert wird ein hochgeladenes SMARTDRV
+bei Floppy-Zugriffen nur Schrott lesen und schreiben. Um das
+zu umgehen, kann SMARTDRV mit dem Pararmeter /L geladen werden.
+Man kann SMARTDRV aber trotzdem hochladen:
+Diese Zeile in der CONFIG.SYS
+
+installhigh=c:\windows\smartdrv.exe 4096 64 /l
+
+laed SMARDRV gesplittet in den unteren und oberen Speicher, wobei
+die Transfer-Puffer im unteren Speicher liegen, was die Problem mit
+ISA-DMA vermeidet.
+
+Wenn UMBPCI auf einer Bootdisk benutzt wird, sollten nur Bereiche
+benutzt werden, in denen ISA-DMA funktioniert. Auf neueren Intel-
+Chipsaetzen (430xX, 440xX) ist der geeignete Parameter fuer UMBPCI
+/I=E000-EFFF. Auf Chipsaetzen die kein ISA-DMA in den UMBs beherrschen,
+sollte UMBPCI nicht auf Bootdisketten eingesetzt werden.
+Konkret ist es so, dass man kein Programm direkt von Diskette in einen
+betroffenen UMB laden kann. Programme die sich selbst hochladen
+sind dagegen kein Problem.
+
+
+Die Probleme mit Floppy-Zugriffen und ISA-DMA lassen sich mit dem Treiber
+LOWDMA von Henrik Haftmann umgehen, siehe LOWDMA.TXT.
+
+
+Win9x bindet aller verbliebenen UMBs in seine Speicherverwaltung
+als normalen Speicher ein. Wie oben beschrieben ist der Speicher
+aber oft nicht ganz normal...
+Um Win9x von den UMBs fernzuhalten habe ich UMBFILL geschrieben.
+Es belegt alle freien UMBs. Es sollte ggf. nach allen residenten
+Programmen in der AUTOEXEC.BAT stehen. Es darf selbst nicht
+hochgeladen werden.
+Wer ein Programm schreiben kann, dass hochgeladen alle UMBs belegt,
+moege sich bei mir melden...
+
+Die Zeile LocalLoadHigh=1 im Abschnitt [386Enh] der SYSTEM.INI
+fuehrt dazu, dass Win9x nur einen kleinen Teil der UMBs benutzt,
+was wohl unkritisch ist. Verlaessliche Infos dazu habe ich aber
+nicht.
+
+
+DR DOS / Novell DOS / Caldera Open DOS
+--------------------------------------
+
+Findet UMBPCI beim Laden keinen XMS-Treiber ohne die Funktion
+'Request XMS-UMB', sprich keinen HIMEM.SYS aus MS-DOS, werden
+die Speicherbereiche nur aktiviert und UMBPCI beendet sich.
+Aus den aktivierten Speicherbereichen kann dann z.B. HIDOS.SYS
+aus DR-DOS UMBs machen.
+
+Ist die XMS-Funktion 'Request XMS-UMB' dagegen schon vorhanden,
+bricht UMBPCI mit Fehlermeldung ab.
+
+
+Bitte UMBPCI.TXT fuer weitere Informationen lesen!
+
+http://www.uwe-sieber.de
+mail@uwe-sieber.de
+16.8.2000
+

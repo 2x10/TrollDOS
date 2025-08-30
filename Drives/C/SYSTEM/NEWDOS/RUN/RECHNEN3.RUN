@@ -1,0 +1,39 @@
+PROGRAM Rechnen3;
+
+{iPascal kann keine Nachkommastellen verarbeiten. Da· trotz dieser}
+{BeschrÑnkung sehr lange und genaue Flie·kommazahlen darstellbar sind, zeigt}
+{dieses kleine Beispiel. Es demonstriert au·erdem den Praxiseinsatz}
+{mathematischer Funktionen.}
+
+{Aufgabe hier ist die Division der zwei Zahlen @x und @y.}
+
+
+BEGIN-MAIN
+  Init;
+
+  @x:= 5555555;
+  @y:= 1111112;
+                               
+  @s:= 70;                          {Zahl der auszugebenden Nachkommastellen}
+
+  !a:=!Concat (@div (@x, @y), '.');  {Vorkommateil im String !a speichern}
+
+  @a:= @x;
+
+  For @z:= 1 To @s Do               {70 mal...}
+  BEGIN
+    @a:= @mod (@a, @y);             {Divisionsrest in @a...}
+    @a:= @mul (@a, 10);             {...mal zehn}
+    !a:= !Concat (!a, @div (@a, @y));     {Ganzzahlergebnis der Division Rest (=@a)}
+  ENDFOR;                           {durch @y an den String !a anhÑngen.}
+
+
+  WriteLn ('Divisionsergebnis ', @x, ' geteilt durch ', @y, ' :', #13#10);
+  WriteLn (!a);
+
+  GetKey;
+END.
+
+{Beachten Sie bitte, da· die Zahlen @x und @y den Wert 2147483647 nicht}
+{Åber- und den Wert -2147483648 nicht unterschreiten darf. Divisionen}
+{durch Null werden von den Funktionen @MOD und @DIV abgefangen.}

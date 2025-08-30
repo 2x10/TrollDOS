@@ -1,0 +1,114 @@
+//--------------------------------------------------------------------
+// HELPMAC.AML
+// Macro Help, (C) 1993-1996 by nuText Systems
+//
+// This macro displays .Dox help for macros in the Macro\ directory.
+//
+// Usage:
+//
+// This macro is intended for use as a utility by other macros, not as a
+// standalone macro. Helpmac is used by the 'helpmacro' function in
+// Ext.aml. When called from runmacro, arguments to this macro will be as
+// follows:
+//
+//   arg 1: the filename of this macro
+//   arg 2: the object name of this macro
+//   arg 3: the unqualified macro name
+//
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// help window colors
+constant help_border_color        = color black on gray
+constant help_border_flash_color  = color brightgreen on gray
+constant help_north_title_color   = color black on gray
+constant help_text_color          = color cyan on black
+constant help_cursor_color        = color yellow on black
+
+// this object inherits from the 'win' object
+settype "win"
+
+macro = arg 3
+
+// load the .Dox help file
+helpbuf = loadbuf (qualify (forceext macro "dox") (bootpath "macro"))
+if not helpbuf then
+  msgbox "No help available for " + macro
+  return
+end
+
+lines = getlines
+
+resident ON
+
+// create the help window
+createwindow
+setframe ">b"
+setcolor  border_color        help_border_color
+setcolor  north_title_color   help_border_color
+setcolor  text_color          help_text_color
+setcolor  border_flash_color  help_border_flash_color
+settitle (onname (getname macro)) + " Help"
+setwinctrl "ð" 2
+setborder "1"
+setshadow 2 1
+
+// center the window
+width  = 75
+height = getvidrows - 2
+if lines >= height then
+  setframe "+v"
+else
+  height = lines + 1
+end
+ox = (getvidcols - width) / 2
+oy = (getvidrows - height) / 2
+sizewindow ox oy ox + width oy + height "ad"
+
+// attach cursor
+cursor = createcursor
+colorcursor help_cursor_color
+setwincurs cursor
+setsyntax 1 (onsyntax (getbufname))
+
+// destroy window and buffer
+event <destroy>
+  // prevent close from adding buffer name to the history
+  setbufname '' helpbuf
+  close
+  destroybuf helpbuf
+end
+
+function 'ð'
+  destroyobject
+end
+
+//--------------------------------------------------------------------
+// keys
+//--------------------------------------------------------------------
+
+// cursor
+key <up>           up
+key <down>         down
+key <left>         rollcol -1
+key <right>        rollcol  1
+key <home>         col 1
+
+// scrolling
+key <pgup>         pageup
+key <pgdn>         pagedown
+key <ctrl pgup>    row 1                // to list top
+key <ctrl pgdn>    row (getlines)       // to list bottom
+key <ctrl home>    row (getviewtop)     // to page top
+key <ctrl end>     row (getviewbot)     // to page bottom
+
+// window functions
+key <ctrl z>       maximize
+key <shift f3>     tile 'v'             // tile vertical
+key <shift f4>     tile 'h'             // tile horizontal
+key <shift f5>     cascade              // cascade
+
+// exit
+key <esc>          destroyobject

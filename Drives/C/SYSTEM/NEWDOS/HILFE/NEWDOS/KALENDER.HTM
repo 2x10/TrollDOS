@@ -1,0 +1,313 @@
+<HTML><HEAD><TITLE>Kalender</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Kalender</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Terminkalender mit Datenbank fr 50000 Eintragungen, Alarmfunktion und
+Taschenkalender. Das zweite New-DOS-Termin-Programm <A HREF="#alarm"> ALARM</A> ist entfallen - 
+dessen Funktion hat Kalender bernommen.
+
+Kalender ist jahr-2000-f„hig.
+ 
+<A HREF="#0"> Syntax</A>    
+<A HREF="#1"> Allgemeines</A> 
+<A HREF="#2"> Neueingabe eines Termines</A> 
+<A HREF="#3"> ndern eines Termines</A> 
+<A HREF="#4"> Alle Termine ansehen</A> 
+<A HREF="#5"> Status von Terminen</A> 
+<A HREF="#6"> Periodisch wiederkehrende Termine</A> 
+<A HREF="#7"> Verwaltungsfunktionen</A> 
+<A HREF="#8"> Termin-Alarm</A> 
+<A HREF="#9"> Versehentlich gel”schte Termine wiederherstellen</A><HR 
+ 
+noshade color="silver"><A
+NAME="0"><A HREF="#top"> </A><FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">KALENDER [/s /n /p /t]</FONT>
+
+/s  Kalender prft beim Start, ob ein f„lliger Termin vorliegt und schaltet 
+    sich sofort wieder aus, wenn kein Termin vorliegt. Wurden Termine
+    gefunden, werden Sie angezeigt. /s bietet sich an, wenn Sie Kalender
+    bei jedem Rechnerstart durch die AUTOEXEC.BAT ausfhren lassen wollen.
+    Der Rechner bootet dann automatisch weiter, wenn keine Termine vorliegen.
+
+/n  Kalender sucht beim Start nicht nach aktuellen Terminen. Normalerweise
+    prft Kalender bei jedem Start automatisch die Termindatenbank.
+
+/p  Drucker oder Name der Druckzieldatei, wenn nicht LPT1 (z.B. /p:LPT2
+    oder /p:c:\termine.txt
+    
+/t  Name der Termin-Datei, wenn nicht KALENDER.TER (z.B. /t:A:\TERMINE.TER)
+ 
+Werden keine Parameter eingegeben, startet Kalender mit den Standard-
+Einstellungen:
+
+- Suchen nach f„lligen Terminen
+- Termin-Datenbank ist KALENDER.TER im selben Verzeichnis wie KALENDER.EXE.
+- Drucker ist LPT1<HR
+
+
+noshade color="silver"><A
+NAME="1"><A HREF="#top"> </A><FONT COLOR="maroon">Allgemeines</FONT>  
+
+Kalender kann sowohl mit der Maus als auch mit der Tastatur bedient werden.
+Fr Blinde besteht eine Cursormitfhrung, die auch auf Schwarz-Weiá-
+Monitoren hilfreich ist. Der Cursor kann mit der TAB-Taste einen Schritt
+vor und mit der Tastenkombination Umschalt-TAB (Shift-Tab) einen Schritt
+rckw„rts bewegt werden. Befindet sich der Cursor auf einer Schaltfl„che
+oder einem Kontrollfeld, k”nnen Sie es durch Drcken der Enter-Taste 
+bet„tigen. Alternativ dazu k”nnen Sie auch den farblich hervorgehobenen
+Buchstaben eintippen (Fr Blinde: Immer den ersten Buchstaben der 
+Beschriftung oder die namentlich genannte Taste, z.B. F2, Esc, Enter u.„.).
+
+In „lteren Versionen von Kalender konnten nur einmalige feste Termine 
+eingegeben werden. Dieser Modus ist (auch aus Kompatibilit„tsgrnden)
+unver„ndert beibehalten worden. Die Termine der Vorversionen k”nnen also
+ohne Korrektur bernommen werden. Diese sind im Editier-Feld als
+"j„hrlich" wiederkehrend gekennzeichnet. 
+Siehe hierzu auch: <A HREF="#6"> Periodisch wiederkehrende Termine</A><HR
+
+
+noshade color="silver"><A
+NAME="2"><A HREF="#top"> </A><FONT COLOR="maroon">Neueingabe eines Termines</FONT> 
+
+Klicken Sie im Er”ffnungsmen auf "Neuen Termin eingeben". Tragen Sie nun
+alle abgefragten Daten ein und schlieáen Sie das Fenster abschlieáend mit
+Taste F2. Der Termin wird dann gespeichert und steht zur Verfgung. Mit Esc
+brechen Sie die Bearbeitung ab, ohne das eine nderung erfolgt.
+
+Beim Eintragen der Zahlen in die Datums- und Zeitfelder k”nnen Sie einfach
+"durchschreiben", d.h., wenn sie die Tasten 16071999 bet„tigen, fllen Sie
+damit die Datumsangabe aus (16.07.1999). Die Jahreszahl kann zweistellig, 
+also ohne Jahrhundert eingegeben werden. Dies funktioniert bis zum Jahr
+2080, danach mssen Sie (oder wer dann auch immer) die Jahreszahl
+vierstellig eingeben.
+
+Neben den blichen Tasten zum Editieren (Entf, Rcktaste, Pfeiltasten) 
+stehen noch folgende Taste zur Verfgung:
+
+F9      : l”scht den Inhalt eines Editierfeldes
+F3      : kopiert den Inhalt des Editierfeldes in eine Art Zwischenablage
+CTRL+F3 : Fgt den Inhalt dieser Zwischenablage in das Editierfeld ein
+
+F4      : Kopiert den gesamten Inhalt des Termindatenblattes in das
+          <A HREF="clipbrd.htm">Clipboard</A> (ist nicht identisch mit F3 und CTRL+F3).
+CTRL+F4 : Fgt den Inhalt des Clipboards in das Termindatenblatt ein
+
+<FONT COLOR="green">Trick 17</FONT>
+Wenn Sie einen Termin genau ans Monatsende setzen m”chten, brauchen Sie 
+nicht erst nachzurechnen, ob dieser Monat nun 30 oder 31 Tage hat oder ob 
+der Februar 28 oder 29 Tage hat. Geben Sie einfach 31 ein, das Datum wird 
+automatisch korrigiert.
+
+<FONT COLOR="green">Trick 18</FONT>
+Wenn der Cursor in einem leeren Datums- oder Zeitfeld steht und Sie drcken
+die Enter-Taste, wird der entsprechende Teil des aktuellen Datums bzw. der
+aktuellen Uhrzeit eingefgt.<HR
+
+
+noshade color="silver"><A
+NAME="3"><A HREF="#top"> </A><FONT COLOR="maroon">ndern eines Termines</FONT> 
+
+™ffnen Sie vom Hauptmen die Bl„ttern- oder Listen-Ansicht, w„hlen Sie
+dort den zu „ndernden Termin und bet„tigen Sie die Korrekturtaste (K).
+Der Termin wird in die Editiermaske eingeblendet, deren Bedienung unter
+"Neueingabe eines Termines" beschrieben wurde.
+
+Sie erreichen die Editiermaske auch aus der Kalender-Ansicht. Klicken Sie
+im Kalender auf den gewnschten Termin, um ihn anzuzeigen und w„hlen Sie in
+dieser Anzeige den Korrektur-Schalter.<HR
+
+
+noshade color="silver"><A
+NAME="4"><A HREF="#top"> </A><FONT COLOR="maroon">Alle Termine ansehen</FONT>
+
+Es stehen drei Ansichtsarten zur Verfgung:
+
+<FONT COLOR="blue">Bl„ttern-Ansicht</FONT>
+Jeder Termin wird einzeln und ausfhrlich in einer Art Karteikarte 
+angezeigt. Eine Karteikarte kann mit Taste F4 komplett ins Clipboard
+bernommen werden. Die Bl„ttern-Ansicht wird auch immer dann aktiviert,
+wenn nur <FONT COLOR="red">ein</FONT> Termin vorliegt - entweder, wenn Kalender beim Start Alarm
+ausgel”st hat oder wenn Sie in der Kalender-Ansicht auf einen grau 
+unterlegten Tag geklickt haben. Werden bei diesen Aktionen mehrere Termine
+gefunden, wird stattdessen die Listen-Ansicht aktiviert.
+
+<FONT COLOR="blue">Listen-Ansicht</FONT>
+Alle Termine werden in Kurzform in einer scrollbaren Liste angezeigt. Im 
+unteren Teil wird der komplette Inhaltstext des Termines angezeigt, auf
+dem sich gerade der Anzeigebalken befindet. Dieser Termin kann auch
+komplett in das Clipbord bernommen werden (Taste F4).
+
+<FONT COLOR="blue">Kalender-Ansicht</FONT>
+Hier wird ein Monatskalender des aktuellen Monats gezeigt, der sich bis ins
+Jahr 1600 zurck und bis ins Jahr 9999 vorbl„ttern l„át. Befinden sich
+innerhalb des gerade angezeigten Monats Termine, so sind die betreffenden
+Tage grau unterlegt. Um die darunter befindlichen Termine anzusehen, klicken
+Sie mit der Maus auf diesen Tag.<HR
+
+
+noshade color="silver"><A
+NAME="5"><A HREF="#top"> </A><FONT COLOR="maroon">Status von Terminen</FONT> 
+
+Im Bl„ttern-Modus (und in Kurzform auch im Listen-Modus) wird der Status 
+eines Termines angezeigt, den Sie durch Tastendruck bzw. Mausklick beliebig 
+„ndern k”nnen.
+
+<FONT COLOR="green">Alarm ist aktiv</FONT>
+   Fr diesen Termin wird Alarm ausgel”st.
+   Taste: Aktivieren
+
+<FONT COLOR="green">Alarm ist ausgeschaltet</FONT> 
+   Dieser Termin bleibt gespeichert, es wird aber kein Alarm ausgel”st.
+   Mit der Taste "Aktivieren" k”nnen Sie in wieder aktivieren.
+   Taste: Stillegen
+
+<FONT COLOR="green">Termin zum L”schen freigegeben</FONT> 
+   Sobald Sie Kalender ausschalten, wird der Eintrag aus der Datenbank
+   entfernt. Sie k”nnen die L”schmarkierung bis dahin wieder aufheben.
+   Taste: L”schen
+
+In der Listen-Ansicht erkennen Sie gel”schte oder stillgelegte Termine an
+einem vorangestellten farbigen x.<HR
+
+
+noshade color="silver"><A
+NAME="6"><A HREF="#top"> </A><FONT COLOR="maroon">Periodisch wiederkehrende Termine</FONT>
+
+Ein einmal eingegebener Termin kann in regelm„áigen Abst„nden wieder 
+vorgelegt werden. Diese Abst„nde legen Sie in der Editier-Maske fest, wenn
+Sie einen Termin neu anlegen oder „ndern. Folgende Perioden sind m”glich:
+
+<FONT COLOR="green">j„hrlich</FONT>
+Dies entspricht dem Modus von Terminen in „lteren Versionen von Kalender:
+Der Termin wird ab dem angegebenen Tag solange in der Alarm-Liste gefhrt,
+bis Sie ihn l”schen oder um ein Jahr vorverlegen. Beachten Sie bitte, daá
+sich j„hrlich wiederkehrende Termine im Gegensatz zu den im folgenden 
+beschriebenen <FONT COLOR="red">nicht</FONT> von selbst vorverlegen.
+
+<FONT COLOR="green">monatlich</FONT>
+Der Termin wird ab dem angegebenen Datum einmal im Monat in der Alarm-Liste
+vorgelegt. Alarmtag ist der Tag im angegebenen Datum. Monat und Jahr mssen
+Sie aber trotzdem korrekt angeben, damit Kalender weiá, ab wann er den
+Termin vorlegen soll. Sie k”nnen den Beginn dieser "Alarmphase" also auch
+auf einen beliebigen sp„teren Zeitpunkt verlegen.
+
+<FONT COLOR="green">zweiw”chentlich</FONT>
+Der Termin wird ab dem angegebenen Datum alle zwei Wochen in der Alarm-
+Liste vorgelegt. Alarmtag ist der Wochentag, der sich aus diesem Datum
+ergibt: ist das eingetragene Datum also ein Dienstag, wird jeden zweiten 
+Dienstag Alarm geschlagen.
+
+<FONT COLOR="green">w”chentlich</FONT>
+Wie "zweiw”chentlich", nur daá der Termin in <FONT COLOR="red">jeder</FONT> Woche vorgelegt wird.
+
+Im Gegensatz zu "j„hrlich" wiederkehrenden Terminen mssen die drei
+anderen periodischen Termine nicht jedesmal aktualisiert werden, wenn sie
+verstrichen sind. Einmal eingegeben, wird ein solcher Termin bis zum Jahr 
+9999 regelm„áig wiederholt. Ein weiterer Unterschied zu den j„hrlichen
+Terminen ist, daá sie nur am Alarmtag selbst vorgelegt werden; ist ein
+solcher Termin also verstrichen, wird er erst wieder am n„chsten f„lligen
+Datum vorgelegt. Sie sollten Kalender also wenigstens einmal am Tag starten
+oder besser noch gleich in die AUTOEXEC.BAT einbauen.<HR
+
+
+noshade color="silver"><A
+NAME="7"><A HREF="#top"> </A><FONT COLOR="maroon">Verwaltungsfunktionen</FONT>
+
+Untermen, erreichbar aus dem Hauptmen.
+
+<FONT COLOR="green">Termine sortieren</FONT>
+Sortiert die Termindatenbank in chronologischer Reihenfolge. Die „ltesten
+Termine stehen danach an vorderer Stelle. Beachten Sie bitte, daá die
+Sortierung sehr groáer Terminbest„nde u.U. sehr lange dauert.
+
+<FONT COLOR="green">Termine drucken</FONT>
+Termine werden formatiert ausgedruckt. Wenn Sie das Druckbild vorher sehen
+m”chten, starten Sie Kalender mit dem Parameter /P: und geben Sie unmittelbar
+hinter dem Doppelpunkt den Namen der Datei an, in die der Druck umgeleitet
+werden soll. Diese Datei k”nnen Sie dann in einem Editor nachbearbeiten
+und von dort ausdrucken.
+
+<FONT COLOR="green">Exportieren als Text</FONT>
+Alle Termine werden in eine Textdatei exportiert. Diese entspricht den
+Anforderungen an eine ASCII-Datenbank und kann daher von jedem anderen
+Datenbank-Programm wieder importiert werden (also auch von Kalender selbst).
+Jeder Termin wird dabei in einer einzelnen Zeile gespeichert, wobei die
+einzelnen Felder durch Tabulator-Zeichen voneinander getrennt sind.
+Die Textdatei bekommt den gleichen Namen wie die Termin-Datei - nur die
+Dateiendung lautet TXT.
+
+<A NAME="import"><FONT COLOR="green">Importiere Text-Datei</FONT>
+Importiert eine ASCII-Datenbank (s.o.). Deren Felder mssen entweder durch
+Tabulator-Zeichen oder Semikolons voneinander separiert sein. Die zu
+importierende Datei muá den gleichen Namen wie die Termin-Datei tragen, in 
+die die Termine importiert werden sollen - die Dateiendung muá jedoch TXT
+lauten. Die importierten Termine werden an die Termindatenbank angeh„ngt.
+
+Sie k”nnen auf diese Weise auch Termindatenbanken fremder Programme
+importieren. Speichern Sie die Termine der Fremddatenbank als "Text mit
+Semikolon". Nun k”nnen Sie diese Termine in einem normalen Text-Editor
+nachbearbeiten. Folgende Zeile kann Kalender korrekt importieren:
+
+<FONT COLOR="blue">Tag; Monat; Stunde; Minute; Jahr; Zeile1; Zeile2; Zeile3; Status</FONT>
+
+"Zeile2" und "Zeile3" drfen dabei fehlen (im Grunde auch "Zeile1"). Enth„lt
+die Textdatenbank darber hinaus noch weitere Felder, werden diese beim
+Import ignoriert - wichtig ist nur die korrekte Reihenfolge der ersten
+fnf Datums- und Zeitfelder. Beachten Sie bitte, daá das Feld "Status" in 
+der Regel nur dann gltige Werte enth„lt, wenn die Textdatei von Kalender
+exportiert wurde. Ggf. mssen Sie die importierten Termine am Ende noch
+einmal durchsehen und im Editiermodus den Status neu setzen.<HR
+
+
+noshade color="silver"><A
+NAME="8"><A HREF="#top"> </A><FONT COLOR="maroon">Termin-Alarm</FONT>
+
+Kalender prft bei jedem Start, ob Termine vorliegen und zeigt diese ggf.
+an. In diesem Falle befindet sich im Er”ffnungsmen ein zus„tzlicher
+auff„llig blinkender Schalter. Dieser bleibt solange vorhanden, bis Sie 
+sich die Termine angesehen haben - Sie k”nnen also vorher noch andere
+Aufgaben erledigen, ohne vergessen zu k”nnen, die Termine zu beachten.<HR
+
+
+noshade color="silver"><A
+NAME="9"><A HREF="#top"> </A><FONT COLOR="maroon">Versehentlich gel”schte Termine wiederherstellen</FONT>
+
+Bei nderungen (=beim L”schen von Terminen) wird von der Termin-Datei im 
+selben Verzeichnis eine Sicherheitskopie mit der Endung BAK angelegt. Diese 
+enth„lt auch alle zuletzt gel”schten Termine - um diese wiederherzustellen, 
+benennen Sie Kalender.BAK in Kalender.TER um. Ggf. mssen Sie Kalender.TER 
+zuvor l”schen. Da Kalender.BAK bei der n„chsten nderung wiederum 
+berschrieben wird, sollten Sie die Wiederherstellung m”glichst bald 
+vornehmen.<HR
+
+
+noshade color="silver"><A
+NAME="alarm"><A HREF="#top"> </A><FONT COLOR="maroon">Alarm</FONT>
+
+Das in Vorversionen von New-DOS enthaltene Tool ALARM ist entfallen. Die 
+Termine von Alarm k”nnen von Kalender nicht direkt importiert werden, 
+sondern mssen von Hand bernommen werden. Wenn Sie sehr viele Termine
+in ALARM eingetragen haben, lohnt sich die Mhe, die Alarmdatei import-
+f„hig zu machen. Benennen Sie die Datei ALARM.DOC im New-DOS-Verzeichnis
+zun„chst in KALENDER.TXT um und laden Sie sie in einen Texteditor und
+ver„ndern Sie jede Zeile wie folgt:
+
+alt: W-01-??-Dies ist ein w”chentlicher Termin
+neu: 12;01;0;0;1999;Dies ist ein w”chentlicher Termin;;;12 
+
+alt: M-10-??-Dies ist ein monatlicher Termin
+neu: 10;01;0;0;1999;Dies ist ein monatlicher Termin;;;4 
+ 
+alt: J-13-11-Dies ist ein j„hrlicher Termin 
+neu: 13;11;0;0;1999;Dies ist ein w”chentlicher Termin;;;0 
+ 
+Die beiden Nullen dienen als Platzhalter fr die Uhrzeit. Im Falle der
+w”chentlichen Termine mssen Sie als Datum (im Beispiel 12.01.) einen
+Tag aussuchen, der auf den gleichen Wochentag f„llt wie zuvor in Alarm.
+Einfacher geht es, wenn Sie hier irgendein Datum eingeben und dieses 
+nach dem <A HREF="#import"> Import</A> in Kalender korrigieren.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

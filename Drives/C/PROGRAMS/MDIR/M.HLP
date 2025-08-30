@@ -1,0 +1,95 @@
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³  Press <^Alt^> or <^Ctrl^> to see Hot-Key   <^Ctrl-F12^>: Setup  ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÚÄÄ[ * ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  ÚÄÄ[ RUN ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ ^F12^ : MENU (^Ctrl-Ins^)   ³  ³      ^Enter^: run, Ext-Run      ³
+³ ^F10^ : MCD               ³  ³ ^Ctrl-Enter^: run with argu     ³
+³ ^F11^ : QCD (^#F1^..^#F10^)   ³  ³  ^Alt-SPACE^: Quit              ³
+³                         ³  ³ ^Ctrl-SPACE^: Quit with argu    ³
+³ ^/^   : dos command       ³  ³        ^Tab^: Swapped, Ext-Run  ³
+³ ^?^   : dos command(swap) ³  ³  ^Shift-Tab^: Swapped with argu ³
+³ ^F1^  : HELP              ³  ³     ^Ctrl-T^: review dos screen ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÚÄÄ[ CURSOR / WORK ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ ^[^, ^]^   : position on drive-name                            ³
+³ ^other^  : speed search (^Ctrl-L^:Next match)                  ³
+³ ^S-Char^ : Change Drive    (ex:^Shift-A^,^B^,^C^,...)              ³
+³ ^.^      : to parent/upper directory                         ³
+³ ^\^      : to root directory                                 ³
+³ ^Alt-W^  : Select/designate Working directory                ³
+³ ^Ctrl-W^ : Close/release working directory                   ³
+³ ^Ctrl-BS^: go to previous directory                          ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÚÄÄ[ SELECT ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ ^SPACE^  : select or unselect one file                       ³
+³ ^Alt-U^  : select or Unselect all files                      ³
+³ gray ^*^ : invert selected files                             ³
+³ gray ^+^ : Select files by wild card                         ³
+³ gray ^-^ : DeSelect files by wild card                       ³
+³ gray ^/^ : Select/DeSelect files by current file's extension ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÚÄÄ[ FILE / DIR ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ ^Alt-C^  : Copy   files or directories (^Ins^)                 ³
+³ ^Alt-M^  : Move   files or directories                       ³
+³ ^Alt-D^  : Delete files or directories (^Del^)                 ³
+³ ^Alt-R^  : Rename files or directories                       ³
+³ ^Alt-K^  : maKe directory                                    ³
+³ ^Alt-P^  : Print file                                        ³
+³ ^Alt-V^  : View file                                         ³
+³ ^Alt-I^  : file fInd                                         ³
+³ ^Ctrl-Z^ : change file attributes                            ³
+³ ^@Enter^ : create or edit description (@=Alt)                ³
+³ ^Ctrl-Q^ : Convert long filename to description(DOS 7.0Only) ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÚÄÄ[ DISK ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ ^Ctrl-C^ : Disk copy                                         ³
+³ ^Ctrl-F^ : Format disk/diskette                              ³
+³ ^Ctrl-V^ : Change disk volume label                          ³
+³ ^Ctrl-P^ : Park hard disk head                               ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÚÄÄ[ ARCHIVE ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ ^Enter^  : View contents of archive or self-extractable      ³
+³ ^Ctrl-A^ : Add file(s) to and/or create an archive file      ³
+³ ^Ctrl-M^ : Move file(s) to and/or create an archive file     ³
+³ ^Ctrl-X^ : eXtract all files in an archive file              ³
+ÃÄÄ[ VIEW ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ ^ESC^, ^.^  : return                                           ³
+³ ^Alt-`^   : Directory emulation ON/OFF (ON=<EXIT>/OFF=<Exit> ³
+³ ^Alt-D^   : Delete selected files                            ³
+³ ^Ctrl-X^  : eXtract selected files                           ³
+³ ^Alt-V^   : View file                                        ³
+³ ^Enter^   : Run by extension, Change Drive                   ³
+³ ^Tab^     : Run program, Run by extension(^S-Tab^:Param)       ³
+³ ^/^       : Dos Command                                      ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÚÄÄ[ OPTION ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ ^Ctrl-E^       : toggle 25,28,43/50 line mode in EGA/VGA     ³
+³ ^Alt-A^        : Display Attributes(with hidden files)       ³
+³ ^Alt-Z^        : show hidden files                           ³
+³ ^Alt-F^        : Filter file list                            ³
+³ ^Alt-G^        : shows only executables and directories      ³
+³ ^Alt-L^        : Lowercase filename                          ³
+³ ^Alt-N^/^E^/^S^/^T^/^B^: sort by Name/Ext/Size/Time                  ³
+³ ^Alt--^        : sort order (descending/ascending)           ³
+³ ^Alt-O^        : nO sort                                     ³
+³ ^Alt-1^..^6^     : control number of columns on screen         ³
+³ ^Alt-0^        : fit columns on screen automatically         ³
+³ ^Alt-=^        : fit lines on screen automatically           ³
+³ ^Alt-\^        : Horizontal line ON/OFF                      ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÚÄÄ[ MCD ]ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ ^F2^     : Rescan disk                                       ³
+³ ^F3^     : Change drive(^Shift^-^Drive Letter^)                  ³
+³ ^F4^     : Move Directory (Prune & Graft) (^Alt-M^)            ³
+³ ^F5^     : Copy Directory                 (^Alt-C^)            ³
+³ ^F6^     : Rename directory               (^Alt-R^)            ³
+³ ^F7^,^Ins^ : maKe/create directory          (^Alt-K^)            ³
+³ ^F8^,^Del^ : Delete directory and it's all sub-directories     ³
+³ ^F9^     : Tree size and disk space                          ³
+³                                                            ³
+³ ^Alt-N^  : Sort the currently displayed tree                 ³
+³ ^other^  : speed search(^Ctrl-L^/^SPACE^: next match)            ³
+³                                                            ³
+³ ^F11^       : Quick Change Directory(QCD menu)               ³
+³ ^#F1^..^#F10^ : Quick Change Directory(QCD)     (#=Shift)      ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ

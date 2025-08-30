@@ -1,0 +1,56 @@
+//--------------------------------------------------------------------
+// PARAGRPH.AML
+// Find Next/Prev Paragraph, (C) 1993-1996 by nuText Systems
+//
+// The Paragrph macro defines keys to move the cursor to the next
+// paragraph, previous paragraph, and end of the current paragraph.
+// Paragraphs are assumed to be separated by one or more blank lines.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// edit windows only
+object edit
+
+// next paragraph
+key <alt down>
+  while getlinelen and down do end
+  while not getlinelen and down do end
+  col (getlinebeg)
+end
+
+// prev paragraph
+key <alt up>
+  up
+  while not getlinelen and up do end
+  if getlinelen then
+    while getlinelen and up do end
+    if not getlinelen then
+      down
+    end
+  end
+  col (getlinebeg)
+end
+
+// to end-of-paragraph
+key <alt right>
+  while not getlinelen and down do end
+  if getlinelen then
+    while getlinelen and down do end
+    if not getlinelen then
+      up
+    end
+  end
+  col getlinelen + 1
+end
+
+resident ON
+
+//helpmacro (arg 1)
+display
+say "Paragrph installed"

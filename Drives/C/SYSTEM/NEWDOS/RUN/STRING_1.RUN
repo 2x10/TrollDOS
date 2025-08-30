@@ -1,0 +1,59 @@
+PROGRAM Strings;
+{Beispielprogramm ber den Aufbau von Strings (Zeichenketten).}
+
+
+BEGIN-MAIN
+  init;
+  !a:= 'Zeichenkette';        {!a ist eine Stringvariable. In ihr kann eine}
+                              {Zeichenkette gespeichert werden.}
+                              {!a enth„lt jetzt das Wort "Zeichenkette"}
+
+  WriteLn (!a);               {Gibt die Zeichenkette auf dem Bildschirm aus}
+  WriteLn;                    {Leerzeile auf dem Bildschirm einfgen}
+
+  Write   (!a[0]);            {Gibt die Speicherstelle mit der Nummer 0 aus}
+                              {Dort ist die aktuelle Stringl„nge gespeichert,}
+                              {d.h., die Anzahl der Zeichen in der Kette}
+
+  Write (' = Stringl„nge = ');
+  WriteLn (@Byte (!a[0]), ' Zeichen sind im String enthalten.');
+
+                              {Die Funktion @Byte () wandelt ein Zeichen}
+                              {in die entsprechende Dezimalzahl um}
+
+  WriteLn;                    
+
+  WriteLn (!a[1], !a[2]);     {Ausgabe des ersten und zweiten Zeichens}
+
+  @a:= @Length (!a);          {Die Stringl„nge kann komfortabel mit der}
+                              {Funktion @Length() ermittelt werden. Der}
+                              {Rckgabewert ist identisch mit @Byte (!a[0]) } 
+                              {Dieser Wert ist nun in @a gespeichert.}
+
+  WriteLn (!a[@a]);           {Ausgabe des letzten Zeichens, also !a[12] }
+  WriteLn;
+
+  !a[2]:= #UpCase (!a[2]);    {verwandelt das 2. Zeichen in einen}
+                              {Groábuchstaben}
+  WriteLn (!a);
+
+  !a[0]:= #10;                {Das L„ngenbyte !a[0] wird mit der Zeichen}
+                              {fr die Zahl 10 gefllt.}
+  WriteLn (!a);               {Die Stringl„nge wurde von 12 auf 10}
+                              {verkrzt.}
+
+  #a   := !a[1];              {Das erste und zweite Zeichen werden}
+  !a[1]:= !a[2];              {miteinander getauscht. Zur Zwischen-}
+  !a[2]:= #a;                 {speicherung wird die Zeichenvariable #a}
+                              {verwendet.}
+  WriteLn;
+  WriteLn (!a);
+
+  getkey;
+END.
+
+
+{Stringvariablen erkennt man am vorangestellten Ausrufezeichen (!).}
+{Zur Verfgung stehen die Variablen !a bis !z. Ein String kann eine}
+{L„nge von 0 - 255 Zeichen haben. Mit !a:= '' werden alle Zeichen}
+{aus dem String entfernt - er hat dann die L„nge Null}

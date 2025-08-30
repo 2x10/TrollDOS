@@ -1,0 +1,34 @@
+PROGRAM ScasB;
+{Beispielprogramm zum Assemblerbefehl SCASB. Dieser durchsucht eine Zeichen-}
+{kette und vergleicht jedes Zeichen mit dem Inhalt des AL-Registers. Sind}
+{beide gleich, bricht REPNE SCASB ab. Anwendungsgebiet ist vor allem das}
+{schnelle Durchsuchen gr”áerer Speicherbereiche.}
+
+
+BEGIN-MAIN
+  init;
+  !a:= 'Zeichenkette';
+
+  ASM
+    les di, !a[1];               {Lade Adresse des ersten Zeichens in !a}
+
+    mov cx, @length(!a);         {Lade Z„hlregister CX mit der Stringl„nge}
+    mov al, 'c';                 {Lade AL mit dem gesuchten Zeichen}
+
+    cld                          {Richtungsflag setzen}
+    repne scasb                  {REPeat while Not Equal... Wiederhole den}
+                                 {Befehl SCASB, bis das gesuchte Zeichen "c"}
+                                 {gefunden wurde}
+    mov @a, cx                   {Positions-Wert von CX nach @a}
+  END;
+
+  @b:=0;
+  If (@a<>0) Then @b:= @sub (@Length(!a), @a); {Richtigstellung dieses Wertes}
+
+  WriteLn (!a, #13#10);
+  WriteLn ('Das Zeichen "c" befindet sich im Wort "',!a, '" an Position ',@b);
+  getkey;
+END.
+
+{Gibt das Programm eine Null aus, wurde das Zeichen nicht gefunden.}
+

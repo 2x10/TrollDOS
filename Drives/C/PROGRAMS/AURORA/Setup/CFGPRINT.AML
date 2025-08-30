@@ -1,0 +1,54 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGPRINT.AML
+// Configuration for Print Settings
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable prtopt, prtdev, prtpag, prtspace, prtcop, prtini,
+         prttop, prtbot, prtleft, prtright
+
+// create dialog box
+dialog "Print Settings" 62 10 "cp"
+
+// print settings group box
+groupbox '' 3 2
+  (menu ''
+     item " [ ] &Header"
+     item " [ ] &Footer"
+     item " [ ] Pa&ge Numbers    "
+     item " [ ] Line &Numbers"
+     item " [ ] &Eject"
+   end) '' _PrtOpt 'hfple'
+
+// edit fields
+field "&Device:          >"  27  2  5 _PrtDev
+field "Lines per &Page:  >"  27  3  5 _PrtPag
+field "Line &Spacing:    >"  27  4  5 _PrtSpace
+field "&Copies:          >"  27  5  5 _PrtCop
+field "Printer &Init:    >"  27  6  5 _PrtIni
+field "&Top Margin:     >"    3  8  5 _PrtTop
+field "&Bottom Margin:  >"    3  9  5 _PrtBot
+field "&Left Margin:     >"  27  8  5 _PrtLeft
+field "&Right Margin:    >"  27  9  5 _PrtRight
+
+// ok/cancel buttons
+button "O&k"    52 2 8
+button "Cancel" 52 4 8
+
+if (getdialog ref prtopt ref prtdev ref prtpag ref prtspace
+              ref prtcop ref prtini ref prttop ref prtbot
+              ref prtleft ref prtright) == 'Ok' then
+  prf.PrtOpt   = prtopt
+  prf.PrtDev   = prtdev
+  prf.PrtPag   = prtpag
+  prf.PrtSpace = prtspace
+  prf.PrtCop   = prtcop
+  prf.PrtIni   = prtini
+  prf.PrtTop   = prttop
+  prf.PrtBot   = prtbot
+  prf.PrtLeft  = prtleft
+  prf.PrtRight = prtright
+end

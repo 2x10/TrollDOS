@@ -1,0 +1,66 @@
+
+Ab V2.02 funktioniert UMBPCI auch mit den VIA Apollo Chipsaetzen (ungetestet).
+Es besteht aber die Moeglichkeit, dass auf einigen Chipsaetzen oder
+Rechnern vom Chipsatz ein Remap von Speicher aus dem Adapterbereich
+ans Ende des Extended Memory stattfindet. In dem Moment wo UMBPCI
+Speicher im Adapterbereich einschaltet, wuerde dieses Remap rueckgaengig-
+gemacht. Der Speicher wurde aber zuvor schon von HIMEM erkannt -
+es fehlen also ploetzlich 128 oder 256K am Ende des XMS.
+
+Es empfiehlt sich also, beim ersten Test nur bis zum DOS-Prompt zu
+booten und einen Speichertest durchzufuehren, z.B. diesen:
+
+ftp://www.checkit.com/files/memtest.exe
+
+Wenn es dieses Problem wirklich gibt, baue ich einen Fix dafuer ein.
+Aber ohne Gewissheit, dass es das Problem tatsaechlich besteht, habe ich
+dazu keine Lust.
+
+
+Weiterhin wird auf den meissten oder auch allen Rechnern der Bereich
+C800-CFFF nicht funktionieren, weil dafuer ein Konfigurations-Bit
+nicht existiert. Also schreibet mal, ob dieser Bereich funktioniert.
+
+Auf meinem MVP3 geht es jedenfalls.
+
+Ab V2.24 geht es auch auf neueren MVP3 mit der zuvor bei P2-Chips„tzen
+verwendeten South-Bridge 596.
+
+
+Die UMBs sind leider nicht cacheable und damit reichlich langsam.
+Fuer CD-ROM-Treiber samt MSCDEX, sowie und Maus- und Tastatur-
+Treiber reicht aber es allemal.
+Da Win95 aber automatisch performancetraechtige Sachen wie Buffers, Files
+und Stacks hochlaed, sollte man das unterbinden, indem man in der CONFIG.SYS
+den Schalter DOS=NOAUTO setzt. Damit werden dann auch HIMEM.SYS und IFSHLP.SYS
+nicht mehr automatisch geladen. Die muessen dann in die CONFIG.SYS geschrieben
+werden.
+
+Das koennte dann z.B. so aussehen:
+
+files=50
+buffers=20
+stacks=9,256
+dos=high, umb, noauto
+device=c:\windows\ifshlp.sys
+device=c:\windows\himem.sys
+device=umbpci.sys /i=d000-efff
+devicehigh=...
+installhigh=...
+
+
+Das Shadow-RAM fuers Main-BIOS ist uebrigens auf den meissten Rechnern auch
+nicht cacheable - also alles halb so schlimm.
+
+
+
+
+
+Uwe Sieber, 09/98
+
+
+uwe.sieber@gmx.de
+oder
+uwe.sieber@relay.boerde.de
+
+

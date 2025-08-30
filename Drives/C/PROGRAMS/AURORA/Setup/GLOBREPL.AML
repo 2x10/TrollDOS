@@ -1,0 +1,517 @@
+//--------------------------------------------------------------------
+// GLOBREPL.AML
+// Global Replace, (C) 1993-1996 by nuText Systems
+//
+// (See Globrepl.dox for user help)
+//
+// This macro performs a global search and replace in multiple files on
+// disk. The following search and replace options can be specified:
+//
+//   a - replace all occurrences of the search string without prompting.
+//       (if this option is not specified, a verification window will be
+//       displayed and you will be prompted to verify each replacement).
+//   B - backup files before they are modified
+//   i - ignore case
+//   u - search within subdirectories also
+//   w - whole words only
+//   x - regular expressions
+//
+// If this macro is run from a file manager window, then only the files
+// listed in the file manager are searched, otherwise you will be
+// prompted to enter a directory or file specification where files will
+// be searched.
+//
+// After successful completion of this macro, a summary window is
+// displayed, showing the total number of replacements and the number
+// of replacements for each file.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// status window colors
+constant status_border_color      = color black on gray
+constant status_border_color_all  = color white on gray   // replace-all
+constant status_text_color        = color black on gray
+constant status_count_color       = color red   on gray
+constant status_marker_color      = color brightgreen on gray
+
+// status window dimensions for replace-all
+constant status_qwidth  = 70  // (for fully qualified scans only)
+constant status_height  = 19
+
+// status window height for replace-verify
+// (as a percentage of the screen)
+constant status_size    = 33
+
+// use fmgr files if run from the file manager
+if wintype? "fmgr" then
+  passedbuf = getcurrbuf
+end
+
+// inherit from the 'win' object
+settype "win"
+
+variable statuswin, statusbottom, verifywin
+
+// create the status window
+private function createstatus (width)
+  statuswin = createwindow
+  setshadow 2 1
+  settitle "Global Replace" 'c'
+
+  setcolor  border_color
+     (if? width status_border_color_all status_border_color)
+  setcolor  north_title_color  status_border_color
+  setcolor  text_color         status_text_color
+
+  // replace all
+  if width then
+    setframe ">sb"
+    setcolor border_color status_border_color_all
+    setcolor south_title_color  status_border_color
+    setborder "1i"
+    // center the window
+    ox = (getvidcols - width) / 2
+    oy = (getvidrows - status_height) / 2
+    sizewindow ox oy ox + width oy + status_height "ad"
+
+  // replace-verify
+  else
+    setframe "><b"
+    setcolor border_color status_border_color
+    setborder "1"
+    statusbottom = (getvidrows * status_size) / 100
+    sizewindow 0 0 getvidcols - 1 statusbottom "ad"
+  end
+end
+
+// create the verify window
+private function createverify
+  verifywin = createwindow
+  setcolor border_color status_text_color
+  setcolor text_color        (getpalette 2)
+  setcolor menu_color        (getpalette 18)
+  setcolor menu_hotkey_color (getpalette 20)
+  setcolor scroll_color      (getpalette 22)
+  setcolor control_color     (getpalette 17)
+  setcolor endoftext_color   (getpalette 7)
+  setborder "1"
+  setframe '><bv4'
+  setwinctrl 'ð'
+  eotstring (if? _EOTLine _EOTLine -1)
+  menubar '' 4
+    item "Replace?"
+    item "{Enter,Y}=Yes"
+    item "{N}=No"
+    item "{A}=All"
+    item "{O}=One"
+    item "{U}=Undo"
+    item "{Q}=Quit"
+    item "{Esc}=Quit All"
+  end
+  sizewindow 0 statusbottom + 1 getvidcols - 1 getvidrows - 1 'ad'
+end
+
+// edit fields/groupbox windows
+variable f1, f2, f3, g1, g2
+
+// retrieve history in dlgbox fields and options
+function updatehist
+  variable searchstr, replstr, options
+  n = splitstr '' (gettext) ref searchstr ref replstr ref options
+  if n == 2 then
+    options = replstr
+    replstr = ''
+  end
+
+  // search string
+  buffer = getwinbuf f1
+  delchar MAX_COL 1 '' buffer
+  instext searchstr 1 '' buffer
+
+  // replace string
+  if f2 then
+    buffer = getwinbuf f2
+    delchar MAX_COL 1 '' buffer
+    instext replstr 1 '' buffer
+  end
+
+  // default options
+  if not options and n <= 1 then
+    options = _SearchOpt + _ReplaceOpt
+  end
+
+  setgroupbox options "iwx"  g1
+  setgroupbox options "aBu"  g2
+  col getlinelen + 1
+end
+
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+
+variable searchstr, replstr, filespec, options, options2
+
+// global replace prompt
+private function askgrepl
+  //if passedbuf or _PromptStyle == 'd' then
+    file = getbufname
+    dlg = dialog "Global Search and Replace" 66 11 'cp'
+    f1 = field "&Search for:   >" 3 2  36 '' "_find"  whenselect "updatehist"
+    f2 = field "&Replace with: >" 3 4  36 '' "_find"  whenselect "updatehist"
+    if passedbuf then
+      filespec = getbufname passedbuf
+      gotowindow dlg
+      writestr "In Files:     " + (onname filespec) '' 3 6
+      gotowindow f2
+    else
+      f3 = field "In &Files:     >" 3 6  36
+                 (onname (qualify "*.*" file)) "_load"
+    end
+
+    g1 = groupbox '' 3 8
+      (menu ''
+         item " [ ] &Ignore Case"
+         item " [ ] &Whole Words"
+         item " [ ] Regular E&Xpression "
+       end ) '' _SearchOpt 'iwx'
+
+    g2 = groupbox '' 29 8
+      (if passedbuf then
+         menu ''
+           item " [ ] Replace &All        "
+           item " [ ] &Backup Files"
+         end
+       else
+         menu ''
+           item " [ ] Replace &All"
+           item " [ ] &Backup Files"
+           item " [ ] S&Ubdirectories     "
+         end
+       end) '' _SearchOpt 'aBu'
+
+    button "O&k"    56 2 8
+    button "Cancel" 56 4 8
+    value = if passedbuf then
+              getdialog ref searchstr ref replstr ref options ref options2
+            else
+              getdialog ref searchstr ref replstr ref filespec ref options ref options2
+            end
+    if value == 'Ok' then
+      joinstr '' searchstr replstr filespec (options + options2)
+    end
+  //else
+    //ask "[string/replstr/files/iwxasu] Global Replace" "_find"
+  //end
+end
+
+
+variable keycode
+
+// search and replace with verification
+// (returns the number of replacements made)
+private function verify (searchstr replstr options)
+
+  variable len, badkey
+
+  keycode = 0
+  repeat
+
+    if not badkey then
+      len = find searchstr options + (if? len '' '*')
+    end
+
+    if len then
+
+      // adjust the view
+      edit.onfound len
+
+      // get keycode
+      keycode = getkey
+      badkey = FALSE
+      case keycode
+
+        // replace
+        when <enter>, <y>, <o>, <a>, <Y>, <O>, <A>
+          if keycode == <enter> then
+            keycode = <y>
+          else
+            keycode = keycode | 0x20
+          end
+          l = (replace searchstr replstr options + "*") - 1
+          right l
+          if (pos 'x' options) and getcol == getlinelen then
+            right
+          end
+          count = count + 1
+          if keycode <> <y> then
+            len = ''
+            if keycode == <a> then
+              count = count + (replace searchstr replstr options + 'a')
+            end
+          end
+
+        // undo
+        when <u>, <U>
+          if count then
+            undo
+            count = count - 1
+            if getcol == 1 then
+              if up then
+                col MAX_COL
+              end
+            else
+              left l
+            end
+          end
+
+        // don't replace
+        when <n>, <N>
+          // do nothing
+
+        // quit
+        when <q>, <Q>, <esc>
+          count = 0
+          break
+
+        // unrecognized key
+        otherwise
+          beep 220 60
+          badkey = TRUE
+      end
+    end
+  until not len
+
+  return count
+end
+
+
+// disable <loading>, <saving> in Ext.aml while this macro is running
+event <loading> end
+event <saving>  end
+
+variable fileoptions, diroptions, subdir
+
+// get the global replace multistring
+greplstring = askgrepl
+
+// use defaults if needed
+n = splitstr '' greplstring ref searchstr ref replstr ref filespec ref options
+if n < 4 then
+  options = _SearchOpt
+  if n < 3 then
+    filespec = '.'
+  end
+end
+
+if not greplstring or not searchstr then
+  return
+end
+
+// add to history buffers
+addhistory "_load" filespec
+addhistory "_find" (joinstr '' searchstr replstr options)
+
+// copy passed buffer
+if passedbuf then
+  markline 1 (getlines) 'T' passedbuf
+  scanbuf = if? (getbinarylen passedbuf) (createbbuf) (createbuf)
+  copyblock 'T'
+  destroymark 'T'
+  delline
+  filespec = onname (getbufname passedbuf)
+  setbufname filespec
+
+// load new buffer if none passed
+else
+  subdir = pos 'u' options
+  filespec = onname (qualify filespec (getbufname))
+  fileoptions = (sub 'd' '' _FmgrOpt) + 'f' + _NameStyle + (if? subdir 'vq' '')
+  scanbuf = loadbuf filespec '' '' fileoptions
+  if subdir then
+    diroptions = (sub 'f' '' fileoptions) + 'd'
+    insertbuf (qualify "*.*" filespec) '' '' diroptions '' '' (getlines)
+  end
+end
+
+if not scanbuf then
+  return
+end
+if not getlinelen or not (dir? filespec) then
+  destroybuf
+  display
+  queue "msgbox" filespec + " not found"
+  return
+end
+
+// create buffer to hold summary results
+resultbuf = createbuf
+
+currbuf scanbuf
+fmgr.fsort 'n'
+
+// create the status window
+if pos 'a' options then
+  replaceall = TRUE
+  options = options + '*'
+  createstatus (if? (getbinarylen)
+                    length (getpath filespec) + 37 status_qwidth)
+else
+  createstatus
+end
+display
+
+// set line delimiter to use
+delimit = hex2bin _LineDlm
+
+totalcount = 0
+backupfiles = pos 'B' options
+
+// do for all files in the scan buffer
+repeat
+
+  // get the next file
+  file = fmgr.fgetfile
+
+  // check for subdirectories
+  if file [LAST_CHAR] == '\\' then
+    if subdir and not (pos ".." file) then
+      insertbuf file + (getname filespec) '' '' fileoptions '' '' (getlines)
+      while not (getlinelen (getlines)) do
+        delline 1 (getlines)
+      end
+      insertbuf file + "*.*" '' '' diroptions  '' '' (getlines)
+    end
+
+  else
+    // display scan progress
+    writestr file
+    display
+
+    // replace-all (no-verify)
+    if replaceall then
+      if loadbuf file '' delimit then
+        count = replace searchstr replstr options
+        if count then
+          if backupfiles then
+            backup file
+          end
+          if not savebuf then
+            msgbox "Error saving " + file "Error!"
+          end
+          addline file:-48 + (thousands count):13 + " REPLACED" '' '' resultbuf
+        end
+        destroybuf
+      end
+
+    // replace w/verify
+    else
+      count = 0
+      if scanfile file searchstr options delimit then
+        if loadbuf file '' delimit then
+
+          // mark currently loaded file
+          x = getx
+          writestr "  <Ä-" status_marker_color
+
+          // use existing verify window
+          if verifywin then
+            gotowindow verifywin
+            oldbuffer = getwinbuf
+            setwincurs
+            destroybuf oldbuffer
+
+          // create verify window
+          else
+            createverify
+          end
+
+          // create cursor and attach to window
+          cursor = createcursor
+          setcursor 'v' + (if? (pos 'i' _DefaultSet 'i') 'i' '')
+          colorcursor (getpalette 4)
+          setwincurs cursor
+
+          // set window titles, syntax highlighting, undosize
+          settitle (getbufname) 'nl'  1  // filename
+          settitle ''           'nrx' 2  // status
+          setsyntax TRUE (onsyntax file)
+          undosize _UndoSize
+
+          // replace w/verify
+          count = verify searchstr replstr options
+
+          // exit all
+          if keycode == <esc> then
+            break
+          end
+
+          // replacements were made - save
+          if count then
+            if backupfiles then
+              backup file
+            end
+            if not savebuf then
+              msgbox "Error saving " + file "Error!"
+            end
+            addline file:-48 + (thousands count):13 + " REPLACED" '' '' resultbuf
+          end
+
+          gotobuf scanbuf
+          gotowindow statuswin
+
+          // remove file marker
+          writestr "     " status_text_color  x
+        end
+      end
+    end
+
+    // display number of replacements in the status window
+    if count > 0 then
+      totalcount = totalcount + count
+      settitle "Total: " + (thousands totalcount) + " REPLACED" 'sr' 2
+      gotoxy (getcoord 'x1') - 22
+      writestr (thousands count):13  status_count_color
+      writestr " REPLACED" status_text_color
+    end
+    writeline
+    display
+  end
+
+until not down
+
+breakoff
+
+// destroy the verify window and buffer if present
+if verifywin then
+  destroybuf (getwinbuf verifywin)
+end
+
+// destroy the status window
+destroywindow
+
+// destroy the scan buffer
+destroybuf scanbuf
+
+// check if anything was replaced
+gotobuf resultbuf
+if getlines > 1 then
+  ovltext "TOTAL:":-48 + (thousands totalcount):13 + " REPLACED" 1 1
+  popup (getcurrbuf) "Summary [replace " + searchstr + " with " + replstr + "]" 70
+else
+  queue "msgbox" "'" + searchstr + "' was not replaced in " + filespec
+end
+destroybuf resultbuf

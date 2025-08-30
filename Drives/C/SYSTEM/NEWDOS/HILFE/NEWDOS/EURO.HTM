@@ -1,0 +1,75 @@
+<HTML><HEAD><TITLE>EURO</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>EURO</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A><BR>
+<A HREF="ddd.htm">Allgemeines zu DDD</A> 
+<HR noshade color="silver"><PRE>sorgt fr die Darstellung der Euro-W„hrungssymboles auf dem Bildschirm 
+und/oder auf dem Drucker.
+
+<FONT COLOR="maroon">Installation</FONT>
+
+<FONT COLOR="blue">EURO [/e]</FONT> oder <A HREF="help:lh">LH</A> <FONT COLOR="blue">EURO [/e]</FONT>  
+
+/e  hier k”nnen Sie den ASCII-Code des Zeichens angeben, das durch das
+    Euro-Symbol ersetzt werden soll: <FONT COLOR="blue">/e238</FONT> z.B. bedeutet, daá EURO beim 
+    Drucken bzw. der Bildschirmausgabe das Zeichen î in das Euro-Symbol
+    verwandelt. 
+    Die Zahlenangabe muá immer dreistellig sein, ggf. mssen Sie fhrende 
+    Nullen eingeben.
+
+    Weiterhin k”nnen Sie in diesem Parameter das Aussehen des Euro-Zeichens 
+    auf dem Drucker beeinflussen: <FONT COLOR="blue">/e213+C=</FONT> z.B. bedeutet, daá Sie das ASCII-
+    Zeichen 213 als Euro-Symbol festlegen UND daá dieses beim Drucken durch 
+    šbereinander-Drucken der Zeichen C und = erzeugt werden soll. Vergessen 
+    Sie nicht das + im Parameter.
+
+Bei der Druckereinstellung k”nnen Sie ruhig ein wenig experimentieren, da das
+Ergebnis je nach Drucker-Typ und Schriftart sehr unterschiedlich sein kann.
+Aussichtsreiche Versuche starten sie mit [=, (=, C= oder anstelle 
+des = mit -, Í (ASCII-205) oder Ä (ASCII-196). 
+
+Fehlt /e, verwendet EURO automatisch das Zeichen 213 und druckt die Zeichen
+C und Ä (ASCII-196) bereinander. 
+
+Tip: Wenn Sie nicht wollen, daá EURO etwas an der Druckausgabe „ndert, dann 
+geben Sie zweimal x ein (Kleinbuchstabe): <FONT COLOR="blue">/e213+xx</FONT>. Dies ist vor allem dann 
+notwendig, wenn Sie Grafiken drucken wollen oder Sie einen Treiber fr Ihren 
+Drucker installiert haben, der das Euro-Symbol von sich aus untersttzt. 
+
+EURO sollten Sie am besten in Ihre AUTOEXEC.BAT aufnehmen.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Steuerung</FONT>
+
+Mit folgenden Standard-DDD-Parametern kann EURO nach der Installation 
+gesteuert werden:
+
+/x  aus dem Speicher entfernen
+/s  stillegen
+/r  reaktivieren<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anmerkungen</FONT> 
+ 
+Auf Schwarz-Weiá-Monitoren ist die Darstellung des Euro-Symboles aus 
+bauseitigen Grnden nicht m”glich. EURO erkennt den Monitortyp beim Start 
+und deaktiviert automatisch die Bildschirm-Steuerung. Auf sw-Monitoren 
+sollten Sie daher das ASCII-Zeichen î (ASCII-Nummer 238) als Euro verwenden.
+Dies muá mit dem New-DOS-Tastaturtreiber <A HREF="keyb.htm">KEYB</A> eingestellt werden
+(siehe dort).
+
+Bei VGA-Monitoren wird das ASCII-Zeichen 213 mit einem neuen Symbol - dem 
+Euro-Zeichen belegt: Õ. Falls Sie hinter dem Doppelpunkt kein Euro-Symbol 
+sondern ein eigenartiges Winkel-Element sehen, dann ist EURO noch nicht 
+installiert (oder Sie betrachten diesen Text mit einem sw-Monitor). Sie 
+k”nnen ein beliebiges anderes Zeichen als Euro-Symbol einstellen (s.o.).
+
+Das Drucken des Euro-Symbols ist nicht ganz so einfach, da die Standard-
+Einstellung auf verschiedenen Druckertypen und mit verschiedenen Schrift-
+Arten und -Gr”áen unterschiedliche Ergebnisse erzeugt. Sie k”nnen das 
+Aussehen des Euro-Symbols jedoch beeinflussen und somit an Ihren Drucker 
+anpassen.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

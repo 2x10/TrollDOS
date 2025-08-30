@@ -1,0 +1,21 @@
+
+ÿÿFILESTAT.AML
+ ÿDisplay File/Directory Statisticsÿ
+
+  This macro display statistics for the current File in an edit window,
+  or the current File or Directory in a file manager window.
+
+  The statistics displayed for a File are:
+
+    - Fully Qualified File Name
+    - File Size and Drive Free Space
+    - File Modification Date in Full Format
+    - File Attributes
+
+  The statistics displayed for a Directory are:
+
+    - Fully Qualified Directory Name
+    - Total Size of all Files and Drive Free Space
+    - Directory Creation Date in Full Format
+    - Directory Attributes
+

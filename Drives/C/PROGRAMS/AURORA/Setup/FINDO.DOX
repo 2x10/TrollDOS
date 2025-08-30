@@ -1,0 +1,40 @@
+
+ÿÿFINDO.AML
+ ÿFind Occurrencesÿ
+
+  This macro searches the current edit window for all occurrences of a
+  search string or regular expression pattern. You will be prompted to
+  enter the search string and search options.
+
+  The following search options can be specified:
+
+    b - marked block only
+    i - ignore case
+    s - skip closed folds
+    w - whole words only
+    x - regular expressions
+
+  After the search has completed, a window will be displayed showing
+  each line in the edit window where the search string was found. A menu
+  is also displayed which allows you to goto the line at cursor, edit
+  all displayed lines, and print all displayed lines.
+
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <esc>              // exit
+  <enter>            // goto occurrence and exit
+  <ctrl g>           // goto occurrence
+  <ctrl e>           // copy occurrences to a new edit window
+  <ctrl p>           // print all occurrences
+
+  <up>, <down>       // move cursor
+  <ctrl home>        // to page top
+  <ctrl end>         // to page bottom
+  <ctrl pgup>        // to top of list
+  <ctrl pgdn>        // to bottom of list
+
+  <pgup>, <pgdn>     // scroll up, down
+  <left>, <right>    // scroll left, right
+  <home>             // scroll to column 1
+

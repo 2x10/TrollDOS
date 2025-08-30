@@ -1,0 +1,58 @@
+<HTML><HEAD><TITLE>Dokument drucken mit PRINT:</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Dokument drucken mit PRINT:</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">ZurÅck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">ZurÅck zur öbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+
+Mit "Print" befehlen Sie dem Browser, das gerade angezeigte Dokument 
+auszudrucken. Gedruckt wird das Dokument dabei nicht als Quellcode, sondern 
+so, wie Sie es am Bildschirm sehen. (Mit dem HTML-Tag <A 
+HREF="../html/noprint.htm">&lt;NOPRINT&gt;</A>&lt;/NOPRINT&gt; kînnen Sie 
+jedoch Teile des Dokumentes von der Druckausgabe ausschlie·en.)
+<P>
+Der Name des Ziel-Druckers wird nach einem Doppelpunkt an die "Print"-
+Anweisung angehÑngt. Fehlt diese Angabe, druckt der Browser immer zu dem 
+Drucker, den der Anwender in der Browser-Konfiguration angegeben hat, in 
+der Regel "LPT1". Die Angabe eines anderen Druckers in der "Print"-
+Anweisung ist immer dann sinnvoll, wenn das Dokument in eine Datei 
+gedruckt werden soll.
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>print:</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+In diesem Beispiel wird zu dem voreingestellten Standard-Drucker gedruckt.
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>print:c:\druck.tmp</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Hier wird die Druckausgabe in die Datei "c:\druck.tmp" umgeleitet. Diese 
+Datei kann der Anwender spÑter mit einem Editor bearbeiten o.Ñ. Sinnvoll 
+ist die Umleitung in eine Datei z.B., wenn Sie dem Anwender vor dem 
+eigentlichen Druck zeigen wollen, wie das Dokument dann aussehen wird 
+(Druckvorschau). Dazu kînnen Sie hinter die "Print"-Anweisung eine "<A 
+HREF="href.htm">Href</A>"-Anweisung setzen, die einen Link zur Druckdatei 
+"c:\druck.tmp" legt, den Anwender also automatisch dorthin schaltet.
+<BR>
+ 
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>print:c:\druck.tmp<FONT 
+Color="yellow">;</FONT>href:c:\druck.tmp</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Ist der Anwender mit dem Druckbild einverstanden, kann er "c:\druck.tmp" 
+dann durch Anklicken des Druckbuttons des Browsers auf dem eingestellten 
+Drucker ausgeben und mit dem "ZurÅck"-Button zum Original-Dokument 
+zurÅckkehren.
+<P>
+Es sind hier auch <A HREF="../relpath.htm">relative Pfadangaben</A> mîglich.
+
+
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+ 
+</BODY></HTML>
+

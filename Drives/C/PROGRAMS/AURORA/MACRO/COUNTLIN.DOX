@@ -1,0 +1,29 @@
+
+ÿÿCOUNTLIN.AML
+ ÿCount Lines in Multiple Filesÿ
+
+  This macro counts the total number of lines and blank lines in
+  multiple files on disk. You will be prompted to enter a directory or
+  filespec.
+
+  The totals and the line counts for each file are listed in a popup
+  menu. Selecting a file from the menu displays the file in an edit
+  window. Selecting the first line of the menu displays the menu
+  contents in an edit window.
+
+  Countlin can be useful for counting the total lines of source code in
+  a directory or filespec.
+
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <esc>              // exit
+  <up>, <down>       // move cursor
+  <ctrl home>        // to page top
+  <ctrl end>         // to page bottom
+  <ctrl pgup>        // to top of menu
+  <ctrl pgdn>        // to bottom of menu
+
+  <pgup>, <pgdn>     // scroll up, down
+  <left>, <right>    // scroll left, right
+

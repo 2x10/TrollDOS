@@ -1,0 +1,68 @@
+//--------------------------------------------------------------------
+// HILITEWD.AML
+// Highlight Word, (C) 1993-1996 by nuText Systems
+//
+// This macro highlights the word at the cursor. The user is prompted to
+// select a color from a color chart. Cancelling the color chart will
+// remove the highlighting for the word.
+//
+// This macro also calls the Clrchart macro.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+window = getcurrwin
+
+variable word, sobj
+
+// called by CLRCHART.X when changing the color
+function oncolor (attr)
+  set word attr sobj
+  setframe '+' window
+  display
+end
+
+// get the syntax object to use
+sobj = onsyntax (getbufname)
+if not sobj then
+  if object? "xword" then
+    sobj = "xword"
+  else
+    return
+  end
+end
+
+// get the word at the cursor
+word = getword "a-zA-Z_0-9?"
+if not word then
+  display
+  say "No word at the cursor"
+  return
+end
+
+// turn syntax highlighting On
+setting 'X' ON sobj
+
+// call Clrchart to change the color
+value = runmacro (bootpath "macro\\clrchart.x") ''
+                 '' '' (getpalette 8) (getcurrobj)
+
+// remove highlight if Clrchart is cancelled
+if value == -1 then
+  destroyvar word sobj
+  setframe '+' window
+end
+
+display

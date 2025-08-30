@@ -1,0 +1,41 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGFIND.AML
+// Configuration for Search and Replace Options
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable searchopt, replopt
+
+// create dialog box
+dialog "Search Options" 41 13 "cp"
+
+// search options
+groupbox 'Default Search Options:' 3 2
+  (menu ''
+     item " [ ] &Block Only"
+     item " [ ] &Global Search"
+     item " [ ] &Ignore Case"
+     item " [ ] Search in &Reverse"
+     item " [ ] &Skip Closed Folds"
+     item " [ ] &Whole Words Only"
+     item " [ ] Regular E&xpressions "
+   end)  '' _SearchOpt "bgirswx"
+
+// replace options
+groupbox 'Default Replace Options:' 3 11
+  (menu ''
+     item " [ ] Replace &All"
+   end)  '' _ReplaceOpt "a"
+
+// ok/cancel buttons
+button "O&k"     31  3 8
+button "Cancel"  31  5 8
+
+// display dialog box
+if (getdialog ref searchopt ref replopt) == 'Ok' then
+  prf.SearchOpt = searchopt
+  prf.ReplaceOpt = replopt
+end

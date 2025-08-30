@@ -1,0 +1,10 @@
+
+ÿÿSYNCH.AML
+ ÿSynchronized Scrollingÿ
+
+  This macro toggles synchronized scrolling On/Off.
+
+  When synchronized scrolling is On, other windows will be scrolled by
+  the same amount as the topmost window. Only windows of the same type
+  as the topmost window (i.e. edit, fmgr) will be scrolled.
+

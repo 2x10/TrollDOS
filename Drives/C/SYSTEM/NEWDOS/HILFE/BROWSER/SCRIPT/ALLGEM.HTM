@@ -1,0 +1,102 @@
+<HTML><HEAD><TITLE>Die Script-Sprache des New-DOS-Browsers</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Die Script-Sprache des New-DOS-Browsers</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+Grunds„tzlich besteht ein Dokument fr den New-DOS-Browser aus Standard-
+HTML-Code. Wie auch die groáen Internet-Navigatoren untersttzt der New-DOS-
+Browser einen speziellen Befehlssatz, der JavaScript ein wenig „hnelt, 
+jedoch auch wieder so anders ist, daá ihn fremde Browser nicht (fehl-)
+interpretieren k”nnen.
+<P>
+Generell dienen die zus„tzlichen Befehle nicht der optischen Gestaltung der 
+Seite, sondern ausschlieálich zur Steuerung von Abl„ufen, der Ausfhrung 
+von Programmen und Datei-Operationen.
+<P>
+Der Befehlssatz ist sehr klein und einfach und soll keinesfalls eine 
+professionelle Programmiersprache sein, sondern mit wenigen Mitteln 
+ntzliche Dinge vollbringen.
+<P>
+Die Ausfhrung eines Script-Befehls bzw. einer Befehls-Sequenz kann durch 
+zwei Ereignisse ausgel”st werden:<PRE><FONT COLOR=navy>
+<LI>automatisch unmittelbar nach dem Laden eines Dokumentes. Der Ausl”ser 
+  (sog. "Event-Handler") heiát "load" und entspricht dem JavaScript-
+  Befehl "onLoad".
+<LI>Bei Anklicken/Bet„tigen eines Buttons. Hier heiát der Eventhandler
+  "click", der dem JavaScript-Befehl "onClick" gleichkommt.</FONT>
+
+</PRE>
+Beide Eventhandler werden in einem HTML-Tag untergebracht und laut HTML-
+Grundlage werden diese Befehle von fremden Browsern ignoriert - zumal sie 
+von diesen ohnehin nicht ausgefhrt werden k”nnten. Auf den Eventhandler 
+folgt ein Gleichheitszeichen und der oder die in Anfhrungszeichen 
+eingeschlossenen Script-Befehle:
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;BODY <FONT color=cyan>load</FONT>="read:daten.bnk, 1"&gt;<BR>
+&lt;INPUT TYPE=Button <FONT color=cyan>click</FONT>="read:daten.bnk, 1"&gt;
+</FONT><BR></TD></TR></TABLE>
+Regelrechte Scripte (wie in JavaScript) sind im New-DOS-Browser nicht 
+m”glich und w„ren aufgrund des kleinen und sehr speziellen Befehlsschatzes 
+auch kaum sinnvoll. Es ist lediglich m”glich, mehrere Script-Befehle 
+(voneinander durch ein Semikolon getrennt) „hnlich wie in JavaScript in 
+einer Zeile aufzufhren. Diese werden dann vom Event-Handler nacheinander 
+ausgefhrt.
+<BR>
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>read:daten.bnk,1</FONT>;<FONT color=cyan>print:</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Diese Kargheit ist jedoch Absicht. Eine aufwendige Scriptsprache wrde den 
+Browser unn”tig aufbl„hen, langsamer und fehleranf„lliger machen (Stichwort 
+"JavaScript-Error"). Unn”tig vor allem deshalb, weil damit 
+Funktionsgruppen in New-DOS doppelt vorhanden w„ren: Das Kopieren von 
+Dateien oder Verzeichnissen z.B. kann XCOPY am besten und deswegen wird der 
+Browser so etwas nicht selbst machen, sondern an XCOPY delegieren. 
+Verbesserungen an XCOPY infolge von New-DOS-Updates fhren so auch 
+automatisch zu Verbesserungen der M”glichkeiten des Browsers selbst. 
+Auáerdem haben Sie die freie Wahl, anstelle von XCOPY ein anderes 
+Kopierprogramm aufzurufen.
+<P>
+Die wesentlichen Aufgabengebiete der Script-Sprache sind also
+<PRE> 
+<FONT COLOR=navy>
+1.  Formatieren der im aktuellen Dokument (Formular) eingegebenen
+    Daten zu einer Kommandozeile oder zu einem Datensatz</FONT><FONT COLOR=brown>
+
+2a. Ausfhren externer Programme (auch Batchdateien, RUN-Scripte)
+    mit šbergabe der unter 1. formatierten Daten in Form einer
+    Kommandozeile oder einer tempor„ren Datei</FONT><FONT COLOR=navy> 
+
+2b. Verwaltung (Lesen, Schreiben, L”schen, Anh„ngen) von Formulareingaben
+    in einer Datenbank-Datei</FONT><FONT COLOR=brown>
+ 
+3.  Entgegennahme und Aufschlsselung des Ergebnisses der von externen 
+    Funktionsgruppen durchgefhrten Operation(en)</FONT><FONT COLOR=navy>
+ 
+4.  Einige wenige zus„tzlichen Befehle wie z.B. das Warten auf eine
+    Tastatureingabe durch den Anwender („hnlich "pause" in Batch-Dateien),
+    das Ausdrucken eines Dokumentes oder der Aufruf der originalen
+    DOS-Hilfe</PRE>
+</FONT>
+<P>
+Dieser Befehlsschatz reicht im Grunde aus, um auch aufwendigere 
+Operationen auszul”sen. Anders als bei normalen Browsern sind Sie also 
+nicht von den M”glichkeiten (oder Unm”glichkeiten) der dort untersttzten 
+Scriptsprache abh„ngig.
+<P>
+Externe Funktionsgruppen k”nnen neben Programmen wie dem schon erw„hnten 
+XCOPY auch andere kommandozeilentaugliche Objekte sein, wie z.B.
+Batchdateien oder RUN-Programme.
+<P>
+Fazit: Sie mssen nur wenig Neues hinzulernen und k”nnen doch auf einen 
+groáen Pool sicherer und ausgereifter Funktionen des DOS-Systems 
+zurckgreifen.
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

@@ -1,0 +1,77 @@
+<HTML><HEAD><TITLE>YEAR2094</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>YEAR2094</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A> 
+<HR noshade color="silver"><PRE>YEAR2094 prft bei jedem Rechner-Neustart das System-Datum und korrigiert
+dieses Datum, falls es durch den Jahr-2094-Fehler verf„lscht ist. Auch der
+selten auftretende Jahr-2096-Fehler wird korrigiert.
+
+<FONT COLOR="maroon">Installation</FONT>
+
+1. Wenn noch nicht geschehen, stellen Sie zun„chst von Hand das korrekte
+   aktuelle Datum ein, z.B. mit dem DOS-Befehl "date 16.3.2000".
+ 
+2. Tragen Sie in die Datei AUTOEXEC.BAT folgenden Befehl ein:
+
+   <FONT color="navy">Laufwerk:\Verzeichnis\YEAR2094.COM</FONT>
+
+   Anstelle von "Laufwerk" und "Verzeichnis" nennen Sie den vollst„ndigen
+   Verzeichnispfad von YEAR2094.COM ein, z.B. "c:\dos\YEAR2094.com". Falls
+   Sie noch das Vorl„uferprogramm YEAR2000.COM dort eingetragen haben,
+   entfernen Sie dessen Aufrufbefehl.
+
+3. Starten Sie YEAR2094.COM einmalig von Hand mit dem Parameter /i (z.B.
+   year2094 /i). Mehr hierzu siehe im folgenden in "Anwendung".
+
+<FONT color="red">Wichtig!</FONT> Der Datentr„ger, auf dem YEAR2094.COM gespeichert ist, darf
+nicht schreibgeschtzt sein!
+
+Unbedingt empfehlenswert ist die Aufnahme dieses Befehles in die AUTOEXEC.BAT<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT> 
+
+Da sich die tats„chliche Jahreszahl aus technischen Grnden nicht aus der 
+verf„lschten ableiten l„át, fhrt YEAR2094 intern Protokoll, um das 
+aktuelle Jahr und auch einen Jahreswechsel erkennen zu k”nnen. 
+
+Wie unter "Installation" beschrieben, muá YEAR2094 daher vor dem Ersteinsatz
+einmalig von Hand mit dem Parameter /i gestartet werden. Dabei speichert 
+YEAR2094 das aktuelle Datum als Ausgangswert fr alle sp„teren 
+Korrekturberechnungen. Dies setzt voraus, daá Sie zuvor auf dem PC ein
+korrektes Datum eingestellt haben (DOS-Befehl DATE).
+
+Sollte YEAR2094 sp„ter ein falsches Datum einstellen, wiederholen Sie
+die im vorigen Absatz beschriebene Prozedur. Zu einem Fehler bei der
+Datums-Korrektur kommt es z.B. dann, wenn...
+
+- der betreffende PC l„nger als ein Jahr nicht eingeschaltet wurde
+- Sie z.B. zu Experimentierzwecken ein falsches Datum einstellen und den 
+  Rechner damit neu starten
+- Sie YEAR2094 auf einer Startdiskette installiert haben, die l„nger als
+  ein Jahr nicht benutzt wurde
+- der Datentr„ger mit YEAR2094 schreibgeschtzt ist
+
+Am 29.2. in Schaltjahren verf„lscht der Jahr-2094-Fehler nicht nur die
+Jahreszahl, sondern auch Tag und Monat. Wird der PC am 29.2 eines 
+Schaltjahres eingeschaltet, dreht DOS das Datum auf den 1.3. vor. Durch 
+einen Fehler, den DOS dabei macht, kann YEAR2094 diese Datumsverf„lschung 
+jedoch wieder rckg„ngig machen. Es kann allerdings nicht mit Sicherheit 
+gesagt werden, daá sich jede DOS-Version so verh„lt. Fhren Sie also
+sicherheitshalber vorher einen Test durch. Installieren Sie YEAR2094
+zun„chst, wie oben unter Punkt 3. beschrieben und fahren Sie dann wie
+folgt fort:
+
+1. Geben Sie als Systemdatum den 29.2.2000 ein (oder 2004, 2008 usw.)
+2. Geben Sie den DOS-Befehl YEAR2094 /i
+3. Schalten Sie den PC aus und danach wieder ein
+4. Prfen Sie das Systemdatum: Es muá der 29.2. sein - ist es der 1.3.,
+   mssen Sie diesen Fehler sp„ter per Hand korrigieren.
+
+Achten Sie bei diesem Test darauf, daá die Uhr ihres PC nicht auf kurz
+vor Mitternacht steht. Nach dem Test stellen Sie wieder das korrekte Datum
+ein und geben <FONT COLOR="red">unbedingt nochmals den Befehl YEAR2094 /i</FONT></PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

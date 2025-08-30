@@ -1,0 +1,167 @@
+//--------------------------------------------------------------------
+// WHERE.AML
+// Where-is Utility, (C) 1993-1996 by nuText Systems
+//
+// (see Where.dox for user help)
+//
+// This macro searches all directories on one or more disk drives for a
+// filename or filespec. After the search has completed, a file manager
+// window will be displayed, listing all the located files in
+// fully-qualified format.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include  bootpath "define.aml"
+
+constant where_border_color        = color white on gray
+constant where_text_color          = color black on gray
+constant where_border_flash_color  = color brightgreen on gray
+constant where_south_title_color   = color darkgray on green
+
+// create the status window
+private function createstatus (filespec)
+  createwindow 'scan'
+  setframe ">bsv"
+  setcolor  border_color        where_border_color
+  setcolor  north_title_color   where_border_color
+  setcolor  south_title_color   where_border_color
+  setcolor  text_color          where_text_color
+  setcolor  border_flash_color  where_border_flash_color
+  setcolor  south_title_color   where_south_title_color
+  settitle "Where is " + filespec
+  setwinctrl "ð"
+  setborder "1i"
+  setshadow 2 1
+
+  // center the window
+  width  = 67
+  height = 14
+  ox = (getvidcols - width) / 2
+  oy = (getvidrows - height) / 2
+  sizewindow ox oy ox + width oy + height "ad"
+end
+
+variable resultbuf, filespec, formatopt
+
+dircount = 0
+filecount = 0
+
+// scan directories recursively for a filespec
+private function scandir (filespec directory)
+
+  // is filespec found in the directory?
+  if file? filespec directory then
+    fullspec = qualify filespec directory
+
+    // wildcard filespec specified?
+    if poschar '*?' filespec then
+      insertbuf fullspec resultbuf '' "fh" + formatopt '' '' (getlines)
+      filecount = filecount + (getloadinfo 'f')
+
+    // complete filename was specified
+    else
+      addline (getfileinfo fullspec 'e' + formatopt) '' '' resultbuf
+      filecount = filecount + 1
+    end
+    writeline fullspec
+  end
+
+  // scan window status line
+  dircount = dircount + 1
+  settitle  "Files: " + (thousands filecount) +
+            "  Directories Searched: " + (thousands dircount) 'sl' 2
+  display
+
+  // get a directory listing
+  if loadbuf directory + "*.*" '' '' "dhs" + formatopt then
+    if getloadinfo 'd' then
+      repeat
+        scandir filespec (gettext)
+      until not down
+    end
+    destroybuf
+  end
+end
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+// set default drives (all drives except floppies)
+initdrives = sub 'B' '' (sub 'A' '' (getdisk 'm'))
+drives = initdrives
+
+// dialog box to get filespec and drives
+dialog "Where is" 65 5 "c"
+field "&Search for: >"  3  2 38 (getname (getbufname)) "_load"
+field "In &Drives:  >"  3  4 35 drives
+button "O&k"      55 2 8
+button "Cancel"   55 4 8
+if (getdialog ref filespec ref drives) <> 'Ok' then
+  return
+end
+
+// check filespec and drives
+filespec = onname filespec
+path = getpath filespec
+if path then
+  filespec = getname filespec
+else
+  path = '\\'
+end
+
+if not filespec then
+  filespec = "*.*"
+end
+
+// directory format for resultbuf
+formatopt = 'vq'+ _NameStyle + (if? (pos 'k' _FmgrOpt) 'k')
+
+// create result buffer and status window
+resultbuf = createbuf
+createstatus filespec
+settitle "Press <ctrl break> to stop" 'r' 3
+
+if path [2] == ':' then
+  scandir (getname filespec) path
+else
+  // scan each drive
+  if not drives then
+    drives = initdrives
+  end
+  drives = upcase drives
+  for i = 1 to length drives do
+    scandir filespec (onname drives [i]) + ":" + path
+  end
+  breakoff
+end
+
+// cleanup
+breakoff
+destroywindow
+currbuf resultbuf
+
+// success
+if getlines > 1 then
+  // delete first blank line
+  delline
+  setbufname filespec + (if? not (poschar '*?' filespec) '*' '')
+  queue "openbuf" resultbuf
+  say "Sorting..."
+
+// nothing found
+else
+  destroybuf
+  queue "msgbox" filespec + " not found"
+end

@@ -1,0 +1,63 @@
+---------------------------------------------------------------------
+PKZIP (R) FAST! Create/Update Utility Version 2.50 03-01-1999
+Copyright 1989-1999 PKWARE Inc. All Rights Reserved
+PKZIP Reg. U.S. Pat. and Tm. Off. Patent No. 5,051,745
+--------------------------------------------------------------------- 
+
+The PK250UPD.ZIP file contains all the files necessary to update 
+PKZIP 2.04g for DOS to PKZIP 2.50 for DOS. The contents of the 
+PK250UPD.ZIP file will be extracted into the directory (e.g. 
+c:\pkware) where the PKZIP 2.04g program files reside. A full 
+installation of the REGISTERED version of PKZIP 2.04g for DOS *must*
+reside in this directory for the update process to work properly. 
+
+Applying the Update  
+---------------------
+To apply the PKZIP 2.50 for DOS update:
+
+1. Follow all instructions for downloading the PKZIP 2.50 for DOS 
+   update (i.e. PK250UPD.ZIP) file.
+   
+   or
+   
+   Insert the diskette labeled PKZIP for DOS Version 2.50 Update
+   into an appropriate diskette drive.
+
+2. Change to the drive and/or directory where the PK250UPD.ZIP file
+   resides and (using PKUNZIP) extract the contents of this file into
+   the PKZIP 2.04g installation directory (e.g. c:\pkware) by typing 
+   a command similar to the following:
+   
+     pkunzip pk250upd.zip c:\pkware
+ 
+   where "c:\pkware" is the directory where the original PKZIP 2.04g
+   for DOS REGISTERED version file set resides. Several files will be
+   extracted into this directory.
+   
+3. Change to aforementioned installation directory (e.g. c:\pkware)
+   and type the following:
+
+     pk250upd.bat
+
+   Follow all instructions that appear. If the update process is
+   successful, a message similar to the following will appear:
+   
+     Successfully updated PKZIP for DOS to Version 2.50!
+     
+   This completes the update process. A backup of the original PKZIP
+   2.04g installation file set will be copied into the VER_204G
+   directory nested under the installation/update directory. If you 
+   wish to reapply the update you will need to do so on this 
+   particular file set.
+   
+Note: The files contained in PK250UPD.ZIP file will only update the 
+      English REGISTERED version of PKZIP 2.04g. The update process
+      will preserve previously embedded Authenticity Verification 
+      (i.e. AV) information.
+      
+Support Documentation
+-----------------------
+For extensive information on configuring and using PKZIP for DOS, 
+refer to the ADDENDUM.TXT, HINTS.TXT, MANUAL.TXT, and WHATSNEW.TXT 
+files. These files are located in the installation/update directory
+after completion of the update process.

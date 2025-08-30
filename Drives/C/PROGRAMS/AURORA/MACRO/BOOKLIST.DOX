@@ -1,0 +1,33 @@
+
+ÿÿBOOKLIST.AML
+ ÿList all Bookmarksÿ
+
+  This macro lists all bookmarks in the current edit session. For each
+  bookmark, the following data is displayed:
+
+    - bookmark name
+    - filename containing the bookmark
+    - bookmark column
+    - bookmark line
+    - text at the bookmark location
+
+  A menu is also displayed which allows you to goto a bookmark, delete a
+  bookmark, and delete all bookmarks.
+
+  Note: this macro will not handle bookmark names longer than 9 chars.
+
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <enter>            // goto bookmark
+  <del>              // delete bookmark
+  <ctrl d>           // delete all bookmarks
+  <esc>              // exit
+  <up>, <down>       // move cursor
+  <left>, <right>    // scroll left, right
+
+ÿÿMouse:
+  ÄÄÄÄÄ
+  Single Click on:
+    bookmark         // goto bookmark
+

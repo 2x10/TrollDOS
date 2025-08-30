@@ -1,0 +1,85 @@
+//--------------------------------------------------------------------
+// PROJOPEN.AML
+// Open Project, (C) 1993-1996 by nuText Systems
+//
+// (see Projopen.dox for user help)
+//
+// This macro opens a project saved previously with the Projsave macro.
+// If the filename is not passed as arg 3, then the user is prompted
+// to enter the project filename.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// bookmark history buffer
+constant HISTORY = '_book'
+
+// book field delimiters and regexp patterns
+constant DELIM = '\x00'
+constant FIELD = '{[~' + DELIM + ']+}' + DELIM + '#'
+constant BOOKFIELDS = FIELD + FIELD + FIELD + FIELD + FIELD + FIELD
+
+// mark history buffer
+constant MARK = '_mark'
+
+// edit windows only
+object edit
+
+function onopen
+
+  variable bookmark, filename, viewleft, viewtop, column, line
+
+  passprev
+
+  name = getbufname
+  pushcursor
+
+  // restore bookmarks from the bookmark history buffer
+  oldbuf = gotobuf HISTORY
+  if oldbuf then
+    pushcursor
+    gotopos 1 1
+    while find DELIM + name + DELIM do
+      // parse history line into fields
+      parse BOOKFIELDS (gettext) 'x' ref bookmark ref filename
+                                     ref viewleft ref viewtop
+                                     ref column   ref line
+      gotobuf oldbuf
+      scrollcol viewleft
+      scrollrow viewtop
+      gotopos column line
+      setbook bookmark
+      gotobuf HISTORY
+    end
+    popcursor
+    gotobuf oldbuf
+  end
+  popcursor
+end
+
+object entry
+
+file = arg 3
+if not file
+  file = ask "Restore current state from project file" "_load"
+end
+
+if file then
+  if openhistory (qualify (defext file "prj") (getbufname)) then
+    restoredesk 'c'
+    // restore marked block
+    if buffer? MARK then
+      command = gettext 1 MAX_COL 1 MARK
+      eval command [1..length command - 1]
+      destroybuf MARK
+    end
+  else
+    msgbox "Can't open " + file
+  end
+end

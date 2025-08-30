@@ -1,0 +1,219 @@
+[EXTRAS]
+S; ScanFix / ScanDrive...          ; GOTO SCANFIX 
+R; Ram2Disk...                     ; GOTO RAM2DISK
+K; Terminalarm...                  ; GOTO TERMIN
+E; Editoren...                     ; GOTO EDITOREN
+F; Formatiere...                   ; GOTO FORMAT
+C; CleanDisk...                    ; GOTO CLEANDISK
+U; RUN-Programmierung...           ; GOTO RUN
+D; DOSBOX...                       ; GOTO DOSBOX
+B; Backup - Restore...             ; GOTO BACKUP
+M; Multi-Volumes...                ; GOTO MULTIVOL
+V; Datei verschlÅsseln...          ; GOTO CRYPT
+P; Space / Text2Exe...             ; GOTO SPACE
+A; Replace...                      ; GOTO REPLACE
+O; Verzeichnisse vergleichen       ; -@echo off
+                                     -[C]dircomp [P] [Z] /s /l /p
+                                     -pause
+[ENDE]
+
+[CRYPT]
+A; Datei VERschlÅsseln (SchlÅsseldisk in A:) ; [C]crypt /v [Q]
+B; Datei VERschlÅsseln (SchlÅsseldisk in B:) ; [C]crypt /v [Q] b:\crypt.key
+E; Datei ENTschlÅsseln (SchlÅsseldisk in A:) ; [C]crypt /e [Q]
+F; Datei ENTschlÅsseln (SchlÅsseldisk in B:) ; [C]crypt /e [Q] b:\crypt.key
+X; SchlÅssel auf Diskette in A: erstellen    ; [C]crypt /s
+Y; SchlÅssel auf Diskette in B: erstellen    ; [C]crypt /s b:\crypt.key
+H; Hilfe zu CRYPT                            ; [C]help crypt  
+[LINE]
+Q; zum HauptmenÅ ...                         ; GOTO EXTRAS
+[ENDE]
+
+[FORMAT]
+F; Formatiere 1.44 MB                 ; format a: /u /autotest
+G; Formatiere 720  kB                 ; format a: /f:720 /u /autotest 
+T; Formatiere 1.2  MB                 ; format b: /u /autotest 
+I; Formatiere 360  kB                 ; format b: /4 /autotest 
+A; Quick-Format A:                    ; format a: /q /u /autotest 
+B; Quick-Format B:                    ; format b: /q /u /autotest 
+X; Systemdisk 1.44 MB A:              ; format a: /u /s /autotest 
+Y; Systemdisk 720  kB A:              ; format a: /f:720 /u /s /autotest
+L; DOS-Hilfe zum Formatieren          ; help format
+R; Refresh - Auffrischformatierung A: ; [C]refresh a:
+E; Refresh - Auffrischformatierung B: ; [C]refresh b:
+M; Refresh - mehrere Disketten in A:  ; [C]refresh a: /w
+N; Refresh - mehrere Disketten in B:  ; [C]refresh b: /w
+H; Refresh - Hilfe                    ; [C]help refresh
+Q; zum HauptmenÅ ...                  ; GOTO EXTRAS
+[ENDE]
+
+[RUN]
+R; RUN-Datei - Starten                     ; [C]run.exe [Q]
+D; RUN-Datei - EinzelschrittausfÅhrung     ; [C]run.exe [Q] /debug 
+C; RUN-Datei - Testlauf (CUT-Modus)        ; [C]run.exe [Q] /cut 
+L; RUN-Datei - öbersetzung anzeigen        ; [C]run.exe [Q] /list  
+P; RUN       - Programmierumgebung starten ; [C]ed.exe [C]Run\noname.run
+H; RUN       - Hilfe                       ; [C]help run 
+[LINE]
+Q; zum HauptmenÅ ...                       ; GOTO EXTRAS
+[ENDE]
+
+ 
+[RAM2DISK]
+R; Ram2Disk            ; [C]Ram2Disk
+F; Filter              ; [C]Filter
+O; RAM2DISK.LOG zeigen ; [V][C]ram2disk.log
+D; RAM2DISK.FIL zeigen ; [V][C]ram2disk.fil 
+B; RAM2DISK.BLC zeigen ; [V][C]ram2disk.blc 
+H; Ram2Disk - Hilfe    ; [C]help ram2disk 
+I; Filter   - Hilfe    ; [C]help filter 
+[LINE]
+Q; zum HauptmenÅ ...   ; GOTO EXTRAS
+[ENDE]
+ 
+
+[EDITOREN]
+A; DiskEdit A:  - Normaldiskette   ; [C]diskedit a:
+U; DiskEdit A:  - unbekannte Disk  ; [C]diskedit a: /u
+M; DiskEdit A:  - MAC-Diskette     ; [C]diskedit a: /u /m
+N; DiskEdit B:  - Normaldiskette   ; [C]diskedit b:
+C; DiskEdit C:                     ; [C]diskedit c:
+H; DiskEdit     - Hilfe            ; [C]help diskedit 
+[LINE]
+X; HEX-Editor                      ; [C]hexe [Q]
+T; HEX-Editor   - Textmodus        ; [C]hexe [Q] /b
+L; HEX-Editor   - Hilfe            ; [C]help hexe 
+[LINE]
+B; BinÑr-Editor                    ; [C]ED.EXE [Q] /b /l:70
+[LINE]
+Q; zum HauptmenÅ ...               ; GOTO EXTRAS
+[ENDE]
+
+; alle Ausgaben von Befehlen der DOS-Box werden in eine Datei umgeleitet, 
+; die anschlie·end angezeigt wird 
+[DOSBOX]
+C; Checkdisk (aktuelles Laufwerk)  ; CHKDSK 
+E; Dateien reparieren              ; CHKDSK /F 
+X; Fragmentierung prÅfen           ; CHKDSK *.* | find "zusammenhÑngend"  
+D; DIR  - GesamtÅbersicht          ; DIR /S/O:N  
+H; DIR  - Versteckte Dateien       ; DIR /S/A:H 
+B; DIR  - Alle Pfade               ; DIR /S/L/B  
+T; TREE - Verzeichnisbaum          ; TREE  
+F; TREE - Verzeichnis- & Dateibaum ; TREE /F 
+I; TREE - Baum (ASCII-Darstellung) ; TREE /F/A 
+M; RAM  - Standard-Anzeige         ; MEM
+P; RAM  - Programmstatus           ; MEM /P 
+R; RAM  - Programme/Treiber        ; MEM /D 
+G; RAM  - Grî·enanzeige            ; MEM /C 
+Y; DatentrÑgername in Laufwerk A:  ; VOL A:
+U; Liste der gelîschten Dateien    ; undelete /list
+[ENDE]
+ 
+
+[CLEANDISK]
+C; CleanDisk - Eingabeaufforderung; [D] [C]Cleandsk.exe
+T; CleanDisk *.TMP+*.BAK+*.$$$    ; [D] [C]Cleandsk.exe *.TMP+*.BAK+*.$$$
+B; CleanDisk *.BAK                ; [D] [C]Cleandsk.exe *.bak
+S; CleanDisk *.$$$                ; [D] [C]Cleandsk.exe *.$$$
+T; CleanDisk *.TMP                ; [D] [C]Cleandsk.exe *.TMP
+H; Hilfe zu CleanDisk             ; help cleandsk
+[LINE]
+Q; zurÅck zum HauptmenÅ ...       ; GOTO EXTRAS
+[ENDE]
+
+[TERMIN]
+S; Terminalarm - nur Alarm suchen   ; [D][C]kalender /s
+E; Terminalarm - Neueingabe/Ansicht ; [D][C]kalender
+H; Terminalarm - Hilfe              ; [C]help kalender
+[LINE]
+Q; zum HauptmenÅ ...; GOTO EXTRAS
+[ENDE]
+
+[MULTIVOL]
+K; Kopiere ADDVOL auf die erste Diskette in A:      ; copy [C]addvol.exe A:
+M; Datei auf mehrere Disketten verteilen A:         ; [C]multivol.exe [Q] A:
+Z; Zusammensetzen von Disketten in A: zu einer Datei; [C]addvol.exe A: [P]
+V; Anzeigen der Disketten in A:                     ; [C]viewvol.exe A:
+[LINE]
+H; Hilfe zu Multivol                                ; [C]help multivol
+A; Hilfe zu AddVol                                  ; [C]help addvol
+I; Hilfe zu Viewvol                                 ; [C]help viewvol
+[LINE]
+Q; zum HauptmenÅ ...                                ; GOTO EXTRAS
+[ENDE]
+
+[SCANFIX]
+N; Scanfix A:  - Normaldiskette    ; [D][C]scanfix a:
+S; Scanfix A:  - Sonderformate     ; [D][C]scanfix a: /s
+M; Scanfix A:  - MAC-Diskette      ; [D][C]scanfix a: /t /s
+U; Scanfix A:  - unbekanntes Format; [D][C]scanfix a: /t /s
+T; Scanfix A:  - mehrere Disketten ; [D][C]scanfix a: /r
+H; Scanfix     - Hilfe             ; [C]help scanfix 
+[LINE]
+C; Scandrive   - MenÅ              ; [D][C]scandrv
+S; Scandrive   - Hilfe             ; [C]help scandrv
+[LINE]
+Q; zum HauptmenÅ ...               ; GOTO EXTRAS
+[ENDE]
+
+[BACKUP]
+B; Backup  - alle Dateien                  ; [D][C]xcopy [P] [Z] /e /r /h /o /y
+D; Backup  - nur aktuelle und neue Dateien ; [D][C]xcopy [P] [Z] /e /r /h /o /y /d
+V; Verzeichnisabgleich                     ; [D][C]xcopy [P] [Z] /e /r /h /o /y /dg
+R; Restore - Einzeldiskette  komplett      ; [D][C]xcopy [P] [Z] /e /r /h /o /y
+T; Restore - Diskettenstapel komplett      ; [D][C]xcopy [P] [Z] /e /r /h /o /y /w
+U; Restore - Einzeldiskette  nur aktuellere; [D][C]xcopy [P] [Z] /e /r /h /o /y /d
+V; Restore - Diskettenstapel nur aktuellere; [D][C]xcopy [P] [Z] /e /r /h /o /y /d /w
+L; LOG-Datei anzeigen                      ; [V]C:\DOSERROR.LOG
+[LINE]
+Q; zum HauptmenÅ ...                       ; GOTO EXTRAS
+[ENDE]
+
+[SPACE]
+P; Space    - Datei packen                      ; [D][C]space /p [Q]
+E; Space    - Datei entpacken                   ; [D][C]space /e [Q]
+S; Space    - alle Dateien packen               ; [D][C]space /p [P]*.*
+A; Space    - alle Dateien entpacken            ; [D][C]space /e [P]*.*
+H; Space    - Hilfe                             ; [C]help space 
+[LINE]
+T; Text2Exe - Text-Datei in EXE-Datei verwandeln; [D][C]text2exe [Q]
+I; Text2Exe - Hilfe                             ; [C]help text2exe 
+Q; zum HauptmenÅ ...                            ; GOTO EXTRAS
+[ENDE]
+
+
+[REPLACE]
+C; ALLE Dateien in Laufwerk C: ersetzen; [D][C]replace [Q] C:\ /s /r /h /p /o
+A; ALLE Dateien in Laufwerk A: ersetzen; [D][C]replace [Q] A:\ /s /r /h /p /o
+B; ALLE Dateien in Laufwerk B: ersetzen; [D][C]replace [Q] A:\ /s /r /h /p /o
+H; Hilfe                               ; [C]help replace
+[LINE]
+Q; zum HauptmenÅ ...                   ; GOTO EXTRAS
+[ENDE]
+
+;--------------------------------------------------------------------------
+
+[HILFE]
+D; NEW-DOS bestellen            ; [C]Browser.exe [C]hilfe\newdos\bestell.htm 
+I; Hilfe-Index Comander         ; [H]main
+I; Hilfe-Index New-DOS          ; [C]help
+T; Setup                        ; [C]setup
+A; Allgemeine Hilfe             ; [H]Allgemei
+U; Unsichtbare Tasten           ; [H]Geheim
+T; Trickkiste                   ; [H]Tricks
+M; Comander-MenÅs bearbeiten ...; GOTO EDITIEREN
+[ENDE]
+
+[EDITIEREN]
+C; Globales BenutzermenÅ editieren                      ; [E] [C]dc.mnu
+A; BenutzermenÅ im aktuellen Verzeichnis editieren      ; [E] dc.mnu
+M; Globales Hilfe-Extras-MenÅ editieren                 ; [E] [C]intern.mnu
+E; Hilfe-Extras-MenÅ im aktuellen Verzeichnis editieren ; [E] intern.mnu
+V; Globale VerknÅpfungsdatei bearbeiten                 ; [E] [C]Autostar.ini
+D; VerknÅpfungsdatei im aktuellen Verzeichnis bearbeiten; [E] Autostar.ini
+H; Hilfe                                                ; [H]Menuedit
+[LINE]
+Q; zum HauptmenÅ; GOTO HILFE
+[ENDE]
+
+

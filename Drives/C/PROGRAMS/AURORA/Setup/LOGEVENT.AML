@@ -1,0 +1,200 @@
+//--------------------------------------------------------------------
+// LOGEVENT.AML
+// Log Events, (C) 1993-1996 by nuText Systems
+//
+// (see Logevent.dox for user help)
+//
+// Running this macro will cause the editor to log the following editor
+// events:
+//
+//   - log begin
+//   - opening files and file manager windows
+//   - closing files and file manager windows
+//   - saving files
+//   - switching the focus to another file or window
+//
+// Logged events can be viewed by pressing <ctrl f11>, or by running
+// Logevent again. The following information is displayed in a log
+// window for each event:
+//
+//   - the date and time the event occurred
+//   - the name of the event
+//   - the file or directory associated with the event
+//
+// A menu is displayed on the log window, allowing the log to be
+// cleared, removed (uninstalled), copied to an edit window, and
+// printed.
+//
+// The current log is appended to the file Macro\Logevent.log when
+// removing the log or exiting the editor.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// initial window dimensions
+constant log_width  = 72
+
+// log filename
+constant log_file = "macro\\logevent.log"
+
+// colors
+constant log_title_color        = color black on gray
+constant log_menu_color         = color white on blue
+constant log_menu_hotkey_color  = color yellow on blue
+constant log_menu_hilite_color  = color white on cyan
+
+// if already installed, then view the event log
+if prf.logobj then
+  queueobject prf.logobj "viewlog"
+  return
+end
+
+// inherit from popup windows
+settype "popup"
+
+variable logbuffer, oldbuffer
+
+// cleanup when the log is removed or the editor is closed
+event <destroy>
+  // save the current log
+  savebuf (bootpath log_file) 'a' logbuffer
+  if logbuffer then
+    destroybuf logbuffer
+  end
+  destroyvar "logobj" "prf"
+end
+
+// log an event
+function log (text start)
+  addline getdate + ' ' + (gettime -1) + "  " + text:-10 +
+          (onname (getbufname))  '' '' logbuffer
+end
+
+// clear the log and start over
+function lclear
+  deleteblock '*a'
+  log "begin"
+  delline
+end
+
+// remove (uninstall) the log
+function lremove
+  close
+  destroyobject
+end
+
+// copy the log to a new edit window
+function ledit
+  close
+  editbuf = createbuf
+  setbufname (qualify "logevent.txt" oldbuffer)
+  gotobuf logbuffer
+  copyblock '*a' editbuf 1 1
+  gotobuf editbuf
+  delline
+  openbuf editbuf
+end
+
+// print the log
+function lprint
+  print
+end
+
+// key definitions for the log window
+key <ctrl c>  lclear
+key <ctrl r>  lremove
+key <ctrl e>  ledit
+key <ctrl p>  lprint   end
+
+// macro help
+macrofile = arg 1
+key <f1>
+  helpmacro macrofile
+end
+
+// called when the log window is created
+function onopen
+  setcolor north_title_color  log_title_color
+  setcolor menu_color         log_menu_color
+  setcolor menu_hotkey_color  log_menu_hotkey_color
+  setcolor menu_hilite_color  log_menu_hilite_color
+  setframe "+4"
+  menubar '' 4
+    item "{Ctrl-C}=Clear"     lclear
+    item "{Ctrl-R}=Remove"    lremove
+    item "{Ctrl-E}=Edit"      ledit
+    item "{Ctrl-P}=Print"     lprint
+    item "{Esc}=Exit"         close
+  end
+  if (getcoord 'y') + 2 <= getvidrows then
+    sizewindow 0 0 0 2
+  end
+  setwinctrl "ð" 2
+  row (getlines)
+end
+
+// view the event log
+function viewlog
+  oldbuffer = getcurrbuf
+  popup logbuffer "Event Log" log_width getvidrows - 10 (getcurrobj)
+end
+
+// create and initialize the log buffer
+oldbuffer = getcurrbuf
+logbuffer = createbuf
+log "begin"
+delline
+currbuf oldbuffer
+
+// make this object_id accessible to edit_fmgr below
+prf.logobj = getcurrobj
+
+
+// trap edit/fmgr window events
+object edit_fmgr
+
+// log an event
+private function log (text)
+  sendobject prf.logobj "log" text
+end
+
+// trap edit_fmgr events:  onopen, onclose, onsave, onfocus
+
+// called after opening files
+function onopen (options)
+  log "open " + options
+  passprev options
+end
+
+// called before closing files
+function onclose
+  log "close"
+  passprev
+end
+
+// called before saving files
+function onsave
+  log "save"
+  passprev
+end
+
+// called after switching files
+function onfocus
+  log "focus"
+  passprev
+end
+
+// view the event log
+key <ctrl f11>
+  queueobject prf.logobj "viewlog"
+end
+
+// stay resident
+resident ON
+msgbox "Event Log Installed.\nRe-run or press <ctrl f11> to view the log."

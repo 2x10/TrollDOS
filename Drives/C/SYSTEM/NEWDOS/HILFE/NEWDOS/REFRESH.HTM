@@ -1,0 +1,72 @@
+<HTML><HEAD><TITLE>REFRESH</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>REFRESH</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Formatiert Disketten ohne Datenverlust (Auffrischungsformatierung)
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">REFRESH [Laufwerk] [/n /r /o /v /g]</FONT>
+
+/n  speichert das aktuelle Datum in der Datentr„gernummer (s. <A HREF="diskdate.htm">DiskDate</A>)
+    Hierdurch k”nnen Sie sp„ter den Zeitpunkt der šberformatierung ablesen
+    und z.B. entscheiden, ob es Zeit fr eine erneute Formatierung ist.
+
+/r  fragt am Ende, ob Sie ine weitere Diskette berformatieren wollen
+
+/o  keine Benutzerabfage, Fehler werden in der <A HREF="logfile.htm">LOG-Datei</A> protokolliert
+
+/v  Verify: jede Spur wird am Ende nochmals berprft
+
+/g  Erzwingt die Anwendung einer von Ihnen vorgegebenen Datentr„ger-
+    Geometrie. Verwenden Sie /g zum Kopieren von Disketten, die kein
+    DOS-Format haben (Mac, CP/M u.a.). <FONT COLOR="red">/G:9-80-2</FONT> bedeutet, daá die Diskette
+    9 Sektoren je Spur in 80 Spuren auf 2 Seiten hat. Wenn Sie die Werte 
+    der Diskette nicht kennen, k”nnen Sie diese mit <A HREF="scanfix.htm">Scanfix</A> ermitteln.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT> 
+
+Refresh formatiert DOS-Standard-Disketten, ohne daá die darauf 
+befindlichen Daten verloren gehen. Die Diskette befindet sich anschlieáend in
+genau demselben Zustand wie vorher. Auch gel”schte Dateien k”nnen nach der 
+Anwendung von Refresh mit UNDELETE usw. wiederhergestellt werden. Die 
+regelm„áige šberformatierung Ihres Diskettenbestandes kann die Lebensdauer 
+Ihrer Daten um ein mehrfaches verl„ngern, da ALLE Informationen v”llig neu 
+aufgebracht werden. Dies ist z.B. beim regelm„áigen Backup NICHT der Fall. 
+Lediglich bei Materialermdung einer Diskette (Hitze, Kratzer durch Staub, 
+N„sse usw.) sollten Sie die Daten auf eine neue Diskette umkopieren.
+
+Wichtig: Disketten, die bereits zu Fehlern neigen, sollten Sie auf keinen
+Fall mit Refresh zu reparieren versuchen. Kopieren Sie diese Diskette 
+auf einen anderen Datentr„ger. 
+
+Eine Diskette muá bereits einmal formatiert worden sein, entweder durch den 
+Hersteller der Disketten oder mit dem DOS-Befehl FORMAT. Bei Disketten, die 
+bereits Daten enthalten, ist dies dann jedoch durchg„ngig der Fall.
+Unformatierte Disketten kann Refresh nicht verarbeiten.
+
+Refresh berprft beim Formatieren, ob der momentan bearbeitete Bereich auf
+der Diskette auch tats„chlich Daten enth„lt. Ist dem nicht so, werden diese
+Bereiche lediglich formatiert. Dies k”nnen Sie im Statusfenster von Refresh
+daran erkennen, daá der Lichtpunkt nur auf "Lese" und "Formatiere", nicht 
+jedoch auf "Schreibe" (und "Prfe") springt. Dies spart bei wenig gefllten
+Disketten z.T. erheblich Verarbeitungszeit ein.
+
+Bricht Refresh mit einem Fehler ab, sollten Sie die betroffene Diskette
+baldm”glichst auf eine andere Diskette umkopieren und die alte Diskette
+ausmustern.
+
+Refresh untersttzt folgende Diskettenformate:
+
+in 5 1/4-Laufwerken: 160, 180, 320, 360 kB sowie 1.2 MB 
+in 3 1/2-Laufwerken: 720 und 1440 kB, jedoch nicht 2880 kB 
+
+Die Funktionsf„higkeit bei weiteren Formaten wurde nicht getestet, drfte 
+aber vor allem bei Disketten kleiner als 1.2 MB bzw. 1440 kB m”glich sein.
+Sie sollten die Lesbarkeit solcher Disketten zuvor mit Scanfix im Normal-
+modus testen.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

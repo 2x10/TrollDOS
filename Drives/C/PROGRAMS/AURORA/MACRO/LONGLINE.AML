@@ -1,0 +1,46 @@
+//--------------------------------------------------------------------
+// LONGLINE.AML
+// Find the Longest Line, (C) 1993-1996 by nuText Systems
+//
+// This macro moves the cursor to the end of the longest line in the
+// current edit window.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+variable maxlength
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+// make cursor position undo-able and goto file top
+undocursor
+row 1
+
+// do for all lines in the file
+repeat
+
+  // if the line length > current longest line..
+  if getlinelen > maxlength then
+
+    // ..then make it the longest line and save the row
+    maxlength = getlinelen
+    longestline = getrow
+  end
+until not down
+
+// goto to the end of the longest line
+row longestline
+col getlinelen + 1
+
+// use 'onfound' (in Ext.aml) to adjust the window view if needed
+send "onfound"

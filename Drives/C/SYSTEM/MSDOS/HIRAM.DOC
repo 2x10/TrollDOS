@@ -1,0 +1,511 @@
+
+		 ÄÒÄ	 ÄÒÄ   Ò
+		  º	  º    Ğ
+		  º	  º
+		  ÇÄÄÄÄÄÄÄ¶   Ä·   ÄÒÄÄÄ·  ÖÄÄÄÄ·   ÄÒÄÄÄÒÄÄÄ·
+		  º	  º    º    º	  ÖĞÄÄÄÄ¶    º	 º   º
+		  º	  º    º    º	  º	º    º	 º   º
+		 ÄĞÄ	 ÄĞÄ  ÄĞÄ  ÄĞÄ	  ÓÄÄÄÄÄĞÄ  ÄĞÄ ÄĞÄ ÄĞÄ  V1.9
+
+			 Copyright (C) 1992,93 by JVP
+
+
+ Dieses Paket darf (und soll) frei kopiert und weitergegeben werden (denn Gutes
+ muá  nicht  teuer  sein),  sofern  alle  in  ReadMe.1st  aufgefhrten	Dateien
+ unver„ndert darin enthalten sind.
+
+ Eine (private oder kommerzielle) Verwendung unterliegt folgenden Bedingungen:
+
+ - bei	erfolgreichem Einsatz  werden das   Programm und  sein Autor  bei sich
+   bietenden Gelegenheiten lobend erw„hnt.
+
+ - Eine Verwendung in kommerziellen Produkten  sowie das Bundling mit Hard- und
+   Software  ist grunds„tzlich untersagt.
+
+ - Ein	 Verkauf  dieser   Software  ist   ausdrcklich  untersagt,  Disketten-
+   Kopiergebhren sind hiervon ausgenommen.
+
+
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!							       !!
+      !! Die in diesem Paket  enthaltenen Programme wurden nach bestem !!
+      !! Wissen auf ihre Funktionsf„higkeit  geprft und sollten unter !!
+      !! den   unten   aufgefhrten   Einsatzbedingungen   einwandfrei !!
+      !! funktionieren. Eine Garantie dafr wird nicht bernommen.     !!
+      !!							       !!
+      !! Da  die  Nutzung  der	Programme  kostenlos  ist, erfolgt ihr !!
+      !! Einsatz auf eigene Gefahr.				       !!
+      !!							       !!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+ WARNUNG:
+ ÄÄÄÄÄÄÄÄ
+
+ HiRAM.EXE darf  auf keinen Fall mit  Packprogrammen wie z.B. DIET,  LZEXE oder
+ PKLITE behandelt werden, da es sich  sowohl um eine ausfhrbare Datei als auch
+ um einen DEVICE-Treiber handelt!
+
+ Erstellen  Sie vor  der ersten  Verwendung von  HiRAM.EXE auf	jeden Fall eine
+ bootf„hige DOS-Diskette. Informieren Sie sich im Falle der Verwendung von
+
+ - DR-DOS  ber die  Verwendung des "?"-Befehls  in der CONFIG.SYS.
+
+ - MS-DOS  6.0	ber  die  Verwendung	der  Tasten  F5/F8  zum  šbergehen  der
+   Startdateien CONFIG.SYS und AUTOEXEC.BAT.
+
+
+ Einleitung:
+ ÄÄÄÄÄÄÄÄÄÄÄ
+
+ Um den unter  DOS nutzbaren Speicher zu vergr”áern, kann  seit der Version 5.0
+ von DR-DOS und MS-DOS der  fr Erweiterungskarten vorgesehene Bereich zwischen
+ den  Segmenten A000h  bis F000h,  die sog.  UMA (Upper  Memory Area),	genutzt
+ werden.  Auf  diese  Weise  kann  der	zusammenh„ngende  freie  konventionelle
+ DOS-Speicher bis auf ca. 620 KByte gesteigert werden.
+
+ Um die UMA mit den  Standard-Utilities der genannten Betriebssysteme nutzen zu
+ k”nnen, ist unter  DR-DOS mindestens ein 80286 mit  NEAT-Chipsatz und Extended
+ Memory,  unter MS-DOS	sogar ein  80386 mit  entsprechender Speicherbestckung
+ notwendig.
+
+ HiRAM wurde entwickelt, um dieses Manko zu beseitigen. HiRAM bietet die Unter-
+ sttzung der UMA auf PCs mit 8086/88 oder 80286 Prozessoren und Zusatzspeicher
+ zwischen den Segmenten  A000h und E000h (einschlieálich). Auf	PCs mit 386/486
+ und  Shadow-RAM  im  oben  genannten  Bereich	kann HiRAM ebenfalls eingesetzt
+ werden,  um ohne  EMM386 und  dessen V86-Modus  UMBs zu erhalten. Nachfolgende
+ Device-Treiber  k”nnen dann  via DEVICEHIGH=  bzw. HIGHDEVICE=  in den  oberen
+ Speicher  geladen  werden,  ebenso  wie  TSR-Programme  mit  HIGHLOAD, LH bzw.
+ LOADHI.
+
+ Besitzer  von 386/486er  PCs, deren  Setup nicht  die Einblendung  von UMBs im
+ Bereich von C000h-EFFFh erm”glicht, sollten die Datei MakHiSET.DOC lesen.
+
+ Die folgende Abbildung zeigt die Ausgabe von MEM (DR-DOS 6.0) auf einem AT/286
+ mit  640KB  Hauptspeicher  sowie  64KB  Zusatzspeicher  im  Segment E000h nach
+ Verwendung von HiRAM.EXE:
+
+ Ú Speichertyp ÄÄÄÄÄÂÄÄ Anzahl Bytes ( KBytes ) ÄÂÄÄÄÄÄÄÄÄ Verfgbar ÄÄÄÄÄÄÄÄÄ¿
+ ³		    ³				 ³			      ³
+ ³ Konventionell    ³	      655.360 (  640K )  ³	   643.040 ( 627K  )  ³
+ ³ Oberer Speicher  ³	       65.488 (   63K )  ³	       288 (   0K  )  ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ Hierbei   handelt   es   sich	 um   eine   arbeitsf„hige   Konfiguration  mit
+ Tastaturtreiber,  ANSI-Treiber und  22 Buffers  (HiBuffers), auáerdem	sind 20
+ Files eingestellt.
+
+ Da  sich die  Nutzung der  UMA bei  den DOS-Versionen	deutlich unterscheidet,
+ stellt sich HiRAM  automatisch auf die verwendete Version  ein. Die Verwendung
+ der optionalen  Parameter sollte daher nur  fr spezielle Konfigurationen bzw.
+ im Falle von Fehlfunktionen erfolgen.
+
+
+ Die Programme wurden  unter MS-DOS 3.21, 3.30, 4.01, 5.0  und 6.0 sowie DR-DOS
+ 3.41 und 6.0 auf meinen ATs erfolgreich getestet:
+
+ - 286/12, Suntac-Chipsatz,  640KB, 1,4MB EMS,	64KB Zusatzspeicher im	Segment
+   E000h,  Tseng ET4000-VGA-Karte  mit 1MB  Video-RAM und  32KB BIOS im Segment
+   C000h und SCSI-Platte mit 6KB Controller-BIOS im Segment C800h.
+
+   Der	maximal freie  Speicher betrug	 auf diesem  System 643.040  Byte unter
+   DR-DOS   6.0  bei   Verwendung   von   FILES=20,  HIBUFFERS=22,   ANSI-  und
+   Tastaturtreiber, also einer durchaus arbeitsf„higen Konfiguration.
+
+ - 486/33,  OPTi  HiB/486  Chipsatz,  8MB  RAM,  Tseng ET4000-VGA-Karte mit 1MB
+   Video-RAM  und   32KB  BIOS	im  Segment   C000h,  Shadow-RAM  via  direkter
+   Chipsatz-Programmierung von C800h-EFFFh eingeblendet.
+
+   Hier  betrug der  maximal freie   Speicher 638.000  Byte bei  Verwendung von
+   DR-DOS 6.0 und  HIDOS.SYS, um XMS zur Verfgung zu  haben und die HMA nutzen
+   zu  k”nnen. Windows	3.1 konnte  im 386-Modus  problemlos verwendet	werden,
+   nicht aber im Standard-Modus.
+
+ - 486DX2/66, UMC 82C481 Chipsatz, 8MB RAM, SpeedSTAR Pro HiColor VGA-Karte mit
+   1MB	Video-RAM  und	32KB  BIOS  im	Segment  C000h, Shadow-RAM via direkter
+   Chipsatz-Programmierung von C800h-EFFFh eingeblendet.
+
+   Hier  betrug der  maximal freie   Speicher 638.000  Byte bei  Verwendung von
+   MS-DOS 6.0 und  HIMEM.SYS, um XMS zur Verfgung zu  haben und die HMA nutzen
+   zu  k”nnen. Windows	3.1 konnte  im 386-Modus  problemlos verwendet	werden,
+   nicht aber im Standard-Modus.
+
+
+ Installation:
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ Kopieren Sie alle Dateien in  ein beliebiges Verzeichnis Ihrer Festplatte bzw.
+ Ihrer DOS-Start-Diskette.  Im folgenden wird  davon ausgegangen, daá  dies das
+ Verzeichnis "C:\HIRAM" ist.
+
+
+ Verwendung der Treiber/Programme:
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ Die  Verwendung ist  nach den	verschiedenen DOS-Versionen  und den jeweiligen
+ Ansprchen an die vorhandene Hardware-Ausstattung geordnet.
+
+  - MS-DOS bis Version 4 einschlieálich,
+    DR-DOS 3.41, mit Shadow-RAM oder Zusatzspeicher:
+
+    ÚÄÄ CONFIG.SYS ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄ AUTOEXEC.BAT ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³				    ³					   ³
+    ³	DEVICE=C:\HIRAM\HiRAM.EXE   ³	C:\HIRAM\HiFILES=12		   ³
+    ³	FILES=8			    ³	C:\HIRAM\HiLOAD C:\DOS\KEYB.COM GR ³
+    :	...			    :	...				   :
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+    Diese  DOS-Versionen bieten  leider keine  M”glichkeiten, Treiber  oder das
+    Betriebssystem in den oberen Speicher zu verschieben. Mit HiLOAD.COM k”nnen
+    aber TSR-Programme in die UMA geladen werden.
+
+
+  - MS-DOS ab  Version 5,  8086/88 oder  80286 ohne  Extended Memory, aber mit
+    Zusatzspeicher:
+
+    ÚÄÄ CONFIG.SYS ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄ AUTOEXEC.BAT ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³				    ³					   ³
+    ³	DOS=UMB			    ³	C:\HIRAM\HiFILES=12		   ³
+    ³	DEVICE=C:\HIRAM\HiRAM.EXE   ³	LH KEYB GR,,KEYBOARD.SYS	   ³
+    ³	FILES=8			    ³					   ³
+    ³	DEVICEHIGH=...		    ³					   ³
+    :	...			    :	...				   :
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+    Device-Treiber und	TSR-Programme k”nnen in  die UMA geladen  werden, nicht
+    aber der Betriebssystem-Kern.
+
+
+  - MS-DOS ab Version 5, 80286 mit Extended Memory, 80386/486 mit Shadow-RAM:
+
+    ÚÄÄ CONFIG.SYS ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄ AUTOEXEC.BAT ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³				    ³					   ³
+    ³	DOS=HIGH,UMB		    ³	C:\HIRAM\HiFILES=12		   ³
+    ³	DEVICE=C:\HIRAM\HiRAM.EXE   ³	LH KEYB GR,,KEYBOARD.SYS	   ³
+    ³	FILES=8			    ³					   ³
+    ³	DEVICEHIGH=HIMEM.SYS	    ³					   ³
+    :	...			    :	...				   :
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+    Device-Treiber  und TSR-Programme  k”nnen in  die UMA  geladen werden,  der
+    Betriebssystem-Kern wird in die HMA verlagert.
+
+
+  - DR-DOS ab  Version 5,  8086/88 oder  80286 ohne  Extended Memory, aber mit
+    Zusatzspeicher:
+
+    ÚÄÄ CONFIG.SYS ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄ AUTOEXEC.BAT ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³				    ³					   ³
+    ³	HIDOS=ON		    ³	MEMMAX +U			   ³
+    ³	SHELL=COMMAND.COM /P /MU    ³	C:\HIRAM\HiFILES=15		   ³
+    ³	DEVICE=C:\HIRAM\HiRAM.EXE   ³	KEYB GR,,KEYBOARD.SYS /MU	   ³
+    ³	FILES=5			    ³	HILOAD ...			   ³
+    ³	HIBUFFERS=...		    ³					   ³
+    ³	HIDEVICE=...		    ³					   ³
+    :	...			    :	...				   :
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+    Device-Treiber, TSR-Programme und der Betriebssystem-Kern k”nnen in die UMA
+    geladen werden.
+
+
+  - DR-DOS ab Version 5, 80286 mit Extended Memory, 80386/486 mit Shadow-RAM:
+
+    ÚÄÄ CONFIG.SYS ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄ AUTOEXEC.BAT ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³				    ³					   ³
+    ³	HIDOS=ON		    ³	MEMMAX +U			   ³
+    ³	SHELL=COMMAND.COM /P /MH    ³	C:\HIRAM\HiFILES=15		   ³
+    ³	DEVICE=HIDOS.SYS /BDOS=FFFF ³	KEYB GR,,KEYBOARD.SYS /MH	   ³
+    ³	DEVICE=C:\HIRAM\HiRAM.EXE   ³	HILOAD ...			   ³
+    ³	FILES=5			    ³					   ³
+    ³	HIBUFFERS=...		    ³					   ³
+    ³	HIDEVICE=...		    ³					   ³
+    :	...			    :	...				   :
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+    Device-Treiber  und TSR-Programme  k”nnen in  die UMA  geladen werden,  der
+    Betriebssystem-Kern wird in die HMA verlagert.
+
+
+ HiRAM	testet	den   oberen  Speicher	in  Schritten  von   4	KByte  auf  das
+ Vorhandensein von RAM und initialisiert ihn gegebenenfalls.
+
+ Der Treiber belegt nach erfolgreicher Initialisierung im Falle von DR-DOS 3.41
+ und MS-DOS keinen zus„tzlichen Speicher, bei DR-DOS 5.0 und 6.0 nur 48 Byte in
+ der UMA.
+
+ Das war's.
+
+
+
+ HiRAM.EXE
+ ÍÍÍÍÍÍÍÍÍ
+
+ Optionale Parameter:
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ Sollten Probleme  in der Standardeinstellung auftreten,  so kann das Verhalten
+ von HiRAM.EXE ber Kommandozeilenparameter  gesteuert werden. Die vollst„ndige
+ Syntax lautet:
+
+	DEVICE=[Lw:][\Pfad\]HiRAM.EXE [/option [/option [...]]]
+
+ Fr "option" stehen zur Verfgung:
+
+  Debug
+	testet den oberen Speicher  und gibt die festgestellte Belegung am
+	Bildschirm aus, verhindert jedoch Initialisierung und Installation.
+
+  Exclude=bereich
+  X=bereich
+  E=bereich
+	verhindert die Verwendung von "bereich".
+	"bereich" ist eine Liste von vierstelligen hexadezimalen Segmentwerten,
+	die ber "," und "-" getrennt ist.
+
+	"DEVICE=HiRAM.EXE /X=-D100,E800-E9FF,EB00,ED00-"
+	klammert also den Bereich von A000h-D1FFh, E800h-E9FFh, EB00h-EBFFh und
+	ED00h-EFFFh aus.
+
+  FixMSDOS
+	initialisiert die Speichererweiterung nach Art von MS-DOS 5.0/6.0.
+
+  FixDRDOS
+	initialisiert die Speichererweiterung nach Art von DR-DOS 5.0/6.0.
+
+  Chain
+	bewirkt die Verbindung von konventionellem Speicher und UMBs.
+
+  NoChain
+	verhindert die Verbindung von konventionellem Speicher und UMBs
+
+  Int2F
+	bewirkt die Installation eines	Interrupt-Handlers, der den verfgbaren
+	oberen Speicher  an das Betriebssystem	meldet. Der Handler  fr MS-DOS
+	5.0/6.0 ist  nur tempor„r, d.h.  er entfernt sich  nach Anforderung des
+	oberen	Speichers  selbst„ndig	aus  dem  Speicher.  Daher sollte diese
+	Option nur  mit „uáerster Vorsicht angegeben  werden, um Systemabstrze
+	zu vermeiden.
+
+  NoInt2F
+	verhindert die standarm„áige Installation des Interrupt-Handlers.
+
+
+ Die internen Voreinstellungen lauten fr
+
+  - MS-DOS bis Version 4 und DR-DS 3.41:
+	/FixMSDOS /Chain /NoInt2F
+
+  - MS-DOS ab Version 5:
+	/FixMSDOS /NoChain /Int2F
+
+  - DR-DOS ab Version 5:
+	/FixDRDOS /Chain /Int2F
+
+
+
+ Fehlermeldungen und Warnungen:
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ "FEHLER: Kein oberer Speicher gefunden.                                    ³
+ ³	    Programm nicht installiert."                                      ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ HiRAM hat in  der UMA keine zusammenh„ngenden RAM-Bereiche  von mindestens 4KB
+ gefunden.  Es ist  kein Zusatzspeicher  vorhanden bzw.  Shadow-RAM wurde nicht
+ korrekt konfiguriert.
+
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ "FEHLER: MS-DOS ab Version 3.0 oder DR-DOS ab Version 3.41 erforderlich!   ³
+ ³	    Programm nicht installiert."                                      ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ Die verwendete DOS-Version ist nicht zu HiRAM kompatibel.
+
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ "WARNUNG: Das aktuelle Betriebssystem untersttzt nicht das Hochladen."    ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ Es wird  eine DOS-Version vor V5.0  verwendet. Diese k”nnen Programme	nur mit
+ Zusatz-Utilities in die UMBs laden.
+
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ "WARNUNG: Falscher /EXCLUDE-Parameter wird ignoriert."		      ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ Bei  der Option  /EXCLUDE=, /X=  oder /E=  wurde eine	falsche Angabe gemacht.
+ Diese wird von HiRAM ignoriert.
+
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ "WARNUNG: Es ist bereits ein Speichermanager installiert!                  ³
+ ³	     Treiber trotzdem installieren (J/N) ? "                          ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ Ein  anderer  Speichermanager	wurde  vor  HiRAM  geladen. Wenn HiRAM trotzdem
+ verwendet wird, kann es evtl. zu Systemabstrzen kommen.
+
+
+
+
+ HiFILES.EXE
+ ÍÍÍÍÍÍÍÍÍÍÍ
+
+ Verlagert Teile  der System File Table  in den oberen Speicher.  Zur optimalen
+ Nutzung  dieses Utilities  sollte der	DOS-Standardwert in  CONFIG.SYS auf den
+ Minimalwert von 5 bzw. 8 Files gesetzt werden:
+
+	FILES=5
+ bzw.
+	FILES=8
+
+ HiFILES wird in AUTOEXEC.BAT mit
+
+	HiFILES[=]yy
+
+ aufgerufen.  Diese Zeile  sollte m”glichst  frh in  AUTOEXEC.BAT stehen.  Die
+ Anzahl "yy" darf, addiert zum DOS-Standardwert  5 bzw. 8, nicht die Gesamtzahl
+ von 255 berschreiten und sollte der Angabe fr FILES=xx, die das DOS-Handbuch
+ nennt, entsprechen.
+
+
+ HiLOAD.COM
+ ÍÍÍÍÍÍÍÍÍÍ
+
+ HiLOAD  erm”glicht  mit  DOS-Versionen  kleiner  als  V5.0  das Laden von TSR-
+ Programmen in den oberen Speicher.
+
+ Der Aufruf erfolgt mit
+
+	HiLOAD Lw:\Pfad\Dateiname.Ext [Programmparameter]
+
+ Dateiname  ist  das  hochzuladende  Programm,	Programmparameter  sind die von
+ diesem evtl. erwarteten Parameter.
+
+ Beispiel:
+
+	HiLOAD C:\DOS\KEYB.COM GR
+
+ l„dt  den Tastaturtreiber  KEYB.COM  in  den (hoffentlich  vorhandenen) oberen
+ Speicher und bergibt als Parameter "GR".
+
+
+ Glossar
+ ÍÍÍÍÍÍÍ
+
+ Arbeitsspeicher
+	siehe Hauptspeicher
+
+ EMS	Expanded Memory Specification
+	Veraltete Speichererweiterungsform. Sie wurde ber Zusatzspeicherkarten
+	oder direkt  auf dem Motherboard  implementiert. ATs mit  NEAT-Chipsatz
+	bzw. ab  80386 Prozessor sind  in der Lage,  EMS im Extended  Memory zu
+	emulieren, da EMS von vielen Programmen untersttzt wird.
+
+ Extended Memory
+	Speicherbereich oberhalb  der 1MByte Grenze,  der sich nur  auf PCs mit
+	Prozessoren ab 80286 nutzen l„át.
+
+ Hauptspeicher
+	Zusammenh„ngender  RAM-Speicher ab  Adresse 0000h:0000h,  blicherweise
+	640 KByte. Hier laufen normalerweise DOS und Anwenderprogramme ab.
+
+ HMA	High  Memory  Area
+	RAM-Bereich, der  auf PCs mit  Prozessoren ab 80286  verwendbar ist und
+	den Bereich  FFFFh:0010h bis FFFFh:FFFFh  belegt. Dieser Speicher,  der
+	eigentlich Teil des  Extended Memory ist, kann im  Real Mode adressiert
+	werden und ber spezielle Treiber zug„nglich gemacht werden (HIDOS.SYS,
+	HIMEM.SYS, EMM386.SYS).
+
+ Oberer Speicher
+	siehe UMA
+
+ RAM	Random Access Memory
+	Speicherbaustein, dessen Inhalt sich beliebig lesen und schreiben l„át.
+
+ ROM	Read Only Memory
+	Speicherbaustein, dessen Inhalt sich vom Anwender nur lesen l„át.
+
+ Shadow-RAM
+	Speicher, der sich auf 286-NEAT/386/486 durch das BIOS-Setup oder durch
+	direkte  Chipsatz-Programmierung  in  der  UMA	einblenden  l„át und so
+	Lcken	zwischen den  ROM-Bereichen schlieát.  Um Shadow-RAM  fr HiRAM
+	nutzen zu k”nnen, muá es im entsprechenden Bereich eingeblendet (SHADOW
+	xxxxh: Enabled) und beschreibbar sein (Write Protection: Disabled).
+
+ UMA	Upper Memory Area
+	Bereich  zwischen den  Segmenten A000h	und F000h.  Dieser war	von IBM
+	eigentlich  fr  Adapterkarten	vorgesehen,   ist  jedoch  in  "normal"
+	ausgersteten PCs nie  vollst„ndig ausgenutzt, so daá er  evtl. fr die
+	Einrichtung von RAM-Speicher (UMBs) verwendet werden kann.
+
+ UMB	Upper Memory Block
+	Ein   zusammenh„ngender  RAM-Bereich   innerhalb  der	UMA.  Wird  von
+	speziellen Treibern oder DOS selbst verwaltet.
+
+ XMS	eXtended Memory Specification
+	Standard fr einheitlichen Zugriff auf das Extended Memory. Die Treiber
+	HIMEM.SYS bzw. HIDOS.SYS sowie	EMM386.SYS/ realisieren diesen Standard
+	und werden daher als XMS-Treiber bezeichnet.
+
+ Zusatzspeicher
+	Physikalischer	RAM-Speicher,  der   sich  zus„tzlich  zum  vorhandenen
+	Hauptspeicher  im Bereich  von A000h:0	bis E000h:FFFFh  befinden kann.
+	Wird  meist von  Zusatzkarten angeboten  (z.B. Upper  Memory Board, Fa.
+	DAWICONTROL, G”ttingen; c't UNIRAM-Karte fr ATs, c't 6/90, 7/90).
+
+
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ Die  verwendeten  Bezeichnungen  sind	teilweise  geschtzte  Warennamen ihrer
+ jeweiligen Inhaber.
+
+
+
+
+
+
+
+
+
+
+
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ  Ende des Autorentextes  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+
+
+
+
+
+
+
+
+
+
+
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+º(C)omputer (S)olutions Software (L)ibrary (TM) ûEntscheidung fr die Profis. º
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+º    Postfach 1180 ù D-8018 Grafing/Mnchen ù Telefon 08092/5018 Zentrale     º
+º   Fax 08092/31727   ù  BTX *CSL#  ù E-MAIL: CompuServe EasyPlex 76234,3577  º
+ÇÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄ¶
+º        ³ Shareware und Public-Domain Software der Spitzenklasse  ³          º
+ÇÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄ¶
+º Die  Computer Solutions  Sharewarebibliothek ist eine der bestgepflegtesten º
+º Softwaresammlungen  weltweit.  Die Programme werden sorgf„ltig getestet und º
+º ausgew„hlt. Falls  Sie  noch  nicht  Kunde  sind, sollten Sie Informations- º
+º material anfordern!                                                         º
+º                                                                             º
+º Diese Diskette ist urheberrechtlich geschtzt und nur echt mit dem original º
+º Computer Solutions Logo. Vorsicht Virengefahr bei Raubkopien!               º
+º Bitte beachten Sie die Lizenzbestimmungen.                                  º
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+º AUTOREN:Ihre Programme sind bei der CSL in guten H„nden. Schreiben Sie uns! º
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+ºSeien Sie fair und untersttzen Sie Sharewareautoren durch Ihre Registration!º
+ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+

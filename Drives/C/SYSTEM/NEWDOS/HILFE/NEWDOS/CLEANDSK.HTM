@@ -1,0 +1,94 @@
+<HTML><HEAD><TITLE>CLEANDSK</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>CLEANDSK</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>CleanDisk sucht und l”scht berflssige Dateien. Dabei k”nnen einzelne
+Verzeichnisb„ume oder ganze Datentr„ger nach solchen Dateien durchforscht
+werden.<HR 
+
+noshade color="silver"><FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">CLEANDSK [Dateiname] [/u /r /a /t]</FONT> oder
+
+<FONT COLOR="blue">CLEANDSK [Verzeichnis] [Dateiname] [/u /r /a /t]</FONT>
+
+/?   zeigt einen kurzen Hilfetext.
+
+/u   CleanDisk durchsucht keine Unterverzeichnisse.
+
+/r   l”scht auch versteckte und schreibgeschtzte Dateien (System-Dateien
+     werden generell nicht gel”scht).
+
+/a   CleanDisk l”scht alle gesuchten Dateien ohne vorherige Rckfrage. 
+     Verwenden Sie /a nur, wenn Sie ganz sicher sind, daá nicht
+     versehentlich wichtige Dateien gel”scht werden. Um das festzustellen, 
+     sollten Sie Cleandisk im Zweifelsfalle zun„chst mit Parameter /t 
+     starten.
+
+/t   Testfunktion. Hierbei wird Cleandisk ausgefhrt, ohne daá die gesuchten
+     Dateien gel”scht werden. Mit diesem Parameter k”nnen Sie testen, wieviel
+     Speicherplatz frei wird, wenn Sie diese Dateien l”schen oder vor einem 
+     L”schvorgang berprfen, ob sich nicht doch noch wichtige Dateien im 
+     L”schverzeichnis befinden.
+
+/o   Cleandisk l„uft ohne Benutzerabfrage durch und protokolliert evtl. 
+     aufgetretene Fehler in der <A HREF="logfile.htm">LOG-Datei</A>.
+
+Wenn Sie [Verzeichnis] weglassen, verwendet CleanDisk das gerade ge”ffnete 
+Verzeichnis. 
+
+Als [Dateiname] geben Sie den/die Namen der zu l”schenden Dateien ein. Hier
+sind alle Eingaben laut DOS-Konventionen m”glich, also auch die Wildcards *
+und ?. CleanDisk verweigert jedoch in bestimmten F„llen seinen Dienst: Wenn
+Sie versehentlich *.*, *.COM, *.EXE, *.SYS oder *.BAT eingegeben haben, wird
+kein L”schvorgang ausgefhrt. Dies ist zum Schutz von wichtigen Systemdateien
+bzw. Anwendungsprogrammen gedacht. Sie k”nnen brigens selbst weitere Datei-
+endungen festlegen, die Sie schtzen wollen. Wie das geht, wird am Ende
+dieser Hilfe-Datei unter Trick 17 beschrieben.
+
+Jede Datei wird einzeln zum L”schen vorgelegt, so daá Sie w„hlen k”nnen, ob
+Sie diese Datei wirklich l”schen wollen. Wenn Sie sicher sind, daá Sie alle
+weiteren Dateien des angegebenen Typs l”schen wollen, k”nnen Sie statt
+j (fr JA) auch a (fr ALLE) eingeben. CleanDisk l”scht dann alle weiteren
+Dateien ohne jede Rckfrage.
+
+Nach Beendigung des L”schvorganges wird angezeigt, wieviel Speicherplatz auf 
+dem Datentr„ger frei geworden ist.<HR 
+
+noshade color="silver"><FONT COLOR="green">Trick 17</FONT>
+
+Um Datenverlusten durch versehentliche Fehleingaben vorzubeugen, verweigert
+CleanDisk bei der Eingabe bestimmter Dateiendungen das L”schen. Geschtzt
+werden alle Dateien mit der Endung COM, EXE, BAT und SYS. Sie k”nnen jedoch
+6 weitere Dateiendungen schtzen lassen. Im Code des Programmes CLEANDSK.EXE
+befinden sich einige Leerfelder, die fr Benutzereingaben reserviert sind.
+Legen Sie von CLEANDSK.EXE eine Sicherheitskopie an und laden Sie diese Datei
+anschlieáend mit <A HREF="hexe.htm">HEXE</A> oder einem anderen Hexadezimal-
+bzw. Bin„r-Editor.
+
+Bewegen Sie den Cursor an das Dateiende. Dort finden Sie folgende Zeichen-
+kette:
+
+<FONT COLOR="blue">.EXE.COM.SYS.BAT<FONT COLOR="red">$$$$</FONT>$$$$$$$$$$$$$$$$$$$$</FONT>
+
+Schalten Sie den Editor in den šberschreibmodus (Taste Einfg) und tragen
+Sie anstelle der Zeichenkette $$$$ einen Punkt und die gewnschte Dateiendung
+(Beispiel: TXT) ein. Nach der Bearbeitung muá die Zeichenkette so aussehen:
+
+<FONT COLOR="blue">.EXE.COM.SYS.BAT<FONT COLOR="red">.TXT</FONT>$$$$$$$$$$$$$$$$$$$$</FONT>
+
+Auáer den Dollarzeichen drfen keine weiteren Zeichen verwendet werden.
+Zwischen den einzelnen Endungen drfen sich keine Ketten mit Dollarzeichen
+befinden. In folgendem Beispiel wrde der Schutz fr die Endung TXT nicht
+aktiv werden.
+
+<FONT COLOR="blue">.EXE.COM.SYS.BAT$$$$<FONT COLOR="red">.TXT</FONT>$$$$$$$$$$$$$$$$</FONT>
+
+<FONT COLOR="green">Trick 18</FONT>
+
+Falls Sie eine so geschtzte Datei doch einmal l”schen wollen, k”nnen Sie
+sich folgendermaáen helfen. Geben Sie anstatt z.B. *.BAT einfach *.BA* ein.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

@@ -1,0 +1,73 @@
+<HTML><HEAD><TITLE>HTML-Syntax</TITLE></HEAD><BODY><A 
+NAME="top"><BR><FONT COLOR=teal>HTML-Syntax</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "HTML-Befehle"</A>
+<HR noshade color="silver">
+Jeder HTML-Befehl - auch "HTML-Tag" genannt - wird grunds„tzlich 
+von zwei spitzen Klammern (Gr”áer- und Kleiner-Zeichen) in die Mitte 
+genommen:
+<P>
+<FONT color=red>&lt;HTML-Befehl&gt;</FONT>
+<P>
+Das bedeutet, daá normaler Text keines dieser beiden Zeichen enthalten 
+darf, da der Browser es als Beginn bzw. Ende eines Tags interpretieren 
+wrde, was zu Darstellungsfehlern auf dem Monitor fhrt. Derartige Zeichen 
+mssen auf andere Art und Weise dargestellt werden (siehe hierzu: 
+<A HREF="charset.htm">Zeichen-Tabelle</A>).
+<P>
+In vielen F„llen bilden zwei HTML-Tags selbst eine Klammer. Im folgenden 
+Beispiel soll Text in Fettschrift ausgegeben werden (vom New-DOS-Browser 
+allerdings nicht anzeigbar):
+<P>
+<FONT color=red>&lt;B&gt;</FONT>fetter
+Text<FONT color=red>&lt;/B&gt;</FONT> 
+<P> 
+&lt;B&gt; kennzeichnet also den Beginn einer formatierten Textpassage und  
+&lt;/B&gt; deren Ende. Generell wird die Aufhebung bzw. das Ende eines 
+vorher gegebenen HTML-Befehls dadurch erreicht, indem der gleiche Befehl 
+mit einem vorangestellten Schr„gstrich nochmals eingesetzt wird.
+<P>
+Ein HTML-Befehl kann zus„tzliche Angaben enthalten. Ein Beispiel dafr ist 
+der Befehl &lt;FONT&gt;. Mit diesem kann unter anderem angegeben werden, 
+welche Farbe der Text annehmen soll. Diese Farbangabe muá innerhalb des 
+FONT-Tags erscheinen:
+<P> 
+<FONT color=red>&lt;FONT color="red"&gt;</FONT>roter
+Text<FONT color=red>&lt;/FONT&gt;</FONT>
+<P>
+Bei der Aufhebung der FONT-Anweisung muá also nicht nochmal die "color"-
+Anweisung (bzw. alle weiteren zus„tzlichen Anweisungen) aufgefhrt werden. 
+Dies gilt generell auch fr alle anderen HTML-Befehle, die mehrere 
+Anweisungen enthalten.
+<P>
+Bei den meisten Browsern (auch diesem hier) drfen die Anfhrungsstriche
+bei der Angabe hinter dem Gleichheitszeichen auch weggelassen werden, wenn
+diese Angabe kein Leerzeichen enth„lt:
+<P> 
+<FONT color=red>&lt;FONT color=red&gt;</FONT>roter
+Text<FONT color=red>&lt;/FONT&gt;</FONT>
+<P>
+HTML-Befehle k”nnen auch ineinander verschachtelt werden. Dies tritt in 
+der Praxis h„ufig bei dem schon genannten FONT-Befehl auf:
+<P>
+&lt;FONT color="red"&gt;<FONT color=red>roter 
+Text<FONT color=black>&lt;FONT color="green"&gt;</FONT><FONT 
+color=green>grner 
+Text</FONT><FONT color=black>&lt;/FONT&gt;</FONT>Text 
+wieder Rot</FONT>&lt;/FONT&gt;
+<P> 
+Die Anweisung &lt;FONT color=green&gt; f„rbt den Text also nur bis zum 
+n„chsten Auftreten von &lt;/FONT&gt; grn. Danach wird wieder die zuvor 
+angegebene Farbe verwendet, n„mlich rot. Das letzte &lt;/FONT&gt; l”scht 
+dann auch den "Rot-F„rbe-Befehl", wodurch wieder Schwarz als Farbe 
+verwendet wird. Solche Farbspielereien lassen sich fast beliebig tief 
+verschachteln. Es muá nur darauf geachtet werden, daá die Zahl der 
+einleitenden Tags mit der Zahl der abschlieáenden bereinstimmt.
+
+  
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

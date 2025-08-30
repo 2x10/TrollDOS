@@ -1,0 +1,14 @@
+
+ÿÿTEMPLATE.AML
+ ÿTemplate Editingÿ
+
+  This macro installs or removes Template Editing.
+
+  Template editing allows you to include commonly-used blocks of text or
+  source code (called 'templates') in the current edit window with just
+  a few keystrokes. Templates can also be defined to be specific to one
+  or more file extensions, and may contain embedded macro expressions.
+
+  Templates are defined in the data file Template.dat. See Template.dat
+  for detailed instructions.
+

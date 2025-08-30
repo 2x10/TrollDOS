@@ -1,0 +1,5 @@
+
+Calls function 00h and 2Fh of Int 33h - thats all.
+
+
+

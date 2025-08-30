@@ -1,0 +1,50 @@
+//--------------------------------------------------------------------
+// ERRORAML.AML
+// Return AML Compiler Error Message, (C) 1993-1996 by nuText Systems
+//
+// This macro returns an AML compiler error message for an error code
+// passed as arg 3.
+//
+// Usage:
+//
+// This macro is intended for use as a utility by other macros, not as a
+// standalone macro. Erroraml is used by Ext.aml when compiling macros.
+//--------------------------------------------------------------------
+
+error = arg 3
+case error
+  when 1001  "Can't open file"
+  when 1002, 1003  "Read error"
+  when 1004  "Not an executable macro file or incorrect version"
+  when 1031  "Write error"
+  when 1032  "Can't open compiler output file"
+  when 1101  "No closing quote"
+  when 1102  "No closing bracket"
+  when 1103  "Invalid symbol"
+  when 1104  "Invalid key or event"
+  when 1301  "No terminator"
+  when 1302  "Unexpected end of source"
+  when 1303  "No closing parenthesis"
+  when 1310  "Unexpected identifier"
+  when 1311  "Unexpected terminator"
+  when 1312  "Unexpected function"
+  when 1313  "Unexpected operator"
+  when 1314  "Unexpected keyword"
+  when 1315  "Invalid redefinition"
+  when 1318  "Invalid number"
+  when 1319  "Identifier '" + (geterror 's') + "' not defined"
+  when 1320  "Bad assignment"
+  when 1330  "Bad when clause"
+  when 1336  "Improperly placed break"
+  when 1337  "Invalid reference"
+  when 1501  "Can't open include file " + (geterror 's')
+  when 1502  "Include level exceeded"
+  when 1504  "Statement must be at top level"
+  when 1507  "Can't redefine builtin function"
+  when 1508  "Duplicated function argument"
+  when 1701  "Too many variables"
+  when 1703  "Function or expression too large"
+  when 1704, 1705, 1707, 1708   "Internal stack overflow"
+  when 1706  "Out of symbol space"
+  otherwise "Fatal compilation error " + error
+end

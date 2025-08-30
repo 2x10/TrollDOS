@@ -1,0 +1,8 @@
+
+ÿÿPALETTE.AML
+ ÿChange Color Paletteÿ
+
+  This macro changes the current color palette (Color.aml) and
+  re-compiles the editor. You will be prompted to select a color palette
+  from the Palette\ directory.
+

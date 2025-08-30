@@ -1,0 +1,86 @@
+1     DIE BENUTZEROBERFLÑCHE COMMAND PROCESSOR
+3     CP - ALLGEMEINE ANGABEN
+4     OPTIONEN DER CP-BEFEHLSZEILE
+5     Tastenbelegung im HauptmenÅ
+6     Hauptbildschirm von CP
+9     Bewegung des Cursorbalkens in den Fenstern A und B
+10    CP Pulldown-MenÅs
+11    Wiedereinlesen
+12    Fensteraustausch
+13    Verzeichnis wechseln A
+14    Baum A
+15    Wurzelverzeichnis A
+16    Dateisuche
+17    Suchmuster
+18    MARKIEREN VON DATEIEN UND VERZEICHNISSEN
+19    Kippschalter
+20    Invertieren
+21    Dateien markieren
+22    Markierung ausblenden
+23    Fenster vergleichen
+24    Mark. auflisten
+25    Tastenbelegung im HauptmenÅ
+27    "Geschichte"
+28    Tastenbelegung im HauptmenÅ
+29    Laufwerk Fenster A
+30    Formatieren
+31    BootfÑhige Disk erstellen
+32    Diskette wiederbeleben
+33    Diskette wiederherstellen
+34    Diskette kopieren
+35    Disketten vergleichen
+36    Volume Label
+37    DAS ARBEITEN MIT DATEIEN UND UNTERVERZEICHNISSEN
+38    ôffnen
+39    Markierte îffnen
+40    Kopieren
+44    Verschieben
+45    Lîschen
+49    Neuer Name
+50    Verzeichnis anlegen
+51    Attribute
+52    Datei suchen
+53    Kontextsuche
+54    Datensicherung
+57    Wiederherstellung der Sicherungskopie
+55    Wiederherstellung gelîschter Dateien
+56    ZEICHENKETTEN-EDITIERUNG IN DEN FENSTERN
+60    Quit
+61    Dateien neu laden
+62    BenutzermenÅ
+63    Speicher-Info
+67    DOS-Bildschirm
+68    DOS-Bildschirm lîschen
+69    System-Info
+70    Zeilenanzahl ega/vga
+71    Editieren
+72    Tastenbelegung bei Editierung und Betrachten
+73    Angegebene editieren
+74    EDITOR
+75    Bewegung
+76    Lîschen (Editor)
+77    Suche
+78    Allgemeine Verwaltung
+82    BETRACHTEN UND EDITIEREN VON BDF-DATEIEN
+83    Betrachten
+84    Angegebene betrachten
+85    Betrachten von Archiven
+86    Tastenbelegung im Programm ARCHVIEW
+87    BASEVIEW-Hotkeys im Modus der satzorientierten Ansicht
+88    BASEVIEW-Hotkeys im Tabellenmodus
+89    Betrachten von .DBF-Dateien
+90    Betrachten von .DBF-Dateien
+91    Betrachten der .EXE- und .COM-Dateien
+92    Betrachten von grafischen Dateien
+93    STATUSEINSTELLUNG
+94    Sortierungsweise
+95    Anzeige und Maus
+96    Bildschirmschoner
+97    Farbeinstellung
+98    Auslagerung
+99    Tonsignal
+100   Makrogenerator
+101   Tastenbelegung im Makrogenerator
+102   DATENSICHERUNG IM HINTERGRUNDBETRIEB
+109   STATUSEINSTELLUNG
+110   Status sichern

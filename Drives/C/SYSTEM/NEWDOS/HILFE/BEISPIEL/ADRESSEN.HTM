@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+  <TITLE>Adressen</TITLE>
+</HEAD>
+<BODY>
+<BR>
+<FONT COLOR="teal">&nbsp;&nbsp;Adress-Datenbank</FONT>
+<HR noshade color="maroon">
+<FORM>
+&nbsp;&nbsp;Vorname&nbsp;&nbsp;
+<INPUT TYPE=Text Name=Vorname Maxlength=65 size=65 Value=""><BR> 
+
+&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<INPUT TYPE=Text Name=Name Maxlength=65 size=65 Value=""><BR>
+
+&nbsp;&nbsp;Stra&szlig;e&nbsp;&nbsp;&nbsp;
+<INPUT TYPE=Text Name=Strasse Maxlength=65 size=65 Value=""><BR>
+
+&nbsp;&nbsp;PLZ/Ort&nbsp;&nbsp;
+<INPUT TYPE=Text Name=PLZ/Ort Maxlength=65 size=65 Value="">
+
+<HR noshade color="maroon">
+
+&nbsp;&nbsp;Telefon&nbsp;&nbsp;
+<INPUT TYPE=Text Name=Telefon Maxlength=36 size=34 Value=""><BR> 
+
+&nbsp;&nbsp;Fax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
+<INPUT TYPE=Text Name=Fax Maxlength=36 size=34 Value=""><BR> 
+
+&nbsp;&nbsp;Funk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<INPUT TYPE=Text Name=Funk Maxlength=36 size=34 Value=""><BR> 
+
+&nbsp;&nbsp;geboren&nbsp;&nbsp; 
+<INPUT TYPE=Text Name=geboren Maxlength=36 size=34 Value="">
+
+<HR noshade color="maroon">
+
+&nbsp;&nbsp;URL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<INPUT TYPE=Text Name=URL Maxlength=65 size=65 Value=""><BR> 
+
+&nbsp;&nbsp;E-Mail&nbsp;&nbsp;&nbsp; 
+<INPUT TYPE=Text Name=eMail Maxlength=65 size=65 Value=""> 
+
+<HR noshade color="blue">
+
+&nbsp;&nbsp;<INPUT TYPE=Radio Name=Art Value="x" checked>&nbsp;privat<BR> 
+&nbsp;&nbsp;<INPUT TYPE=Radio Name=Art Value="y">&nbsp;gesch&auml;ftlich<BR> 
+&nbsp;&nbsp;<INPUT TYPE=Radio Name=Art Value="z">&nbsp;sonstiges 
+
+<HR noshade color="blue">
+ 
+&nbsp;
+<INPUT TYPE=Button Value=" &brvbar;&lt;  "   click="read:data.bnk,first">&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  &lt;  "          click="read:data.bnk,prev" >&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  &gt;  "          click="read:data.bnk,next" >&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  &gt;&brvbar; "   click="read:data.bnk,last" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+
+<INPUT TYPE=Button Value="  Anh&auml;ngen  " click="append:data.bnk">&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  Speichern "      click="write:data.bnk" >&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  L&ouml;schen   " click="erase:data.bnk" >
+
+</FORM>
+</BODY></HTML>

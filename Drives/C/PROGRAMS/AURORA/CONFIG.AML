@@ -1,0 +1,409 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CONFIG.AML
+// Configuration Settings (included by Main.aml)
+//
+// To change a configuration setting, locate the desired setting in this
+// file and type in the new value for the setting. Do not change the
+// name of the setting. Character and string values should be enclosed
+// in quotes.
+//
+// When you are finished, save this file and select Recompile the
+// Editor from the Set menu. Exit and re-enter the editor for your
+// changes to take effect.
+//--------------------------------------------------------------------
+
+// Video -------------------------------------------------------------
+
+public VidCols       =  0           // video columns (0=default)
+public VidRows       =  0           // video rows    (0=default)
+public VidStr        = "°"          // video background fill string
+                                    //   (null=use existing bkgnd)
+
+// Mouse -------------------------------------------------------------
+
+public Mouse         = "y"          // (y/n) enable/disable mouse
+public MouseOpt      = ''           // mouse options:
+                                    //   r=reverse mouse buttons
+                                    //   d=hide mouse after keystroke
+
+public MouSenX       =  6           // x sensitivity (lower=more sensitive)
+public MouSenY       =  13          // y sensitivity (lower=more sensitive)
+public MouDST        =  57          // double-speed threshold
+
+public MouDouble     =  300         // double-click interval (in msec)
+public MouHold       =  300         // mouse hold time (in msec)
+public MouDelay      =  0           // mouse scrolling delay (in msec)
+                                    //   0=fast (try 0,8,16,24,30)
+
+public MouMark       = "s"          // default mark type on single
+                                    // click & drag:
+                                    //   k=column
+                                    //   l=line
+                                    //   s=stream
+
+public MouMarkD      = "l"          // default mark type on double-click
+                                    //   & drag (see MouMrk above)
+
+// Margins and Tabs --------------------------------------------------
+
+public LMargin       =  1           // left margin
+public RMargin       =  72          // right margin
+
+public VarTabs       = "4 8 16 24 50 72"   // tab stops for variable tabs
+public TabWidth      =  8           // tab width for fixed interval tabs
+
+public TabOpt        =  "oh"        // display tab characters as
+                                    //   a=ascii 9
+                                    //   o=spaces, if found on open
+                                    //   s=spaces
+                                    // tableft/tabright options
+                                    //   h=shift text in insert mode
+                                    //   r=use real tabs
+
+// Open --------------------------------------------------------------
+
+public OpenOpt       = "z"          // default open options
+                                    //   z=maximize
+                                    //   f=full screen
+                                    //   c=cascade
+                                    //   n=minimize
+                                    //   h=horz split
+                                    //   v=vert split
+                                    //   e=use same window
+
+public LineDlm       = "0D0A"       // default line delimiter str (in hex)
+                                    //   0D0A=CR/LF
+                                    //   0A=LF
+                                    //   0D=CR
+
+public BinaryLength  =  64          // default binary line length
+
+public TruncLength   =  0           // maximum line length at load
+                                    //   (0=editor maximum)
+
+// default file extensions -------------------------------------------
+public DefExt        = "c cpp h doc aml dox txt asm pas inc bat"  //
+
+
+// Save --------------------------------------------------------------
+
+public BackupDir     = "C:\\Temp"           // backup directory (null=directory
+                                    //   of file). Note: backslash chars
+                                    //   (\) must be entered twice
+                                    //   within quotes. For example:
+                                    //   'd:\\backup\\aurora'
+
+public BackupExt     = "bak"        // backup file extension
+
+public SaveOpt       = ''          // save options
+                                    //   e=entab while saving
+                                    //   t=trim trailing blanks
+                                    //     (non-binary only)
+                                    //   x=don't save fold comments
+                                    //     (even if comments are defined)
+                                    //   z=append ctrl-z to end-of-file
+
+public FoldSign      = " [fold]  "  // fold comment signature
+
+public AutoSave      =  0           // default seconds between automatic
+                                    //   saves (0=OFF)
+
+
+// Edit --------------------------------------------------------------
+
+public DefaultSet    = "aiux"      // default window settings for new
+                                    // edit windows:
+                                    //   a=Autoindent
+                                    //   b=Backup
+                                    //   d=Draw Mode
+                                    //   i=Insert Mode (also in prompts)
+                                    //   l=Live Word Wrap
+                                    //   m=Match Character
+                                    //   s=Smart tabs
+                                    //   t=Translate
+                                    //   u=Undo enabled
+                                    //   v=Variable tabs
+                                    //   w=Word Wrap (standard)
+                                    //   x=Syntax Highlighting
+
+public UndoSize      =  300         // undo-redo stack size
+public HistSize      =  50          // prompt history size
+public ClipName      = "clip"       // default clipboard name
+
+public EnterIns      = "s"          // <enter> key behavior in Ins mode
+                                    //   s=split line
+                                    //   i=insert line
+                                    //   n,null=move to start of next line
+
+public EnterOvl      = "n"          // <enter> key behavior in Ovl mode
+                                    //   (see EnterIns above)
+
+public DelJoin       = "y"          // (y/n) join lines if delete char
+                                    //   at end-of-line
+
+public BakJoin       = "y"          // (y/n) join lines if backspace at
+                                    //   column one
+
+public BakOvl        = "n"          // (y/n) backspace overlay if not
+                                    //   in insert mode
+
+public InsAbove      = "n"          // (y/n) insert line blocks above
+                                    //   current line (copy, move, paste)
+
+public ClipLine      = "n"          // (y/n) copy/cut uses current
+                                    //   line if nothing marked
+
+public CopyLine      = "y"          // (y/n) copyblock repeats current
+                                    //   line if nothing marked
+
+public DelLine       = "n"          // (y/n) deleteblock deletes current
+                                    //   line if nothing marked
+
+public FormatOpt     = "kre"        // text reformatting options
+                                    //   j=justify both left and right
+                                    //   k=keep spaces
+                                    //   r=keep first-line indent
+                                    // when no mark:
+                                    //   c=advance cursor
+                                    //   e=format to paragraph-end only
+
+public SortOpt       = "ac"         // block sorting options
+                                    //   a=ascending
+                                    //   c=case sensitive
+                                    //   d=descending
+                                    //   i=ignore case
+
+public CurHigh       = "y"          // (y/n) highlight the cursor line
+
+public LineStyle     =  0           // default line draw style
+                                    //   0=single
+                                    //   1=double horizontal only
+                                    //   2=double vertical only
+                                    //   3=double
+                                    //   4=eraser
+
+public MultCopy      = "n"          // (y/n) allow loading of same file
+                                    //   or directory more than once
+
+public EOTLine       = "ðððððð Ende des Textes ðððððð"           // end-of-text string (null=default)
+
+
+// Search ------------------------------------------------------------
+
+public SearchOpt     = "gi"          // default search options
+                                    //   b=block only
+                                    //   g=global
+                                    //   i=ignore case
+                                    //   r=search in reverse
+                                    //   s=skip closed folds
+                                    //   w=whole words only
+                                    //   x=regular expression
+
+public ReplaceOpt    = ''           // default replace options
+                                    //   a=replace all
+
+
+// Window ------------------------------------------------------------
+
+public EditStyle     = "hmnvs"      // edit window style
+                                    //   h=horz scrollbar
+                                    //   m=menu
+                                    //   n=north title
+                                    //   s=south title
+                                    //   v=vert scrollbar
+                                    //   2=toolbar
+                                    //   >=north title in border
+                                    //   <=south title in border
+                                    //   z=south title bar controls
+
+public EditTitle     = "nl"         // edit window title location
+                                    //   n=north
+                                    //   s=south
+                                    //   l=left justified
+                                    //   c=centered
+                                    //   r=right justified
+
+public EditStatus    = "nr"         // edit window status location
+
+public FmgrStyle     = "hnsvm"      // file mgr window style
+public FmgrTitle     = "nl"         // file mgr window title location
+public FmgrStatus    = "sl"         // file mgr window status location
+
+public PromptStyle   = "c"            // default prompt style
+                                    //   c=command line
+                                    //   1=one-line box
+                                    //   2=two-line box
+                                    //   d=dlgbox
+
+public BoxStyle      = "i1"         // one and two line box prompt style
+                                    //   f=flat
+                                    //   i=3D-in
+                                    //   o=3D-out
+                                    //   0-6=border style
+
+public DlgStyle      = "i1"         // dialog box style (see BoxStyle)
+
+
+// File Manager ------------------------------------------------------
+
+public FmgrOpt       = "vdfh1"      // file manager options
+                                    //   v=variable length format
+                                    //   d=show subdirectories
+                                    //   f=show files
+                                    //   h=show hidden & system files
+                                    //   k=show file sizes in 1k increments
+                                    //   1=show directories first when
+                                    //     sorting by name
+
+public FmgrSort      = "e"          // default file manager sort
+                                    //   n=file name
+                                    //   e=file extension
+                                    //   s=file size
+                                    //   d=file date/time
+                                    //   o,null=Dos default order
+
+public FmgrQuit      = ''          // (y/n) close file mgr window when
+                                    //   opening file from file mgr
+
+
+// Print -------------------------------------------------------------
+
+public PrtDev        = "prn"        // printer device name
+public PrtPag        =  0           // lines per page (0=continuous)
+public PrtSpace      =  1           // line spacing
+public PrtCop        =  1           // number of copies to print
+
+public PrtIni        = ''           // printer specific initialization
+                                    // string
+
+public PrtTop        =  0           // top margin
+public PrtBot        =  0           // bottom margin
+public PrtLeft       =  0           // left margin
+public PrtRight      =  0           // right margin
+
+public PrtOpt        = "hpe"       // default print options
+                                    //   h=header
+                                    //   f=footer
+                                    //   p=page numbers
+                                    //   l=line numbers
+                                    //   e=eject when done
+                                    //   s=separator line
+
+
+// Desktop -----------------------------------------------------------
+
+public SavePosition  = "y"          // (y/n) remember window sizes,
+                                    //   cursor positions, and settings
+
+public SaveDialog    = "y"          // (y/n) remember dialog box and
+                                    //   named popup menu positions
+
+public SaveHistory   = "y"          // (y/n) save window/cursor position
+                                    //   and prompt history on exit and
+                                    //   reload on entry
+
+public SaveMac       = "n"          // (y/n) save all key macros to
+                                    //   A.MAC on exit and reload on
+                                    //   entry
+
+public ExitOpen      = "n"          // (y/n) display open prompt on exit
+
+public BootOpt       = "d"          // action to take when starting the
+                                    // editor with no filespec
+                                    //   d=display last desktop
+                                    //   f=display file manager
+                                    //   n=edit new file
+                                    //   o=display open prompt
+                                    //   t=display directory tree
+
+
+// Miscellaneous -----------------------------------------------------
+
+public NameStyle     = "c"          // filename style
+                                    //   l=lowercase
+                                    //   c=capitalize
+                                    //   u=uppercase
+                                    //   ' ' or null=as-is
+
+public TileSplit     =  3           // number of tiles allowed before
+                                    //   2nd split when tiling windows
+
+public MenuCursor    = "h"          // display the hardware cursor on
+                                    // menus and the file manager
+                                    // (helpful for blind users)
+                                    //   h=hidden, no hardware cursor
+                                    //   i=use insert cursor size
+                                    //   o=use overstrike cursor size
+
+
+// Character Sets ----------------------------------------------------
+
+public CSetA         = "a-zA-Z0-9_"                        // char set A
+public CSetB         = "a-zA-Z0-9_()./\\\\@{}~:^!#$%&`'-"  // char set B
+public CSet          =  "a-zA-Z0-9_"      // default character set
+
+
+// Translation -------------------------------------------------------
+
+public TranObj       = "tran"         // translation object name
+public TranCSet      = "a-zA-Z0-9_;"  // translation lookup char set
+
+
+// Confirmations -----------------------------------------------------
+
+public ConDel        = "y"          // (y/n) confirm on file delete
+public ConRpl        = "y"          // (y/n) confirm on file replace
+public ConTch        = "y"          // (y/n) confirm on file touch
+
+
+// Border ------------------------------------------------------------
+
+public Shadow        = 1            // shadow thickness
+
+public BorderStyle   = 0            // default window border style
+                                    //   0=expanded
+                                    //   1=single
+                                    //   2=double horz
+                                    //   3=double vert
+                                    //   4=double
+                                    //   5=solid
+                                    //   6=blank
+
+// for expanded borders (BorderStyle=0):
+public BorX          = 1            // x border thickness
+public BorY          = 1            // y border thickness
+public BorO          = 2            // corner overlap length
+
+
+// International -----------------------------------------------------
+
+public Language      = 3            //  1 = bokm†l     (Norwegian)
+                                    //  2 = dansk      (Danish)
+                                    //  3 = Deutsch    (German)
+                                    //  4 = English    (English)
+                                    //  5 = espa¤ol    (Spanish)
+                                    //  6 = fran‡ais   (French)
+                                    //  7 = italiano   (Italian)
+                                    //  8 = Nederlands (Dutch)
+                                    //  9 = portuguˆs  (Portuguese)
+                                    // 10 = Suomi      (Finnish)
+                                    // 11 = svenska    (Swedish)
+
+public DateOpt       = 1            // date format
+                                    //   0=mm dd yy
+                                    //   1=dd mm yy
+                                    //   2=yy mm dd
+
+public DateSep       = "."          // date separator character
+public LDateOpt      = "$D, $d. $M $y"   // long date format
+
+public TimeOpt       = 1            // time format
+                                    //   0=12hr
+                                    //   1=24hr
+                                    //   2=12hr with seconds
+                                    //   3=24hr with seconds
+public TimeSep       = ":"          // time separator character
+public ThousandSep   = "."          // thousands separator character
+                                    //   (null=no separator)

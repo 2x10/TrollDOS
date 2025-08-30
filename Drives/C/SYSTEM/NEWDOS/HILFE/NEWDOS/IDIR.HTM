@@ -1,0 +1,189 @@
+<HTML><HEAD><TITLE>IDIR</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>IDIR</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>DIR-Befehl fr Datentr„ger-Abbilder. 
+
+<A HREF="#1"> Syntax</A>
+<A HREF="#2"> Allgemeines</A> 
+<A HREF="#3"> Anwendungsbeispiele</A> 
+<A HREF="#4"> M”glichste schnelle Datentr„ger-Archivierung</A> 
+<A HREF="#5"> Ausmustern von Datentr„gern</A> 
+<A HREF="#6"> Anzeigen des Inhalts aller archivierten Disketten</A> 
+<A HREF="#7"> Schnelle Dateisuche auf der Festplatte</A><HR 
+
+
+noshade color="silver"><A Name="1"><A 
+HREF=#top> </A><FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">IDIR [Laufwerk | Datei] [/n /p /d /e /l /b /t /k=Name]</FONT>
+
+/n  fragt, ob ein weiterer Datentr„ger eingelesen werden soll
+/p  seitenweise Anzeige
+/d  zeigt nur Verzeichnisse an
+/e  l”scht ein Datentr„ger-Abbild
+/l  zeigt alle Datentr„ger-Etiketten
+/b  verwendet einfaches Ausgabeformat
+/t  speichert auch Datei-Datum und -Gr”áe
+/k  Etikett, das ein einzulesender Datentr„ger bekommen soll.
+    Dieser Name kann bis zu 79 Zeichen lang sein - er darf frei gew„hlt 
+    werden, jedoch keine Leerzeichen enthalten.<HR
+
+
+noshade color="silver"><A Name="2"><A 
+HREF=#top> </A><FONT COLOR="maroon">Allgemeines</FONT>
+
+Mit IDIR k”nnen Sie die Inhaltsverzeichnisse (Verzeichnisb„ume) beliebig 
+vieler Datentr„ger in einer Datenbank auf der Festplatte speichern. Danach 
+l„át sich IDIR wie der normale DIR-Befehl verwenden - ohne den 
+entsprechenden Datentr„ger einlegen zu mssen. Mit IDIR k”nnen Sie also 
+umfangreiche Disketten- und CD-ROM-Best„nde verwalten. Um z.B. 
+herauszubekommen, auf welchem Datentr„ger sich eine bestimmte Datei 
+befindet, geben Sie einfach den Befehl "IDIR Dateiname" ein und in wenigen
+Sekunden pr„sentiert IDIR die Datei inklusive Datentr„ger-Etikett. 
+IDIR behandelt Ihren Datentr„ger-Bestand also praktisch wie eine einzige 
+groáe Festplatte.
+
+<FONT COLOR="green">Neues</FONT>
+Zur Vorversion (New-DOS 6.24) sind allerdings einige nderungen und 
+Verbesserungen hinzugekommen. Das neue IDIR ist zum alten jedoch halbwegs 
+kompatibel, sodaá Sie Ihre Datentr„ger nicht alle nochmal neu einlesen 
+mssen. Empfohlen wird es jedoch, da das neue IDIR nun auf Wunsch auch die 
+Gr”áe, Zeit und Datum der Dateien bernehmen kann. Damit ist auch ein 
+Versionsvergleich von gleichnamigen Dateien auf verschiedenen Datentr„gern 
+m”glich - bei Doubletten k”nnen Sie die aktuellste Datei erkennen (und die 
+veralteten auf Wunsch l”schen o.„.).
+
+Um nun auch CD-ROM, DVD, ZIP-Disks oder beliebige andere unter DOS lesbare 
+Medien archivieren zu k”nnen, ist ein neues Etikettierungssystem 
+implementiert worden. Der Name und die Seriennummer von Disketten wird NICHT 
+mehr ausgewertet. Vielmehr geben Sie einem Datentr„ger nun per Hand einen 
+bis zu 79 Zeichen langen Namen. Dieser Name wird von IDIR gespeichert und 
+diesen Namen sollten Sie dann auch auf das Etikett der Diskette oder CD 
+schreiben. Es steht Ihnen jedoch frei, den Namen mit dem LABEL-Befehl 
+zus„tzlich auch auf die Diskette zu "brennen" - bercksichtigt wird dies 
+beim Einlesen einer Diskette jedoch nicht.<HR
+
+
+noshade color="silver"><A Name="3"><A 
+HREF=#top> </A><FONT COLOR="maroon">Anwendungsbeispiele</FONT> 
+
+- datentr„ger-bergreifendes Suchen einer Datei oder eines Verzeichnisses
+- Aufspren von doppelt vorhandenen Dateien
+- auch Festplatten k”nnen in die Datenbank aufgenommen werden. Nutzen: 
+  extrem schnelles Auffinden von gesuchten Dateien
+- šberwachung von Backups<HR
+
+
+noshade color="silver"><A Name="4"><A 
+HREF=#top> </A><FONT COLOR="maroon">M”glichst schnelle Datentr„ger-Archivierung</FONT>
+
+Wenn Sie Ihren gesamten Disketten- oder CD-Bestand in der Datenbank 
+speichern wollen, legen Sie die erste "Scheibe" ein und geben Sie folgenden 
+Befehl:
+
+<FONT COLOR="blue">IDIR A: /n /k=Name_des_ersten_Datentr„gers</FONT>
+
+IDIR fordert Sie nun so oft zum Einlegen eines weiteren Datentr„gers auf, 
+bis Sie alle archiviert haben und mit Taste N (oder Esc) abbrechen.
+Um sp„ter hinzukommende Datentr„ger in die Datenbank aufzunehmen, legen Sie 
+diese in das Laufwerk und geben den Befehl:
+
+<FONT COLOR="blue">IDIR A: /k=Name_des_Datentr„gers </FONT>
+
+Ebenso verfahren Sie, wenn der Inhalt einer archivierten Diskette ver„ndert 
+wurde und diese nderung nun auch in das Abbild bernommen werden soll. 
+IDIR durchsucht IMMER die Datenbank, um festzustellen, ob von dem 
+eingelegten Medium schon ein Abbild existiert. Findet IDIR ein gleichnamiges 
+Etikett, fragt es, ob Sie das dazugeh”rige Abbild durch den neuen 
+Datentr„ger berschreiben lassen wollen oder nicht.<HR
+
+
+noshade color="silver"><A Name="5"><A 
+HREF=#top> </A><FONT COLOR="maroon">Ausmustern von Datentr„gern</FONT> 
+
+Wenn Sie eine Diskette oder CD (z.B. wegen eines Fehlers) wegwerfen wollen, 
+sollten Sie deren Abbild von IDIR l”schen lassen:
+
+<FONT COLOR="blue">IDIR /e /k=Name_des_ausgemusterten_Datentr„gers</FONT>
+
+Wenn Sie keinen Namen (/k=...) angeben, zeigt IDIR nacheinander
+s„mtliche gespeicherte Datentr„ger-Etiketten und fragt, ob sie 
+das dazugeh”rige Abbild l”schen wollen. Drcken Sie so oft Taste n fr nein, 
+bis die Nummer der auszumusternden Diskette angezeigt wird und l”schen Sie 
+deren Abbild mit Taste J.
+
+Die Abbild-Datenbank befindet sich im gleichen Verzeichnis wie das Programm 
+IDIR selbst und heiát IDIR.BNK. Dies ist im Grunde eine Textdatei, die sich 
+daher auch in einem ganz normalen Texteditor bearbeiten l„át. Dadurch ist es 
+m”glich, ein Abbild auch "per Hand" zu entfernen - z.B., wenn sich das 
+Etikett des auszumusternden Mediums nicht mehr ermitteln l„át, Sie aber noch 
+den Inhalt in Erinnerung haben.
+
+Das L”schen eines Abbildes bezieht sich immer nur auf das Abbild selbst - 
+der dazugeh”rige Datentr„ger wird natrlich nicht ver„ndert.<HR
+
+
+noshade color="silver"><A Name="6"><A 
+HREF=#top> </A><FONT COLOR="maroon">Anzeigen des Inhalts aller archivierten Disketten</FONT> 
+
+Folgender Befehl gibt das komplette Inhaltsverzeichnis aller Disketten aus:
+
+<FONT COLOR="blue">IDIR *.*</FONT>
+
+Da dies ohne Unterbrechung geschieht, sollten Sie den Parameter /p 
+verwenden, um eine seitenweise Ausgabe zu erzwingen:
+
+<FONT COLOR="blue">IDIR /p</FONT> 
+
+Sie k”nnen groáe Ausgabemengen jedoch auch filtern:
+
+<FONT COLOR="blue">IDIR /d</FONT>    gibt nur die Namen der Verzeichnisse aus
+
+<FONT COLOR="blue">IDIR /b</FONT>    einfaches Ausgabeformat (Pfad\Datei)
+
+Um die Dateiausgabe zu filtern oder eine Datei zu suchen, geben Sie einen 
+bestimmten Dateinamen oder Teile davon ein:
+
+<FONT COLOR="blue">IDIR *.TXT</FONT> 
+
+zeigt z.B. alle Dateien mit der Endung .TXT. Folgende Filterm”glichkeiten 
+k”nnen Sie auáerdem noch verwenden:
+
+*.*    zeigt ALLE Dateien
+*      zeigt nur Dateien OHNE Dateiendung
+PA*    zeigt alle Dateien, deren Name mit PA beginnt
+*IX*   zeigt alle Dateien, deren Name die Zeichen IX enth„lt
+TEXT   zeigt alle Dateien mit dem Namen TEXT
+
+Fragezeichen als Platzhalter (wie unter DOS m”glich) k”nnen Sie nicht 
+verwenden. Der Parameter /p kann auch hier angewendet werden (IDIR a* /p).
+Zu den gefundenen Dateien werden immer auch Pfadinformationen sowie die 
+Nummer und der Name der Diskette angezeigt.
+
+Die Suchabfrage bezieht sich brigens auch auf Datum, Uhrzeit und 
+Dateigr”áe. Wenn Sie also eine Datei suchen, deren Namen Sie nicht mehr 
+kennen, von der Sie aber wissen, daá Sie sie 1991 erstellt haben, dann 
+k”nnen Sie "*1991" als "Datei-Maske" eingeben.<HR
+
+
+noshade color="silver"><A Name="7"><A 
+HREF=#top> </A><FONT COLOR="maroon">Schnelle Dateisuche auf der Festplatte </FONT>
+
+Um eine einzelne Datei zu suchen, verwenden Sie besser die herk”mmliche 
+Methode (am schnellsten ist <A HREF="attrib.htm">ATTRIB</A> Dateiname /s /p). Wollen Sie Ihre Platte 
+intensiv nach verschiedenen Dateien durchforsten, dann lohnt die Mitwirkung 
+von IDIR. Fertigen Sie zun„chst ein Abbild der Festplatte an:
+
+<FONT COLOR="blue">IDIR C: /k=Festplatte-C:</FONT>
+
+Nun k”nnen Sie mit IDIR [Dateiname] in der Abbild-Datei nach den gewnschten 
+Dateien fahnden. In der Regel geht das um ein mehrfaches schneller als das 
+tats„chliche Durchsuchen der Festplatte mittels <A HREF="help:chkdsk">CHKDSK</A>, <A HREF="help:dir">DIR</A> oder ATTRIB. Um 
+das Festplattenabbild wieder zu l”schen, ermitteln Sie mit <A HREF="label.htm">LABEL</A> C: /v 
+zun„chst die Datentr„gernummer der Festplatte. Mit IDIR /e kann dann das 
+Abbild wie oben beschrieben entfernt werden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

@@ -1,0 +1,19 @@
+# Makefile for NNANSI.COM, Version 9/92
+all:	nnansi.com
+# all:  nnansi.com nnansi.sys
+
+# Note: there is a bug in TASM V3.0 that causes a crash when attempting
+# to assemble the SYS version of NNANSI. If you have this assembler, use
+# the COM version instead.
+
+
+nnansi.sys :	nnansi.asm config.inc drivers.inc
+	tasm /m5 /dTSR=0 nnansi,nnansi
+	tlink nnansi,nnansi.sys/t
+
+nnansi.com :	nnansi.asm config.inc drivers.inc
+	tasm /m5 /dTSR=1 nnansi,nnansi,nnansi
+	tlink nnansi,nnansi.bin/t
+	erase nnansi.com
+	rename nnansi.bin nnansi.com
+

@@ -1,0 +1,38 @@
+<HTML><HEAD><TITLE>DEVMAN</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>DEVMAN</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A><BR>
+<A HREF="ddd.htm">Allgemeines zu DDD</A> 
+<HR noshade color="silver"><PRE>Device-Manager zum Steuern der <A HREF="ddd.htm">DDD</A> (Dynamic Device Drivers)
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">DEVMAN</FONT><HR
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT>  
+
+Der Device-Manager erm”glicht das Steuern der DDD ber eine zentrale
+Oberfl„che. DEVMAN ist speziell auf das DDD-Konzept zugeschnitten und kann
+auch DDD anderer Hersteller verwalten. Wenn Sie den DEVMAN starten,
+erzeugt dieser eine Liste aller im NEW-DOS-Verzeichnis befindlichen DDD.
+
+Klicken Sie einen Treiber in der Liste mit der Maus an oder bewegen Sie
+den Lichtbalken mit den Pfeiltasten dorthin, wird der momentane
+Status dieses Treibers angezeigt, z.B. ob er geladen oder gerade
+stillgelegt ist, welche Interrupts er "verbogen" hat und an welcher
+RAM-Adresse er gespeichert ist (UMB oder konventioneller RAM). Bei <A HREF="printer.htm">PRINTER</A> 
+wird zus„tzlich der aktuelle Stand eines Druckvorganges angezeigt.
+
+Mit der Maus oder Tastatur k”nnen Sie den DDD nun beliebig laden und
+entladen, die geladenen Treiber im Speicher umsortieren usw.
+
+U.U. kann es passieren, daá DEVMAN einen Treiber als "nicht geladen oder
+umgeleitet" ausweist, obwohl der Treiber geladen ist. In diesem Falle trifft
+der zweite Teil der Statusmeldung zu: Der Treiber wurde umgeleitet. Dies
+geschieht imemr dann, wenn nach diesem Treiber ein weiterer geladen wurde,
+der denselben Interrupt belegt. In diesem Falle kann aus technischen Grnden
+keine Steuerung des betreffenden DDD vorgenommen werden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

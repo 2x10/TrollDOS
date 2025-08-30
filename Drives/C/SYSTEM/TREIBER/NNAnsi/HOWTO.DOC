@@ -1,0 +1,197 @@
+		     How To Write to the Display
+
+
+		       A quick NNANSI tutorial
+
+
+The purpose of this tutorial is to illustrate the various ways
+programs can write to the display. There are several parts to this
+puzzle: 
+
+	DISPLAY MEMORY -- memory mapped video, can be accessed
+	directly by applications, but there are drawbacks.
+
+	VIDEO BIOS -- "Low level" access to write characters,
+	position the cursor, change display modes.
+
+	DOS INT 21H SERVICES -- Access display in a device
+	independent manner. The display (and keyboard) are device
+	"CON". Devices can be accessed in "Cooked" mode, in which the
+	keyboard is monitored for ^C and other control characters and
+	certain character translations may occur, or in "Raw", or
+	binary, mode, which does no translation and is potentially
+	much faster. In Cooked mode when the output device is the
+	display, single characters are written using calls to INT
+	29H. In Raw mode, or for other devices, DOS calls the driver,
+	which is a cumbersome process, but allows writing of multiple
+	characters.
+
+	INT 29H HANDLER -- writes a single character to the display.
+	By default (no ANSI driver) it is a simple call to the video
+	BIOS.
+
+	CON DRIVER -- The console device. Called by DOS and in turn
+	calls the video BIOS to write characters.
+
+	ANSI DRIVER -- A replacement for the default CON driver which
+	provides interpretation of ANSI control codes. 	Also
+	overrides the "INT 29H" handler to interpret ANSI codes. The
+	driver typically calls the VIDEO BIOS for all functions, but
+	fast drivers like NNANSI do most of the low level operations
+	internally.
+
+
+NNANSI has additional features which will be discussed throughout
+this tutorial.
+
+
+*************Writing Direct to Display***********************
+
+Most program originally used DOS calls to write to the display. But
+poor performance of DOS and the ANSI.SYS driver led many programmers
+to bypass the operating system and write directly to the display. The
+standardization of displays hastened the change, and made
+"PC-Compatible" the important issue rather than just "MS-DOS
+operating system".
+
+Programs that use this technique typically (but not always) use the
+video BIOS for moving the cursor and clearing the display.
+
+This is potentially the fastest technique, and is employed by high
+level languages which provide a fast console output. There are
+several problems with direct output, however.
+
+The video BIOS maintains information about the display in low memory.
+This information includes the number of rows and columns, as well as
+the display memory start address. Many programs using direct display
+writing ignore the row and column information. This typically means
+only the top of the display is utilized (typically 43/50 line modes)
+or the display is garbled (typically 132 column modes).
+
+Most programs ignore the display start address. This can cause
+problems in two ways. Some applications use "display pages". When
+display pages are in use, the display memory gets divided into
+several screens that can be switched back and forth by a single BIOS
+command. Programs that ignore the start address always write to page
+0, possibly clobering the display. 
+
+NNANSI modifies the start address to implement FAST scrolling. It
+attempts to accomodate direct to display programs by reseting the
+offset when a program calls the BIOS to either clear the screen or
+get the display mode. Programs that do neither of these, or write to
+the display after the display has scrolled, will not work with NNANSI
+in FAST mode.
+
+There is another problem with writing the display directly -- you
+cannot redirect output to a file, or more important, to a serial port
+for remote operation. The program is locked into the display and is
+not portable to other computers or even other PC operating systems.
+
+
+
+
+************Using the Video BIOS*******************
+
+
+Again, standardization of the video BIOS made it possible to write
+programs using BIOS calls to write to the display. Because of the
+cumbersome interface, few programs actually use BIOS calls to write
+to the display. But in the absence of an ANSI driver, BIOS calls are
+necessary to read or position the cursor or clear the display in
+programs that otherwise use the DOS INT 21H interface.
+
+The BIOS provides a "TTY Write" function which allows writing
+character strings, but does not allow controling the color, and does
+not expand tab characters. NNANSI has an option to do ANSI processing
+of this BIOS call which will allow setting the color and expanding
+tabs. To set the colors using BIOS calls is a messy process because
+the only call that writes the character attribute information does
+not advance the cursor!
+
+One advantage of using the Video BIOS for writing is that the BIOS
+always know how to handle the various display modes the video adapter
+is capable of handling. It will always correctly write in 132 column
+or 50 line modes, for example.
+
+
+
+
+**********DOS INT 21H Services**********************
+
+
+DOS provides numerious functions for accessing the display (and
+keyboard) without much difference in functionality. Most of the
+functions are for compatibility with the archaic CP/M operating
+system. 
+
+We will only consider the "handle" interface, which allows treating
+the console (keyboard and display) as a file. You can open, read,
+write, and close the console "file". All programs start execution
+with three appropriate handles. Handle 0 (corresponding to the C
+language stdin) and Handle 1 (corresponding to the C language stdout)
+are the console unless redirected on the command line with the "<" or
+">" operators. Handle 2 (corresponding to the C language stderr) is
+always (well, almost always) the console. Unless redirection is in
+effect, any of the three handles can be used interchangably.
+
+Normally, the console device is in "cooked" mode. In cooked mode, tab
+characters are expanded, and the keyboard is checked with each
+character written for control-C, control-S, and control-P keystrokes.
+On input, these keystrokes are not readable, nor is control-Z which
+forces the end of file condition.
+
+Programs using cooked mode DOS INT 21H services to write to the
+display are very portable, but slow. In fact this is the slowest way
+to write to the display. In addition, without an ANSI driver loaded,
+there is no way to enquire or set the cursor position, change colors
+or other display attributes, or clear the display.
+
+
+*********ANSI Drivers********************************
+
+To make using DOS INT 21H services more palatable, an ANSI driver can
+be loaded. With an ANSI driver the program gains the following
+abilities: 
+
+1. Change display mode (some drivers allow extended modes)
+2. Clear screen (some drivers allow line clearing, and
+	inserting/deleting characters and lines)
+3. Set cursor position
+4. Get cursor position -- cumbersome to use, and not available with some
+	drivers such as ANSI.COM and NNANSI as limited function TSR
+5. Change character attributes
+
+
+When an ANSI driver is used, the program is portable to any system
+that supports ANSI display codes, including DEC VT-100 and later
+terminals, and most programs can be run remotely out the COM port
+using the CTTY command.
+
+
+*********Using INT 29H*******************************
+
+This interrupt will always write the character in register AL to the
+display. The DOS INT 21H services use this interrupt to write
+characters when the console is in Cooked mode. Since the keyboard
+check is bypassed, INT 29H is a significantly faster way to write to
+the display. When an ANSI driver is loaded, ANSI processing will
+occur, but tabs will not be expanded unless NNANSI or some other
+extended ANSI driver is used.
+
+
+*********Using RAW Mode******************************
+
+
+All the previous techniques only write a single character at a time.
+A major speed advantage can be gained by using DOS INT21H services
+with the console in Raw mode, and by buffering up the characters to
+write. In this manner, the ANSI driver gets all the characters to
+write at once and overhead is vastly reduced. The NANSI driver, and
+its derivatives, such as NNANSI, are particularly enhanced this way,
+and will often outperform high level language's "console" drivers.
+
+Using raw mode will also prevent DOS from intercepting typed control
+characters during printing, which is often an advantage. Note however
+that tab expansion will not occur with standard ANSI drivers. The
+application needs to expand tabs unless it can be assured the system
+is using an enhanced ANSI driver, such as NNANSI.

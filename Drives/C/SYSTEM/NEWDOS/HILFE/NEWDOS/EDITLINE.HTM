@@ -1,0 +1,129 @@
+<HTML><HEAD><TITLE>EDITLINE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>EDITLINE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>stellt in BATCH-Dateien eine komfortable Benutzer-Eingabezeile zur VerfÅgung
+Zusammen mit dem DOS-Befehl <A HREF="help:choice">CHOICE</A> kînnen Sie Batch-Programme schreiben, die 
+sich vollkommen vom Anwender steuern lassen. EDITLINE darf zusammen mit Ihren
+Batchdateien auch an andere Personen beliebig weitergegeben werden.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">EDITLINE [BATCH-Datei] [Variable] [/g /a /z /h]</FONT>
+
+<FONT COLOR="green">[BATCH-Datei]</FONT>
+Name der Batchdatei, in die EDITLINE den <A HREF="help:set">SET</A>-Befehl schreiben soll. EDITLINE 
+kann den SET-Befehl aus technischen GrÅnden nicht selbst ausfÅhren. 
+Stattdessen schreibt er ihn in eine Batchdatei, die Sie danach in Ihrem 
+Batchprogramm starten mÅssen, um den SET-Befehl ausfÅhren zu lassen. Die 
+Dateiendung BAT mu· mit angegeben werden. VORSICHT: EDITLINE Åberschreibt 
+eine bereits bestehende Batchdatei ohne Vorwarnung! Lediglich bei einer 
+schreibgeschÅtzten Datei bricht EDITLINE mit einer Fehlermeldung ab. Ihr 
+Batchprogramm sollte also ggf. vor Aufruf von EDITLINE eine PrÅfung in dieser
+Richtung vornehmen.
+
+<FONT COLOR="green">[Variable]</FONT>
+Name der Umgebungsvariablen, die die Benutzereingabe aufnehmen soll.
+
+/g   Benutzereingabe wird in Gro·buchstaben umgewandelt
+
+/a   Benutzereingabe wird an den Inhalt der Variablen angehÑngt. Der 
+     bestehende Inhalt der Umgebungsvariablen bleibt also erhalten und wird 
+     lediglich um die Benutzereingabe erweitert.
+
+/z   Inhalt der Umgebungsvariablen wird zum Editieren angezeigt. Der Anwender
+     editiert also den bereits vorhandenen Inhalt der Umgebungsvariablen. 
+     Wird /z weggelassen, zeigt EDITLINE eine leere Zeichenkette.
+
+/h   zeigt Bedienhinweise fÅr den Anwender. Der Zeileneditor von EDITLINE 
+     unterstÅtzt zahlreiche komfortable Funktionen. Wenn Sie den Anwender 
+     darauf aufmerksam machen wollen, starten Sie EDITLINE zuvor mit dem 
+     Parameter /h. In diesem Falle wird NUR der Hilfetext angezeigt - um eine
+     Eingabezeile zu erzeugen, mÅssen Sie EDITLINE danach ein weiteres Mal 
+     aufrufen.
+
+Die maximale LÑnge einer mit EDITLINE editierbaren Zeile betrÑgt 79 Zeichen.
+
+EDITLINE zeigt bei Fehlern eine Bildschirm-Meldung an. Diese Meldung soll 
+Ihnen die Fehlersuche wÑhrend der Testphase erleichtern. EDITLINE setzt 
+au·erdem einen <A HREF="help:if">ERRORLEVEL</A> ab, den Ihre Batch-Datei anschlie·end auswerten 
+kann, um geeignete Ma·nahmen zu ergreifen. Wenn Sie die Bildschirm-Meldung 
+von EDITLINE unterdrÅcken wollen, leiten Sie sie mit &gt; NUL um.
+
+Folgende Fehlercodes (ErrorLevel) liefert EDITLINE zurÅck:
+
+0 - Fehlerfreie AusfÅhrung
+1 - Name der Batch-Datei fehlt in der Kommandozeile
+2 - Name der Umgebungsvariablen fehlt in der Kommandozeile
+3 - Anwender hat die Eingabe mit Taste Esc abgebrochen
+4 - Fehler beim Schreiben der Batch-Datei<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Praktischer Einsatz</FONT>
+
+EDITLINE ergÑnzt den CHOICE-Befehl um eine Benutzer-Eingabezeile und 
+ermîglicht so die komplette Steuerung eines Batch-Programmes durch den 
+Anwender. Ein Einsatzgebiet sind z.B. Batch-Dateien, die Programme 
+installieren (INSTALL.BAT) - sprich: Dateien von einer Diskette in ein 
+Festplatten-Verzeichnis kopieren. In der Regel legt eine INSTALL.BAT den 
+Zielpfad fest oder fordert zum Eingeben eines alternativen Verzeichnisses 
+auf der Kommandozeile ein. Mit EDITLINE kînnen Sie den Anwender direkt 
+fragen, in welches Verzeichnis er die besagten Dateien kopieren lassen 
+mîchte.
+
+<FONT COLOR="green">Beispielfragment:</FONT>
+
+<FONT COLOR="blue"><A HREF="help:set">set</A> Zielpfad=C:\TEST
+<A HREF="help:echo">echo</A> Geben Sie das Verzeichnis an, in das die Dateien kopiert werden sollen:
+<FONT COLOR="red">editline</FONT> c:\temp.bat Zielpfad /z &gt; NUL
+<A HREF="help:call">call</A> c:\temp.bat
+<A HREF="help:md">md</A> %Zielpfad%
+<A HREF="help:copy">copy</A> *.* %Zielpfad%
+<A HREF="help:del">del</A> c:\temp.bat</FONT>                                         
+
+Mit SET setzen Sie zunÑchst eine Umgebungsvariable namens ZIELPFAD und 
+belegen ihn mit einem Standard-Verzeichnis. EDITLINE zeigt diesen Pfad an 
+und der Anwender kann ihn editieren. Anschlie·end wird TEMP.BAT aufgerufen, 
+um die Variable ZIELPFAD mit der Anwendereingabe zu fÅllen.
+
+Mit EDITLINE kînnen Sie sogar einen kleinen Editor basteln. Der Anwender 
+kann z.B. nach erfolgreicher Installation gebeten werden, die dazugehîrige 
+INI-Datei anzulegen:
+
+<FONT COLOR="blue">set iniline=Printer:
+echo Geben Sie die Drucker-Schnittstelle an (LPT?): 
+<FONT COLOR="red">editline</FONT> c:\temp.bat iniline /a
+call c:\temp.bat
+echo %iniline% &gt;&gt; PROGRAM.INI 
+
+set iniline=Maus:
+echo Geben Sie die Maus-Schnittstelle an (COM?): 
+<FONT COLOR="red">editline</FONT> c:\temp.bat iniline /a
+call c:\temp.bat
+echo %iniline% &gt;&gt; PROGRAM.INI</FONT> 
+
+Parameter /a sorgt fÅr das AnhÑnger der Benutzereingabe an die Variable 
+INILINE. Dadurch kann der Anwender z.B. die Zeichenkette "Printer=" nicht 
+lîschen. Die Datei PROGRAM.INI sieht anschlie·end so aus:
+
+<FONT COLOR="blue">Printer:LPT1
+Maus:COM1</FONT>  
+
+Ein weiteres Einsatzgebiet fÅr Batch-Bastler ist die Mîglichkeit, 
+Kommandozeilen-Programme mit einer eigenen Eingabemaske auszustatten (die 
+NEW-DOS-Programme besitzen eine solche). Die folgende Datei soll FORM.BAT 
+hei·en.
+
+<FONT COLOR="blue">@echo off
+cls
+echo FORMAT - Diskette formatieren
+echo ----------------------------------------------------------------------
+echo Geben Sie das Laufwerk an, das die zu formatierende Diskette enthÑlt:
+<FONT COLOR="red">editline</FONT> c:\temp.bat laufwerk &gt; nul
+call c:\temp.bat
+del  c:\temp.bat
+<A HREF="help:format">format</A> %laufwerk%</FONT></PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

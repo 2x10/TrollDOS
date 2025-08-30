@@ -1,0 +1,16 @@
+
+ÿÿCOMPRESS.AML
+ ÿFind Occurrences via Foldingÿ
+
+  This macro hides all lines (via folding) where a search string is not
+  found in the current edit window, You will be prompted to enter the
+  search string. It is possible that the first line in the first fold
+  may not contain the search string.
+
+  This macro is similar to the Find Occurrences command on the edit
+  window Search menu, but will also allow you to edit the occurrences
+  'in place'. The folds can be removed later by selecting Remove All
+  Folds from the Fold menu.
+
+  Note: this macro will run faster if Undo is turned Off on the Set menu.
+

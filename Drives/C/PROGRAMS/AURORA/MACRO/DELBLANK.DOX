@@ -1,0 +1,9 @@
+
+ÿÿDELBLANK.AML
+ ÿDelete Blank Linesÿ
+
+  This macro deletes blank lines in the current edit window. The
+  operation is confined to a marked block if one exists.
+
+  Note: this macro will run faster if Undo is turned Off on the Set menu.
+

@@ -1,0 +1,249 @@
+
+\              // Main directory
+a.exe          // Aurora/386
+a.x            // Compiled editor environment
+color.aml      // Color definitions
+config.aml     // Configuration settings
+define.aml     // Compile-time declarations, constants, functions
+ext.aml        // Extension source
+features.doc   // Features List
+file_id.diz    // BBS description
+install.aml    // Installation macro source
+install.dat    // Installation file list (full)
+install.x      // Installation macro
+installs.dat   // Installation file list (lite)
+lib.x          // Compiled editor library
+license.doc    // Copyright, License, and Restrictions
+main.aml       // Main macro source
+mouse.aml      // Mouse definitions
+orderfrm.doc   // Ordering information and order form
+read.me        // Introduction and last-minute information
+syntax.aml     // Syntax highlighting definitions
+system.aml     // System settings
+tran.aml       // Translation sample definitions
+vendor.doc     // Distribution restrictions
+ver30c.doc     // New features in v3.0c
+whatsnew.doc   // New features in this version
+
+startup.aml    // Optional startup macros
+user.aml       // Optional user extension source
+
+cfg\           // Configuration macros
+cfgcolor.x     // Color configuration
+cfgdesk.aml    // Desktop
+cfgedit1.aml   // Edit Options 1
+cfgedit2.aml   // Edit Options 2
+cfgfind.aml    // Search/Replace
+cfgfmgr.aml    // File Manager
+cfgform.aml    // Text Reformatting
+cfgintnl.aml   // International Options
+cfgldlm.aml    // Line Delimiter
+cfgmain.aml    // Main Configuration
+cfgmarg.aml    // Margins and Tabs
+cfgmisc.aml    // Miscellaneous
+cfgmouse.aml   // Mouse
+cfgopen.aml    // Open
+cfgprint.aml   // Print
+cfgprom.aml    // Prompt
+cfgsave.aml    // Save
+cfgsort.aml    // Sort
+cfgstyl2.x     // Edit and File Manager window styles
+cfgstyle.x     // Dialog box and Prompt window styles
+cfgupd.aml     // Save Configuration
+cfgvideo.aml   // Video
+
+doc\           // Documenation
+function.dox   // The Aurora Macro Language Function Reference
+language.dox   // The Aurora Macro Language Reference
+quickfun.dox   // The AML Function Quick Reference
+regexp.dox     // Regular Expression Searching Reference
+tips.dox       // Miscellaneous User Tips
+user.dox       // The Aurora Editor User's Guide
+
+macro\         // External macros
+alarm.aml      // Set alarm
+alarm.dat      // Set alarm data
+alarm.dox
+ascii2.aml     // 2-Dimensional ASCII chart
+ascii2.dox
+bookauto.aml   // Save/Restore bookmarks automatically
+bookauto.dox
+booklist.aml   // List all bookmarks
+booklist.dox
+calcpad.aml    // Calculator pad
+calcpad.dox
+calen4.aml     // 4-month calendar
+calen4.dox
+calendar.aml   // Popup calendar
+calendar.dox
+capital.aml    // Capitalize words
+capital.dox
+clipview.aml   // Clipboard viewer
+clipview.dox
+clock.aml      // Digital clock
+clock.dox
+clrchart.aml   // Color chart
+clrchart.dox
+compare.aml    // Compare files
+compare.dox
+compress.aml   // Find occurrences via folding
+compress.dox
+countchr.aml   // Count characters
+countchr.dox
+countlin.aml   // Count lines in multiple files
+countlin.dox
+countwrd.aml   // Count words
+countwrd.dox
+delblank.aml   // Delete blank lines
+delblank.dox
+deldup.aml     // Delete duplicate lines
+deldup.dox
+deskopen.aml   // Open desktop
+deskopen.dox
+desksave.aml   // Save desktop
+desksave.dox
+dlgdemo.aml    // Dialog box demo
+dlgdemo.dox
+drawbox.aml    // Draw a box
+drawbox.dox
+erroraml.aml   // AML rrror codes
+example.aml    // Examples and macro source fragments
+fattr.aml      // Change attributes
+fattr.dox
+fcopy.aml      // Copy/Move file(s)
+fcopy.dox
+filestat.aml   // Display file/directory statistics
+filestat.dox
+fillnum.aml    // Fill block with a numeric sequence
+fillnum.dox
+findo.aml      // Find cccurrences
+findo.dox
+flopen.aml     // Open file list
+flsave.aml     // Save file list
+globrepl.aml   // Global Search and Replace
+globrepl.dox
+helplang.aml   // Language Reference Topics menu
+helpmac.aml    // Macro help
+helpuser.aml   // User's Guide Topics menu
+hilitewd.aml   // Hilite a word
+hilitewd.dox
+install.dox    // Install help
+installs.dox
+keycodes.aml   // Display keycodes
+keycodes.dox
+keydef.aml     // Show assigned state of all keys
+keydef.dox
+logevent.aml   // Log editor events
+logevent.dox
+longdate.aml   // Get the date and time in long format
+longdate.dox
+longline.aml   // Find the longest line
+longline.dox
+machine.bin    // Assembled and linked machine.asm
+machine.aml    // Examples for calling machine code
+machine.asm    // Assembly language source for MACHINE.AML examples
+machine.dox
+maclist.aml    // Macro list
+maclist.dat
+palette.aml    // Change color palette
+palette.dox
+paragrph.aml   // Find next/prev paragraph
+paragrph.dox
+projopen.aml   // Open project
+projopen.dox
+projsave.aml   // Save project
+projsave.dox
+ruler.aml      // Insert a ruler line above the current line
+ruler.dox
+saveall.aml    // Save all open files
+saveall.dox
+scan.aml       // Scan files
+scan.dox
+scan2.aml      // Scan files for all occurrences
+scan2.dox
+scandlg.aml    // Scan dialog box
+scrsaver.aml   // Screen saver
+scrsaver.dox
+sieve.aml      // Sieve of Eratosthenes demo
+sieve.dox
+sortstr.aml    // Sort a string
+sortstr.dox
+status.aml     // Custom status line example
+status.dox
+stopwtch.aml   // Stopwatch timer
+stopwtch.dox
+style.aml      // Change editor style
+style.dox
+sumblock.aml   // Add up numbers in a block
+sumblock.dox
+sweep.aml      // Sweep directories
+synch.aml      // Synchronized scrolling
+synch.dox
+tabauto.aml    // Expand tabs automatically
+tabauto.dox
+tabs.aml       // Entab/Detab
+tabs.dox
+template.aml   // Template editing
+template.dat   // Template data
+template.dox
+tree.aml       // Directory tree
+tree.dox
+trimline.aml   // Trim trailing blanks and tabs
+trimline.dox
+vcursor.aml    // Vertical cursor line
+vcursor.dox
+where.aml      // Where-is utility
+where.dox
+winclock.aml   // Edit window clock
+winclock.dox
+zapem.aml      // ZapEm Game
+zapem.dox
+
+palette\       // Color palettes
+blugreen.aml   // Blue and green
+fluoresc.aml   // Fluorescent
+greench.aml    // Green charcoal
+redblue.aml    // Red and blue
+wimbledn.aml   // Wimbledon
+
+style\         // Styles
+aukbd.aml      // Aurora-style keyboard layout and functions
+aumenu.aml     // Aurora-style menu definitions
+brkbd.aml      // Brief-style keyboard layout and functions
+brmenu.aml     // Brief-style menu definitions
+cukbd.aml      // Aurora/CUA/Windows-style keyboard definitions
+cumenu.aml     // Aurora/CUA/Windows-style menu definitions
+mekbd.aml      // MultiEdit-style keyboard definitions
+memenu.aml     // MultiEdit-style menu definitions
+qekbd.aml      // QEdit/TSE-style keyboard layout and functions
+qemenu.aml     // QEdit/TSE-style menu definitions
+wpkbd.aml      // WordPerfect-style keyboard layout and functions
+wpmenu.aml     // WordPerfect-style menu definitions
+wskbd.aml      // WordStar/Borland IDE keyboard layout and functions
+wsmenu.aml     // WordStar/Borland IDE menu definitions
+
+syn\           // Syntax highlighting objects
+xada.aml       // ADA
+xaml.aml       // AML macro language
+xasm.aml       // 80x86 assembly language
+xbas.aml       // Basic
+xbat.aml       // Dos .Bat files
+xc.aml         // C/C++
+xcbl.aml       // Cobol
+xcmd.aml       // Rexx
+xdox.aml       // Aurora .Dox files
+xfor.aml       // Fortran
+xhtm.aml       // Hypertext Markup Language (HTML)
+xipf.aml       // IPF (GML)
+xjav.aml       // Java
+xlsp.aml       // Lisp
+xmak.aml       // Make files
+xmod.aml       // Modula2
+xpas.aml       // Pascal
+xpps.aml       // PCBoard PPL
+xprg.aml       // dBase
+xrc.aml        // Windows Resource Files
+xsql.aml       // SQL
+xsys.aml       // Config.sys
+xtex.aml       // LaTex
+xword.aml      // Used by hiliteword command

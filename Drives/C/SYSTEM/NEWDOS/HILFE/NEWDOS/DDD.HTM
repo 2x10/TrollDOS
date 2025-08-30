@@ -1,0 +1,137 @@
+<HTML><HEAD><TITLE>DDD - Dynamic Device Drivers</TITLE></HEAD>
+<BODY><A NAME="top"> 
+<BR><FONT COLOR=teal>DDD - Dynamic Device Drivers</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>NEW-DOS-Treiber und Hintergrund-Tools
+
+<A HREF="#1"> Was bisher geschah...</A>
+<A HREF="#2"> Mehr Komfort und Leistung</A>
+<A HREF="#3"> šbersicht ber alle DDD</A>
+<A HREF="#4"> Einheitliche Steuerung</A>
+<A HREF="#5"> Kompatibilit„t</A>
+<A HREF="#6"> Eigenintelligenz</A><HR
+
+
+noshade color="silver"><A NAME="1"><A HREF="#top"> </A><FONT COLOR="maroon">Wie speicherresidente Programme (TSR) bisher verwaltet werden muáten</FONT>
+
+TSR sind Programme, die im Hintergrund schlummern, und in Aktion treten, 
+wenn ihre Dienste ben”tigt werden (z.B. der deutsche Tastaturtreiber 
+KEYB.COM) oder im Hintergrund laufende Arbeiten ausfhren (z.B. das
+Druckprogramm PRINT).
+
+All diese und andere Standard-Treiber haben gemeinsam, daá sie nach dem
+Laden in den Arbeitsspeicher nur noch durch einen Neustart des Systems
+entfernt oder umkonfiguriert werden k”nnen. Einige Treiber lassen sich
+obendrein nur durch den DEVICE-Befehl in der CONFIG.SYS laden - also muá
+auch hier der PC neu gestartet werden.<HR
+
+
+noshade color="silver"><A NAME="2"><A HREF="#top"> </A><FONT COLOR="maroon">Mehr Komfort und Leistung mit DDD</FONT>
+
+Die umst„ndliche Handhabung der klassischen Treiber hat mit dem neuen
+DDD-Konzept von New-DOS ein Ende. Dynamische TSR lassen sich zu
+jedem beliebigen Zeitpunkt laden, entladen, stillegen und damit auch
+umkonfigurieren, OHNE daá der PC auch nur ein einziges Mal neu gestartet
+werden muá.
+
+Die neuen DDD von New-DOS verleihen Ihrem DOS auáerdem ganz neue 
+z.T. einmalige Funktionen. Dazu geh”rt u.a. eine anwendungsbergreifende
+Zwischenablage, mit der Sie („hnlich wie mit dem Windows-Clipboard) Daten 
+zwischen unabh„ngigen Anwendungen austauschen k”nnen (Kopieren-Einfgen).
+
+Oder eine Hintergrund-Druckfunktion, die von jedem beliebigen Anwendungs-
+Programm genutzt werden kann. Der DOS-Editor EDIT.COM z.B. druckt Dateien 
+dadurch automatisch im Hintergrund, ohne daá Sie dazu einen speziellen 
+Befehl geben máten. Sie k”nnen also sofort weiterarbeiten, ohne auf
+das Ende des Ausdrucks warten zu mssen.
+
+Die Verwaltung der "Treiber-Flotte" kann ganz klassisch via Kommandozeile
+oder Batch-Datei (z.B. AUTOEXEC.BAT) erfolgen oder komfortabel und
+spielend einfach per Maus-Klick im extra dafr vorgesehenen <A HREF="devman.htm">Device-Manager</A>.
+
+Und zu guter Letzt: Um die neuen Treiber einsetzen zu k”nnen, ben”tigen
+Sie nicht zwangsl„ufig mehr Arbeits-Speicher. Der neue deutsche Tastatur-
+Treiber KEYB.COM ben”tigt z.B. nur ca. 10% des Speicherplatzes des DOS-
+Originals - der ANSI-Treiber nur ein Drittel. Durch Einsatz dieser
+beiden Programme anstelle der Originale gewinnen Sie bereits ca. 12 kB
+zus„tzlichen Arbeitsspeicher, den Sie mit den neuen DDD belegen k”nnen.
+Da sich auáerdem alle Treiber zur Laufzeit beliebig entfernen lassen, 
+brauchen Sie immer nur die Treiber zu laden, die Sie gerade ben”tigen.
+
+Mehr Leistung und Komfort ist also auch ohne zus„tzliche System-Belastung
+m”glich.<HR
+
+
+noshade color="silver"><A NAME="3"><A HREF="#top"> </A><FONT COLOR="maroon">šbersicht ber alle DDD</FONT> 
+ 
+<A HREF="ansi.htm">ansi</A>      Bildschirm-Cursor- und -Farb-Steuerung
+<A HREF="ascii.htm">ascii</A>     anwendungsbergreifende ASCII-Tabelle
+<A HREF="clip.htm">clip</A>      anwendungsbergreifendes Clipboard (Zwischenablage)
+<A HREF="clock.htm">clock</A>     Uhr mit Weckerfunktion
+<A HREF="dprotect.htm">dprotect</A>  L”schschutz fr Dateien und Verzeichnisse 
+<A HREF="drvlock.htm">drvlock</A>   Schreibschutz fr alle Diskettenlaufwerke
+<A HREF="devman.htm">devman</A>    Device-Manager zum Steuern der DDD
+<A HREF="euro.htm">euro</A>      Ausgabe des Euro-Symboles auf Drucker und Bildschirm
+<A HREF="keyb.htm">keyb</A>      deutscher Tastaturtreiber mit Euro-Funktion
+<A HREF="printer.htm">printer</A>   Hintergrunddruck aus allen Anwendungen
+<A HREF="setver.htm">setver</A>    t„uscht eine andere DOS-Versionsnummer vor<HR
+
+
+noshade color="silver"><A NAME="4"><A HREF="#top"> </A><FONT COLOR="maroon">Einheitliche Steuerung</FONT>
+
+Auáer mit dem Device-Manager k”nnen Sie DDD auch mit Kommandozeilen-
+Parametern steuern. Einheitlich fr alle DDD gelten folgende Optionen:
+
+/x  der DDD wird aus dem Speicher entfernt (z.B. <FONT COLOR="red">PRINTER /x</FONT>)
+/s  der DDD wird stillgelegt (berbrckt), bleibt jedoch im Speicher
+/r  stillgelegter DDD wird reaktiviert
+
+/?  zeigt einen Hilfe-Text zu dem DDD an <HR
+
+
+noshade color="silver"><A NAME="5"><A HREF="#top"> </A><FONT COLOR="maroon">Kompatibilit„t zu anderen Treibern und Programmen</FONT>
+
+Das DDD-Konzept ist bewuát so aufgebaut, daá es von speziellen DOS-System-
+Funktionen oder Standard-Anwendungen weitestgehend unabh„ngig ist.
+
+DDD "verbiegen" desweiteren nur wenige Interrupts. Zusammen mit der Tatsache,
+daá alle DDD in reinstem Assembler programmiert sind, bedeutet das, daá Ihr
+System nicht mehr als unbedingt notwendig belastet wird.<HR
+
+
+noshade color="silver"><A NAME="6"><A HREF="#top"> </A><FONT COLOR="maroon">Eigenintelligenz</FONT>
+
+DDD-Treiber, die gr”áere Speicherbereiche belegen mssen, besitzen eine
+Anpassungs-Funktion. Gerade beim Hochladen von Treibern mit dem LH-Befehl
+geht der kleine in den UMBs verfgbare Speicher schnell zur Neige. Reicht
+der freie Speicher fr einen DDD nicht mehr aus, verkleinert er sich 
+automatisch. Ferner k”nnen Sie bereits beim Starten eines DDD festlegen,
+wieviel Speicher er belegen darf. Die Meldung "Nicht gengend Speicher"
+wird daher nur bei extrem knappen Platzverh„ltnissen erscheinen.
+
+Einige DDD sind auch ansonsten relativ "elastisch". Spezielle Funktionen 
+erkennen automatisch den Grad der System-Auslastung oder kritische 
+Augenblicke und entscheiden dann eigenst„ndig, welche weitere Vorgehensweise
+die optimalste und sicherste ist. In der Regel wird weniger gut organisierten
+Prozessen der Vortritt gelassen und der anstehende Befehl zu einem sp„teren
+Zeitpunkt ausgefhrt.
+
+Eine gewisse Fehlertoleranz sorgt auch dafr, daá nicht beim kleinsten 
+Wehwehchen ein Fehler-Fenster aufklappt. Einige DDD arbeiten mit internen 
+Warteschlangen, in der momentan nicht ausfhrbare Befehle angestaut werden.
+Deshalb kann z.B. bereits bei ausgeschaltetem Drucker oder fehlendem 
+Papier ein Druckauftrag abgeschickt werden. Sobald die St”rung beseitigt 
+ist, werden die angestauten Befehle ausgefhrt.
+
+Jeder DDD-Treiber besitzt einen eigenen Unloader - das ist die Funktion, mit 
+der sich ein DDD selbst aus dem Speicher entfernt, nachdem man ihm diesen
+Befehl gegeben hat. Damit ist gew„hrleistet, daá jeder Treiber beim
+Entladen alle Befehle selbst„ndig ausfhrt, die zum fehlerfreien Entflechten
+aus dem Interrupt-Sytem speziell fr ihn notwendig sind bzw. um das Entladen 
+zu verweigern bzw. hinauszuz”gern, wenn dies aus technischen Grnden nicht
+m”glich ist. Der Device-Manager kann somit auch ihm unbekannte DDD steuern, 
+z.B. DDD von anderen Herstellern.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

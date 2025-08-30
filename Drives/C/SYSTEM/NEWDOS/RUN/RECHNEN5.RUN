@@ -1,0 +1,99 @@
+PROGRAM Rechnen5;
+{Praktischer Einsatz von @AND in einem Programm, das die Attribute von}
+{Dateien berÅcksichtig. ErklÑrungen zu den Kernbefehlen am Ende dieser Datei.}
+
+
+PROCEDURE Weiter;
+BEGIN
+  GotoXY (1, 25);
+  Write ('Weiter mit Taste.');
+  GetKey;
+  Init;
+END;
+
+
+
+BEGIN-MAIN
+  Init;
+  GetDir (0, !a);                  {speichere aktuelles Verzeichnis in !a}
+  ChDir ('C:\');                   {wechsle nach C:\}
+
+
+  WriteLn ('Nur Verzeichnisse...', #13#10);
+
+  FindFirst ('*.*', @anyfile, %Searchrec);
+  While (@DOSerror=0) Do
+  BEGIN
+    If (@and (%Searchrec.attr, @directory)<>0) Then WriteLn (%Searchrec.name);
+    FindNext (%Searchrec);
+    If (@WhereY=24) Then call weiter;
+  ENDW;
+  If (@WhereY<>24) Then call weiter;
+
+
+  WriteLn ('Nur Dateien...', #13#10);
+
+  FindFirst ('*.*', @anyfile, %Searchrec);
+  While (@DOSerror=0) Do
+  BEGIN
+    If (@and (%Searchrec.attr, @directory) =0) Then WriteLn (%Searchrec.name);
+    FindNext (%Searchrec);
+    If (@WhereY=24) Then call weiter;
+  ENDW;
+  If (@WhereY<>24) Then call weiter;
+
+
+  WriteLn ('Nur System-Dateien...', #13#10);
+
+  FindFirst ('*.*', @anyfile, %Searchrec);
+  While (@DOSerror=0) Do
+  BEGIN
+    If (@and (%Searchrec.attr, @SysFile)<>0) Then WriteLn (%Searchrec.name);
+    FindNext (%Searchrec);
+    If (@WhereY=24) Then call weiter;
+  ENDW;
+  If (@WhereY<>24) Then call weiter;
+
+
+  ChDir (!a);              {wechsle in altes Verzeichnis zurÅck}
+END.
+
+{Die @AND-Befehle ermitteln in jeder der drei Anzeigeschleifen das Attribut}
+{der von FindNext/FindNext gefundenen Dateien. Die Dateiattribute sind in}
+{einem einzigen Byte verschlÅsselt. Jedes der ersten 6 Bits stellt ein}
+{Attribut dar - ist es auf 1 gesetzt, besitzt die Datei das Attribut - ist}
+{es auf 0 gesetzt, fehlt es.}
+
+{Mit AND kann nun ÅberprÅft werden, ob ein einzelnes Bit gesetzt ist. Dazu}
+{mu· das Attribut-Byte, welches in %Searchrec.Attr gespeichert ist, mit}
+{einem geeigneten Operanden verknÅpft werden, bei dem das gewÅnschte Bit}
+{bereits auf 1 steht. Alle anderen Bits dieses Operanden mÅssen auf 0}
+{stehen.}
+
+{Die Konstante @Directory ist ein solcher vorbereiteter Operand, bei dem}
+{nur das Verzeichnis-Bit gesetzt ist. Die Funktion}
+{@AND (%Searchrec.Attr, @Directory) liefert also immer den Wert 0 zurÅck,}
+{wenn in %Searchrec.Attr das Verzeichnis-Bit NICHT gesetzt ist und einen}
+{Wert <> 0, wenn es gesetzt ist.}
+
+{Die Abfrage "If (@and (%Searchrec.Attr, @sysfile)<>0) Then..." fÅhrt den}
+{Befehl "WriteLn (%Searchrec.Name)" also nur dann aus, wenn das Systemdatei-}
+{Bit gesetzt ist. @SysFile ist hierbei eine Konstante, bei der nur das}
+{System-Bit gesetzt ist.}
+
+{Man kann auch mehrere Attribut-Bits zugleich abfragen. Angenommen, es sollen}
+{alle Dateien ermittelt werden, die schreibgeschÅtzt (ReadOnly) und/oder}
+{versteckt sind (hidden) sind:}
+
+{If (@and (%Searchrec.Attr, @or (@hidden, @readonly)) <> 0) Then...}
+
+{Die Funktion @or erzeugt aus den Konstanten @hidden und @ReadOnly einen}
+{Wert, bei dem das Hidden- UND das ReadOnly-Bit gesetzt ist. Sind beide}
+{oder eines der beiden Bits auch in %Searchrec.Attr gesetzt, liefert @and}
+{einen Wert <> 0 zurÅck.}
+
+{Werte, bei denen nur ein Bit gesetzt ist, kînnen Sie auch selbst ermitteln.}
+{Dies trifft auf alle Zweierpotenzen zu, also 1, 2, 4, 8, 16, 32, 64 usw.}
+{Dies wird im Programm Rechnen6.run anhand der Attribut-Konstanten vorge-}
+{fÅhrt.}
+

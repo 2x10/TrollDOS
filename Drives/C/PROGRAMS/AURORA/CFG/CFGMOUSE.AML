@@ -1,0 +1,92 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGMOUSE.AML
+// Configuration for Mouse Options
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable mainopt, mousenx, mouseny, moudst, moudouble,
+         mouhold, moudelay, moumark, moumarkd
+
+// create dialog box
+dialog "Mouse Options" 58 16 "c"
+
+// write dialog box text
+writestr "Speed:" '' 3 7
+writestr "Delays:" '' 3 12
+
+// mouse options group box
+groupbox "Main Options:" 3 2
+  (menu ''
+     item " [ ] &Mouse Enabled"
+     item " [ ] &Reverse Mouse Buttons"
+     item " [ ] &Hide Mouse on Keypress "
+   end) '' _Mouse + _MouseOpt 'yrd'
+
+// edit fields
+field "&X-Sensitivity:      >"  5  8 6 _MouSenX
+field "&Y-Sensitivity:      >"  5  9 6 _MouSenY
+field "Dou&ble Speed:       >"  5 10 6 _MouDST
+
+field "&Double Click Time:  >"  5 13 6 _MouDouble
+field "H&old Time:          >"  5 14 6 _MouHold
+field "Scroll Dela&y:       >"  5 15 6 _MouDelay
+
+// mark type on single-click and drag
+groupbox "Single-Click Mark Type"  35 2
+  (menu ''
+     item " ( ) &Column"
+     item " ( ) &Line"
+     item " ( ) &Stream"
+   end) '' _MouMark 'kls'
+
+// mark type on double-click and drag
+groupbox "Double-Click Mark Type" 35 7
+  (menu ''
+     item " ( ) &Column"
+     item " ( ) &Line"
+     item " ( ) &Stream"
+   end) '' _MouMarkD 'kls'
+
+
+// ok/cancel buttons
+button "O&k"    36 14 8
+button "Cancel" 47 14 8
+
+// display dialog box
+if (getdialog ref mainopt ref mousenx ref mouseny ref moudst
+              ref moudouble ref mouhold ref moudelay
+              ref moumark ref moumarkd) == 'Ok' then
+
+  prf.Mouse      = if? (pos 'y' mainopt) 'y' 'n'
+  prf.MouseOpt   = sub 'y' '' mainopt
+  prf.MouSenX    = mousenx
+  prf.MouSenY    = mouseny
+  prf.MouDst     = moudst
+  prf.MouDouble  = moudouble
+  prf.MouHold    = mouhold
+  prf.MouDelay   = moudelay
+  prf.MouMark    = moumark
+  prf.MouMarkD   = moumarkd
+
+  x = getmousex
+  y = getmousey
+
+  closemouse
+
+  // re-initialize the mouse
+  if _Mouse == 'y' then
+    if openmouse _MouseOpt then
+      mousepos x y
+      y_sens = _MouSenY
+      if (getos 'v') > 9 then
+        mousesense (_MouSenX * 5) / 8  (y_sens * 5) / 8  _MouDST
+      else
+        mousesense _MouSenX y_sens _MouDST
+      end
+    end
+  end
+
+end

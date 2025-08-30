@@ -1,0 +1,14 @@
+
+ÿÿPARAGRPH.AML
+ ÿFind Next/Prev Paragraphÿ
+
+  This macro defines keys to move the cursor to the next paragraph,
+  previous paragraph, and end of the current paragraph. Paragraphs are
+  assumed to be separated by one or more blank lines.
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <alt up>           // prev paragraph
+  <alt next>         // next paragraph
+  <alt right>        // to end-of-paragraph
+

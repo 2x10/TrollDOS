@@ -1,0 +1,60 @@
+<HTML><HEAD><TITLE>DISKEDIT</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>DISKEDIT</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Betrachten und Editieren von Datentr„ger-Sektoren
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">DISKEDIT [Laufwerksbuchstabe] [/u /m /i /l /g]</FONT>
+
+/u  verwenden Sie diesen Parameter bei Disketten mit fehlendem oder 
+    zerst”rtem Boot-Sektor. Bei Macintosh-Disketten befindet sich anstelle 
+    des Bootsektors von DOS-Disketten ein leerer Sektor.
+
+/m  zeigt die Sonderzeichen in Macintosh-Textdateien als normale DOS-
+    ASCII-Zeichen an. Wenn Sie Parameter /m w„hlen, wird der Parameter /u 
+    automatisch eingesetzt.
+
+/i  zeigt Sonderzeichen in Windows-Dateien als DOS-ASCII-Zeichen an.
+
+/l  zeigt Leerzeichen als kleine Punkte an
+
+/g  Erzwingt die Anwendung einer von Ihnen vorgegebenen Datentr„ger-
+    Geometrie. Verwenden Sie /g zum Kopieren von Disketten, die kein
+    DOS-Format haben (Mac, CP/M u.a.). <FONT COLOR="red">/G:9-80-2</FONT> bedeutet, daá die Diskette
+    9 Sektoren je Spur in 80 Spuren auf 2 Seiten hat. Wenn Sie die Werte 
+    der Diskette nicht kennen, k”nnen Sie diese mit <A HREF="scanfix.htm">Scanfix</A> ermitteln.
+
+/g, /u und auch /m verhindern, daá DISKEDIT einen ungltigen Bootsektor
+auswertet, da dies unweigerlich zu Fehlanzeigen fhren wrde. Stattdessen
+versucht DISKEDIT, die Diskette mit den Standardeinstellungen des Laufwerkes
+anzuzeigen. Sind die Sektoren - wie bei DOS blich - 512 Byte groá, drfte
+dies keinerlei Schwierigkeiten bereiten. Es kann dann jedoch vorkommen, daá
+DISKEDIT entweder (bei šberformaten) nicht alle Sektoren anzeigt oder (bei
+Unterformaten) versucht, Spuren oder Sektoren zu lesen, die gar nicht
+existieren. In diesem Fall wird ein Sektor als fehlerhaft angezeigt.
+
+Wenn Sie einen Sektor editiert haben, werden Sie gefragt, ob von dem Sektor 
+eine Sicherheitskopie angelegt werden soll, bevor er ge„ndert wird. Diese 
+Kopien werden in einer Datenbank gespeichert. Sollten Sie eine nderung 
+rckg„ngig machen wollen, findet Diskedit automatisch die richtige 
+Sicherheitskopie, auch wenn Sie die Diskette zwischenzeitlich gewechselt 
+haben.
+
+Hilfe zu den wichtigsten Tasten finden Sie auch direkt in DiskEdit.
+Zus„tzlich untersttzt Diskedit das New-DOS-<A HREF="clipbrd.htm">Clipboard</A> mit folgenden Tasten:
+
+F4      : Kopiert den Inhalt des gerade angezeigten oder editierten Sektors 
+          in das Clipboard. Dieser kann sp„ter in einer anderen Anwendung
+          (z.B. einem Hexeditor) eingelesen und bearbeitet werden.
+
+CTRL+F4 : Fgt den Inhalt des Clipboards in den Sektor-Editor ein. Enth„lt 
+          das aktuelle Clipboard weniger als 512 Zeichen (=Gr”áe eines 
+          Sektors), verweigert Diskedit das Einfgen. Nach dem Einfgen
+          k”nnen die angezeigten Daten bearbeitet und/oder in den aktuellen
+          Sektor geschrieben werden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

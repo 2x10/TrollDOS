@@ -1,0 +1,17 @@
+
+ÿÿDESKOPEN.AML
+ ÿOpen Desktopÿ
+
+  This macro opens and restores a desktop layout saved previously with
+  the Desksave macro.
+
+  You will be prompted to enter the desktop file name. If no file
+  extension is specified, the file extension .Dst is assumed.
+
+  The following items are restored from the desktop file:
+
+    - all open files
+    - window sizes and positions
+    - window settings
+    - cursor states and positions
+

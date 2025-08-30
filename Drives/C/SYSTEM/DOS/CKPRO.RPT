@@ -1,0 +1,174 @@
+
+                       CheckIt 1.25 (S/N:Unknown)
+                        Licensed To: Unknown
+
+             *** Memory Test Requested Was Not Run ***
+
+
+--------------------------------------------------------------------
+
+
+                       CheckIt 1.25 (S/N:Unknown)
+                        Licensed To: Unknown
+
+
+   NO FAILURES   MEMORY TEST v1.25           05-27-1998 23:33
+
+
+              Memory Installed:                 Selected for Test:
+              -------------------------------   ------------------
+        Base:    640K from      0K to    640K   All
+       Upper:     96K from    640K to  1,024K   All
+    Extended: 65,472K from  1,024K to 66,496K   None
+    Expanded: 32,768K from    384K to 33,152K   All
+       Video:    256K VESA                      None
+
+    Test Setup: Quick 
+
+
+    Base/Upper Memory.................................Passed
+
+    Extended Memory...................................Skipped
+        Your memory manager will not permit this test.
+
+    Expanded Memory...................................Passed
+
+    Primary Video.....................................Skipped
+
+
+
+--------------------------------------------------------------------
+
+
+                       CheckIt 1.25 (S/N:Unknown)
+                        Licensed To: Unknown
+
+
+   NO FAILURES   MEMORY TEST v1.25           05-27-1998 23:33
+
+
+              Memory Installed:                 Selected for Test:
+              -------------------------------   ------------------
+        Base:    640K from      0K to    640K   All
+       Upper:     96K from    640K to  1,024K   None
+    Extended: 65,472K from  1,024K to 66,496K   None
+    Expanded: 32,768K from    384K to 33,152K   None
+       Video:    256K VESA                      None
+
+    Test Setup: Quick 
+
+
+    Base/Upper Memory.................................Passed
+
+    Extended Memory...................................Skipped
+
+    Expanded Memory...................................Skipped
+
+    Primary Video.....................................Skipped
+
+
+
+--------------------------------------------------------------------
+
+
+                       CheckIt 1.25 (S/N:Unknown)
+                        Licensed To: Unknown
+
+
+   NO FAILURES   MEMORY TEST v1.25           05-27-1998 23:33
+
+
+              Memory Installed:                 Selected for Test:
+              -------------------------------   ------------------
+        Base:    640K from      0K to    640K   None
+       Upper:     96K from    640K to  1,024K   All
+    Extended: 65,472K from  1,024K to 66,496K   None
+    Expanded: 32,768K from    384K to 33,152K   None
+       Video:    256K VESA                      None
+
+    Test Setup: Quick 
+
+
+    Base/Upper Memory.................................Passed
+
+    Extended Memory...................................Skipped
+
+    Expanded Memory...................................Skipped
+
+    Primary Video.....................................Skipped
+
+
+
+--------------------------------------------------------------------
+
+
+                       CheckIt 1.25 (S/N:Unknown)
+                        Licensed To: Unknown
+
+
+   NO FAILURES   MEMORY TEST v1.25           05-27-1998 23:34
+
+
+              Memory Installed:                 Selected for Test:
+              -------------------------------   ------------------
+        Base:    640K from      0K to    640K   None
+       Upper:     96K from    640K to  1,024K   None
+    Extended: 65,472K from  1,024K to 66,496K   None
+    Expanded: 32,768K from    384K to 33,152K   All
+       Video:    256K VESA                      None
+
+    Test Setup: Quick 
+
+
+    Base/Upper Memory.................................Skipped
+
+    Extended Memory...................................Skipped
+
+    Expanded Memory...................................Passed
+
+    Primary Video.....................................Skipped
+
+
+
+--------------------------------------------------------------------
+
+
+                       CheckIt 1.25 (S/N:Unknown)
+                        Licensed To: Unknown
+
+             *** Memory Test Requested Was Not Run ***
+
+
+--------------------------------------------------------------------
+
+
+                       CheckIt 1.25 (S/N:Unknown)
+                        Licensed To: Unknown
+
+
+   NO FAILURES   MEMORY TEST v1.25           05-27-1998 23:34
+
+
+              Memory Installed:                 Selected for Test:
+              -------------------------------   ------------------
+        Base:    640K from      0K to    640K   None
+       Upper:     96K from    640K to  1,024K   None
+    Extended: 65,472K from  1,024K to 66,496K   None
+    Expanded: 32,768K from    384K to 33,152K   None
+       Video:    256K VESA                      All
+
+    Test Setup: Quick 
+
+
+    Base/Upper Memory.................................Skipped
+
+    Extended Memory...................................Skipped
+
+    Expanded Memory...................................Skipped
+
+    Primary Video.....................................Passed
+
+
+
+--------------------------------------------------------------------
+

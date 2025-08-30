@@ -1,0 +1,61 @@
+<HTML><HEAD><TITLE>ARCDIR</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>ARCDIR</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>DIR-Befehl fÅr gepackte Archive. UnterstÅtzt werden normale und 
+selbstentpackende Archive der Packer ARJ, PKZIP, LHA/LHARC und RAR. ARCDIR 
+erkennt selbstÑndig, ob es sich bei einer Datei um ein Archiv handelt und 
+von welchem Packer es erstellt wurde. Die genannten Packprogramme werden von 
+ARCDIR <FONT COLOR="red">nicht</FONT> benîtigt.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">ARCDIR [Archiv(e)] [Suchdatei] [/p /b /s /n /w]</FONT>
+
+/p  seitenweise Anzeige. Verhindert das Wegrollen langer Bildschirmausgaben.
+
+/b  listet nur Archiv- und Dateinamen auf. Vereinfachte (kompakte) 
+    Bildschirmausgabe z.B. zu Suchzwecken (z.B. <A HREF="help:find">FIND</A>).
+  
+/s  zeigt auch Archive in Unterverzeichnissen. ARCDIR kann also auch als 
+    Suchmaschine dienen, die ganze DatentrÑger nach Archiven durchsucht und 
+    diese dann nach der gewÅnschten Datei.
+
+/n  listet nur Dateinamen auf. Einfache Ausgabe, fÅr Umleitungen zu 
+    Stapelverarbeitungszwecken und Suchaufgaben.
+
+/d  wie /n, wenn auffindbar, werden auch Angaben zum Unterverzeichnis
+    im Archiv gezeigt, in denen sich die Datei befindet
+
+/w  wartet vor Beginn auf einen Tastendruck. Erlaubt das Wechseln der 
+    Diskette, falls ARCDIR von einer Startdiskette o.Ñ. betrieben wird.
+
+Gepackte Unterverzeichnisse werden meist (noch) nicht angezeigt.
+
+Wenn Sie [Suchdatei] weglassen, zeigt ARCDIR den gesamten Inhalt des 
+Archives an. Als [Archiv] kînnen Wildcards (*.* usw.) angegeben werden.
+Fehlt auch [Archiv(e)], sucht ARCDIR im gerade geîffneten Verzeichnis
+in allen auffindbaren Archiven.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">ARCDIR</FONT>
+sucht in allen Archiven, die sich im gerade geîffneten Verzeichnis befinden.
+ 
+<FONT COLOR="blue">ARCDIR <FONT COLOR="red">C:\*.* FINANZAM.TXT /s /p</FONT></FONT>
+sucht die Datei FINANZAM.TXT in allen Archiven, die sich auf der Festplatte 
+C: befinden.
+
+<FONT COLOR="blue">ARCDIR <FONT COLOR="red">C:\*.exe fin /s /p</FONT></FONT>
+sucht in allen Selbstextraktoren in C: nach Dateien, die mit FIN beginnen.
+
+<FONT COLOR="blue">ARCDIR <FONT COLOR="red">C:\*.zip+*.rar /s /p</FONT></FONT>
+Zeigt den Inhalt aller ZIP- und RAR-Archive auf Laufwerk C:. 
+
+Die Ausgabe erfolgt in den drei letzten Beispielen seitenweise.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

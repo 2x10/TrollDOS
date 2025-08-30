@@ -1,0 +1,62 @@
+//--------------------------------------------------------------------
+// TABAUTO.AML
+// Expand Tabs Automatically, (C) 1993-1996 by nuText Systems
+//
+// Running this macro will automatically expand tab characters (Ascii 9)
+// whenever a new file is loaded into an edit window.
+//
+// To reduce the amount of time required to open large files, only the
+// last 200 lines are checked for tab characters. If found, then tabs
+// throughout the file are expanded. If tabs are not expanded by this
+// macro, the Expand Tabs command can be used to manually expand tabs.
+//
+// The current tab width (the value of the _TabWidth configuration
+// variable) is used as the tab width for the expansion.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// number of ending lines to check for tabs
+constant check_lines = 200
+
+// check for a previous instance
+if object? prf.tabauto then
+  if (okbox "Tabauto already installed. Remove it?") == 'Ok' then
+    destroyobject prf.tabauto
+    prf.tabauto = ''
+  end
+  return
+end
+prf.tabauto = getcurrobj
+
+// keep this macro resident
+resident ON
+
+// edit windows only
+object edit
+
+// called when edit windows are opened
+function onopen (options)
+  // non-binary files only
+  if not getbinarylen then
+    oldmark = usemark 'T'
+    // create a temp mark at end-of-file
+    markline getlines - check_lines + 1 (getlines)
+    if find "\t" "bgn*" then      // search for tabs in the mark
+      markline 1 (getlines)       // extend mark to the whole file
+      tabblock _TabWidth          // expand tabs using TabWidth
+      bufferflag '-m'             // turn off buffer-modified flag
+    end
+    destroymark                   // destroy the temp mark
+    usemark oldmark
+  end
+  passprev options                // pass on to previous onopen
+end
+
+display
+say "Tabauto installed"

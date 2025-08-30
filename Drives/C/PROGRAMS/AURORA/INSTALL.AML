@@ -1,0 +1,342 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// INSTALL.AML
+// Installation Macro
+//
+// This macro installs all Aurora files to a user-specified path, and
+// also prompts the user for an editor style and color palette to use.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// main window colors
+constant inst_border_color   = color white on gray
+constant inst_text_color     = color black on gray
+constant inst_control_color  = color yellow
+
+// progress bar colors
+constant bar_todo_color      = color black on gray
+constant bar_done_color      = color black on gray
+
+// progress bar chars
+constant bar_todo_char       = '°'
+constant bar_done_char       = '±'
+
+
+variable compdisplay, lastfile
+
+titleprefix = arg 4
+
+// message strings
+title     = titleprefix + "Installation"
+cancelmsg = titleprefix + "Installation canceled"
+failmsg   = titleprefix + "Installation failed"
+source_path = onname (getpath (getbootpath))
+
+// for progress bar
+width = getvidcols
+
+// create progress bar
+bar = createwindow
+setwinobj
+setcolor text_color bar_todo_color
+sizewindow 0 (getvidrows)-1 0 0 "rd"
+
+private function resetbar
+  oldwin = gotowindow bar
+  writestr '':width:bar_todo_char bar_todo_color 1 1
+  gotowindow oldwin
+end
+
+resetbar
+
+// create status window
+createwindow
+setwinobj
+setframe ">b"
+setcolor  border_color   inst_border_color
+setcolor  text_color     inst_text_color
+setcolor  control_color  inst_control_color
+settitle "Aurora v" + getversion + ' ' + title
+setwinctrl 'ð'
+sizewindow 1 1 -1 -2 "rd"
+setborder "1i"
+display
+
+// get the install path
+install_path = onname (ask "Enter installation path:" ''
+                       source_path title 'd')
+if not install_path then
+  msgbox cancelmsg title
+  destroywindow
+  destroywindow
+  return
+end
+
+// add backslash if not present
+if install_path [0] <> "\\" then
+  install_path = install_path + "\\"
+end
+
+writestr "Installation path is " + install_path
+
+// check if the install path exists
+if directory? install_path then
+  if (okbox  "Path " + install_path +
+             " already exists, install over it?" title) <> "Ok" then
+    msgbox cancelmsg title
+    destroywindow
+    destroywindow
+    return
+  end
+
+// ..if not, then create it
+else
+  if (okbox "Path " + install_path +
+            " is not found, create it?" title) <> "Ok" then
+    msgbox cancelmsg title
+    destroywindow
+    destroywindow
+    return
+  else
+    if not createdir install_path then
+      msgbox "Can't create path " + install_path + " - " + failmsg  title
+      destroywindow
+      destroywindow
+      return
+    end
+  end
+  install_path = getpath (qualify install_path)
+end
+
+
+// create the style menu
+menu "mstyle"
+  item " &Aurora"                 "AU"
+  item " Aurora/&CUA/Windows"     "CU"
+  item " &Brief"                  "BR"
+  item " &MultiEdit"              "ME"
+  item " &QEdit/TSE"              "QE"
+  item " Word&Perfect"            "WP"
+  item " &WordStar/Borland IDE"   "WS"
+end
+
+// get the editor style
+style = popup "mstyle" "Which editor style would you like to use?"
+destroybuf "mstyle"
+if not style then
+  msgbox cancelmsg title
+  destroywindow
+  destroywindow
+  return
+end
+
+writeline
+writestr "Editor style is: " + style
+display
+
+// create the color palette menu
+menu "colors"
+  item " &Blue and green"   "blugreen"
+  item " &Fluorescent"      "fluoresc"
+  item " &Green charcoal"   "greench"
+  item " &Red and blue"     "redblue"
+  item " &Wimbledon"        "wimbledn"
+end
+
+// get the color palette to use
+palette = popup "colors" "Select a color palette to install" 37
+destroybuf "colors"
+if not palette then
+  msgbox cancelmsg title
+  destroywindow
+  destroywindow
+  return
+end
+
+writeline
+writestr "Editor color palette is: " + palette
+display
+
+// display compiling message only for a.x compilation
+event <compiling> (filename line)
+  if compdisplay and filename <> lastfile then
+    writeline
+    writestr "Compiling " + (onname filename) + "..."
+    display
+    lastfile = filename
+  end
+end
+
+// disable <loading> event for this macro
+event <loading> end
+
+// load installation file list
+listfile = arg 3
+if not listfile then
+  listfile = "install.dat"
+end
+listbuf = loadbuf (bootpath listfile)
+if not listbuf then
+  msgbox listfile + " not found." title
+  destroywindow
+  destroywindow
+  return
+end
+
+lines = getlines
+
+// check for same-path installation
+same_path = source_path == install_path
+
+// copy files
+repeat
+  file = gettext
+  if file then
+    posblank = pos ' ' file
+    file = onname (file [1..(if? posblank posblank - 1 TO_END)])
+    if file [0] == '\\' then
+      if file == '\\' then
+        path = if? same_path '' install_path
+      else
+        path = file
+        createdir install_path + path
+      end
+    elseif path or file == "tran.aml" then
+      source = qualify file source_path
+      if path == install_path then
+        dest = qualify file install_path
+      else
+        if not locatefile source then
+          source = qualify file source_path + path
+        end
+        dest = qualify file install_path + path
+      end
+
+      writeline
+      writestr "Copying " + source + " to " + dest + "..."
+      display
+
+      if source <> dest then
+        if copyfile source dest then
+          if same_path then
+            deletefile source
+          end
+        else
+          // error copying non-optional files
+          if not icompare file "startup.aml" "user.aml" then
+            msgbox "Failed copying " + dest + ", " + failmsg  title
+            destroybuf listbuf
+            destroywindow
+            destroywindow
+            return
+          end
+        end
+      end
+
+      // compile external macro source
+      if (icompare path "cfg\\" "macro\\" "syn\\") or
+         (locase file) == "tran.aml" then
+        // compile only .aml files (skip examples)
+        if (locase file) <> "example.aml" and
+           (locase (getext file)) == ".aml" then
+          writeline
+          writestr "Compiling " + dest + "..."
+          display
+          error = compilemacro dest dest [1 : length dest - 3] + 'x'
+          if error then
+            msgbox "Error (" + error + ") compiling macro " + dest
+          end
+        end
+      end
+    end
+  end
+
+  // progress bar
+  variable lastx
+  x = ((getrow * width) / lines)
+  if lastx < x then
+    oldwin = gotowindow bar
+    writestr '':x:bar_done_char bar_done_color 1 1
+    gotowindow oldwin
+    lastx = x
+  end
+
+until not down
+
+// destroy the file list buffer
+destroybuf listbuf
+
+// routine to copy style/palette files to the main install path
+private function copys (src_path sfile dfile)
+  source = onname (qualify sfile + ".aml" src_path)
+  dest = onname (qualify dfile + ".aml" install_path)
+  writeline
+  writestr "Copying " + source + " to " + dest
+  display
+  // make a backup copy
+  copyfile dest (qualify dfile + ".old" install_path)
+  if not copyfile source dest then
+    // error copying files
+    msgbox "Failed copying " + dest + ", " + failmsg  title
+    destroywindow
+    destroywindow
+    return 1
+  end
+  //return
+end
+
+style_path = install_path + "style\\"
+
+// copy keyboard style file
+if copys style_path style + "kbd" "kbd" then
+  return
+end
+
+// copy menu style file
+if copys style_path style + "menu" "menu" then
+  return
+end
+
+// copy color palette file
+if copys install_path + "palette\\"  palette "color" then
+  return
+end
+
+writeline
+writestr "Recompiling the Editor..."
+display
+
+compdisplay = TRUE
+
+// recompile the editor
+save_boot = getbootpath
+setbootpath install_path
+error = regen
+setbootpath save_boot
+
+// reset progress bar
+resetbar
+
+if error then
+  msgbox "Compilation failed, " + failmsg  title
+  destroywindow
+  destroywindow
+  return
+else
+  writeline
+  writestr "*** End of Installation *** "
+  display
+  msgbox "Installation is complete!  Add " + install_path + " to your PATH."  title
+  msgbox "To run Aurora, execute " +
+         (onname (qualify "a.exe" install_path)) + " from the Dos command line."
+end
+
+// destroy the installation windows
+destroywindow
+destroywindow
+
+// return the install path if successful
+return install_path

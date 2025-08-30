@@ -1,0 +1,69 @@
+<HTML><HEAD><TITLE>Links (Verweise zu anderen Dokumenten)</TITLE></HEAD><BODY><A NAME="top"><BR>
+<FONT COLOR=teal>Links (Verweise zu anderen Dokumenten)</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "HTML-Befehle"</A>
+<HR noshade color="silver">
+Verweise zu anderen Dokumenten werden Links genannt. Jede der in diesen New-
+DOS-Dokumenten hellblau eingef„rbten Textpassagen stellt einen solchen Link 
+dar. Beim Anklicken eines Links wird das aktuelle Dokument geschlossen und 
+stattdessen das Dokument angezeigt, zu dem der Link verwiesen hat. Auf diese 
+Weise ist es m”glich, auch groáe Dokumentbest„nde in 
+bersichtlich strukturierter Form darzubieten.
+<P>
+<FONT color=aqua>
+<FONT color=red>
+&lt;A HREF="dokument.htm"&gt;</FONT>Verweis-Text<FONT color=red>&lt;/A&gt;
+</FONT></FONT>
+<P>
+Im Feld "href" des &lt;A&gt;-Tags wird der Dateiname bzw. Pfad der Datei 
+angegeben, zu der verwiesen wird. Der Dateipfad kann in UNIX- oder DOS-Manier
+geschrieben werden. Es wird jedoch die UNIX-Schreibweise empfohlen, da im 
+Internet nur sie gltig ist. Die DOS-Schreibweise funktioniert nur im 
+New-DOS-Browser.
+<P>
+DOS : newdos\hilfe\browser\html\main.htm<BR>
+UNIX: newdos/hilfe/browser/html/main.htm
+<P>
+Es sind auch <A HREF="../relpath.htm">relative Pfadangaben</A> m”glich. 
+Anstelle eines Verweises kann das href-Feld auch einen 
+<A HREF="../script/main.htm">Script-Befehl</A> enthalten.
+<P>
+Wenn das Zieldokument <A HREF="anker.htm">Anker</A> enth„lt, kann ein Link 
+zus„tzlich auch zu einem Anker in diesem Dokument verweisen. Dann wird das 
+Dokument nicht nur angezeigt, sondern es wird gleich bis zum Anker 
+weitergescrollt.
+<P>
+Bei Verweis auf einen Anker wird dessen Name einfach an den Dateipfad 
+angeh„ngt, wobei das Zeichen # (Raute, Gatter) als Trennmarkierung fungiert.
+<P>
+<FONT color=blue>
+<FONT color=red>
+&lt;A HREF="dokument.htm</FONT>#ankername<FONT color=red>
+"&gt;Verweis-Text&lt;/A&gt;</FONT></FONT>
+<P>
+Ein Link kann auch auf einen Anker im gerade ge”ffneten Dokument verweisen.
+In diesem Falle wird im href-Feld berhaupt kein Dateiname angegeben, sondern 
+nur der Name des Ankers (wieder mit vorangestellter Raute #).
+<P>
+<FONT color=blue>
+<FONT color=red>
+&lt;A HREF="</FONT>#ankername<FONT color=red>
+"&gt;Verweis-Text&lt;/A&gt;</FONT></FONT>
+<P>
+Und zu guter Letzt: Links k”nnen auch auf Dateien verweisen, die der Browser 
+nicht anzeigen kann, z.B. ZIP-Dateien, EXE-Programme usw. In diesen F„llen 
+”ffnet sich beim Anklicken des Links der Dateimanager des Browsers und fragt, 
+wo Sie die Datei anspeichern wollen. Dies entspricht im Prinzip einer Art 
+Download und wird auch auf zahlreichen Shareware-CD usw. so gehandhabt.
+<P>
+<FONT color=blue>
+<FONT color=red>
+&lt;A HREF="</FONT>programm.zip<FONT color=red>
+"&gt;Verweis-Text&lt;/A&gt;</FONT></FONT>
+ 
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

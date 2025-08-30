@@ -1,0 +1,971 @@
+
+   PEDIT     Program Editor    V4.00     PEDIT.DOC      pedit@goldshell.com
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+              >>>>>> "It's like Dos edit on steroids..." <<<<<<
+
+
+ Welcome to Program Editor!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Pedit, short for Program Editor, is a freeware editor with lots of
+   powerful options, many found exclusively in the "better" editors.
+
+   A few examples are:
+
+   - Both, columns and lines can easily be marked, for alterations
+     and/or deletions.
+   - There's an undo function!
+   - Indentation of source files can very easily be changed.
+   - Position marking and jumping.
+   - Word wrap.
+   - Insert/append another file into the current file.
+   - An integrated spelling checker and thesaurus.
+   - Copy and paste to other Windows applications.
+
+
+
+ Important Notice:
+~~~~~~~~~~~~~~~~~~~
+
+   Pedit is a freeware product.  This means that you can use it for your
+   own personal use, or even in your company.  However, just using it is
+   about all you are allowed to do.  Nobody is permitted to:
+
+     A) Sell Pedit, either to make money or to lose money.  It may be
+        placed on "Bulletin Board Services" which charge for membership
+        to/for its services.  Examples: COMPUSERVE, PRODIGY, etc.
+     B) Make any changes to the program apart from the editor settings.
+     C) Distribute PEDIT.EXE without its accompanying files PEDIT.DOC,
+        PEDIT.GIF, PEDAGENT.EXE, PEDITLGT.EXE, INSTALL.EXE & FILE_ID.DIZ.
+     D) Do anything else which is not covered in items A, B, or C above.
+
+   All the inclusive and exclusive rights of this editor are ours, and stay
+   ours.  We will preserve the right to make later versions that are not
+   freeware, or to make dedicated (commercial) versions for third parties.
+
+   Pedit is optimized for use with the 386 CPU or higher.
+
+   If you are planning to include Pedit in some kind of freeware package,
+   a notification to us is required.
+
+
+
+ General:
+~~~~~~~~~~
+
+   For programming many people use the MS-DOS Editor.  It's good, and once
+   you get to know the cursor movements and the copy/paste keys it's a fine
+   tool to create software.
+
+   However, hopping around in sources, and between files, some things become
+   a nuisance.  If you wish to copy a line, you start marking. But if the
+   cursor isn't on the start of the line, it marks two lines.  Also not a big
+   problem, but the home key refuses to go to the line start, and stops at
+   the first char, ignoring any spaces before that.  Adding or removing IF'S
+   creates a lot of work, by inserting or removing indentation spaces.  This
+   should be a piece of cake for a professional editor!  Many often used
+   commands could definitely use a shortcut key.  In short, there are enough
+   reasons to re-program the standard DOS editor.
+
+   So, by mixing in some elements of Turbo-C, the Norton Guides, and even
+   good old vi, together with some new ideas, this is a more powerful tool.
+
+   It provides the look and feel of the MS-DOS Editor, but has an improved
+   copy and paste function, an Undo function, a revert function, useful
+   tables, a much improved file selection, many shortcut keys, allowing user
+   "look and feel" changes, and all this at great speed.
+
+
+
+ What's new in 4.00:
+~~~~~~~~~~~~~~~~~~~~~
+
+   It's always hard to figure out what the changes are.  New features are
+   sometimes subtle improvements on long existing functions, so they're
+   easily missed, and thus not used.  Let's summarize all the changes from
+   version 3.30 to 4.00:
+
+     - You can go to word processor mode, which word-wraps the lines as you
+       type them.
+     - The right mouse button will give a pop-up menu for cut, copy, paste,
+       and other often used commands.
+     - Backspace key in the file selection window to go up a directory.
+     - The file selection can handle more files per directory.
+     - Key to remove (empty) directories in the file selection window.
+     - Key to delete all entries in the pick list.
+     - Macro key to add Perl comments.
+     - A light version of Pedit has been added in the package, so Pedit
+       can easily included on rescue floppies and such.
+     - Spell check now also works for marked lines.
+     - Spell check HTML and RTF files.
+     - Remove all HTML or RTF codes.
+     - Bracket search is smarter, and also works for '(' and ')'.
+     - HTML and RTF files with too long lines are more intelligently loaded.
+     - CTRL-SHIFT-V will paste copied/cut columns into existing text.  Very
+       powerful, don't forget to try this!
+     - Much more Alt-F1 options: read the "Editor Settings:" chapter for more
+       information on this.
+     - New command-line option to go straight to a line number of a file.
+     - A hex editor, INSPECT, has been included in the Pedit package.
+
+
+
+ Installation:
+~~~~~~~~~~~~~~~
+
+   Pedit can just be copied to anywhere in the PATH, but to make full use
+   of its strength, features, and integration with Windows, unzip all files
+   from PEDIT.ZIP into a temporary directory, and run INSTALL.EXE.  This
+   will set up Pedit for optimal use with Windows.
+
+   !! Use only the included INSTALL.EXE if you're using Win95 or higher !!
+
+   After full installation you will be able to:
+
+   - Use the Windows printer drivers to print your files from Pedit.
+   - In Explorer, right click on a file, then choose "Send To" -> "Pedit".
+   - In Internet Explorer, from the "Edit" menu, select "Page", to view
+     and edit the HTML source code of the web page you're looking at.
+
+
+
+ Editing Keys:
+~~~~~~~~~~~~~~~
+
+   The following key assignments may be displayed by pressing F1 within
+   Pedit.  The following summary is offered to assist users who may need
+   more complete information.
+
+   Please note that Pedit supports many "old fashioned" editor keys, such
+   as the familiar WordStar control-key sequences (i.e. Ctrl-Q F, Ctrl-L).
+   Windows Copy/Paste keys are also supported.  Finally, most characters with
+   ASCII values 1..31 can be entered, using Alt + the numeric keypad.
+
+
+ * Important:
+      Help                                              : F1
+      Editor settings. If you don't like how the editor : Alt-F1
+      works, spend 2 minutes over here to change both
+      its layout and behavior.  You'll love it!
+
+
+ * Simple:
+      Toggle insert mode                         : Ins
+      Move cursor                                : Arrow keys
+      Splits a line (A.k.a Carriage Return)      : Enter
+      Adds an empty line without splitting line  : Shift-Enter, Alt-O
+      Adds an empty line before current line.    : Ctrl-Enter, Alt-Shift-O
+
+
+ * Marking, copying, pasting:
+      Mark part of file                  : Shift-Arrows
+      Delete marked block                : Del, Ctrl-K Y
+      Cut marked block                   : Shift-Del, Ctrl-X
+      Copy marked block into buffer      : Ctrl-Ins, Ctrl-C
+      Paste buffer                       : Shift-Ins, Alt-P, Ctrl-V
+      Paste copied columns into text     : Ctrl-Shift-V
+      Mark and Copy current word         : Alt-M
+      Mark current word, then do a Paste : Alt-Shift-M
+      Cut current line into buffer       : Ctrl-Shift-Y
+      Yank current line into buffer      : Alt-Y
+      Save marked block to disk          : Alt-K, Ctrl-K W
+      Print marked block                 : Ctrl-K P
+      Mark whole file                    : Ctrl-A
+
+
+ * Source hopping:
+      Mark a position                               : Alt-Shift-1..9
+      Jump to marked position                       : Alt-1..9
+      Jump to previous position                     : Alt-0
+      Go to line number                             : Alt-G
+      Go to line number while looking at DOS screen : Alt-Shift-G
+
+
+ * Some cursor movement:
+      Goes to start of line: when on start of line goes : Ctrl-Home
+        to home.  (Behavior adjustable under Alt-F1)
+      Goes to end of line: when on end of line goes to  : Ctrl-End
+        end of file.  (Behavior adjustable under Alt-F1)
+
+
+ * Searching:
+      Search text                             : Shift-F3, Ctrl-Q F, Ctrl-F
+      Search text again                       : F3, Ctrl-L
+      Search and replace                      : Ctrl-F3, Ctrl-Q A
+      Check (English) spelling.  If lines are : F7
+        marked then these lines are checked,
+        otherwise the entire file
+      Spell check HTML files or RTF files     : Ctrl-F7, Alt-C
+      Check spelling of current word          : Alt-Shift-C
+      Thesaurus current word                  : Shift-F7
+      Thesaurus for entire document           : Alt-Shift-F7
+      Find matching {, (, ) or }              : Alt-B
+
+
+ * Misc editing:
+      Duplicate current line                              : Alt-Shift-D
+      Delete current line                                 : Ctrl-Y
+      Join lines                                          : Alt-J
+      Remove all trailing spaces from the current file    : Alt-Shift-R
+      Move line/block {TAB} spaces left / right           : Alt-, / .
+      Move line/block 1 space left / right                : Alt-< / >
+      Word wrap marked lines                              : Alt-W
+      Sort marked lines                                   : Shift-F8
+      Undo: (Tries to) paste last deletion.  Don't abuse  : Alt-U, Ctrl-Z
+        this for an alternative copy/paste function!
+      (Tries to) undo the changes on the current line     : Alt-Shift-U
+        Works only as long as the cursor isn't moved to
+        another line.
+      Toggle case of character under cursor.  Works also  : F4
+        for marked lines/blocks
+      Transpose last two chars that have been typed       : Alt-F4
+      Put an accent on current character, making it a     : Alt-A
+        foreign char
+      Insert page break                                   : Alt-Shift-F8
+      Strip off C-comments, HTML tags, or RTF codes       : Ctrl-F6
+
+
+ * Misc others:
+      File Select                                            : Alt-L, Ctrl-O
+      Save current file  (Can be turned off under Alt-F1)    : F2
+      Save current file  (Can be turned off under Alt-F1)    : Ctrl-S
+      Save current file                                      : Alt-Shift-F2
+      Quit Pedit                                             : Alt-X
+      Saves current file and Quit                            : Alt-Z Alt-Z
+      Pick a file                                            : F12
+      Print file                                             : Ctrl-P
+      Toggle file password protection                        : Ctrl-Shift-P
+      View last DOS screen                                   : Alt-V
+      Insert file into current one                           : Ctrl-K R
+      Print file                                             : Alt-F8
+      Execute batch file PEDBATCH.BAT  (See "Calling DOS")   : Alt-F9
+      Shell to DOS                                           : Alt-Shift-F9
+      Start (and stop) recording a macro. (See "Macro key"   : Alt-F10
+      Play back macro                                        : F10
+      Show full path name of current edited file, until the  : Shift-F5
+      shift key is released.                                 :
+      Show name of previous edited file.  Releasing the Alt  : Alt-F5
+        key will load this file.  Pressing F5 again will
+        abort.
+      Same as Alt-F5, but will not work under Windows        : Alt-Tab
+      Accelerate the keyboard response rate                  : Alt-Shift-F12
+
+
+ * "Macros:"
+      Assign multiple keystrokes to a single key.  Will act on a single
+      line, or on a marked block (if a block is marked).  The real power
+      of a macro is its ability to make changes over a marked block, so
+      it will alter multiple lines.
+
+      Puts '//'    before line/block. (C/C++/Java/JavaScript)  : Alt-/
+      Puts '//'    after  line/block. (C/C++/Java/JavaScript)  : Alt-Shift-/
+      Puts '/* */' around line/block. (C/C++/Java/JavaScript)  : Alt-\
+      Puts '/* */' after  line/block. (C/C++/Java/JavaScript)  : Alt-Shift-\
+      Puts ' = ;'  after  line/block. (C/C++/Java/JavaScript)  : Alt-=
+      Puts ';'     before line/block. (ASM)                    : Alt-;
+      Puts ';'     after  line/block. (ASM)                    : Alt-Shift-;
+      Puts 'rem '  before line/block. (BASIC/DOS batch files)  : Alt-R
+      Puts '>'     before line/block. (E-mail)                 : Alt-~
+      Puts '> '    before line/block. (E-mail)                 : Alt-Shift-~
+      Puts '#'     before line/block. (Perl)                   : Alt--
+      Puts '#'     after  line/block. (Perl)                   : Alt-Shift--
+      Adds two lines with brackets.   (C/C++/Java/JavaScript)  : Alt-[
+      Change C/C++/Java function header into a pre-definition  : Ctrl-Q P
+
+
+
+ Macros:
+~~~~~~~~~
+
+   Computer users frequently find themselves needing to perform a task
+   repetitively.  This can be time-consuming and tedious.  Pedit provides a
+   simple macro facility to make such tasks easier.
+
+   Use Alt-F10 to start and stop recording the macro, use F10 to invoke
+   this recorded macro.
+
+   Starting and stopping a macro is possible any time.  Not only when you
+   are in edit mode, but also in the File Selection menu, in menus, etc.
+
+   (A maximum of 60 keys can be recorded.)
+
+
+
+ Bracket Matching:
+~~~~~~~~~~~~~~~~~~~
+
+   The Alt-B key will perform bracket matching in your file.  The logic of
+   this bracket matching is as follows:
+
+   - If the cursor is on a ( or on a ), then that matching bracket is
+     located.
+   - Otherwise, the { or } closest to the cursor is used to search a
+     match for.
+   - When no match is found, nothing will happen.
+   - For C programmers: if the current line is NOT proceeded by the \\
+     comment characters, then all lines starting with \\ are skipped
+     during the search.  This way any unbalanced { } in comments will
+     not confuse the matching procedure.
+
+
+
+ File Selection:
+~~~~~~~~~~~~~~~~~
+
+   When you want to open a file, using File-Open, (Ctrl-O), or File-Insert
+   (Ctrl-K-R), you will go to the File Selection menu.  This menu offers
+   some features.  These (mostly "hidden") features are explained here.
+
+   - You can type the first letter of a filename to make selection easier.
+     Use uppercase for directories.
+   - Pressing Ctrl-Del will delete the selected file or directory (after
+     confirmation).  Directories will only be removed if they're empty.
+   - Pressing Ctrl-Ins will enable you to create a new directory.
+   - F5 refreshes the current directory. Convenient when changing floppy
+     disks and such.
+   - Alt-S is a toggle between the file names and file sizes.
+   - Alt-O brings you back to the original dir, the dir that was there when
+     you popped up the File Selection menu.
+   - Under Windows 95, Alt-L will toggle between long and short file names.
+   - If you have drives with the letters of L, O, P, or S, then you cannot
+     access the Alt-L, Alt-O, Alt-P, or Alt-S functions because you will
+     access those drives instead.  In that case, instead of ALT, use
+     ALT-SHIFT, such as Alt-Shift-P to select the function Alt-P.  Use same
+     combo for L, O and S.
+   - Instead of just Enter to select, use LShift-RShift-Enter for any
+     extremely big file which is too big to be loaded into the editor.
+     This will enable you to enter a file offset where to start loading.
+   - Just as in Windows, you can use the Backspace key to go a directory
+     "up".
+   - Alt-P brings you to a list of previously visited directories and edited
+     files.  Choosing one of these files will re-load this file.  Choosing
+     one of these dirs will bring you back to that directory.  Very
+     convenient for quickly jumping back and forth between multiple
+     directories.
+   - In the pick list, press 'P' to toggle a file "permanent". When a
+     file is marked like this, it will always stay in the pick list, and
+     never be thrown out until it's unmarked. Mark your regular visited
+     files and directories, and they'll always be in the pick list.
+   - In the pick list, press Ctrl-Del to delete all entries from the pick
+     list.
+
+
+
+ User Tips:
+~~~~~~~~~~~~
+
+   - If the shift key is pressed when Pedit is started, it won't show the
+     file chooser, but re-load the last edited file.
+   - When moving the cursor up and down when the shift key is pressed, whole
+     lines are marked. When you move the cursor left or right, columns will
+     be marked.
+   - Use (keypad) Shift-5 to mark a whole line.
+   - When you've marked a column, but you want to change it to a "whole-
+     line-mark", press (keypad) Shift-5.
+   - Use (keypad) 5 or ESC to un-mark.
+   - Mark a word, then Copy it.  Now mark a line part over several lines.
+     If you now Paste, the Copied word is inserted on every line that is
+     marked.
+   - After you've marked a column, you can start typing a line that will
+     be inserted into every line of the column.
+   - If you have compiler error messages on the DOS screen, use Alt-V to
+     look at them. Also Alt-Shift-G is very convenient here.
+   - All "Ok" input can also be answered with Space, Return, or Esc.
+   - All "Yes/No" input can also be answered with Space or Return for "Yes",
+     or Esc for "No".
+   - All "Next/Previous/Stop" input can also be answered with Space or Return
+     for "Next", or Esc for "Stop".
+   - Word wrap "sees" empty lines, so it's possible to mark and wrap entire
+     documents in one pass.
+   - Use Ctrl-M as the last search character to find a string on the
+     end of a line.  Can be combined with the next tip:
+   - Use Ctrl-M as the first search character to find a string on the
+     beginning of a line.
+   - Ctrl-A, Ctrl-C, Ctrl-V and Ctrl-X can also be used in input fields,
+     i.e. the "Find" input box.
+   - Rename PEDIT.EXE to P.EXE, or just copy it over the DOS EDIT.EXE
+   - Keep your private telephone numbers or other personal data at the
+     office, and simply use the protect option to encrypt your data.
+   - The longer you make your password, the more difficult it will be to
+     crack.  Pedit defaults to 80 bit encryption, but if you use more than
+     10 characters, Pedit will adjust the algorithm, and you can go up to
+     112 bits encryption.
+
+   General tips:
+
+   - To accelerate the keyboard response rate, add the line
+     "mode con rate=32 delay=1" to your AUTOEXEC.BAT. (On very early DOS
+     versions this is not supported.)
+   - In Windows, you can accelerate the keyboard response rate under
+     "Control Panel", "Keyboard".
+   - If you use EMM386 in your CONFIG.SYS, add the parameter "I=B000-B7FF".
+     This will give you an extra 32Kb of free memory.  On some computers
+     Windows will complain that you shouldn't do this, but on others it
+     won't.
+
+
+
+ Editor Settings:
+~~~~~~~~~~~~~~~~~~
+
+   The editor has many configurable settings, grouped together in an easy
+   to use pop-up menu. Use Alt-F1 to invoke.  Changed settings will be saved
+   when you exit the editor.  From then on these new settings are used every
+   time Pedit is started.
+
+   ====== Settings Page 1 ======
+
+   Editor Style                - Change the general outlook of the screen and
+                                 dialog windows.  Four different styles can
+                                 be chosen. The "Mul" setting should be used
+                                 for multibyte systems.
+
+   Scroll Bar                  - Gives the possibility to display a scroll
+                                 bar at the right hand side of the screen.
+
+   Text Color                  - Color of the text.
+
+   Background Color            - Background color of the edited text.
+
+   Display Lines               - How many lines the editor will display.  Can
+                                 be 25, 28, 43 or 50 lines, or it can keep
+                                 the same lines mode as DOS is currently in.
+
+   Show Column Number          - Shows the current column number on the
+                                 status line.  No matter what this option is
+                                 set to, the current line number will always
+                                 be displayed.
+
+   Show Char Under Cursor      - If enabled, this option shows on the status
+                                 line the value of the current character
+                                 where the cursor resides.  Values are shown
+                                 in ASCII, decimal, and hex.
+
+   Show Insert Mode            - Will show the status of the Insert mode
+                                 on the status line.
+
+   Full Path In Win95 Title    - A full path is more convenient when looking
+                                 at the window itself, but file-name-only is
+                                 better for the Alt-Tab task switcher.
+
+   Convert ANSI <-> OEM        - Normally Pedit converts the DOS charset to
+                                 the Windows charset in the clipboard, and
+                                 vice verse.  Turn it off when you want to be
+                                 able to preserve special chars like for
+                                 example the (C) character or Chinese
+                                 characters, or when you're copying data
+                                 between 2 copies of Pedit, and this data
+                                 contains characters higher than ASCII 127.
+
+   Paste Moves Cursor          - When pasting, the cursor will move, just
+                                 like the Windows paste.  Turn this option
+                                 off to stay compatible with DOS Edit.
+
+   ====== Settings Page 2 ======
+
+   Use UMB                     - Squeezes a few Kb of extra memory out of
+                                 your computer.  On some computers there
+                                 isn't any extra memory to be found.  Win95
+                                 is likely to have taken already every single
+                                 byte available.
+
+   Ignore Num Lock             - When selected, the Num Lock key looses its
+                                 functionality, and the key pad keys will
+                                 always be cursor keys.
+
+   Tab Size                    - This is the Tab setting while editing, used
+                                 by the Tab key, by Alt-. and by Alt-,
+
+   Tab Expand Size             - When files are loaded, all Tabs are expanded
+                                 to spaces.  Here you can indicate the Tab
+                                 stop value.
+
+   Ignore 0x0D                 - Some files, usually redirected output, have
+                                 strange carriage returns in them.  Loading
+                                 them causes unexpected empty lines to occur.
+                                 Setting this option will try to normalize
+                                 these files when loading them.  This option
+                                 is default ON.  If you want to be able to
+                                 read Mac files, turn it OFF.
+
+   Clear After File Too Large  - When a file is loaded, and it's too large,
+                                 the loaded part is discarded from the
+                                 editor.  With this option it's possible to
+                                 keep what's loaded in the editor.  Warning:
+                                 since nearly all the memory is exhausted,
+                                 you can't edit very much.  It's intended as
+                                 an option to view (most of) very large
+                                 files.
+
+   Carriage Return             - Character(s) to be written at the end of the
+                                 line, when saving your file.  Can be changed
+                                 from DOS (0x0D0A) to SUN (0x0A) or
+                                 MAC (0x0D).
+
+   Make BAK File               - If selected, a .BAK file is created of the
+                                 saved file.
+
+   Ignore Words With 0-9       - Spell check will skip words with numeric
+                                 characters in them.
+
+   Ignore Words With _         - Spell check will skip words with underscores
+                                 in them.
+
+   ====== Settings Page 3 ======
+
+   Button Pop-up Menu          - Defines which mouse button pops up a quick
+                                 choose menu: right mouse, left mouse, or
+                                 no pop-up.
+
+   F2 is File-Save             - Can disable the F2-save option, for instance
+                                 because you find F2 too quickly pressed by
+                                 accident.
+
+   Ctrl-S is File-Save         - Can disable the Ctrl-S-save option
+
+   Ctrl-End direct to EOF      - If disabled, Ctrl-End will first go to
+                                 the last position of a line, and only
+                                 to the End Of File upon a second press.
+
+   Ctrl-Home direct to SOF     - If disabled, Ctrl-End will first go to
+                                 the first position of a line.
+
+   Alt Highlights Menu Choices - Pressing ALT alone activates the menu,
+                                 as in the MS-DOS Edit program.
+
+   Save Changed Settings       - When settings are changed Pedit will
+                                 normally ask for confirmation upon exit of
+                                 the editor.  Can be changed to "Don't ask,
+                                 just save" or to "Don't save". (For
+                                 temporary changes.)
+
+   Also Save Changed Margins   - Gives the possibility to save changed margin
+                                 settings for Printing and Word Wrap.
+
+   Save Pick List To Disk      - Lets Pedit save all the last visited files
+                                 and directories to disk upon exit.  This
+                                 list will be reloaded and used in the next
+                                 Pedit session.
+
+   Restore Original Directory  - Will upon exit go back to the directory
+                                 where Pedit was started.
+
+   ====== Settings All Pages ======
+
+   Alt-D : Restore Defaults    - Alt-D will restore the "factory" defaults.
+
+
+
+ Calling DOS:
+~~~~~~~~~~~~~~
+
+   Alt-F9 will execute PEDBATCH.BAT.  This gives the possibility to execute a
+   compiler or so from within Pedit.  This batch file must be in the current
+   working directory or to be found in the path.  The name (without
+   extension) and the extension of the current edited file will be passed as
+   parameters %1 and %2 to the batch file.
+
+   At the end of this doc you can find a sample batch file.
+
+   Alt-Shift-F9 will shell to DOS.  Should we still tell not to load TSR's or
+   to do other strange things here ?
+
+   Before one of these two options is executed, the current edited file will
+   be saved.  When returning to the editor it will be reloaded, so any
+   changes made in DOS will be effective in the editor.
+
+   Technically: Pedit tries to find the "COMSPEC=" setting in the environment
+   to locate your COMMAND.COM.  If the setting isn't there, it tries to run
+   C:\COMMAND.COM
+
+   (Remember, after you went to DOS, you can always use Alt-V to look at the
+   last DOS screen.)
+
+
+
+ Pedit Windows Agent:
+~~~~~~~~~~~~~~~~~~~~~~
+
+   As of version 3.20 and up, there's a nifty little plug-in for Pedit, to
+   allow you to print through the Windows 95 printer drivers, and to perform
+   other Pedit<->Windows integration tasks.
+
+   When in Windows, run PEDAGENT.EXE, and it will remain in the tray,
+   monitoring print requests from Pedit.  It will be the most convenient to
+   put PEDAGENT.EXE in your StartUp directory, so it will be loaded every
+   time Windows 95 starts.  To do that, drag a shortcut into the
+   C:\Win95\Start Menu\Programs\StartUp directory.  It's also possible to do
+   this through "Start Menu", "Settings", "Taskbar", "Start Menu Programs",
+   "Advanced", and then dragging a shortcut to PEDAGENT.EXE into the StartUp
+   directory there.
+
+   In the Pedit print menu there's an option to use the Windows printer.
+   Choose this option, and when the agent is running, Pedit will list out the
+   available printers.  Select one, press Ok, and your file will be printed.
+
+   The advantage is that networked printers and fax drivers can be selected
+   to do the Pedit print job.  Also, files are spooled, so big files won't
+   stop the operation of Pedit.  Future versions will allow you to select
+   font and font size.
+
+
+
+ Known Bugs/Limitations:
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   - Without EMS/XMS the copy/paste buffer is 16Kb.
+   - The "Save Mark" option is limited to 8Kb.
+   - Tabs are expanded to spaces, and stay as spaces.
+   - Don't continue editing after a "Memory Low" warning!  If you really try
+     hard, it's possible to push Pedit "over the edge".
+   - Files with strange CR(LF) can create unwanted empty lines.  Supported
+     are 0x0D0A, 0x0D, 0x0A & 0x0A0D.  If in trouble, try the setting
+     "Ignore 0x0D".
+   - Spelling checker user dictionary is limited to 16Kb.
+   - Enormously big files cannot be spell checked/thesaured.  Also after some
+     severe editing the spell checker memory could be in use by the editor.
+     (In that case, save and reload the current file.)
+   - The macro function records all keyboard hits, but not all mouse clicks.
+   - The LShift-RShift-Enter sequence doesn't work on some computers. In
+     that case, try the Enter key on the Num Pad.
+   - On slow systems, Pedit has sometimes problems communicating with the
+     Pedit Windows Agent.  Usually trying again will work.
+   - Word wrap paragraph limit is 16Kb.
+
+
+   !! Make sure you have the last version of Pedit !!  We already had many
+   people reporting bugs or requesting features, which were already out or
+   in.  This because they used an older version of Pedit.  Try to find the
+   latest Pedit in the following place:
+
+      http://www.goldshell.com/pedit
+
+   Other download sites:
+      Pedit can now be found on many popular freeware & shareware sites.
+      Even on Windows-only sites!  However, it cannot be guaranteed that
+      they have the latest version, so be sure to always check the Pedit
+      home page.
+
+   To get a notification when a new version of Pedit gets released, send an
+   E-mail to "list@goldshell.com" with as subject "Subscribe Pedit", and
+   you'll be automatically informed about new versions.  This list will be
+   solely for Pedit update announcements, and maybe once in a while a
+   newsletter.  So, don't worry about unsolicited E-mails.
+
+   To get off the list, send an E-mail with subject "UnSubscribe Pedit".
+
+
+
+ Future Plans/Additions:
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Anything could be baked into Pedit, the sky is the limit.  Lots of
+   convenient and powerful options can be added.  Several ideas of other
+   users have already been implemented, so if you have any suggestions,
+   don't hesitate to mail them.  Who knows...?
+
+   Send bugs, remarks, suggestions, and additions to the spell checker and
+   thesaurus, to pedit@goldshell.com
+
+
+
+ Pedit Goes Light:
+~~~~~~~~~~~~~~~~~~~
+
+   In the Pedit package there's a file called PEDITLGT.EXE.  This is the
+   Light version of Pedit.  It's Pedit stripped of several options.  The
+   purpose for this is to offer an editor which can easily be included on
+   rescue floppies and such.
+
+   The omitted options are:
+
+   - Spell checker.
+   - Thesaurus.
+   - Printing through Windows.
+
+   The remaining functionality is the same.
+
+
+
+ Pedit Goes Pro:
+~~~~~~~~~~~~~~~~~
+
+   Following in the footsteps of Pedit, there is now also GoldEdit, the
+   pro version of Pedit.  Whereas most people consider Pedit already to
+   be pro, GoldEdit goes even a few steps further.
+
+   If you want the most up-to-date and advanced features, or even just
+   want to support the development of Pedit, download and try GoldEdit.
+
+   You can find GoldEdit at http://www.goldshell.com/goldedit
+
+
+
+ Acknowledgements:
+~~~~~~~~~~~~~~~~~~~
+
+   Should we acknowledge these people, who bug us for changes, new options,
+   better options, more, more, more, change this, don't like that, ... ?
+   Of course!  Thank you all folks, for pushing us to this end result.
+
+   Many thanks to David, for his never ending support, suggestions, proof
+   reading, etc.  It's for sure that without him Pedit wouldn't have become
+   what it is now.
+
+   Special appreciation goes to Alexandre Pukall, for contributing his PC1
+   cipher algorithm.
+
+
+
+ Disclaimer:
+~~~~~~~~~~~~~
+
+   This Program is provided "as is".  We warrant that the Program will
+   substantially comply with the specifications set out in the
+   documentation.  Except as stated herein this Program is provided,
+   without warranty of any kind, express or implied, statutory or
+   otherwise, including but not limited to the implied warranties of
+   merchantability and fitness for a particular purpose.
+
+   The entire risk as to the quality and performance of the Program is
+   with you.  Should the Program prove defective, you assume the entire
+   cost of all necessary servicing, repair or correction.  We do not
+   warrant that the functions contained in the Program will meet your
+   requirements or that the operation of the Program will be uninterrupted
+   or error-free.
+
+   OUR SOLE LIABILITY TO YOU FOR ANY CLAIM, DEMAND OR CAUSE OR ACTION
+   WHATSOEVER, AND REGARDLESS OF FORM OF ACTION, WHETHER IN CONTRACT OR
+   TORT, INCLUDING NEGLIGENCE, SHALL BE LIMITED, AT OUR SOLE OPTION, TO
+   REPLACEMENT OF THE PROGRAM OR REFUND OF THE PURCHASE PRICE.  IN NO
+   EVENT SHALL WE BE LIABLE FOR OR YOU HAVE A REMEDY FOR RECOVERY OF ANY
+   SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, EVEN IF WE
+   HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, INCLUDING BUT NOT
+   LIMITED TO LOST PROFITS, LOST SAVINGS, LOST REVENUES OR ECONOMIC LOSS
+   OF ANY KIND, OR FOR ANY CLAIM BY ANY THIRD PARTY.
+
+   All trademarks are acknowledged as the property of their respective
+   owners.
+
+   If you have any problems with this program, please direct your comments
+   to Goldshell Digital Media at "info@goldshell.com".  Please grant us the
+   opportunity of defending the program's design and functionality before
+   decrying its use in any forum, public or private.  The success of future
+   shareware & freeware depends on your encouragement.
+
+
+
+ Revision History:
+~~~~~~~~~~~~~~~~~~~
+
+ - Version 0.99  -  26 Jan 1996  -  PEDIT.EXE  82,396 bytes
+                                    PEDIT.INF     990 bytes
+
+      Beta release.
+
+
+ - Version 0.99k -  12 Mar 1996  -  PEDIT.EXE  88,276 bytes
+
+      Un-official release for a freeware package that wanted to include the
+      latest version of Pedit, since printing was necessary.  This one's
+      rare, and bound to be a collectors item.
+
+
+ - Version 1.00  -   4 May 1996  -  PEDIT.EXE  86,850 bytes
+                                    PEDIT.DOC  16,165 bytes
+
+      Initial release.  Many additions on top of the 0.99 version, such as
+      word wrap, file printing, an append function, a new layout, improved
+      changeable settings, etc. etc.
+
+
+ - Version 1.10  -   1 Aug 1996  -  PEDIT.EXE  93,444 bytes
+                                    PEDIT.DOC  23,776 bytes
+                                    PEDIT.ENG  83,095 bytes
+
+      Few small bug fixes.  Some different defaults.  Again many additions.
+      Most important new feature is the spelling checker.  Some others are:
+      marked block saving, marked block aligning, a string append function,
+      shelling to DOS, automatic appending of a signature file, etc. etc.
+
+
+ - Version 1.20  -   7 Dec 1996  -  PEDIT.EXE  93,754 bytes
+                                    PEDIT.DOC  25,809 bytes
+                                    PEDIT.ENG  83,095 bytes
+                                    PEDIT.DIZ     426 bytes
+
+      Again a few minor bug fixes.  Extra print option.  Much better support
+      for networked drives.  Change of E-mail & snail mail address!
+
+
+ - Version 2.00  -  21 Mar 1997  -  PEDIT.EXE    72,136 bytes
+                                    PEDIT.DOC    29,073 bytes
+                                    PEDIT.ENG    83,095 bytes
+                                    PEDIT.HLP     5,813 bytes
+                                    FILE_ID.DIZ     413 bytes
+
+      Major internal restructuring.  Compiler change.  Added again several
+      new options, such as a sort function, a macro key, and quick file pick.
+      Some less useful functions have disappeared.  Apart from EMS, also XMS
+      is now supported.  Further, the F1-help has improved a lot, and is now
+      separated from the executable.
+
+
+ - Version 2.10  -  21 Jun 1997  -  PEDIT.EXE    76,962 bytes
+                                    PEDIT.DOC    29,658 bytes
+                                    PEDIT.ENG    83,095 bytes
+                                    PEDIT.HLP     5,853 bytes
+                                    FILE_ID.DIZ     413 bytes
+
+      Support for 43 and 50 lines mode, param and name change of PEDIT.BAT,
+      pick list will be saved in mem, monochrome screen support, spell check
+      user dictionary, easy foreign chars, file password protection, copy and
+      paste in input fields, intelligent formatting too long lines when
+      reading a file.
+
+
+ - Version 3.00  -  21 Oct 1997  -  PEDIT.EXE   292,525 bytes
+                                    PEDIT.DOC    31,849 bytes
+                                    FILE_ID.DIZ     394 bytes
+
+      Mouse support, Windows 95 long file names, 28 lines mode, quick file
+      pick from the File Menu, save pick list to disk, thesaurus, additional
+      1500 words to the spell check dictionary, storing all external data
+      files inside the executable.
+
+
+ - Version 3.10  -  14 Feb 1998  -  PEDIT.EXE   293,939 bytes
+                                    PEDIT.DOC    32,212 bytes
+                                    FILE_ID.DIZ     389 bytes
+
+      Better multitasking under Windows, print marked block, even stronger
+      file password protection (up to 112 bits), new editor style that also
+      looks proper on multi-byte DOS/Windows versions (Chinese/Japanese/etc),
+      improved sort.
+
+
+ - Version 3.20  -  16 May 1998  -  PEDIT.EXE   299,330 bytes
+                                    PEDIT.DOC    38,307 bytes
+                                    PEDIT.GIF     2,365 bytes
+                                    FILE_ID.DIZ     389 bytes
+                                    PEDAGENT.EXE 36,352 bytes
+
+      Always using the Windows clipboard for copy and paste, new Alt-F1
+      option to move the cursor when pasting, enhanced mouse support, easy
+      change of C function definition into a pre-definition, printing through
+      the Windows 95 printer.
+
+
+ - Version 3.30  -  14 Nov 1998  -  PEDIT.EXE   299,540 bytes
+                                    PEDIT.DOC    36,665 bytes
+                                    PEDIT.GIF     2,365 bytes
+                                    FILE_ID.DIZ     387 bytes
+                                    PEDAGENT.EXE 36,864 bytes
+
+      Enlarged pick list, permanent entries in the pick list, release of
+      the printing agent for all Pedit users, loading of last edited file
+      at startup.
+
+
+ - Version 4.00  -   1 Oct 1999  -  PEDIT.EXE   308,669 bytes
+                                    PEDIT.DOC    44,358 bytes
+                                    PEDIT.GIF     2,341 bytes
+                                    FILE_ID.DIZ     392 bytes
+                                    PEDAGENT.EXE 40,960 bytes
+                                    PEDITLGT.EXE 97,619 bytes
+                                    INSPECT.ZIP  18,098 bytes
+                                    INSTALL.EXE  32,768 bytes
+
+      Word wrap on the fly!  Pop-up menu when right mouse button is clicked.
+      Key to remove (empty) directories in the file chooser.  Key to delete
+      all entries in the pick list.  Much more Alt-F1 functions.  Changed
+      revert message.  Added a light version.  Included Windows installer.
+      Included Hex editor.
+
+
+                       -----------------------------
+                                   --*--
+
+ For Programmers: Sample PEDBATCH.BAT:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   This sample should give a rough idea how to use the Alt-F9 option as
+   effectively as possible.  We hope it's not too technical for most people.
+   On the other hand... this still is the PROGRAM editor!
+
+ --8<----------------------------- CUT HERE ---------------------------------
+@echo off
+
+rem  /---------------------------------------------------------------------\
+rem  !  Sample batch file for PEDIT.EXE. It can best be stored in the      !
+rem  !    same directory as the other Pedit files. It MUST have the name   !
+rem  !    "PEDBATCH.BAT".                                                  !
+rem  !  (Renamed from "PEDIT.BAT" to "PEDBATCH.BAT", to avoid execution of !
+rem  !    the .BAT file instead of the .EXE)                               !
+rem  !  Param %1 will contain the extension of the currently edited file:  !
+rem  !    i.e. ".BAT" or ".C".  If the file has no extension, %1 will be   !
+rem  !    a period only. (".")                                             !
+rem  !  Param %2 will contain the file name without extension, i.e.        !
+rem  !  "CONFIG" or "AUTOEXEC".                                            !
+rem  \---------------------------------------------------------------------/
+
+
+rem  /---------------------------------------------------------------------\
+rem  !  Prevent accidentally direct calling of this batch file.            !
+rem  \---------------------------------------------------------------------/
+
+if X%2==X goto End
+
+
+rem  /---------------------------------------------------------------------\
+rem  !  Try to execute a PEDBATCH.BAT in the local directory. Do some      !
+rem  !  checking to prevent an endless loop. With additional PEDBATCH.BAT's!
+rem  !  in different working directories *this* batch file can be smaller  !
+rem  !  and more general. Change drive C: to your primary drive.           !
+rem  \---------------------------------------------------------------------/
+
+if exist C:PEDBATCH.BAT  if X%3==X  C:PEDBATCH.BAT %1 %2 ExtraParam
+
+
+rem  /---------------------------------------------------------------------\
+rem  !  Check whether we can do something useful with the extension.       !
+rem  \---------------------------------------------------------------------/
+
+if %1==.BAT goto BatchFile
+if %1==.C   goto CompileC
+if %1==.ASM goto CompileAsm
+if %1==.TXT goto Print
+if %1==.DOC goto Print
+
+
+rem  /---------------------------------------------------------------------\
+rem  !  Unknown file type: give an error message.                          !
+rem  \---------------------------------------------------------------------/
+
+echo Unknown extension for file %2%1
+goto End
+
+
+rem  /---------------------------------------------------------------------\
+rem  !  Execution of task which belong to a certain extension.             !
+rem  \---------------------------------------------------------------------/
+
+:BatchFile
+%2%1
+goto End
+
+:CompileC
+bcc -3 -ml %2%1
+goto End
+
+:CompileAsm
+make
+goto End
+
+:Print
+copy %2%1 lpt1
+goto End
+
+:End
+ --8<----------------------------- CUT HERE ---------------------------------

@@ -1,0 +1,36 @@
+PROGRAM Rechnen2;
+{Einsatz mathematischer Funktionen an einem praktischen Beispiel}
+
+
+BEGIN-MAIN
+  Init;
+  WriteLn ('Grî·e der COMMAND.COM', #13#10);
+
+  FindFirst (!Getenv('COMSPEC'), @anyfile, %SearchRec);
+  If (@DosError<>0) Then
+  BEGIN
+    WriteLn ('COMMAND.COM nicht gefunden. Weiter mit ENTER');
+    GetKey;
+    Halt;
+  ENDIF;
+
+  @a:= %Searchrec.size;                {enthÑlt Grî·e der Command.com in Byte}
+
+  WriteLn ('in Byte: ', @a);
+
+  WriteLn ('in kb  : ', @div (@a, 1024)); {@a geteilt durch 1024}
+
+  WriteLn ('in kb  : ', @shr (@a, 10));   {@a um 10 Bits nach rechts schieben}
+
+  GetKey;
+END.
+
+{Das sogenannte Bit-Shiften mit der SHR-Funktion ist eine Division durch eine}
+{Zweierpotenz, in diesem Falle: @a = @a durch (2 hoch 10).}
+{2 hoch 10 = 1024. Ein KiloByte sind also nicht 1000 (Kilo) Bytes,}
+{sondern 1024, ebenso hat ein MegaByte 1024 Kilobyte also 1048576 Bytes.}
+
+{Bei der Erstellung "echter EXE-Dateien" wird das Shiften vorgezogen, wenn}
+{ein Operand eine Zweierpotenz darstellt, da diese Berechnung um ein}
+{mehrfaches schneller ausgefÅhrt wird als eine normale}
+{Division/Multiplikation.}

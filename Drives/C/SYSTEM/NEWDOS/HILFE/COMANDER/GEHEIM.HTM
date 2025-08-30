@@ -1,0 +1,205 @@
+<HTML><HEAD><TITLE>Unsichtbare Tasten</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Unsichtbare Tasten</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver">
+
+Leider lieáen sich nicht alle Befehle als Tasten auf der Comander-Oberfl„che
+darstellen und existieren daher nur als "unsichtbare" Tastenkombinationen.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">Sprung zu einer Datei</FONT><BR>
+ 
+Halten Sie die Shift-Taste gedrckt und geben Sie dann den Anfangsbuchstaben
+des Dateinamens ein. Der Commander scrollt dann bis zur ersten Datei, die
+mit dem eingegebenen Buchstaben beginnt. 
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">Hilfe zu einer Taste aufrufen</FONT><BR>
+ALT + diese Taste
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">Hintergrundfunktionen</FONT><BR> 
+STRG + F5&nbsp;&nbsp;= ein Kopierbefehl wird im Hintergrund ausgefhrt<BR> 
+STRG + U&nbsp;&nbsp;&nbsp;= ein Druckvorgang wird im Hintergrund ausgefhrt<BR> 
+<BR> 
+Genauere Hinweise zu den beiden Hintergrundfunktionen finden Sie in den
+Hilfetexten zu den Tasten F5 (<A HREF="kopieren.htm">Kopieren</A>) und U (<A HREF="drucken.htm">Drucken</A>).
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">Taste z</FONT><BR> 
+(z wie zeigen)<BR> 
+Hiermit k”nnen Sie versteckte bzw. Systemdateien sichtbar machen und wieder
+verschwinden lassen, ohne das <A HREF="konfix.htm">Konfix</A>-Men ”ffnen zu mssen.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">CTRL + F3</FONT><BR> 
+Mit Taste F3 wird eine Datei in den New-DOS-Textbetrachter <A HREF="../newdos/xtype.htm">XTYPE</A> geladen.
+Mit CTRL+F3 erzwingen Sie das Anzeigen der Datei durch den comander-internen
+Editor. Dies kann die L”sung sein, wenn XTYPE wegen extrem schlechter
+Speicherverh„ltnisse nicht ausgefhrt werden kann.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">CTRL + X</FONT><BR> 
+Schaltet die Sonderzeichenkonvertierung bei der Anzeige von Windows-Dateien
+ein und aus. Immer, wenn Sie eine solche Datei mit F3 anzeigen, wird sie im
+DOS-ASCII-Zeichensatz angezeigt.
+
+<HR noshade color="silver">
+ 
+<FONT COLOR="maroon">Taste 4 im Drucker-Einrichtungsmen</FONT><BR> 
+Normalerweise k”nnen Sie mit den Tasten 1, 2 und 3 die Druckerschnittstellen
+LPT1 bis LPT3 anw„hlen. Durch Drcken der Taste 4 wird die zu druckende Datei
+jedoch nicht auf Papier, sondern auf die Festplatte gedruckt. Dort entsteht
+eine Datei namens C:\PRINT.$$. Diese enth„lt alle von Ihnen eingestellten
+Formatierungen. Sie k”nnen anhand dieser Datei das Druckbild prfen, ohne
+einen Probeausdruck vornehmen zu mssen und die Datei danach z.B. mit
+<FONT COLOR="blue">TYPE c:\print.$$ > lpt1</FONT> ausdrucken. 
+<P>
+Um diese Datei zu betrachten, benutzen Sie am besten Ihren Editor (F4) oder
+einen Textbetrachter, der keine Zeilenumbrche erzeugt. Die erste Zeile eines
+Absatzes wird u.U. als nicht eingerckt dargestellt. Beim Drucken wird sie
+jedoch richtig ausgegeben.
+
+<HR noshade color="silver">
+ 
+<FONT COLOR="maroon">CTRL + v</FONT><BR> 
+(v wie view)
+Schaltet QuickView ein. Im Berichtfenster wird nun statt der Datei-
+Information der Inhalt der Datei angezeigt, genauer: die "rechte obere Ecke".
+Hiermit k”nnen Sie schnell nach Informationen suchen (z.B. einer Adresse in
+einem Briefkopf). Steht der Lichtbalken auf einem Verzeichnis, wird die
+Gesamtgr”áe und Abnzahl der darin enthaltenen Dateien angezeigt. QuickView 
+bleibt solange aktiv, bis Sie es mit CTRL + v wieder auschalten.
+
+<HR noshade color="silver">
+ 
+<FONT COLOR="maroon">Taste Q oder W oder Kombination CTRL+Q oder CTRL+W</FONT><BR> 
+Aktiviert das DOS-Prompt in verschiedenen Varianten. Wurde auch CTRL 
+gedrckt, bleibt der DOS-Bildschirm nach Ausfhrung des Befehles solange 
+offen, bis Sie Esc drcken.<PRE>
+
+Q / CTRL+Q: L”scht die Reihe mit den F-Tasten und blendet statt dessen ein
+            DOS-Prompt ein.
+W / CTRL+W: ™ffnet ein groáes DOS-Fenster, in dem der gesamte Kommandostapel
+            angezeigt wird.
+
+</PRE>
+Das DOS-Prompt ist in Wirklichkeit ein <A HREF="dospromp.htm">Comander-Prompt</A> und bietet daher mehr
+Komfort als das von DOS. Es stellt eine voll editierbare Befehlszeile und
+einen permanenten Kommando-Stapel zur Verfgung.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">CTRL + j</FONT><BR> 
+Holt den im Comander markierten Dateinamen in die Befehlszeile des DOS-
+Prompts (wenn dieses mit Q, W usw. aktiviert ist). Dies funktioniert auch,
+wenn Sie das Eingabefenster der Funktionen <A HREF="makefile.htm">MAKEFILE bzw. MKDIR</A>, <A HREF="suchen.htm">SUCHEN </A>
+oder <A HREF="umbenenn.htm">UMBENENNEN</A> ge”ffnet haben. Notwendige Leerzeichen werden ggf. automatisch
+eingefgt.
+
+<HR noshade color="silver">
+ 
+<FONT COLOR="maroon">CTRL + e</FONT><BR> 
+DOS-Gateway; Dies ist ein "echtes" DOS-Fenster, d.h., daá Sie den Comander
+hierbei nicht verlassen. Dadurch steht Ihnen natrlich bedeutend weniger
+Arbeitsspeicher zur Verfgung als bei Verwendung des oben beschriebenen
+<A HREF="dospromp.htm">DOS-Prompts</A>. Gr”áere Anwendungsprogramme lassen sich daher hier oftmals nicht
+starten. Der Vorteil des Gateways ist, daá er auch bei laufenden Hintergrund-
+prozessen ge”ffnet werden kann. Die Hintergrundoperationen werden angehalten
+und nach Verlassen des DOS-Gateways fortgesetzt. Sie beenden eine DOS-Sitzung
+durch Eingabe des Befehles EXIT.
+
+<HR noshade color="silver">
+ 
+<FONT COLOR="maroon">CTRL + F4</FONT><BR> 
+Mit F4 wird normalerweise der installierte externe Editor aufgerufen. Der
+DOS-Comander enth„lt jedoch noch einen winzigen eigenen Editor, der schnell
+geladen und einfach zu bedienen ist. Mit CTRL+F4 wird dieser Editor anstelle
+des externen aktiviert, ohne daá sich an der Konfiguration des Comanders
+etwas „ndert. F4 bleibt also weiterhin dem externen Editor vorbehalten.
+
+<HR noshade color="silver">
+ 
+<FONT COLOR="maroon">CTRL + t</FONT><BR> 
+(t wie tauschen)<BR> 
+Beide Fenster des Comanders werden getauscht.
+
+<HR noshade color="silver">
+ 
+<FONT COLOR="maroon">CTRL + l</FONT><BR> 
+(l wie letztes)<BR> 
+Das letzte vor einem Verzeichniswechsel ge”ffnete Verzeichnis wird nochmals
+ge”ffnet.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">CTRL + s</FONT><BR> 
+(s wie selbes)<BR> 
+™ffnet im gegenberliegenden Fenster das gleiche Verzeichnis wie im aktiven
+Fenster.
+
+<HR noshade color="silver">
+ 
+<FONT COLOR="maroon">CTRL + a</FONT><BR> 
+(a wie alle)<BR> 
+Invertiert die Markierungen mit roten K„stchen. Nicht markierte Dateien 
+werden also markiert, bei markierten Dateien wird das K„stchen entfernt. 
+Daraus ergeben sich auch folgende ntzliche Effekte:<BR> 
+- diese Funktion kann alle Dateien im ge”ffneten Verzeichnis markieren<BR> 
+- oder, wenn dies bereits geschehen ist, alle Markierungen entfernen
+
+<HR noshade color="silver">
+ 
+<FONT COLOR="maroon">CTRL + z</FONT><BR> 
+Funktioniert wie CTRL + a, nur daá alle Dateimarkierungen <FONT COLOR="red">ober</FONT>halb des
+Lichtbalkens nicht ver„ndert werden.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">CTRL + b</FONT><BR> 
+Funktioniert wie CTRL + a, nur daá alle Dateimarkierungen <FONT COLOR="red">unter</FONT>halb des
+Lichtbalkens nicht ver„ndert werden.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">CTRL + r</FONT><BR> 
+(r wie reinigen)<BR> 
+L”scht <FONT COLOR="red">alle</FONT> Markierungen.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">CTRL + y</FONT><BR> 
+Funktioniert wie CTRL + r, nur daá alle Dateimarkierungen <FONT COLOR="red">ober</FONT>halb des
+Lichtbalkens nicht ver„ndert werden.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">CTRL + d</FONT><BR> 
+Funktioniert wie CTRL + r, nur daá alle Dateimarkierungen <FONT COLOR="red">unter</FONT>halb des
+Lichtbalkens nicht ver„ndert werden.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">CTRL + o</FONT><BR> 
+Der Comander wird ausgeblendet und die letzte DOS-Ausgabe angezeigt. Mit
+einer beliebigen Taste kehren Sie zum Comander zurck. Verwenden Sie
+CTRL + o, wenn Sie am internen DOS-Prompt einen Befehl eingegeben haben und
+die Anzeige nicht sehen konnten bzw. nochmals ansehen wollen.
+
+<HR noshade color="silver">
+
+<FONT COLOR="maroon">Zifferntaste 0</FONT><BR> 
+Diese k”nnen Sie anstatt der gewohnten Entf-Taste (Dekl) zum Markieren von 
+Dateien verwenden. Die Nulltaste hat den Vorteil, daá der Lichtbalken 
+solange von allein weiterscrollt, bis sie losgelassen wird.
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

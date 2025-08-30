@@ -1,0 +1,33 @@
+//--------------------------------------------------------------------
+// SAVEALL.AML
+// Save all Loaded Files, (C) 1993-1996 by nuText Systems
+//
+// This macro saves all open files within the editor. Open files are
+// defined to be all non-hidden loaded buffers with a descriptive buffer
+// name (i.e. filename).
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+buffer = getcurrbuf
+
+// cycle through all buffers
+if buffer then
+  loop
+    if getbufname then
+      save
+    end
+    if getprevbuf then
+      gotobuf (getprevbuf)
+    else
+      break
+    end
+  end
+end
+
+gotobuf buffer

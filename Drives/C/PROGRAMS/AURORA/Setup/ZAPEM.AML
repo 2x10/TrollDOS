@@ -1,0 +1,600 @@
+//--------------------------------------------------------------------
+// ZAPEM.AML
+// Shoot'em-up Game, (C) 1993-1996 by nuText Systems
+//
+// (See Zapem.dox for user help)
+//
+// This macro plays a grid-based game where the player shoots at
+// computer generated enemies.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// game dimensions
+constant viewxd = 26
+constant viewyd = 13
+
+// game board colors
+constant game_border_color       = color white on black
+constant game_border_flash_color = color brightgreen on black
+constant game_title_color        = color black on gray
+constant game_text_color         = color brightblue on black
+constant game_bkgnd_color        = game_text_color & 0xF0
+
+// object colors
+constant COLOR_PLAYER   = color brightmagenta on game_bkgnd_color
+constant COLOR_ENEMY    = COLOR_PLAYER
+constant COLOR_SHOT     = color white         on game_bkgnd_color
+constant COLOR_FLASH    = color white         on game_bkgnd_color
+
+// object symbols
+constant SYM_SPACE      = 'ú'
+constant SYM_SPACEX     = ' ' + SYM_SPACE
+constant SYM_SHOT       = 'ù'
+constant SYM_PLAYER     = '+'
+constant SYM_STAR       = '*'
+
+// object record indexes
+constant Objx           = 1
+constant Objy           = 2
+constant Objtype        = 3
+constant Objchar        = 4
+constant Objcolor       = 5
+constant Objenergy      = 6
+constant Objstrength    = 7
+constant Objdx          = 8   // shots only
+constant Objdy          = 9   // shots only
+constant Speed          = 8   // enemies only
+constant Synch          = 9   // enemies only
+
+// object types
+constant TYPE_PLAYER    = 1
+constant TYPE_SHOT      = 3
+constant TYPE_STAR      = 7
+constant TYPE_ENEMY     = 11
+
+// maximum game levels
+constant MAX_LEVEL      = 9
+
+// energy/strength increments per level
+constant LEVEL_ENERGY   = 100
+constant LEVEL_STRENGTH = 5
+
+// energy reward factor for a kill
+// (energy += factor * enemystrength)
+constant KILL_REWARD    = 15
+
+// score bonus factors
+constant HIT_BONUS      = 1    // score += factor * level for a hit
+constant KILL_BONUS     = 10   // score += factor * level for a kill
+
+// attack/flee factor for enemies
+// (lower=less cautious)
+constant LOW_ENERGY     = 5
+
+
+// timers
+constant shot_id        = "shots"
+constant shot_delay     = 33
+constant enemy_id       = "enemy"
+constant enemy_delay    = 33
+
+// flash
+constant flash_delay    = 33
+constant flash_beep     = 170
+
+private forward startgame
+private forward stopgame
+private forward nextlevel
+
+forward moveshots
+forward enemy
+
+// variables
+variable obj, level, turn
+okfire = TRUE
+soundok = TRUE
+score = 0
+
+// create the game window
+createwindow
+setframe "b>"
+setcolor  border_color        game_border_color
+setcolor  border_flash_color  game_border_flash_color
+setcolor  text_color          game_text_color
+setcolor  north_title_color   game_title_color
+settitle "ZapEm!"
+settitle "F1=Help" 'nr' 2
+setwinctrl "ð"
+setborder "1i"
+setshadow 2 1
+
+// center the window
+ox = (getvidcols - viewxd * 2) / 2
+oy = (getvidrows - viewyd) / 2
+sizewindow ox oy ox + viewxd * 2 oy + viewyd - 0 "adc"
+
+// inherit from win object & stay resident
+settype "win"
+resident ON
+
+
+// draw the game grid
+private function drawgrid
+  for y = 1 to viewyd do
+    gotoxy 1 y
+    for x = 1 to viewxd do
+      writestr SYM_SPACEX
+    end
+  end
+end
+
+// add the player to the grid
+private function addplayer (ebonus sbonus)
+  x = (rand mod viewxd) + 1
+  y = (rand mod viewyd) + 1
+  // first object=player
+  obj  = { {x y TYPE_PLAYER SYM_PLAYER COLOR_PLAYER
+            obj [1].Objenergy + ebonus
+            obj [1].Objstrength + sbonus} }
+  writestr ' ' COLOR_PLAYER x * 2 y
+end
+
+// add stars to the grid
+private function addstars
+  loop ((viewxd * viewyd) / (40 + level)) +
+        (rand mod (viewxd * viewyd) / (10 + level)) times
+    repeat
+      starcolor = rand mod 16
+    until starcolor and starcolor <> 8 and starcolor <> COLOR_PLAYER
+    repeat
+      x = (rand mod viewxd) + 1
+      y = (rand mod viewyd) + 1
+    until (getstr 1 x * 2 y) == SYM_SPACE
+    obj = obj + {{x y TYPE_STAR SYM_STAR starcolor
+                  level * (starcolor + 3) * 10}}
+    writestr ' ' starcolor x * 2 y
+  end
+end
+
+// add enemies to the grid
+private function addenemies
+  loop level + (rand mod 2) times
+    repeat
+      x = (rand mod viewxd) + 1
+      y = (rand mod viewyd) + 1
+    until (getstr 1 x * 2 y) == SYM_SPACE
+    l = level
+    if l > 1 then
+      l = ((rand mod 2) * ((rand mod 3) - 1)) + l
+      if not l then
+        l = 1
+      end
+    end
+    obj = obj + {{x y TYPE_ENEMY (char 64 + l) COLOR_ENEMY
+                  l * LEVEL_ENERGY l * LEVEL_STRENGTH
+                  10 - l (rand mod (10 - l)) }}
+    writestr ' ' COLOR_ENEMY x * 2 y
+  end
+end
+
+// draw game objects
+private function drawobjs
+  for i = 1 to length obj do
+    writestr obj [i].Objchar obj [i].Objcolor obj [i].Objx * 2 obj [i].Objy
+  end
+end
+
+// draw status line
+private function drawstatus
+  gotoxy 1 viewyd + 1
+  writestr " Level: " (color black on gray)
+  writestr level (color red on gray)
+  writestr "  Score: " (color black on gray)
+  writestr score (color red on gray)
+  writestr "  Strength: " (color black on gray)
+  writestr obj [1].Objstrength (color red on gray)
+  energy = obj [1].Objenergy
+  writestr "  Energy: " (color black on gray)
+  writestr (if? energy < 0 0 energy):-40 (color red on gray)
+end
+
+// draw explosion at x,y
+private function explode (x y)
+  hilite 1 1 COLOR_FLASH (x - 1) * 2  y
+  hilite 1 1 COLOR_FLASH (x + 1) * 2  y
+  hilite 1 1 COLOR_FLASH x * 2        y - 1
+  if y < viewyd then
+    hilite 1 1 COLOR_FLASH x * 2        y + 1
+  end
+  hilite 1 1 COLOR_FLASH x * 2        y
+  display
+  delay 120
+  drawgrid
+  drawobjs
+end
+
+// delete object i
+private function delobj (i start)
+  if not start then
+    // explosion-flash
+    if obj [i].Objtype <> TYPE_SHOT then
+      explode obj [i].Objx obj [i].Objy
+    end
+    writestr SYM_SPACE game_text_color obj [i].Objx * 2 obj [i].Objy
+  end
+  obj [i] = ''
+end
+
+// flash object i
+private function flashobj (i e)
+  writestr obj [i].Objchar COLOR_FLASH obj [i].Objx * 2 obj [i].Objy
+  display
+  t = obj [i].Objtype
+  if soundok and (t == TYPE_PLAYER or t >= TYPE_ENEMY) then
+    beep flash_beep + (e * 9) flash_delay
+  else
+    delay flash_delay
+  end
+  writestr obj [i].Objchar obj [i].Objcolor obj [i].Objx * 2 obj [i].Objy
+  if t >= TYPE_ENEMY then
+    turn = -obj [i].Synch - 1
+    enemy
+  end
+  display
+end
+
+// moving object i is colliding into object j, start = started shot
+// return -1 if hit, -2 if fire-too-fast, null if no-fire
+private function collide (i j start)
+  if obj [i].Objtype == TYPE_SHOT or obj [j].Objtype == TYPE_SHOT then
+    if obj [i].Objtype == TYPE_SHOT then
+      s = i
+      k = j
+    else
+      s = j
+      k = i
+    end
+    t = obj [k].Objtype
+
+    // firing too fast, return -2 (wait)
+    if start and t == TYPE_SHOT and
+       obj [k].Objdx == obj [s].Objdx and
+       obj [k].Objdy == obj [s].Objdy then
+      obj [s] = ''
+      return -2
+    end
+
+    // shot energy
+    e = obj [s].Objenergy
+    obj [k].Objenergy = obj [k].Objenergy - e
+    delobj s start
+    if t <> TYPE_SHOT then
+      flashobj k e
+    else
+      delobj k
+      return -1
+    end
+
+    if t == TYPE_PLAYER then
+      drawstatus
+    elseif t >= TYPE_ENEMY then
+      score = score + (HIT_BONUS * level)
+      drawstatus
+    end
+
+    if obj [k].Objenergy <= 0 then
+      // enemy killed
+      if t >= TYPE_ENEMY then
+        // score bonus
+        score = score + (KILL_BONUS * level)
+        // energy reward
+        obj [1].Objenergy = obj [1].Objenergy +
+                            (KILL_REWARD * obj [k].Objstrength)
+         // strength reward
+        if obj [k].Objstrength > obj [1].Objstrength then
+          obj [1].Objstrength = obj [1].Objstrength +
+                                ((obj [k].Objstrength - obj [1].Objstrength) / 2)
+        end
+        delobj k
+        drawstatus
+      elseif t == TYPE_PLAYER then
+        delobj k
+        drawstatus
+        stopgame
+        if (okbox "You lose! Play again?") == "Ok" then
+          score = 0
+          startgame 1 LEVEL_ENERGY LEVEL_STRENGTH
+        else
+          destroyobject
+        end
+        return -1
+      else
+        delobj k
+      end
+    end
+    return -1
+  end
+  return 0
+end
+
+// move object i in direction x,y
+// return success/fail
+private function moveobj (i x y start)
+  x = x + obj [i].Objx
+  if x > 0 and x <= viewxd then
+    y = y + obj [i].Objy
+    if y > 0 and y <= viewyd then
+
+      // test for collision
+      for j = 1 to length obj do
+        if j <> i and x == obj [j].Objx and y == obj [j].Objy then
+          return (collide i j start)
+        end
+      end
+
+      if not start then
+        writestr SYM_SPACE game_text_color obj [i].Objx * 2 obj [i].Objy
+      end
+      writestr obj [i].Objchar obj [i].Objcolor x * 2 y
+      obj [i].Objx = x
+      obj [i].Objy = y
+      return TRUE
+    end
+  end
+end
+
+// move fired shots
+function moveshots
+  for i = 2 to length obj do
+    if obj [i].Objtype == TYPE_SHOT then
+      // no collision
+      if moveobj i obj [i].Objdx obj [i].Objdy then
+        shot_moved = TRUE
+      else
+        delobj i
+      end
+    end
+  end
+  if not shot_moved then
+    destroytimer shot_id
+  end
+  display
+end
+
+// object i fires shot in direction dx,dy
+private function fire (i dx dy)
+  if obj [i].Objenergy > level then
+
+    // create shot object
+    shot = {obj [i].Objx  obj [i].Objy TYPE_SHOT SYM_SHOT
+              COLOR_SHOT obj [i].Objstrength '' dx dy}
+
+    // find a place in obj to put it
+    j = length obj + 1
+    while not obj [j - 1] do
+      j = j - 1
+    end
+    if j > length obj then
+      obj = obj + {shot}
+    else
+      obj [j] = shot
+    end
+
+    // move the shot (-2 = too many shots)
+    if (moveobj j dx dy TRUE) <> -2 then
+      // each shot costs 'level' units
+      obj [i].Objenergy = obj [i].Objenergy - level
+      if i == 1 then
+        drawstatus
+      end
+      // start the moveshots timer, if needed
+      if obj [j].Objtype == TYPE_SHOT and not (timer? shot_id) then
+        setrepeat shot_id shot_delay '' "moveshots"
+      end
+    end
+    if i == 1 then
+      purgequeue
+    end
+  end
+end
+
+// enemy action
+function enemy
+  turn = turn + 1
+  for i = 1 to length obj do
+    // i = enemy
+    if obj [i].Objtype >= TYPE_ENEMY then
+      enemies = TRUE
+      if not ((turn + obj [i].Synch) mod obj [i].Speed) then
+        x = obj [i].Objx
+        y = obj [i].Objy
+        // j = shot or player
+        for j = 1 to length obj do
+          t = obj [j].Objtype
+          if t == TYPE_SHOT or t == TYPE_PLAYER then
+            // inline on the y-axis
+            if obj [j].Objx == x and (t == TYPE_PLAYER or
+               ((obj [j].Objy - y) * obj [j].Objdy) < 0) then
+
+              // test if the way is clear
+              clearway = TRUE
+              for k = 1 to length obj do
+                if obj [k].Objx == x and
+                   ((obj [k].Objy > y and obj [k].Objy < obj [j].Objy) or
+                    (obj [k].Objy < y and obj [k].Objy > obj [j].Objy)) then
+                  clearway = FALSE
+                end
+              end
+
+              if clearway then
+                if t == TYPE_PLAYER then
+                  fire i 0 (if? obj [j].Objy > y 1 -1)
+                end
+                d = ((rand mod 2) * 2) - 1
+                if not moveobj i d 0 then
+                  moveobj i -d 0
+                end
+                break
+              end
+
+            // inline on the x-axis
+            elseif obj [j].Objy == y and (t == TYPE_PLAYER or
+               ((obj [j].Objx - x) * obj [j].Objdx) < 0) then
+              // test if the way is clear
+
+              clearway = TRUE
+              for k = 1 to length obj do
+                if obj [k].Objy == y and
+                   ((obj [k].Objx > x and obj [k].Objx < obj [j].Objx) or
+                    (obj [k].Objx < x and obj [k].Objx > obj [j].Objx)) then
+                  clearway = FALSE
+                end
+              end
+
+              if clearway then
+                if t == TYPE_PLAYER then
+                  fire i (if? obj [j].Objx > x 1 -1) 0
+                  display
+                end
+                d = ((rand mod 2) * 2) - 1
+                if not moveobj i 0 d then
+                  moveobj i 0 -d
+                end
+                break
+              end
+            end
+
+            // not inline
+            if t == TYPE_PLAYER then
+              // mode: 1=attack, -1=flee
+              if obj [i].Objenergy < (obj [j].Objstrength * LOW_ENERGY) and
+                 obj [j].Objenergy > (obj [i].Objstrength * LOW_ENERGY) then
+                mode = -1
+              else
+                mode = 1
+              end
+              // x-axis movement
+              if rand mod 2 then
+                x = if? x < obj [j].Objx mode mode * -1
+                if not (moveobj i x 0) and mode > 0 then
+                  x = -x
+                  moveobj i x 0
+                end
+                // try to avoid moving into a line of fire
+                k = length obj
+                while k and obj [k].Objtype == TYPE_SHOT do
+                  if obj [k].Objx == obj [i].Objx then
+                    moveobj i -x 0
+                    break
+                  end
+                  k = k - 1
+                end
+              // y-axis movement
+              else
+                y = if? y < obj [j].Objy mode mode * -1
+                if not (moveobj i 0 y) and mode > 0 then
+                  y = -y
+                  moveobj i 0 y
+                end
+                // try to avoid moving into a line of fire
+                k = length obj
+                while k and obj [k].Objtype == TYPE_SHOT do
+                  if obj [k].Objy == obj [i].Objy then
+                    moveobj i 0 -y
+                    break
+                  end
+                  k = k - 1
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  display
+  // move to next level if no more enemies
+  if not enemies then
+    nextlevel
+  end
+end
+
+// start the game at level l
+private function startgame (l ebonus sbonus)
+  turn = 0
+  level = l
+  drawgrid
+  addplayer ebonus sbonus
+  addstars
+  addenemies
+  drawobjs
+  drawstatus
+  setrepeat enemy_id enemy_delay '' "enemy"
+end
+
+// stop the game
+private function stopgame
+  destroytimer shot_id
+  destroytimer enemy_id
+end
+
+// advance to the next level
+private function nextlevel
+  stopgame
+  if level == MAX_LEVEL then
+    msgbox "Congradulations!\nYou've mastered all levels!"
+  else
+    newlevel = level + 1
+    ebonus = LEVEL_ENERGY
+    sbonus = LEVEL_STRENGTH
+    msgbox "You've mastered level " + level + "!" +
+           "\nEnergy bonus: " + ebonus + ", Strength bonus: " + sbonus +
+           "\n\nMoving to level " + newlevel + "..."
+    startgame newlevel ebonus sbonus
+  end
+end
+
+// quit the game
+event <destroy>
+  stopgame
+  close
+end
+
+function 'ð'
+  destroyobject
+end
+
+// key definitions
+
+// movement
+key <left>         moveobj 1 -1  0
+key <right>        moveobj 1  1  0
+key <up>           moveobj 1  0 -1
+key <down>         moveobj 1  0  1
+
+// firing
+key <shift left>   fire 1 -1  0
+key <shift right>  fire 1  1  0
+key <shift up>     fire 1  0 -1
+key <shift down>   fire 1  0  1
+
+// sound On/Off
+key <ctrl s>
+  soundok = not soundok
+end
+
+// help
+macrofile = arg 1
+key <f1>           helpmacro macrofile
+
+// quit
+key <esc>          destroyobject end
+
+startgame 1 LEVEL_ENERGY LEVEL_STRENGTH
+mousepos -1 -1

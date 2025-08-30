@@ -1,0 +1,21 @@
+
+ÿÿWHERE.AML
+ ÿWhere-is Utilityÿ
+
+  This macro searches all directories on one or more disk drives for a
+  filename or filespec. You will be prompted to enter the filespec and
+  disk drives.
+
+  After the search has completed, a file manager window will be
+  displayed, listing all the located files in fully-qualified format.
+  The full range of file manager commands are available for use with the
+  located files.
+
+  Where can also be used to generate a list of all files on a drive, or
+  in a directory. To generate a file manager listing of all files in all
+  directories on the D drive, run Where and and specify a filespec of
+  'D:\*.*'. To generate a listing of all files on your computer, run
+  Where with a filespec of '*.*' (Warning: these filespecs may generate
+  listings with tens of thousands of files, which may take some time for
+  the file manager to sort.)
+

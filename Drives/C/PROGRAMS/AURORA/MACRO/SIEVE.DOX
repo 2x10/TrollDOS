@@ -1,0 +1,10 @@
+
+ÿÿSIEVE.AML
+ ÿSieve of Eratosthenes Demoÿ
+
+  This macro uses the Sieve of Eratosthenes to list the prime numbers
+  from 1 to 4001. This method originated in the 3rd century B.C.
+
+  The Sieve of Eratosthenes is often used for benchmarking and
+  demonstrates the use of macro language arrays.
+

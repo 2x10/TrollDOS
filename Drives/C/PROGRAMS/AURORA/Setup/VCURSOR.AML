@@ -1,0 +1,56 @@
+//--------------------------------------------------------------------
+// VCURSOR.AML
+// Vertical Cursor Line, (C) 1993-1996 by nuText Systems
+//
+// This macro attaches a highlighted vertical bar to the cursor in the
+// current edit window.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>. Run this macro again to remove
+// the vertical highlight.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// highlight color = mark color
+vcur_vertical_color  = getpalette 6
+
+if not wintype? "edit" then
+  msgbox "Edit Windows Only."
+  return
+end
+
+// if already installed, then remove it
+if _vcursor then
+  destroyobject (getwinobj)
+  return
+end
+
+public vcursor = TRUE
+
+// make resident and inherit from existing window object
+resident ON
+settype (getwinobj)
+setwinobj (getcurrobj)
+
+// turn on custom paint
+windowflag '+p'
+
+// draw the vertical highlight
+event <paint>
+  passprev
+  hilite 1 getlines - getviewtop + 1 vcur_vertical_color '' (getviewtop)
+end
+
+// turn off custom paint
+event <destroy>
+  windowflag '-p'
+end
+
+// remove this macro when the file is closed
+function onclose
+  passprev
+  destroyobject
+end

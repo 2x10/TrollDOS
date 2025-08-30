@@ -1,0 +1,45 @@
+<HTML><HEAD><TITLE>Datensatz schreiben mit WRITE:</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Datensatz schreiben mit WRITE:</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+
+Mit "Write" befehlen Sie dem Browser, einen Datensatz in eine 
+Datenbank-Datei zu schreiben.
+<P>
+Nach der Write-Anweisung muá der Dateiname der Datenbank angegeben werden. 
+Eine Positionsangabe wie im "<A HREF="read.htm">Read</A>-Befehl ist nicht 
+erforderlich und auch nicht m”glich: Der Write-Befehl schreibt den 
+Datensatz immer an die aktuelle Position innerhalb der Datenbankdatei. Wenn 
+der Anwender also den Datensatz Nummer 4 im Formular sieht, diesen „ndert 
+und dann wieder in die Datei schreibt, wird der ursprngliche Datensatz 4 
+gel”scht und an seiner Stelle die neuen Daten eingesetzt.
+<P>
+Wichtig: Der Write-Befehl eignet sich also nicht zum Anlegen und Speichern 
+von neuen Datens„tzen, sondern nur zum ndern von bereits bestehenden. Um 
+einen neuen Datensatz zu erzeugen, verwenden Sie den Befehl "<A 
+HREF="append.htm">Append</A>". Einen Tip, wie Sie dem Anwender erm”glichen, 
+versehentlich berschriebene Daten wieder herzustellen, finden Sie <A 
+HREF="erase.htm#tip">hier</A>.<BR>
+
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>write:daten.bnk</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Befindet sich die Datenbank-Datei nicht im gleichen Verzeichnis wie das 
+Formular, in dem der Datensatz angezeigt wird, muá der Dateiname 
+zus„tzliche Pfadangaben enthalten, z.B.
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>write:c:\newdos\daten.bnk
+</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Es sind hier auch <A HREF="../relpath.htm">relative Pfadangaben</A> m”glich.
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

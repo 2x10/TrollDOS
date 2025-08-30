@@ -1,0 +1,21 @@
+
+ÿÿALARM.AML
+ ÿSet Alarmÿ
+
+  This macro allows you to set up to four editor alarms.
+
+  A window is displayed listing the alarms from top to bottom. The date,
+  time, command, and parameter for each alarm are listed in edit fields
+  from left to right.
+
+  If the box to the left of the alarm is checked, then the alarm is set,
+  otherwise the alarm is not active.
+
+  The dates and times can be set for each alarm, as well as the command
+  (with an optional parameter) to execute when the alarm goes off. If a
+  wildcard (*) is specified for a date or time subfield, then the alarm
+  will go off for all possible values of the subfield.
+
+  When the Ok button is pressed, all alarm fields are saved in the file
+  Alarm.dat.
+

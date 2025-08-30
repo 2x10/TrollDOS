@@ -1,0 +1,9 @@
+
+ÿÿHILITEWD.AML
+ ÿHighlight a Wordÿ
+
+  This macro highlights the word at the cursor.
+
+  You will be prompted to select a color from a color chart. Cancelling
+  the color chart will remove the highlighting for the word.
+

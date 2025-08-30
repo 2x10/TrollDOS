@@ -1,0 +1,101 @@
+<HTML><HEAD><TITLE>Fragen + Antworten</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Fragen + Antworten</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A><BR>
+<A HREF="service.htm">Zurck zur Support-Seite</A>
+<HR noshade color="silver"><PRE><FONT
+
+COLOR="maroon">Hin und wieder startet statt einem neuen New-DOS-Programm ein altes</FONT> 
+
+Dies geschieht immer dann, wenn Sie zuf„llig das Verzeichnis ge”ffnet haben,
+in dem Ihr altes DOS installiert ist. Schlieáen Sie das Verzeichnis und 
+geben Sie den Befehl erneut. Wenn dann immer noch das alte DOS-Programm
+ausgefhrt wird, ”ffnen Sie bitte die Datei C:\AUTOEXEC.BAT in einem
+Editor und suchen Sie folgende Zeile:
+
+<FONT COLOR="blue">SET PATH=<FONT COLOR="red">C:\NEWDOS</FONT>;%PATH%</FONT>
+
+Der rot gekennzeichnete Teil dieser Anweisung muá auf das Verzeichnis
+verweisen, in dem Sie NEW-DOS installiert haben. Ist dies nicht der Fall,
+„ndern Sie diese Zeile per Hand entsprechend ab. Grunds„tzlich gilt, daá
+der Pfad zum New-DOS-Verzeichnis vor dem Pfad zum alten DOS-Verzeichnis
+erscheinen muá.
+
+Nach nderungen an der AUTOEXEC.BAT muá der Computer neu gestartet werden.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Warum untersttzt New-DOS keine langen Dateinamen?</FONT>
+
+Es war bereits bei der Entwicklung von New-DOS 6.23 abzusehen, daá Windows
+einem echten DOS nach und nach das Wasser abgraben wird und dem letzendlich
+in wohl absehbarer Zeit auch das in Windows eingebaute DOS 7.x zum Opfer
+fallen wird. New-DOS wendet sich an die Benutzer echter DOS-Versionen oder
+an diejenigen, die ihr Windows-/Linux/OS/2-DOS weiterhin mit kurzen 
+Dateinamen - also m”glichst kompatibel - betreiben.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Kann man auch Einplatzlizenzen von New-DOS erwerben ?</FONT> 
+
+Jein. Die angebotene Zweiplatzlizenz ist im Grunde eine Einplatzlizenz, zu
+der eine zweite Lizenz kostenlos beigegeben wird. Eine Einplatzlizenz wrde
+also das gleiche kosten wie eine Zweiplatzlizenz. Viele Anwender besitzen
+heute jedoch mehr als einen Computer (PC und Laptop) und m”chten New-DOS auf
+beiden installieren. Die Zweiplatzlizenz vereinfacht das fr alle 
+Beteiligten.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Der Druck-Spooler PRINTER verbraucht sehr viel Arbeitsspeicher</FONT>
+
+PRINTER selbst ben”tigt nur etwas mehr als 1 kB dieses Speichers, der Rest
+wird fr das Zwischenspeichern der Druckdaten verwendet. Sie k”nnen diesen
+Speicherbereich jedoch auf bis zu 10 kB verkleinern - wie das geht, lesen Sie
+bitte in der Hilfe zu Printer nach. Auch derart verkleinerte Puffer k”nnen
+auf alten Nadel-Druckern bereits eine erfreuliche Wirkung zeigen.
+
+Fr die Zukunft sind hier jedoch noch Verbesserungen geplant.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Die Bedienung der New-DOS-Zwischenablage ist uneinheitlich</FONT>
+
+Auch hier sind fr die Zukunft Verbesserungen geplant.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Der Device-Manager zeigt ein geladenes DDD als nicht vorhanden an</FONT>
+ 
+Dies ist immer dann der Fall, wenn nach diesem Treiber ein weiterer geladen
+wurde, der den selben Interrupt belegt. In diesem Falle wrde ein Zugriff
+auf den davorliegenden Treiber das ganze System durcheinanderbringen - bis
+hin zum Totalabsturz. Um trotzdem auf diesen Treiber zugreifen zu k”nnen,
+deinstallieren Sie mit dem Device-Manager den sp„ter installierten DDD,
+fhren den gewnschten Befehl aus und laden den eben deinstallierten DDD
+wieder.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Der Download von New-DOS aus dem Internet funktioniert nicht richtig</FONT>
+ 
+Dies ist meist auf vorbergehende technische St”rungen zurckzufhren, die 
+sich meinem Einfluá entziehen. Versuchen Sie es bitte zu einem sp„teren 
+Zeitpunkt nochmal und meiden Sie dabei Spitzenbelastungszeiten wie die
+Mittagspause oder die Zeit um 21 Uhr. Sollte der Download jedoch permanent
+fehlschlagen, informieren Sie mich bitte.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Der DOS-Comander sieht auf meinem Monitor eigenartig aus</FONT>
+ 
+Dann besitzen Sie m”glicherweise einen Monochrom-Monitor, der sich nicht im
+sogenannten 50-Zeilen-Modus betreiben l„át. Auf VGA-Schwarz-Weiá-Monitoren
+oder auf LCD-Laptop-Monitoren k”nnen Sie die Darstellung verbessern, indem
+Sie das Konfigurationsmen (Konfix) des Comanders ”ffnen, und dort die
+Option "LCD-Monitor" aktivieren.<HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Im Wort DOS-Comander fehlt ein M</FONT>
+ 
+Dies stammt noch aus der Zeit, als der DOS-Comander ein Einzelprogramm war,
+welches in einem Verzeichnis namens COMANDER installiert wurde. Der max.
+L„nge eines DOS-Verzeichnisnamens ist dann das M zum Opfer gefallen, was aus
+nostalgischen Grnden auch unter New-DOS so beibehalten wurde.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

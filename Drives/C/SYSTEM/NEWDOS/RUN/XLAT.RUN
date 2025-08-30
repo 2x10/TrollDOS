@@ -1,0 +1,21 @@
+PROGRAM Xlat;
+
+BEGIN-MAIN
+
+  !a:= 'Hallo!;
+  ASM
+    lea bx, !a
+  END;
+
+  For @x:= 1 To @Length (!a) Do
+  BEGIN
+    ASM
+      mov al, @x
+      xlat
+      mov @a, al
+    END;
+    Write (#char(@a));
+  ENDFOR;
+
+  GetKey;
+END.

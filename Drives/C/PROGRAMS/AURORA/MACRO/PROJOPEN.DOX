@@ -1,0 +1,20 @@
+
+ÿÿPROJOPEN.AML
+ ÿOpen Projectÿ
+
+  This macro opens and restores a project saved previously with the
+  Projsave macro.
+
+  You will be prompted to enter the project file name. If no file
+  extension is specified, the file extension .Prj is assumed.
+
+  The following items are restored from the project file:
+
+    - all open file names
+    - window sizes and positions
+    - window settings
+    - cursor states and positions
+    - all prompt history
+    - bookmarks in all open files
+    - the current marked block
+

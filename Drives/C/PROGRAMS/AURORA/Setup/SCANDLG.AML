@@ -1,0 +1,105 @@
+//--------------------------------------------------------------------
+// SCANDLG.AML
+// Scan Dialog Box, (C) 1993-1996 by nuText Systems
+//
+// This macro displays a scan dialog box and returns a scan
+// 'multistring' with the format: searchstring/files/options. An
+// optional list buffer may be passed as arg 3 and an optional dlgbox
+// title as arg 4.
+//
+// Usage:
+//
+// This macro is intended for use as a utility by other macros, not as a
+// standalone macro. Scandlg is used by the Scan and Scan2 macros.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// check if a file list is passed
+if bufferflag "d?" (arg 3) then
+  passedbuf = arg 3
+end
+
+title = arg 4
+
+// edit fields/groupbox windows
+variable f1, f2, g1, g2
+
+// retrieve history in scan dlgbox fields and options
+function updatehist
+  variable searchstr, files, options
+  n = splitstr '' (gettext) ref searchstr ref files ref options
+
+  // search string
+  buffer = getwinbuf f1
+  delchar MAX_COL 1 '' buffer
+  instext searchstr 1 '' buffer
+
+  // files
+  if f2 then
+    buffer = getwinbuf f2
+    delchar MAX_COL 1 '' buffer
+    instext (if? files files "*.*")  1 '' buffer
+  end
+
+  // options
+  if not options then
+    if n <= 2 then
+      options = _SearchOpt
+    end
+  end
+  setgroupbox options "ix"  g1
+  setgroupbox options "wu"  g2
+  col getlinelen + 1
+end
+
+
+variable searchstr, filespec, options, options2, delimit
+
+// prompt to scan files for a string
+if passedbuf or _PromptStyle == 'd' then
+  file = getbufname
+  dlg = dialog (if? title title "Scan") 66 8 'cp'
+  f1 = field "&Search for: >" 3 2  38 '' "_scan"
+             whenselect "updatehist"
+  if passedbuf then
+    filespec = onname (getbufname passedbuf)
+    gotowindow dlg
+    writestr "In Files:   " + filespec '' 3 4
+    gotowindow f1
+  else
+    f2 = field "In &Files:   >" 3 4  38 (onname (qualify "*.*" file)) "_scan"
+                whenselect "updatehist"
+  end
+
+  g1 = groupbox '' 3 6
+    (menu ''
+       item " [ ] &Ignore Case"
+       item " [ ] Regular E&Xpression "
+     end ) '' _SearchOpt 'ix'
+
+  g2 = groupbox '' 29 6
+    (if passedbuf then
+       menu ''
+         item " [ ] &Whole Words        "
+       end
+     else
+       menu ''
+         item " [ ] &Whole Words        "
+         item " [ ] S&Ubdirectories"
+       end
+     end) '' _SearchOpt 'wu'
+  button "O&k"    56 2 8
+  button "Cancel" 56 4 8
+  value = if passedbuf then
+            getdialog ref searchstr ref options ref options2
+          else
+            getdialog ref searchstr ref filespec ref options ref options2
+          end
+  if value == 'Ok' then
+    joinstr '' searchstr filespec (options + options2)
+  end
+else
+  ask "[string/files/ixwu] Scan" "_scan"
+end

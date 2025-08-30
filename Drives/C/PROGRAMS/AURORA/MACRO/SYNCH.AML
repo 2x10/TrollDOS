@@ -1,0 +1,63 @@
+//--------------------------------------------------------------------
+// SYNCH.AML
+// Synchronized Scrolling, (C) 1993-1996 by nuText Systems
+//
+// This macro toggles synchronized scrolling On/Off.
+//
+// When synchronized scrolling is On, all windows will be scrolled by
+// the same amount as the topmost window. Only windows of the same type
+// as the topmost window (i.e. edit, fmgr) will be scrolled.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// check for a previous install
+if prf.sync then
+  destroyobject prf.sync
+  destroyvar "sync" "prf"
+  display
+  say "Synchronized scrolling Off "
+  return
+end
+prf.sync = getcurrobj
+
+
+// edit/fmgr windows only
+object "edit_fmgr"
+
+variable lastwin, lastx, lasty
+
+// called when the display is updated
+event <display>
+  if lastwin == getcurrwin then
+    xoffset = getviewleft - lastx
+    yoffset = getviewtop - lasty
+    if xoffset or yoffset then
+      window = getprevwin
+      while window do
+        if wintype? (getwinobj lastwin) window then
+          rollcol xoffset window
+          rollrow yoffset window
+        end
+        window = getprevwin window
+      end
+    else
+      return
+    end
+  else
+    lastwin = getcurrwin
+  end
+  lastx = getviewleft
+  lasty = getviewtop
+end
+
+// keep this macro resident
+resident ON
+
+display
+say "Synchronized scrolling On "

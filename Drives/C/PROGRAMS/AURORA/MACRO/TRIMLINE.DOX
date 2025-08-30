@@ -1,0 +1,11 @@
+
+ÿÿTRIMLINE.AML
+ ÿTrim Trailing Blanks and Tabsÿ
+
+  This macro trims trailing blanks and tabs from lines in the current
+  file. The operation is limited to a marked block if it exists. The
+  number of lines trimmed is displayed.
+
+  Trimline is usually not needed if Trim Trailing Blanks is turned On
+  under Save Options in the Main Configuration.
+

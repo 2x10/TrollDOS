@@ -1,0 +1,116 @@
+//--------------------------------------------------------------------
+// FCOPY.AML
+// File manager - Copy files, (C) 1993-1996 by nuText Systems
+//
+// This macro prompts you to copy or move one or more files.
+//
+// If run from an edit window, the current file is copied to the
+// specified destiniation.
+//
+// If run from a file manager window, the current file (or marked
+// files), are copied or moved to the specified destination.
+//
+// This macro may also call the Sweep macro.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//
+// This macro can also be run from the file manager by selecting Copy
+// or Move from the file manager Command menu.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// fmgr copy/move file(s) command
+function fcopy2 (source dest options)
+  sourcedir = source [LAST_CHAR] == '\\'
+  if dir? dest then
+    dest = qualify (getname (if? sourcedir source [1..length source - 1]
+                                           source)) dest
+  end
+  // copying/moving directories
+  if sourcedir then
+    if pos "*.*" dest then
+      dest = (getpath dest) + (getname source [1..length source - 1])
+    end
+    action = 'r'
+    if directory? dest then
+      if (popup "ok" dest + " Exists. Overwrite?") [1] <> 'O' then
+        action = ''
+      end
+    end
+    //action = askrac dest
+    dest = dest + '\\'
+  else
+    action = askrac dest
+  end
+  if pos action "ra" 'i' then
+    move? = options == 'm'
+    say (if? move? "Mov" "Copy") + "ing " + source + "..."
+    success = TRUE
+    if not move? or (icompare action 'a') or not (renamefile source dest) then
+      // copying/moving directory
+      success = if sourcedir then
+                  runmacro (bootpath "macro\\sweep.x") ''
+                             source dest 'c' + (if? move? 'd')
+                else
+                  copyfile source dest (if? (icompare action 'a') 'a')
+                end
+    end
+    if success then
+      if source [LAST_CHAR] == '\\' then
+        source [LAST_CHAR] = ''
+        if dest [LAST_CHAR] == '\\' then
+          dest [LAST_CHAR] = ''
+        end
+      end
+      if (icompare (getpath source) (getpath dest)) then
+        finsert dest
+      end
+      if move? then
+        if not sourcedir then
+          deletefile source
+        end
+        delline
+      end
+    else
+      msgbox (if? move? "Move" "Copy") + " Failed"  "Error!" 'b'
+      fbreak
+    end
+  end
+end
+
+options = arg 3
+
+// check for edit/fmgr windows
+if not wintype? "edit_fmgr" then
+  msgbox "File Manager Windows and Edit Windows windows only!"
+end
+
+fmgrtype = wintype? "fmgr"
+bufname = getbufname
+
+if fmgrtype and fmark? then
+  dir_dest = qualify (fgetfile)
+  if not dir? dir_dest then
+    dir_dest = ''
+  end
+end
+
+// get destination
+dest = ask (if? options == 'm' "Move" "Copy") + ' ' +
+            (if? fmgrtype (fname) (onname (getname bufname))) + " to"
+           "_load" dir_dest
+
+// do the copy
+if dest then
+  dest = qualify dest bufname
+  if fmgrtype then
+    fcommand "fcopy2" dest options
+  else
+    fcopy2 bufname dest options
+  end
+end

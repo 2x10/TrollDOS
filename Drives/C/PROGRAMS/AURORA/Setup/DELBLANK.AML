@@ -1,0 +1,59 @@
+//--------------------------------------------------------------------
+// DELBLANK.AML
+// Delete Blank Lines, (C) 1993-1996 by nuText Systems
+//
+// This macro deletes blank lines in the current edit window. The
+// operation is confined to a marked block if one exists. Note: this
+// macro will run faster if Undo is turned Off on the Set menu.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable count
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+// test if a marked block exists in the current file
+block_count = mark? and getmarkbuf == getcurrbuf
+
+// display message
+say "Deleting blank lines" + (if? block_count " in block") + "..."
+
+// set search options
+options = "x*" + (if? block_count 'b')
+
+// mark the beginning of an undoable group of operations
+undobegin
+
+// save cursor position and goto first line
+pushcursor
+gotopos 1 (if? block_count (getmarktop) 1)
+
+// search for blank lines using regular expressions
+while find "^ *$" options do
+  delline
+  count = count + 1
+end
+breakoff
+
+// mark the end of an undoable group of operations
+undoend
+
+// restore cursor
+popcursor
+
+// clear the title bar
+display
+
+// display the count
+shortbox  (if? count (thousands count) "No") + " lines deleted" +
+          (if? block_count " in the block")

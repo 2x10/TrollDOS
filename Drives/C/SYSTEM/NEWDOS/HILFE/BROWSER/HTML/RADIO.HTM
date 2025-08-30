@@ -1,0 +1,51 @@
+<HTML><HEAD><TITLE>Auswahlknîpfe</TITLE></HEAD><BODY><A NAME="top"><BR>
+<FONT COLOR=teal>Auswahlknîpfe</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">ZurÅck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">ZurÅck zur öbersicht "HTML-Befehle"</A>
+<HR noshade color="silver">
+Auswahlknîpfe ermîglichen dem Anwender, aus verschiedenen 
+Auswahlmîglichkeiten eine zu markieren, indem er den gewÅnschten Auswahl-
+Knopf mit der Maus oder Tastatur betÑtigt. Der Anwender kann immer nur 
+<FONT color=red>einen</FONT> der Knîpfe auswÑhlen: Aktiviert er einen 
+Knopf, werden alle anderen Knîpfe automatisch deaktiviert.
+<P>
+Genauer gesagt: Es werden alle Knîpfe deaktiviert, die zusammengehîren. 
+Damit der Browser wei·, welche Knîpfe zusammen eine Gruppe bilden,
+mÅssen diese alle den gleichen Namen bekommen. Dieser wird im Feld "Name" 
+angegeben.
+<P>
+In "Value" legen Sie au·erdem fest, 
+welchen Inhalt das Eingabe-Element haben soll, wenn es aktiviert ist. 
+
+<P>
+<FONT COLOR=red>&lt;INPUT TYPE=radio value="<FONT COLOR=blue>x</FONT>" name="klickmich"&gt;</FONT><BR>
+<FONT COLOR=red>&lt;INPUT TYPE=radio value="<FONT COLOR=blue>y</FONT>" name="klickmich"&gt;</FONT><BR> 
+<FONT COLOR=red>&lt;INPUT TYPE=radio value="<FONT COLOR=blue>z</FONT>" name="klickmich"&gt;</FONT>
+ 
+<P>
+<INPUT TYPE=radio value="x" name="klickmich"> Auswahl 1 (klicken Sie mal ein wenig)<BR>
+<INPUT TYPE=radio value="y" name="klickmich"> Auswahl 2<BR>
+<INPUT TYPE=radio value="z" name="klickmich"> Auswahl 3
+<P>
+Durch zusÑtzliche Angabe der Anweisung "checked" erreichen Sie, da· 
+der betreffende Auswahl-Knopf beim ôffnen des Dokumentes bereits 
+aktiviert ist.
+<P>
+<FONT COLOR=red>&lt;INPUT TYPE=radio value="<FONT COLOR=blue>x</FONT>" <FONT COLOR=blue>CHECKED</FONT> name="nochnklick"&gt;</FONT><BR>
+<FONT COLOR=red>&lt;INPUT TYPE=radio value="<FONT COLOR=blue>y</FONT>" name="nochnklick"&gt;</FONT><BR>                                         
+<FONT COLOR=red>&lt;INPUT TYPE=radio value="<FONT COLOR=blue>z</FONT>" name="nochnklick"&gt;</FONT>
+ 
+<P>
+<INPUT TYPE=radio value="x" checked name="nochnklick"> Auswahl 1 (wie Sie sehen, bleibt die obere Gruppe unbeeinflu·t)<BR>
+<INPUT TYPE=radio value="y" name="nochnklick"> Auswahl 2<BR>
+<INPUT TYPE=radio value="z" name="nochnklick"> Auswahl 3
+<P>
+ 
+siehe auch: <A HREF="eingabe.htm">Eingabe-Elemente</A>
+
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+ 
+</BODY></HTML>
+

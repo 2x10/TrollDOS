@@ -1,0 +1,40 @@
+                       DOS-Tools, die man immer braucht
+                       ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+67HZCT.COM        - Setzt den Standard-VGA-Modus 640x480 mit jeder VGA-Karte
+                    auf 67 Hz (statt 60 Hz, deutlich weniger Flimmern).
+
+CTLOAD.COM        - L„dt Ger„tetreiber, die normalerweise in der CONFIG.SYS
+                    stehen mssen (z.B. fr CD-ROM) auch sp„ter von der
+                    Kommandozeile oder aus Batchdateien. (DOSSTART.BAT !!)
+
+DEFRAGM.COM       - Defragmentiert den konventionellen Speicher und UMB-
+                    Bereiche (kein Witz !). Viele Treiber (Maus, Netzwerk)
+                    kann man ber spezielle Kommandozeilenparameter auch
+                    wieder aus dem Speicher entfernen. Dabei entstehen
+                    einzelne freie Speicherbl"cke, die von DOS aber nicht
+                    als ganzes angesprochen werden k"nnen. DEFRAGM faát die
+                    Speicherbl"cke wieder zusammen, so daá DOS wieder den
+                    gesamten freigegebenen Speicher nutzen kann.
+                    
+EMODE.EXE         - Setzt ungebr„uchliche Textmodi, z.B. 80x34.
+
+KGAS.COM          - Kleiner Tastaturtreiber.
+
+REBOOT.COM        - Fhrt einen Kaltstart durch.
+
+SAY.COM           - Wie ECHO, aber ohne Zeilenvorschub. Ntzlich zum
+                    Kommandozeilen - Basteln in Batchdateien.
+
+TI.EXE            - Kleiner Scherz. Abstellen mit nochmaligem Aufruf.
+
+XCHNG.COM         - Suchen und Ersetzen in Dateien.
+
+XSET.EXE          - Stark erweiterter SET - Befehl. XSET /? fr ausfhrliche
+                    Hilfe.
+
+Ralf Buschmann
+
+EMail: ralf@conactive.com
+Home : http://www.conactive.com/win95/
+ 

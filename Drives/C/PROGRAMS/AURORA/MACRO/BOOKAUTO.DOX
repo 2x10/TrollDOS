@@ -1,0 +1,18 @@
+
+ÿÿBOOKAUTO.AML
+ ÿSave/Restore Bookmarks Automaticallyÿ
+
+  Running this macro will automatically save bookmarks to history
+  whenever a file is closed, and restore bookmarks from history whenever
+  a file is opened. If you have configured history to be saved when
+  exiting the editor, then bookmarks can be saved and restored across
+  editing sessions.
+
+  If the name of a bookmark to be restored is already in use, a new
+  bookmark name is assigned.
+
+  The total number of bookmarks which can be saved at one time is
+  limited by the history size configuration setting in Config.aml.
+  Newer bookmarks will replace older bookmarks when the history size
+  is exceeded.
+

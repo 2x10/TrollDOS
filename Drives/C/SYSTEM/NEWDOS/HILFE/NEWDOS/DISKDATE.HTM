@@ -1,0 +1,54 @@
+<HTML><HEAD><TITLE>DISKDATE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>DISKDATE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>setzt oder ermittelt das Datum und die Uhrzeit einer Diskette
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">DISKDATE [Laufwerksbuchstabe] [/w]</FONT>
+
+/w  DiskDate speichert das aktuelle Datum samt Uhrzeit auf der Diskette
+
+Fehlt /w, werden Datum und Uhrzeit angezeigt, ohne daá eine nderung erfolgt.
+Es k”nnen nur Disketten korrekt angezeigt werden, deren Werte zuvor mit
+DISKDATE oder von <A HREF="diskcopy.htm">Diskcopy</A> oder <A HREF="refresh.htm">Refresh</A> gesetzt wurden. Andernfalls zeigt
+DISKDATE ein "Fantasie"-Datum.
+
+Es werden nur die Laufwerke A: und B: untersttzt.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT>
+  
+DISKDATE verschlsselt Datum und Uhrzeit in der Datentr„gernummer der 
+Diskette nach dem gleichen Prinzip wie Datum und Uhrzeit von Dateien 
+(Pascal-"PackTime" bzw. -"UnPackTime"). Die Datentr„gernummer wird durch 
+das Speichern des Datums also ge„ndert. Es wird dafr kein zus„tzlicher 
+Speicherplatz auf der Diskette verwendet. Eine Datentr„gernummer kann
+daher in 99 Jahren brigens nur ein einziges mal vorkommen.  
+
+Verwenden Sie DISKDATE, wenn Sie wissen wollen, wann welche Ihrer Disketten
+zum letzten mal formatiert wurde, indem Sie den Befehl <FONT COLOR="blue">DISKDATE A: /w</FONT> bzw.
+<FONT COLOR="blue">DISKDATE A: /w</FONT> unmittelbar nach dem Formatieren der Diskette eingeben.
+Noch einfacher wird dies, wenn Sie eine Batchdatei anlegen, die das 
+automatisch erledigt.
+
+<FONT COLOR="blue">@echo off
+format %1 /u
+<FONT COLOR="red">diskdate</FONT> %1 /w</FONT>  
+
+Nennen Sie diese Batchdatei FORMAT.BAT und speichern Sie sie im New-DOS-
+Verzeichnis. Aufgerufen wird die Datei mit dem Befehl:
+
+<FONT COLOR="blue">format a:</FONT>
+
+Wenn Sie eine Diskette mit <A HREF="diskcopy.htm">Diskcopy</A> kopieren, bekommt die Zieldiskette
+standardm„áig aktuelles Datum und Uhrzeit, sodaá Sie DISKDATE in diesem 
+Falle nicht nachtr„glich einzusetzen brauchen.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>
+
+
+
+

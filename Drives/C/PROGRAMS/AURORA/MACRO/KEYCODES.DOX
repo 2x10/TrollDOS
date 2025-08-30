@@ -1,0 +1,16 @@
+
+ÿÿKEYCODES.AML
+ ÿDisplay Keycodesÿ
+
+  This macro displays the following values for each key pressed:
+
+    - keycode in decimal
+    - keycode in hexadecimal
+    - scancode for the key
+    - ascii value of the key, in decimal
+    - ascii value of the key, in hexadecimal
+    - ascii character represented by the key
+    - keyname associated with the keycode
+
+  Pressing the <esc> key twice will exit this macro.
+

@@ -1,0 +1,72 @@
+VBEHz 2.00
+==========
+
+A German documentation is no longer included to save time (and work).
+
+This program increases the refresh rate on video boards supporting VBE 3.0.
+To install it type "vbehz" (without quotes).
+
+
+
+CAUTION: My program does not check, if your monitor supports the
+         frequencies, set in VBEHZ.COM that's your job
+         (see table in VBEHZCFG.TXT).
+         I AM NOT LIABLE FOR ANY DAMAGE.
+         (newer monitors, however, protect themselves by switching off)
+For the default settings your monitor needs at least 82 kHz horizontal
+scan frequency.
+
+
+
+Currently supported resolutions:
+  640 x  400, graphics
+  640 x  480, graphics
+  800 x  600, graphics
+ 1024 x  768, graphics
+ 1152 x  864, graphics
+ 1280 x 1024, graphics
+ 1600 x 1200, graphics
+  512 x  384, graphics, double scanned, else NVIDIA Chips can't handle it
+  400 x  300, graphics, double scanned
+  320 x  240, graphics, double scanned
+  320 x  200, graphics, double scanned (VESA only, no mode 13h or similar)
+   80 x   60, text,     may require loading RIVAFIX.COM first on NVIDIA Chips
+  132 x   25, text,     may require loading RIVAFIX.COM first on NVIDIA Chips
+  132 x   43, text,     may require loading RIVAFIX.COM first on NVIDIA Chips
+  132 x   50, text,     may require loading RIVAFIX.COM first on NVIDIA Chips
+  132 x   60, text,     may require loading RIVAFIX.COM first on NVIDIA Chips
+
+
+The more resolutions and colour depths your hard-/software supports,
+the more memory will be used by VBEHz (700-1300 Bytes).
+
+To see which modes your BIOS or VESA driver supports, run
+MODELIST.COM |more
+
+
+
+If VBEHz is resident and you run VBEHZ.COM again, the resident part will be
+diabled until you run VBEHZ.COM once more. This allows you to load VBEHz
+in your AUTOEXEC.BAT and disable it later for one or more programs.
+VBEHz can be forced to get resident again if started with "/r"
+(vbehz /r), this can be useful if you reconfigured it and don't
+want to reboot (or close the DOS-Box under Windows).
+
+En-/Disabling is done by calling INT 10h with AX=4FBEh, if VBEHz switches
+to disabled, it returns AL=01h, if switches to enabled, it returns AL=02h.
+
+If you use VBEHz within .BAT-Files, it will return errorlevel 2 for
+enabled and 1 for disabled. If it is run for the first time, it will not
+return an errorlevel (or errorlevel 0).
+
+
+
+Notes:
+ - The BIOS of your video board may not support all of these modes,
+   and my program will not add the missing modes.
+ - There may be problems with programs using DOS4GW, but I don't
+   know why.
+   If DOS/4GW is a seperate EXE-file you should replace it with
+   DOS/32A, PMODE/W oder CauseWay.
+
+

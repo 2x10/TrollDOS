@@ -1,0 +1,52 @@
+<HTML><HEAD><TITLE>MULTIVOL</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>MULTIVOL</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>verteilt eine Datei auf mehreren Disketten (siehe auch: <A
+HREF="addvol.htm">ADDVOL</A> und <A HREF="viewvol.htm">VIEWVOL</A>)
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">MULTIVOL [Quelldatei] [Ziellaufwerk] [Kennwort]</FONT>
+
+Quelldatei     Datei, die Sie auf mehrere Disketten verteilen wollen
+
+Ziellaufwerk   Laufwerk, auf das kopiert werden soll
+
+Kennwort       Die Dateistcke auf den Disketten erhalten ein Kennwort.
+               Wenn Sie kein Kennwort eingeben, legt MULTIVOL ein Zufallswort
+               fest. Dieses hat den Vorteil, daá es fast ausgeschlossen ist,
+               daá ein Kennwort doppelt vergeben wird. Einen Informations-
+               gehalt hat dieses Kennwort jedoch nicht. Mehr zum Kennwort
+               bei <A HREF="addvol.htm#kennwort">ADDVOL</A>.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT> 
+
+Mit MULTIVOL k”nnen Sie eine Datei auch dann auf Disketten kopieren, wenn
+sie gr”áer ist als der auf einer Diskette verfgbare Speicherplatz. Sobald
+der Zieldatentr„ger voll ist, fordert Sie Multivol zum Einlegen einer neuen
+Diskette auf. Wenn Sie die Diskette gewechselt haben, drcken Sie ENTER, um
+das n„chste Dateistck kopieren zu lassen. Die Gr”áenberechnung und das 
+Zerlegen der Datei erfolgt automatisch. Die Zieldiskette muá <FONT COLOR="red">nicht</FONT> leer 
+sein. Es darf sich auch schon <FONT COLOR="red">ein</FONT> Teilstck einer anderen Datei auf der 
+Diskette befinden, hier weist Sie Multivol jedoch auf namensgleiche 
+Teilstcke hin.
+
+Multivol gibt jedem Teilstck den Namen VOLUME.XXX, wobei XXX fr eine Zahl
+zwischen 001 und 999 steht. Um mehr ber ein Teilstck zu erfahren, rufen
+Sie das New-DOS-Dienstprogramm VIEWVOL auf.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT> 
+
+<FONT COLOR="blue">multivol <FONT COLOR="red">bild.bmp a:</FONT></FONT>
+
+kopiert die Datei bild.bmp auf Disketten in Laufwerk A:
+
+<FONT COLOR="blue">multivol <FONT COLOR="red">dickgros.fat b: Lauter_Daten</FONT></FONT>
+
+Hier wird die Datei dickgros.fat nach Laufwerk B: kopiert. Die Teildateien
+werden mit dem Kennwort LAUTER_DATEN versehen.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

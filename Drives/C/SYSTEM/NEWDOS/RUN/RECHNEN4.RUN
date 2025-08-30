@@ -1,0 +1,63 @@
+PROGRAM Rechnen4;
+{Wirkungsweise der Funktionen @and, @or, @xor und @not anhand der beiden}
+{Variablen @a und @b. Der praktische Nutzen wird in Rechnen5 dargestellt.}
+
+
+PROCEDURE Weiter;
+BEGIN
+  GotoXY (1, 25);
+  Write ('Weiter mit Taste.');
+  GetKey;
+  Init;
+END;
+
+
+
+BEGIN-MAIN
+  Init;
+
+  WriteLn ('@NOT kippt alle Bits in den Gegenzustand', #13#10);
+  @a:= 62;
+  WriteLn ('vorher : ', !BBits (@a));
+  @a:= @not (@a);
+  WriteLn ('nachher: ', !BBits (@a));
+
+  call weiter;
+
+  WriteLn ('@OR setzt ein Bit im Zieloperanden auf 1, wenn es in');
+  WriteLn ('@a oder @b oder in beiden auf 1 gesetzt ist.', #13#10);
+
+  @a:= 33;
+  @b:= 17;
+  @c:= @or (@a, @b);
+  WriteLn ('Quelle 1 : ', !BBits (@a));
+  WriteLn ('Quelle 2 : ', !BBits (@b));
+  WriteLn ('nach  OR : ', !BBits (@c));
+
+  call weiter;
+
+  WriteLn ('@XOR setzt ein Bit im Zieloperanden auf 1, wenn es in');
+  WriteLn ('@a ODER @b, nicht jedoch in beiden auf 1 gesetzt ist.', #13#10);
+
+  @a:= 33;
+  @b:= 17;
+  @c:= @xor (@a, @b);
+  WriteLn ('Quelle 1 : ', !BBits (@a));
+  WriteLn ('Quelle 2 : ', !BBits (@b));
+  WriteLn ('nach XOR : ', !BBits (@c));
+
+  call weiter;
+
+  WriteLn ('@AND setzt ein Bit im Zieloperanden auf 1, wenn es in');
+  WriteLn ('@a UND @b auf 1 gesetzt ist.', #13#10);
+
+  @a:= 33;
+  @b:= 17;
+  @c:= @and (@a, @b);
+  WriteLn ('Quelle 1 : ', !BBits (@a));
+  WriteLn ('Quelle 2 : ', !BBits (@b));
+  WriteLn ('nach AND : ', !BBits (@c));
+
+  call weiter;
+END.
+

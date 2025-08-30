@@ -1,0 +1,52 @@
+//--------------------------------------------------------------------
+// XAML.AML
+// Syntax highlighting for Aurora Macro Language files (Aml)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+
+  // options
+  'bcfin'                         // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+
+  // language elements
+  '()=+-*/<>|&^,[]{}:.~\t'        // symbol set 1
+  ''                              // symbol set 2
+  '"\''                           // string characters
+  '\\'                            // string literal char
+  ''                              // numeric symbol
+  '//'          0                 // eol comment 1 / start column
+  ''            0                 // eol comment 2 / start column
+  '/*'          '*/'              // multi-line comment 1
+  ''            ''                // multi-line comment 2
+  0                               // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black     // keyword
+  color gray         on cyan      // symbol set 1
+  color gray         on cyan      // symbol set 2
+  color brightred    on black     // string
+  color brightred    on black     // numeric
+  color brightgreen  on black     // eol comment 1
+  color brightgreen  on black     // eol comment 2
+  color brightgreen  on black     // comment 1
+  color brightgreen  on black     // comment 2
+
+keyword
+  and, by, break, case, call, const, color, constant, do, downto,
+  databuf, #end, end, else, #else, eval, #endif, event, endif, elseif,
+  endfor, #elseif, endkey, endmenu, endcase, endloop, #endexec,
+  endevent, endwhile, endmenubar, enddatabuf, endfunction, #exec, for,
+  forward, function, if, if?, #if, include, key, loop, length, mod,
+  menu, menubar, not, or, object, otherwise, public, private, queue,
+  ref, repeat, return, send, shl, shr, step, to, then, times, until,
+  var, variable, when, while

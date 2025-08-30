@@ -1,0 +1,90 @@
+<HTML><HEAD><TITLE>MOVE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>MOVE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Verschieben bzw. Umbenennen von Dateien und Verzeichnissen
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">MOVE [Quelle] [Zielpfad] [/y | /-y /f /w]</FONT>
+
+/y   Åberschreibt im Ziel existierende Dateien ohne RÅckfrage. Mit /y kann
+     auch die Umgebungsvariable COPYCMD Åberschrieben werden (mehr dazu im 
+     folgenden).
+
+/-y  fragt, ob eine bereits existierende Datei Åberschrieben werden soll. 
+     Diesen Parameter kînnen Sie auch ganz weglassen. MOVE fragt ohnehin 
+     standardmÑ·ig nach, ob eine bereits existierende Datei Åberschrieben 
+     werden soll. /-y ist im Grunde nur dazu da, um die Umgebungsvariable 
+     COPYCMD Åberschreiben zu kînnen (mehr dazu im folgenden).
+
+/f   fragt bei JEDER Datei, ob sie verschoben werden soll. Dies ermîglicht 
+     es, fÅr jede zu verschiebende Datei eine gesonderte Auswahl zu treffen 
+     und bietet sich an, wenn Dateien aus zahlreichen Verzeichnissen verlegt 
+     werden sollen.
+
+/o   wie /y, MOVE lÑuft ohne Benutzerabfrage durch und protokolliert evtl. 
+     aufgetretene Fehler in der <A HREF="logfile.htm">LOG-Datei</A>.
+ 
+Das laufwerksÅbergreifende Verschieben von Daten ist mîglich. MOVE erkennt,
+wenn es sich bei einer oder beiden Verzeichnisangaben um <A HREF="help:subst">SUBST</A>-Laufwerke
+handelt und ob sie sich auf dem selben logischen Laufwerk befinden. In diesem
+Falle behandelt MOVE die SUBST-Laufwerke mit ihren Ursprungsnamen - die 
+Dateien werden also nicht kopiert, sondern (zeitsparend) verschoben. Das
+Verschieben von Daten <FONT COLOR="red">von</FONT> CD-ROM oder schreibgeschÅtzten Disketten ist
+ebenfalls mîglich - das Lîschen der Quelldateien entfÑllt natÅrlich und es
+wird am Ende eine kurze Meldung dazu angezeigt.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Die Umgebungsvariable COPYCMD</FONT>
+
+Neuere DOS-Versionen unterstÅtzen die Umgebungsvariable COPYCMD, um fÅr die 
+Programme <A HREF="xcopy.htm">XCOPY</A> und MOVE einen einheitlichen Betriebsmodus erstellen zu 
+kînnen. In COPYCMP kînnen Sie festlegen, ob die beiden genannten Befehle den 
+Anwender vor dem öberschreiben einer bereits im Ziel existierenden Datei 
+fragen sollen oder ob das öberschreiben automatisch vorgenommen werden soll:
+
+COPYCMD = /Y   öberschreiben ohne Vorwarnung
+COPYCMD = /-Y  Anwender wird gefragt
+
+Um COPYCMD sie zu setzen, geben Sie z.B. folgenden Befehl:
+
+<FONT COLOR="blue">SET COPYCMD=/-Y</FONT>   
+
+Dieser kann auch in der AUTOEXEC.BAT eingetragen werden, damit COPYCMD bei 
+jedem Rechnerstart automatisch zur VerfÅgung steht.
+
+Durch Eingabe des Parameters /Y bzw /-Y in der Kommandozeile (beim AusfÅhren 
+von MOVE) kînnen Sie die in COPYCMD gespeicherte Einstellung jedoch 
+Åberschreiben - ma·geblich ist dann also Ihr Befehl am DOS-Prompt bzw.
+in einer Batchdatei.<HR
+
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">MOVE *.* c:\test</FONT>
+verschiebt alle Dateien und Verzeichnisse im aktuellen Verzeichnis in das 
+Verzeichnis C:\TEST.
+
+<FONT COLOR="blue">MOVE *.txt A:\texte</FONT> 
+verschiebt alle Dateien mit der Endung TXT in das Verzeichnis A:\TEXTE. 
+
+<FONT COLOR="blue">MOVE c:\texte c:\word\texte</FONT> 
+verschiebt das Verzeichnis C:\TEXTE mit allen Unterverzeichnissen und 
+Dateien in das Verzeichnis C:\WORD\TEXTE
+
+<FONT COLOR="blue">MOVE c:\texte c:\dokument</FONT> 
+Umbenennen des Verzeichnisses C:\TEXTE in C:\DOKUMENT
+
+Die Zielverzeichnisse werden immer automatisch angelegt. Ein In-Sich-Selbst- 
+(zyklisches) Verschieben ist nicht mîglich. Leere Unterverzeichnisse werden 
+nach dem "Herausschieben" der Dateien gelîscht, es sei denn, es befinden 
+sich noch Dateien darin. In diesem Falle werden nur die leeren "éste" eines 
+Verzeichnisbaumes gelîscht. Dadurch werden anwendergesteuerte 
+Teilverschiebungen mîglich, die keine leeren (und den Speicher belastenden) 
+Verzeichnisse Åbriglassen.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

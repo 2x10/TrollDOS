@@ -1,0 +1,180 @@
+//--------------------------------------------------------------------
+// TEMPLATE.AML
+// Template Editing, (C) 1993-1996 by nuText Systems
+//
+// (see Template.dox and Template.dat for user help)
+//
+// This macro installs or removes Template Editing. This macro requires
+// the file Template.dat, which contains user-modifiable templates. See
+// Template.dat for further instructions.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// check for a previous install
+obj = prf.templobj
+if obj then
+  if (okbox "Template is already installed. Remove it?") == 'Ok' then
+    destroyobject obj
+    destroyvar "templobj" "prf"
+    msgbox "Template removed."
+  end
+  return
+else
+  prf.templobj = getcurrobj
+end
+
+// keep this object resident
+resident ON
+
+// template expansion only in edit windows
+object edit
+
+// template data file name
+templatefile = getbootpath + "macro\\template.dat"
+
+// template expansion key
+// (change this key definition to suit your own preferences)
+
+key <ctrl f3>
+
+  // get the template keyword and start column
+  pushcursor
+  if find _CSet "~lr" then
+    right
+  else
+    col 1
+  end
+  startcol = getcol
+  word = getword
+  popcursor
+
+  // if no template keyword is found, then return
+  if not word then
+    display
+    say "No template keyword" 'b'
+    return
+  end
+
+  // get the current buffer id
+  buffer = getcurrbuf
+
+  // build the template key
+  tempkey = '^' + word + '{{\\.[a-zA-Z]*}*\\' + (locase (getext (getbufname))) +
+            "\\.| |$}|{\\. |$}"
+
+  undobegin
+
+  // load the template file
+  if loadbuf templatefile then
+
+    // look for the template key
+    len = find tempkey 'xi*'
+    if len then
+
+      // look for explicitly specified number of lines, if any
+      right len
+      len = find '[0-9]#' 'xl*'
+      if len then
+        lines = gettext (getcol) len
+
+      // no explicit lines specified -- look for the next blank line
+      else
+        top = getrow
+        pushcursor
+        if find '^$' 'x' then
+          lines = getrow - top - 1
+        else
+          lines = getlines - top
+        end
+        popcursor
+      end
+
+      // delete the original word in the text
+      delchar  length word  startcol '' buffer
+
+      oldmark = usemark 'T'
+
+      // insert the first template line horizontally
+      down
+      markcolumn 1 (getlinelen)
+      copyblock 'T' buffer startcol
+
+      // insert the following lines vertically, and shift right if needed
+      if lines > 1 then
+        down
+        markline '' getrow + lines - 2
+        copyblock 'T' buffer
+        if startcol > 1 then
+          shiftblock startcol - 1
+        end
+      end
+
+      // destroy the template buffer
+      destroybuf
+
+      //gotobuf buffer
+      markline (getrow) getrow + lines - 1
+
+      // expand embedded macro expressions, if any
+      pushcursor
+      loop
+        len = find "\\\\\\{.+\\}" "xb*"
+        if not len
+          break
+        end
+
+        // get the macro expression
+        begcolumn = getcol
+        expression = gettext begcolumn + 2  len - 3
+
+        // delete the expression in the copied text
+        delchar len
+
+        // evaluate the expression
+        value = eval expression
+        // (expression may have changed the current buffer)
+        gotobuf buffer
+
+        // insert the value of the expression into the text
+        // or indicate a compilation error
+        error = geterror 'c'
+        if error then
+          errorstr = "Template expression error: " + (errormsg error)
+          break
+        else
+          instext value
+          right  length value
+        end
+      end
+      popcursor
+
+      // move to the cursor position specified in the template (if any)
+      replace "\\c" ' ' "gbi*"
+
+      destroymark
+      usemark oldmark
+    else
+      errorstr = "Template '" + word + "' not found"
+      destroybuf
+    end
+  else
+    errorstr = "Can't open " + templatefile
+  end
+
+  undoend
+
+  // display any error messages
+  if errorstr then
+    display
+    say errorstr 'b'
+  end
+end
+
+display
+say "Template installed. See Template.dat for instructions.":-80

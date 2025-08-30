@@ -1,0 +1,11 @@
+
+ÿÿSTATUS.AML
+ ÿCustom Status Line Exampleÿ
+
+  This macro adds a custom status line to all edit windows on the
+  desktop, and also to any new edit windows as they are opened. Running
+  this macro a second time will restore the default status line.
+
+  The status line can be customized by modifying the <status> event in
+  Status.aml.
+

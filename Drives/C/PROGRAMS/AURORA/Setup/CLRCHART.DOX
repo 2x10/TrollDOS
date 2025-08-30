@@ -1,0 +1,31 @@
+
+ÿÿCLRCHART.AML
+ ÿColor Chartÿ
+
+  This macro displays a color chart with color attribute codes in
+  decimal and hexidecimal.
+
+  If Clrchart is run from within an edit window and a color is selected,
+  then the color description (i.e. 'cyan on black') is entered into the
+  edit window text at the cursor.
+
+  Clrchart is also called as a utility from other macros, such as
+  Cfgcolor or Hilitewd.
+
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <esc>                // exit
+  <enter>              // select color
+  <tab>, <shift tab>   // toggle background base color
+  <left>, <right>      // move cursor
+  <up>, <down>         // move cursor
+
+ÿÿMouse:
+  ÄÄÄÄÄ
+  Single Click on:
+    ,   controls     // toggle background base color
+
+  Double Click on:
+    color              // select color
+

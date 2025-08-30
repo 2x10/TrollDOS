@@ -1,0 +1,588 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// KBD.AML
+// WordPerfect Keyboard definitions (included by Main.aml)
+//
+// If you have made any changes, save this file and select Recompile
+// the Editor from the Set menu. Exit and re-enter the editor for
+// your changes to take effect.
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+// Edit and File Manager windows
+//--------------------------------------------------------------------
+
+object edit_fmgr
+
+  // Controls
+  function  'ð'                                // close window
+    close
+  end
+
+  // Menu activation
+  key  <esc>           gotobar                 // to last menu bar item
+  key  <alt =>         gotobar                 // to last menu bar item (wp)
+  key  <f3>            gotomenu "help"         // goto help menu (wp)
+  key  <shift f7>      gotomenu "print"        // goto print menu (wp)
+  key  <alt t>         gotobar2                // to last toolbar/drive item
+
+  // Scroll
+  key  <pgdn>          pagedown                // scroll down (wp)
+  key  <pgup>          pageup                  // scroll up (wp)
+  key  <grey->         row (getviewtop)        // to page top (wp)
+  key  <grey+>         row (getviewbot)        // to page bottom (wp)
+  key  <ctrl pgup>     row 1                   // to file top
+  key  <ctrl pgdn>     row (getlines)          // to file bottom
+  key  <center>        adjustrow               // center cursor
+  key  <ctrl up>       rollrow -1              // scroll up one line
+  key  <ctrl down>     rollrow  1              // scroll down one line
+  key  <ctrl ->        lastpos                 // to last cursor position
+
+  // File
+  key  <ctrl n>        opennew                 // new edit window
+  key  <shift f10>     askopen                 // open prompt (wp)
+  key  <alt z>         openlast                // open last window
+  key  <alt ->         filelist                // file list
+  key  <alt q>         close                   // close window
+  key  <f7>            closeall                // close all windows (wp)
+
+  // Window
+  key  <f5>            winlist                 // window list (wp)
+  key  <ctrl z>        maximize                // maximize window
+  key  <shift f3>      nextwindow              // next window (wp)
+  //key  <f12>           prevwindow              // prev window
+  //key  <shift f3>      tile 'v'                // tile vertical
+  //key  <shift f4>      tile 'h'                // tile horizontal
+  //key  <shift f5>      cascade                 // cascade
+  key  <ctrl k><q>     close                   // close window
+
+  // Search
+  key  <ctrl s>        askscan                 // file scan prompt
+  key  <ctrl b>        gotomark 't'            // find top of block
+  key  <ctrl 6>        cyclebook               // cycle through bookmarks
+
+  // Print
+  key  <ctrl p>        print                   // print
+  key  <alt p>         print 'b'               // print block
+
+  // Macro
+  key  <ctrl v>        askeval                 // macro command prompt
+  key  <ctrl f1>       shell                   // exit to Dos (wp)
+  key  <shift f12>     pickmacro               // macro picklist
+  key  <ctrl f12>      runmacro2 "maclist"     // macro menu
+
+  // undefined or unnamed keys
+  key <otherkey> (keycode)
+    say (geteventname keycode) + " not defined"
+  end
+
+
+//--------------------------------------------------------------------
+// Prompts and Edit windows
+//--------------------------------------------------------------------
+
+object prompt
+
+  // Controls
+  function  'ð'        close                   // close window
+  end
+
+  function  '*'        enter                   // simulate <enter>
+  end                                          //  (2-line box only)
+
+  // Cursor
+  key  <left>          left                    // move cursor left
+  key  <right>         right                   // move cursor right
+  key  <home>          col 1                   // to column one
+  key  <end>           col  getlinelen + 1     // to end of line (wp)
+
+  // Cursor + CUA-marking
+  key  <shift left>    left
+                       smark
+  key  <shift right>   right
+                       smark
+  key  <shift home>    col 1
+                       smark
+  key  <shift end>     col getlinelen + 1
+                       smark
+
+  // Editing
+  key  <ins>           setting 'I' TOGGLE      // toggle insert mode (wp)
+  key  <del>           delchar                 // delete character (wp)
+
+  key  <backspace>     backsp                  // delete left character (wp)
+  key  <ctrl [>        literal                 // enter literal character
+  key  <ctrl a>        asciilist               // display ascii chart
+
+  // Block
+  key  <alt f4>        markchar                // mark character (wp)
+  key  <alt b>         markcolumn              // mark column
+  key  <alt 1>         markword                // mark word
+  key  <alt 2>         markeol                 // mark to end of line
+  key  <alt u>         destroymark             // unmark
+
+  // copy block to prompt
+  key  <alt c>
+                       instext (getmarktext)
+                       col  getlinelen + 1
+
+  // paste from clipboard to prompt
+  key  <grey*>
+                       oldmark = usemark _ClipName
+                       instext (getmarktext)
+                       usemark oldmark
+                       col  getlinelen + 1
+
+  // copy from prompt to clipboard
+  //key  <grey+>         copy
+
+  // Prompt history
+  key  <up>            prevhist                // retrieve prev prompt
+  key  <down>          nexthist                // retrieve next prompt
+  key  <pgup>          askhistory              // history popup menu
+  key  <pgdn>          askhistory              // history popup menu
+
+  // Exit
+  key  <esc>           close                   // quit prompt
+  key  <alt q>         close                   // quit prompt
+
+  // non-function keys
+  key  <char> (character)                      // typeable keys
+    write character
+  end
+
+  // filename completion
+  key  <ctrl tab>      askcomplete             // filename completion
+  key  <tab>           askcomplete             // filename completion
+
+
+//--------------------------------------------------------------------
+// Edit windows
+//--------------------------------------------------------------------
+
+object edit
+
+  // Controls
+  function  'ð'
+    close                                      // close window
+  end
+
+  // Menu
+  key  <esc>           gotobar                 // to last menu bar item
+
+  // Cursor
+
+  // cursorleft with wrap (wp)
+  key  <left>
+    if getcol == 1 then                        // wrap if at column 1
+      if up then                               // ..and not at first line
+        col getlinelen + 1
+      end
+    else
+      left
+    end
+    smark                                      // cua marking
+  end
+  key <shift left>  call <left>
+
+  // cursorright with wrap (wp)
+  key  <right>
+    if getcol > getlinelen then                // wrap if at end-of-line
+      if down then                             // ..and not at last line
+        col 1
+      end
+    else
+      right
+    end
+    smark                                      // cua marking
+  end
+  key <shift right>  call <right>
+
+  key  <up>            up                      // move cursor up (wp)
+  key  <down>          down                    // move cursor down (wp)
+
+  key  <shift up>      up
+                       smark
+  key  <shift down>    down
+                       smark
+
+  // home key (wp)
+  forward  wpdelword
+  key  <home>
+    case getkey
+      when <up>         row (getviewtop)       // page top (wp)
+      when <down>       row (getviewbot)       // page bottom (wp)
+      when <right>      col getlinelen + 1     // end of line (wp)
+      when <left>       col 1                  // column 1 (wp)
+      when <backspace>  wpdelword              // deleteword (wp)
+      when <home>
+        case getkey
+          when <up>     row 1                  // file top (wp)
+          when <down>   row (getlines)         // file bottom (wp)
+        end
+    end
+    smark                                      // cua marking
+  end
+
+  key  <enter>         enter                   // enter key (wp)
+  key  <greyenter>     enter                   // keypad enter key
+  key  <del>           delchar2                // delete character (wp)
+  key  <backspace>     backsp                  // delete left char (wp)
+
+  // delete word
+  function  wpdelword
+    if poschar _CSet (getchar) then
+      if not find _CSet "yrl" then
+        col 1
+      else
+        right 1
+      end
+    end
+    delword _CSet
+  end
+
+  key  <ctrl backspace>  wpdelword             // delete word (wp)
+
+  key  <tab>           tabright                // tab right (wp)
+  key  <shift tab>     tableft                 // tab left (wp)
+
+  key  <ctrl left>     prevword                // find left word
+                       smark
+  key  <ctrl right>    nextword                // find right word
+                       smark
+
+  // Scroll
+  key  <pgdn>          pagedown                // page down (wp)
+  key  <pgup>          pageup                  // page up (wp)
+
+  // Scroll + CUA-marking
+  key  <shift pgdn>    pagedown
+                       smark
+  key  <shift pgup>    pageup
+                       smark
+
+  key  <ctrl end>      row (getviewbot)
+                       smark                   // to page bottom
+
+  key  <ctrl pgup>     row 1
+                       smark                   // to file top
+  key  <ctrl pgdn>     row (getlines)          // to file bottom
+                       smark
+
+  key  <ctrl up>       rollrow -1              // scroll up one line
+                       smark
+  key  <ctrl down>     rollrow  1              // scroll down one line
+                       smark
+
+  // File
+
+  // text in/out (wp)
+  function inout
+    display
+    say "1 (S)ave, 2 (R)etrieve "
+    k = getkey
+    display
+    case k
+      when <1>, <s>, <S>   asksaveas
+      when <2>, <r>, <R>   askinsert
+    end
+  end
+
+  key  <ctrl f5>       inout                   // text in/out (wp)
+
+  key  <ctrl ]>        openword                // open file at cursor
+  key  <alt n>         askname                 // rename prompt
+  key  <f10>           save                    // save file (wp)
+  //key  <ctrl ins>      prevfile                // next file
+  //key  <ctrl del>      nextfile                // prev file
+  //key  <f4>            open "*.*"              // display file manager
+  key  <alt q>         close                   // close file/window
+  key  <ctrl x>        close 's'               // save & close file/window
+
+  // Window
+  key  <ctrl c>        copywin                 // copy window
+  key  <alt h>         splitwin 'h'            // split window horizontal
+  key  <alt v>         splitwin 'v'            // split window vertical
+  //key  <ctrl f8>       toolbar                 // display tool bar
+
+  // Block
+
+  function  placeblock
+    title = gettitle
+    settitle "press <enter> to place block"
+    loop
+      case getkey
+        when <left>  left
+        when <right> right
+        when <up>    up
+        when <down>  down
+        when <pgdn>  pagedown
+        when <pgup>  pageup
+        when <enter>
+          paste
+          break
+      end
+    end
+    settitle title
+  end
+
+  // cut and paste (wp)
+  key  <ctrl del>
+    cut
+    placeblock
+  end
+
+  // copy and paste (wp)
+  key  <ctrl ins>
+    copy
+    placeblock
+  end
+
+  // wordperfect-style markblock (wp)
+  function  markblock
+    markstream
+    loop
+      k = getkey
+      case k
+        when <left>   send <left>
+        when <right>  send <right>
+        when <up>     send <up>
+        when <down>   send <down>
+        when <ctrl del>  sendkey k
+        when <ctrl ins>  sendkey k
+        when <alt f4>    break
+        otherwise
+          if find (char k mod 256) 'i' then
+            send <right>
+          end
+      end
+    end
+    destroymark
+  end
+
+  key  <alt f4>        markblock               // mark block (wp)
+  key  <alt l>         markline                // mark line
+  key  <alt 3>         markpara "tb"           // mark paragraph
+  key  <alt c>         copyblock2              // copy block
+  key  <alt o>         copyblockover           // overlay block
+  key  <alt m>         moveblock2              // move block
+  key  <ctrl m>        moveblockover           // move block over
+  key  <alt d>         deleteblock2            // delete block
+  //key  <shift f7>      shiftblock -1           // unindent block
+  //key  <shift f8>      shiftblock  1           // indent block
+  key  <ctrl k><f>     fillblock2              // fill block with string
+  key  <alt r>         formatblock2            // reformat block
+  key  <alt y>         formatblock2 "rj"       // reformat & right just block
+  key  <ctrl k><s>     saveblock2              // save block
+  key  <ctrl k><o>     sortblock2              // sort block
+  key  <ctrl k><u>     caseblock               // change block to uppercase
+  //key  <shift f9>      quote                   // quote a block
+  key  <ctrl k><c>     justblock2 'c'          // center a block
+
+  // Search
+  key  <f2>            askfind                 // find prompt (wp)
+  key  <shift f2>      askfind                 // find reverse?? (wp)
+  key  <alt f2>        askrepl                 // replace prompt (wp)
+  key  <ctrl i>        isearch                 // incremental search
+  key  <ctrl h>        askfindo                // find occurrences
+
+  key  <ctrl l>        findlast                // do last find/replace
+  key  <ctrl 2>        quickbook               // set quick bookmark
+  key  <ctrl j>        askrow                  // go to line prompt
+  key  <alt 7>         search2 "f/f"           // go to next fold
+  //key  <alt f3>        gotomatch2              // find matching char
+
+  // Fold
+  key  <alt 8>         foldline                // fold next line
+  key  <alt 9>         foldline 'u'            // unfold next line
+  key  <alt g>         destroyfold2            // destroy closed/open fold
+  key  <alt f>         foldblock2              // fold block
+  key  <alt \>                                 // open or close fold
+    if fold? then
+       openfold
+    else
+       closefold
+    end
+  end
+  key  <alt 0>         foldall 'ds'            // destroy all folds
+  key  <alt [>         foldall 'os'            // open all folds
+  key  <alt ]>         foldall 'cs'            // close all folds
+
+  // Edit
+  key  <f1>            undo                    // undo last change (wp)
+  key  <ctrl y>        redo                    // redo last change
+  key  <ctrl enter>    insline2                // insert line
+  //key  <ctrl backspace> delline                // delete line
+  key  <alt s>         splitline2              // split line
+  key  <alt j>         joinline                // join line
+  key  <alt 4>         copyblock '*l'          // duplicate line
+  key  <alt 5>         swapline                // swap line
+  key  <shift f6>      centerline              // center line (wp)
+  key  <shift f5>      timestamp               // date/time stamp (wp)
+  key  <ctrl k><x>     tabfile                 // expand tabs
+  key  <ctrl \>        hiliteword              // highlight words
+
+  // flush right <wp>
+  function <alt k>
+    if getcol <= getlinelen and (apparentcol (getlinelen)) < _RMargin then
+      justblock 'r' '*l' (apparentcol (getcol)) _RMargin
+    end
+  end
+
+  key  <alt f6>        flushr                  // flush right (wp)
+
+  // Clipboard
+  key  <ctrl grey->    cut 'a'                 // cut append
+  key  <ctrl grey+>    copy 'a'                // copy append
+  key  <grey*>         paste                   // paste
+  key  <ctrl grey*>    paste 'o'               // paste over
+  key  <ctrl grey/>    clear                   // clear clipboard
+
+  // Set
+  key  <ctrl w>        setting 'L' TOGGLE      // live word wrap toggle
+  key  <ctrl d>        setting 'D' TOGGLE      // line draw toggle
+
+  // Macro
+  //key  <shift f10>     compilemacro2 (getbufname)  // compile current file
+  //key  <shift f11>     runmacro2 (getbufname)      // run current file
+  key  <shift f1>      runcfg "main"           // configuration (wp)
+
+  // non-function (typeable) keys
+  key  <char> (character)                      // typeable keys
+    write character
+  end
+
+  // Other
+  key  <ctrl q><q>     askrepkey               // repeat entered keys
+
+  // invoke a spell checker from within an edit window (wp)
+  // (replace 'jspell' with your favorite spell checker)
+  key  <ctrl f2>
+    save                                       // save the current file
+    run  "jspell " + getbufname  "ck"          // call spellchecker
+    reopen                                     // reopen current file
+  end
+
+//--------------------------------------------------------------------
+// File Manager windows
+//--------------------------------------------------------------------
+
+object fmgr
+
+  // Menu activation
+  key  <tab>           gotobar2                // to drive menu bar
+
+  // Cursor
+  key  <left>          rollcol -1              // scroll left one column
+  key  <right>         rollcol  1              // scroll right one column
+  key  <home>          col 1                   // scroll to column one
+
+  key  <up>            up                      // move cursor up
+  key  <down>          down                    // move cursor down
+
+  key  <shift up>      fmark                   // mark files
+                       up
+  key  <shift down>    fmark                   // mark files
+                       down
+
+  // file manager commands (single character command codes)
+  key  <char> (c)
+
+    // toggle file mark
+    if c == ' ' then
+      fmark
+
+    // <shift-character> commands
+    elseif shiftkey? then
+      case  locase c
+        when 'o'     fopen 'o'                   // open file/directory
+        when 'e'     fopen 'e'                   // open file/directory
+        when 'z'     fopen "ze"                  // open maximized
+        when 'b'     fopen 'b'                   // open binary file
+        when 'y'     fopen "be"                  // open binary in one window
+        when 'f'     flopen (fgetfile)           // open file list
+        when 'k'     openkey2 (fgetfile)         // open key macro file
+        when 'm'     fmove                       // move file
+        when 'c'     fcopy                       // copy file
+        when 'd'     fdelete                     // delete file
+        when 'n'     frename                     // rename file
+        when 'r'     frun 'c'                    // run program/batch file
+        when 'p'     fprint                      // print file
+        when 'l'     fremove                     // remove line
+        when 't'     ftouch                      // touch file
+        when 'a'     fattr                       // change file attributes
+        when 'i'     askscan TRUE                // scan files
+
+        // spell checker
+        when 's'     run "jspell " + fgetfile  "ck"
+
+        // unarchive .Zip or .Lzh files
+        when 'u'
+          f = fgetfile
+          run (if? (pos ".lzh" f 'i') "lha e " "pkunzip ") + f  "ck"
+          reopen
+
+        // view .ZIP or .Lzh archives
+        when 'v'
+          f = fgetfile
+          runcap (if? (pos ".lzh" f 'i') "lha v " "pkunzip -v ") + f
+      end
+
+    // hotkey to files
+    else
+      onhotkey c
+    end
+
+  key  <backspace>     onhotkey '\x08'         // undo hotkey
+
+  // File
+  key  <ctrl backspace>   fup                  // parent directory
+
+  // Mark
+  key  <alt m>         fmark "ma"              // mark all files
+  key  <alt u>         fmark "ua"              // unmark all
+
+  // Command
+  key  <enter>         fopen '1'               // open file (one only)
+  key  <ctrl enter>    fopen 'q'               // open file (close fmgr)
+  key  <del>           fdelete                 // delete file
+
+  // Sort
+  key  <alt n>         fsort 'n'               // sort by name
+  key  <alt s>         fsort 's'               // sort by size
+  key  <alt d>         fsort 'd'               // sort by date/time
+  key  <alt o>         fsort 'o'               // no sort (Dos order)
+
+  // Print
+  key  <ctrl p>        print                   // print fmgr contents
+
+
+//--------------------------------------------------------------------
+// Movable/Sizable windows
+//--------------------------------------------------------------------
+
+object win
+
+  //key  <ctrl f5>       sizekey                 // move/size with kbd
+  //key  <ctrl f6>       pankey                  // pan video with kbd
+
+  key  <alt ins>       sizewin -2 -1 -2 -1 2   // move window northwest
+  key  <alt del>       sizewin  2  1  2  1 2   // move window southeast
+
+
+//--------------------------------------------------------------------
+// All windows
+//--------------------------------------------------------------------
+
+object mon
+
+  // key macros (wp)
+  key  <ctrl f10>      record                  // toggle record setting
+  key  <alt f10>       play                    // play scrap key macro
+
+  // define multi-key prefixes
+  key  <ctrl k>        prefix <ctrl k>         // define <ctrl k> prefix
+  key  <ctrl o>        prefix <ctrl o>         // define <ctrl o> prefix
+  key  <ctrl q>        prefix <ctrl q>         // define <ctrl q> prefix
+

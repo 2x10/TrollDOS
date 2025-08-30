@@ -1,0 +1,337 @@
+//--------------------------------------------------------------------
+// CALCPAD.AML
+// Calculator Pad, (C) 1993-1996 by nuText Systems
+//
+// (See Calcpad.dox for user help)
+//
+// This macro displays a simple calculator pad with basic arithmetic
+// operations, a memory, and four display lines. Floating point numbers
+// are not supported.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// define the colors to use
+constant  calc_display_color       = color darkgray  on green
+constant  calc_display_curr_color  = color black     on green
+constant  calc_button_color        = color black     on green
+constant  calc_button_hilite_color = color black     on brightgreen
+constant  calc_client_color        = color black     on gray
+constant  calc_border_color        = color white     on gray
+constant  calc_control_color       = color yellow
+
+// keep this object resident
+resident ON
+settype "win"
+
+// display lines
+variable line1, line2, line3, line4
+
+// line number of last lbutton click
+variable line, bcol
+
+// display operators
+variable op0, op1, op2, op3, op4
+
+// numeric base
+radix = 10
+
+// clear the calculator display
+private function cleardisp
+  line1 = ''
+  line2 = ''
+  line3 = ''
+  line4 = 0
+  op0 = ' '
+  op1 = ' '
+  op2 = ' '
+  op3 = ' '
+  op4 = ' '
+end
+
+// scroll the display upwards
+private function scrollup
+  op0   = op1
+  line1 = line2
+  op1   = op2
+  line2 = line3
+  op2   = op3
+  line3 = line4
+  op3   = op4
+  line4 = 0
+  op4   = ' '
+end
+
+// perform the operation currently on the display
+private function result
+  value = case op3
+            when '+'  line3 + line4
+            when '-'  line3 - line4
+            when '*'  line3 * line4
+            when '/'  line3 / line4
+            when 'm'  line3 mod line4
+            when '%'  (line3 * line4) / 100
+          end
+  scrollup
+  line4 = value
+end
+
+
+// create the calculator window
+createwindow
+setframe ">b"
+setcolor  border_color    calc_border_color
+setcolor  text_color      calc_client_color
+setcolor  control_color   calc_control_color
+setcolor  border_flash_color   (color brightgreen on gray)
+settitle "Calculator"
+setwinctrl 'ð'
+
+width = 36
+height = 15
+
+// center the window
+ox = (getvidcols - width) / 2
+oy = (getvidrows - height) / 2
+sizewindow ox oy ox + width oy + height "ad"
+
+setborder "1i"
+setshadow 2 1
+
+// define strings to display in the keypad
+keystr = "  C        %   mod   /    CE   7    8    9    *    MR   4    5    6    -    MS   1    2    3    +    M+   0       +/-   =  "
+
+// draw the keypad
+gotoxy 3 7
+for y = 0 to 4 do
+  for x = 0 to 4 do
+    writestr keystr [y * 25 + (x * 5) + 1 : 5]  calc_button_color
+    writestr "  "
+  end
+  if y <> 4 then
+    writeline
+    writeline
+    gotoxy 3
+  end
+end
+
+x = 0
+y = 0
+memory = ''
+
+// clear the display
+cleardisp
+
+private function draw
+  // draw the calculator display
+  gotoxy 3 2
+  writestr op0 + (thousands line1):32  calc_display_color
+  gotoxy 3 3
+  writestr op1 + (thousands line2):32 calc_display_color
+  gotoxy 3 4
+  writestr op2 + (thousands line3):32 calc_display_color
+  gotoxy 3 5
+  writestr (if? op3 == '=' ' ' op3) + (thousands line4):32
+           calc_display_curr_color
+end
+
+draw
+
+event <destroy>
+  // call 'close' in object 'win'
+  close
+end
+
+function "ð"
+  destroyobject
+end
+
+// exit the calculator
+key <esc>
+  destroyobject
+end
+
+// mouse click
+event <lbutton>
+
+  // first pass on mouse events to the library
+  pass
+
+  case getregion
+
+    // client area
+    // translate mouse click to keypress
+    when 1
+      line = virtorow
+      buttonline = case line
+                     when 7  "cb%m/"
+                     when 9  "e789*"
+                     when 11 "r456-"
+                     when 13 "s123+"
+                     when 15 "z0ti="
+                     otherwise ''
+                   end
+
+      if buttonline then
+        column = virtocol
+        bcol = if     column >= 3  and column <= 7  then 1
+               elseif column >= 10 and column <= 14 then 2
+               elseif column >= 17 and column <= 21 then 3
+               elseif column >= 24 and column <= 28 then 4
+               elseif column >= 31 and column <= 35 then 5
+               end
+
+        if bcol then
+          buttonchar = buttonline [bcol]
+          hilite 5 1 (calc_button_hilite_color) (bcol * 7) - 4  line
+
+          // simulate the appropriate keypress
+          if buttonchar then
+            queuekey (geteventcode '<'+ buttonchar + '>')
+          end
+        end
+      end
+  end
+end
+
+event <lbuttonup>
+  if bcol then
+    hilite 5 1 (calc_button_color) (bcol * 7) - 4  line
+    bcol = ''
+  end
+  pass
+end
+
+// clear the display
+key <del>
+  cleardisp
+
+// enter into text
+key <ctrl enter>
+  send "ð"
+  queue "write" (thousands line4)
+
+// paste from the clipboard to the calculator
+key <ctrl grey*>
+  oldmark = usemark _ClipName
+  number = sendobject "edit" "getmarktext"
+  usemark oldmark
+  if not posnot "0-9" number then
+    line4 = number
+    draw
+  end
+
+// backspace
+key <backspace>
+  line4 = line4 / radix
+  op4 = ' '
+  op3 = ' '
+  draw
+end
+
+key <enter>
+  if op3 <> ' ' then
+    if op3 == '=' then
+      op4 = op2
+      scrollup
+      line4 = line2
+    end
+    op4 = '='
+    result
+    draw
+  end
+end
+
+// macro help
+macrofile = arg 1
+key <f1>
+  helpmacro macrofile
+end
+
+// enter numeric characters
+key <char> (c)
+  if pos c "0123456789" then
+    if c < radix then
+      if op3 == '=' then
+        scrollup
+      end
+      positive = line4 >= 0
+      oldline = line4
+      line4 = line4 * radix + c
+      // test for overflow
+      if positive <> (line4 > 0) then
+        line4 = oldline
+      end
+      draw
+    end
+
+    // operators
+  elseif pos c "+-*/%m" then
+    if op3 <> ' ' and op3 <> '=' then
+      op4 = '='
+      result
+    end
+    op4 = c
+    scrollup
+    draw
+
+  elseif c == '=' then
+    send <enter>
+
+  // do the current operation
+  else
+    case c
+
+      when 'c'
+        cleardisp
+
+      // clear the entry line
+      when 'e'
+        line4 = 0
+        op4 = ' '
+        op3 = ' '
+
+      // store
+      when 's'
+        memory = line4
+
+      // recall
+      when 'r'
+        line4 = memory
+
+      // store + memory
+      when 'z'
+        memory = memory + line4
+
+      // change sign
+      when 'i'
+        line4 = -line4
+        op4 = ' '
+        op3 = ' '
+
+      // enter into text
+      when 't'
+        send <ctrl enter>
+        return
+
+      // backspace
+      when 'b'
+        send <backspace>
+
+      // unrecognized key
+      otherwise
+        send <otherkey>
+    end
+    draw
+  end
+end
+
+// unrecognized key
+key <otherkey>
+  beep 200 70
+end

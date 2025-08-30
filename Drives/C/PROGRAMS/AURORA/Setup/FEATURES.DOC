@@ -1,0 +1,155 @@
+
+              The Aurora Editor version 3.0 - Feature List
+              --------------------------------------------
+
+ Aurora is an advanced, professional quality text editor, offering you
+ power, versatility, top-notch performance, and a full range of features
+ including:
+
+ * Ease-of-use:
+     + Intuitive user interface
+     + User-friendly menus showing key assignments
+     + Comprehensive on-line help
+     + Context-sensitive hot-keys to macro language help
+     + Emulation of other popular editors/word processors
+     + Helpful installation macro
+ * Superb user-interface:
+     + Best text-mode windowing available
+     + Multi-window, multi-file
+     + Detachable pull-down menus, tool bar, controls, scroll bars
+     + Many window styles
+     + Ability to remember desktop layout, window and cursor positions
+     + Huge virtual screen larger than the display
+ * Huge capacity:
+     + Lightning-fast 1 Gigabyte virtual memory uses extended/expanded
+       memory and disk.
+     + Line lengths up to 16000 characters
+     + Simultaneous editing of many files
+     + Shrinks to less than 1.5k when shelling to Dos
+ * Extremely fast:
+     + Displaying files
+     + Loading and saving files
+     + Searching
+     + Cut, paste, and block operations
+     + Sorting
+     + Aurora is one of the fastest editors available
+ * Powerful, easy-to-use macro language:
+     + Exceedingly flexible Basic/Pascal-like macro language (AML) for
+       extending and configuring the editor
+     + Easy-to-learn
+     + Object-oriented, event-driven architecture
+     + Hundreds of functions
+     + Over 15000 lines of macro source code included
+     + Compilation support - cursor moves to directly compile errors
+     + Editor is written in the macro language
+ * Fast Color syntax highlighting:
+     + Automatic syntax highlighting for over 20 languages included
+     + Customizable for any programming language, or even text files
+     + Configurable syntax, keywords, and colors
+     + Highlighting of keywords on-the-fly with different colors
+ * Complete Mouse support for:
+     + Windows - move, resize, minimize, maximize, scrolling
+     + Menus
+     + Marking blocks
+     + Prompts, dialog boxes and controls
+ * Folding and outlining capabilities:
+     + Open and closed folds
+     + Nested folds
+     + Automatic saving and loading of folds
+     + Ability to search through, or skip folds
+     + Export text without folds
+ * Search and replace:
+     + Find matching braces and parentheses
+     + Regular expression search and replace
+     + Incremental search
+     + Find occurrences of a string
+     + Count occurrences of a string
+     + Scan files for a string
+     + Global multi-file search and replace
+     + Where-is-file search
+ * Integrated file manager:
+     + Multiple instances
+     + Interactive directory tree
+     + Numerous commands - open, move, copy, delete, rename, run print,
+       statistics, touch, change file attributes
+     + Execute commands on marked files/directories
+     + Sort by filename, extension, size, date-time, Dos default order
+     + File lists
+     + Variable or fixed format
+     + Supports Windows/95 long file names
+     + Configurable and programmable
+ * Deep undo-redo:
+     + Unlimited multi-level undo and redo
+     + Configurable
+     + Programmable grouping of undoable/redoable commands
+ * Fully configurable:
+     + Interactive configuration
+     + Customizable menu bars, pull-down menus, tool bar, prompts
+     + Reassignable keys for editing, prompts, and the file manager
+     + Programmable dialog boxes, and mouse
+     + Numerous window and prompt styles
+     + Editing preferences and colors
+     + Commands and macros
+ * Word processing:
+     + Left and right margins
+     + Live wordwrap, standard wordwrap, autoindent
+     + Paragraph reformatting
+     + Centering and shifting of text
+     + Count words
+     + Prev/next paragraph
+ * Block commands:
+     + Line, column, character, and stream marks
+     + Copy, move, delete, overlay, indent, unindent, reformat, fill,
+         save, change case, capitalize, entab/detab
+     + Center, left and right justify
+     + Sorting
+ * Clipboards:
+     + Multiple clipboards
+     + Cut, copy, append, paste, paste-over
+     + Copy to/paste from the Windows clipboard
+     + Clipboard viewer
+ * Printing:
+     + Headers, footers, page numbers, and line numbers
+     + Adjustable line spacing
+     + Top, bottom, left and right margins
+     + Printer initialization string
+     + Ability to print to devices or files
+ * Many other features, including:
+     + Hex view/entry mode
+     + Binary mode editing
+     + Capitalized/uppercase/lowercase filenames
+     + Support for Windows/95 long file names
+     + Bookmarks, bookmark list, quick bookmarks, cycle through bookmarks
+     + Complete keyboard macro capabilities
+     + Abbreviation expansions and typo-corrections as-you-type
+     + Template expansion
+     + Project Save/Restore
+     + International date-time formats, and thousands-separator
+     + Support for any 1 or 2 character line delimiter (CR, CR/LF, etc.)
+     + Configurable prompts:
+         - four different prompt styles:
+               dialog boxes, one-line box, two-line box, command-line
+         - moveable and resizeable
+         - popup history windows
+         - filename completion
+         - copy and paste to and from prompts
+         - reassignable keys
+     + Support for running compilers and jumping to compiler errors
+     + Machine code interface
+     + Lite installation to floppy drive
+     + Synchronized scrolling
+     + Log events
+     + Stopwatch command timer
+     + Digital clock
+     + Set alarms
+     + Ruler
+     + Optional cursor-line highlighting
+     + Optional highlighting of modified lines
+     + Default extensions when opening files
+     + Popup Ascii-chart with character entry
+     + Line and box drawing
+     + Three tab types - fixed, variable, and smart
+     + Supports real tabs
+     + Builtin entab and detab
+     + 25/28/43/50-line EGA/VGA modes
+     + Supports 132x25 and 132x43 video modes, and more

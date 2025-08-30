@@ -1,0 +1,46 @@
+This Program should at least run with:
+
+
+Hardware:
+---------
+3dfx Voodoo3 2000
+ASUS v3400 TNT/TV  (*)
+Creative Labs Graphics Blaster Riva TNT  (*)
+Diamond Viper 330  (*)
+Diamond Viper 550  (*)
+Diamond Viper 770  (*)
+ELSA Erazor II  (*)
+ELSA Victory II
+ELSA Victory Erazor  (*)
+ELSA Victory Erazor LT  (*)
+ELSA Winner II
+STB Velocity 4400  (*)
+any other card with VBE 3.0
+
+(*) These cards have problems with
+    512x384, 80x60, 132,25, 132x43, 132x50 and 132x60
+    You need to use RIVAFIX.COM for the text modes
+
+
+Software:
+---------
+Arachne
+Cubic Player
+Earth 2140
+Fractint (use STB Pegasus VESA for 1600x1200)
+Nesticle
+NHL96
+Scorched Earth
+SEA
+Sim Ctiy 2000
+Snes9x
+Transport Tycoon
+Warcraft 2
+ZSNES
+any other Software compatible to VBE 1.2, 2.0 or 3.0
+
+
+
+VBEHz is Y2K compliant. :-)
+
+

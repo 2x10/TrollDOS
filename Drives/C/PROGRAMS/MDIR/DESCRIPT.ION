@@ -1,0 +1,32 @@
+MCD.BAT batch file for NCD type
+MDIR.BAT batch file for dir command type
+HCONV.EXE Hangul Code converter
+M.CFG MdirIII configuration file(!!)
+BLACK.COL Color configuration file - BLACK
+BLUE.COL Color configuration file - BLUE
+M.DOC Documentation for MdirIII
+MCOPY.DOC Documentation for MCOPY
+MF.DOC Documentation for MF
+MFF.DOC Documentation for MFF
+MUPDATE.DOC What's new...
+Q&A.DOC Question and Answer(FAQ)
+TIP.DOC Tip
+M.HLP Help for English mode
+M-J.HLP Help for JoHap mode
+M-K.HLP Help for KS mode
+M.ICO MS Windows icon
+M.PIF MS Windows PIF
+BBS.TXT What's new...
+DSCMAN.EXE Description Manager
+M.EXE MdirIII - DosShell
+MCOPY.EXE MCOPY - DiskCopy
+MF.EXE MF - Format
+MFF.EXE MFF - FileFind
+MSET.EXE MSET - SetUp
+VV.EXE BORA - Hangul Text Viewer
+M.EXE QX4fdc
+ORDER.DOC Order form. (등록양식)
+VV.DOC Documentation for BORA
+MSET.DOC Documentation for MSET
+MUPDATE.DOC 버젼업되면서 달라진 사항
+README.DOC Read me..!! (읽어봐주세요)

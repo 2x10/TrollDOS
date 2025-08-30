@@ -1,0 +1,24 @@
+4dos.com 4DOS program file
+4help.exe 4DOS help program
+4dos.hlp 4DOS help text
+4dos.ini 4DOS configuration file
+4dos.txt 4DOS, 4NT, TC32 Intro/Install Guide
+4dos.ico Icon file for 4DOS under Windows
+batcomp.exe Batch file compression utility
+br4dos.exe Brand program for registered users
+csclean.bat Batch file used to clean up CONFIG.SYS during uninstall
+helpcfg.exe 4DOS help color configuration program
+kstack.com Program used by the KEYSTACK command
+option.exe Program used by the OPTION command
+setup.exe 4DOS installation program
+examples.btm Batch file with variable function and internal variable examples
+licpurch.txt License agreement for purchased software
+lictrial.txt License agreement for trial versions
+ordform.txt New customer order form
+products.txt Product and ordering information
+readme.txt Installation and other important notes 
+support.txt Technical support contacts, plans, and paid support options
+trial.txt Explanation of trial version
+upgform.txt Upgrade order form
+install.log Automated installation log (required for uninstall)
+unwise.exe Uninstall program

@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+  <TITLE>BackUp-Profile</TITLE>
+</HEAD>
+<BODY>
+<BR>
+<FONT face="courier"><FONT COLOR="teal">&nbsp;&nbsp;BackUp-Profile</FONT>
+<HR noshade>
+<FORM>
+&nbsp;&nbsp;Quell-Dateien<BR>
+&nbsp;&nbsp;<INPUT TYPE=File Name=Quelle Maxlength=79 size=74 Value=""><P>
+ 
+&nbsp;&nbsp;Ziel-Verzeichnis bzw. Laufwerk<BR> 
+&nbsp;&nbsp;<INPUT TYPE=File Name=Ziel Maxlength=79 size=74 Value="A:\"><BR>
+ 
+<HR noshade>
+
+&nbsp;&nbsp;Disketten-Etikett oder Nummer<BR>
+&nbsp;&nbsp;<INPUT TYPE=Text Name=Etikett Maxlength=45 size=46 Value="">
+&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="     Backup ausf&uuml;hren     " click="exec:"><P> 
+
+&nbsp;&nbsp;BackUp-Programm bzw. Batch-Datei<BR>
+&nbsp;&nbsp;<INPUT TYPE=File Name=Programm Maxlength=50 size=74 
+Value=""><P> 
+
+&nbsp;&nbsp;<INPUT TYPE=Radio Name=Art Value="x">&nbsp;alle Dateien sichern<BR> 
+&nbsp;&nbsp;<INPUT TYPE=Radio Name=Art Value="y" checked>&nbsp;nur aktuellere und neue Dateien sichern<BR> 
+&nbsp;&nbsp;<INPUT TYPE=Checkbox Name=Mode Value="z" checked>&nbsp;auch schreibgeschÅtzte und versteckte 
+
+<HR noshade></FONT>
+ 
+&nbsp;
+<INPUT TYPE=Button Value=" |&lt;  " click="read:backup.bnk, first">&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  &lt;  " click="read:backup.bnk, prev">&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  &gt;  " click="read:backup.bnk, next">&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  &gt;| " click="read:backup.bnk, last">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+
+<INPUT TYPE=Button Value="  Anh&auml;ngen  " click="append:backup.bnk">&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  Speichern "      click="write:backup.bnk">&nbsp;&nbsp; 
+<INPUT TYPE=Button Value="  L&ouml;schen   " click="erase:backup.bnk">
+
+</FORM>
+</BODY></HTML>

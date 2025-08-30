@@ -1,0 +1,13 @@
+
+ÿÿFCOPY.AML
+ ÿCopy/Move File(s)ÿ
+
+  This macro prompts you to copy or move one or more files. You will be
+  prompted to enter the destination.
+
+  If run from an edit window, the current file is copied to the
+  specified destiniation.
+
+  If run from a file manager window, the current file (or marked files),
+  are copied or moved to the specified destination.
+

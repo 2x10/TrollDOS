@@ -1,0 +1,152 @@
+//--------------------------------------------------------------------
+// STOPWTCH.AML
+// Stopwatch Timer and Command Timer, (C) 1993-1996 by nuText Systems
+//
+// (see Stopwtch.dox for user help)
+//
+// This macro displays a modeless stopwatch dialog box with start/stop
+// and reset buttons, and real-timer clock.
+//
+// Pressing the Command button allows you measure how long it takes to
+// execute an editor keyboard command. The command will be executed and
+// the time will be displayed in the stopwatch dialog box.
+//
+// The stopwatch dialog box is 'modeless', allowing windows to be
+// switched while the stopwatch is running.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// colors
+constant watch_timer_color = color brightred on black
+constant watch_clock_color = color black on gray
+
+// timer delays
+constant timer_delay = 30
+constant clock_delay = 1000
+
+variable basetime, starttime, dlgwin
+
+// timer id's
+variable timerid, clockid, commandid
+
+// get the current time in hundreths of a second
+// since the beginning of the month
+private function gethundredths
+  time = getrawtime
+  return time [16:2] + time [14:2] * 100 +
+         time [12:2] * 6000 + time [10:2] * 360000 +
+         time [7:2] * 8640000
+end
+
+// timer function to update the timer display
+function tick (zero)
+  oldwindow = gotowindow dlgwin
+  uu = if? zero 0 gethundredths - starttime + basetime
+  uu = uu mod 8640000
+  hh = uu / 360000
+  uu = uu mod 360000
+  mm = uu / 6000
+  uu = uu mod 6000
+  writestr ' ' + hh : 2 : '0' + ':' + mm : 2 : '0'+ ':' +
+           (uu / 100) : 2 : '0' + ' ' + (uu mod 100) : 2 : '0' + ' '
+           watch_timer_color  3 2
+  gotowindow oldwindow
+end
+
+// timer function to update the real-time clock
+function clocktick
+  oldwindow = gotowindow dlgwin
+  writestr ' ' + (gettime -1) watch_clock_color  33 2
+  gotowindow oldwindow
+end
+
+// start/stop the timer
+function startstop
+  if timer? timerid then
+    destroytimer timerid
+    basetime = gethundredths - starttime + basetime
+  else
+    starttime = gethundredths
+    timerid = setrepeat '' timer_delay (getcurrobj) "tick"
+  end
+end
+
+// reset the timer
+function reset
+  // stop the timer if it's running
+  if timer? timerid then
+    startstop
+  end
+  basetime = 0
+  tick 1
+end
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+// display the stopwatch dialog box
+// and start the real-time clock
+function timerbox (zero)
+  dlgwin = dialog "Stopwatch" 46 5 "c" (getcurrobj)
+  tick zero
+  clocktick
+  clockid = setrepeat '' clock_delay (getcurrobj) "clocktick"
+  button "&Start/Stop"      3  4 13  whenenter "startstop"
+  button "&Reset"          19  2 11  whenenter "reset"
+  button "&Command"        19  4 11  whenenter "timecmd"
+  button "E&xit"           33  4 11
+  showdialog
+end
+
+variable startcommand
+
+function endcommand
+  starttime = gethundredths
+  basetime = starttime - startcommand
+  timerbox
+end
+
+// time an editor keyboard command
+function timecmd
+  sendobject (getwinobj) "close" "hide"
+  queue "eval" "set 'kc' (getkey) '" + getcurrobj + "' queue <esc>"
+  shortbox  "Enter a keyboard command to time, or <Esc> to exit."
+  keycode = _kc
+  if keycode <> <esc> and keycode <> <lbutton> and
+     keycode <> <rbutton> then
+    queue (geteventname keycode)
+    // timer events execute with the lowest priority
+    commandid = settimer '' 0 (getcurrobj) "endcommand"
+    startcommand = gethundredths
+  else
+    timerbox 1
+  end
+end
+
+// called by Lib.x when the dialog box is closed
+function onclosedlg (title)
+  reset
+  destroytimer clockid
+  if title <> "hide" then
+    destroyobject
+  end
+end
+
+// keep this macro resident at startup
+resident ON
+
+// display the dialog box
+timerbox 1

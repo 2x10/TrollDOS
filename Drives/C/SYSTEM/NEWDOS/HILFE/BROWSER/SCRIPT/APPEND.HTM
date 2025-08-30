@@ -1,0 +1,42 @@
+<HTML><HEAD><TITLE>Neuen Datensatz erzeugen mit APPEND:</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Neuen Datensatz erzeugen mit APPEND:</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+
+Mit "Append" befehlen Sie dem Browser, einen neuen Datensatz an eine 
+Datenbank-Datei anzuh„ngen.
+<P>
+Nach der Append-Anweisung muá der Dateiname der Datenbank angegeben werden. 
+Eine Positionsangabe wie im "<A HREF="read.htm">Read</A>-Befehl ist nicht 
+erforderlich und auch nicht m”glich: Der Append-Befehl h„ngt den 
+Datensatz immer hinter dem letzten Datensatz an die Datenbankdatei an. Der
+Anwender muá also nicht erst zum Ende der Datenbank bl„ttern, um einen 
+neuen Datensatz anh„ngen zu k”nnen.
+<P>
+Nachdem der Append-Befehl den Datensatz in der Datenbank gespeichert hat, 
+wird dieser unmittelbar danach im Formular angezeigt - der Positions-Zeiger 
+steht danach also auf dem letzten Datensatz.
+<BR>
+
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>append:daten.bnk</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Befindet sich die Datenbank-Datei nicht im gleichen Verzeichnis wie das 
+Formular, in dem der Datensatz angezeigt wird, muá der Dateiname 
+zus„tzliche Pfadangaben enthalten, z.B.
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>append:c:\newdos\daten.bnk
+</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Es sind hier auch <A HREF="../relpath.htm">relative Pfadangaben</A> m”glich.
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

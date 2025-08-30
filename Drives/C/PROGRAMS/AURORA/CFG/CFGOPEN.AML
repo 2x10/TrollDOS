@@ -1,0 +1,38 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGOPEN.AML
+// Configuration for Open Options
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable openopt, defextension
+
+// create dialog box
+dialog "Open Options" 48 13 "cp"
+
+// open options group box
+groupbox 'Default Open Options:' 3 2
+  (menu ''
+     item " ( ) &Full Screen"
+     item " ( ) &Maximize"
+     item " ( ) Mi&nimize"
+     item " ( ) &Cascade"
+     item " ( ) &Horizontal Split "
+     item " ( ) &Vertical Split"
+     item " ( ) Sam&e Window"
+   end) '' _OpenOpt 'fznchve'
+
+// default extensions
+field "&Default File Extensions:"   3 11 43 _DefExt
+
+// ok/cancel buttons
+button "O&k"    38 3 8
+button "Cancel" 38 5 8
+
+// display dialogbox
+if (getdialog ref openopt ref defextension) == 'Ok' then
+  prf.OpenOpt  = openopt
+  prf.DefExt   = defextension
+end

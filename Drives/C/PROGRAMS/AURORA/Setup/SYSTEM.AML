@@ -1,0 +1,71 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// SYSTEM.AML
+// System Settings (included by Main.aml)
+//
+// To change a setting, locate the desired setting in this file and type
+// in the new value. Character and string values should be enclosed in
+// quotes.
+//
+// When you are finished, save this file and select Recompile the
+// Editor from the Set menu. Exit and re-enter the editor for your
+// changes to take effect.
+//--------------------------------------------------------------------
+
+
+// disable the video blink mode (disabling the video blink mode
+// allows the use of high intensity background colors)
+blink OFF
+
+// set cursor size in insert and overstrike modes
+cursorsize
+   // overstrike mode
+   80       // cursor top    (0-99)
+   90       // cursor bottom (0-99)
+
+   // insert mode
+   50       // cursor top    (0-99)
+   90       // cursor bottom (0-99)
+
+// keyboard options:
+kbdoptions 'egw'
+   // e=enable enhanced keyboard
+   // g=enable unshifted grey keypad function keys
+   //     <grey*>, <grey->, <grey+>
+   // w=enable shifted white keypad function keys
+   //     <shift del>, <shift ins>, <shift end>, etc.
+
+
+// enable the PC speaker
+speaker ON
+
+// international date and time format
+international _DateOpt _DateSep _TimeOpt _TimeSep _ThousandSep
+
+// event priority
+// (0 yields the most time slices to the operating system,
+// -1 yields no time slices, other values are system-dependent)
+
+priority     0                  // event priority:
+                                //       0=lowest
+                                //    5000=low (on a 166mhz system)
+                                //  100000=high (on a 166mhz system)
+                                //      -1=highest
+
+// system memory settings
+
+maxxms      -1                  // maximum XMS memory (in k) to use:
+                                //    0=none
+                                //   -1=available maximum
+
+maxems      -1                  // maximum EMS memory (in k) to use:
+                                //    0=none
+                                //   -1=available maximum
+
+swapfiles                       // swap files:
+   "c:\\aurora@1.swp"           //   primary swap file
+   "d:\\aurora@2.swp"           //   secondary swap file
+
+memoptions  'o'                 // memory options:
+                                //   o=allow open files

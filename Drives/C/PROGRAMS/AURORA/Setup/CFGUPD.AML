@@ -1,0 +1,113 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGUPD.AML
+//
+// Save the current configuration to Config.aml and Color.aml and
+// recompile the editor
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// load config.aml
+file = bootpath "config.aml"
+if not loadbuf file then
+  msgbox "Can't Open " + file  "Error!"
+  return
+end
+
+// do for each variable in Config.aml
+loop
+
+  // find the config variable
+  len = find "^ *public" 'x'
+  if len then
+    right len
+    nlength = find "[a-zA-Z0-9_]#" 'xl'
+    if nlength then
+
+      // get config variable name and current value
+      varname = gettext (getcol) nlength
+      value = prf [varname]
+
+      right nlength
+      if (find "=" 'l') and (find "[~ ]" 'xl') then
+        startcol = getcol
+        if (find "//" 'rlg') and (find "[~ ]" 'xr') then
+          endcol = getcol
+          col startcol
+
+          // delete the old value
+          delchar endcol - startcol + 1
+
+          // insert the new (current) value
+          if not length value then
+            instext "''"
+          elseif posnot "0-9" value then
+            value = sub '\\' '\\\\' value
+            value = sub '"' '\\"' value
+            instext '"' + value + '"'
+          else
+            instext value
+          end
+        end
+      end
+    end
+  else
+    break
+  end
+end
+
+// save the new Config.aml
+if not (savebuf file) then
+  msgbox "Error saving " + file "Error!"
+  destroybuf
+  return
+end
+destroybuf
+
+// define an array of color attribute names
+attrname = { "black"     "blue"        "green"        "cyan"
+             "red"       "magenta"     "brown"        "gray"
+             "darkgray"  "brightblue"  "brightgreen"  "brightcyan"
+             "brightred" "pink"        "yellow"       "white" }
+
+// function to return foreground on background string for attr
+// (used to modify color.aml files)
+private function fattrname (attr)
+  attrname [(attr & 0fh) + 1]:-13 + "on " +
+    attrname [((attr & 0f0h) shr 4) + 1]:-13
+end
+
+
+// load color.aml
+file = bootpath "color.aml"
+if not loadbuf file then
+  msgbox "Can't Open " + file  "Error!"
+  return
+end
+
+// do for each palette item in Color.aml
+for i = 1 to 100 do
+  len = find "^ *color.*//" 'x'
+  if len then
+    col (getlinebeg)
+    delchar len - (getcol - 1)
+    instext "color " + (fattrname (getpalette i)) + "//"
+  else
+    break
+  end
+end
+
+// save the new Color.aml
+if not (savebuf file) then
+  msgbox "Error saving " + file "Error!"
+  destroybuf
+  return
+end
+destroybuf
+
+// recompile the editor
+if not regen then
+  msgbox "Configuration has been saved."
+end

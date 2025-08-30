@@ -1,0 +1,123 @@
+; =======================================================================
+; SETUP.MSG
+;
+; IBM Corporation
+; Copyright (c) IBM Corporation 1990-1994
+; All Rights Reserved.
+;
+; The text in this file is used for advertising messages that are
+; displayed on the file copy screen in the Setup program.
+;
+; TRANSLATION NOTES:
+; 1. 10 lines of text is the maximum allowed per advertising message.
+; 2. Each line should not exceed 60 characters.
+; =======================================================================
+
+
+;disk 1
+[CopyWait]
+; ======================== Begin ad message =========================
+PC DOS 7.0 contains many new and enhanced tools!
+- Award-winning compression program for more storage capacity
+- Online Command Reference
+- REXX programming language capability
+- File synchronization when moving files from PC to PC
+- More virus protection including detection and removal
+- New improved powerful and flexible editor
+
+Note: You may not have to use every diskette during installation.
+; ========================= End ad message ==========================
+
+;disk 2
+[CopyWait]
+; ======================== Begin ad message =========================
+PC DOS 7.0 has included these enhancements!
+- Performance improvements to the DOS kernel for
+  faster processing
+- Upgraded versions of optional tools, such as PCMCIA
+  and CPBACKUP
+- Improved Advanced Power Management to reduce power
+  consumption
+- RAMBoost, the memory optimizer, can work with multiple
+  configurations and give you more memory
+- QCONFIG now recognizes more hardware configurations
+; ========================= End ad message ==========================
+
+;disk 3
+[CopyWait]
+; ======================== Begin ad message =========================
+Do you need a more powerful and flexible DOS editor?
+
+PC DOS 7.0 comes with an easier to use, full feature, text
+editor that:
+- Has mouse support
+- Lets you perform tasks by making menu selections
+- Enables editing of large files
+- Is configurable
+- Has a browse capability
+- Includes additional math functions
+; ========================= End ad message ==========================
+
+;disk 4
+[CopyWait]
+; ======================== Begin ad message =========================
+PC DOS 7.0 provides you with Stacker Compression and
+these features:
+
+- Converts other compressed drives
+- Gives you more disk space
+- Lets data on compressed disks be read at computers
+  without Stacker
+- Guards your system from data loss
+- Provides more drive and maintenance monitoring
+- Easy-to-use toolbox
+; ========================= End ad message ==========================
+
+;disk 5
+;[CopyWait]
+; ======================== Begin ad message =========================
+;
+; ========================= End ad message ==========================
+
+;disk6
+[CopyWait]
+; ======================== Begin ad message =========================
+Want to be eligible for valuable savings?
+
+  Be sure to mail in your completed registration card today
+  to be included in future promotions.
+; ========================= End ad message ==========================
+
+;disk 7
+[CopyWait]
+; ======================== Begin ad message =========================
+Concerned about protecting your PC files?
+
+   PC DOS 7.0 includes Central Point's Undelete and Backup
+   plus IBM's AntiVirus/DOS to help protect your PC files.
+; ========================= End ad message ==========================
+
+;disk 8
+[CopyWait]
+; ======================== Begin ad message =========================
+Do you share a computer with several people?
+
+   PC DOS 7.0 allows you to define multiple configurations.
+   Each time you start your computer, you can choose the
+   configuration you want to use.
+; ========================= End ad message ==========================
+
+;disk 9
+[CopyWait]
+; ======================== Begin ad message =========================
+PC DOS 7.0 has included these enhancements!
+- Performance improvements to the DOS kernel for
+  faster processing
+- Upgraded versions of optional tools, such as PCMCIA
+  and CPBACKUP
+- Improved Advanced Power Management to reduce power
+  consumption
+- RAMBoost, the memory optimizer, can work with multiple
+  configurations and give you more memory
+- QCONFIG now recognizes more hardware configurations
+; ========================= End ad message ==========================

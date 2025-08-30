@@ -1,0 +1,78 @@
+<HTML><HEAD><TITLE>Konfiguration des Browsers</TITLE></HEAD>
+<BODY load="read:../../browser.ini,1"><A NAME="top">
+<BR>
+<FONT COLOR=teal>Konfiguration des Browsers</FONT>
+<HR noshade color="silver">
+<A HREF="../../hilfe.htm">zum Browser-Hilfe-Index</A><BR>
+<A HREF="../../index.htm">zur New-DOS-Leitseite</A>
+ 
+<HR noshade color="silver"> 
+
+<FONT Color=maroon>Aufrufbefehl der Original-DOS-Hilfe</FONT>
+<P>
+<INPUT TYPE=File Name=Ziel Maxlength=79 size=77 Value="C:\DOS\HELP.COM">
+<P>
+<A HREF="#helppath"> Hilfe hierzu</A>
+ 
+<HR noshade color="silver">
+
+<FONT Color=maroon>Farben erzwingen/Ton</FONT><P>   
+<INPUT TYPE=Radio Name=Color Value="A" checked> im Dokument definierte 
+Farben anwenden
+<BR>
+<INPUT TYPE=Radio Name=Color Value="B"> schwarzer Hintergrund, helle 
+Schrift, Linkfarben: hellblau/magenta 
+<BR>
+<INPUT TYPE=Radio Name=Color Value="C"> heller Hintergrund, schwarze 
+Schrift, Linkfarben: hellblau/magenta
+<P> 
+<INPUT TYPE=Checkbox Name=Color Value="X"> Kopf- und Statuszeile schwarz 
+(fÅr Ñltere LCD-Monitore)<BR>
+<INPUT TYPE=Checkbox Name=Color Value="Y" checked> Piep-Ton bei 
+Fehlermeldungen
+
+<HR noshade color="silver">
+
+<FONT Color=maroon>Druckeranschlu·</FONT>
+<P>
+<INPUT TYPE=Text Name=Drucker Maxlength=30 size=30 Value="LPT1">
+<P>
+Tip: Um in eine Datei zu drucken, geben Sie hier den Namen dieser Datei an.
+
+<HR noshade color="silver">
+
+<FONT Color=maroon>Darstellung von nicht codierten Umlauten in HTML-Dateien</FONT>
+<P> 
+<INPUT TYPE=Radio Name=CharSet Value="0" checked> keine Korrektur der Darstellung
+<BR>
+<INPUT TYPE=Radio Name=CharSet Value="1"> Windows-Umlaute lesbar anzeigen
+<BR>
+<INPUT TYPE=Radio Name=CharSet Value="2">&nbsp;Macintosh-Umlaute lesbar anzeigen
+<BR>
+<INPUT TYPE=Radio Name=CharSet Value="3"> DOS-Umlaute "falsch" anzeigen
+ 
+<HR noshade color="silver">
+ 
+<INPUT Type=Button Value=" Konfiguration speichern " 
+click="write:../../browser.ini;init:;href:konfig.htm">
+
+&nbsp;&nbsp;<INPUT Type=Button Value=" ZurÅck " click="back:">
+<BR>
+<HR noshade color="silver">
+
+
+
+<A Name="helppath">
+<A HREF="#top"> </A><FONT color=blue>Hilfe zu Aufrufbefehl der Original-
+DOS-Hilfe</FONT><P>
+Bei MS-DOS ab Version 6.x: help.com, bei DR-DOS: dosbook.exe. Wenn sich das 
+DOS-Hilfe-Programm nicht in einem Suchpfad (PATH-Eintrag in der Autoexec.bat)
+befindet, mÅssen Sie den vollstÑndigen Pfadnamen einschlie·lich Dateiendung 
+(exe, com) angeben.<P>
+Ist keine Original-Hilfe vorhanden (z.B. bei MS-DOS bis Version 5.0), 
+lîschen Sie bitte den Inhalt des Eingabefeldes. 
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+ 
+</BODY></HTML>
+

@@ -1,0 +1,11 @@
+
+ÿÿWINCLOCK.AML
+ ÿEdit Window Clockÿ
+
+  This macro displays a real-time clock on an edit window. The clock is
+  displayed on the horizontal scroll bar, or on the menu bar if the
+  horizontal scroll bar is not present.
+
+  Winclock updates the clock every 300 milliseconds, when the top window
+  is an edit window and no mouse buttons are pressed down.
+

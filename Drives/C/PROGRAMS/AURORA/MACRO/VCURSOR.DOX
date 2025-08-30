@@ -1,0 +1,8 @@
+
+ÿÿVCURSOR.AML
+ ÿVertical Cursor Lineÿ
+
+  This macro attaches a highlighted vertical bar to the cursor in the
+  current edit window, which can be useful for aligning text in columns.
+  Running this macro a second time will remove the highlight.
+

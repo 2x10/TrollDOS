@@ -1,0 +1,23 @@
+
+ÿÿASCII2.AML
+ ÿ2-Dimensional Ascii chartÿ
+
+  This macro displays a two-dimensional Ascii chart, showing Ascii
+  character codes in decimal, hexadecimal, octal, and binary.
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <esc>              // close window
+  <enter>            // enter current character into an edit window
+  <left>, <right>    // move cursor
+  <up>, <down>       // move cursor
+  <home>             // to column 1
+  <end>              // to column 16
+  <ctrl home>        // to row 1
+  <ctrl end>         // to row 16
+
+ÿÿMouse:
+  ÄÄÄÄÄ
+  Double Click on:
+    character        // enter current character into an edit window
+

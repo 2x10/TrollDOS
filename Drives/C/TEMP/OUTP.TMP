@@ -1,0 +1,632 @@
+4DOS XMS swapping initialized (248K)
+
+4DOS 7.01A   DOS 5.00
+Copyright 1988-2001  Rex Conn & JP Software Inc.  All Rights Reserved
+
+4DOS, S/N 10078620.  Licensed to Spaceman by Egis.
+
+F-777 DOSBOX BIOS
+BiosVersion=F-777 v.2.0
+BiosCopy=All Copyrights to ART2PLANETS
+load path
+loading files
+
+
+ Audio card is configured at A220 I7 D1 H5 
+
+Sound Mixer Control   Version 2.16
+Copyright (c) Creative Technology Ltd., 1992-97. All rights reserved.
+
+MIX0001: Auxiliary driver AUXDRV.DRV not found.
+
+CuteMouse v1.9 [FreeDOS]
+Installed at PS/2 port
+4DOS 7.01 KSTACK loaded
+Copyright 1991-2001 Rex Conn & JP Software Inc.  All Rights Reserved.
+
+KEYBW ver. 4.1
+Default installiert
+
+S3 VBE/Core 2.0  Version 3.18  Copyright (c) 1994,97 Dietmar Meschede
+
+S3 Trio64 (PCI) graphics chip with 2 MB video memory detected.
+
+Linear frame buffer located at 0xC0000000 (3072 MB).
+
+VBE/Core 2.0 extensions:     On
+Linear frame buffer support: On
+Low resolution video modes:  On
+VESA Super VGA BIOS Extension v1.00
+Copyright (c) 1990 Western Digitial Inc
+VESA driver (version 1.2) installed
+load dirves
+load aliases
+load sets
+load sound sets
+load path sets (to find programs etc.)
+load more sets.
+dload progress
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+x
+
+C:\>xxx   desk
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                                                             #
+#  N...Explorer    D...Ram Anzeige                                            #
+#  C...Musik       Y...StressTester                                           #
+#  A...Antivirus   Z...DUMM LOLO                                              #
+#  T...Editor                                                                 #
+#                                                                             #
+###############################################################################
+#                                                                             #
+#  S...System Dateien und Einstellungen                                       #
+#                                                                             #
+#  G...Games, Emulatoren und Demos                                            #
+#                                                                             #
+#  Q...Alle Programme                                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+#
+[0;32;40m
+###############################################################################
+#  X...Exit                           H...Hilfe           #   D e s k t o p   #
+#  M...MiniReboot                                         #####################
+#  R...Reboot                                             #  T r o l l D O S  #
+#  O...Standby                                            #  E m u l a t o r  #
+#  #...Neuladen                                           #    S y s t e m    #
+#  I...DosBox  Anleitung                                  #      2 0 1 7      #
+###############################################################################
+#                                   

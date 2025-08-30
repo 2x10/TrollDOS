@@ -1,0 +1,16 @@
+
+Welcome to the E Editor.
+
+Changes have been made by SETUP and saved to your AUTOEXEC.BAT and
+CONFIG.SYS files.
+
+Press the CTRL+N key to edit or view each file.  Then:
+
+   Press F3 to close the file without saving any additional
+    changes, or
+
+   Press F4 to save any additional changes you have made to
+    the file.
+
+To get additional help, press the F1 key.
+

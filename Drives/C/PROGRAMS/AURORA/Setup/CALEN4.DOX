@@ -1,0 +1,17 @@
+
+ÿÿCALEN4.AML
+ ÿFour-month Calendarÿ
+
+  This macro displays a calendar window with four months, starting with
+  the previous month. The current day is highlighted.
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <esc>              // exit
+  <pgdn>             // next month
+  <pgup>             // prev month
+  <right>            // same month, next year
+  <left>             // same month, prev year
+  <ctrl pgdn>        // december of the current year
+  <ctrl pgup>        // january of the current year
+

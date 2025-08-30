@@ -1,0 +1,67 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGLDLM.AML
+// Configuration for Line Delimiter Options
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable linedlm, binlen, trunclen, delimwin
+
+// change edit field from groupbox
+function changedlm
+  dlm = case getrow
+          when 1 "0D0A"
+          when 2 "0D"
+          when 3 "0A"
+          otherwise ''
+        end
+  if dlm then
+    buf = getwinbuf delimwin
+    oldbuffer = gotobuf delimwin
+    col 1
+    delchar 16000
+    instext dlm
+    gotobuf oldbuffer
+  else
+    currwin delimwin
+    col getlinelen + 1
+  end
+end
+
+lineopt = case _LineDlm
+            when "0D0A"  'c'
+            when "0D"    'r'
+            when "0A"    'l'
+            otherwise    'o'
+          end
+
+// create dialog box
+dialog "Line Delimiter Options" 41 11 "cp"
+
+// display delimiter options
+groupbox 'Delimiter:' 3 2
+  (menu ''
+     item " ( ) &CR/LF          (Dos)"
+     item " ( ) C&R Only        (Mac)"
+     item " ( ) &LF Only       (Unix) "
+     item " ( ) &Other"
+   end) '' lineopt "crlo"
+whenselect "changedlm"
+
+delimwin = field "&Delimiter in hex:   >"  3  8 6 _LineDlm
+
+field "&Binary Line Length: >" 3  9  6 _BinaryLength
+field "&Truncation Length:  >" 3 10  6 _TruncLength
+
+// ok/cancel buttons
+button "O&k"    31 3 8
+button "Cancel" 31 5 8
+
+// display dialog box
+if (getdialog ref lineopt ref linedlm ref binlen ref trunclen ) == 'Ok' then
+  prf.LineDlm       = linedlm
+  prf.BinaryLength  = binlen
+  prf.TruncLength   = trunclen
+end

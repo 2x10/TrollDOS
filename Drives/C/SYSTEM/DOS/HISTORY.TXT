@@ -1,0 +1,390 @@
+README.TXT    - Full Documentation of MaxDIR.
+FASTREAD.TXT  - Quick Read Documentation of MaxDIR.
+HISTORY.TXT   - History of Revisions to MaxDIR.
+-----------------------------------------------------------------------------
+ MaxDIR                  [History]                (C)1995-2005 MSH Softworks
+-----------------------------------------------------------------------------
+                       ---  HISTORY of MaxDIR  ---
+-----------------------------------------------------------------------------
+* = Changes made, but version number not changed.
+
+
+WHAT's NEW for MaxDIR v2.29:
+
+ 1)  Added ability to set default number of columns in MaxDIR Config.
+ 
+ 2)  Added background color checking.  MaxDIR now displays data using your
+     current custom background color.  DOS can only have 8 background colors.
+     If you are using Windows, then MaxDIR will use the nearest DOS
+     compatable color selected by Windows..
+ 
+ 3)  Backward compatibility with custom configurations upwards from v2.26.
+ 
+ 4)  Removed cursor code from MaxDIR for better compatibility.
+     
+
+WHAT's NEW for MaxDIR v2.28:
+
+ 1)  Fixed problem for Win9x based boot disks.  After booting from the boot
+     disk, MaxDIR would show wrong 'Total Clusters', causing it to display
+     incorrect disk size and percentage full.  Using /X option, it would
+     also show incorrect total clusters and clusters used.  This problem did
+     not occur on any other OS's, and it did not occur on fully booted Win9x
+     OS's.
+
+ 2)  Added error checking code for illegal cluster values received from OS.
+     See #1 above.
+
+ 3)  Added error checking to MaxDIR Config.  Began coding for backward
+     compatibility with old config files when new options are added.
+
+
+WHAT's NEW for MaxDIR v2.27:  (quickfix for 2.26)
+
+ 1)  Fixed 'Divide Error' on last line of /x (extra drive info) option.
+     Somehow missed a silly typo when testing 2.26..
+
+ 2)  Added pause for /? (command list) on 25 line screens.
+
+ 3)  Modified (Show available Drives) to show drives A / B if the current
+     or checked drive is A / B.
+
+
+WHAT's NEW for MaxDIR v2.26:
+
+ 1)  Completely re-wrote the entire screen display system to allow for more
+     display options and to allow for standard device output. (stdio)
+
+ 2)  Added ability to re-direct output to files/printers/ etc., when using
+     the no color (/c) option or the ANSI option (/j). ex: di /c > file.txt.
+
+ 3)  Added code to print colors using ANSI codes.
+
+ 4)  Added the /j option (Show colors in ANSI format).
+
+ 5)  Added ability to customize colors for 'Available Drives', File Sizes,
+     and Volume Label.
+
+ 6)  Updated MaxDIR Config (CFG.EXE) to let you customize: 'Available
+     Drives' color; File Size color; Volume Label color; Command Switch for
+     Use ANSI/ No Color/ Standard Color.
+
+ 7)  Made numerous changes to MaxDIR Config (CFG.EXE) to make it more user
+     friendly.  Updated all help screens.  Each window has its own help.
+
+ 8)  Optimized MaxDIR Memory for 128K model.  Upped max files to 2400.
+
+ 9)  Added ability to show space used up to 4GB.  Previous limit was 2GB.
+
+10)  Added ability to show files in 1, 2, 4, or 6 columns.  In 1 and 2
+     column view, it will show filedates and times.
+
+11)  Added code to sort files by filedate/time.
+
+12)  Add the /t option (Sort by Date/Time)
+
+13)  Added ability to customize colors for 'File Dates' and 'File Times'.
+
+
+WHAT's NEW for MaxDIR v2.25: (BETA Testing - Not Publicly Released.)
+
+ 1)  Fixed bug:  Memory leak when reading more than 1,800 filenames.  My
+     calculation for memory usage was off by about 4K.  Reduced max files
+     from 2,300 to 1,800 to prevent problems.
+
+ 2)  Completed Custom Config program.  Completed modifications to MaxDIR
+     to make it interface with .CFG files.
+
+ 3)  Removed .INI file support that was used for v2.24.  All custom configs
+     are now done for the user via the CFG.EXE program.
+
+
+WHAT's NEW for MaxDIR v2.24:
+
+ 1)  Added code for user customizable command switches.  Putting command
+     switches in a file called MAXDIR.INI will cause MaxDIR to use them
+     automatically each time it is executed.
+
+     MAXDIR.INI must reside in the same DIR as DI.EXE (or whatever you
+     renamed it).  Custom Colors are not finished yet, and are ignored in
+     the .INI file.  The INI file is optional.  Please review the INI file
+     for rules in its use and for a taste of what will be in the next
+     release (v2.26).
+
+ 2)  Created Readme.Ini file and inserted instructions for using it.  This
+     file must be renamed to Maxdir.Ini in order to be default. User Choice.
+
+   NOTE:  No instructions for using the Ini file will be in the Readme.txt
+          file!  All intructions for the INI file will be in that file.
+
+*3)  Added Extension to the color table:  .MP3  (Lt. Blue)
+
+
+WHAT'S NEW for MaxDIR v2.23: (BETA Testing - Not Publicly Released.)
+
+ 1)  Added code to show available HD and network drives at top of listing.
+     (I kept it from looking for floppy drives A & B because it might
+     activate the drive each time you execute DI.EXE.)
+
+ 2)  Added the /v option to disable show available drives.
+
+ 3)  Added code to show build and your system information in the /b option.
+
+ 4)  Began coding changes for user customizable color and command-switch
+     configurations, via an .INI file.  Will be in beta for v2.24 in a few
+     weeks!  This is such a big change, that the v2.24 may end up becoming
+     MaxDIR v2.30.  Is there a rule book for revision numbers??? :)
+
+*5)  Added "Check C-Shore.com/maxdir for latest info." in the /? option.
+
+*6)  Fixed Bug from beta1:  Typing DI followed by a drive designation caused
+     your Current Drive to be switched to that drive.  ie: DI F:
+
+
+WHAT'S NEW for MaxDIR v2.22:
+
+ 1)  Added Extensions to the color table:  .PDF .RTF .ASC .HTM .SHT (White)
+
+ 2)  Added Extensions to the color table:  .DBF .MDB .DB .LCK .XLS (Blue)
+
+ 3)  Added documentation to explain about NT drawbacks while in LFN (Long
+     FileName) Directories.  Not a problem, Just a nuisance.
+
+
+WHAT'S NEW for MaxDIR v2.22beta: (BETA Testing - Not Publicly Released.)
+
+ 1)  Separated number of Files reported into number of Files and number of
+     Directories.  Added #DIR's to right edge of screen, same line as #Files.
+     This added information also provided by the Win95/98 DIR command.
+
+ 2)  Added code to allow listing Hidden and System files.
+
+ 3)  Added the /a option (Show ALL files including Hidden and System.)
+
+ 4)  Rearranged current time/date (above Volume Label) to "Magna" Universal
+     style. Example:  Mmm DD, YYYY HH:MMa/p. IE: Jan 15, 2001 12:00a
+
+ 5)  Edited documentation, and renamed standard doc file from DI.TXT to
+     README.TXT
+
+ 6)  Added Extensions to the color table:  .IFF .IMG .PIC .PCT .PSP (Cyan)
+
+ 7)  Added Extensions to the color table:  .S3M .IT .XM .STM (Lt. Blue)
+
+ 8)  Added Extensions to the color table:  .INF (Lt. Red), .VXD (Brown)
+
+ 9)  Added Extension to the color table:  .RAR (Red)
+
+
+WHAT'S NEW for MaxDIR v2.21:
+
+ 1)  Added code to finalize reliability problems under WinNT.  It now works
+     perfectly as long as it is in the first PATH= directory.  Copy it to
+     the C:\WINNT or C:\WINDOWS directory, to be sure.  DI.EXE or whatever
+     you want to call it.  WinNT does not like additions to PATH=.  Make
+     sure you read the text file for MaxDIR.
+
+
+WHAT'S NEW for MaxDIR v2.2:
+
+ 1)  Removed the /b option (Show Beta-Test Information.)
+
+ 2)  Added documentation to ease confusion when used on drives > 2GB under
+     different OS's.
+
+ 3)  Added code to make MaxDIR work better on "DOS" drives under MacOS 7.5+.
+
+ 4)  Added code to fix reliability problems under Windows NT 4.0.
+
+
+WHAT'S NEW for MaxDIR v2.1b:
+
+ 1)  Added the /i (Show Directory Bytes Consumed) to accurately show the
+     bytes consumed for all DIR's in a DIR (SubDIR's also consume a cluster.)
+
+ 2)  Removed default to Show Directory Bytes Consumed to allow less
+     confusion when comparing bytes used to bytes consumed for files.
+
+
+WHAT'S NEW for MaxDIR v2.1a:
+
+ 1)  Beta Test.
+
+
+WHAT'S NEW for MaxDIR v2.0a:
+
+ 1)  Major new version.
+ 2)  Replaced abbreviated date with complete Day-of-Week name above label.
+
+ 3)  Fixed bug;  When viewing a directory on a drive other than the current
+     drive, MaxDIR would show the directory, but the volume label would not
+     be updated.  (ie:  di a:  while currently in another drive.)
+
+ 4)  Added code to have MaxDIR show the current drive letter after the total
+     drive capacity is displayed.
+
+ 5)  Fixed various minor typo's throughout the program.  Made several
+     aesthetic changes.
+
+ 6)  Added Extensions to the color table:  .CMF (Blue), .LOG (White)
+
+
+WHAT'S NEW for MaxDIR v1.6d:
+
+ 1)  Added code in the /x command to show the current drive's DOS Identifier
+     Byte and it's meaning.
+
+ 2)  Rewrote the DI.DOC file to compensate for changes and additions in the
+     "computer programming community" in an attempt to standardize wording
+     and multiple-platform operation.
+
+ 3)  Replaced "Time" with current Day-of-Week above Volume Label display.
+
+
+WHAT'S NEW for MaxDIR v1.6c:
+
+ 1)  Added "Path Deduction" ability so that you don't have to type in the
+     full path to the location in which you want a directory listing.  ie:
+     DI GAMES  instead of  DI GAMES\*.*
+
+ 2)  Added code to make MaxDIR neatly show the complete pathname in the Path:
+     slot, in All Uppercase.
+
+ 3)  Added Extension to the color table:  .ASM (Lt Green).
+
+
+WHAT'S NEW for MaxDIR v1.6b:
+
+ 1)  Fixed Bug; (FINALLY Tracked it down!).  The 'Bytes Consumed' algorithm
+     became confused after the 'Total # of clusters used' exceeded 32767.
+
+ 2)  Added a status indicator (LOADing, SORTING) which appears at the
+     volume label while MaxDIR is sorting a large number of files on slower
+     computers(it takes over 2 seconds to sort 1000 files on a 486sx33).
+
+ 3)  Added the ability to 'break' from the program at a pause by pressing
+     ESCape or Ctrl-C/Ctrl-Break.  Helpful when listing many files.
+
+ 4)  Switched to V-DMA for quicker operation.  Still working on ANSI.
+
+ 5)  Finalized switchover to including directories in the 'Bytes Consumed'
+     algorithm...Since each DIR entry also consumes a cluster.
+
+ 6)  Added the /o (Disable Video Direct MemAccess) option.  This command will
+     cause MaxDIR to use the BIOS, instead of V-DMA, to print to the screen.
+
+ 7)  Added Extensions to the color table:  .PCX, .MOV, .AVI, .MPG  (CYAN).
+
+
+WHAT'S NEW for MaxDIR v1.6a:
+
+ 1)  Added the /c (No Color) option.
+ 2)  Added code to speed up response time when the /c option is triggered.
+ 3)  Added Extensions to the color table:  .WRI, .SCR, .HLP  (White).
+ 4)  Added Extensions to the color table:  .DAT (Green), and .GRP (Brown).
+
+ 5)  Reduced Maximum files per-call from 2500 to 2300 to save memory and
+     speed response time.
+
+ 6)  Added Code to double Maximum Drive Size from 2 Gigs to 4 Gigs (32-bit
+     computing limitation for long integers).  I am considering using
+     'integer overflows' to correctly recognize even larger drives.
+     (This did not work... Woe is me.)
+
+ 7)  Began Preparations for ANSI (to allow usage on a dumb terminal or over
+     a modem) and Direct VideoMemory Addressing (V-DMA) for faster operation.
+
+
+WHAT'S NEW for MaxDIR v1.5g:
+
+ 1)  Added the .CFG extension to the color table (Red).
+ 2)  Changed color of .ZIP, .ARJ, .LHA, .ARC from Lt Magenta to Red.
+ 3)  Changed color of .MOD, .MID, .WAV, .VOC from Yellow to Lt Blue.
+ 4)  Added the /n (No Sorting) option.
+ 5)  Added the /s (Sort by FileSize) option.
+ 6)  Added the /p (No Pausing) option.
+ 7)  Added the /b (Show Beta-Test Information) option.
+ 8)  Changed the di /? command to not show beta-info without the /b option.
+
+ 9)  Added code to make MaxDIR check the first 2 directories to be sure they
+     aren't "." and ".." before getting their names.
+
+10)  Added stronger sorting routines to allow deductive sorting.  ie: When
+     sorting by Size; if two files are the same Size, then auto-sort by
+     Extension.  If Size and Extension are both the same, then auto-sort by
+     Filename...etc.
+
+
+WHAT'S NEW for MaxDIR v1.5f:
+
+ 1)  Added Current Date and Time to MaxDIR (Shows above Volume Label).
+ 2)  Added Compile Date info in the DI /? to show when it was compiled.
+
+
+WHAT'S NEW for MaxDIR v1.5e:
+
+ 1)  Added CD-ROM checking...the BIOS can get a little funny with one.
+
+
+*** MaxDIR v1.5b - v1.5d:  Beta-Testing ***
+
+
+WHAT'S NEW for MaxDIR v1.5a:
+
+ 1)  Added error checking code (So MaxDIR can get info about a drive even if
+     there is no disk in it) so it can inform you of the problem.
+ 
+ 2)  Added code to display info about a disk if it is empty.  ie: DOS's DIR
+     command just says "File not found" without displaying any information
+     about it's size or it's Bytes Free.  MaxDIR now does.
+
+
+*** MaxDIR v1.2c - v1.4:  Beta-Testing ***
+
+
+WHAT'S NEW for MaxDIR v1.2b:
+
+ 1)  Added code to neatly display files lengths larger than seven characters.
+     ie: 10.454M as opposed to 10454783, which moves all the files over one
+     space past the limit, causing a messed-up display.
+
+ 2)  Fixed Bug; MaxDIR was confused by Directories with extensions, causing
+     it to freak out, since I forgot to design a place for it to put the
+     extra characters...  :)
+ 
+ 3)  Added/Altered code to make better use of memory so that more files
+     could be read and sorted without having to use 32-bit addressing.
+
+ 4)  Changed the file-limit from 1500 to 2500 files.
+ 5)  Added the /x (Extra Drive Info) option.
+
+
+WHAT'S NEW for MaxDIR v1.2:
+
+ 1)  Fixed Major Bug; A memory leak caused by using strings past their
+     pre-defined length-limits.  A poor programming practice...
+
+
+WHAT'S NEW for MaxDIR v1.1:
+
+ 1)  Added the /f (Sort by Filename) option.
+ 2)  Changed the sorting default to Sort by Extension, and removed the /e
+     option from the menu.
+
+ 3)  Added the /l (Show Files Left-to-Right instead of Up/Down) option.
+ 4)  Added code to show files in ascending order down columns (Up/Down), and
+     removed the /c option.
+
+ 5)  Changed from ANSI screen writing to Video BIOS addressing.
+
+
+WHAT'S NEW for MaxDIR v1.0:
+
+ 1)  Added the /d (Show Directories Only) option.
+ 2)  Added the /u (Show Files in ALL Uppercase) option.
+ 3)  Added the /e (Sort Files by Extension) option.
+
+
+-=> FIRST WRITING:
+
+  MaxDIR v0.1 was at first an idea, and then was written in May 1995.

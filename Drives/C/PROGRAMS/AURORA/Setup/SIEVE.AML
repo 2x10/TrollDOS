@@ -1,0 +1,48 @@
+//--------------------------------------------------------------------
+// SIEVE.AML
+// Sieve of Eratosthenes Demo, (C) 1993-1996 by nuText Systems
+//
+// This macro uses the sieve of Eratosthenes to list prime numbers from
+// 1 to 4001 in a popup menu. This method originated in the 3rd century
+// B.C. Sieve demonstrates the use of macro language arrays.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// finds primes up to SIZE*2+1
+// (2000 is the maximum size of an array)
+constant SIZE = 2000
+
+// create result buffer
+createbuf
+ovltext 2
+
+// create and initialize flags array to nulls
+flags = array SIZE
+
+// tests odd numbers only
+for i = 1 to SIZE do
+  if not flags [i] then
+    prime = i + i + 1
+    for j = prime + i to SIZE step prime do
+      flags [j] = TRUE
+    end
+    // add prime number to the menu
+    addline prime
+  end
+end
+
+// display primes in a popup menu
+prime = popup (getcurrbuf) 'Prime Numbers' 10
+destroybuf
+
+// if a number is selected, enter it at the cursor
+if prime then
+  send "write" prime
+end

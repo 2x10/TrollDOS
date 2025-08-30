@@ -1,0 +1,45 @@
+PROGRAM Schleife;
+{Dieses Programm zeigt die Wirkungsweise der drei Schleifentypen.}
+
+BEGIN-MAIN
+  Init;
+  !a:= 'Dies ist eine Zeichenkette';
+
+  @x:=0;                               {Z„hlvariable auf 0 setzen}
+  While (@x < @Length (!a)) Do         {Solange @x < L„nge von !a "tue"...}
+  BEGIN
+    inc (@x);                          {@x um eins hochz„hlen}
+    Write (!a[@x]);                    {Schreibe Zeichen an Pos. @x in !a}
+    Delay (100);                       {Warte 100 Millisekunden}
+  ENDW;
+
+  WriteLn;
+
+  @x:=0;                               {Z„hlvariable auf 0 setzen}
+  REPEAT                               {Wiederhole...}
+    inc (@x);                          {@x um eins hochz„hlen}
+    Write (!a[@x]);                    {Schreibe Zeichen an Pos. @x in !a}
+    Delay (100);                       {Warte 100 Millisekunden}
+  UNTIL (@x = @Length(!a));            {...bis @x = L„nge von !a}
+
+  WriteLn;
+
+  For @x:= 1 To @Length(!a) Do
+  BEGIN
+    Write (#upcase(!a[@x]));           {Schreibe Zeichen als Groábuchstaben}
+    Delay (100);
+  ENDFOR;
+
+  WriteLn (#13#10#10, Weiter mit Taste);
+  GetKey;
+END.
+
+{In der FOR-Schleife braucht die Variable @x nicht vorher mit einem}
+{Startwert belegt werden. Der FOR-Befehl setzt hier automatisch die}
+{erste Zahl ein (hier: 1). Das Hochz„hlen von @x wird ebenfalls automatisch}
+{ausgefhrt. Dabei wird der Befehl nach DO so oft ausgefhrt, bis @x}
+{L„nge von !a betr„gt.}
+
+{Vor REPEAT und WHILE mssen Z„hlvariablen vorbelegt werden, da das Ergebnis}
+{sonst undefinierbar ist.}
+

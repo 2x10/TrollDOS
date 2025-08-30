@@ -1,0 +1,74 @@
+<HTML><HEAD><TITLE>Datensatz lesen mit READ:</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Datensatz lesen mit READ:</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+
+Mit "Read" befehlen Sie dem Browser, einen Datensatz aus einer Datei zu 
+lesen und in das gerade auf dem Bildschirm angezeigte Formular einzublenden.
+<P>
+Nach der Read-Anweisung muá der Dateiname der Datenbank angegeben werden 
+und - durch ein Komma voneinander getrennt - die Nummer des Datensatzes. 
+Die Z„hlung der Datens„tze beginnt mit 1. Im folgenden Beispiel wird
+aus der Datei "DATEN.BNK" der Datensatz mit der Nummer 1 ausgelesen:
+
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>read:daten.bnk, 1</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Befindet sich die Datenbank-Datei nicht im gleichen Verzeichnis wie das 
+Formular, in dem der Datensatz angezeigt wird, muá der Dateiname 
+zus„tzliche Pfadangaben enthalten, z.B.
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>read:c:\newdos\daten.bnk, 
+1</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Es sind hier auch <A HREF="../relpath.htm">relative Pfadangaben</A> m”glich.
+<P>
+Anstelle einer "festen" Datensatznummer wird es in der Praxis angebrachter 
+sein, eine relative Datensatznummer anzugeben. Folgende Positionsangaben 
+sind m”glich:<P>
+<font color=maroon>first</FONT>&nbsp;Liest den ersten Datensatz ein<BR>
+<font color=maroon>last</FONT>&nbsp;&nbsp;Liest den letzten Datensatz 
+ein<BR>
+<font color=maroon>next</FONT>&nbsp;&nbsp;Liest den n„chsten Datensatz 
+ein<BR>
+<font color=maroon>prev</FONT>&nbsp;&nbsp;Liest den vorherigen Datensatz 
+ein <P> 
+Mit diesen vier Positionierungsbefehlen ist es m”glich, eine Datenbank 
+schrittweise vorw„rts und rckw„rts durchzubl„ttern sowie an den Anfang bzw.
+das Ende der Datenbank zu springen. Der folgene HTML-Befehl erzeugt im 
+Anzeigeformular einen Button mit der Aufschrift "weiter". Immer, wenn der 
+Anwender diesen Button anklickt, wird der n„chste Datensatz im Formular 
+eingeblendet - solange, bis das Ende der Datenbank erreicht ist, also der 
+letzte Datensatz angezeigt ist.
+<BR>
+<TABLE><TR><TD bgcolor=teal><FONT 
+COLOR=yellow>&lt;INPUT TYPE=Button click="<FONT color=cyan>read:daten.bnk, 
+next</FONT>" VALUE="weiter"&gt;</FONT><BR></TD></TR></TABLE>
+Tip: In der Regel bietet es sich an, die Formularseite, in der die Datenbank 
+angezeigt werden soll, mit einem leeren (oder mit Standard-Werten 
+vorbelegten) Formular zu ”ffnen. Der Anwender hat so die M”glichkeit, 
+einen neuen Datensatz anzulegen, ohne bereits im Formular 
+befindliche Angaben l”schen zu mssen. In manchen F„llen kann es jedoch 
+angebracht sein, daá das Formular bereits beim ™ffnen einen Datensatz aus 
+der Datenbank anzeigt. Zu diesem Zweck k”nnen Sie im &lt;BODY&gt;-Tag 
+mittels des Event-Handlers "<A HREF="load.htm">Load</A>" bereits den 
+gewnschten Datensatz einlesen lassen.
+<BR>
+<TABLE><TR><TD bgcolor=teal><FONT 
+COLOR=yellow>&lt;BODY load="<FONT color=cyan>read:daten.bnk, 
+first</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+In diesem Beispiel wird der erste Datensatz eingelesen und im Formular 
+angezeigt. 
+
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

@@ -1,0 +1,10 @@
+
+ÿÿCOUNTWRD.AML
+ ÿCount Wordsÿ
+
+  This macro counts the number of words in the current file and displays
+  the result. The count is limited to a marked block if it exists.
+
+  Words are defined to be contiguous sequences of alphabetic characters
+  of mixed case, and the underline (_) character.
+

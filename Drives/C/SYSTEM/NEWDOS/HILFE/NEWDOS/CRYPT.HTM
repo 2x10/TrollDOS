@@ -1,0 +1,182 @@
+<HTML><HEAD><TITLE>CRYPT</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>CRYPT</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>ver- und entschlsselt beliebige Datei und fertigt einen Schlssel an.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">CRYPT [Dateiname(n)] [Schlsseldatei] [/s /v /e]</FONT>
+
+/s   fertigt die Schlsseldatei [Dateiname] an. Fehlt [Dateiname], wird
+     automatisch A:\CRYPT.KEY verwendet.
+
+/v   entschlsselt die Datei/en [Dateiname] mit der Schlsseldatei 
+     [Schlssel] Fehlt [Schlssel], wird als Schlssel A:\CRYPT.KEY 
+     verwendet.
+
+/e   entschlsselt die Datei/en [Dateiname] mit der Schlsseldatei 
+     [Schlssel] Fehlt [Schlssel], wird als Schlssel A:\CRYPT.KEY 
+     verwendet.
+
+Die Eingabe von Wildcards als Dateiname (*.TXT) ist m”glich.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT> 
+
+<FONT COLOR="blue">CRYPT <FONT COLOR="red">C:\TEXTE\*.* /v</FONT></FONT>
+verschlsselt alle Dateien im Verzeichnis C:\TEXTE. Als Schlssel wird
+A:\CRYPT.KEY verwendet.
+
+<FONT COLOR="blue">CRYPT <FONT COLOR="red">C:\TEXTE\*.* /e</FONT></FONT>
+entschlsselt alle Dateien im Verzeichnis C:\TEXTE. Als Schlssel wird
+A:\CRYPT.KEY verwendet.
+ 
+<FONT COLOR="blue">CRYPT <FONT COLOR="red">C:\TEXTE\*.* A:\MY.KEY /v</FONT></FONT>
+verschlsselt alle Dateien im Verzeichnis C:\TEXTE. Als Schlssel wird
+A:\MY.KEY verwendet.
+
+<FONT COLOR="blue">CRYPT <FONT COLOR="red">/s</FONT></FONT>
+Stellt den Schlssel A:\CRYPT.KEY her.
+
+<FONT COLOR="blue">CRYPT <FONT COLOR="red">A:\MY.KEY /s</FONT></FONT>
+Stellt den Schlssel A:\MY.KEY her.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Allgemeines</FONT>
+
+CRYPT ist ein einfacher und schneller synchroner Strom-Chiffrierer. Synchron 
+bedeutet, daá zum Ver- und Entschlsseln ein und derselbe Schlssel 
+verwendet wird. Strom-Chiffrierer behandeln jedes Byte der Datei nur einmal 
+(durchlaufender Datenstrom), deshalb sind sie sehr schnell.
+
+ACHTUNG: <FONT COLOR="red">Die Originaldatei wird beim Verschlsseln berschrieben!</FONT> Dadurch 
+werden jegliche unverschlsselte Reste einer Datei unwiederherstellbar 
+vernichtet. Das Original l„át sich nur noch durch Entschlsselung wieder 
+herstellen. CRYPT l”scht auáerdem den von ihm verwendeten Bereich des 
+Arbeitsspeichers.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Vorgehensweise</FONT> 
+
+Bevor Sie mit CRYPT Dateien ver- und entschlsseln k”nnen, mssen Sie einen 
+Schlssel anfertigen.
+
+<FONT COLOR="green">1. Anfertigen eines Schlssels</FONT>
+
+Starten Sie CRYPT und w„hlen Sie in der Eingabemaske den Menpunkt
+"Erstellen eines Schlssels". Der im oberen Teil der Maske angezeigte 
+Dateiname ist hier ohne Bedeutung. šberprfen Sie aber den darunter 
+angezeigten Namen der Schlsseldatei. Normalerweise steht dort A:\CRYPT.KEY.
+Dies ist die Datei, die sp„ter den Schlssel enth„lt. Sie k”nnen ihn nach 
+Belieben ab„ndern. Beachten Sie jedoch, daá es am sichersten ist, wenn Sie
+die Schlsseldatei auf einem entnehmbaren Datentr„ger anlegen (also
+Diskette usw.). Sollte jemals ein Unbefugter auf Ihrem Rechner nach dem
+Schlssel suchen, so hat er keine Chance, wenn die Diskette mit der
+Schlsseldatei entfernt wurde.
+
+Wenn Sie alle Parameter gew„hlt haben, fordert CRYPT Sie auf, mehrmals 
+hintereinander die Tastatur zu bet„tigen. Anhand des angezeigten Z„hlwerkes 
+k”nnen Sie ersehen, wie lang der Schlssel gerade ist. CRYPT errechnet aus 
+den gedrckten Tasten, einer Zufallszahl sowie aus dem jeweiligen 
+Zeitabstand zwischen dem Bet„tigen zweier Tasten einen Wert, der in den 
+Schlssel eingefgt wird. Auch wenn jemand die Tastatur berwachen sollte, 
+anhand der gedrckten Tasten kann ein Schlssel nicht rekonstruiert werden.
+Wenn Sie fertig sind, drcken Sie die Taste Esc. Der Schlssel wird dann
+in die Schlsseldatei geschrieben (ggf. vorher Diskette einlegen).
+
+Nehmen Sie sich bitte zum Anfertigen des Schlssels etwas Zeit. Tests haben 
+ergeben, daá ein Schlssel dann als absolut sicher gelten kann, wenn Sie
+etwa 2000 mal die Tastatur bet„tigt haben. Je l„nger ein Schlssel, desto
+besser. Einen einmal angefertigten Schlssel k”nnen Sie dann sooft
+verwenden, wie Sie m”chten.
+
+<FONT COLOR="green">2. Verschlsseln</FONT>
+
+Starten Sie CRYPT und geben Sie den Namen der zu verschlsselnden Datei ein. 
+Dieser kann aus Wildcards (*.*, *.TXT usw.) bestehen oder einen 
+vollst„ndigen Datei- oder Pfadnamen enthalten. šberprfen Sie, ob im 
+darunterliegenden Eingabefeld der korrekte Name der Schlsseldatei angezeigt 
+wird und korrigieren Sie ihn ggf. Befindet sich der Schlssel auf einer 
+Diskette, legen Sie diese nun ein. W„hlen Sie dann den Menpunkt "Datei 
+verschlsseln". Anschlieáend werden alle angegebenen Dateien verschlsselt.
+
+<FONT COLOR="green">3. Entschlsseln</FONT>
+
+Gehen Sie genauso vor, wie beim Verschlsseln. Lediglich der Menpunkt 
+"Datei entschlsseln" muá gew„hlt werden.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Verhalten bei Fehlern</FONT> 
+
+CRYPT "begr„bt" die Originaldatei unwiederbringlich unter der neu erstellten 
+Datei. Bei versehentlicher Falschbedienung gehen Sie bitte wie folgt vor, um 
+Datenverluste zu vermeiden:
+
+Fehler : Ein unverschlsselte Datei wrde ENTschlsselt.
+Rettung: VERschlsseln Sie diese Datei, um das Original wiederzubekommen.
+
+Fehler : Eine Datei wurde mehrmals VERschlsselt.
+Rettung: ENTschlsseln Sie diese Datei genau so oft, wie Sie sie 
+         verschlsselt haben. Falls Sie das nicht mehr wissen, gehen Sie 
+         schrittweise vor, bis Sie das Original wiederhaben.
+
+Fehler : Eine Datei wurde mehrmals ENTschlsselt.
+Rettung: VERschlsseln Sie diese Datei genau so oft, wie Sie sie 
+         entschlsselt haben. Falls Sie das nicht mehr wissen, gehen Sie 
+         schrittweise vor, bis Sie das Original wiederhaben.
+
+Fehler : Eine Datei wurde mehrmals mit verschiedenen Schlsseln 
+         VERschlsselt.
+Rettung: Zur Entschlsselung verwenden Sie die gleichen Schlssel wie bei 
+         der Verschlsselung. Die Reihenfolge, in der Sie die Schlssel 
+         verwenden, ist egal.
+
+Fehler : Eine Datei wurde mit einem falschen Schlssel entschlsselt.
+Rettung: Verschlsseln Sie die Datei wieder mit dem falschen Schlssel und 
+         entschlsseln Sie sie danach mit dem richtigen.
+
+Grunds„tzlich gilt also, daá Entschlsseln und Verschlsseln sich 
+gegenseitig aufheben (invertieren). Beide Prozesse fhren die gleichen 
+Befehle aus, nur eben "umgekehrt" - ein Prozeá l„át sich mit dem anderen 
+IMMER wieder rckg„ngig machen.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Woran erkennt man eine sicher verschlsselte Datei?</FONT>
+
+Eine verschlsselte Datei darf keinerlei Strukturen enthalten, die auf den 
+Inhalt oder den Schlssel hindeuten k”nnten. In deutschsprachigen Texten 
+kommt z.B. der Buchstabe e besonders h„ufig vor. F„llt in einer 
+verschlsselten Datei ein Zeichen durch besonders h„ufiges Vorkommen auf, 
+k”nnte man daraus schlieáen, daá sich dahinter das Zeichen e verbirgt. 
+CRYPT verwischt solche verr„terischen Strukturen um so besser, je l„nger 
+der Schlssel ist. Theoretisch 100%ig sicher w„re nur ein Schlssel, der 
+genauso lang ist, wie der zu verschlsselnde Text. Dies ist in der Praxis 
+nicht gerade komfortabel. Als Faustregel fr CRYPT gilt eine Schlssell„nge
+von 2000 Bytes.
+
+Um zu testen, ob eine verschlsselte Datei auff„llige und verwertbare 
+Strukturen enth„lt, komprimieren Sie diese Datei mit einem der blichen 
+Packprogramme (ARJ, LHA, ZIP, RAR usw.). Packprogramme werden nur wirksam, 
+wenn eine Datei redundante Daten enth„lt - sprich: jene auff„lligen, sich 
+wiederholenden Strukturen. Ist also die gepackte Datei deutlich kleiner als 
+das Original, dann hat der Packer solche Strukturen entdecken k”nnen. In
+diesem Falle sollten Sie unbedingt einen neuen l„ngeren Schlssel 
+anfertigen. ENTschlsseln Sie die Testdatei zuvor aber wieder mit dem 
+alten Schlssel!
+
+Bei einer Schlssell„nge von 2000 Bytes (zu sehen an der Dateigr”áe der 
+Schlsseldatei) fertigen Packprogramme Archive an, die GR™áER als die 
+ungepackte Datei sind. Dies ist ein sicheres Zeichen fr eine strukturfreie 
+und damit sicher verschlsselte Datei.
+
+Falls Sie eine verschlsselte Datei per DFš versenden wollen, sollten Sie 
+sie VOR dem Verschlsseln packen, um šbertragungszeit zu sparen. Ein 
+Packen NACH dem Verschlsseln bringt ja wie gesagt keinen Effekt. Durch 
+Packen wird das Knacken einer verschlsselten Datei brigens nochmals 
+deutlich erschwert.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

@@ -1,0 +1,150 @@
+//--------------------------------------------------------------------
+// BOOKAUTO.AML
+// Save/Restore Bookmarks Automatically, (C) 1993-1996 by nuText Systems
+//
+// (See Bookauto.dox for user help)
+//
+// Running this macro will automatically save bookmarks to history
+// whenever a file is closed, and restore bookmarks from history
+// whenever a file is opened.
+//
+// If the name of a bookmark to be restored is already in use, a new
+// bookmark name is assigned.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// bookmark history buffer
+constant HISTORY = '_book'
+
+// book field delimiters and regexp patterns
+constant DELIM = '\x00'
+constant FIELD = '{[~' + DELIM + ']+}' + DELIM + '#'
+constant BOOKFIELDS = FIELD + FIELD + FIELD + FIELD + FIELD + FIELD
+
+// temporary bookmark name
+constant tempbook = '@T'
+
+// check for a previous instance
+if object? prf.bookauto then
+  if (okbox "Bookauto already installed. Remove it?") == 'Ok' then
+    destroyobject prf.bookauto
+    prf.bookauto = ''
+  end
+  return
+end
+prf.bookauto = getcurrobj
+
+
+// edit windows only
+object edit
+
+// called when closing edit windows
+function onclose
+
+  // call previous onclose
+  passprev
+
+  name = getbufname
+
+  // delete old bookmarks from the history buffer for this file
+  oldbuf = gotobuf HISTORY
+  if oldbuf then
+    while find DELIM + name + DELIM do
+      delline
+      col 1
+    end
+    gotobuf oldbuf
+  end
+
+  // check for bookmarks in the current buffer
+  bookmark = getcurrbook
+  if not bookmark then
+    return
+  end
+
+  // save the current cursor position and window view in
+  // a temporary bookmark
+  setbook tempbook
+
+  // cycle through bookmarks for this buffer
+  while bookmark do
+    if bookmark <> tempbook then
+      // move cursor to the bookmark --and change the window view
+      gotobook bookmark
+      // add bookmark data to history
+      addhistory HISTORY bookmark + DELIM + name + DELIM +
+                 getviewleft + DELIM + getviewtop + DELIM +
+                 getcol + DELIM + getrow + DELIM
+    end
+    bookmark = getprevbook bookmark
+  end
+
+  // restore the cursor position and window view
+  // and destroy the temp bookmark
+  gotobook tempbook
+  destroybook tempbook
+end
+
+
+// called when opening edit windows
+function onopen (options)
+
+  variable bookmark, filename, viewleft, viewtop, column, line
+
+  // call previous onopen
+  passprev options
+
+  name = getbufname
+  pushcursor
+
+  // restore bookmarks from the bookmark history buffer
+  oldbuf = gotobuf HISTORY
+  if oldbuf then
+    pushcursor
+    gotopos 1 1
+    // find bookmarks for this filename
+    while find DELIM + name + DELIM do
+      // parse history line into fields
+      parse BOOKFIELDS (gettext) 'x' ref bookmark ref filename
+                                     ref viewleft ref viewtop
+                                     ref column   ref line
+      // set the bookmark
+      gotobuf oldbuf
+      scrollcol viewleft
+      scrollrow viewtop
+      gotopos column line
+      // bookmark name already used?
+      if book? bookmark then
+        // remove trailing numeric digits to get base name
+        bookbase = bookmark [1..posnot '0-9' bookmark 'r']
+        // find a unique name
+        i = 1
+        loop
+          bookmark = concat bookbase i
+          if not book? bookmark then
+            break
+          end
+          i = i + 1
+        end
+      end
+      // set the bookmark
+      setbook bookmark
+      gotobuf HISTORY
+    end
+    popcursor
+    gotobuf oldbuf
+  end
+  popcursor
+end
+
+// keep this macro resident
+resident ON
+
+display
+say "Bookauto installed"

@@ -1,0 +1,118 @@
+<HTML><HEAD><TITLE>XTYPE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>XTYPE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Dateibetrachter (erweiterter <A HREF="help:type">TYPE</A>-Befehl): zeigt eine Datei (oder mehrere
+nacheinander) am Bildschirm an (wahlweise Text, Bin„r oder Hex).
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">XTYPE [Datei/en] [/h /b /w /m /v /c]</FONT>
+
+<FONT COLOR="blue">[Datei/en]</FONT>
+Hier k”nnen Sie eine Datei angeben oder mit Wildcards arbeiten. *.TXT 
+zeigt zum Beispiel alle Dateien mit der Endung TXT an. XTYPE zeigt zun„chst
+die erste gefundene Datei an. Mit Taste N gelangen Sie in die n„chste Datei,
+mit Taste V wieder zurck in die vorhergehende Datei.
+
+/h  zeigt eine Datei als Hexadezimal-Code. Geeignet z.B. zum Anzeigen von 
+    Programmdateien.
+ 
+/b  zeigt eine Datei bin„r. Geeignet z.B. zum Anzeigen von Programmdateien.
+
+/w  Sonderzeichen in Windows-Dateien werden als lesbare ASCII-Zeichen
+    angezeigt.
+
+/m  Sonderzeichen in Macintosh-Dateien werden als lesbare ASCII-Zeichen
+    angezeigt.
+
+/v  Vorlesemodus fr Blinde (funktioniert nur bei der Anzeige von Dateien
+    im Text- oder Space-Modus, nicht bei der Bin„r- oder Hexanzeige).
+    Die Ausgabe des Dateiinhaltes erfolgt hierbei ber das BIOS. Zum Scrollen
+    werden hierzu die Tasten BILD-AUF bzw. BILD-AB empfohlen, die im
+    Vorlesemodus immer genau eine Bildschirmseite weiterbl„ttern. Die BIOS-
+    Ausgabe ist im Vergleich zum normalen Ausgabemodus extrem langsam und
+    sollte von Sehenden daher nicht verwendet werden.
+
+/c  zeigt das <A HREF="clipbrd.htm">New-DOS-Clipboard</A> (die Eingabe von [Datei] ist nicht 
+    erforderlich).
+
+Die Aktivierung der bzw. das Umschalten zwischen den vier erstgenannten 
+Darstellungsarten ist auch per Tastatur/Maus innerhalb von XTYPE m”glich.
+Mit dem Packer SPACE gepackte Dateien werden ohne verheriges Entpacken
+im Klartext angezeigt.
+
+Die maximale Dateigr”áe liegt bei 2 Gigabyte (max. Dateigr”áe unter DOS)<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">XTYPE c:\autoexec.bat /w</FONT>
+zeigt die Datei AUTOEXEC.BAT an.
+
+<FONT COLOR="blue">XTYPE c:\windows\*.wri /w</FONT>
+zeigt alle Dateien mit der Endung WRI im Windows-Verzeichnis an. Windows-
+Sonderzeichen (z.B. Umlaute) werden dabei zu DOS-Zeichen konvertiert.
+
+<FONT COLOR="blue">XTYPE *.txt+*.doc</FONT>
+zeigt alle Dateien mit der Endung TXT und DOC im gerade ge”ffneten 
+Verzeichnis an.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Bedien-Tasten in XTYPE</FONT>
+
+Pfeil-AUF      eine Zeile aufw„rts scrollen
+Pfeil-AB       eine Zeile abw„rts scrollen
+BILD-AUF       eine Bildschirmseite aufw„rts scrollen
+BILD-AB        eine Bildschirmseite abw„rts scrollen 
+STRG+Pos1 oder
+STRG+BILD-AUF  Sprung zum Dateianfang
+STRG+End oder
+STRG+BILD-AB   Sprung zum Dateiende
+
+Pos1           Sprung zum Zeilenanfang
+End            Sprung zum Zeilenende (z.B. wenn Zeile l„nger als Bildschirm)
+Pfeil-Rechts   um 1 Zeichen seitw„rts nach rechts scrollen
+Pfeil-Links    um 1 Zeichen seitw„rts nach links scrollen
+              (wird dabei die STRG/CTRL-Taste niedergehalten, erfolgt ein 
+               Seitw„rtssprung um 40 Zeichen)
+ 
+F4             Auf dem Bildschirm sichtbarer Teil der Datei wird in das
+               <A HREF="clipbrd.htm">New-DOS-Clipboard</A> kopiert. Wird F4 sp„ter weitere Male
+               bet„tigt, wird der Dateiausschnitt an das Clipboard angeh„ngt,
+               sodaá durch abwechselndes Scrollen und Drcken von F4 auch
+               l„ngere Ausschnitte der Datei in das Clipboard bernommen
+               werden k”nnen. 
+
+T   zeigt die Datei als Text
+B   zeigt die Datei bin„r
+H   zeigt die Datei hexadezimal
+P   zeigt eine Space-Datei entkomprimiert
+U   fgt Zeilenumbrche in berlange Zeilen ein
+A   zeigt Leerzeichen als Punkte und Zeilenumbrche als Symbole
+W   zeigt Windows-Sonderzeichen als DOS-Zeichen
+M   zeigt Macintosh-Sonderzeichen als DOS-Zeichen 
+S   Suchen. Zeigt eine Eingabezeile fr die Eingabe eines Suchwortes
+    oder einer Textpassage und fhrt anschlieáend einen Sprung zur ersten
+    aufgefundenen Stelle in der Datei. Gesucht wird ab der aktuellen
+    Dateiposition abw„rts.
+I   Weitersuchen. Fhrt einen Sprung zum n„chsten in der Datei auffindbaren
+    Suchwort aus.
+N   Zeigt die n„chste Datei an
+V   Zeigt die vorherige Datei an
+E   oder
+Esc beendet XTYPE<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Bedienung mit der Maus</FONT> 
+
+Die meisten der o.g. Tastaturbefehle werden in XTYPE als Menpunkt angezeigt
+und k”nnen mit der Maus angeklickt werden. Die Pfeilsymbole k”nnen zum
+Scrollen angeklickt werden:
+
+Linke  Maustaste: langsames Scrollen (zum "Mitlesen")
+Rechte Maustaste: sehr schnelles Scrollen</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

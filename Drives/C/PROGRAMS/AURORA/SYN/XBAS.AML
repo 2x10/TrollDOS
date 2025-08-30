@@ -1,0 +1,68 @@
+//--------------------------------------------------------------------
+// XBAS.AML
+// Syntax highlighting for BASIC PDS & QuickBASIC files (Bas, Bi)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+  'bcfin'                         // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+  '()=+-*/<>!#%^\t'               // symbol set 1
+  ''                              // symbol set 2
+  '"'                             // string characters
+  ''                              // string literal char
+  ''                              // numeric char
+  "'"           0                 // eol comment 1 / start column
+  'rem'         0                 // eol comment 2 / start column
+  ''           ''                 // multi-line comment 1
+  ''           ''                 // multi-line comment 2
+  0                               // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black     // keyword
+  color gray         on cyan      // symbol set 1
+  color gray         on cyan      // symbol set 2
+  color brightred    on black     // string
+  color brightred    on black     // numeric
+  color brightgreen  on black     // eol comment 1
+  color brightgreen  on black     // eol comment 2
+  color brightgreen  on black     // comment 1
+  color brightgreen  on black     // comment 2
+
+keyword
+  abs, access, alias, all, and, any, append, asc, as, atn, base,
+  beep, begintrans, binary, bload, bof, bsave, byval, calls, call,
+  case, ccur, cdbl, cdecl, chain, chdir, chdrive, checkpoint, chr$,
+  cint, circle, clear, clng, close, cls, color, command$,
+  committrans, common, com, const, cos, createindex, csng, csrlin,
+  curdir$, currency, cvc, cvdmbf, cvd, cvi, cvl, cvsmbf, cvs, data,
+  date$, declare, defcur, defdbl, defint, deflng, defsng, defstr,
+  def, deleteindex, deletetable, delete, dim, dir$, double, do,
+  draw, elseif, else, endif, end, environ$, environ, eof, eqv,
+  erase, erdev$, erdev, erl, error, err, event, exit, exp, field,
+  fileattr, files, fix, for, freefile, fre, function, getindex$,
+  get, gosub, goto, go, hex$, if, imp, inkey$, input$, input, inp,
+  insert, instr, integer, int, ioctl$, ioctl, isam, is, key, kill,
+  lbound, lcase$, left$, len, let, line, list, local, locate, lock,
+  loc, lof, log, long, loop, lpos, lprint, lset, ltrim$, mid$, mkc$,
+  mkd$, mkdir, mkdmbf$, mki$, mkl$, mks$, mksmbf$, mod, movefirst,
+  movelast, movenext, moveprevious, name, next, not, oct$, off, on,
+  open, option, or, output, out, paint, palette, pcopy, peek, pen,
+  play, pmap, point, poke, pos, preset, print, pset, put, randomize,
+  random, read, redim, reset, restore, resume, retrieve, return,
+  right$, rmdir, rnd, rollback, rset, rtrim$, run, sadd, savepoint,
+  screen, seekeq, seekge, seekgt, seek, seg, select, setindex,
+  setmem, sgn, shared, shell, signal, single, sin, sleep, sound,
+  space$, spc, sqr, ssegadd, sseg, stack, static, step, stick, stop,
+  str$, strig, string$, string, sub, swap, system, tab, tan, then,
+  time$, timer, to, troff, tron, type, ubound, ucase$, uevent,
+  unlock, until, update, using, val, varptr$, varptr, varseg, view,
+  wait, wend, while, width, window, write, xor

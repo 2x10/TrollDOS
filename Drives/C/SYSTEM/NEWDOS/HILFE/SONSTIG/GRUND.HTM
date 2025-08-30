@@ -1,0 +1,196 @@
+<HTML><HEAD><TITLE>Grunds„tzliches zur Bedienung von New-DOS</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Grunds„tzliches zur Bedienung von New-DOS</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver">
+ 
+<PRE><A HREF="#0"> Bedienung ber Eingabemasken</A>
+<A HREF="#1"> Aufbau der Kommandozeile</A>
+<A HREF="#2"> Format von Pfadangaben</A> 
+<A HREF="#3"> Zus„tzliche M”glichkeiten in Pfadangaben in New-DOS</A> 
+<A HREF="#4"> Sicherheitsprfungen</A> 
+<A HREF="#5"> Fehlerbehandlung</A><HR 
+
+noshade color="silver"><A NAME="0"><A 
+HREF="#top"> </A><FONT COLOR="maroon">Bedienung ber Eingabemasken</FONT>  
+
+Die meisten New-DOS-Dienstprogramme werden per Kommandozeilen-Parameter
+bedient. Fast alle dieser Programm besitzen jedoch auch eine eingebaute
+Eingabemaske. Diese wird immer dann gezeigt, wenn Sie ein Dienstprogramm
+<FONT COLOR="red">ohne jeden Parameter starten</FONT> (indem Sie z.B. nur "xcopy" an der Kommando-
+zeile eingeben oder das Tool im DOS-Comander mit Doppelklick starten).
+ 
+Diese Eingabemaske fragt alle relevanten Einstellungsoptionen ab. Zur
+Bedienung dieser Masken finden Sie innerhalb der Maske einen kleinen Hinweis.<HR 
+
+noshade color="silver"><A NAME="1"><A 
+HREF="#top"> </A><FONT COLOR="maroon">Aufbau der Kommandozeile</FONT>  
+
+Die meisten New-DOS-Dienstprogramme k”nnen mit Kommandozeilen-Parametern 
+gesteuert werden. Die Kompatibilit„t zu g„ngigen DOS-Systemen und auch 
+die Flexibilit„t sind verbessert worden. Parameter, die mit einem 
+Schr„gstrich / beginnen, sogenannte Kommandoschalter, k”nnen nun auch 
+ohne Leerzeichen dazwischen aneinandergereiht werden. Lediglich zwischen 
+Parametern ohne fhrenden Schr„gstrich ist ein Leerzeichen zur Trennung 
+notwendig. Die Reihenfolge der Kommandoschalter ist nicht festgelegt, 
+allerdings muá die Reihenfolge von Quell- und Zielparametern eingehalten 
+werden. Diese entnehmen Sie den jeweiligen Hilfetexten. Grunds„tzlich gilt 
+jedoch die Regel, daá die Quell-Angabe an erster und die Zielangabe an 
+zweiter Stelle steht. Davor, dazwischen und danach drfen sich die 
+Kommandoschalter befinden. Folgende Kommandozeilen sind in ihrer Wirkung 
+identisch (Beispiel: <A HREF="../newdos/xcopy.htm">XCOPY</A> soll Dateien von Laufwerk A: nach B: kopieren):
+
+XCOPY <FONT COLOR="red">a: b:</FONT><FONT COLOR="blue"> /s /r /h</FONT>  
+
+XCOPY <FONT COLOR="red">a: b:</FONT><FONT COLOR="blue">/s/r/h</FONT> 
+
+XCOPY<FONT COLOR="blue">/r</FONT> <FONT COLOR="red">a:</FONT><FONT COLOR="blue">/s</FONT> <FONT COLOR="red">b:</FONT><FONT COLOR="blue">/h</FONT> 
+
+XCOPY <FONT COLOR="blue">/h/s /r</FONT> <FONT COLOR="red">a: b:</FONT> 
+
+Grunds„tzlich k”nnen Parameter in Groá- oder Kleinschreibung oder gemischt 
+eingegeben werden. Der Kommandoschalter <FONT COLOR="red">/?</FONT> bewirkt, daá das aufgerufene 
+Programm seine interne Kurzhilfe anzeigt. Starten Sie ein Programm ohne
+Kommandozeilenparameter, wird in der Regel eine Eingabemaske angezeigt, in 
+der alle notwendigen Angaben abgefragt werden.<HR
+
+noshade color="silver"><A NAME="2"><A 
+HREF="#top"> </A><FONT COLOR="maroon">Format von Pfadangaben</FONT>
+                                                            
+Bei der Interpretation von Pfadangaben h„lt sich in New-DOS weitgehend 
+an die DOS-Standards. Unvollst„ndige bzw. relative Pfadangaben werden 
+intern expandiert und eindeutige absolute Dateipfade gebildet. Dabei gelten
+folgende Grundregeln:
+
+<FONT COLOR="red">A:</FONT>
+bezieht sich auf das momentan auf Laufwerk A: ge”ffnete Verzeichnis. DOS 
+"merkt" sich fr jedes installierte Laufwerk das dort ge”ffnete Verzeichnis.
+Beim Start des Rechners ist dies das Wurzelverzeichnis des Laufwerkes bzw.
+der Festplatten-Partition (z.B. A:\). Ist also in Laufwerk A: das 
+Verzeichnis TEXTE ge”ffnet, bezieht sich die Angabe A: auf den absoluten
+Verzeichnispfad A:\TEXTE.
+
+<FONT COLOR="red">A:\</FONT>
+bezieht sich immer auf das Wurzelverzeichnis des angegebenen Laufwerkes,
+also A:\
+ 
+<FONT COLOR="red">A:BRIEF.TXT</FONT>
+bezieht sich auf die Datei BRIEF.TXT in dem Verzeichnis, welches gerade
+auf Laufwerk A: ge”ffnet ist. Ist dies das Verzeichnis TEXTE, dann bildet
+New-DOS daraus den Pfad A:\TEXTE\BRIEF.TXT.
+
+<FONT COLOR="red">A:\BRIEF.TXT</FONT>
+bezieht sich immer auf die Datei BRIEF.TXT im Wurzelverzeichnis von A:, also
+A:\BRIEF.TXT. 
+
+<FONT COLOR="red">\BRIEF.TXT</FONT>
+bezieht sich immer auf die Datei BRIEF.TXT im Wurzelverzeichnis des gerade
+aktiven Laufwerkes. Ist dies A:, lautet der vollst„ndige Dateipfad
+A:\BRIEF.TXT.
+
+<FONT COLOR="red">BRIEF.TXT</FONT>
+bezieht sich immer auf die Datei BRIEF.TXT im gerade ge”ffneten Verzeichnis
+des gerade aktiven Laufwerkes. Ist dies A:, und dort das Verzeichnis TEXTE
+ge”ffnet, lautet der vollst„ndige Dateipfad A:\TEXTE\BRIEF.TXT.
+ 
+<FONT COLOR="red">..\BRIEF.TXT</FONT>
+bezieht sich auf die Datei BRIEF.TXT, die eine Verzeichnisebene oberhalb
+des gerade ge”ffneten Verzeichnisses des aktuellen Laufwerkes gespeichert 
+ist. Ist das momentane Verzeichnis A:\TEXTE\BRIEFE, dann lautet der 
+vollst„ndige Dateipfad A:\TEXTE\BRIEF.TXT.
+
+<FONT COLOR="red">.</FONT>
+Der einzelne Punkt symbolisiert das gerade ge”ffnete Verzeichnis des 
+aktuellen Laufwerkes.
+
+<FONT COLOR="red">A:.</FONT>
+symbolisiert das gerade ge”ffnete Verzeichnis des genannten Laufwerkes.
+ 
+Es sind noch weitere Kombinationen m”glich. Einige Programme verarbeiten
+grunds„tzlich nur Laufwerksangaben. <FONT COLOR="red">A:</FONT> bezieht sich in diesen Programmen
+immer auf das Laufwerk an sich und nicht auf einen Verzeichnispfad auf diesem
+Laufwerk. Ein Beispiel dafr ist <A HREF="../newdos/diskcopy.htm">DISKCOPY</A>.<HR
+
+noshade color="silver"><A NAME="3"><A 
+HREF="#top"> </A><FONT COLOR="maroon">Zus„tzliche M”glichkeiten in Pfadangaben in New-DOS</FONT> 
+
+Die neuen M”glichkeiten bei der Gestaltung von Quell-Pfadangaben erlauben
+eine bessere Beschreibung der Quelldateien. Wenn Sie unter New-DOS 6.23
+z.B. mit Cleandisk Ihre Festplatte aufr„umen wollten, muáten Sie Cleandsk
+mehrmals starten:
+
+Cleandsk *.tmp
+Cleandsk *.bak
+Cleandsk *.sic
+Cleandsk *.$$$
+
+Das l„át sich jetzt mit einem einzigen Befehl erledigen:
+
+<FONT COLOR="blue">Cleandsk *.tmp+*,bak+*.sic+*.$$$</FONT>
+
+Sie sparen nicht nur Tipparbeit, sondern auch eine Menge Zeit, da Cleandisk
+nun nicht viermal, sondern nur noch einmal ber den Datentr„ger laufen muá.
+
+Solche Konstrukte sind auch bei den meisten anderen New-DOS-Dienstprogrammen
+m”glich, z.B. XCOPY.<HR 
+
+noshade color="silver"><A NAME="4"><A 
+HREF="#top"> </A><FONT COLOR="maroon">Sicherheitsprfungen</FONT>   
+
+Die New-DOS-Dienstprogramme unterziehen jede Pfadangabe nach der Expansion 
+einer genauen Prfung. Schreibversuche beispielsweise auf ein CD-Laufwerk
+werden bereits ganz zu Anfang abgewiesen, ansonsten ist die Erkennung solcher
+Laufwerke verbessert worden. Ebenfalls verbessert wurde die Erkennung von
+unterschiedlichen Pfadangaben, die sich jedoch auf ein und dieselbe Datei
+beziehen. Dies ist vor allem bei Verzeichnissen wichtig, die mit <A HREF="help:subst">SUBST</A> 
+in ein Laufwerk verwandelt wurden. Wird z.B. das Verzeichnis C:\TEXTE durch
+SUBST als Laufwerk E: dargestellt, beziehen sich die Pfadangaben E:\BRIEF.TXT
+und C:\TEXTE\BRIEF.TXT auf dieselbe Datei. Das Kopieren der einen Datei
+auf die andere wrde bei Nichterkennung zur Zerst”rung der Datei fhren.
+Dieses Manko der Vorversion von New-DOS wurde beseitigt.
+
+Phantom-Laufwerke werden nicht untersttzt oder nur dort, wo es zu keinen
+Komplikationen fhren kann. In vielen PC ist nur ein Diskettenlaufwerk
+(A:) eingebaut, so daá der Laufwerksbuchstabe B: freigeblieben ist. Dieses
+Laufwerk nennt man Phantomlaufwerk, weil es fr DOS intern existiert. DOS 
+kann n„mlich Laufwerk A: in B: umbenennen und umgekehrt, so daá sich die
+Pfadangaben A:\BRIEF.TXT und B:\BRIEF.TXT auf ein und dieselbe Datei
+beziehen. XCOPY z.B. wrde die Datei auf A: nur nach B: kopieren, wenn das
+Laufwerk B: tats„chlich existiert und ansonsten melden, daá das Laufwerk B:
+nicht untersttzt wird.
+
+Ausgeschlossen wird von den Programmen, die es betrifft, nun auch eine erst 
+einmal dokumentierte Verwechslung. Im besagten Fall trug ein Verzeichnis den
+gleichen Namen wie der Datentr„ger, wobei der Datentr„gername als 
+Datei gespeichert war - sprich, es existierten zwei gleichnamige Objekte in
+ein und demselben Verzeichnis (was normalerweise nicht m”glich ist).<HR 
+
+noshade color="silver"><A NAME="5"><A 
+HREF="#top"> </A><FONT COLOR="maroon">Fehlerbehandlung</FONT>
+
+Erkennt ein New-DOS-Dienstprogramm einen Fehler, gibt es nun eine verbesserte
+Fehlermeldung aus, die ziemlich genau die Ursache nennt. Das geht z.T. 
+soweit, daá XCOPY, wenn Sie eine Datei zum Drucker kopieren wollen, 
+fehlendes Papier erkennt und meldet.
+
+Der Kommandoschalter /o wird von mehreren Programmen untersttzt.
+/o bewirkt, daá ein Programm ohne Benutzerabfrage oder Fehlermeldung
+durchl„uft und eventuelle Probleme in der zentralen Datei <A HREF="../newdos/logfile.htm">DOSERROR.LOG</A> 
+dokumentiert. Angeben werden dabei der Name des Programmes, das ber den
+Fehler gestolpert ist, Datum und Uhrzeit des Fehlers, ggf. Name der 
+fehlerhaften Datei und eine kurze Diagnose.
+
+Der Parameter /o kann also immer dann eingesetzt werden, wenn z.B. eine
+Batch-Datei unbeaufsichtigt mehrere Aktionen durchfhren soll. In diesem
+Falle wrde jedes daran beteiligte Programm (wenn es /o untersttzt), in der
+Datei DOSERROR.LOG seine Fehlermeldungen hinterlassen. Daran kann dann der
+Erfolg oder Miáerfolg der Aktion im nachhinein abgelesen werden.
+
+Eine weitere M”glichkeit, Protokoll ber unbeaufsichtigte Programml„ufe zu
+fhren, ist, die Bildschirmausgaben der Programme in eine Datei umzuleiten
+(z.B. XCOPY A: B: >> LOG.TXT).</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>
+ 

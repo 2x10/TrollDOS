@@ -1,0 +1,60 @@
+//--------------------------------------------------------------------
+// STYLE.AML
+// Change Editor Style, (C) 1993-1996 by nuText Systems                                        */
+//
+// (see Style.dox for user help)
+//
+// This macro changes the current keyboard and menu style (Kbd.aml and
+// Menu.aml) and re-compiles the editor.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// create the style menu
+menu "style"
+  item " &Aurora"                 "AU"
+  item " Aurora/&CUA/Windows"     "CU"
+  item " &Brief"                  "BR"
+  item " &MultiEdit"              "ME"
+  item " &QEdit/TSE"              "QE"
+  item " Word&Perfect"            "WP"
+  item " &WordStar/Borland IDE"   "WS"
+end
+
+settype "popup"
+
+// macro help
+macrofile = arg 1
+function <f1>
+  helpmacro macrofile
+end
+
+// get the editor style
+style = popup "style" "Which editor style would you like to use?"
+              '' '' (getcurrobj)
+if style then
+
+  // backup the existing style files
+  copyfile (bootpath "kbd.aml") (bootpath "kbd.old")
+  copyfile (bootpath "menu.aml") (bootpath "menu.old")
+
+  // copy the selected style files to the main install path
+  if copyfile (getbootpath + "style\\" + style + "kbd.aml")
+              (bootpath "kbd.aml") then
+    if copyfile (getbootpath + "style\\" + style + "menu.aml")
+                (bootpath "menu.aml") then
+      // recompile the editor
+      seteventobj (getwinobj)
+      send "recompile"
+    end
+  end
+end
+
+// destroy the style menu
+destroybuf "style"

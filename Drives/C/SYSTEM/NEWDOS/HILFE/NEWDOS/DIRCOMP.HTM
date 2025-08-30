@@ -1,0 +1,79 @@
+<HTML><HEAD><TITLE>DIRCOMP</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>DIRCOMP</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>vergleicht alle gleichnamigen Dateien zweier Verzeichnisse byteweise 
+miteinander
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">DIRCOMP [Verzeichnis 1] [Verzeichnis 2] [ggf. Dateimaske] [Parameter]</FONT>
+
+/s  vergleicht auch Dateien in Unterverzeichnissen
+/p  wartet nach jeder Bildschirmseite auf einen Tastendruck
+/i  listet nur identische Dateien auf
+/u  listet nur unterschiedliche Dateien auf
+/l  listet auch die Namen nicht doppelt vorhandener Dateien auf
+/k  verwendet Kleinschreibung
+/o  Sind die beiden verglichenen Verzeichnisse unterschiedlich, wird dies
+    in der <A HREF="logfile.htm">Log-Datei</A> vermerkt
+    
+Fehlt <FONT COLOR="blue">[Verzeichnis 2]</FONT>, verwendet DIRCOMP das aktuelle Verzeichnis.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT>
+
+Mit DIRCOMP kînnen Sie ÅberprÅfen, ob die Dateien zweier Verzeichnisse 
+inhaltlich identisch sind. Verwenden Sie DIRCOMP z.B., wenn Sie festzustellen
+wollen, ob eine Sicherheitskopie mit dem Original identisch ist, um zu 
+entscheiden, ob die Kopie aktualisiert werden mu· oder nicht. DIRCOMP kann 
+auch (im Gegensatz zu DISKCOMP) zwei DatentrÑger miteinander vergleichen, 
+die ein unterschiedliches Format haben. Verglichen werden kînnen also 
+beispielsweise eine 3.5-Zoll-Diskette mit einer 5.25-Zoll-Diskette oder 
+zwei unterschiedlich gro·e Festplatten.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Arbeitsweise von DIRCOMP</FONT>
+
+DIRCOMP sucht zu allen Dateien und Verzeichnissen im Quellpfad ein 
+gleichnamiges Pendant im Zielpfad. Wird ein solches gefunden, werden beide 
+Dateien Byte fÅr Byte gelesen und verglichen. Nur wenn beide Dateien 
+unterschiedlich gro· sind, entfÑllt die LeseprÅfung und DIRCOMP zeigt eine 
+entsprechende Meldung an. Wenn Sie den Parameter /s angeben, mit dem DIRCOMP 
+auch in allen Unterverzeichnissen nach vergleichbaren Dateien fahndet, dann 
+beachten Sie bitte, da· auch die Namen der Unterverzeichnisse gleich sein 
+mÅssen. Ansonsten werden Dateien "Åbersehen", die durchaus vergleichbar 
+(also gleichnamig) wÑren. Ein Vergleich von Datum und Uhrzeit zweier Dateien 
+findet nicht statt.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">DIRCOMP A:\ B:\ /s</FONT>
+vergleicht die Diskette in A: mit der Diskette in Laufwerk B:
+
+<FONT COLOR="blue">DIRCOMP A:\ B:\ *.TXT /s</FONT> 
+wie oben, es werden jedoch nur Dateien mit der Endung .TXT verglichen
+
+<FONT COLOR="blue">DIRCOMP C:\SICHKOPI D:\ /s</FONT> 
+vergleicht das Verzeichnis C:\SICHKOPI mit dem Inhalt von Festplatte D:
+
+<FONT COLOR="blue">DIRCOMP C:\DOS C:\DOSSAVE</FONT> 
+vergleicht das DOS-Verzeichnis mit einer Sicherheitskopie namens C:\DOSSAVE
+
+Da die genannten Beispiele jede Menge Daten ausgeben wÅrden, bietet es sich 
+an, den Parameter /p anzuhÑngen, damit die Ausgabe nach jeder Bildschirmseite
+stoppt. Eine weitere Verringerung der "Datenflut" erreichen Sie, indem Sie
+mit Parameter /u nur die Dateien anzeigen lassen, die NICHT identisch sind.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Errorlevel</FONT>
+ 
+Folgende <A HREF="help:if">Errorlevel</A> kînnen in einer Batchdatei abgefragt werden:
+
+0 = beide Verzeichnisse sind identisch
+1 = es wurden Unterschiede gefunden
+2 = es ist ein Fehler aufgetreten
+3 = Benutzer hat Programm vorzeitig abgebrochen</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

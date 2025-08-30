@@ -1,0 +1,31 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGPROM.AML
+// Configuration for Prompt Style
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable promptstyle
+
+// create dialog box
+dialog "Prompt Style" 37  7 "cp"
+
+// save options group box
+groupbox 'Default Prompt Style:' 3 2
+  (menu ''
+     item " ( ) &Command Line"
+     item " ( ) &One-Line Box "
+     item " ( ) &Two-Line Box"
+     item " ( ) &Dialog Box"
+   end) '' _PromptStyle 'c12d'
+
+// ok/cancel buttons
+button "O&k"    27  3 8
+button "Cancel" 27  5 8
+
+// display dialogbox
+if (getdialog ref promptstyle) == "Ok" then
+  prf.PromptStyle  = promptstyle
+end

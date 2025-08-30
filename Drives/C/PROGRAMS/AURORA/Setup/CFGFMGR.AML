@@ -1,0 +1,84 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGFMGR.AML
+// Configuration for File Manager Options
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable fmgropt, fmgrsort, fmgrquit, confopt
+
+// create dialog box
+dialog "File Manager Options" 54 16 "cp"
+
+// display options
+groupbox 'Display:' 3 2
+  (menu ''
+     item " [ ] &Variable Length Format"
+     item " [ ] &Directories"
+     item " [ ] &Files"
+     item " [ ] &Hidden and System Files "
+     item " [ ] Sizes in 1&k increments "
+     item " [ ] D&irectories First"
+   end) '' _FmgrOpt "vdfhk1"
+
+// sort options
+groupbox 'Sort by:' 3 10
+  (menu ''
+     item " ( ) &Name"
+     item " ( ) &Extension"
+     item " ( ) &Size"
+     item " ( ) D&ate/Time  "
+     item " ( ) D&os Order"
+   end) '' _FmgrSort 'nesdo'
+
+// confirmation options
+groupbox 'Confirm on:' 34 2
+  (menu ''
+     item " [ ] File De&lete"
+     item " [ ] File &Replace "
+     item " [ ] File &Touch"
+   end) '' (if? _ConDel == 'y' 'a') + (if? _ConRpl  == 'y' 'b') +
+           (if? _ConTch == 'y' 'c')  "abc"
+
+// other options
+groupbox 'Options:' 34 7
+  (menu ''
+     item " [ ] &Quit on Open "
+   end) '' _FmgrQuit 'y'
+
+// ok/cancel buttons
+button "O&k"    33 14 8
+button "Cancel" 44 14 8
+
+// display dialog box
+if (getdialog ref fmgropt ref fmgrsort ref confopt ref fmgrquit) == 'Ok' then
+
+  // confirmation options
+  prf.ConDel = if? (pos 'a' confopt) 'y' 'n'
+  prf.ConRpl = if? (pos 'b' confopt) 'y' 'n'
+  prf.ConTch = if? (pos 'c' confopt) 'y' 'n'
+
+  doupdate = prf.FmgrOpt <> fmgropt
+  prf.FmgrOpt  = fmgropt
+  prf.FmgrSort = fmgrsort
+  prf.FmgrQuit = fmgrquit
+
+  // apply changes to all existing fmgr windows
+  for window = getcurrwin to getbotwin by getprevwin window do
+    if wintype? "fmgr" window then
+      oldwin = gotowindow window
+      oldbuf = gotobuf (getwinbuf)
+      oldevent = geteventobj
+      seteventobj "fmgr"
+      if doupdate then
+        send "fupdate" '' fmgropt + _NameStyle
+      end
+      fsort _FmgrSort
+      seteventobj oldevent
+      gotobuf oldbuf
+      gotowindow oldwin
+    end
+  end
+end

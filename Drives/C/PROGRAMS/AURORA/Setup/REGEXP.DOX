@@ -1,0 +1,299 @@
+
+
+  Regular Expression Searching
+  컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  The Regular Expression search option 'x' allows you to specify complex
+  search patterns when searching through buffers or strings. Option 'x'
+  can be specified in both end-user search prompts and macro language
+  searching functions (such as 'find' and 'replace').
+
+  Regular expression search patterns are created by combining normal
+  characters with regular expression 'operator' characters in the search
+  string. These operators take on a special meaning when the search
+  option 'x' is specified.
+
+  Each operator matches a pattern. There are operators which allow you
+  to anchor searches to the beginning or end of a line, match any
+  character, match a class of characters or its complement, optionally
+  match a pattern, match one of several patterns, match repeating
+  patterns, and match groups of patterns.
+
+  A rich set of regular expression operators are provided. The following
+  table lists and describes each of the operators:
+
+
+  Operator  Description
+  컴컴컴컴  컴컴컴컴컴�
+
+  ^         Matches the beginning of a line. If the search is confined
+            to a marked block with search option 'b', then this operator
+            matches the beginning column of the mark. For example:
+
+              ^         // matches the beginning of a line
+              ^a        // matches 'a' at the beginning of a line
+              ^apples   // matches 'apples' at the beginning of a line
+
+  $         Matches the end of a line. If the search is confined to a
+            marked block with search option 'b', then this operator
+            matches the ending column of the mark or line. For example:
+
+              $         // matches the end of a line
+              o$        // matches 'o' at the end of a line
+              oranges$  // matches 'oranges' at the end of a line
+
+  .         Matches any character. For example:
+
+              .         // matches any single character
+              ..        // matches any two consecutive characters
+              t.o       // matches 'two' or 'too', but not
+                        //   'toe' or 'true'
+
+  [ ]       Specifies a 'class' of characters that a single character
+            can match. For example:
+
+              [ab]      // matches 'a' or 'b'
+              [abc12!]  // matches 'a', 'b', 'c', '1', '2', or '!'
+              [AaZz]    // matches 'A', 'a', 'Z', or 'z'
+
+            Note that the character class is always case-sensitive, even
+            when the 'ignore case' search option 'i' is specified.
+
+  [ - ]     Specifies a range of characters to match when used between
+            characters in a class. Note that '-' is treated as a normal
+            character if used as the first or last character of the
+            class, or if used outside the class. For example:
+
+              [a-z]        // matches characters 'a' through 'z'
+              [-+0-9]      // matches characters '0' through '0' and
+                           //   '-' and '+'
+              [a-zA-Z0-9]  // matches any alphanumeric character
+
+  [~ ]      Specifies the complement of a character class against which
+            to match a character. The '~' operator is only meaningful
+            when used as the first character after the '[' bracket,
+            otherwise it is treated as any other normal character. For
+            example:
+
+              [~ab]        // match any characters other than 'a' or 'b'
+              [~12~]       // match any characters other than
+                           //   '1', '2', or '~'
+              [~0-9]       // match any non-numeric character
+
+  ?         Optionally matches the preceding pattern. For example:
+
+              thes?e       // matches 'thee' or 'these'
+              the[sm]?e    // matches 'thee', 'these', or 'theme'
+
+  |         This is the alternation ('or') operator. It matches the
+            preceding or the following pattern. For example:
+
+              the|in       // matches 'then' or 'thin'
+                           //   (but not 'the' or 'in)
+              thes|me      // matches 'these' or 'theme'
+
+            Multiple '|' operators can be chained together. The 'or-ed'
+            patterns are searched in the order in which they are listed.
+            For example:
+
+              thes|m|r| |e
+                // matches 'these', 'theme', 'there', or 'the e'
+              {apples}|{oranges}|{bananas}
+                // matches 'apples', 'oranges', or 'bananas' (see below
+                // for a description the grouping operator '{}')
+
+  *         Matches zero or more occurrences of the preceding pattern,
+            matching as few occurrences as possible (minimum closure).
+            For example:
+
+              fo*bar
+                // matches 'fbar', 'fobar', 'foobar', 'fooobar', etc.
+
+              apples.*oranges
+                // matches any string starting with 'apples' and ending
+                // with 'oranges':
+
+            'Minimum closure' means that the shortest possible string is
+            matched. For example, if the search pattern is 'ab*b' and
+            string to be searched is 'abbbbbbb', then 'ab' will be
+            matched. Thus, the '*'and '+' operators are seldom used at
+            the end of a search string).
+
+  +         Matches one or more occurrences of the preceding pattern,
+            matching as few occurrences as possible (minimum closure).
+            For example:
+
+              fo+bar
+                // matches 'fobar', 'foobar', 'fooobar', etc.
+              apples +oranges
+                // matches any string starting with 'apples', followed
+                // by one or more spaces, and ending with 'oranges':
+
+  @         Matches zero or more occurrences of the preceding pattern,
+            matching as many occurrences as possible (maximum closure).
+            For example:
+
+              a.@z
+                // matches a string starting with 'a' and ending with
+                // 'z', for the longest possible string
+              '.@'
+                // matches a single-quoted string for the longest
+                // possible string
+
+            'Maximum closure' means that the longest possible string is
+            matched. For example, if the search pattern is "ab@b", and
+            the string to be searched is 'abbbbbbb', then 'abbbbbbb'
+            will be matched.
+
+  #         Matches one or more occurrences of the preceding pattern,
+            matching as many occurrences as possible (maximum closure).
+            For example:
+
+              [a-zA-Z]#
+                // matches the first occurrence of one or more
+                // alphabetic characters, for the longest string
+                // possible
+              string2#
+                // matches 'string2', 'string22', 'string222', etc.
+                // (matching the longest possible string)
+
+  { }       Groups characters or other patterns together as one pattern,
+            so that regular expression operators can act on the entire
+            pattern. For example:
+
+              {apples}|{oranges}
+                // matches 'apples' or 'oranges'
+              another{ fine}? mess
+                // matches 'another mess' or 'another fine mess'
+              {ab}#
+                // matches 'ab', 'abab', 'ababab', etc.
+              {{ab}|{xy}}#
+                // matches 'ab', 'xy', 'abab', 'abxy', 'xyab', 'abxyab',
+                // etc.
+
+            The '{}' operator also identifies or 'tags' patterns for
+            replacement (see below).
+
+  \         Indicates that the next character is to taken literally and
+            not used as a regular expression operator. For example:
+
+              apples\++oranges
+                // matches 'apples+oranges', 'apples++oranges', etc.
+              whats all this then\?
+                // matches "whats all this then?"
+              c:\\file\.?txt
+                // matches 'c:\filetxt' or 'c:\file.txt'
+
+            The '\' operator can also be used to match specific
+            characters:
+
+              \a    matches the alert (beep) character (Ascii 7)
+              \b    matches the backspace character (Ascii 8)
+              \f    matches the formfeed character (Ascii 12)
+              \n    matches the newline (linefeed) character (Ascii 10)
+              \r    matches the return character (Ascii 13)
+              \t    matches the tab character (Ascii 9)
+              \v    matches the vertical tab character (Ascii 11)
+              \xHH  matches the hexadecimal character 'HH'
+
+            For example:
+
+              \t\t
+                // matches two tab characters
+              \x00|\r
+                // matches a binary zero or a return character
+                // (Ascii 13)
+
+            The '\' operator is also used within a replacement pattern
+            to reference a pattern which was tagged with the grouping
+            '{}' operator (see below).
+
+
+  The following are a few additional examples of regular expression
+  search patterns:
+
+    ^ *$    // matches blank lines
+    ^.*$    // matches all the characters on any line
+    ^.+$    // matches all the characters on any non-blank line
+
+    { |\x09}+$
+      // matches trailing whitespace (blanks and tabs)
+
+    {if}|{else}|{for}|{while}|{switch}|{return}|{break}
+      // matches a few 'C' language keywords
+
+    [a-zA-Z0-9_]#
+      // matches identifiers in most languages
+
+    ^ *{function}|{key}.*$
+      // matches AML function headers
+
+    [a-zA-Z0-9_]# *= *[0-9]#
+      // matches statements of the form: variable = number
+
+
+  Regular Expression Replacement Patterns
+  컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴�
+  A pattern which was 'tagged' by the grouping operator '{}' in the
+  search string of a regular expression search-and-replace operation can
+  be referenced in the replacement string by using the '\' replacement
+  operator. Tagged patterns are numbered from 1 to 9 based on the
+  leftmost '{' symbol in the search string. The pattern number is
+  specified after the '\' character in the replacement string. For
+  example:
+
+    search string:    "{.*}"         // changes double-quoted strings
+    replace string:   '\1'           // to single-quoted strings
+
+    search string:    {[a-zA-Z]#} +{[a-zA-Z]#}
+    replace string:   \2 and \1
+
+  The example above reverses two adjacent alphabetic words and places
+  the word 'and' between them.
+
+
+  Specifying '\0' in the replacement string references the entire search
+  pattern. For example:
+
+    search string:    ^.+$           // encloses non-blank lines
+    replace string:   (\0)           // in parentheses
+
+    search string:    [a-zA-Z0-9]#   // duplicates alphanumeric
+    replace string:   \0\0           // identifiers
+
+
+  To enter the '\' character in a replacement string, enter it twice.
+  For example:
+
+    search string:    ^              // insert '\\' at the beginning
+    replace string:   \\\\           // of each line
+
+
+
+  Summary of Regular Expression Operators
+  컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴�
+
+  Operator  Description
+  컴컴컴컴  컴컴컴컴컴�
+  ^         match the beginning of a line
+  $         match the end of a line
+  .         match any character
+  [ ]       specify a characters class
+  [ - ]     specify a range of characters
+  [~ ]      specify the complement of a character class
+  ?         optionally match the preceding pattern
+  |         the alternation ('or') operator
+  *         match zero or more of the preceding pattern (min closure)
+  +         match one or more of the preceding pattern (min closure)
+  @         match zero or more of the preceding pattern (max closure)
+  #         match one or more of the preceding pattern (max closure)
+  { }       define a group or tag a pattern
+  \         literal operator, or reference a tagged pattern
+  \a        match the alert or beep character (Ascii 7)
+  \b        match the backspace character (Ascii 8)
+  \f        match the formfeed character (Ascii 12)
+  \n        match the newline or linefeed character (Ascii 10)
+  \r        match the return character (Ascii 13)
+  \t        match the tab character (Ascii 9)
+  \v        match the vertical tab character (Ascii 11)
+  \xHH      match the hexadecimal character 'HH'
+

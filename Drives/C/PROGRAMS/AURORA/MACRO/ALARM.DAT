@@ -1,0 +1,5 @@
+12 00 00*  *  *  *shortbox   Lunchtime!
+15 45 00*  *  *  2msgbox     It's 3:45pm, Tuesday.
+*  *  * *  *  *  *onalarm    Beep every second
+*  00 00*  *  *  *clock.x    Show clock on the hour
+

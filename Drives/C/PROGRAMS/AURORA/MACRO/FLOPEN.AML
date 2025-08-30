@@ -1,0 +1,57 @@
+//--------------------------------------------------------------------
+// FLOPEN.AML
+// Open File List, (C) 1993-1996 by nuText Systems
+//
+// This macro opens a file containing a list of filenames/filespecs
+// and displays them in qualified format in a file manager window.
+//
+// If the file is not passed as arg 3, then the user is prompted to
+// enter the filename of the file list. If option 'r' is passed to this
+// macro as arg 4, then the new file list will replace the contents of
+// the current file manager window (if any).
+//
+// Usage:
+//
+// This macro can be run by selecting Open List or Replace List from
+// the file manager File menu, or Open File List from the file manager
+// Command menu.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+file = arg 3
+options = arg 4
+
+// get file list file
+if not file then
+  file = ask (if? (pos 'r' options) "Replace " + (onname (getbufname) + " with") "Open file list")
+             _load
+
+  if not file then
+    return
+  end
+end
+
+// use .Lst extension if none is specified
+file = defext file "lst"
+
+// load file list
+file = qualify file [1..posnot '*' file 'r'] (getbufname)
+buffer = loadbuf file
+if buffer then
+  // directory was loaded
+  if getloadinfo 't' then
+    destroybuf
+    queue "msgbox" "Invalid file list!\nFile must contain a list of filenames/filespecs."
+  // file was loaded
+  else
+    title = getbufname
+    setbufname title + (if? not (poschar '*?' title) '*' '')
+    say "Loading " + title + "..."
+    fmgr.fupdate '' _FmgrOpt + _NameStyle + 'vq'
+    openbuf buffer (arg 4)
+  end
+else
+  queue "msgbox" file + " not found"
+end

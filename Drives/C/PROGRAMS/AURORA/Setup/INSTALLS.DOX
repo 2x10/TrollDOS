@@ -1,0 +1,22 @@
+
+ÿÿINSTALLS
+ ÿLite Installationÿ
+
+  This macro installs a 'Lite' version of the editor to a drive and
+  directory on your computer. You will be prompted to enter the
+  installation path, and to select an editor style and color palette.
+
+  Since the total size of all installed files will be less than 1.4
+  megabytes, the editor can be installed on a floppy drive.
+
+  Nearly all editor features will be retained in a Lite Installation.
+  However, the following files will be ommitted:
+
+    - online macro language and function documentation
+    - source for configuration macros
+    - source for external macros
+    - source for most syntax highlighting objects
+
+  The total amount of disk space required for a Lite Installation is
+  about 1.3 megabytes.
+

@@ -1,0 +1,107 @@
+//--------------------------------------------------------------------
+// FATTR.AML
+// Change Attributes, (C) 1993-1996 by nuText Systems
+//
+// (See Fattr.dox for user help)
+//
+// This macro displays and optionally changes file or directory
+// attributes.
+//
+// When run from an edit window, the attributes of the current file are
+// changed to the new attributes.
+//
+// When run from a file manager window, the attributes of the current
+// file (or marked files) are changed to the new attributes.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//
+// This macro can also be run from the file manager by selecting the
+// Attributes.. item from the Command menu.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+// change attribute dialog box
+private function askattr (file attr)
+
+  file = onname file
+
+  // used dialog box
+  if _PromptStyle == 'd' then
+
+    dialog file 31 7 "cp"
+
+    groupbox 'Attributes:' 3 2
+      (menu ''
+         item " [ ] &Archive"
+         item " [ ] &Hidden"
+         item " [ ] &Read Only "
+         item " [ ] &System"
+       end) '' (upcase attr)  "AHRS"
+
+    // ok/cancel buttons
+    button "O&k"     21  3 8
+    button "Cancel"  21  5 8
+
+    // display dialog box
+    if (getdialog ref attr) == 'Ok' then
+      if? attr (locase attr) ' '
+    end
+  else
+    ask "Enter attributes [AHRS] for " + file '' (sub 'Ä' '' attr)
+  end
+end
+
+// called by fcommand for file manager
+function fattr2 (file attr)
+  if file [LAST_CHAR] == '\\' then
+    file [LAST_CHAR] = ''
+  end
+  if setfileattr file attr then
+    fupdate file
+  else
+    ferror "Change attributes"
+  end
+end
+
+// fmgr change attributes command
+if wintype? "fmgr" then
+  if not fmark? then
+    file = fgetfile
+    if file [LAST_CHAR] == '\\' then
+      file [LAST_CHAR] = ''
+    end
+    attr = getfileinfo file 'a'
+  end
+  attr = askattr fname [1..13] attr
+  if attr then
+    fcommand "fattr2" (locase attr)
+  end
+
+// edit windows
+elseif wintype? "edit" then
+  file = getbufname
+  attr = askattr (getname file) (getfileinfo file 'a')
+  if attr then
+    if not setfileattr file attr then
+      msgbox "Change attributes failed!"
+    end
+  end
+
+else
+  msgbox "Edit Windows or File Manager Windows Only!"
+end

@@ -1,0 +1,15 @@
+
+ÿÿTABAUTO.AML
+ ÿExpand Tabs Automaticallyÿ
+
+  Running this macro will automatically expand tab characters (Ascii 9)
+  whenever a new file is loaded into an edit window.
+
+  To reduce the amount of time required to open large files, only the
+  last 200 lines are checked for tab characters. If found, then tabs
+  throughout the file are expanded. If tabs are not expanded by this
+  macro, the Expand Tabs command can be used to manually expand tabs.
+
+  The current tab width (the value of the _TabWidth configuration
+  variable) is used as the tab width for the expansion.
+

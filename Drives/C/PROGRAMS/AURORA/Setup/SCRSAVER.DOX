@@ -1,0 +1,10 @@
+
+ÿÿSCRSAVER.AML
+ ÿScreen Saverÿ
+
+  This macro installs or removes a colorful screen saver.
+
+  You will be prompted to enter the screen saver delay time in minutes.
+  When the specified time has elapsed and there has been no activity in
+  the editor, random color patterns are drawn until activity resumes.
+

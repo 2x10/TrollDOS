@@ -1,0 +1,8 @@
+
+ÿÿSUMBLOCK.AML
+ ÿAdd Numbers in a Blockÿ
+
+  This macro adds up numbers in a marked block in the current edit
+  window and displays the total. Sumblock will handle numbers from
+  -2 billion to +2 billion with a maximum of 8 decimal places.
+

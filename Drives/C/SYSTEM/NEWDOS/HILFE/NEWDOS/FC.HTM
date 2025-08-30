@@ -1,0 +1,65 @@
+<HTML><HEAD><TITLE>FC</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>FC</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>vergleicht zwei Dateien miteinander, um inhaltliche Unterschiede 
+festzustellen.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">FC [Datei_1] [Datei_2] [/b /c /w /h]</FONT>
+
+/b    Bin„rvergleich - beide Dateien werden byteweise miteinander verglichen.
+      Dateien mit den Endungen EXE, COM, SYS, OBJ, LIB und BIN werden 
+      automatisch bin„r verglichen - es sei denn, es wird Parameter /t 
+      eingegeben       
+
+/t    Damit nun auch ein ASCII-Vergleich der CONFIG.SYS oder von ASM-
+      LIB-Dateien m”glich ist, kann mit /t ein Textvergleich erzwungen 
+      werden.
+
+/c    FC meldet keinen Unterschied, wenn sich die beiden Dateien nur in 
+      Groá- und Kleinschreibung voneinander unterscheiden. Unwirksam, wenn 
+      /b verwendet wurde.
+
+/w    Tabulatorzeichen werden als Leerzeichen interpretiert. Mehrfach 
+      hintereinander folgende Leerzeichen sieht FC als EIN Leerzeichen an. 
+      Die Dateien werden also als identisch gemeldet, wenn sie sich dem 
+      "Wortlaut" nach gleichen. Unwirksam, wenn /b verwendet wurde. 
+
+/h    Die Unterschiede beim Bin„rvergleich werden in Hexadezimal-
+      Schreibweise angezeigt. Vor oder nach dem ersten unterschiedlichen 
+      Zeichen wird ein Sternchen angezeigt.
+
+/p    wartet nach jeder Bildschirmseite auf einen Tastendruck<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT>
+
+Beim Bin„r-Vergleich wird nur die ERSTE unterschiedliche Stelle in den 
+Dateien angezeigt. Der Bin„rvergleich ist sehr schnell und sollte bei groáen 
+Dateien angewendet werden, bei denen nur festgestellt werden soll, OB sie 
+sich berhaupt unterscheiden. Beim Vergleich im Text-Modus (also ohne 
+Parameter /b) werden beide Dateien zeilenweise gelesen. Die jeweils erste 
+Zeile eines Blockes unterschiedlicher Zeilen wird angezeigt. FC versucht 
+dann, den Lesevorgang in beiden Dateien wieder zu synchronisieren. Das heiát,
+daá in beiden Dateien nach Textzeilen gesucht wird, die wieder identisch 
+sind.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">FC autoexec.bat autoexec.old /c /w</FONT>
+
+šberprft, ob sich die beiden Dateien inhaltlich gleichen. Groá- und 
+Kleinschreibung sowie (hier bedeutungslose) Unterschiede in der 
+Leerzeichenanordnung werden ignoriert. Die Dateien werden zeilenweise
+gelesen.
+
+<FONT COLOR="blue">FC c:\msdos.sys c:\sichkopy\msdos.sys /b</FONT>
+
+Beide genannten Dateien werden blockweise gelesen und byteweise verglichen.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

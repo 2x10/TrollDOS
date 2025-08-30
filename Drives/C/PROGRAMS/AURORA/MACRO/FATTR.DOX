@@ -1,0 +1,13 @@
+
+ÿÿFATTR.AML
+ ÿChange Attributesÿ
+
+  This macro displays and optionally changes file or directory
+  attributes. You will be prompted to enter the new attributes.
+
+  When run from an edit window, the attributes of the current file are
+  changed to the new attributes.
+
+  When run from a file manager window, the attributes of the current
+  file (or marked files) are changed to the new attributes.
+

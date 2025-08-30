@@ -1,0 +1,67 @@
+<HTML><HEAD><TITLE>SCANFIX</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>SCANFIX</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Durchsucht die Oberfl„che von Datentr„gern nach physikalischen Fehlern.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">SCANFIX [Laufwerk(e)] [/r /s /q /t /o]</FONT>
+
+/r  fragt am Ende, ob Sie einen weiteren Datentr„ger prfen wollen. 
+    Verwenden Sie diesen Parameter, wenn Sie z.B. einen ganzen Stapel 
+    Disketten in einem Rutsch scannen wollen.
+
+/s  Diesen Parameter mssen Sie einsetzen, wenn Sie eine Diskette mit 
+    Sonderformat (z.B. 1,74 MB) scannen wollen, da SCANFIX ansonsten 
+    zahlreiche Fehler melden wrde. Sie k”nnen diesen Parameter aber auch 
+    bei normalen Disketten verwenden. Dadurch wird SCANFIX angewiesen, 
+    jeden Sektor einzeln zu prfen. Diese Prfung ist etwas grndlicher,
+    dauert aber l„nger.
+
+/q  Fhrt einen Schnelltest durch. Dabei wird nur der erste Sektor jeder 
+    Spur gelesen - getestet wird also lediglich, ob auf jede Spur 
+    zugegriffen werden kann. Verwenden Sie /q, wenn Ihnen der vollst„ndige 
+    Test eines groáen Datentr„gers zu lange dauert. Hin und wieder sollten 
+    Sie diesen jedoch komplett (also ohne /q) scannen lassen. 
+
+/t  SCANFIX fhrt einen mechanischen Datentr„gertest durch und ermittelt 
+    dessen tats„chliche Parameter. Bootsektor und Disk-Parameter-Tabelle 
+    werden hierbei nicht ausgewertet. /t dient zum Identifizieren 
+    unbekannter Datentr„ger oder wenn dessen Bootsektor zerst”rt ist. Fgen
+    Sie ggf. auch den Parameter /s an. Verwenden Sie /t, wenn eine Diskette
+    sich nicht auf normalem Wege prfen lassen will. (z.B Macintosh-
+    Disketten u.„.)
+
+/o  Scanfix l„uft ohne Benutzerabfrage durch (geeignet fr Batch-Betrieb) und
+    protokolliert Fehler in der <A HREF="logfile.htm">LOG-Datei</A><HR 
+
+
+noshade color="silver"><FONT COLOR="maroon">Bedienung</FONT> 
+
+Wenn Sie mehrere Disketten in Laufwerk A: prfen wollen, geben Sie folgenden
+Befehl:
+
+<FONT COLOR="blue">SCANFIX a: /r</FONT>
+
+Sollen die Festplatten C: und D: geprft werden, starten Sie SCANFIX mit:
+
+<FONT COLOR="blue">SCANFIX c: d:</FONT>
+
+Findet SCANFIX einen defekten Sektor, gibt es eine Fehlermeldung aus, die
+solange stehen bleibt, bis ein weiterer Fehler eine neue Meldung erzeugt.
+Die Zahl der fehlerhaften Spuren wird angezeigt. Ist kein Fehler aufgetreten
+oder war Parameter /o eingegeben, beendet sich SCANFIX. Ansonsten wartet 
+SCANFIX am Ende mit der Meldung
+
+<FONT COLOR="blue">Datentr„ger ist fehlerhaft.
+Weiter mit ENTER</FONT>  
+
+SCANFIX kann jederzeit mit der ESC-Taste abgebrochen werden.
+
+Eine Fehlerbehebung ist mit Scanfix nicht m”glich. Fehlerhafte Disketten
+sollten ohnehin vernichtet werden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

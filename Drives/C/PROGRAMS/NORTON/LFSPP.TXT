@@ -1,0 +1,35 @@
+Hi Ivo ,
+Ich habe eine Lîsung fÅr dein Problem mit deinen Simm's!
+Du willst dir ja ein neues Board kaufen, oder?(Warscheinlich 486mit PS/2
+SpeicherbÑnken) Da du aber nur ein 386 Board mit Simm's hast ist die Lîsung
+nah das du dir PS/2 Speichermodule kaufst. Eine preiswertere Lîsung 
+liegt im Simm-Shuttle des Versandhauses "GLOBAL-VERTRIEB", dieser ist ein 
+ Adapter mit dem du deine 8-Bit Simm's mit auf das neue Board packen kannst.
+ Hier habe ich dir noch mal die ganze Anzeige aus der PC-SHOPPING abgetippt:
+
+ SIMM-PS/2 ADAPTER
+ _________________
+ Behalten sie ruhig ihre alten 30-poligen SIMM-Module.Mit diesen SIMM-Adaptern
+ haben sie die Mîglichkeit 1/4/8 und 16MB in den PS/2 Slot zu stecken.
+ Damit die Adapter auch auf engatem Raum Platz finden gibt es eine rechte und
+ linke Variante. Die einstellungen erfolgt Åber DIL-Schalter.
+
+ SIMM-PS/2 ADAPTER -links-
+ Art-Nr. 109-1011
+                                    je nur 49,95 DM
+ SIMM-PS/2 ADAPTER -rechts-
+ Art-Nr. 109-1013
+ Bestellen und informieren kannst du sie unter der Telefon(nicht Modem)Nummer
+                          02331/9602-0  
+
+
+ Ich hoffe dieser Tip ist etwas fÅr dich,
+ den ich habe mir den Arsch platt gesessen und die Finger blutig getippt...
+ UND ich hoffe du bist nicht Sauer das ich diesen Text als binÑere Datei
+ schicke . Viel Spa· noch!!!!!!!
+
+ CU,
+                      
+                        J O O L S
+                                  '96
+

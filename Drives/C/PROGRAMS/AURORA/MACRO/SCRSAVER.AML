@@ -1,0 +1,164 @@
+//--------------------------------------------------------------------
+// SCRSAVER.AML
+// Screen Saver, (C) 1993-1996 by nuText Systems
+//
+// (see Scrsaver.dox for user help)
+//
+// This macro installs or removes a colorful screen saver.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>. Re-run this macro to remove
+// the screen saver.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable attr, count, interval, minutes, obj, ecount
+
+// draw the screen saver
+function drawsaver
+
+  // change to 50-line mode
+  oldrows = getvidrows
+  videomode 80 50
+
+  // create a dummy window that covers the whole screen,
+  // to prevent this demo from overwriting the existing screen
+  createwindow
+  setcolor 5 (color black on black)
+  display
+
+  // get the screen dimensions
+  cols = getvidcols
+  rows = getvidrows
+
+  // hide the mouse
+  hidemouse
+
+  // make video functions use the actual physical screen,
+  // instead of the current window
+  gotoscreen
+
+  // string to write
+  str = "°°°"
+
+  // initial x,y position on the screen
+  x = (rand mod cols) + 1
+  y = (rand mod rows) + 1
+
+  // do until an external event occurs
+  while not event? do
+
+    // get next random x,y position
+    x = x + ((rand mod 3) - 1)
+    y = y + ((rand mod 3) - 1)
+
+    // correct x,y if not within screen boundry
+    if x > cols then
+      x = cols
+    elseif x < 1 then
+      x = 1
+    end
+    if y > rows then
+      y = rows
+    elseif y < 1 then
+      y = 1
+    end
+
+    // write the string
+    writestr str attr x y
+
+    // change the string and color periodically
+    count = count + 1
+    if count > interval then
+      count = 0
+      interval = 700
+      // random color
+      attr = rand mod 256
+      // random string
+      str = { "°°°" "±±±" } [(rand mod 2) + 1]
+    end
+
+  end
+
+  // absorb any keys entered
+  while keyhit? do
+    getkey
+  end
+
+  // restore the screen
+  showmouse
+  destroywindow
+  videomode 80 oldrows
+end
+
+// screen saver timer management
+function saver (f min)
+  // check for time expired
+  if f == -2 then
+    if ecount <> geteventcount then
+      ecount = geteventcount
+      settimer "saver2" min * 60000 obj
+    elseif not timer? "saver2" then
+      // call screen saver function
+      drawsaver
+      ecount = -1
+    end
+
+  // start/stop the check timer
+  else
+    destroytimer "saver"
+    destroytimer "saver2"
+    ecount = -1
+    if f <> -1 then
+      setrepeat "saver" 1000 obj "saver" -2 f
+    end
+  end
+end
+
+// check for a previous install
+obj = prf.saverobj
+if obj then
+  installed = TRUE
+else
+  obj = getcurrobj
+  prf.saverobj = obj
+end
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+// screen saver dialog box
+dialog "Screen Saver" 46 6 "c"
+field "Delay in minutes:  >"  11 2 6 10
+button "O&k"       3  5 8
+button "&Test"    14  5 8    whenenter "drawsaver"
+button "&Remove"  25  5 8
+button "Cancel"   36  5 8
+
+case (getdialog ref minutes)
+  // install screen saver
+  when "Ok"
+    if minutes then
+      sendobject obj "saver" minutes
+      if not installed then
+        resident ON
+      end
+      queue "msgbox" "Screen Saver Installed, delay is " + minutes + " minutes."
+    end
+    // remove screen saver
+  when "Remove"
+    sendobject obj "saver" -1
+    destroyobject obj
+    destroyvar "saverobj" "prf"
+    queue "msgbox" "Screen Saver Removed."
+end

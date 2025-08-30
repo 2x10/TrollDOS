@@ -1,0 +1,171 @@
+<HTML><HEAD><TITLE>Variablen in Mens und Verknpfungen</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Variablen in Mens und Verknpfungen</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver">
+
+Durch den geschickten Einsatz von Variablen k”nnen Sie aus Ihren <A HREF="freemenu.htm">Mens</A> und
+<A HREF="verknpf.htm">Verknpfungs-Dateien</A> noch eine Menge mehr herausholen und sich viel Arbeit 
+sparen.
+<HR noshade color="silver">
+<A HREF="#c">[C]</A> 
+<A HREF="#d">[D]</A> 
+<A HREF="#q">[Q]</A> 
+<A HREF="#z">[Z]</A> 
+<A HREF="#p">[P]</A> 
+<A HREF="#e">[E]</A> 
+<A HREF="#h">[H]</A> 
+<A HREF="#v">[V]</A> 
+<A HREF="#x">[X]</A> 
+<A HREF="#s">[S]</A> 
+<A HREF="#w">[W]</A> 
+
+<HR noshade color="silver">
+
+<A NAME="c"><A HREF="#top"> </A><FONT COLOR="green">[C]</FONT><BR> 
+(C wie Comander)
+Diese Variable wird vom Comander gegen den Pfadnamen des 
+Comander-Verzeichnisses (=New-DOS-Verzeichnis) ausgetauscht. Wenn Sie New-DOS
+in ein anderes Verzeichnis kopieren, brauchen Sie an dieser Stelle nichts 
+zu „ndern - der Comander setzt automatisch den neuen Verzeichnispfad ein.
+<P>
+<FONT COLOR="blue">S; Termine checken; <FONT COLOR="red">[C]</FONT>Kalender /s</FONT>
+<P>
+Aus <FONT COLOR="blue">[C]Kalender /s</FONT> macht der Comander z.B. <FONT COLOR="blue">C:\NEWDOS\KALENDER /s</FONT>,
+d.h. <FONT COLOR="red">[C]</FONT> wird durch <FONT COLOR="red">C:\NEWDOS\</FONT> ersetzt.
+
+<HR noshade color="silver">
+
+<A NAME="d"><A HREF="#top"> </A><FONT COLOR="green">[D]</FONT><BR>
+(D wie direkt)
+Direktstart einer Anwendung erzwingen. Statt ber den Umweg ber den Reloader
+DCLOAD.COM wird ein Programm direkt im Comander gestartet, wenn es noch in 
+den Arbeitsspeicher paát. Bei langsamen Rechnern oder beim Arbeiten von
+Diskette fhrt dies zu einer schnelleren Ausfhrung des Befehles.
+<P>
+<FONT COLOR="blue">M; Speicher checken; <FONT COLOR="red">[D]</FONT>mem /c /p</FONT>
+
+<HR noshade color="silver">
+
+<A NAME="q"><A HREF="#top"> </A><FONT COLOR="green">[Q]</FONT><BR>
+(Q wie Quelle)
+An dieser Stelle wird der Name der Datei eingefgt, auf der der Lichtbalken 
+des Comanders stand, bevor Sie das Men ge”ffnet haben.
+<P>
+<FONT COLOR="blue">A; Datei anzeigen; type <FONT COLOR="red">[Q]</FONT></FONT>
+<P>
+Stand der Lichtbalken auf der Datei AUTOEXEC.BAT, bildet der Comander den
+Befehl <FONT COLOR="blue">TYPE <FONT COLOR="red">AUTOEXEC.BAT</FONT></FONT>.
+
+<HR noshade color="silver">
+
+<A NAME="z"><A HREF="#top"> </A><FONT COLOR="green">[Z]</FONT><BR> 
+(Z wie Ziel)
+Hier wird der Pfad des Verzeichnisses eingefgt, das gerade im gegenber-
+liegenden Fenster des Comanders ge”ffnet ist. Endet dieser Pfad mit einem
+Backslash, wird dieses entfernt (z.B. bei C:\ oder A:\). 
+<P> 
+[Q] und [Z] ergeben also gemeinsam eine vollst„ndige Quelle-Ziel-Angabe.
+<P> 
+<FONT COLOR="blue">X; Kopiere Verzeichnis; xcopy <FONT COLOR="red">[Q] [Z]</FONT> /s</FONT>
+<P> 
+Daraus macht der Comander automatisch z.B. <FONT COLOR="blue">xcopy <FONT COLOR="red">TEST C:\BTEST</FONT> /s</FONT>, wenn
+der Lichtbalken auf <FONT COLOR="red">TEST</FONT> stand und im anderen Fenster <FONT COLOR="red">C:\BTEST</FONT> ge”ffnet
+war. Muá in der Zielangabe neben dem Verzeichnisnamen auch der Name der
+Zieldatei genannt werden, muá <FONT COLOR="red">[Z]\[Q]</FONT> eingesetzt werden.
+
+<HR noshade color="silver">
+
+<A NAME="x"><A HREF="#top"> </A><FONT COLOR="green">[X]</FONT><BR>
+(PrefiX)
+hnlich wie [Q], es wird jedoch der Dateiname <FONT COLOR="red">ohne</FONT> Dateiendung (Pr„fix)
+eingesetzt.
+
+<HR noshade color="silver">
+
+<A NAME="s"><A HREF="#top"> </A><FONT COLOR="green">[S]</FONT><BR> 
+(Wie Suffix)
+hnlich wie [Q], es wird jedoch nur die Datei-Endung (Suffix) eingesetzt.
+<P> 
+[X].[S] zusammen ergeben also wieder [Q] - vorausgesetzt, die Datei hatte 
+eine Endung (was bei Verzeichnissen fast nie der Fall ist, also Vorsicht).
+Sie k”nnen [X] und [S] verwenden, wenn die Zieldatei umbenannt werden soll.
+Mit folgendem Men-Beispiel k”nnen Sie eine Datei duplizieren, also eine 
+Kopie unter anderem Namen im selben Verzeichnis anlegen:
+<P> 
+<FONT COLOR="blue">D; Datei duplizieren ; copy <FONT COLOR="red">[Q] [X]</FONT>.cop</FONT>
+<P> 
+Ist z.B. die Datei AUTOEXEC.BAT markiert, fhrt der Comander folgenden
+Befehl aus:
+<P> 
+<FONT COLOR="blue">copy <FONT COLOR="red">autoexec.bat autoexec</FONT>.cop</FONT>
+
+<HR noshade color="silver">
+
+<A NAME="h"><A HREF="#top"> </A><FONT COLOR="green">[H]</FONT><BR>
+(H wie Hilfe)
+Dies ist ein comander-interner Befehl, der das Zeigen eines Hilfetextes
+veranlaát und in der Praxis kaum eine Rolle spielt. Die zu zeigende
+Hilfedatei muá im HTML-Format im Verzeichnis \HILFE\COMANDER vorliegen.
+<P> 
+<FONT COLOR="blue">H; Hilfe zu Variablen; <FONT COLOR="red">[H]</FONT>variab</FONT>
+
+<HR noshade color="silver">
+
+<A NAME="e"><A HREF="#top"> </A><FONT COLOR="green">[E]</FONT><BR>
+(E wie Editor)
+Hier setzt der Comander den Aufrufbefehl des Editors ein, den Sie mit SETUP
+eingebunden haben.
+<P> 
+<FONT COLOR="blue">M; Mendatei bearbeiten; <FONT COLOR="red">[E]</FONT> [C]dc.mnu</FONT>
+<P> 
+Daraus macht der Comander z.B. die Kommandozeile:
+<P> 
+<FONT COLOR="blue"><FONT COLOR="red">C:\DOS\EDIT.COM</FONT> C:\NEWDOS\DC.MNU</FONT>
+<P> 
+Wenn Sie also jemals den Editor wechseln sollten, dann brauchen Sie hier
+nichts zu „ndern.
+
+<HR noshade color="silver">
+
+<A NAME="v"><A HREF="#top"> </A><FONT COLOR="green">[V]</FONT><BR>
+(V wie View)
+Zeigt die angegebene Datei im Textbetrachter des Comanders. 
+<P> 
+<FONT COLOR="blue">S; Zeige Kommandostapel; <FONT COLOR="red">[V]</FONT>[C]stapel.log</FONT>
+
+<HR noshade color="silver">
+
+<A NAME="p"><A HREF="#top"> </A><FONT COLOR="green">[P]</FONT><BR>
+(P wie Pfad)
+Hier fgt der Comander den Namen des im aktiven Fenster ge”ffneten
+Verzeichnisses ein. Das Backslash (\) wird automatisch angeh„ngt. Um einem
+Programm nicht nur den Namen der angeklickten Datei [Q] zu bergeben, sondern
+den vollst„ndigen Pfadnamen, kann [P][Q] verwendet werden. Ist im Verzeichnis
+C:\TEST die Datei ATEST.DOC angeklickt, wird aus [P][Q] C:\TEST\ATEST.DOC;
+aus del [P]*.BAK wird del C:\TEST\*.BAK
+
+<HR noshade color="silver">
+
+<A NAME="w"><A HREF="#top"> </A><FONT COLOR="green">[W]</FONT><BR>
+(W wie Windows)<BR>
+<FONT COLOR="red">[W]</FONT> wird vom Comander durch den Startbefehl von Windows ersetzt. Bei Windows
+3.x ist dies "<FONT COLOR="red">win</FONT>" und bei Windows 95/98 "<FONT COLOR="red">start</FONT>".
+Welchen der beiden Befehle der Comander verwendet, mssen Sie im 
+<A HREF="konfix.htm">Konfix</A>-Men einstellen.
+<P>
+<FONT COLOR="blue">D; Windows-Notepad starten; <FONT COLOR="red">[W]</FONT> notepad</FONT>
+
+<HR noshade color="silver">
+
+An einigen Beispielen konnten Sie sehen, daá Sie mehrere Variablen
+miteinander kombinieren k”nnen. Wichtig ist, daá am Ende das Abbild einer
+Kommandozeile entsteht, die DOS verarbeiten kann. Es drfen also keine
+Leerzeichen hinzugefgt oder weggelassen werden, die einen DOS-Befehl
+verf„lschen wrden. In den Dateien DC.MNU, INTERN.MNU sowie AUTOSTAR.INI
+sind bereits zahlreiche Beispiele enthalten.
+
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

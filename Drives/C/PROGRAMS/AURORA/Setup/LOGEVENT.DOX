@@ -1,0 +1,46 @@
+
+ÿÿLOGEVENT.AML
+ ÿLog Editor Eventsÿ
+
+  Running this macro will cause the editor to log the following editor
+  events:
+
+    - log begin
+    - opening files and file manager windows
+    - closing files and file manager windows
+    - saving files
+    - switching the focus to another file or window
+
+  Once Logevent is installed, you can view all logged events by pressing
+  <ctrl f11>, or by running Logevent again. The following information is
+  displayed in a log window for each event:
+
+    - the date and time the event occurred
+    - the name of the event
+    - the file or directory associated with the event
+
+  A menu is displayed on the log window, which allows you to clear the
+  log, remove the log (uninstall), copy the log to an edit window, and
+  print the log.
+
+  The current log is appended to the file Macro\Logevent.log when
+  removing the log or exiting the editor.
+
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <esc>              // exit
+  <ctrl c>           // clear the log
+  <ctrl r>           // remove the log (uninstall)
+  <ctrl e>           // edit the log
+  <ctrl p>           // print the log
+
+  <up>, <down>       // move cursor
+  <ctrl home>        // to page top
+  <ctrl end>         // to page bottom
+  <ctrl pgup>        // to top of clipboard
+  <ctrl pgdn>        // to bottom of clipboard
+
+  <pgup>, <pgdn>     // scroll up, down
+  <left>, <right>    // scroll left, right
+

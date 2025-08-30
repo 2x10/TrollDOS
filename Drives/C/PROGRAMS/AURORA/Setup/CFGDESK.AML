@@ -1,0 +1,56 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGDESK.AML
+// Configuration for Desktop Options
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable bootopt, options
+
+// create dialog box
+dialog "Desktop Options" 58 15 "cp"
+
+// boot options
+groupbox 'When starting the editor with no filespec:' 3 2
+  (menu ''
+     item " ( ) &Display the Last Desktop"
+     item " ( ) Display the &File Manager"
+     item " ( ) Edit a &New File"
+     item " ( ) Display an &Open Prompt"
+     item " ( ) Display a Directory &Tree"
+   end) '' _BootOpt "dfnot"
+
+// other options
+groupbox 'Other Options:' 3 9
+  (menu ''
+     item " [ ] &Remember Window Positions and Settings"
+     item " [ ] Remember Dialog &Box and Popup Menu Positions    "
+     item " [ ] &Save Window Positions and History on Exit"
+     item " [ ] Save Key &Macros on Exit"
+     item " [ ] Display Open &Prompt on Exit"
+   end) '' (if? _SavePosition == 'y' 'a') + (if? _SaveDialog  == 'y' 'b') +
+           (if? _SaveHistory  == 'y' 'c') + (if? _SaveMac     == 'y' 'd') +
+           (if? _ExitOpen     == 'y' 'e')
+           'abcde'
+
+// ok/cancel buttons
+button "O&k"    48  3 8
+button "Cancel" 48  5 8
+
+// display dialog box
+if (getdialog ref bootopt ref options) == 'Ok' then
+
+  prf.BootOpt      = bootopt
+  prf.SavePosition = if? (pos 'a' options) 'y' 'n'
+  prf.SaveDialog   = if? (pos 'b' options) 'y' 'n'
+  prf.SaveHistory  = if? (pos 'c' options) 'y' 'n'
+  prf.SaveMac      = if? (pos 'd' options) 'y' 'n'
+  prf.ExitOpen     = if? (pos 'e' options) 'y' 'n'
+
+  // turn savedialog off if saveposition is off
+  if _SavePosition <> 'y' then
+    prf.SaveDialog = 'n'
+  end
+end

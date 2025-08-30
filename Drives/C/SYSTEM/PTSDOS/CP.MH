@@ -1,0 +1,106 @@
+;	Diese Datei enthÑlt die Zeilen der Mini-Hilfe,
+;	die im CP HauptmenÅ angezeigt wird.
+;	Jede Zeile, die mit ; beginnt, bedeutet Kommmentar
+;	und wird ignoriert. Alle 40 Zeilen der Mini-Hilfe
+;	sollen fÅr [F1...F10], [Shift-F1...F10], [^F1...^F10] 
+;       und [Alt-F1...F10] nacheinander angegeben werden.
+;	Die weiteren Zeilen der Datei werden ignoriert.
+;	Die maximale Grî·e der Zeichenkette ist 14 Zeichen
+;	gleich. Die weiteren Zeichen in der Zeichenkette werden 
+;	ignoriert
+;
+;            ; - ist das letzte (14.) Zeichen.
+;
+;--- [F1] ---;
+Hilfe
+;--- [F2] ---;
+BenutzerMenÅ 
+;--- [F3] ---;
+View
+;--- [F4] ---;
+Edit
+;--- [F5] ---;
+Copy
+;--- [F6] ---;
+Move
+;--- [F7] ---;
+MD
+;--- [F8] ---;
+Delete
+;--- [F9] ---;
+Pulldown-MenÅ
+;--- [F10] --;
+Exit
+;
+;
+;
+; [Shift-F1] ;
+Attribute ...
+; [Shift-F2] ;
+Speicher-Info
+; [Shift-F3] ;
+View ...
+; [Shift-F4] ;
+Edit ...
+; [Shift-F5] ;
+Copy ...
+; [Shift-F6] ;
+Move ...
+; [Shift-F7] ;
+Find ...
+; [Shift-F8] ;
+Delete ...
+; [Shift-F9] ;
+Text-Finder
+; [Shift-F10];
+Disk-Tools
+;
+;
+;
+;--- [^F1] --;
+Baum A
+;--- [^F2] --;
+Baum B
+;--- [^F3] --;
+Rename
+;--- [^F4] --;
+AusfÅhren
+;--- [^F5] --;
+Kopieren
+;--- [^F6] --;
+Verlagern
+;--- [^F7] --;
+History
+;--- [^F8] --;
+Lîschen
+;--- [^F9] --;
+Backup
+;-- [^F10] --;
+Volume Label
+;
+;
+;
+;- [Alt-F1] -;
+LaufWerk
+;- [Alt-F2] -;
+Datenbank
+;- [Alt-F3] -;
+Mit BSA packen
+;- [Alt-F4] -;
+---
+;- [Alt-F5] -;
+Kopieren
+;- [Alt-F6] -;
+Verschieben
+;- [Alt-F7] -;
+Wo markiert ?
+;- [Alt-F8] -;
+Lîschen
+;- [Alt-F9] -;
+Restore
+;- [Alt-F10] ;
+Undelete
+;
+;
+;
+; <<<DATEIENDE>>>

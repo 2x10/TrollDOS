@@ -1,0 +1,58 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// MAIN.AML
+// Main Source File for A.x
+//
+// If you have made any changes, save this file and select Recompile
+// the Editor from the Set menu. Exit and re-enter the editor for your
+// changes to take effect.
+//--------------------------------------------------------------------
+
+object a
+
+// compile-time macros and constants
+include bootpath "define.aml"
+
+object prf
+
+// configuration settings
+include bootpath "config.aml"
+
+// system settings
+include bootpath "system.aml"
+
+object a
+
+// colors
+include bootpath "color.aml"
+
+// library
+include amlfile "lib"
+
+// extensions
+include bootpath "ext.aml"
+
+// user extensions (include if present)
+#if file? (bootpath "user.aml")
+include bootpath "user.aml"
+object a
+#end
+
+// menu definitions
+include bootpath "menu.aml"
+
+// keyboard definitions
+include bootpath "kbd.aml"
+
+// mouse definitions
+include bootpath "mouse.aml"
+
+// syntax highlighting definitions
+include bootpath "syntax.aml"
+
+// startup extensions (include if present)
+#if file? (bootpath "startup.aml")
+object a
+include bootpath "startup.aml"
+#end

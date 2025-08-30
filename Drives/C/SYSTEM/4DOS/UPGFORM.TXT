@@ -1,0 +1,125 @@
+     JP Software                                Upgrade Order Form [12/01]
+     P.O. Box 1470                               Email to sales@jpsoft.com
+     E. Arlington, MA 02474 USA                   or fax to (781) 646-0904
+
+     This order form is for current customers who want to order an
+     upgrade, additional product, or a license for additional computers.
+
+     For complete product details, more shipping information, and answers
+     to other ordering questions, see the PRODUCTS.TXT file.  If you need
+     additional information, or want to order directly from our web site:
+
+        For                             See
+        ----------------------------    -------------------------
+        On-line order entry             http://www.jpsoft.com/
+        Email orders / inquiries        sales@jpsoft.com
+        Phone orders                    (800) 368-8777 (US / Canada)
+        General phone inquiries         (781) 646-3975
+        US / international dealer list  see http://www.jpsoft.com/
+        New customer order form         ORDFORM.TXT file
+        Detailed product information    PRODUCTS.TXT file
+        Support plans                   SUPPORT.TXT file
+
+     =====================================================================
+     First, tell us who you are:
+
+     Name (first, last) __________________________________________________
+
+     Company _____________________________________________________________
+
+     Address _____________________________________________________________
+
+             _____________________________________________________________
+
+     City, State/Prov, Post Code _________________________________________
+
+     Country _____________________________________________________________
+
+     Phone _____________________________  Fax ____________________________
+
+     E-Mail ______________________________________________________________
+       (Will only be used by JP Software to notify you of upgrades or
+        contact you with other information related to our products.)
+
+     Register products to:  ___ Company     ___ Individual
+
+     =====================================================================
+     Now, what would you like to order?
+
+     [Not sure what to order?  See PRODUCTS.TXT for more details!]
+
+     Upgrades ($34.95 first product, $19.95 to        Total Price
+       upgrade each add'l product; 1 lb.)
+     ___ 4DOS .................. S/N __________ ...... __________  [UP300]
+     ___ 4NT ................... S/N __________ ...... __________  [UP320]
+     ___ Take Command/32 ....... S/N __________ ...... __________  [UP340]
+
+     ___ JP CD Suite ($54.95, .. S/N __________ ...... __________  [CD380]
+            1 lb.)
+
+     Add-Ons / Conversions  (Add another product for
+       your current system, or switch products.  $34.95
+       ea., 1 lb.)
+     ___ 4DOS add-on / conversion .................... __________  [RE200]
+     ___ 4NT add-on / conversion ..................... __________  [RE220]
+     ___ Take Command/32 add-on / conversion ......... __________  [RE240]
+
+     ___ Convert to JP CD Suite ($69.95, 1 lb., ...... __________  [CD280]
+           includes upgrades for products you own now)
+
+         For all add-ons / conversions please supply a
+         current serial number ______________.
+
+     Extended Support Annual Subscription (see
+       SUPPORT.TXT; single system price with upgrade
+       order $19.95 for 1 product, $29.95 for 2 or more)
+     ___ 4DOS Extended Support ....................... __________  [SU600]
+     ___ 4NT Extended Support ........................ __________  [SU620]
+     ___ Take Command/32 Extended Support ............ __________  [SU640]
+
+         Please contact us or see our web site for
+         pricing on multi-system license and Premium
+         Support plans.
+
+     Additional Licenses  (License additional systems
+       for your current product(s), contact us for
+       pricing before placing your order; 1 lb.)
+     ___ ____________________________________________  __________  [     ]
+     ___ ____________________________________________  __________  [     ]
+
+     Manuals
+     ___ 4DOS, 4NT Take Command Reference Manual ..... __________  [BK502]
+            ($19.95, 2 lb)
+
+     ----------------------------------
+     | SHIPPING:                      |    Subtotal  $ __________
+     |                                |
+     | Total   USA UPS  Canada  Int'l | Sales Tax (MA
+     | Weight  Ground   Mail    Mail  | 5%, MN 6.5%) $ __________
+     | ------  ------   -----   ----- |
+     |  1 lb    $ 7      $ 7     $13  |     Shipping $ __________
+     |  2 lb    $ 8      $10     $20  |
+     |  3 lb    $ 9      $13     $27  |  ORDER TOTAL $ __________
+     |  4 lb    $10      $16     $34  |
+     |  5 lb    $11      $19     $41  |
+     |                                |   Total Weight __________  lb
+     | For other services or higher   |
+     | weights please contact us.     |
+     ----------------------------------
+     =====================================================================
+     Thanks for your order!  Now please choose a payment method:
+
+     ___Credit Card:  __MC  __Visa  __Discover  __Amex
+
+        Card # _________________________________________ Expires ____/____
+
+        Signature ________________________________________________________
+
+     ___Check (US bank, US funds)  ___COD*  ___P.O.*  #___________________
+
+     [* See PRODUCTS.TXT for terms *before* selecting COD or PO payment!]
+     =====================================================================
+
+     Legal Stuff:  Copyright 1999, JP Software Inc., All Rights Reserved.
+     See PRODUCTS.TXT for trademarks.  All prices and terms subject to
+     change without notice.

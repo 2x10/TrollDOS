@@ -1,0 +1,46 @@
+//--------------------------------------------------------------------
+// SORTSTR.AML
+// Sort a String, (C) 1993-1996 by nuText Systems
+//
+// This macro sorts characters in the first line of a marked block.
+// It may be useful for sorting symbols sets or analyzing character
+// frequencies in text.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// simple concatenation-type Quicksort for a string
+private function qsort (s)
+  n = length s
+  if n < 2 then
+    return s
+  end
+  midvalue = s [(n + 1) / 2]
+  s [(n + 1) / 2] = s [1]
+  last = 1
+  for i = 2 to n do
+    if s [i] < midvalue then
+      last = last + 1
+      temp = s [last]  s [last] = s [i]  s [i] = temp
+    end
+  end
+  return (qsort s [2..last]) + midvalue + (qsort s [last + 1..n])
+end
+
+// edit windows only
+if wintype? "edit" then
+  if getmarkbuf == getcurrbuf then
+    // sort and replace chars in the first line of the mark
+    ovltext (qsort (getmarktext)) (getmarkleft) (getmarktop)
+  else
+    msgbox "Block not marked in current edit window"
+  end
+else
+  msgbox "Edit windows only!"
+end

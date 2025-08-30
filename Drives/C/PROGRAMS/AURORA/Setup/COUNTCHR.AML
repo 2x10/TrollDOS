@@ -1,0 +1,100 @@
+//--------------------------------------------------------------------
+// COUNTCHR.AML
+// Count Characters, (C) 1993-1996 by nuText Systems
+//
+// This macro counts the number of characters in the current file and
+// displays the result. The count is limited to a marked block if it
+// exists.
+//
+// The total number of characters reported is the number of bytes that
+// the file or marked block would occupy on disk if it were saved,
+// including line delimiter characters.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable total_char
+
+// edit windows only
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+// if nothing is marked, then temporarily mark the whole file
+if mark? then
+  if getcurrbuf <> getmarkbuf then
+    msgbox "Mark must be in current window"
+    return
+  end
+else
+  tempmark = TRUE             // flag indicating temporary mark
+  markline 1 (getlines)       // mark entire file
+end
+
+marktype = getmarktype        // get the mark type
+firstline = getmarktop        // get the top line of the mark
+lastline = getmarkbot         // get the bottom line of the mark
+currbuf (getmarkbuf)          // make marked buffer the current buffer
+pushcursor                    // save cursor position
+row (getmarktop)              // goto the top of the marked block
+
+// do for all lines in the mark
+repeat
+
+  total_char = total_char +   // add size to total
+
+    case marktype
+
+      // line marks
+      when 'l'
+        getlinelen
+
+      // column marks
+      when 'k'
+        length (gettext (getmarkleft) (getmarkcols))
+
+      // character/stream marks
+      otherwise
+        if getrow == firstline then
+          length (gettext (getmarkleft)
+                        (if firstline == lastline then
+                           getmarkcols
+                         end))
+        elseif getrow == lastline then
+          length (gettext 1 (getmarkright))
+        else
+          getlinelen
+        end
+    end
+
+until not down or getrow > lastline
+breakoff
+
+// restore cursor position
+popcursor
+
+// compute the space that would be occupied by delimiter
+// characters if the marked block was saved (zero for binary files)
+if not getbinarylen then
+  delimitspace = getmarkrows * length (hex2bin _LineDlm)
+end
+
+// destroy mark if temporary
+if tempmark then
+  destroymark
+end
+
+display
+
+// display the totals
+shortbox (if? tempmark "Entire file: " "Marked Block: ") +
+         (thousands total_char + delimitspace) + " chars (" +
+         (thousands total_char) + " text + " +
+         (thousands delimitspace) + " delimiter)"
+       "Character Count"

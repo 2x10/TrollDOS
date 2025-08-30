@@ -1,0 +1,109 @@
+<HTML><HEAD><TITLE>Dateiattribute setzen</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Dateiattribute setzen</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver"><PRE><FONT color=maroon>Schnellkurs</FONT>
+1. Datei(en) und/oder Verzeichnis(se) mit Lichtbalken anw„hlen bzw. mit roten
+   K„stchen markieren.
+2. Mit den Tasten n und v werden die Attribute NurLesen und Versteckt, mit y
+   und r die Attribute System und Archiv gesetzt bzw. entfernt.
+3. Verzeichnisb„ume werden samt Inhalt mit einem Attribut versehen.
+4. Zum schnellen Anzeigen versteckter Dateien drcken Sie einfach die
+   (in der Comander-Oberfl„che nicht angezeigte) Taste z.<HR noshade 
+color="silver"><FONT color=maroon>Beschreibung</FONT> 
+
+<A HREF="#nurlesen"> Nur Lesen</A>
+<A HREF="#verstecken"> Verstecken</A>
+<A HREF="#system"> System</A>
+<A HREF="#archiv"> Archiv</A>
+<A NAME="nurlesen"> 
+<A HREF="#top"> </A><FONT color=green>Nur Lesen</FONT>
+  
+ist eines von vier Attributen, mit denen eine Datei versehen werden kann.
+Eine schreibgeschtzte Datei kann normalerweise nur gelesen, nicht jedoch
+beschrieben bzw. ge„ndert werden. In der Regel weigern sich 
+Dateiverarbeitungsprogramme, eine solche Datei ge„ndert abzuspeichern. Um sie
+dennoch bearbeiten zu k”nnen, muá der Schreibschutz aufgehoben werden. Dies
+soll die Datensicherheit erh”hen.
+
+Beide Funktionen - Schreibschutz einschalten und wieder deaktivieren -
+werden mit Taste n ausgefhrt. Mit n setzen Sie immer das "entgegengesetzte"
+Attribut: Ist die Datei schreibgeschtzt, wird NurLesen entfernt - ist sie
+nicht schreibgeschtzt, wird NurLesen gesetzt.
+
+Ein schreibgeschtztes Verzeichnis wird im Comander in <FONT color=brown bgcolor=silver>brauner</FONT>, eine
+schreibgeschtzte Datei in <FONT color=purple bgcolor=silver>weinroter</FONT> Schrift dargestellt. Wenn Sie ein
+Verzeichnis schreibschtzen wollen, werden immer auch s„mtliche darin
+befindlichen Dateien und Unterverzeichnisse mit diesem Attribut versehen.
+Auch das L”schen des Attributes erfolgt rekursiv, also durch alle
+Verzeichnisebenen.
+
+Der Comander warnt Sie bei dem Versuch, eine schreibgeschtzte Datei zu
+l”schen oder zu berschreiben, noch ein weiteres mal. Ein schreib-
+geschtztes Verzeichnis hingegen k”nnen Sie erst dann l”schen, wenn Sie
+vorher das Attribut deaktiviert haben.
+
+Schreibgeschtzte Verzeichnisse werden vom Comander mit einem besonders
+hartn„ckigen Schutzwall umgeben. Ein šberkopieren oder L”schen solcher
+Verzeichnisse ist nur m”glich, wenn das Schreibschutzattribut vorher
+"von Hand" entfernt wird. Das gilt auch fr in Verzeichnissen
+enthaltene schreibgeschtzte Unterverzeichnisse.
+
+Aber: Beim šberkopieren ganzer Verzeichnisb„ume gibt der Comander keine
+gesonderte Warnung aus, wenn sich darin <FONT COLOR="red">einzelne</FONT> schreibgeschtzte
+<FONT COLOR="red">Dateien</FONT> befinden. Sehen Sie also vorher nach, bevor Sie ein Verzeichnis
+berkopieren.
+
+Bet„tigen Sie zum Setzen des Attributs die Taste n oder klicken Sie mit
+der Maus in die Anzeigezeile im Berichtfenster.
+
+<A NAME="verstecken"> 
+<A HREF="#top"> </A><FONT COLOR="green">Verstecken</FONT>
+
+k”nnen Sie Dateien und Verzeichnisse, um sie vor fremden Blicken zu verbergen
+oder um ein wenig Ordnung in Ihre Verzeichnisse zu bringen. Ein verstecktes
+Objekt wird vom Comander nicht angezeigt. Wenn Sie Taste z drcken, werden
+die versteckten Objekte eingeblendet. Verzeichnisse sind <FONT COLOR="yellow" bgcolor=silver>gelb</FONT>, Dateien 
+<FONT COLOR="aqua" bgcolor=silver>blau</FONT> gekennzeichnet.
+
+Um sie dauerhaft anzeigen zu lassen, k”nnen Sie mit Taste x das <A HREF="konfix.htm">Konfix-Men</A> 
+”ffnen und dort den Anzeigemodus umschalten.
+
+Versteckte (und auch mit dem SYSTEM-Attribut versehene) Objekte werden beim
+Kopieren oder L”schen mit dem gleichen Schutz umgeben wie schreibgeschtzte
+Objekte.
+
+Das Setzen und Entfernen des Versteck-Attributes erfolgt bei Verzeichnissen
+ebenfalls inklusive aller darin befindlcihen Objekte. Bet„tigen Sie hierzu 
+Taste v oder klicken Sie mit der Maus in das Anzeigefeld im Berichtfenster.
+
+<A NAME="system">
+<A HREF="#top"> </A><FONT COLOR="green">Systemdatei (Sys)</FONT>
+
+Das Systemattribut bekommen in der Regel nur Dateien, die den Grundstock zu
+DOS bilden (z.B. C:\IO.SYS). Dieses Attribut ist in der Anwenderpraxis ohne
+Bedeutung. Systemdateien werden vom Comander ebenso wie versteckte Dateien
+nicht angezeigt und zus„tzlich wie schreibgeschtzte Dateien gehandhabt. Zum
+Setzen und L”schen dieses Attributes bet„tigen Sie Taste y oder klicken Sie
+mit der Maus auf das Wort SYS im Berichtfenster. Eine Systemdatei wird wie
+eine versteckte Datei blau dargestellt.
+
+<A NAME="archiv">
+<A HREF="#top"> </A><FONT color="green">Archiv (Arc)</FONT>
+
+Das Archiv-Attribut ver„ndert die Eigenschaften einer Datei nicht. DOS
+versieht jede neue oder ge„nderte Datei damit. Wenn Sie z.B. beim
+regelm„áigen Anlegen von Sicherheitskopien Zeit durch selektives Kopieren
+sparen wollen, k”nnen Sie Dateien ganz gezielt mit diesem Attribut ausstatten
+bzw. es l”schen. Das DOS-Programm <A HREF="../newdos/xcopy.htm">XCOPY</A> kann angewiesen werden, nur Dateien
+mit gesetztem Archivattribut zu kopieren. Zum Setzen und L”schen dieses
+Attributes bet„tigen Sie Taste y oder klicken Sie mit der Maus auf das Wort
+ARC im Berichtfenster.
+
+Eine Datei oder ein Verzeichnis kann auch mit mehreren Attributen versehen
+werden. Dies ist bei so wichtigen Dateien wie COMMAND.COM, AUTOEXEC.BAT,
+CONFIG.SYS usw. auch angeraten.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

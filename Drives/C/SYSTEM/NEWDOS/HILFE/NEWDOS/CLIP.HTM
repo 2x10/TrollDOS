@@ -1,0 +1,89 @@
+<HTML><HEAD><TITLE>CLIP</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>CLIP</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A><BR>
+<A HREF="ddd.htm">Allgemeines zu DDD</A> 
+<HR noshade color="silver"><PRE>anwendungsbergreifende Zwischenablage (Clipboard).
+
+<FONT COLOR="maroon">Installieren</FONT>
+
+<FONT COLOR="blue">CLIP [/d]</FONT> oder <A HREF="help:lh">LH</A> <FONT COLOR="blue">CLIP [/d]</FONT> 
+
+/d  verdoppelt die Puffergr”áe, um auch 50-Zeilen-Bildschirme komplett 
+    in der Zwischenablage speichern zu k”nnen. Standardeinstellung ist
+    ein 25-Zeilen-Bildschirm.
+
+Laden Sie CLIP am besten gleich beim Starten des PC, indem Sie den Befehl 
+in Ihre AUTOEXEC.BAT einfgen.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Steuerung</FONT>  
+
+Mit folgenden Standard-DDD-Parametern kann CLIP nach der Installation 
+gesteuert werden:
+
+/x  aus dem Speicher entfernen
+/s  stillegen
+/r  reaktivieren<HR
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT>  
+ 
+Via Clip k”nnen Daten zwischen voneinander unabh„ngigen DOS-Anwendungs-
+Programmen ausgetauscht werden. Die Anwendungsprogramme ben”tigen keine 
+speziellen Funktionen, um das Clipboard nutzen zu k”nnen. Es ist daher mit 
+fast allen handelsblichen DOS-Programmen anwendbar.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Kopieren von Text in die Zwischenablage</FONT>
+
+1. Bewegen Sie in der Quell-Anwendung den Cursor auf das erste zu kopierende
+   Zeichen und drcken Sie <FONT COLOR="red">Taste F11</FONT>.
+2. Bewegen Sie den Cursor auf das letzte zu kopierende Zeichen und drcken 
+   Sie F11 ein zweites Mal.
+
+Der Inhalt des Bildschirmes zwischen der 1. und der 2. Cursorposition ist
+nun in der Zwischenablage enthalten.
+
+Beachten Sie bitte, daá der Textbildschirm beim Cursor-Verschieben nicht 
+gescrollt werden darf, da ansonsten die NACH dem Scrollvorgang sichtbaren 
+Zeichen in die Zwischenablage kopiert werden. Es k”nnen also max. 25 
+Textzeilen zwischengespeichert werden (im EGA-Modus 50 Zeilen).
+
+Wenn die Quellanwendung eine Cursorpositionierung nicht erm”glicht (z.B. ein
+Textbetrachter), mssen Sie den gesamten Bildschirm in die Zwischenablage 
+kopieren und die uninteressanten Daten nach dem Einfgen in die Zielanwendung
+l”schen. Zum šbernehmen des gesamten Bildschirmes drcken Sie <FONT COLOR="red">SHIFT+F11</FONT>.<HR 
+
+noshade color="silver"><FONT COLOR="maroon">Einfgen der Zwischenablage in eine Anwendung</FONT>   
+
+1. Wechseln Sie in die Zielanwendung und bewegen Sie den Cursor an die 
+   Position, ab der der zwischengespeicherte Text eingefgt werden soll.
+2. Drcken Sie nun <FONT COLOR="red">Taste F12</FONT>, um das Einfgen zu starten.
+
+Das Einfgen kann aus technischen Grnden einige Sekunden dauern. Sie k”nnen
+das Einfgen durch nochmaliges Drcken von Taste F12 vorzeitig abbrechen.
+Der Inhalt der Zwischenablage bleibt solange erhalten, bis Sie mit F11
+neue Daten in die Zwischenablage kopieren. Der Inhalt der Zwischenablage 
+l„át sich also beliebig oft in eine oder verschiedene Zielanwendung einfgen.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Hinweise</FONT> 
+
+CLIP hat nichts mit dem <A HREF="clipbrd.htm">New-DOS-Clipboard</A> zu tun, ber das New-DOS-
+Anwendungen Daten austauschen k”nnen.
+
+Einige Anwendungen (z.B. der DOS-Editor EDIT.COM) sperren sich nach der 
+Ausgabe einiger Zeichen. In diesem Falle drcken Sie die SHIFT-Taste und
+halten Sie solange nieder, bis der Text komplett eingefgt wurde.
+
+Beachten Sie bitte, daá Bildschirme, die in die Zwischenablage kopiert 
+werden, u.U. Steuerzeichen enthalten k”nnen. Im New-DOS-Editor ED z.B. 
+befindet sich ganz unten links ein Esc-Zeichen (&lt;-). Solche Zeichen k”nnten 
+von der Zielanwendung als Befehl interpretiert werden (ED z.B. wrde sich 
+beenden wollen, da es "meint", die Esc-Taste wurde gedrckt).
+
+Ferner sollten Sie vermeiden, Zeichenketten versehentlich am DOS-Prompt oder 
+anderen Eingabeaufforderungen einzufgen. Dies k”nnte zu erheblichen 
+St”rungen fhren, wenn die Eingabeaufforderung die Zeichenkette als Befehl 
+interpretiert.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

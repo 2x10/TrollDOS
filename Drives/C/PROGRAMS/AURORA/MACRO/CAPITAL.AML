@@ -1,0 +1,52 @@
+//--------------------------------------------------------------------
+// CAPITAL.AML
+// Capitalize Words, (C) 1993-1996 by nuText Systems
+//
+// This macro capitalizes words in a marked block. If no block is
+// marked, then words are capitalized in the current line.
+//
+// The CSet configuration variable is used to define a word for this
+// macro.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+// use CSet variable for word character set
+pattern = '[' + _CSet + ']#'
+
+// test if a marked block exists in the current file
+options = if mark? and getmarkbuf == getcurrbuf then
+            "xb"
+          else
+            "xl"
+          end
+
+// save cursor position and start undo group
+pushcursor
+undobegin
+
+// find first word
+wordsize = find pattern options + "*g"
+while wordsize do
+  // capitalize word
+  text = gettext (getcol) wordsize
+  ovltext (concat (upcase text [1]) (locase (text [2..TO_END])))
+  right wordsize
+  // find next word
+  wordsize = find pattern options
+end
+
+undoend
+popcursor

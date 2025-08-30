@@ -1,0 +1,73 @@
+//--------------------------------------------------------------------
+// STATUS.AML
+// Custom Status Line Example, (C) 1993-1996 by nuText Systems
+//
+// This macro adds a customized status line to all edit windows on the
+// desktop, and also to new edit windows as they are opened. The status
+// line can be customized by modifying the <status> event below.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>. Run this macro again to remove
+// the custom status line.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// status line update delay in milliseconds
+constant update_delay = 1000
+constant timer_id     = "status"
+
+// check for a previous install
+if prf.altstatus then
+  destroytimer timer_id
+  destroyobject prf.altstatus
+  prf.altstatus = ''
+  return
+end
+
+// install this object
+prf.altstatus = getcurrobj
+resident ON
+
+// set flags for edit windows
+private function setflags (flags)
+  for window = getcurrwin to getbotwin by getprevwin window do
+    if wintype? "edit" window then
+      windowflag flags window
+    end
+  end
+end
+
+// remove custom status for all edit windows
+// when this object is destroyed
+event <destroy>
+  setflags '-s'
+end
+
+// turn on custom status for all existing edit windows
+setflags '+s'
+
+
+object edit
+
+// add custom status to new edit windows
+function onopen
+  passprev
+  windowflag '+s'
+end
+
+// return custom status line
+// (modify this function to suit your own preferences)
+event <status>
+  wsettings = getsettings
+  return (if? (pos 'R' wsettings) 'Rec ' '') +
+         (if? (pos 'I' wsettings) 'Ins' 'Ovr') +
+         '  C ' + getcol + '  L ' + getrow + '  ' +
+         (gettime -1) + ' '
+end
+
+// create timer to update status line time every second
+// (only needed if the time is displayed on the status line)
+setrepeat timer_id update_delay '' "display"

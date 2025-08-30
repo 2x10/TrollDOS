@@ -1,0 +1,178 @@
+<HTML><HEAD><TITLE>Daten kopieren</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Daten kopieren</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver"><PRE><FONT COLOR="maroon">Schnellkurs</FONT>
+
+1. Kopiert ausgew„hlte Datei(en) und/oder Verzeichnis(se) ins
+   jeweils gegenberliegende Fenster.
+
+2. CTRL+F5 startet Kopiervorgang im Hintergrund.
+
+3. Im <A HREF="konfix.htm">KONFIX-Men</A> k”nnen Sie "echtes" <A HREF="#verify"> Verify</A> aktivieren.<HR
+noshade color="silver"><FONT COLOR="maroon">Beschreibung</FONT> 
+
+1.  W„hlen Sie im Nachbarfenster das Laufwerk bzw. Verzeichnis, in das Sie 
+    die Daten kopieren wollen.
+
+2.  Wechseln Sie ins ursprngliche Fenster zurck und bewegen Sie den
+    Lichtbalken auf das Objekt (Datei oder Verzeichnis), das kopiert werden 
+    soll.
+
+3.  Wenn Sie auáerdem noch weitere Objekte kopieren m”chten, drcken Sie
+    danach die rechte Maustaste oder die Taste EINFG bzw. INS oder 0. 
+    Die Datei wird mit einem roten K„stchen markiert. Auf diese Weise 
+    k”nnen Sie nun weitere Dateien und Verzeichnisse ausw„hlen.
+    Sie k”nnen die Auswahl rckg„ngig machen, indem Sie den eben
+    beschriebenen Vorgang wiederholen. Um eine Auswahl vollst„ndig
+    rckg„ngig zu machen, drcken Sie die Tastenkombination STRG+R.
+    Lesen Sie hierzu auch <A HREF="#trick">Trick 17</A> am Ende dieses Hilfetextes.
+
+4.  Drcken Sie zum Kopieren die Taste F5 oder klicken Sie mit der Maus
+    auf das entsprechende Tastensymbol.
+
+5.  Sollten sich im Zielverzeichnis bereits gleichnamige Objekte
+    befinden, erscheint ein Warnfenster. W„hlen Sie dort mit der Maus
+    oder durch Drcken der hervorgehobenen Taste zwischen NEIN, JA oder
+    (wenn Sie mehrere Objekte ausgew„hlt haben) ALLE und ENDE.
+
+    <FONT COLOR="blue">NEIN</FONT>: Die Quelldatei wird nicht kopiert, die Zieldatei bleibt also
+          unver„ndert. Sind mehrere Objekte ausgew„hlt worden, f„hrt
+          die Kopierfunktion beim n„chsten Objekt fort.
+   
+    <FONT COLOR="blue">JA</FONT>:   Die Quelldatei wird kopiert und die Zieldatei berschrieben.
+          Wurden mehrere Objekte ausgew„hlt, wird der Warnhinweis
+          bei der n„chsten bereits existierenden Datei wiederholt.
+
+    <FONT COLOR="blue">ALLE</FONT>: Alle weiteren ausgew„hlten Objekte werden kopiert, auch wenn
+          sie eventuell bereits im Kopierziel existieren, <FONT COLOR="red">ohne</FONT> daá
+          weitere Warnhinweise erscheinen. (Vorsicht!)
+
+    <FONT COLOR="blue">ENDE</FONT>: Die Operation wird vollst„ndig abgebrochen.
+
+    Achtung! Beim Kopieren von Verzeichnisb„umen wird INNERHALB dieser
+    Verzeichnisse keine Prfung auf gleichnamige Objekte vorgenommen.
+    Lediglich schreibgeschtzte, versteckte oder System-Verzeichnisse
+    sind erst dann berschreibbar, wenn das Attribut entfernt wird.
+
+6.  Der Comander erkennt auch <A HREF="attribut.htm#verstecken">versteckte</A> Dateien im Zielverzeichnis.
+    Hier (und auch bei <A HREF="attribut.htm#nurlesen">schreibgeschtzten</A> oder <A HREF="attribut.htm#system">Systemdateien</A>) erscheint
+    ein zus„tzlicher Warnhinweis.
+
+
+<FONT COLOR="maroon">Kopieren im Hintergrund</FONT>
+
+Wenn Sie sehr groáe Datenmengen kopieren wollen und nebenbei gern
+weiterarbeiten m”chten, k”nnen Sie den Kopiervorgang auch im Hinter-
+grund ausfhren lassen.
+
+1. W„hlen Sie die zu kopierenden Dateien wie oben beschrieben aus und
+   drcken Sie dann die Tastenkombination CTRL+F5 (bzw. STRG+F5).
+
+2. Warten Sie, bis ein Piepton den Beginn der Kopieraktion meldet. Erst
+   dann k”nnen Sie die Verzeichnisse in den Fenstern wechseln oder
+   andere Befehle ausfhren.
+
+3. šber den Stand des Kopiervorganges erscheinen keine weiteren
+   Hinweise auf dem Monitor. Wenn Sie jedoch die Tasten STRG+F5 ein
+   weiteres Mal drcken, erscheint im Kopf des Comanders eine kurze
+   Meldung (z.B. 25. Datei von 127).
+
+4. Der Hintergrundprozeá beendet sich mit einer akustischen Meldung:
+
+   Piepton wie zu Beginn: fehlerfreie Ausfhrung.
+   Langgezogener Ton:     Kopierbefehl kann nicht ausgefhrt werden
+   Alarmsirene:           Fehler w„hrend des Kopierens (vorzeitiger
+                          Abbruch).
+
+5. Vorsicht! Gleichnamige Dateien im Kopierziel werden ohne Vorwarnung
+   berschrieben!
+
+Beachten Sie bitte auch folgendes: Kopiervorg„nge beanspruchen von der
+Rechenzeit des PC relativ groáe "Scheiben". Dies gilt vor allem, wenn
+von oder auf Diskette kopiert wird. Die Maus ist in der Regel nicht mehr
+sinnvoll zu gebrauchen, aber auch die Tastatur wird schleppender.
+Warten Sie nach einem Tastendruck, ob sich etwas tut, bevor Sie ihn
+wiederholen.
+
+Auch wenn Sie gar nichts tun, dauert eine Hintergrundkopie z.T.
+bedeutend l„nger als eine normale Vordergrundkopie. Im Verzeichnis
+Comander befindet sich w„hrend des Hintergrundkopierens eine Datei
+namens BACK_COP.LOG. L”schen Sie diese nicht! (Dies geschieht am Ende
+automatisch).
+
+Sie k”nnen eine Hintergrundkopie auch dann starten, wenn bereits ein
+Hintergrunddruck ausgefhrt wird und umgekehrt. Die akustischen
+Meldungen der beiden Funktionen unterscheiden sich in der Tonfrequenz.
+Die Frequenz der Alarmsirene der Druckfunktion steigt z.B. gegen Ende
+an, w„hrend die der Kopierfunktion gleich bleibt. Im Doppelbetrieb kann
+es vorkommen, daá das gesamte System regelm„áig v”llig blockiert wird,
+so daá Sie im Vordergrund nichts sinnvolles anfangen k”nnen. Wenn Sie
+den Rechner jedoch verlassen wollen, dann bietet es sich allerdings an,
+beide Befehle nicht nacheinander sondern zugleich ausfhren zu lassen.
+
+<A NAME="verify"></A> 
+<A HREF="#top"> </A><FONT COLOR="maroon">Verify</FONT>
+
+Verify bedeutet, daá nach dem Kopieren berprft wird, ob Quell- und Ziel-
+datei identisch sind. Somit k”nnen Kopierfehler erkannt werden, die durch
+fehlerhafte Datentr„ger, RAM-Bausteine oder Hardware"aussetzer" entstehen
+k”nnen. DOS selbst bietet dazu den Befehl Verify, der aber nicht so 
+"pedantisch" ist, wie es echnisch m”glich w„re. Der Comander bietet "echtes"
+Verify, d.h., Quell- und Zieldatei werden nach dem Kopieren nochmals voll-
+st„ndig von den Datentr„gern gelesen und Byte fr Byte miteinander verglich-
+en. (Keine Prfsummen-Vergleiche, daher 100% exakter Vergleichsalgorithmus)
+Allerdings gibt es eine Ausnahme: Wenn Sie ein Cache-Programm wie z.B.
+SMARTDRV geladen haben, erfolgt beim Neulesen mitunter gar kein Datentr„ger-
+zugriff, sondern die Daten werden einfach aus dem Schreib-Lese-Puffer im
+RAM geholt. Da hier kein physikalischer Lesevorgang stattfindet, kann es
+vorkommen, daá z.B. ein Datentr„gerfehler gar nicht bemerkt wird. Wenn Sie
+wichtige Daten auf Diskette sichern, sollten Sie SMARTDRV mit folgendem
+Eintrag in der AUTOEXEC.BAT einschr„nken:
+
+LH C:\DOS\SMARTDRV.SYS a- b- c+ x+
+
+x+ steht hier fr alle weiteren Laufwerke. Laufwerke A: und B: werden durch
+das Minuszeichen von der Pufferung ausgeschlossen. Sie werden (noch) lang-
+samer, aber sicherer. Wenn es schon vorgekommen sein sollte, daá Disketten
+oder Laufwerke aus unerfindlichen Grnden als unbrauchbar gemeldet wurden,
+sollten Sie diese Anweisung auf jeden Fall anwenden.
+
+Verify wird im KONFIX-Men ein- bzw. ausgeschaltet. Beim Kopieren erscheint
+im grnen Feld des Kopierfensters eine gelbe Prozentzahl, die bei kleinen
+Dateien praktisch immer auf 100% zeigt, bei gr”áeren den Fortschritt beim
+Vergleich anzeigt. Ist Verify ausgeschaltet, wird dort nichts angezeigt.
+Verify verlangsamt einen Kopiervorgang z.T. betr„chtlich, erspart aber
+oftmals den anschlieáenden Einsatz von Prfprogrammen wie SCANDISK usw.
+
+WICHTIG: Beim Hintergrundkopieren wird Verify generell <FONT COLOR="red">nicht</FONT> aktiv! Fhren
+         Sie Kopien auf "wacklige" Disketten also im Vordergrundbetrieb aus!
+
+
+<FONT COLOR="green">Hinweis:</FONT>
+Wenn Sie ein oder mehrere Objekte mit roten K„stchen markiert haben,
+bezieht sich der nun folgende Kopiervorgang nur auf diese Objekte.
+Wenn sich der Lichtbalken nach dem Markieren auf irgendeiner anderen
+Datei befindet, wird diese NICHT mitkopiert. Der DOS-Comander kopiert
+nur dann die Datei im Lichtbalken, wenn keine weiteren Objekte aus-
+gew„hlt wurden.
+
+<A NAME="trick"> 
+<FONT COLOR="green">Trick 17</FONT>
+Um mehrere untereinander stehende Objekte mit roten K„stchen zu mar-
+kieren, halten Sie die rechte Maustaste gedrckt. Der Balken bewegt
+sich nun automatisch von Datei zu Datei. Gleiches erreichen Sie, wenn Sie 
+statt der EINFG-Taste die 0-Taste drcken.
+
+<FONT COLOR="green">Trick 18</FONT>
+Sie wollen Dateien aus unterschiedlichen Verzeichnissen auf zwei ver-
+schiedene Datentr„ger kopieren und zwischendurch einen Kaffee trinken
+gehen? Oder ein und das selbe Verzeichnis auf zwei Diskette kopieren
+und dabei eine Datei drucken? Dann starten Sie den ersten Kopierbefehl
+(sowie den Druck) im Hintergrund und den zweiten ganz normal mit Taste
+F5 im Vordergrund. Die Hintergrundprozesse werden w„hrend der Vorder-
+grundkopie angehalten und anschlieáend automatisch ausgefhrt.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

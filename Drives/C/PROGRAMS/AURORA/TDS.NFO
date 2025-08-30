@@ -1,0 +1,50 @@
+Program:
+"AURORA TEXT EDITOR" for DOS v3.0c by nuText Systems (now nText Research)
+
+Released:
+a long time ago :-) (files are dated November '96)
+
+Program Home Page:
+http://ntext.net
+
+Price (shipping included):
+$42.95 (US) + $32.00 for printed manual
+
+Download Locations:
+http://ntext.net/auror30c.exe (684,434 bytes)
+http://ftpsearch.ntnu.no/cgi-bin/search?query=auror30c
+
+Description: An excellent, fast DOS text editor with tons of features.  I
+             like this one much better than TSE or Boxer (even though you
+             can't change the cursor size).  And it supports Win95 long
+             filenames.  I'm looking forward to Aurora/32.
+
+Instructions: -> If you already have the program installed, just run the
+                 patch in your Aurora directory (where A.EXE resides).
+
+              -> Otherwise, install it first (by running A.EXE once), and
+                 THEN run the patch.
+
+Notes: -> After patching, the "About" screen will always state that you
+          have thirty days left in your evaluation.
+
+       -> If you've unpacked the file (which is partially compressed
+          using MS Exepack), you can try to patch it by using a more
+          generic method.  Open A.EXE in a hex editor and:
+          <1> Look for "21 6C 40 23 00" (hex), and change
+              the NEXT byte (should be a 00 or 02) to 03;
+          <2> Then, search for "01 74 05 B8 01" (hex),
+              and change "74 05" to "90 90".
+
+Details: I fiddled with this one for a while.  I had patched it quickly
+         about a year ago, but just recently I noticed that all the date
+         functions (clock, alarm, insert time/date, etc.) didn't work
+         properly.  Not too surprising, considering I had completely
+         disabled the date check.  So this time instead I just changed a
+         flag inside the executable.  Works like a charm!  Now you don't
+         have a static clock that states an impossible date.  The closing
+         nag is disabled the same way as before.  Nice to be cracking in
+         DOS again! :-)
+
+                                       - Dreamless Sleep, 98-01-03
+

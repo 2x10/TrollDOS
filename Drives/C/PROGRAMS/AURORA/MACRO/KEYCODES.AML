@@ -1,0 +1,82 @@
+//--------------------------------------------------------------------
+// KEYCODES.AML
+// Display Keycodes, (C) 1993-1996 by nuText Systems
+//
+// (see Keycodes.dox for user help)
+//
+// This macro displays various keycodes for each key pressed.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// keep this object resident
+resident ON
+settype "win"
+
+// create main window with titles
+createwindow
+setframe ">b"
+setcolor  border_color         color white on gray
+setcolor  border_flash_color   color brightgreen on gray
+setcolor  text_color           color brightgreen on gray
+settitle "Display Keycodes - press <esc> twice to exit"
+setwinctrl 'ð'
+sizewindow 6 5 72 20 "ad"
+setborder "1i"
+setshadow 2 1
+writeline " Keycode  Hexcode  Scancode  Ascii  Hex  Char  Keyname"
+
+// create scrollable subwindow
+createwindow
+sizewindow 0 1 0 0 "rw1" '' (getprevwin)
+setparent (getprevwin)
+setcolor  text_color     color black on gray
+showcursor 80 90
+
+inheritkeys OFF
+
+lastcode = 0
+
+event <destroy>
+  // call 'close' in object 'win'
+  close
+end
+
+function "ð"
+  destroyobject
+end
+
+// don't process shift keys
+key <shiftkey>
+
+key <otherkey> (keycode)
+  asciicode = keycode & 0ffh        // get ascii code from keycode
+  keyname = geteventname keycode    // get keyname from keycode
+  if lastcode then
+    writeline
+  end
+
+  writestr
+    keycode:8             +           // display keycode
+    (base keycode 16):9   +           // display hexcode
+    (keycode shr 8):10    +           // display scancode
+    asciicode:7           +           // display asciicode (if any)
+    (base asciicode 16):5 +           // display asciicode (if any)
+    (char asciicode):6    +           // display key char (if any)
+    "  " + keyname                    // display keyname
+
+  lastcode = keycode                // save last keycode
+end
+
+key <esc> (keycode)
+  if lastcode == keycode then
+    destroyobject
+  else
+    call <otherkey> (keycode)
+  end
+end

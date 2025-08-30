@@ -1,0 +1,39 @@
+//--------------------------------------------------------------------
+// XWORD.AML
+// Syntax highlighting for highlighting words
+// (used by the hiliteword command in Ext.aml)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+  'bcfi'                          // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+  '.,;:\'"?!()<>|\t'              // symbol set 1
+  ''                              // symbol set 2
+  ''                              // string characters
+  ''                              // string literal char
+  ''                              // numeric symbol
+  ''            0                 // eol comment 1 / start column
+  ''            0                 // eol comment 2 / start column
+  ''            ''                // multi-line comment 1
+  ''            ''                // multi-line comment 2
+  0                               // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black        // keyword
+  color white        on white        // symbol set 1
+  color white        on white        // symbol set 2
+  color brightred    on brightred    // string
+  color brightred    on brightred    // numeric
+  color brightgreen  on brightgreen  // eol comment 1
+  color yellow       on yellow       // eol comment 2
+  color brightgreen  on brightgreen  // comment 1
+  color brightcyan   on brightcyan   // comment 2

@@ -1,0 +1,116 @@
+     JP Software                               Standard Order Form [12/01]
+     P.O. Box 1470                               Email to sales@jpsoft.com
+     E. Arlington, MA 02474 USA                   or fax to (781) 646-0904
+
+     This order form covers our standard product line:  New copies,
+     product packs, our CD Suite, and associated manuals.
+
+     For multi-system licenses, more shipping information, and answers to
+     other ordering questions, see the PRODUCTS.TXT file.  If you need
+     additional information, or want to order directly from our web site:
+
+        For                             See
+        -------------------------       --------------------------
+        On-line order entry             http://www.jpsoft.com/
+        Email orders / inquiries        sales@jpsoft.com
+        Phone orders                    (800) 368-8777 (US / Canada)
+        General phone inquiries         (781) 646-3975
+        US / international dealer list  see http://www.jpsoft.com/
+        Upgrade order form              UPGFORM.TXT file
+        Detailed product information    PRODUCTS.TXT file
+        Support plans                   SUPPORT.TXT file
+
+     =====================================================================
+     First, tell us who you are:
+
+     Name (first, last) __________________________________________________
+
+     Company _____________________________________________________________
+
+     Address _____________________________________________________________
+
+             _____________________________________________________________
+
+     City, State/Prov, Post Code _________________________________________
+
+     Country _____________________________________________________________
+
+     Phone _____________________________  Fax ____________________________
+
+     E-Mail ______________________________________________________________
+       (Will only be used by JP Software to notify you of upgrades or
+        contact you with other information related to our products.)
+
+     Register products to:  ___ Company     ___ Individual
+     Send information on:  ___ Multi-System Licenses  ___ Reseller Pricing
+
+     Where did you hear about our products? ______________________________
+
+     =====================================================================
+     Now, what would you like to order?
+
+     [Not sure what to order?  See PRODUCTS.TXT for more information.]
+
+                                                      Total Price
+     New Copies and Product Packs
+     ___ 4DOS ($69.95, 1 lb) ......................... __________  [NC100]
+     ___ 4NT ($69.95, 1 lb) .......................... __________  [NC120]
+     ___ Take Command/32 ($69.95, 1 lb) .............  __________  [NC140]
+
+     ___ JP CD Suite (six products, $119.95, 1 lb) ..  __________  [CD180]
+
+     ___ Win95/98 Pack (TCMD/32, 4DOS; $99.95, 1 lb) . __________  [PK184]
+     ___ Windows NT Pack (4NT, TCMD/32; $99.95, 1 lb)  __________  [PK186]
+
+     Extended Support Annual Subscription (see
+       SUPPORT.TXT; single system $29.95 for 1 product,
+       $39.95 for 2 or more)
+     ___ 4DOS Extended Support ....................... __________  [SU600]
+     ___ 4NT Extended Support ........................ __________  [SU620]
+     ___ Take Command/32 Extended Support ............ __________  [SU640]
+
+         Please contact us or see our web site for
+         pricing on multi-system license and Premium
+         Support plans.
+
+     Manuals
+     ___ 4DOS, 4NT Take Command Reference Manual ..... __________  [BK502]
+            ($19.95, 2 lb)
+
+     Multi-System Licenses / Other Products
+     ___ ____________________________________________  __________  [     ]
+     ___ ____________________________________________  __________  [     ]
+     ___ ____________________________________________  __________  [     ]
+
+     ----------------------------------
+     | SHIPPING:                      |    Subtotal  $ __________
+     |                                |
+     | Total   USA UPS  Canada  Int'l | Sales Tax (MA
+     | Weight  Ground   Mail    Mail  | 5%, MN 6.5%) $ __________
+     | ------  ------   -----   ----- |
+     |  1 lb    $ 7      $ 7     $13  |     Shipping $ __________
+     |  2 lb    $ 8      $10     $20  |
+     |  3 lb    $ 9      $13     $27  |  ORDER TOTAL $ __________
+     |  4 lb    $10      $16     $34  |
+     |  5 lb    $11      $19     $41  |
+     |                                |   Total Weight __________  lb
+     | For other services or higher   |
+     | weights please contact us.     |
+     ----------------------------------
+     =====================================================================
+     Thanks for your order!  Now please choose a payment method:
+
+     ___Credit Card:  __MC  __Visa  __Discover  __Amex
+
+        Card # _________________________________________ Expires ____/____
+
+        Signature ________________________________________________________
+
+     ___Check (US bank, US funds)  ___COD*  ___P.O.*  #___________________
+
+     [* See PRODUCTS.TXT for terms *before* selecting COD or PO payment!]
+     =====================================================================
+
+     Legal Stuff:  Copyright 2001, JP Software Inc., All Rights Reserved.
+     See PRODUCTS.TXT for trademarks.  All prices and terms subject to
+     change without notice.

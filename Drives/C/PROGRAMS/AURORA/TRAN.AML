@@ -1,0 +1,77 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// TRAN.AML
+// Translation definitions (loaded on-demand by Ext.aml)
+//
+// Notes:
+//
+// The text translations and macros listed here are only examples -
+// you can replace them with your own.
+//
+// To change a translation definition, simply locate the desired word
+// and it's substitution text and change them in the table. You can also
+// add new entries to the table. Be sure to enclose both the word and
+// the substitution text in quotes.
+//
+// If you have made any changes, save this file and compile it
+// with <shift f10>
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// When translation is On, words in the left column are replaced
+// with the phrases in right column as-you-type. To turn translation
+// On and Off, select Translate from the Set menu.
+
+// Words defined with a '*' suffix are translated only when a word
+// delimiter character is entered. The rest are translated when the
+// last character of the word is entered.
+
+//   Word:             Replace with:
+//   ----              ------------
+set "adn"              "and"
+set "asap"             "as soon as possible"
+set "aurora"           "The Aurora Editor"
+set "btw"              "by the way,"
+set "don;t"            "don't"
+set "etc"              "et cetera"
+set "i*"               "I"
+set "imho"             "In my humble opinion,"
+set "incl"             "include"
+set "occurence"        "occurrence"
+set "recieve"          "receive"
+set "teh"              "the"
+set "yn"               "your name"
+
+
+// Macro Translations ------------------------------------------------
+
+// If translation is On, these macros are executed when you type the
+// macro name as a word in your text. Note that macro functions
+// defined in this object cannot call each other - this object is for
+// lookup only.
+
+// type the word 'bip' and a space to beep the PC speaker
+function "bip*"
+  beep 800 100
+end
+
+// type the word 'dt' to enter the date and time at the cursor
+function dt
+  prevword         // find the left word ('dt')
+  delword          // delete the word 'dt' just entered
+  timestamp        // enter the date/time stamp
+end
+
+// type the word 'txx' on a blank line to replace the current line
+// with text from a file (replace c:\your.txt with the name of
+// your text file).
+
+function txx
+  // insert the file after the cursor
+  if open "c:\\your.txt" 'i' then
+    // delete current line if successful
+    delline
+  end
+end

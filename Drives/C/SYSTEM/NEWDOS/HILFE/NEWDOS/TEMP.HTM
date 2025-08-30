@@ -1,0 +1,45 @@
+<HTML><HEAD><TITLE>TEMP-Verzeichnis</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>TEMP-Verzeichnis</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver">
+<PRE>Verzeichnis, welches extra fr das Ablegen von tempor„ren Dateien
+vorgesehen ist. 
+
+Zahlreiche DOS- und New-DOS-Programme erzeugen w„hrend des Betriebes Dateien,
+in denen sie Informationen und Daten zwischenspeichern. Solche Dateien
+tragen in der Regel die Endung TMP. Meist l”schen die erzeugenden Programme
+diese Dateien beim Beenden, in einigen F„llen bleiben sie auch erhalten
+(z.B. <A HREF="clipbrd.htm">das New-DOS-Clipboard</A> CLIPBRD.DAT).
+
+Damit sich derartige Dateien nicht beliebig auf dem Datentr„ger verteilen
+k”nnen, wird in der Autoexec.bat meist ein spezielles Verzeichnis fr
+tempor„re Dateien angegeben. 
+
+<FONT COLOR="red"><A HREF="help:set">SET</A> TEMP=C:\DOS
+SET TMP=C:\DOS</FONT> 
+
+Fehlt diese Angabe in der Autoexec.bat, wird sie von <A HREF="setup.htm">SETUP</A> von New-DOS
+erzeugt.
+ 
+New-DOS-Programme, die Tempor„r-Dateien erzeugen, verwenden dazu das unter
+TEMP angegebene Verzeichnis. Fehlt diese Angabe in der Autoexec.bat,
+verwenden die Programme das unter TMP angegebene Verzeichnis. 
+Fehlt auch diese Angabe oder existiert das angegebene Verzeichnis nicht, 
+verwenden die Programme das Verzeichnis, in dem sie sich selbst befinden - 
+also das NEWDOS-Verzeichnis.
+
+Sie sollten - falls nicht bereits geschehen - dafr sorgen, daá in Ihrem DOS-
+System ein solches TEMP-Verzeichnis angegeben ist. Dies erleichtert z.B. das
+Auffinden und L”schen von "vergessenen" tempor„ren Dateien. Wenn Sie
+DOS/New-DOS auf einer Diskette, von CD-ROM oder einem langsamen Laufwerk
+betreiben, kann diese Angabe zu einer Beschleunigung beitragen, wenn Sie das
+TEMP-Verzeichnis auf dem schnellsten verfgbaren Datentr„ger deklarieren.
+Hier ist z.B. der Einsatz einer <A HREF="help:ramdrive.sys">RAM-Disk</A> denkbar.
+
+šberprfen Sie Lage bzw. Vorhandensein eines gltigen TEMP-Verzeichnisses
+mit dem DOS-Befehl <FONT COLOR="red">SET</FONT>.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

@@ -1,0 +1,110 @@
+//--------------------------------------------------------------------
+// SUMBLOCK.AML
+// Add Numbers in a Block, (C) 1993-1996 by nuText Systems
+//
+// This macro adds up numbers in a marked block in the current edit
+// window and displays the total. Sumblock will handle numbers from
+// -2 billion to +2 billion with a maximum of 8 decimal places.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include  bootpath "define.aml"
+
+variable width, frac_total, int_total, count
+
+// do only if a mark exists in current window
+if getcurrbuf <> getmarkbuf then
+  msgbox "Block not marked in current window"
+  return
+end
+
+// close mark and save cursor position
+stopmark
+pushcursor
+
+loop
+
+  // find numbers in the mark using regular expressions
+  width = find "-?{[0-9]*\\.[0-9]#}|{[0-9]#}"
+               (if? width "xb*" "xbg*")
+  if width then
+
+    // count numbers found
+    count = count + 1
+
+    // get number and position of decimal character
+    number = gettext (getcol) width
+    p = pos '.' number
+
+    // handle fractional portion of number
+    if p then
+      if p < length number then
+
+        // total up fraction portion in frac_total
+        f = number [p + 1 : TO_END] : -8 : '0'
+        frac_total = if (pos '-' number) then
+                       frac_total - f
+                     else
+                       frac_total + f
+                     end
+
+        // negative fractional sum
+        if frac_total < 0 then
+          int_total = int_total - 1
+          frac_total = frac_total + 100000000
+
+        // fractional overflow
+        elseif frac_total > 99999999 then
+          overflow = length frac_total - 8
+          int_total = int_total + frac_total [1 : overflow]
+          frac_total = frac_total [overflow + 1 : TO_END]
+        end
+      end
+      number = number [1 : p - 1]
+    end
+
+    // add up integer portion
+    int_total = int_total + number
+
+    // setup for next search
+    right width
+  else
+    break
+  end
+end
+
+// restore cursor position and update display
+popcursor
+display
+
+if frac_total then
+
+  // compensate for negative integer sum
+  // and positive fraction sum
+  if int_total < 0 then
+    int_total = int_total + 1
+    frac_total = 100000000 - frac_total
+  end
+
+  // right justify fraction and pad with zeros
+  frac_total = frac_total:8:'0'
+
+  // remove trailing zeros and combine integer and
+  // fraction portion
+  int_total = int_total + '.' +
+                frac_total [1 : posnot '0' frac_total 'r']
+end
+
+if not int_total then
+  int_total = 0
+end
+
+// display the sum and prompt the user to enter
+if (okbox  "Sum of " + count + " numbers is: " + int_total  + ".  Enter into text?" "Block Sum") == "Ok" then
+  write int_total
+end

@@ -1,0 +1,79 @@
+Der SiS 501 funktioniert z.Z. nicht - ich habe auch keine Idee,
+wie ich das aendern sollte.
+
+Bei SiS 511 und 571 sind die UMBs nicht cacheable. Wenn es
+jemand mit Cache probieren will, kann er die V2.13beta
+probieren.
+
+Mir wurde gesagt, SiS 597/98 und 581/82 haetten auch mit Cache
+funktioniert. Auf einem SiS 598 konnte ich es jetzt selbst
+probieren und es ging nur ohne Cache. Ab V2.16 sind die UMBs
+bei diesen Chipsaetzen wieder nicht cacheable.
+
+Wenn es bei den o.g. Chipsaetzen Probleme gibt, aeussert sich das
+so, da· UMBPCI zunaechst insalliert wird, sich hochgeladene
+Programme recht eigenartig verhalten und irgendwann alles abstÅrzt.
+Wenn es so ist, kann ich das leicht beheben - nur verraten muesst Ihr
+es mir.
+
+Die UMBs sind bei 511 und 571 nicht cacheable, ISA-DMA muesste aber gehen.
+Probiert bitte mal aus, ob der Floppy-Cache mit hochgeladenem SMARTDRV
+funktioniert, und schreibt mir bitte das Resultat, denn ich habe hier weit
+und breit keine SIS-Maschine und bin nur auf die Datenblaetter angewiesen.
+
+
+Wie gesagt sind die UMBs bei einigen Chips nicht cacheable und damit reichlich
+langsam. FÅr CD-ROM-Treiber samt MSCDEX, sowie und Maus- und Tastatur-Treiber
+reicht aber es allemal.
+Da Win95 aber automatisch performancetrÑchtige Sachen wie Buffers, Files
+und Stacks hochlaed, sollte man das unterbinden, indem man in der CONFIG.SYS
+den Schalter DOS=NOAUTO setzt. Damit werden dann auch HIMEM.SYS und IFSHLP.SYS
+nicht mehr automatisch geladen. Die muessen dann in die CONFIG.SYS geschrieben
+werden.
+
+Das koennte dann z.B. so aussehen:
+
+files=50
+buffers=20
+stacks=9,256
+dos=high, umb, noauto
+device=c:\windows\ifshlp.sys
+device=c:\windows\himem.sys
+device=umbpci.sys /i=c800-efff
+devicehigh=...
+installhigh=...
+
+
+Das Shadow-RAM fuers Main-BIOS ist uebrigens auf vielen Rechnern auch
+nicht cacheable - also alles halb so schlimm.
+
+
+
+
+-----
+
+Der folgende Hinweis zum 496 ist z.Z. ueberflÅssig, da er garnicht
+funktioniert...
+
+Bei 8MB oder weniger Hauptspeicher macht der 496er einen Remap der Segmente
+A,B,D und E ans Ende des Extended Memory. Bei den alten 461 und 471 wurde
+dieser Remap in dem Moment rÅckgÑngig gemacht in dem man einen Speicher-
+block im D oder E-Segment eingeschaltet hat. Beim 496er gibt es dafÅr
+ein Extra-Bit. Was hier nun passiert, wei· ich nicht. Wer also 8MB oder
+weniger hat, kann nur /I=c800-cfff benutzen.
+
+
+
+
+Mailt mir bitte auch positive Testergebnisse mit Angabe des Chipsatzes.
+
+
+
+Magdeburg, 09/98
+
+Uwe Sieber
+
+
+uwe.sieber@gmx.de
+oder
+uwe.sieber@relay.boerde.de

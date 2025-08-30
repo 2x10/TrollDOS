@@ -1,0 +1,32 @@
+<HTML><HEAD><TITLE>Der Eventhandler "Load"</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Der Eventhandler "Load"</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+Der Ereignis-Handler "Load" wird vom New-DOS-Browser automatisch 
+aufgerufen, wenn das Dokument fertig geladen und auf dem Bildschirm 
+dargestellt ist. "Load" muá sich dazu im BODY-Tag des Dokumentes 
+befinden.
+<BR>
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;BODY <FONT color=cyan>Load</FONT>="read:daten.bnk, 1"&gt;
+</FONT><BR> 
+</TD></TR></TABLE>
+Im Beispiel ”ffnet der Browser die Datenbank-Datei DATEN.BNK, liest daraus 
+den ersten Datensatz. Der Datensatz wird vom Browser aufgeschlsselt und in 
+die Eingabefelder des Formulars eingeblendet, welches sich in dem Dokument 
+befindet. Dabei werden die VALUE-Werte der Eingabefelder von den Daten aus 
+der Datei berschrieben.
+<P>
+Der Effekt ist, daá der Anwender der Datenbank nach dem ™ffnen der Seite
+bereits einen gltigen Datensatz zu sehen bekommt. Ohne die "Load"-
+Anweisung wrde ein leeres Formular angezeigt (was in einigen F„llen auch 
+vorteilhaft sein kann).
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

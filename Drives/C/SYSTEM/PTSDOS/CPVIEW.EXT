@@ -1,0 +1,14 @@
+ICE:	archview !.!
+LZH:	archview !.!
+ARC:	archview !.!
+PAK:	archview !.!
+ZIP:	archview /FULL !.! pkunzip -d -o 
+ARJ:	archview !.! BSA -x -y -iarj
+CHZ:	archview !.!
+BSA:	archview !.! BSA -x -y -ibsa
+BSN:	archview !.! BSA -x -y
+DBF:	baseview !.!
+gif:	grafview !.!
+pcx:	grafview !.!
+com:	exeview !.!
+exe:	exeview !.!

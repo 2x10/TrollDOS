@@ -1,0 +1,181 @@
+//--------------------------------------------------------------------
+// ALARM.AML
+// Set Alarm, (C) 1993-1996 by nuText Systems
+//
+// (See Alarm.dox for user help)
+//
+// This macro displays a dialog box which allows you to set up to four
+// editor alarms. Alarm fields are saved in the file Alarm.dat.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// clock timer delay
+constant clock_delay  = 1000
+
+// disable <loading>, <saving> in Ext.aml while this macro is running
+event <loading> end
+event <saving> end
+
+private function setalarm2 (setopt alarm time date macro parm)
+
+  variable hh, mm, ss
+  variable YY, MM, DD, W
+
+  timerid = "alarm" + alarm
+
+  // turn timer on
+  if pos alarm setopt then
+
+    // get the alarm times
+    parse "{[0-9*]#}.+{[0-9*]#}.+{[0-9*]#}" time 'x'
+           ref hh ref mm ref ss
+    parse "{[0-9*]#}.+{[0-9*]#}.+{[0-9*]#}.+{[0-6*]#}" date 'x'
+           ref YY ref MM ref DD ref W
+
+    // check for wildcards
+    if hh == '*' then  hh = -1  end
+    if mm == '*' then  mm = -1  end
+    if ss == '*' then  ss = -1  end
+    if YY == '*' then  YY = -1  end
+    if MM == '*' then  MM = -1  end
+    if DD == '*' then  DD = -1  end
+    if W  == '*' then  W  = -1  end
+
+    // external macro
+    if pos '.' macro then
+      setalarm timerid YY MM DD W hh mm ss ''
+               "runmacro" (forceext (bootpath "macro\\" + macro) 'x')
+    // function
+    else
+      if macro then
+        setalarm timerid YY MM DD W hh mm ss '' macro parm
+      else
+        setalarm timerid YY MM DD W hh mm ss '' "msgbox" parm "Alarm" 'b'
+      end
+    end
+
+  // turn timer off
+  else
+    destroytimer timerid
+  end
+end
+
+
+variable dlgwin
+
+// timer function to update the real-time clock
+function clocktick
+  oldwindow = gotowindow dlgwin
+  // YYYYMMDDWhhmmssuu
+  rawtime = getrawtime
+  writestr rawtime [10:2] + ' ' + rawtime [12:2] + ' ' +
+           rawtime [14:2] '' 8 8
+  writestr rawtime [3:2]  + ' ' + rawtime [5:2]  + ' ' +
+           rawtime [7:2] + ' ' + rawtime [9] '' 19 8
+  gotowindow oldwindow
+end
+
+// create an alarm line on the dialog box
+private function alarmline (y line)
+  field ">"  8  y   9 line [1:8]
+  field ">" 19  y  11 line [9:10]
+  // trim trailing blanks for macro name
+  macro = line [19:11]
+  field ">" 32  y  11 macro [1 : posnot ' ' macro 'r']
+  field ">" 45  y  25 line [30:TO_END]
+end
+
+
+// alarm dialog box
+private function alarmdlg
+
+  // load alarm field data
+  databuffer = loadbuf (bootpath "macro\\alarm.dat")
+  if databuffer then
+    initialset = if? (getlines > 4) (gettext '' '' 5) ''
+  end
+
+  // create dialog box
+  dlgwin = dialog "Set Alarm" 71 11 "cp"
+
+  writestr " Ä Time Ä   Ä Date Ä" '' 7 2
+  writestr " hh mm ss   yy mm dd w   Command      Parameter/Comment" '' 7 3
+
+  groupbox 'Set' 3 3
+    (menu ''
+       item "[ ]"
+       item "[ ]"
+       item "[ ]"
+       item "[ ]"
+     end) '' initialset "1234"
+
+  alarmline 4 (gettext '' '' 1 databuffer)
+  alarmline 5 (gettext '' '' 2 databuffer)
+  alarmline 6 (gettext '' '' 3 databuffer)
+  alarmline 7 (gettext '' '' 4 databuffer)
+
+  destroybuf databuffer
+
+  button "O&k"      27 10 8
+  button "Cancel"   38 10 8
+
+  variable setopt
+  variable time1, date1, mac1, msg1
+  variable time2, date2, mac2, msg2
+  variable time3, date3, mac3, msg3
+  variable time4, date4, mac4, msg4
+
+  // start real-time clock
+  clockid = setrepeat '' clock_delay (getcurrobj) "clocktick"
+  clocktick
+
+  // get alarm times
+  value = getdialog ref setopt
+                    ref time1 ref date1 ref mac1 ref msg1
+                    ref time2 ref date2 ref mac2 ref msg2
+                    ref time3 ref date3 ref mac3 ref msg3
+                    ref time4 ref date4 ref mac4 ref msg4
+
+  // destroy real-time clock
+  destroytimer clockid
+
+  if value == 'Ok' then
+
+    // turn alarms on/off
+    setalarm2 setopt 1 time1 date1 mac1 msg1
+    setalarm2 setopt 2 time2 date2 mac2 msg2
+    setalarm2 setopt 3 time3 date3 mac3 msg3
+    setalarm2 setopt 4 time4 date4 mac4 msg4
+
+    // save all alarms to Alarm.dat
+    if createbuf '' time1:-8 + date1:-10 + mac1:-11 + msg1
+                    time2:-8 + date2:-10 + mac2:-11 + msg2
+                    time3:-8 + date3:-10 + mac3:-11 + msg3
+                    time4:-8 + date4:-10 + mac4:-11 + msg4
+                    setopt then
+      savebuf (bootpath "macro\\alarm.dat")
+      destroybuf
+    end
+  end
+end
+
+// macro help
+macrofile = arg 1
+key <f1>
+  helpmacro macrofile
+end
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  call keycode
+end
+
+// display alarm dialog box
+alarmdlg

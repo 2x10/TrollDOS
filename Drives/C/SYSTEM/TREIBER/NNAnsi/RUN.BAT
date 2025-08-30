@@ -1,0 +1,2 @@
+nnansi d
+ctty con

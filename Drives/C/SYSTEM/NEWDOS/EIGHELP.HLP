@@ -1,0 +1,37 @@
+Eigene Syntaxhilfe
+
+Diese Datei k”nnen Sie frei nach Ihren Wnschen gestalten. Falls Sie eine 
+Programmiersprache mit ED steuern, fr die es keine Online-Hilfe gibt, so 
+kann EIGHELP.HLP zu einem solchen Hilfesystem umgebaut werden.
+
+Laden Sie - wenn nicht bereits geschehen - EIGHELP.HLP zum Bearbeiten in den 
+Editor. Ganz oben sehen Sie die šberschrift des Hilfetextes, eingerahmt von 
+merkwrdigen Zeichen. Diese sind notwendig, damit das Hilfesystem das 
+gewnschte Thema finden kann. Die šberschrift muá v”llig identisch mit dem 
+Befehlswort der Programmiersprache sein - lediglich Groá- und Kleinschreibung 
+mssen Sie nicht beachten. Auch wenn Sie in Ihren Hilfetexten Querverweise 
+anbringen (Links), mssen die Schreibweise von Querverweis und šberschrift 
+bereinstimmen. Ein Querverweis wird von zwei Karos (ASCII 4) 
+eingeschlossen, welche Sie in ED mit der Tastenkombination STRG+D erzeugen. 
+Das Pik-Zeichen in der šberschrift wird mit STRG+F erstellt. Der Hilfetext 
+darf mit šberschrift max. 21 Zeilen lang sein. šberz„hlige Zeilen werden 
+ignoriert. Ben”tigen Sie eine weitere Bildschirmseite, mssen Sie eine 
+Aufforderung zum Bet„tigen der BILD  - Taste in die letzte Zeile setzen.
+Als Beispiel fr Syntaxhilfe-Stichwort und Querverweis soll hier der BASIC-
+Befehl PRINT dienen. 
+
+PRINT
+
+BASIC-Befehl zur Zeichenausgabe auf dem Monitor... usw.
+
+Diese Hilfeseite wird angezeigt, wenn der Anwender den Cursor im Quelltext 
+unter das Wort PRINT bewegt, und im Hilfemen den Menpunkt
+Eigene Syntaxhilfe aufruft bzw. ALT+F1 drckt ODER in einem bereits 
+ge”ffneten Hilfetext das farblich hervorgehobene Stichwort PRINT w„hlt.
+
+Toolbox-Programmierer k”nnen hier die Hilfetexte zu ihren selbsterstellten
+Befehlen unterbringen.
+
+Karos
+
+Dummy-Text

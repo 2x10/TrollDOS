@@ -1,0 +1,28 @@
+
+ÿÿGLOBREPL.AML
+ ÿGlobal Search and Replaceÿ
+
+  This macro performs a global search and replace in multiple files on
+  disk. You will be prompted to enter the search string, replace string,
+  and search options.
+
+  The following search and replace options can be specified:
+
+    a - replace all occurrences of the search string without prompting.
+        (if this option is not specified, a verification window will be
+        displayed and you will be prompted to verify each replacement).
+    B - backup files before they are modified
+    i - ignore case
+    u - search within subdirectories also
+    w - whole words only
+    x - regular expressions
+
+  If this macro is run from a file manager window, then only the files
+  listed in the file manager are searched, otherwise you will be
+  prompted to enter a directory or file specification where files will
+  be searched.
+
+  After successful completion of this macro, a summary window is
+  displayed, showing the total number of replacements and the number of
+  replacements for each file.
+

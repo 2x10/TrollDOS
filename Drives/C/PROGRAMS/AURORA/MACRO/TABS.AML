@@ -1,0 +1,57 @@
+//--------------------------------------------------------------------
+// TABS.AML
+// Entab/Detab, (C) 1993-1996 by nuText Systems
+//
+// This macro converts tab characters to spaces (Detab), or converts
+// spaces to tab characters (Entab) in the current edit window. The
+// conversion is limited to a marked block, if it exists in the edit
+// window.
+//
+// The current tab width (the value of the _TabWidth configuration
+// variable) is used as the tab width for the conversion.
+//
+// This macro will run faster if Undo is turned Off.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include  bootpath "define.aml"
+
+if not objtype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+// mark beginning of undoable group
+undobegin
+
+// test for a mark in the current window
+if mark? then
+  if getmarkbuf <> getcurrbuf then
+    msgbox "Block not marked in current window"
+    return
+  end
+// create a temporary mark covering the entire file
+else
+  markline 1 (getlines)
+  temp_mark = TRUE
+end
+
+// check if entab was specified
+entab = (arg 3) == 'e'
+
+// use built-in tabblock function for both detab and entab
+tabblock (if? entab -_TabWidth _TabWidth)
+if temp_mark then
+  destroymark
+end
+
+undoend
+
+display
+say  (if? entab "Entab " "Detab ") +
+     (if? not temp_mark "block ") + "done."

@@ -1,0 +1,7 @@
+
+e.g.
+
+wait 5 
+
+waits 5 seconds - thats all.
+

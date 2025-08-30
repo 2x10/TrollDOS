@@ -1,0 +1,229 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// MOUSE.AML
+// Mouse definitions (included by Main.aml)
+//
+// If you have made any changes, save this file and select 'Recompile
+// the Editor' <alt f2> from the Set menu. Exit and re-enter the
+// editor for your changes to take effect.
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+// Edit and File Manager windows
+//--------------------------------------------------------------------
+
+object edit_fmgr
+
+  // left button down
+  event <lbutton>
+    if button? 2 then
+      queue <chord>
+    else
+      pass
+    end
+  end
+
+  // right button down
+  event <rbutton>
+    if button? 1 then
+      queue <chord>
+    else
+      case getregion
+        when 1
+          gotomenu
+        when 11, 12
+          open "*.*"
+        otherwise
+          pass
+      end
+    end
+  end
+
+  // left & right button down (mouse chording)
+  //event <chord>
+  //end
+
+  // left button double-click
+  event <ldouble>
+    case getregion
+      // background
+      when ''
+        winlist
+      otherwise
+        pass
+    end
+  end
+
+//--------------------------------------------------------------------
+// Prompts and Edit windows
+//--------------------------------------------------------------------
+
+object prompt
+
+  public variable lbf
+
+  // left button down
+  event <lbutton>
+    // pass on to the library (Lib.x)
+    pass
+    // library may switch windows, so check...
+    if wintype? "prompt" then
+      lbf = ''
+      case getregion
+        // retrieve tab
+        when 14
+          askhistory
+        // left title
+        when 13
+          call <lbuttonup>
+          close
+        // client area
+        when 1
+          // set flag for mouse marking
+          lbf = 1
+          trackmouse
+          // check for hex view
+          if windowflag "h?" then
+            hexcol = getmousex - (getcoord 'l1d') - getviewcols - 1
+            windowflag "-12"
+            if hexcol > 0 then
+              windowflag '+1'
+            end
+          end
+      end
+    end
+  end
+
+  // move mouse
+  event <move>
+    if lbf then
+
+      // mouse marking
+      if lbf == 1 then
+        destroymark
+
+        mark_type = if? (wintype? "edit") (shiftkey? 0Fh) 1h
+
+        // get the mark type from the keyboard shift-state or the
+        // MouMark config variable
+        if not mark_type then
+          mark_type = case _MouMark
+                        when 'k'  4h
+                        when 'l'  8h
+                        otherwise 1h
+                      end
+        end
+
+        case mark_type
+          when 4h    markcolumn
+          when 8h    markline
+          otherwise  markstream
+        end
+        lbf = 2
+      end
+      trackmouse
+    else
+      pass
+    end
+  end
+
+  // left button up
+  event <lbuttonup>
+    if lbf then
+      stopmark
+      lbf = ''
+    end
+    pass
+  end
+
+
+//--------------------------------------------------------------------
+// Edit windows
+//--------------------------------------------------------------------
+
+object edit
+
+  // left button double-click
+  event <ldouble>
+    case getregion
+      when 1
+        destroymark
+        case _MouMarkD
+          when 'k'   markcolumn
+          when 's'   markstream
+          otherwise  markline
+        end
+        prompt.lbf = 2
+      otherwise
+        pass
+    end
+  end
+
+  // left button triple-click
+  event <ltriple>
+    case getregion
+      when 1
+        markword
+    end
+  end
+
+//--------------------------------------------------------------------
+// File Manager windows
+//--------------------------------------------------------------------
+
+object fmgr
+
+  variable lbf, lasty
+
+  // double click to open
+  event <ldouble>
+    lbf = ''
+    case getregion
+      when 1
+        //fopen '1'
+        send <enter>
+      otherwise
+        pass
+    end
+  end
+
+  // left button down
+  event <lbutton>
+    // pass on to the library (Lib.x)
+    pass
+    // library may switch windows, so check...
+    if wintype? "fmgr" then
+      if getregion == 1 then
+        lbf = 1
+        trackmouse
+        // toggle file mark if <ctrl> is pressed
+        if shiftkey? 4h then
+          fmark
+        end
+      else
+        lbf = ''
+      end
+    end
+  end
+
+  // mouse move
+  event <move>
+    y = getmousey 'e'
+    if lbf and (button? 1h) then
+      if shiftkey? and y <> lasty then
+        fmark
+      end
+      lasty = y
+      trackmouse
+    else
+      lbf = ''
+      pass
+    end
+  end
+
+  // left button up
+  event <lbuttonup>
+    lbf = ''
+    pass
+  end

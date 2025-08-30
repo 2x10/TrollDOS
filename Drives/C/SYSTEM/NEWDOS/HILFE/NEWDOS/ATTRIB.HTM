@@ -1,0 +1,148 @@
+<HTML><HEAD><TITLE>ATTRIB</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>ATTRIB</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>setzt und lîscht die Attribute von Dateien und Verzeichnissen oder zeigt 
+sie an.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Syntax</FONT> 
+
+<FONT COLOR="blue">ATTRIB [Datei- oder Verzeichnisname] [Attribute] [/s /p]</FONT>
+
+Alle Parameter kînnen in beliebiger Reihenfolge eingegeben werden und gro·-
+oder kleingeschrieben werden. Eine Aneinanderreihung ohne trennendes
+Leerzeichen ist ebenfalls mîglich (z.B. &amp;r&amp;a-r-a).
+
+<FONT COLOR="green">[Datei- bzw. Verzeichnisname/n]</FONT>
+Hier geben Sie einen Pfad, einen einzelnen Namen oder Wildcards (*.doc, *.*
+usw.) ein. Fehlt diese Angabe, verarbeitet ATTRIB alle Dateien im gerade 
+geîffneten Verzeichnis. Es kînnen mehrere Datei-Spezifikationen zugleich
+angegeben werden (z.B. C:\*.txt+*.doc).
+
+<FONT COLOR="green">[Attribute]</FONT>
+Hier geben Sie an, welche Attribute Sie wie geÑndert haben wollen. Verwenden
+Sie dabei folgende AbkÅrzungen:
+
+R = ReadOnly  (Schreibschutz-Attribut)
+H = Hidden    (versteckte Datei)
+A = Archive   (Archiv-Attribut)
+S = SysFile   (System-Datei)
+
+D = Directory (Verzeichnis)
+I = Volume-ID ("Disketten-Label")
+
+Die Attribute D und I kînnen Sie natÅrlich nicht lîschen oder setzen, sondern
+nur als Filter einsetzen.
+
+Damit ATTRIB wei·, was es mit den angegebenen Attributen anfangen soll,
+mÅssen Sie folgende Operatoren verwenden:
+
+-   lîscht das nach dem Minuszeichen angegebene Attribut
++   setzt das nach dem Pluszeichen angegebene Attribut
+&amp;   verarbeitet nur Dateien, bei denen das angegebene Attribut gesetzt ist
+#   schlie·t Dateien mit diesem Attribut von der Verarbeitung aus
+
+<FONT COLOR="green">Parameter</FONT>
+
+/s   es werden auch Dateien in Unterverzeichnissen berÅcksichtigt.
+
+/p   besitzt eine Doppelfunktion: 
+     1. sollen Attribute <FONT COLOR="red">geÑndert</FONT> werden, fragt ATTRIB bei 
+        jeder einzelnen Datei, ob deren Attribut geÑndert werden soll.
+
+     2. Sollen Dateien und Verzeichnisse samt ihren Attributen nur <FONT COLOR="red">angezeigt</FONT>
+        werden, hÑlt ATTRIB die Bildschirmausgabe nach jeder Seite an und
+        fordert Sie zu einem Tastendruck auf.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Verwenden von Filtern</FONT>
+
+Wenn Sie grî·ere Datenmengen mit ATTRIB bearbeiten wollen, kînnen Sie sich
+dies mit dem geschickten Einsatz von Filtern deutlich erleichtern. ZunÑchst
+kînnen Sie mit Wildcards (z.B. *.TXT) Dateien und Verzeichnisse von
+der Bearbeitung ausschlie·en, auf die diese Suchmaske nicht zutrifft (in
+diesem Beispiel also alle Dateien, die nicht die Endung TXT tragen).
+
+DarÅber hinaus kînnen Sie Dateien mit den Operatoren &amp; und # filtern. Dies
+ist immer dann sinnvoll, wenn die Datenmenge trotz Einsatz von Wildcards
+immer noch zu gro· und unÅbersichtlich ist. Der Parameter #D zum Beispiel
+schlie·t alle Verzeichnisse von der Bearbeitung aus, mit &amp;H werden nur
+Dateien verarbeitet, deren Versteckt-Attribut gesetzt ist. Diese Filterung
+ist vor allem dann nÅtzlich, wenn Sie sich mit dem Parameter /p jede
+einzelne Datei zum Bearbeiten vorzeigen lassen oder wenn Sie sich eine
+Dateiliste anzeigen lassen wollen.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">ATTRIB c:\texte\*.doc +r /s</FONT>
+ATTRIB setzt bei allen Dateien mit der Endung DOC das Schreibschutz-Attribut
+und durchsucht dabei das gesamte Verzeichnis TEXTE und deren Unterverzeich-
+nisse.
+
+<FONT COLOR="blue">ATTRIB c:\texte\*.doc +a -r /s</FONT> 
+Hier wird das Schreibschutzattribut wieder gelîscht und gleichzeitig das
+Archiv-Attribut gesetzt.
+
+<FONT COLOR="blue">ATTRIB Brief.txt -a /s</FONT> 
+ATTRIB durchsucht das gesetzte Verzeichnis bzw. den gesamten DatentrÑger
+nach der Datei Brief.txt und entfernt das Archiv-Attribut.
+
+<FONT COLOR="blue">ATTRIB c:\*.* -h &amp;h /s /p</FONT> 
+Hier wird das gesamte Laufwerk C: nach Dateien durchsucht. Durch /p wird
+Ihnen jede gefundene Datei vorgelegt und ATTRIB fragt, ob deren Versteck-
+Attribut entfernt werden soll. Sinnvollerweise werden hierzu jedoch nur
+Dateien und Verzeichnisse angezeigt, deren Versteck-Attribut auch tatsÑchlich
+gesetzt ist. Diese Filterung bewirkt der Parameter &amp;h.
+
+<FONT COLOR="blue">ATTRIB c:\texte /s /p</FONT> 
+Es werden alle Dateien und Unterverzeichnisse des Verzeichnisses TEXTE mit
+ihren Attributen angezeigt. Die Anzeige wird nach jeder Bildschirmseite
+angehalten (/p).
+
+<FONT COLOR="blue">ATTRIB c:\texte #d &amp;r &amp;a /s /p</FONT> 
+wie oben; es werden jedoch keine Verzeichnisse angezeigt (#d). Ausgegeben
+werden also nur Dateien, deren Schreibschutz-Attribut (&amp;r) <FONT COLOR="red">und</FONT> deren
+Archiv-Attribut (&amp;a) gesetzt ist.
+
+<FONT COLOR="blue">ATTRIB c:\ &amp;d /s /p</FONT> 
+Es werden sÑmtliche Verzeichnisses von Laufwerk C: angezeigt, jedoch keine
+Dateien.
+
+<FONT COLOR="blue">ATTRIB c:\ &amp;h #r</FONT> 
+Es werden nur Dateien und Verzeichnisse angezeigt, deren Versteckt-Attribut
+gesetzt ist (&amp;h), <FONT COLOR="red">und</FONT> die <FONT COLOR="red">nicht</FONT> schreibgeschÅtzt sind (#r).<HR
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT> 
+
+Geschickte Attributvergabe erleichtert die Arbeit bei der Dateiverwaltung.
+Dateien, die Sie vor versehentlichem Lîschen oder éndern schÅtzen wollen,
+kînnen Sie mit dem Schreibschutz-Attribut versehen. Ein weiterer Lîsch-
+schutz ist das Verstecken von Dateien bzw. Verzeichnissen. Sie kînnen Dateien
+auch verstecken, um zu vermeiden, da· sie bei KopiervorgÑngen mitkopiert
+werden. Das Systemattribut sollte den DOS-Systemdateien vorbehalten bleiben,
+kann aber auch auf normale Dateien angewendet werden.
+
+Mit dem Archivattribut kînnen Sie sich Ihre regelmÑ·igen Sicherungskopien
+(Backups) erleichtern und diese erheblich beschleunigen. <A HREF="xcopy.htm">XCOPY</A> z.B. 
+kann angewiesen werden, nur Dateien zu kopieren, deren Archivattribut
+gesetzt ist.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Anmerkungen</FONT>
+
+Wenn Sie keine Dateimaske bzw. keinen Dateinamen angeben, setzt ATTRIB
+automatisch *.* ein.
+
+ATTRIB kann jederzeit durch BetÑtigen der ESC-Taste beendet werden. Der DOS-
+Befehl ATTRIB wird von vielen als Suchprogramm eingesetzt. Um eine einzelne 
+Datei zu suchen, geben Sie z.B. <FONT COLOR="blue">ATTRIB rechnung.txt /s</FONT> ein.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Errorlevel (DosExitcode)</FONT> 
+
+255 = Programm wurde wegen fehlendem oder falschem Parameter abgebrochen
+254 = Es wurden keine Dateien gefunden
+253 = Programm wurde vom Anwender mit Esc abgebrochen
+
+Diese Codes kînnen in Batch-Dateien mit <A HREF="help:if">IF ERRORLEVEL</A> abgefragt werden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

@@ -1,0 +1,11 @@
+#: Shell
+{
+#: FixShell
+  FixShell
+C: Datei suchen
+  c:\mmdos\datenv\norton\ncff
+B: Diskette formatieren
+  c:\mmdos\datenv\norton\ncsf
+A: Diskette kopieren
+  c:\mmdos\datenv\norton\ncdd
+}

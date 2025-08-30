@@ -1,0 +1,51 @@
+//--------------------------------------------------------------------
+// XHTM.AML
+// Syntax highlighting for HTML Hypertext Markup Language (Htm)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+  'bcfin'                         // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+  '{}[]().=+-*/:|&,~!^?\t'        // symbol set 1
+  '<>'                            // symbol set 2
+  '\'"'                           // string characters
+  '\\'                            // string literal char
+  ''                              // numeric symbol
+  '//'          0                 // eol comment 1 / start column
+  ''            0                 // eol comment 2 / start column
+  '>'           '<'               // multi-line comment 1
+  ''            ''                // multi-line comment 2
+  30                              // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black     // keyword
+  color gray         on cyan      // symbol set 1
+  color brightgreen  on cyan      // symbol set 2
+  color white        on white     // string
+  color brightred    on black     // numeric
+  color brightgreen  on black     // eol comment 1
+  color brightgreen  on black     // eol comment 2
+  color brightgreen  on black     // comment 1
+  color brightgreen  on black     // comment 2
+
+keyword
+  a, abbrev, acronym, action, address, align, alink, alt, b, background,
+  base, blink, blockquote, body, border, bottom, br, cellpadding,
+  cellspacing, center, cite, clear, cmd, code, cols, content, dd, dfn,
+  dir, dl, doctype, dt, em, font, form, h1, h2, h3, h4, h5, h6, head,
+  header, height, hr, href, hspace, html, i, im, img, input, isindex,
+  ismap, kbd, left, li, link, listing, lit, marquee, maxlength, menu,
+  meta, method, middle, name, nobr, noshade, ol, online, option, p,
+  person, post, pre, printed, q, reset, right, rows, s, samp, select,
+  size, src, start, strong, sub, submit, sup, system, table, td, text,
+  textarea, texttop, title, top, tr, tt, type, u, ul, value, var, vlink,
+  vspace, wbr, width

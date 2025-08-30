@@ -1,0 +1,17 @@
+
+Changes in version 3.0c since v3.0 include:
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+* A new priority setting was added to System.aml. This setting allows
+  you to adjust the amount of cpu time yielded to the operating system
+  in multitasking environments such Windows or OS/2. The default setting
+  now yields the maximum amount of time to the operating system.
+
+* New Macros:
+  ù Status    - Custom status line example
+  ù Vcursor   - Vertical cursor line
+  ù Zapem     - Shoot'em-up game
+
+* Bug fixes, including fixes for various problems with editing very
+  large files.
+
+(see Whatsnew.doc for new features in v3.0 since v2.1a)

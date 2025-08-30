@@ -1,0 +1,139 @@
+//--------------------------------------------------------------------
+// FILESTAT.AML
+// Display File/Directory Statistics, (C) 1993-1996 by nuText Systems
+//
+// (See Filestat.dox for user help)
+//
+// This macro display statistics for the current File in an edit window,
+// or the current File or Directory in a file manager window.
+//
+// This macro may also call the Sweep macro and Cfg\Cfgintnl.x.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//
+// When called as a utility from other macros, the following parameter
+// may be passed:
+//
+//   arg 3: an optional filename/directory
+//
+// If a filename/directory is not passed, the user will be prompted to
+// enter one.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// function to get the day of the week for a date
+private function getdow (year month day)
+
+  // get the day in which the year starts using a perpetual
+  // calendar (0-6, 0=sunday)
+  startday = "5012356013456123460124560234" [year mod 28 + 1]
+
+  // string indicating the days over 28 for each month
+  over28 = concat (if? (not (year mod 4)) "31" "30") "3232332323"
+
+  // get the number of days in previous months
+  for i = 1 to month - 1 do
+    monthdays = monthdays + 28 + over28 [i]
+  end
+
+  // return the day of the week for the date (0=sunday)
+  dow = (startday + monthdays + day - 1) mod 7
+end
+
+name = arg 3
+if not name then
+  name = if? (wintype? "fmgr") (getpath (getbufname)) (getbufname)
+end
+if length name > 3 and not (locatefile name) then
+  return
+end
+
+fullname = onname name
+
+// directory/drive
+if name [0] == '\\' then
+  height = 6
+  directory = TRUE
+  // drive only
+  titled = "directories"
+  if length name == 3 then
+    title = "Drive"
+    driveonly = TRUE
+    fullname = title + ': ' + fullname:9
+  // directory
+  else
+    titled = "sub" + titled
+    title = "Directory"
+    height = 8
+  end
+  datedesc = "Created"
+  display
+  // get size and stats from external sweep macro
+  stats = runmacro (bootpath "macro\\sweep.x") '' name
+  size = stats [3]
+  leadsize = -13
+  name [0] = ''
+
+//file
+else
+  height = 7
+  title = "File"
+  datedesc = "Last Modified"
+  size = getfileinfo name 's'
+  leadsize = -19
+end
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+// create dialog box
+dialog title + " Statistics" 70 height "cp"
+
+// file/directory name
+writeline fullname '' 3 2
+gotoxy 3 4
+
+// size
+writeline ((if? directory "Total ") + "Size:  "):leadsize +
+          (thousands size) + " bytes (" +
+          (thousands (getdisk 'f' name [1]) / 1048576 ) + "MB free)"
+
+// directory contents
+if directory then
+  writeline "Contents:  ":leadsize + (thousands stats [2]) + " files, " +
+            (thousands stats [1]) + ' ' +
+            titled '' 3
+end
+
+// date/time and attributes
+if not driveonly then
+
+  // get the file date/time in raw format
+  // rawtime format = YYYYMMDDWhhmmssuu
+  rawtime = getfileinfo name 'r'
+  year    = rawtime [1:4]
+  month   = rawtime [5:2]
+  day     = rawtime [7:2]
+
+  // get formatted date string
+  datestr = runmacro (bootpath "cfg\\cfgintnl.x") '' 'f'
+                     year month day (getdow year month day)
+
+  writeline (datedesc + " on:  "):leadsize + datestr '' 3
+  writeline "Attributes:  ":leadsize +
+            (getfileinfo name 'a') '' 3
+end
+
+// display the dialog box
+getdialog

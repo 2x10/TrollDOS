@@ -1,0 +1,20 @@
+
+ÿÿPROJSAVE.AML
+ ÿSave Projectÿ
+
+  This macro saves the current state of editor as an editor 'project'.
+  The project can be restored later with the Projopen macro.
+
+  You will be prompted to enter the project file name. If no file
+  extension is specified, the file extension .Prj is assumed.
+
+  The following project items are saved by this macro:
+
+    - all open file names
+    - window sizes and positions
+    - window settings
+    - cursor states and positions
+    - all prompt history
+    - bookmarks in all open files
+    - the current marked block
+

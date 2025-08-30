@@ -1,0 +1,70 @@
+<HTML><HEAD><TITLE>DOUBLE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>DOUBLE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>durchsucht ganze (bzw. mehrere) Datentr„ger oder Verzeichnisb„ume nach 
+doppelten Dateien und zeigt eine Liste aller Doubletten. Dies erm”glicht das 
+Aufspren von unntzen "Speicherfressern".
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">DOUBLE [zu durchsuchende(s) Verzeichnis(se)] [zu suchende Datei(en)]</FONT>
+
+/o  Es erfolgt keine Benutzerabfrage und die Liste am Ende wird nicht 
+    gezeigt. Fehler werden in der <A HREF="logfile.htm">LOG-Datei</A> gespeichert. 
+
+Der frhere Parameter /t der New-DOS-6.23-Version wird nicht mehr 
+untersttzt. Er kann (z.B. in bestehenden Batch-Dateien) weiterverwendet 
+werden, hat aber keinerlei Wirkung. Datum und Uhrzeit werden nun 
+standardm„áig nicht ausgewertet.<HR 
+ 
+noshade color="silver"><FONT COLOR="maroon">Suchergebnis</FONT>
+
+Die Ergebnisliste befindet sich in der Datei DOUBLETT.DOC im selben
+Verzeichnis wie DOUBLE.EXE und wird am Ende des Suchdurchlaufes angezeigt.
+
+Die Dateiliste k”nnen Sie mit den Pfeiltasten und Pos1 (Home) und Ende
+scrollen. Mit Taste F3 zeigen Sie die ersten 18 Zeilen der Datei an, auf
+der sich gerade der Lichtbalken befindet. Mit Taste F8 k”nnen Sie diese
+Datei l”schen. Die nach dem L”schen von Doubletten jeweils brigbleibende
+Datei kann mit DOUBLE <FONT COLOR="red">nicht gel”scht</FONT> werden.<HR 
+ 
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT> 
+
+<FONT COLOR="blue">DOUBLE <FONT COLOR="red">c:\ *.txt</FONT></FONT>
+
+prft s„mtliche Dateien mit der Endung TXT im Verzeichnis C:\ und allen 
+seinen Unterverzeichnissen. Dies kommt also dem Durchsuchen der gesamten 
+Festplatte gleich.
+
+<FONT COLOR="blue">DOUBLE <FONT COLOR="red">C:+D:+E: *.*</FONT></FONT>
+
+durchsucht die Laufwerke C:, D: und E nach Doubletten.
+
+<FONT COLOR="blue">DOUBLE <FONT COLOR="red">C:+D: *.txt+*.doc</FONT></FONT>
+
+durchsucht die Laufwerke C: und D: nach Doubletten mit den Endungen TXT 
+und DOC.<HR 
+ 
+noshade color="silver"><FONT COLOR="maroon">Fehlermeldung: Zu wenig Speicher</FONT> 
+
+Die Doublettensuche mit der neuen Version geht z.T. deutlich schneller als 
+mit der alten. Durch diese Verbesserung ist allerdings die Zahl der in 
+einem Durchgang vergleichbaren Dateien auf ca. 130.000 begrenzt. Findet 
+DOUBLE mehr als 130.000 Dateien, bricht er mit der Fehlermeldung "Zu wenig 
+Arbeitsspeicher" ab.
+
+Ausweg: Suchen Sie den oder die Datentr„ger mehrmals ab und begrenzen Sie 
+die Suche dabei durch Angabe einer oder mehrerer Dateiendungen. Da es in 
+der Praxis kaum vorkommen drfte, daá eine EXE- mit einer TXT-Datei 
+identisch ist, k”nnen Sie nacheinander nach artverwandten Dateien fahnden, 
+z.B.:
+
+<FONT COLOR="blue">DOUBLE <FONT COLOR="red">C:+D:+E: *.TXT+*.DOC+*.BAT</FONT></FONT>
+<FONT COLOR="blue">DOUBLE <FONT COLOR="red">C:+D:+E: *.EXE</FONT></FONT>
+
+Durch eine sinnvolle Filterung k”nnen Sie ohnehin eine Menge Zeit sparen.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

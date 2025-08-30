@@ -1,0 +1,95 @@
+<HTML><HEAD><TITLE>TRICKS</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>TRICKS</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">ZurÅck zur öbersicht</A>
+<HR noshade color="silver"><PRE>Um die Bedienung des COMANDERS zu vereinfachen, kînnen Sie sich viele seiner
+Besonderheiten zunutze machen oder auch Ñndern, wenn Sie gern etwas anderes
+hÑtten. Zahlreiche weitere Tricks finden Sie themenbezogen in den
+Hilfetexten.
+
+<A HREF="#1"> Beschleunigter Fensterwechsel</A>
+<A HREF="#2"> Starten von Windows oder Windows-Anwendungen</A> 
+<A HREF="#3"> ScanDrive beschleunigen</A> 
+<A HREF="#4"> Verzeichnis schnell schlie·en</A> 
+<A HREF="#5"> Ein paar KiloByte mehr Arbeitsspeicher...</A> 
+<A HREF="#6"> Schnelles Markieren</A> 
+<A HREF="#7"> Notfall-Parameter</A><HR 
+
+noshade color="silver"><A NAME="1"><A HREF="#top"> </A><FONT COLOR="maroon">Beschleunigter Fensterwechsel</FONT>
+
+Ein Fensterwechsel ist immer dann nervig, wenn in beiden Fenstern ein
+Diskettenlaufwerk aktiviert ist. Bei jedem Wechsel mu· der Laufwerksmotor
+erst hochlaufen, dann wird die Dateiliste neu eingelesen. Das dauert, ist in
+vielen FÑllen jedoch notwendig. Wenn Sie mit der Tastatur arbeiten, werden
+Sie merken, da· das Laufwerk ruhig bleibt. Beim Fensterwechsel mit der Maus
+lie· sich das leider nicht ganz so elegant bewerkstelligen. Doch ein Schlupf-
+loch besteht trotzdem:
+
+Klicken Sie mit der Maus nicht mitten ins Fenster, sondern auf dessen oberen
+Rand (So, als ob Sie die Liste blÑttern wollten). Danach kînnen Sie wieder
+normal ins Innere des Fensters klicken, ohne da· das Laufwerk sich bewegt.<HR 
+
+noshade color="silver"><A NAME="2"><A HREF="#top"> </A><FONT COLOR="maroon">Starten von Windows oder Windows-Anwendungen</FONT>
+
+Dies geht unterm "reinen" DOS wie bei einem DOS-Programm auch mit Doppelklick
+auf den Dateinamen des entsprechenden Programmes. Vorher mu· dies jedoch im
+Konfix-MenÅ auf <A HREF="konfix.htm#3">Seite 3</A> konfiguriert werden.<HR 
+
+noshade color="silver"><A NAME="3"><A HREF="#top"> </A><FONT COLOR="maroon">ScanDrive beschleunigen</FONT> 
+
+Das DatentrÑger-PrÅfprogramm <A HREF="../newdos/scandrv.htm">Scandrive</A> kann auch virtuelle Laufwerke checken.
+Diesen Umstand kînnen Sie ausnutzen, wenn Sie Zeit sparen wollen. Belegen Sie
+das Verzeichnis, welches geprÅft werden soll, mit einem Laufwerksnamen. Geben
+Sie dazu z.B. den DOS-Befehl <A HREF="help:subst">SUBST</A> D: C:\Verzeichnis. D: ist die zukÅnftige
+Laufwerksbezeichnung, C:\Verzeichnis der Pfad des Verzeichnisses, das nach D:
+umgeleitet werden soll. Vereinfachen Sie sich dieses Verfahren, wenn Sie es
+regelmÑ·ig durchfÅhren wollen, durch eine Batchdatei:
+
+subst d: C:\verzeichnis
+scandrv d: /D
+subst d: /d
+
+ScanDrive wird mit Parameter /D aufgerufen, damit es dieses Laufwerk ohne
+RÅckfrage prÅft. Subst d: /d hebt die Laufwerksumleitung wieder auf. Die
+Laufwerksumleitung funktioniert Åbrigens nur, wenn in Ihrer <A HREF="help:config.sys">CONFIG.SYS</A> die
+Anweisung <A HREF="help:lastdrive">LASTDRIVE</A>=D (oder hîher) steht oder gar nicht eingetragen ist.<HR
+
+noshade color="silver"><A NAME="4"><A HREF="#top"> </A><FONT COLOR="maroon">Verzeichnis schnell schlie·en</FONT> 
+
+Pos1, dann ENTER<HR 
+ 
+noshade color="silver"><A NAME="5"><A HREF="#top"> </A><FONT COLOR="maroon">Ein paar KiloByte mehr Arbeitspeicher...</FONT> 
+
+...erhalten Sie, wenn Sie den Reloader DCLOAD.COM in den hohen Speicher 
+laden. éndern Sie den Startbefehl in der Datei DC.BAT. Wenn dort z.B.
+
+<FONT COLOR="blue">dcload</FONT>
+
+steht, schreiben Sie stattdessen:
+
+<A HREF="help:lh">LH </A><FONT COLOR="blue">dcload</FONT><HR 
+ 
+noshade color="silver"><A NAME="6"><A HREF="#top"> </A><FONT COLOR="maroon">Schnelles Markieren</FONT> 
+
+Wenn Sie in einem Verzeichnis au·er ein oder zwei Dateien alle weiteren
+Dateien markieren wollen, markieren Sie diese beiden mit der ENTF-Taste.
+DrÅcken Sie dann CTRL + a. Die Markierung wird nun umgekehrt (invertiert) und
+somit sind alle au·er die beiden Dateien markiert.<HR 
+ 
+noshade color="silver"><A NAME="7"><A HREF="#top"> </A><FONT COLOR="maroon">Notfall-Parameter</FONT>
+
+Das Comander-Hauptprogramm COMAND1.EXE darf nicht direkt gestartet werden
+sondern nur Åber das Programm DCLOAD.EXE (sog. Reloader). COMAND1 bricht bei
+einem derartigen Versuch mit einer Fehlermeldung ab. Nun kînnte es ja sein,
+da· Sie auf eine Boot-Diskette nur COMAND1.EXE kopiert haben und in der
+Not nun nicht weiterkommen. Ich will Ihnen den Parameter nicht vorenthalten,
+mit dem Sie COMAND1 doch in Gang bekommen: <FONT COLOR="blue">/TEST</FONT> (gro·schreiben!)
+Der Comander kann dann allerdings einige Befehle nicht mehr ausfÅhren
+(z.B. externe Programme starten).
+
+ACHTUNG: Versuchen Sie <FONT COLOR="red">niemals</FONT>, die Datei COMAND1.EXE mit einem anderen
+         Parameter als /TEST zu starten.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

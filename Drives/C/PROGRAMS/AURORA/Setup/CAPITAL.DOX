@@ -1,0 +1,10 @@
+
+ÿÿCAPITAL.AML
+ ÿCapitalize Wordsÿ
+
+  This macro capitalizes words in a marked block. If no block is marked,
+  then words are capitalized in the current line.
+
+  The CSet configuration variable is used to define a word for this
+  macro (see the Miscellaneous Options configuration dialog box).
+

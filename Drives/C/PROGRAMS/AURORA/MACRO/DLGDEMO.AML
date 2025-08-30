@@ -1,0 +1,130 @@
+//--------------------------------------------------------------------
+// DLGDEMO.AML
+// Dialog Box Demo, (C) 1993-1996 by nuText Systems
+//
+// This macro displays a sample dialog box with the following items:
+//
+//   - Listbox
+//   - Edit Fields
+//   - Checkboxes
+//   - Radio Buttons
+//   - Pushbuttons
+//   - Background Text
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable control1, control2, control3, control4, control5
+
+// main dialog box
+dialog "Dialog Box Demo" 69 15 "c"
+
+// write background text on the dialog box
+gotoxy 52 13
+writestr "Back"
+writestr "ground"     (color magenta     on gray)
+writestr " Text"      (color brightred   on gray)
+gotoxy 53 14
+writestr "of"         (color yellow      on gray)
+writestr " any"       (color brightgreen on gray)
+writestr " color"     (color brightblue  on gray)
+
+// control #1: listbox
+filespec = bootpath "macro\\*.aml"
+listbox "&Listbox:" 3 2 (loadbuf filespec '' '' 'f' +
+                                 (sub '[~lc]' '' _NameStyle 'x'))
+        16 12
+fmgr.fsort 'n'
+whenenter "listenter"
+function listenter
+  msgbox "You selected:  " + (onname (fmgr.fgetfile))
+end
+
+// control #2: edit field
+field "&Edit Field 1: >"  21  3 14 "string"
+
+// control #3: edit field
+field "Edit &Field 2:"    21  5 28 (onname "file.txt") "_load"
+
+// control #4: check boxes
+groupbox 'Check Boxes:' 52 2
+  (menu ''
+     item " [ ] &Apples"
+     item " [ ] &Oranges"
+     item " [ ] &Melons"
+     item " [ ] &Bananas"
+   end) 15 'am' 'aomb'
+whenselect "checkbox"
+function checkbox
+  beep (if? (getchar 3) == 'X' 430 107) 90
+end
+
+// control #5: radio buttons
+groupbox 'Radio Buttons: ' 52 8
+  (menu ''
+     item " ( ) &Yes"
+     item " ( ) &No"
+     item " ( ) &Maybe"
+   end) '' 'y' 'yno'
+whenselect "radio"
+function radio
+  line = getrow
+  if line == 3 then
+    beep 430 45
+    beep 107 45
+  else
+    beep (if? line == 1 430 107) 90
+  end
+end
+
+// controls #6,#7: ok/cancel buttons
+button "O&k"    23  9 8
+button "Cancel" 23 11 8
+
+// control #8: long button
+button "Long &Button" 21 14 28
+whenenter "longbutton"
+function longbutton
+  beep 215 100
+end
+
+// control #9: big button
+button "" 35 8 14 5
+writestr "Big Button" (color black on green) 3 3
+whenenter "bigbutton"
+function bigbutton
+  beep  60 70
+end
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+// display the dialog box, passing return variables by reference
+if (getdialog ref control1 ref control2 ref control3
+              ref control4 ref control5) == 'Ok' then
+
+  // create another dialog box to display the
+  // return values from getdialog
+  dialog "Dialog Box Return Values" 40 9 "c"
+  writeline
+  writeline " Listbox:       "  + control1 [17:15]
+  writeline " Edit Field 1:   " + control2
+  writeline " Edit Field 2:   " + control3
+  writeline " Check Boxes:    " + control4
+  writeline " Radio Buttons:  " + control5
+  button "O&k" 17  8 8
+  getdialog
+
+end

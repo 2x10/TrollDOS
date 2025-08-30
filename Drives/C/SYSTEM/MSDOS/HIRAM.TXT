@@ -1,0 +1,38 @@
+
+User, die wirklich das allerletzte Byte unteren Speicher nutzbar machen wollen,
+koennen das alte Packet 'HIRAM' probieren:
+http://www.uwe-sieber.de/files/hiram.zip
+
+HIRAM is etwas aehnliches wie UMBPCI aber es stammt von 1993 und war fuer
+286..486 Rechner gemacht. Die Funktionen von UMBPCI sind hier aber auf zwei
+Programme verteilt: Eines aktiviert den Speicher, das zweite (HIRAM.EXE)
+macht ihn fuer DOS nutzbar. Letzteres funktioniert bestens mit MS-DOS 5+ und
+Speicher, der von UMBPCI aktiviert wurde:
+
+
+dos=high, umb
+device=umbpci.sys                 // aktiviert den Speicher (ab V3.00)
+device=hiram.exe                  // macht ihn ueber einen XMS 2.0 Handler
+                                  // fuer DOS sichtbar
+devicehigh=c:\windows\himem.sys   // ja, man kann HIMEM.SYS hochladen
+
+
+Der Trick ist, dass HIRAM einen kleinen HIMEM 2.0-Treiber samt der Funktion
+'Request XMS UMB' implementiert, waehrend UMBPCI das auf dem offiziellen Weg
+macht, indem es den 'echten' HIMEM.SYS um diese Funktion erweitert.
+
+Wenn devicehigh=himem.sys kommt, greift DOS sich alle XMS-UMBs von HIRAM.EXE,
+und HIRAM deaktiviert seinen XMS-Handler, damit HIMEM.SYS laden kann.
+Ohne dos=high,umb wuerde HIMEM.SYS mit einer Meldung wie 'Ein XMS-Treiber
+ist schon geladen' abbrechen, weil HIRAM keinen Anlass hatte, seinen kleinen 
+XMS-Handler zu deaktivieren.
+
+Mit HIRAM.EXE kann man ein ganzes KB unteren Speicher gegenueber UMBPCI 
+alleine einsparen - wow ;-)
+
+
+mail@uwe-sieber.de
+uwe.sieber@gmx.de
+
+7.7.1999
+

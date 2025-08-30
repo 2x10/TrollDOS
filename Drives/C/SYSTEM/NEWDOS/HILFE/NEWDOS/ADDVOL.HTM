@@ -1,0 +1,75 @@
+<HTML><HEAD><TITLE>ADDVOL</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>ADDVOL</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>fgt eine mit <A HREF="multivol.htm">MULTIVOL</A> auf mehrere Disketten verteilte Datei wieder zusammen
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">ADDVOL [Quell-Laufwerk] [Zielverzeichnis]</FONT>
+
+Als Quell-Laufwerk geben Sie das Laufwerk ein, in das die Disketten mit den
+Dateiteilen eingelegt werden. Mit Zielverzeichnis geben Sie an, in welchem
+Verzeichnis die zusammengesetzte Datei angelegt werden soll. Dieses
+Verzeichnis muá bereits existieren. Geben Sie <FONT COLOR="red">keinen</FONT> Dateinamen mit an, da
+Addvol der Zieldatei ihren ursprnglichen Namen wiedergibt.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Verwendung</FONT> 
+ 
+Mit ADDVOL setzen Sie eine Datei, die mit Multivol auf mehrere Disketten 
+verteilt wurde, wieder zu einer einzigen Datei zusammen. ADDVOL fordert Sie 
+nach dem Kopieren jeder Diskette zum Einlegen des n„chsten Datentr„gers auf.
+Ist die Zieldatei vollst„ndig, beendet sich ADDVOL. Falls Sie die 
+Quelldisketten in der verkehrten Reihenfolge einlegen, meldet ADDVOL, daá 
+es kein gltiges Datei-Bruchstck gefunden hat. In so einem Falle legen Sie 
+einfach eine Diskette nach der anderen ins Laufwerk, bis ADDVOL zu kopieren
+beginnt (es hat dann das n„chste Teilstck gefunden). Besser und bequemer
+ist es jedoch, wenn Sie die Disketten vorher in der richtigen Reihenfolge
+bereitlegen. Wenn Sie diese nicht wissen, ordnen Sie die Disketten zuvor 
+mit dem Programm <A HREF="viewvol.htm">VIEWVOL</A>.
+
+<FONT COLOR="green">Beispiel</FONT>
+
+<FONT COLOR="blue">addvol <FONT COLOR="red">a: c:\zusammen</FONT></FONT>
+
+ADDVOL liest nun alle Disketten, die Sie ins Laufwerk A: legen und kopiert
+die gefundenen Dateiteile ins Verzeichnis C:\ZUSAMMEN. Dort wird eine Datei
+angelegt, die genau den gleichen Namen tr„gt wie die Ursprungsdatei (also
+die Datei, die Sie vorher mit MULTIVOL zerlegt haben).<HR
+
+noshade color="silver"><FONT COLOR="maroon"><A Name="Kennwort">Kennwort</FONT> 
+
+Beim Verteilen einer Datei auf mehrere Disketten mit dem New-DOS-Dienst-
+programm MULTIVOL k”nnen Sie wahlweise ein Kennwort eingeben - ansonsten
+legt Multivol per Zufallsgenerator eines fest. Das Kennwort wird in jedem
+Teilstck der Datei, also auf jeder der Disketten gespeichert.
+
+Anhand dieses Kennwortes kann ADDVOL zweifelsfrei alle Dateibruchstcke
+identifizieren, die zu einer Datei geh”ren. Dies ist vor allem dann wichtig,
+wenn Sie mehrere Dateien auf Disketten verteilt haben und nicht genau wissen,
+was auf welcher Diskette ist. Legen Sie versehentlich eine falsche Diskette
+ein, bemerkt ADDVOL dieses und fordert Sie solange zu einem Diskettenwechsel
+auf, bis die richtige Diskette eingelegt wurde (oder Sie mit Esc abbrechen).
+
+Sie k”nnen das Kennfeld jedoch auch fr eigene Zwecke benutzen, indem Sie
+ein Kennwort w„hlen, welches n„here Informationen zu der zerlegten Datei
+enth„lt. Handelt es sich z.B. um eine Sound-Datei, k”nnen Sie dies in
+geeigneter Form als Kennwort verwenden (z.B. SOUND_HIP_HOP). Dadurch wissen
+Sie sp„ter, was sich in welcher Datei befindet, denn alle Teilstcke einer
+Datei bekommen das gleiche Kennwort.
+
+Wichtig ist wie gesagt nur, daá ein Kennwort nicht versehentlich mehrmals
+an unterschiedliche Dateien vergeben wird.<HR
+
+noshade color="silver"><FONT COLOR="maroon">Hinweis</FONT> 
+
+Falls Sie eine auf mehrere Disketten verteilte Datei an jemanden weitergeben
+m”chten, mssen Sie ihm das Programm ADDVOL.EXE auf die erste (oder auch
+letzte) Diskette kopieren, damit der Empf„nger die Datei auf seinem PC
+wieder zusammensetzen kann. ADDVOL.EXE ist daher Freeware, d.h., Sie drfen
+ADDVOL an andere weitergeben, ohne das es sich dabei um eine Raubkopie 
+handelt.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

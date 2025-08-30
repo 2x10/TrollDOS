@@ -1,0 +1,258 @@
+<HTML><HEAD><TITLE>Freidefinierbare Mens</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Freidefinierbare Mens</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver"><PRE><A HREF="#allgemein"> Allgemeines</A>
+<A HREF="#bearbeiten"> Mens bearbeiten</A> (allgemeines)
+<A HREF="#l”schen"> Meneintrag l”schen</A> 
+<A HREF="#editieren"> Meneintrag „ndern</A> 
+<A HREF="#neu"> Neuen Meneintrag hinzufgen</A>
+<A HREF="#meneditor"> Der Men-Editor</A>
+<A HREF="#line"> Horizontale Trennlinie</A>
+<A HREF="#untermen"> Untermens</A>
+<A HREF="#farben"> Farben in Mens</A>
+<A HREF="#kommentare"> Kommentare in Mens</A>
+<A HREF="#rckg„ngig"> nderungen rckg„ngig machen</A><HR 
+
+noshade color="silver"><A NAME="allgemein"><A HREF="#top"> </A><FONT COLOR="maroon">Allgemeines</FONT>
+
+Im DOS-Comander finden Sie unter Taste F2 das Benutzer-Men, das von Ihnen 
+nach Ihren Bedrfnissen gestaltet werden kann. Sie k”nnen bereits darin
+enthaltene Befehle l”schen, „ndern und neue hinzufgen. Lesen Sie hierzu
+mehr unter <A HREF="#bearbeiten"> Mens bearbeiten</A>
+ 
+Im Benutzer-Men k”nnen Sie h„ufig ben”tigte Befehle unterbringen, z.B. die 
+Startbefehle fr Ihr Textverarbeitungsprogramm, fr Spiele, Windows, 
+Batchdateien, Dienstprogramme oder auch normale DOS-Befehle (format, 
+diskcopy usw.).
+
+Neben dem Benutzer-Men existieren noch weitere Mens, die Sie mehr oder
+weniger frei gestalten k”nnen:
+
+<A HREF="chdir.htm">CHDIR-Men</A>
+<A HREF="extras.htm">Extras-Men</A> (enth„lt u.a. die <A HREF="dosbox.htm">DOSbox</A>)
+<A HREF="hilfe.htm">Hilfe-Men</A>
+ 
+Das Benutzer- und das CHDIR-Men befinden sich in der Datei DC.MNU im
+NEWDOS-Verzeichnis, das Extras- und das Hilfemen in der Datei INTERN.MNU.
+Sie k”nnen solche MNU-Dateien auch in anderen Verzeichnissen anlegen. Diese
+werden nur dann aktiv, wenn Sie das betreffende Verzeichnis im Comander
+im aktiven Fenster ge”ffnet haben, ansonsten sind immer die MNU-Dateien
+im NEWDOS-Verzeichnis aktiv.<HR 
+
+noshade color="silver"><A NAME="bearbeiten"><A HREF="#top"> </A><FONT COLOR="maroon">Mens bearbeiten</FONT>
+ 
+Die MNU-Dateien sind reine ASCII-Textdateien und k”nnen auch mit einem
+beliebigen Texteditor bearbeitet werden. Ab Version 4.0 des DOS-Comanders
+steht hierzu jedoch ein komfortabler <A HREF="#meneditor"> Men-Editor</A> zur Verfgung. 
+
+Wenn Sie einen Meneintrag l”schen, ver„ndern oder neu hinzufgen m”chten,
+”ffnen Sie zun„chst im Comander das gewnschte Men bzw. Untermen.<HR 
+
+noshade color="silver"><A NAME="l”schen"><A HREF="#top"> </A><FONT COLOR="maroon">Men-Eintrag l”schen</FONT>
+ 
+Klicken Sie mit der rechten (Linksh„nder-Maus: linken) Maustaste auf den
+zu l”schenden Meneintrag oder bewegen Sie den Lichtbalken dorthin und
+drcken Sie die Taste F4.
+
+Es ”ffnet sich dann ein Abfragefenster. Klicken Sie dort auf die Schaltfl„che
+"L”schen" oder bet„tigen Sie die Taste L.
+
+Wenn der gel”schte Meneintrag auf ein Unter-Men verwiesen hat, fragt Sie
+der <A HREF="#meneditor"> Men-Editor</A>, ob Sie auch dieses Unter-Men l”schen wollen. Wenn Sie 
+sicher sind, daá kein anderer Meneintrag mehr auf dieses Untermen verweist,
+dann sollten Sie es l”schen lassen, um das Aufbl„hen der Mendatei
+durch "Menleichen" zu vermeiden.<HR 
+
+noshade color="silver"><A NAME="editieren"><A HREF="#top"> </A><FONT COLOR="maroon">Men-Eintrag „ndern</FONT>
+ 
+Klicken Sie mit der rechten (Linksh„nder-Maus: linken) Maustaste auf den
+zu „ndernden Meneintrag oder bewegen Sie den Lichtbalken dorthin und
+drcken Sie die Taste F4.
+
+Es ”ffnet sich dann ein Abfragefenster. Klicken Sie dort auf die Schaltfl„che
+"ndern" oder bet„tigen Sie die Taste N. Der <A HREF="#meneditor"> Men-Editor</A> wird gestartet.<HR 
+
+noshade color="silver"><A NAME="neu"><A HREF="#top"> </A><FONT COLOR="maroon">Neuen Men-Eintrag hinzufgen</FONT>
+ 
+Klicken Sie mit der rechten (Linksh„nder-Maus: linken) Maustaste auf den
+Meneintrag, <FONT COLOR="red">unter</FONT> dem sie einen neuen einfgen wollen oder bewegen Sie den
+Lichtbalken dorthin und drcken Sie die Taste F4.
+
+Es ”ffnet sich dann ein Abfragefenster. Klicken Sie dort auf die Schaltfl„che
+"Einfgen" oder bet„tigen Sie die Taste E. Der <A HREF="#meneditor"> Men-Editor</A> wird gestartet.
+
+Falls das Abfragefenster keinen "Einfgen"-Button anzeigt, dann ist das
+Men mit der maximal m”glichen Zahl von 16 Eintr„gen bereits voll belegt.
+In diesem Falle sollten Sie einen der vorhandenen Meneintr„ge in einen
+Verweis auf ein Untermen umwandeln und dort dann die weiteren Befehle 
+einbauen.<HR 
+
+noshade color="silver"><A NAME="meneditor"><A HREF="#top"> </A><FONT COLOR="maroon">Der Men-Editor</FONT>
+ 
+Der Men-Editor befindet sich im Programm MENUEDIT.EXE im NEWDOS-Verzeichnis.
+Der Men-Editor kann nicht direkt gestartet werden, sondern nur ber die eben
+beschriebenen Methoden.
+
+Beim ndern eines Men-Eintrages zeigt der Men-Editor den Inhalt dieses
+Meneintrages an - beim Hinzufgen eines neuen Meneintrages wird eine
+leere Editier-Maske gezeigt. Groá- und Kleinschreibung braucht nicht beachtet
+zu werden, Leerzeilen und fhrende Leerzeichen zur besseren Gliederung
+drfen eingesetzt werden.
+
+Tragen Sie zun„chst im Feld <FONT COLOR="blue">Tastenkrzel</FONT> den Buchstaben der Taste ein, durch
+die sp„ter der Befehl ausgefhrt werden soll. 
+
+Im Feld <FONT COLOR="blue">Men-Eintrag</FONT> geben Sie den Text ein, der sp„ter im Men angezeigt 
+werden soll.
+
+Im Feld <FONT COLOR="blue">Befehle</FONT> k”nnen Sie dann einen oder mehrere DOS-Befehle eintragen, die
+beim Bet„tigen des Tastenkrzels ausgefhrt werden sollen. Das Format dieser
+Befehlsliste ist identisch mit dem von Batch-Dateien - genaugenommen k”nnen
+Sie hier auch bereits existierende Batch-Dateien komplett und unver„ndert
+bernehmen und das Original anschlieáend l”schen. (Andererseits k”nnen Sie
+aber auch einen Verweis auf eine solche Batch-Datei in das Befehls-Feld
+eintragen.) Eine externe Batch-Datei k”nnen Sie ber das <A HREF="../newdos/clipbrd.htm">NEWDOS-Clipboard</A> 
+in den Men-Editor transportieren. ™ffnen Sie die Batchdatei im NewDOS-Editor
+ED (im Comander mit Taste F4), markieren Sie den gesamten Inhalt mit der
+Maus bzw. den Tasten F7 und F8 und drcken Sie dann F5 zum Kopieren.
+Schlieáen Sie nun den Editor, ”ffnen Sie den Men-Editor und fgen Sie den
+Inhalt der Batchdatei mit Taste F4 (oder ALT+V) in das Feld "Befehle" ein.
+
+W„hrend Sie das Feld "Befehle" editieren, wird oben rechts ein Schaltfeld
+<FONT COLOR="blue">Variable einfgen</FONT> angezeigt. Hier k”nnen Sie die fr den Comander definierten
+Variablen per Mausklick in den Befehlstext einfgen lassen. Zu jeder der 
+Variablen wird ein kurzer Erkl„rungstext angezeigt, die ausfhrlichen
+Beschreibungen finden Sie <A HREF="variab.htm">hier</A>.
+
+Haben Sie alle Eintragungen erledigt, speichern Sie das Ergebnis mit Taste
+F2 in der Men-Datei. Wenn Sie den Men-Editor mit Esc abbrechen, wird keine
+nderung vorgenommen.<HR 
+
+noshade color="silver"><A NAME="line"><A HREF="#top"> </A><FONT COLOR="maroon">Horizontale Trennlinie</FONT>
+ 
+Fr die bersichtliche Unterteilung eines Men-Fensters k”nnen Sie an 
+beliebiger Stelle eine waagerechte Linie einfgen. Verfahren Sie zun„chst so,
+wie unter <A HREF="#neu"> Neuen Meneintrag einfgen</A> beschrieben.
+
+Tragen Sie dann im Men-Editor im Feld <FONT COLOR="blue">Meneintrag</FONT> die Zeile <FONT COLOR="red">[LINE]</FONT> ein.
+Die anderen Felder k”nnen Sie leer lassen. Speichern Sie die Eintragung mit
+Taste F2. Beachten Sie jedoch, daá jede Trennlinie einen der 16 maximal 
+m”glichen Eintr„ge belegt.
+
+Wenn Sie eine Trennlinie l”schen wollen, gehen Sie wie unter <A HREF="#l”schen"> Meneintrag
+l”schen</A> vor.<HR 
+
+noshade color="silver"><A NAME="untermen"><A HREF="#top"> </A><FONT COLOR="maroon">Untermen einfgen</FONT>
+ 
+Verfahren Sie zun„chst so, wie unter <A HREF="#neu"> Neuen Meneintrag einfgen</A>
+beschrieben. Fllen Sie die Felder <FONT COLOR="blue">Tastenkrzel</FONT> und <FONT COLOR="blue">Meneintrag</FONT> wie gewohnt
+aus. Im Feld <FONT COLOR="blue">Befehl(e)</FONT> tragen Sie zun„chst die Anweisung <FONT COLOR="red">GOTO</FONT> (=Gehe zu) ein.
+Anschlieáend geben Sie den Namen des Untermens ein, auf das Sie verweisen
+wollen. Diesen Namen k”nnen Sie frei w„hlen, er wird sp„ter im Kopf des
+Mens angezeigt und sollte deshalb nicht berm„áig lang sein.
+
+Soll auf ein bereits existierendes Untermen verwiesen werden, tragen Sie
+dessen Namen ein. Beispiel:
+ 
+<FONT COLOR="red">GOTO Dosbox</FONT>
+
+Dieser Befehl bewirkt, daá das <A HREF="dosbox.htm">DOSbox-Men</A> ge”ffnet wird. Voraussetzung 
+hierzu ist jedoch, daá sich das Men in der selben Men-Datei befindet, wie
+der Men-Eintrag, der dieses Men aufruft. Befindet sich der verweisende
+Meneintrag in der Datei DC.MNU (z.B. im Benutzermen), dann wrde das
+Beispiel nicht funktionieren, da sich das DOSbox-Men in der Datei INTERN.MNU
+befindet. Um das DOSbox-Men korrekt ansteuern zu k”nnen, mssen Sie 
+zus„tzlich den Pfad und den Namen der Datei angeben, in der sich die DOSbox 
+befindet:
+
+<FONT COLOR="red">GOTO c:\newdos\intern.mnu Dosbox</FONT>
+ 
+Anstelle des NEWDOS-Pfades k”nnen Sie hier auch die <A HREF="variab.htm#c">Variable [C]</A> einsetzen:
+
+<FONT COLOR="red">GOTO [C]intern.mnu Dosbox</FONT>
+
+Auf diese Weise k”nnen Sie auf Mens in beliebigen externen Dateien 
+verweisen und von dort auch wieder zurck.
+
+Ein Verweis auf ein nicht existierendes Untermen l”st jedoch keinen Fehler
+aus - im Gegenteil: Auf diese Weise erzeugen Sie automatisch ein neues
+leeres Untermen, welches Sie dann mit Befehlen fllen k”nnen. Der 
+Men-Editor erkennt von selbst, ob das Untermen, zu dem verwiesen wird,
+schon existiert oder nicht und legt ggf. ein neues an.
+
+Untermens k”nnen in beliebiger Tiefe ineinander verschachtelt und 
+miteinander querverbunden werden.<HR 
+
+noshade color="silver"><A NAME="farben"><A HREF="#top"> </A><FONT COLOR="maroon">Farben in Mens</FONT>
+
+Der Comander gibt fr die 4 verschiedenen Mens je eine bestimmte 
+Hintergrundfarbe vor. Beispielsweise ist das Hilfemen blau, das Benutzermen
+cyan (trkis). Diese Farben k”nnen Sie jedoch durch andere ersetzen, auch
+k”nnen Untermens eine andere Farbe haben als das Hauptmen.
+
+Fr das Setzen von Farben mssen Sie die Men-Datei (DC.MNU oder INTERN.MNU)
+in einem Texteditor ”ffnen (Taste F4). Scrollen Sie zum betreffenden Men-
+Namen und fgen Sie eine Zeile tiefer eine der folgenden Farbanweisungen ein:
+ 
+<FONT COLOR="blue">[Farbe cyan]
+[Farbe magenta]
+[Farbe blau]
+[Farbe grau]
+[Farbe braun]
+[Farbe grn]</FONT>     
+
+Wenn z.B. das Benutzer-Men in Zukunft grau sein soll, sieht die fertige
+Passage so aus:
+
+<FONT COLOR="blue">[BENUTZER]
+<FONT COLOR="red">[FARBE grau]</FONT>
+s; Scandisk starten   ; scandisk /autofix /surface
+...
+usw.</FONT>     
+ 
+Tip: Wenn ein Untermen eine andere Farbe haben soll als das Hauptmen, dann
+sollten Sie fr das Hauptmen ebenfalls die Farbe festlegen, auch wenn es
+die selbe ist, die vom Comander schon vorgegeben wird.<HR 
+
+noshade color="silver"><A NAME="kommentare"><A HREF="#top"> </A><FONT COLOR="maroon">Kommentare in Mens</FONT>
+ 
+Wenn Sie im Befehls-Feld des Men-Editors mehrere Befehlszeilen eingeben,
+k”nnen Kommentare das sp„tere Verstehen dieses Programmes erleichtern. Diese
+M”glichkeit kennen Sie vielleicht schon aus der Batch-Programmierung (<A HREF="help:rem">REM</A>). 
+
+Anstelle von REM k”nnen Sie in Mens auch ein fhrendes Semikolon verwenden:
+
+<FONT COLOR="red">; Dies ist ein Kommentar</FONT>
+
+Auf diese Weise k”nnen Sie auch echte Befehle vorbergehend deaktivieren.
+Dies bietet sich an, wenn eine Befehlssequenz einen Fehler enth„lt und
+beim Testen nicht ausgefhrt werden soll.
+
+Der Vorteil des Semikolons gegenber dem REM-Befehl ist, daá der Comander, 
+wenn er die Befehle sp„ter an DOS zur Ausfhrung bergibt, die Kommentar-
+zeilen von vornherein ignoriert. Der Hintergrund ist, daá der Comander die
+Befehle in eine tempor„re Batch-Datei schreibt und diese dann von DOS 
+ausfhren l„át. REM-Anweisungen werden von DOS beim Ausfhren der Batchdatei
+zwar bergangen, mssen zun„chst aber eingelesen und interpretiert werden,
+was bei vielen REM-Befehlen durchaus zu einer Herabsetzung der Ausfhrungs-
+geschwindigkeit fhren kann.<HR 
+
+noshade color="silver"><A NAME="rckg„ngig"><A HREF="#top"> </A><FONT COLOR="maroon">nderungen rckg„ngig machen</FONT>
+ 
+Wenn Sie einmal versehentlich den falschen Meneintrag gel”scht oder 
+ver„ndert haben, sollten Sie baldigst einen Blick in das <A HREF="../newdos/temp.htm">TEMP-Verzeichnis</A> 
+von DOS/NEWDOS werfen. Dort befindet sich dann eine Datei namens MENUE.TMP,
+die die ge„nderte Men-Datei im Zustand vor der nderung enth„lt.
+
+Um also eine fehlerhafte nderung einer Mendatei rckg„ngig zu machen,
+benennen Sie die Datei MENUE.TMP um, z.B. in DC.MNU, und kopieren sie in das
+NEWDOS-Verzeichnis.
+
+Bei der n„chsten nderung an einem Men wird die Datei MENUE.TMP neu
+angelegt, mit dem Rckg„ngigmachen von Fehlern sollten Sie also nicht
+allzulange warten.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

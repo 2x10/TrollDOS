@@ -1,0 +1,67 @@
+PROGRAM Dirx;
+{Demonstriert die Anwendung von FindFirst und FindNext in einem}
+{Beispielprogramm, daá dem DIR-Befehl nachempunden ist.}
+
+
+FUNCTION Zero;
+BEGIN
+  If (%DateTime.min<10) Then !Result:='0' Else !Result:= '';
+END;
+
+
+BEGIN-MAIN
+  Init;
+  @a:=0; 
+  !a:= !ParamStr (1); If (!a= '') Then !a:= '*.*';
+
+  FindFirst (!a, @anyfile, %Searchrec);
+
+  While (@DosError=0) Do
+  BEGIN
+    Write  (!DownString (%searchrec.name));
+
+    GotoXY (18, @WhereY);
+    Write  (%searchrec.size);
+    GotoXY (26, @WhereY);
+    Write  ('Byte');
+
+    UnPackTime (%Searchrec.Time, %DateTime);
+    GotoXY (35, @WhereY);
+    Write (%DateTime.day, '.', %DateTime.Month,'.', %DateTime.Year);
+
+    GotoXY (48, @WhereY);
+    Write (%DateTime.hour, ':', &Zero, %DateTime.Min);
+
+    GotoXY (58, @WhereY);
+    If (@and (%searchrec.attr, @directory)<>0) Then Write ('<DIR>');
+    If (@and (%searchrec.attr, @archive  )<>0) Then Write ('A');
+    If (@and (%searchrec.attr, @hidden   )<>0) Then Write ('H');
+    If (@and (%searchrec.attr, @readonly )<>0) Then Write ('R');
+    If (@and (%searchrec.attr, @sysfile  )<>0) Then Write ('S');
+    WriteLn;
+
+    If (@WhereY>=24) and (!UpString(!ParamStr(2))='/P') Then
+    BEGIN
+      Write (#13#10, 'Weiter mit beliebiger Taste');
+      GetKey;
+      Init;
+    ENDIF;
+
+    inc (@a, %searchrec.size);
+    FindNext (%searchrec);
+  ENDW;
+
+  WriteLn;
+
+  If (@WhereY>=24) and (!UpString(!ParamStr(2))='/P') Then
+  BEGIN
+    Write (#13#10, 'Weiter mit beliebiger Taste');
+    GetKey;
+    Init;
+  ENDIF;
+
+  GetDir (0, !a);
+  WriteLn (!ParamStr(1), ' Dateien in ', !a, #13#10);
+  WriteLn (@a, ' Byte insgesamt');
+
+END.

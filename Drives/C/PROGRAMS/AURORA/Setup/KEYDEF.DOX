@@ -1,0 +1,16 @@
+
+ÿÿKEYDEF.AML
+ ÿShow Assigned State of all Keysÿ
+
+  This macro displays a popup menu showing assigned and unassigned keys
+  for the current window type (edit windows or file manager windows).
+
+  Selecting an assigned key from the menu will open Kbd.aml and position
+  the cursor at the key definition.
+
+  Selecting an unassigned key from the menu will enter the key name into
+  the text of the current edit window.
+
+  Keydef can be run from the macro list, or by selecting Show Available
+  Keys.. from the Macro menu.
+

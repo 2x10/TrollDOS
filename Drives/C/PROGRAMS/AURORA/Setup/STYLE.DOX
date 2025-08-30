@@ -1,0 +1,8 @@
+
+ÿÿSTYLE.AML
+ ÿChange Editor Styleÿ
+
+  This macro changes the current keyboard and menu style (Kbd.aml and
+  Menu.aml) and re-compiles the editor. You will be prompted to select
+  an editor style from the Style\ directory.
+

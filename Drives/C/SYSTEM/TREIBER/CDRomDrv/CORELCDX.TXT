@@ -1,0 +1,266 @@
+About CorelCDX 
+============== 
+ 
+To work with your CD-ROM drives, you require a CD-ROM  
+extensions program such as CorelCDX. CD-ROM extensions  
+programs interpret, for DOS, data read from High Sierra  
+and ISO-9660 formatted CD-ROM discs. 
+ 
+Unlike other CD-ROM extensions programs, CorelCDX also  
+caches CD-ROM data. Applications can access cached data  
+faster than re-reading the CD-ROM disc. 
+ 
+Table of Contents 
+----------------- 
+1.   Loading and Unloading CorelCDX 
+2.   CorelCDX Caching 
+3.   Configuring CorelCDX 
+ 
+1.   Loading and Unloading CorelCDX 
+----------------------------------- 
+CorelCDX is loaded from the AUTOEXEC.BAT file during  
+the system startup. The configuration of CorelCDX is  
+determined by its command line switches, which are  
+described in the topic, "Configuring CorelCDX". 
+ 
+If you need to free the memory or drive letters used  
+by CorelCDX, you can unload CorelCDX. The next time  
+you restart your system, CorelCDX is loaded again. 
+ 
+NOTE: CorelCDX may not unload if other TSR programs were  
+installed after CorelCDX was loaded. If problems occur,  
+unload the other TSR programs and then try to unload  
+CorelCDX again. 
+ 
+To unload CorelCDX, enter the following at the command  
+prompt: 
+     CORELCDX /UNLOAD. 
+ 
+2.   CorelCDX Caching 
+--------------------- 
+CorelCDX includes several types of caches to provide  
+faster access to frequently used CD-ROM data. Path  
+table, directory, and data caches provide conventional  
+or expanded memory caching. As an extension to  
+CorelCDX, CDXCACHE provides an extended memory data  
+cache. 
+ 
+The path table cache stores information about the  
+name and location of each directory on the CD-ROM  
+disc. Each path table cache buffer accommodates  
+approximately 100 sub-directories. 
+ 
+The directory cache stores information such as the  
+name and location of the files in each directory on  
+the CD-ROM disc. Each directory cache buffer  
+accommodates approximately 40 to 50 files. 
+ 
+The data cache stores the contents of recently  
+accessed files from the CD-ROM disc and any data  
+that's expected to be required next. CorelCDX  
+uses a read-ahead plus least recently used (LRU)  
+algorithm for its data cache: frequently used data  
+remains in the cache and infrequently used data  
+is discarded from the cache. Data is read into  
+the cache in sector blocks. 
+ 
+CDXCACHE, if enabled, is loaded at the same time  
+as CorelCDX. This cache stores information recently  
+read from CD-ROM drives in extended memory.  
+CDXCACHE, like the data cache, uses an LRU algorithm  
+to determine the contents of the cache. 
+ 
+CDXCACHE can cache the first 16 CD-ROM drives  
+connected to your system. The cache page size  
+affects the maximum cacheable sector address.  
+CDXCACHE works best with database type applications,  
+which repeatedly read information from the same  
+areas of a CD-ROM disc. 
+ 
+CDXCACHE versus SMARTDrive: 
+Both CDXCACHE and Microsoft's SMARTDrive program  
+use extended memory caching. If you're using  
+SMARTDrive version 5.0, provided with MS-DOS 6.2,  
+you can use SMARTDrive rather than CDXCACHE.  
+However, CDXCACHE has smaller overhead and  
+operates faster than SMARTDrive.  
+ 
+SMARTDRV.EXE 5.0 is designed to work exclusively  
+with Microsoft's MSCDEX CD-ROM driver. However,  
+Corel's PATCH_SD.COM modifies SMARTDRV.EXE to  
+recognize CorelCDX as a valid CD-ROM driver. 
+ 
+PATCH_SD creates a copy of the existing  
+SMARTDRV.EXE program and stores the copy  
+as SMARTDRV.MSC. PATCH_SD works only if  
+the size of SMARTDRV.EXE is equal to 45145 bytes. 
+ 
+To modify SMARTDrive to recognize CorelCDX: 
+1.   Enter the following at the command prompt: PATCH_SD. 
+2.   Check your AUTOEXEC.BAT file to ensure that CorelCDX  
+     is loaded before SMARTDrive. If SMARTDrive is loaded  
+     first, it won't find, and therefore cache, CD-ROM drives. 
+     Since SMARTDrive is loaded after CorelCDX, you can't  
+     use the CorelCDX /UNLOAD command. 
+3.   Disable the CDXCACHE by setting the CorelCDX command  
+     line option /XMSSIZE to 0. If you don't disable this  
+     cache, both CDXCACHE and SMARTDrive will cache data,  
+     using twice the necessary amount of extended memory. 
+4.   Reboot your system to reinstall SMARTDRV.EXE. 
+ 
+3.   Configuring CorelCDX 
+------------------------- 
+CorelCDX is configured using command line switches. Some  
+of these switches affect the caching features. For more  
+information, see the topic, "CorelCDX Caching". 
+ 
+The CorelCDX command syntax includes the path to the  
+location of CorelCDX and several switches. For example,  
+the following command indicates that CorelCDX is located  
+in the CORELDRV directory:  
+ 
+C:\CORELDRV\CORELCDX [options] 
+ 
+/CACHE:pt;dir;data 
+Defines the number of cache buffers allocated, in blocks,  
+to the path table, directory, and data caches, respectively. 
+ 
+Typically, the /M option is used rather than /CACHE. However,  
+the /CACHE option allows more precise control over the use  
+of allocated cache buffers. If both the /CACHE and /M options  
+are used, the /CACHE values override the /M value.  
+ 
+You can set path table and directory caches from 2 to 64  
+blocks. Each block requires 2K. The data cache can be set  
+from 2 to 64 blocks. The size of each block is determined  
+by the /DATABLK option. 
+ 
+Minimum, maximum, and alignment requirements may require  
+that the actual number of buffers differ slightly from  
+those you specify. 
+ 
+/DATABLK:sectors 
+Defines the number of 2K sectors assigned to each data  
+cache block. You can set this value to 1, 2, 4, or 8 sectors.  
+If you don't specify a size, the data cache block size is  
+set to 2 sectors by default. 
+ 
+This option is useful for applications that read data from  
+compact discs in contiguous segments.  
+ 
+Unless you're using CDXCACHE, setting the /DATABLK value  
+to 1 disables read-ahead caching. However, an additional  
+4K of conventional memory is required. 
+ 
+The internal read-ahead caching logic of some CD-ROM  
+drives may be adversely affected by changing the  
+default data cache block size. 
+ 
+/D:name... 
+Displays the required name of the CD-ROM device driver.  
+If you enter more than one CD-ROM device driver name,  
+separate each name with a comma and remove any blanks  
+between names. 
+ 
+If you're using Corel's DOS CD-ROM device drivers,  
+names are numbered starting from MSCD001. If you're  
+using Corel's NetWare CD-ROM device drivers, names  
+are numbered starting from MSCD099. 
+ 
+If driver names aren't included in the command line,  
+CorelCDX will try to locate and initialize the CD-ROM  
+device drivers named, by default, MSCD001 or MSCD099. 
+ 
+/E:value 
+Indicates whether code, data, or cache buffers are  
+to be stored in expanded memory. This option doesn't  
+affect cache buffers used by CDXCACHE. 
+ 
+The option /E:1 loads code and data into expanded  
+memory. Only a small footprint remains resident in  
+conventional memory. This option may be incompatible  
+with some CD-ROM applications; for example, those  
+that perform absolute disk reads into expanded  
+memory buffers. 
+ 
+The options /E:2 and /E load only cache buffers  
+into expanded memory.  
+ 
+The option /E:3 loads code, data, and cache buffers  
+into expanded memory. In rare cases, this value may  
+cause problems when you try to read data from a CD-ROM  
+drive. Some applications, when loaded in expanded  
+memory, may create memory conflicts. If you experience  
+problems, change the option to either /E or /E:2. 
+ 
+If cache buffers are loaded in expanded memory, a small  
+amount of conventional memory may be allocated to store  
+required tables, and so on. To make the most efficient  
+use of allocated memory, the driver may slightly increase  
+the number of specified cache buffers. 
+ 
+/FILES:num 
+Sets the maximum number of CD-ROM files that can be  
+open at the same time. Each file requires approximately  
+16 bytes. 
+ 
+If you don't specify this option, the maximum number  
+of open files is set to the same value as the FILES  
+command in your CONFIG.SYS file. 
+ 
+/L:letter 
+Indicates the drive letter, from A to Z, at which  
+CorelCDX starts assigning letters to CD-ROM drives.  
+If the letter you specify isn't available, the next  
+available drive letter is used. This option is useful  
+for software that requires specific drive letters for  
+CD-ROM drives. 
+ 
+/M:buffers 
+Indicates the approximate number of cache buffers  
+allocated, in blocks, for all CD-ROM drives.  
+ 
+Typically, the /M option is used rather than /CACHE.  
+However, the /CACHE option allows more precise control  
+over the use of allocated cache buffers. If both the  
+/CACHE and /M options are used, the /CACHE values  
+override the /M value.  
+ 
+/NOFILE 
+Prevents CorelCDX from looking for a CRLSCSI.INI file  
+for configuration options. This file isn't required  
+when you configure CorelCDX using command line switches. 
+ 
+/SHARE 
+/S 
+Permits CD-ROM drive sharing with Windows for Workgroups. 
+ 
+/VERBOSE 
+/VB 
+Displays information onscreen about CorelCDX as it's  
+loading during the system boot. 
+ 
+/XMSBLOCK:size 
+Sets the maximum size of read request in sectors that  
+will be cached by CDXCACHE. The cache performance may  
+benefit from larger values. However, the cache may fill  
+up more quickly. A size of 4 is recommended. 
+ 
+/XMSPAGE:sectors 
+Indicates the number of sectors per cache page, which  
+determines the read-ahead operations. This option affects  
+only CDXCACHE. 
+ 
+The value of 4 is recommended for smaller cache sizes;  
+it's more important to cache separate disk reads than  
+to perform read-aheads. Use the value 8 for larger cache  
+sizes; more data is stored in one operation.  
+ 
+/XMSSIZE:size 
+Indicates the size, in kilobytes, of the CDXCACHE cache.  
+Set the size to 0 to disable this cache. 
+ 
+A size of -1 creates a default cache size equal to  
+one-quarter of the free extended memory. You can  
+also set the size to a value from 64 to 16384. 
+

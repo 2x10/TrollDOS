@@ -1,0 +1,2 @@
+
+Installieren Sie New-DOS mit dem Befehl SETUP.

@@ -1,0 +1,8 @@
+
+ÿÿSORTSTR.AML
+ ÿSort a Stringÿ
+
+  This macro sorts the characters in the first line of a marked block.
+  It may be useful for sorting symbols sets or analyzing character
+  frequencies in text.
+

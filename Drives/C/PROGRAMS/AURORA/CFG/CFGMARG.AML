@@ -1,0 +1,59 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGMARG.AML
+// Configuration for Margins and Tabs
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable lmargin, rmargin, tabwidth, vartabs, tabopt1, tabopt2
+
+// create dialog box
+dialog "Margins and Tabs" 38 17 "cp"
+
+// margins
+field "&Margins: >"  3  2  5 _LMargin
+field ""            20  1  5 _RMargin
+
+// tabs
+field "&Fixed Tab Width: >"   3  4  5 _TabWidth
+field "&Variable Tab Stops:"  3  6 33 _VarTabs
+
+// tab display options
+groupbox 'Display Tab Characters as:' 3 9
+  (menu ''
+     item " ( ) &Ascii 9 (\t)"
+     item " ( ) Spaces, if found on &Open    "
+     item " ( ) &Spaces"
+   end) '' _TabOpt "aos"
+
+// tab left/right options
+groupbox 'Tab Left/Right Options:' 3 14
+  (menu ''
+     item " [ ] S&hift Text in Insert Mode   "
+     item " [ ] Use &Real Tabs"
+   end) '' _TabOpt "hr"
+
+// ok/cancel buttons
+button "O&k"    28 2 8
+button "Cancel" 28 4 8
+
+// display dialogbox
+if (getdialog ref lmargin  ref rmargin ref tabwidth
+              ref vartabs  ref tabopt1 ref tabopt2) == 'Ok' then
+  prf.LMargin  = lmargin
+  prf.RMargin  = rmargin
+  prf.TabWidth = tabwidth
+  prf.VarTabs  = vartabs
+  prf.TabOpt   = tabopt1 + tabopt2
+
+  // modify real tabs for the current edit window
+  if wintype? "edit" then
+    if pos 'a' tabopt1 then
+      setbuftabs
+    elseif (pos 's' tabopt1) or getbuftabs then
+      setbuftabs tabwidth
+    end
+  end
+end

@@ -1,0 +1,455 @@
+
+
+User Tips
+ÄÄÄÄÄÄÄÄÄ
+This file contains a few miscellaneous Aurora user tips which you may
+wish to review. For complete documentation on how to install and use
+Aurora, see the Users Guide (User.dox). Note that any key definitions
+shown here are the Aurora-style defaults.
+
+
+Basic Configuration
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÿÿThe editor should always be installed in an empty directory. Never
+   mix files from different editor versions.
+
+ÿÿWhenever you make a change to any of the editor configuration files
+   (such as Config.aml, Kbd.aml, Menu.aml, etc.), you must execute the
+   'recompile' command ('Recompile the editor' <alt f2> on the Set menu)
+   for your changes to take effect.
+
+ÿÿIf you prefer to start Aurora by another name, you can simply rename
+   the file A.exe to whatever you wish (such as E.exe). Do not rename
+   any other files distributed with the editor.
+
+ÿÿYou can re-install Aurora by selecting Full Installation from the
+   Macro List on the Macro menu.
+
+
+The Keyboard
+ÄÄÄÄÄÄÄÄÄÄÄÄ
+ÿÿWhen adding new key definitions to Kbd.aml, be sure to place each
+   definition in the appropriate 'object' for the window in which you
+   would like the key to be active. For most editing key definitions,
+   this will be the 'edit' object.
+
+ÿÿIf you have added or changed keyboard definitions, you will probably
+   also want to change any Menu definitions which show the old keys.
+
+ÿÿTo prevent the editor from using the keypad <grey/>, <grey*>,
+   <grey->, and <grey+> keys as function keys, remove option 'g' from
+   'kbdoptions' in System.aml.
+
+ÿÿTo execute a key or macro function from the Dos command line, use the
+   '-e' command line option. Key or event names must be enclosed in
+   double quotes. For example:
+
+     C>a -emymacro
+        // executes the function 'mymacro' after the editor is started
+
+     C>a -e"<shift f1>" -e"<alt =>"
+        // simulates <shift f1>, <alt => after the editor is started
+
+
+The Mouse
+ÄÄÄÄÄÄÄÄÄ
+ÿÿIf scrolling is too fast when using the mouse, change the Scroll
+   Delay on the Mouse Options dialog box to a higher value.
+
+ÿÿTo hide the mouse pointer whenever a key pressed, change the
+   appropriate option on the Mouse Options dialog box.
+
+
+The Menus
+ÄÄÄÄÄÄÄÄÄ
+ÿÿIf part of a pull-down menu is displayed off the edge of the screen,
+   use the mouse to grab the menu border and drag the menu to a better
+   position.
+
+ÿÿTo hide the menu bar so that it is only displayed when <esc> or the
+   right mouse button is pressed, remove the menu bar on the Window
+   Style 1 dialog box.
+
+
+Prompts
+ÄÄÄÄÄÄÄ
+ÿÿThe Ascii Chart <alt => can be displayed from within a prompt and
+   used to enter any character. The Enter Literal <ctrl [> command can
+   also be used to enter any character in a prompt. In addition, you can
+   enter any character by holding down the <alt> key, then entering the
+   decimal Ascii value of the character on the keypad, and then
+   releasing the <alt> key.
+
+ÿÿUse <pgup> or <pgdn> within a prompt, or click on the prompt retrieve
+   tab () to display a popup menu of all prompt history. You can copy a
+   string from the menu to the prompt by pressing the <enter> key or the
+   left mouse button.
+
+ÿÿUse the Prompt Style command on the Window menu to sample the four
+   editor prompt styles. Select Save Configuration on the Set menu to
+   make the current style the default prompt style.
+
+ÿÿTo move the cursor a relative number of lines away from the current
+   position in the Go To Line <ctrl j> prompt, specify '+' or '-' before
+   the line number.
+
+ÿÿThe Macro Expression prompt <ctrl v> on the Macro menu can be used as
+   a command line calculator, since the macro language compiler and
+   interpreter are available at this prompt. For example:
+
+     Macro Expression>  say 1 + 2 + 30 - 40    <enter>
+       // displays -7
+     Macro Expression>  msgbox (4 * 15) mod 7  <enter>
+       // displays 4 in a message box
+     Macro Expression>  write 1 + 2 * 3 + 4    <enter>
+       // enters the string '11' at the cursor
+
+
+The Desktop
+ÄÄÄÄÄÄÄÄÄÄÄ
+ÿÿYou can prevent windows from remembering their sizes, cursor
+   positions, and settings by checking the appropriate options on
+   Desktop Options dialog box.
+
+ÿÿTo use the existing Dos screen as the editor background when the
+   editor is started, change the Background Fill String to '' (null) on
+   the Video Options dialog box.
+
+ÿÿIf your video card supports special video modes such as 132 x 43, you
+   can use these video modes within the editor by setting the Rows and
+   Columns to 'Dos' on the Video Options dialog box. Then select Save
+   Configuration on the Set menu, exit the editor, and set the desired
+   video mode in Dos before re-starting the editor.
+
+ÿÿEnter the 'showentry' command in the Macro Expression prompt to
+   display the screen as it appeared in Dos before the editor was
+   started.
+
+
+Syntax Highlighting
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÿÿSyntax highlighting definitions are located in the Syn\ directory.
+
+ÿÿIf you are using syntax highlighting with multi-line comments in your
+   program source code, you may wish to increase the number of lines to
+   scan backward in the appropriate syntax definition file in the Syn\
+   directory. Note however, that this may decrease scrolling performance
+   for highlighted files.
+
+ÿÿThe Hilite Word <ctrl \> command highlights all occurrences of the
+   word at the cursor. This can be very useful for finding instances of
+   a word in a document, or marking occurrences of variables, functions,
+   or other identifiers in your program source code.
+
+ÿÿIndividual keywords can be highlighted in colors other than the
+   default keyword color by treating the keyword as a public object
+   variable and assigning it the desired color attribute. For example,
+   in Syntax.aml:
+
+     keyword
+       :      // end of keyword list
+
+     _if   =ÿcolorÿbrightred on blue
+     _else =ÿcolorÿyellow    on blue
+
+
+History
+ÄÄÄÄÄÄÄ
+ÿÿTo erase all of your existing prompt history, window positions, etc.,
+   simply delete Default.prj after you have exited the editor.
+
+ÿÿDo not attempt to manually update the file Default.prj. This file is
+   automatically updated by the editor during normal usage.
+
+
+The File Manager
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÿÿTo open a file manager window for the current directory from the Dos
+   command line, enter 'a .'.
+
+ÿÿTo open a file from the file manager while also closing the file
+   manager window, use <ctrl enter>, or check the option 'Quit on Open'
+   on the file manager options dialog box.
+
+ÿÿTo locate a filename within the file manager or a file picklist,
+   enter the first few characters of the desired filename until the
+   cursor is positioned at the file. To locate a directory, enter a
+   backslash character (\) before the first letter.
+
+ÿÿTo create a separate file manager window from a directory in the file
+   manager, use <shift o>.
+
+ÿÿTo display the amount of disk space used by an entire directory and
+   all subdirectories, use the Statistics command on the Command menu.
+
+ÿÿTo generate a file manager listing of all files in all directories on
+   the C drive, run the Where macro and and specify a filespec of
+   'C:\*.*'. To generate a listing of all files on your computer, run
+   Where with a filespec of '*.*' (Warning: these filespecs may generate
+   listings with tens of thousands of files, which may take some time to
+   sort.)
+
+ÿÿTo display Windows/95 long names in the file manager, set the format
+   to Variable on the File Manager options dialog box.
+
+ÿÿTo make more room for long names in the file manager, configure the
+   time to be displayed without seconds (on the International Options
+   dialog box), and the file size to be displayed in 1k increments (on
+   the File Manager Options dialog box).
+
+
+Opening Files
+ÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÿÿTo open a file from the Dos command line and place the cursor on a
+   specific line, enter the option 'l' followed by the line number. For
+   example:
+
+     C>a myfile.txt/l253
+       // opens 'myfile.txt' and places the cursor on line 253
+
+ÿÿTo open a binary file from the Dos command line (or the Open prompt)
+   using a specific line length, enter the option 'b' followed by the
+   line length. For example:
+
+     C>a myfile.txt/b240
+       // opens 'myfile.txt' in binary mode with a fixed line length
+       //   of 240
+
+ÿÿTo configure the editor so that real tab characters (Ascii 9) are
+   automatically expanded when files are opened, see the Tabauto macro.
+
+
+Searching
+ÄÄÄÄÄÄÄÄÄ
+ÿÿFrequently-used search strings can be saved in a separate file and
+   copied to a find prompt as needed by using the Copy Block <alt c> or
+   Paste <grey*> commands. This can be especially convenient for long or
+   complex regular expression patterns.
+
+ÿÿTo count the occurrences of a search string, use the 'a' search
+   option. For example:
+
+     Find>  gizmo/a  <enter>
+       // displays the number of occurrences of the word 'gizmo'
+       //   from the cursor to the end of the file
+
+ÿÿUse regular expression searching to search for the beginning and/or
+   end of lines. Do not attempt to search for line delimiter characters
+   (such as carriage returns and linefeeds) in non-binary files. In the
+   normal, non-binary editing mode, line delimiter characters are
+   removed from the end of each line when the file is loaded and
+   re-appended to the end of each line when the file is saved.
+
+ÿÿThe Find Occurrences <ctrl h> command can be useful for extracting
+   lines from a flat database file that match search criteria. For
+   example:
+
+     Find Occurrences of>  Joe/b
+       // extract all lines where 'Joe' is found within a column mark
+
+ÿÿThe Find Occurrences <ctrl h> command can be used together with
+   regular expression searching to display a list of function headers in
+   your program source code. For example:
+
+     Find Occurrences of>  ^[a-zA-Z_].*\(.*[~;]$/x
+       // finds C/C++ function definitions beginning in column 1
+
+     Find Occurrences of>  ^ *{function}|{key}.*$/x
+       // finds AML function and key definitions
+
+ÿÿSelecting a file from a file manager scan window (generated by the
+   Scan Files <ctrl s> command) will position the cursor to the first
+   occurrence of the scan search string. Use the Repeat Last Find/Repl
+   <ctrl l> command to find other occurrences.
+
+
+Manipulating Text
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÿÿThe 'quote' <shift f9> and Comment Line <alt f1> commands can both be
+   used for simple text quoting. <shift f9> performs block quoting,
+   while <alt f1> quotes and unquotes text on a line-by-line basis.
+
+ÿÿThe editor is configured at installation to use Live word wrap when
+   <ctrl w> is pressed. If you prefer the standard old-style word wrap,
+   change the definition of <ctrl w> in Kbd.aml to:
+
+    ÿkeyÿ <ctrl w>  setting 'W' TOGGLE   // toggle standard word wrap
+
+ÿÿTo reformat a very long line, perhaps imported from a word processor:
+   insert a blank line below the long line, move the cursor back to the
+   desired left margin in the long line, and enter the Reformat <alt r>
+   command on the Block menu.
+
+ÿÿTo reformat a paragraph into a single long line (for export to a word
+   processor), set the right margin to 16000 before reformatting.
+
+ÿÿTo reformat all of the text in a file, mark the entire file using the
+   Mark Line <alt l> command, and enter the Reformat <alt r> command on
+   the Block menu.
+
+ÿÿThe Fill Block <ctrl k><f> command can be used to fill a marked block
+   with a repeating character or string. For example: to fill columns
+   40-47 of a data file with the date 12/25/96, mark the desired columns
+   by using the 'markcolumn' command <ctrl b>, and then enter the date
+   at the 'fillblock2' prompt.
+
+ÿÿThe clipboard Cut Append <ctrl grey-> and Copy Append <ctrl grey+>
+   commands can be very useful for gathering separate blocks of text and
+   grouping them together in the clipboard.
+
+ÿÿTo expand tab characters (Ascii 9) in the current file, use the
+   Expand Tabs <ctrl k><x> command on the Edit menu.
+
+ÿÿHave you ever been prompted to save changes in a file, and you forgot
+   what changes you just made? Try using the undo/redo feature to review
+   your changes. Just cancel the 'save' prompt and use the Undo <ctrl u>
+   and Redo <ctrl y> commands to backtrack and retrace your changes
+   before exiting.
+
+ÿÿTo the change the line delimiter that a file is saved with, load the
+   file into the editor, change the current Line Delimiter setting (on
+   the Set menu) to the new line delimiter, and save the file.
+
+ÿÿTo disable CUA-style <shift> key marking, remove the 'smark' command
+   from all key definitions in Kbd.aml.
+
+ÿÿUse the Mark Paragraph <alt 3> command to quickly mark the paragraph
+   at the cursor.
+
+ÿÿTo rearrange all the words in a paragraph in sorted order:
+
+   1. Use the Mark Column <alt b> command to mark column 1 of the
+      entire paragraph.
+   2. Enter the Reformat Block <alt r> command to place each word on
+      separate line.
+   3. Enter the Mark Paragraph <alt 3> command to re-mark the separated
+      paragraph with a line mark.
+   4. Enter the Sort Block <ctrl k><o> command to sort the words.
+   5. Enter the Reformat Block <alt r> command to re-join the separated
+      lines back together into a paragraph.
+
+ÿÿTo view or edit a new location in the same file and then return to
+   the original location at a later time, use one of the following
+   techniques:
+
+   1. Make a copy of the current edit window by entering the Copy Window
+      <ctrl c> command, and then move to the new location in the file.
+      When you are finished, close the copied window with the Close
+      <alt q> command to display the original window and cursor position.
+
+   2. Set a bookmark at the original location using the Quick Bookmark
+      <ctrl 2> command, and return to it later using the Prev Bookmark
+      <ctrl 6> command.
+
+
+Working with Very Large Files
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÿÿIf possible, open files in binary mode with a fixed line length.
+   Loading is extremely fast when opening large files in binary mode and
+   memoptions is set to 'o'.
+
+ÿÿIf you are performing extensive 'search and replace all' operations
+   in a very large file, or you are making other large-scale changes to
+   the file, you will get better performance if Undo is disabled on the
+   Set menu.
+
+ÿÿUse the Block commands instead of Cut and Paste. Block Copy, Move,
+   and Delete are more direct and faster.
+
+ÿÿDisplaying real tab characters 'as-is' (Ascii 9) can increase the
+   speed of most column block operations, block sorting, and block
+   formatting, and will also increase the speed of the display. For real
+   tab display options, see the Margins and Tabs dialog box and the
+   TabOpt configuration setting.
+
+ÿÿAurora can be useful for editing very large files when running under
+   OS/2 or Windows. Although other editors may exploit the virtual
+   memory capabilities of these environments, Aurora uses its own
+   virtual memory (optimized for text editing), and will not force other
+   OS/2 or Windows applications to be swapped out or discarded when very
+   large files are loaded and edited. The 'memoptions' setting in
+   System.aml should be set to 'o' for the best performance.
+
+ÿÿIf you are using Aurora under Windows or OS/2, limit the amount of
+   available XMS/EMS memory to about 50-75% of the real physical memory
+   in your computer. This will decrease the probability that the
+   operating system will swap to satisfy the memory request. XMS/EMS can
+   limited in System.aml, or by adjusting the Dos box settings in
+   Windows or OS/2.
+
+ÿÿSetting 'memoptions' to 'o' in System.aml allows large files to be
+   kept open (in Dos) while they are being edited. This feature can
+   greatly increase the loading performance for very large files,
+   especially in binary mode. However, in some cases there may be
+   conflicts with other programs trying to access the open file. If this
+   is a problem for you, set memoptions to '' (null).
+
+ÿÿBefore saving changes to very large files, you may wish to conserve
+   disk space by disabling Backup on the Set menu. Obviously, this
+   should only be done if you have backup files elsewhere.
+
+ÿÿIf you only need to browse the first part of a very large file, or if
+   you have started loading a very large file by mistake, you can press
+   <ctrl break> to interrupt the loading process at any point. Note that
+   the loaded file will be truncated, and you will be prompted with
+   'Truncated file - are you sure?' whenever you try to save the file.
+
+
+AML Macros
+ÄÄÄÄÄÄÄÄÄÄ
+ÿÿTo obtain context-sensitive help on a macro language statement or
+   function at the cursor, press <shift f1> for a brief description, or
+   press <shift f2> for extended help. Note that most extension
+   functions (Ext.aml source code) are not documented. For these
+   functions, the cursor is moved to the function definition in Ext.aml.
+
+ÿÿTo compile and run an external macro in the current edit window, just
+   enter the 'compilemacro2' <shift f10> and 'runmacro2' <shift f11>
+   commands. These commands help to simplify macro development and
+   testing.
+
+ÿÿYou can use the 'pickmacro' <shift f12> command to obtain a picklist
+   of macros in the Macro\ subdirectory. To run a macro from the
+   picklist, move the cursor to the desired macro and press the <enter>
+   key or click the left mouse button. The Macro List <ctrl f12> command
+   displays macros with a brief one-line description.
+
+ÿÿBefore modifying any internal macro code (Ext.aml, Kbd.aml, etc.), be
+   sure to make backup copies of your AML files. You should be
+   reasonably familiar with the macro language before attempting these
+   types of modifications.
+
+ÿÿTo protect your internal AML extensions against upgrades, try to keep
+   them in the file User.aml. If your User.aml extensions override
+   existing internal macro code in Ext.aml, Kbd.aml, etc, comment-out
+   the substituted code to conserve resources.
+
+ÿÿAML has a simpler function call syntax than most programming
+   languages. Here are a few things to keep in mind when calling AML
+   functions:
+
+   If function calls with arguments are used in expressions, the entire
+   function call should be enclosed in parentheses, not just the
+   arguments. For example:
+
+     x = fun1 (1) + fun2 (2, 3, 4);    // Basic, Pascal, C
+     x = (fun1 1) + (fun2 2 3 4)       // AML
+
+   Function calls which have no arguments, and which are preceded or
+   followed by operators, do not need parentheses:
+
+     x = fun1 () + fun2 ();     // Basic, Pascal, C
+     x = fun1 + fun2            // AML
+
+   If a single function call is an argument to another function, and is
+   not preceded or followed by an operator, then it must be enclosed in
+   parentheses. For example:
+
+     x = fun1 (1, fun2 (), fun3 (2, 3, 4));   // Basic, Pascal, C
+     x = fun1 1 (fun2) (fun3 2 3 4)           // AML
+
+ÿÿNew macros and AML configuration files will continue to be posted on
+   the Aurora Support BBS (see Read.me for access details). Many of
+   these macros may only be available to licensed users. You may wish to
+   check the BBS periodically for new macros.
+

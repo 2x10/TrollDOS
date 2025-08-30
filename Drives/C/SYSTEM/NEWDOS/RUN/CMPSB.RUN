@@ -1,0 +1,33 @@
+PROGRAM CMPSB;
+{Beispielprogramm zum Assemblerbefehl CMPSB. Dieser vergleicht zwei Speicher-}
+{bereiche und Zeichen fÅr Zeichen miteinander. Sind zwei Zeichen ungleich}
+{bricht REPE SCASB ab. Anwendungsgebiet ist vor allem das schnelle}
+{Vergleichen grî·erer Speicherbereiche.}
+
+
+BEGIN-MAIN
+  init;
+  !a:= 'Zeichenkette';
+  !b:= 'Zeiger';
+
+  ASM                            
+    les di, !a[1];               {Lade Adresse des ersten Zeichens von !a}
+    lds si, !b[1];               {Lade Adresse des ersten Zeichens von !b}
+    mov cx, @length(!a);         {Lade ZÑhlregister CX mit der StringlÑnge}
+
+    cld                          {Richtungsflag setzen}
+    repe cmpsb                   {REPeat while Equal... Wiederhole den}
+                                 {Befehl CMPSB, bis das !a und !b nicht mehr}
+                                 {gleich sind.}
+
+    mov @a, cx                   {Positions-Wert von CX nach @a}
+  END;
+
+  @b:= @sub (@Length(!a), @a);   {Richtigstellung dieses Wertes}
+
+  WriteLn (!a);
+  WriteLn (!b, #13#10);
+  WriteLn ('Die Zeichenketten sind ab Position ',@b, ' ungleich.');
+  getkey;
+END.
+

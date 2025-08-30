@@ -1,0 +1,61 @@
+<HTML><HEAD><TITLE>Filter</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Filter</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Filtert die von <A HREF="ram2disk.htm">Ram2Disk</A> angelegte Rettungsdatei.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+FILTER<HR
+
+noshade color="silver"><FONT COLOR="maroon">Beschreibung</FONT>
+
+Mit diesem Programm filtern Sie die Datei RAM2DISK.LOG, die vom Daten-
+rettungsprogramm Ram2disk angelegt wurde.
+
+Da diese Datei neben den von Ihnen ben”tigten Daten zum gr”áten Teil nur
+unbrauchbares Durcheinander enth„lt, leistet Filter hier schon einmal
+Vorarbeit:
+
+Es entfernt sowohl alle Daten, die keinen lesbaren Text darstellen, als auch
+Textbruchstcke, die krzer als 30 Zeichen sind. Wenn Ihre verlorenen Daten
+gerade aus solchen Stcken bestanden haben, k”nnen Sie die Filterung beliebig
+oft mit einer anderen Einstellung wiederholen. M”glich sind Bruchstckl„ngen
+zwischen 2 und 254 Zeichen.
+
+Geben Sie die gewnschte L„nge an der Eingabeaufforderung von Filter ein. Die
+Zahl 2 bedeutet z.B., daá Filter nur lesbare Bruchstcke mit mehr als 2
+Buchstaben herausschneidet.
+
+Im Zweifelsfalle k”nnen Sie die Datei RAM2DISK.LOG auch ungefiltert weiter-
+verarbeiten. Sie ist u.U. jedoch sehr groá (bis zu 1 MB kB) und unber-
+sichtlich. 
+
+FILTER legt als Arbeitsergebnis zwei Dateien an, die sich ebenfalls im
+Verzeichnis von New-DOS befinden.
+
+RAM2DISK.FIL: Sie enth„lt das eigentliche Filtrat.
+
+RAM2DISK.BLC: Gleicht inhaltlich RAM2DISK.FIL. Hier sind jedoch alle Text-
+bruchstcke an den Fehlerstellen durch eine waagerechte Linie voneinander
+getrennt. Der Inhalt wird dadurch bersichtlicher. RAM2DISK.BLC ist zur
+Schnellsuche in einem Textbetrachter o.„. gedacht.
+
+RAM2DISK.FIL k”nnen Sie in Ihre Textverarbeitung laden, um die Fehlerstellen
+nachzubessern. Diese sind mit einer Raute (#) kenntlich gemacht, so daá Sie
+hier die Such-Funktion Ihres Texters einsetzen k”nnen, um die Bruchstellen
+anzuspringen.
+
+Die Dateien RAM2DISK.LOG, RAM2DISK.FIL und RAM2DISK.BLC k”nnen Sie wieder
+l”schen, wenn Sie Ihre Arbeit beendet haben. Falls Sie eine der Dateien noch
+l„ngere Zeit aufheben wollen, sollten Sie sie in ein anderes Verzeichnis
+verschieben oder umbenennen.
+
+Filter zeigt zum Ergebnis der Filterung noch weitere Informationen an, wenn
+Sie im Anschluá die Taste i drcken. Eine Fehlermeldung wird immer dann
+ausgegeben, wenn Filter die Datei RAM2DISK.LOG nicht im New-DOS-Verzeichnis
+finden konnte.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

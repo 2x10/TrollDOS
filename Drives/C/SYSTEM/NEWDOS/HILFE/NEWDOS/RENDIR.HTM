@@ -1,0 +1,39 @@
+<HTML><HEAD><TITLE>RENDIR</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>RENDIR</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Benennt ein Verzeichnis oder eine Datei um. Eine Datei kann auch verschoben 
+werden.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">RENDIR [Quellverzeichnis] [neuer Name des Verzeichnisses]</FONT><HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+ 
+<FONT COLOR="blue">RENDIR test xtest
+RENDIR a:\test a:\xtest
+RENDIR newdos\run newdos\xrun</FONT> 
+
+RenDir kann ein Verzeichnis nicht in ein anderes Verzeichnis oder auf
+einen anderen DatentrÑger verschieben. Verwenden Sie hierzu den Befehl
+<A HREF="move.htm">MOVE</A>. Zum Umbenennen von Dateien kînnen Sie auch den Befehl <A HREF="help:ren">REN oder
+RENAME</A> verwenden.
+
+Aktionen von RENDIR kînnen in Batch-Dateien mit der Funktion <A HREF="help:if">ERRORLEVEL</A>
+ÅberprÅft werden. Folgende Fehler-Codes sind u.a. definiert:
+
+0        : kein Fehler
+2        : Quell-Verzeichnis oder Datei nicht gefunden
+3        : Verzeichnispfad nicht gefunden
+5        : Ziel-Verzeichnis oder Datei existiert bereits oder
+           Verschieben in anderes Verzeichnis nicht erlaubt
+150      : Laufwerk ist schreibgeschÅtzt
+152      : Laufwerk nicht betriebsbereit (Diskette nicht eingelegt o.Ñ.)
+155..158 : Fehler an DatentrÑger oder Laufwerk
+162      : Unbekannter Hardwarefehler</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

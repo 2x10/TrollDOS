@@ -1,0 +1,58 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGEDIT1.AML
+// Configuration for Edit Options 1
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable defset, undosiz, clipname, linestyle
+
+// create dialog box
+dialog "Edit Options 1" 63 16 "cp"
+
+// default edit settings group box
+groupbox 'Default Edit Settings:' 3 2
+  (menu ''
+     item " [ ] &Autoindent"
+     item " [ ] &Backup"
+     item " [ ] &Draw Mode"
+     item " [ ] &Hex View"
+     item " [ ] &Insert Mode"
+     item " [ ] &Live Word Wrap"
+     item " [ ] &Match Character"
+     item " [ ] &Smart Tabs"
+     item " [ ] &Translate"
+     item " [ ] &Undo Enabled"
+     item " [ ] &Variable Tabs"
+     item " [ ] Standard &Word Wrap"
+     item " [ ] Synta&x Highlighting "
+   end) '' _DefaultSet "abdhilmstuvwx"
+
+// edit fields
+field "Undo Si&ze:"        31  2 18 _UndoSize
+field "Default &Clipboard:"  31  5 18 _ClipName
+
+// default linestyle
+groupbox 'Default Line Style:' 31 10
+  (menu ''
+     item " ( ) &Single              ÚÄÄ¿ "
+     item " ( ) Double &Horizontal   ÕÍÍ¸"
+     item " ( ) Double &Vertical     ÖÄÄ·"
+     item " ( ) &Double              ÉÍÍ»"
+     item " ( ) &Eraser"
+   end) '' _LineStyle "01234"
+
+// ok/cancel buttons
+button "O&k"    53  3 8
+button "Cancel" 53  5 8
+
+// display dialog box
+if (getdialog ref defset ref undosiz ref clipname
+              ref linestyle) == 'Ok' then
+  prf.DefaultSet = defset
+  prf.UndoSize   = undosiz             // requires re-entry
+  prf.ClipName   = clipname
+  prf.LineStyle  = linestyle
+end

@@ -1,0 +1,209 @@
+README.TXT    - Full Documentation of MaxDIR.
+FASTREAD.TXT  - Quick Read Documentation of MaxDIR.
+HISTORY.TXT   - History of Revisions to MaxDIR.
+
+-----------------------------------------------------------------------------
+ MaxDIR  v2.29      [Documentation - DI.EXE]   (C)1995-2005 MSH Softworks
+-----------------------------------------------------------------------------
+       [ This utility has always been and always will be FREEWARE ]
+
+--> Type DI /? for a list of command-switches.  Use README.TXT for help. <--
+
+
+INSTALLATION:  
+
+  Simply copy the MaxDIR files into your OS directory, or any place else
+that is specified in your AUTOEXEC.BAT's PATH= statement.  Also, you can
+rename it to anything you wish, such as D.EXE, which is how I use it.
+
+IMPORTANT!:  All of the files MUST be in the same directory for MaxDIR to
+             work properly.  DI.EXE, CFG.EXE, and MAXDIR.CFG.
+
+
+NOTE:  For Windows NT/2000, you should extract all files to the C:\WINNT
+       directory.
+
+NOTE:  For Windows95/98/ME/XP, you should extract all files to the
+       C:\WINDOWS directory.
+
+NOTE:  For DOS, you should extract all files to the C:\DOS (or SYSTEM)
+       directory.  You must make sure the directory is in the set PATH=
+       statement.
+
+
+ABOUT THE FILES:
+
+DI.EXE     :This is MaxDIR.  Type DI to get a directory.
+
+CFG.EXE    :This is MaxDIR Config.  This program lets you make up to 25
+            custom config files for MaxDIR to use.  The documentation is
+            built in to the help system.  Press F1 to find out how to use it.
+
+MAXDIR.CFG :This is the default configuration file.  You may create up to 25
+            different .CFG files to use with MaxDIR.
+
+-----------------------------------------------------------------------------
+
+MaxDIR OPTIONS:
+
+  You may change the way MaxDIR shows files by using Command-Switches.  For
+example, by typing  DI /F  MaxDIR will Alphabetize files by Filename instead
+of by File Extension.  Here are the available command-switches:
+
+By default, MaxDIR shows files alpha by file extension, ordered up/down.
+
+/e   - Sort Files by Extension. (Default)
+/f   - Sort Files by Filename.
+/t   - Sort Files by Date/Time.
+/s   - Sort Files by Size.
+/n   - Disable Sorting.
+/w   - Show Files Ordered Up-Down. (Default)
+/l   - Show Files Ordered Left-to-Right.
+/a   - Show Hidden/System files.
+/d   - Show Directories ONLY.
+/#   - Number of Columns (1,2,4,6) (Default: 4)
+/c   - No Color.  (Output can Redirect)
+/j   - Show Colors in ANSI format.  (Output can Redirect)
+/u   - Show Files in ALL-Uppercase.
+/v   - Disable Show Available Drives.
+/p   - Disable Pause at full screen.
+/o   - Use BIOS Video Addressing.
+/i   - Include DIR clusters in 'Bytes Consumed'.
+/x   - Show eXtra Drive Information.
+/b   - Show MaxDIR Location, Build ID, and DOS Version Info.
+/z   - Disable custom configuration. (Use Default Settings.)
+/zfilename - Use custom configuration CFG file. (Don't add .CFG)
+
+
+You can use more than one switch, in any order.  The path to sort must be the
+last thing on the command line.
+
+EXAMPLES:
+
+di                -Will show files in current dir, alpha by extension.
+
+di /?             -Will show Command Line Switches and info about MaxDIR.
+
+di /s             -Will show files sorted from smallest to largest.
+
+di /f /u /l ms*.* -Will show files in current dir starting with MS, alpha
+                   by filename, in all uppercase, ordered left-to-right.
+
+di /u e:\dos      -Will show files under the Dos dir on drive E, alpha 
+                   by extension, in all uppercase.
+
+di /d /x          -Will show directories under current dir, along with
+                   extra info about the drive.
+
+di /n /p          -Will show files, unsorted, with no pausing when the
+                   screen fills up.
+
+di /a             -Will show ALL files(including hidden and system files),
+                   with hidden dirs at the end of the dir list, and all
+                   hidden files at the end of the files list, with their
+                   first characters in lower case.
+
+di /v             -Will show files in current dir, alpha by extension,
+                   without showing available drives.
+
+di /zfilename     -Will use the custom configuration file: filename.cfg
+                   Remember:  Don't add the .CFG in the command.
+
+di \              -Will show the current drive's Root directory, alpha by
+                   extension.
+
+di /2             -Will show files in current dir, alpha by extension,
+                   in 2 columns (which shows dates and times)
+
+di /c > file.txt  -Will list files in current dir, sending output to
+                   File.txt. (no color)
+
+di /j > file.txt  -Will list files in current dir, sending output to
+                   File.txt. (using ANSI color codes.)
+
+di /c > lpt2      -Will list files in current dir, sending output to
+                   printer on LPT2
+
+
+TIP:   When outputting to another device, be sure to use the /p option
+       to disable PAUSE.  Otherwise, you'll have to keep pressing a key
+       until the output is completed.
+
+NOTE:  Even though the /n option specifies No Sorting, all directories will
+       still be pushed to the front of the listing, but they will not be
+       sorted.
+
+NOTE2: The /a option always pushes hidden/system files to the end of the
+       list.  Hidden/System files are denoted by a lowercase first letter
+       of the Filename and Extension.
+
+-----------------------------------------------------------------------------
+
+REGISTRATION:  (MaxDIR is FREE, but there are a couple of benefits.)
+
+   Registering MaxDIR will add you to the new releases list.  This list is
+PRIVATE and is not disclosed to ANYONE WHATSOEVER.  The only thing you will
+get with registration is an occasional e-mail with the latest version of
+MaxDIR attached, as soon as it is finished.
+
+   To register, send a brief e-mail with your e-mail address, your
+City, State/Province/County, Country, your current version of MaxDIR,
+Your PC Type and OS(Your Computer's Operating System [MSDOS 6.22 or
+Win98?] ), and any comments that you would like to say about MaxDIR.
+
+Example:  (send to e-mail address listed on the site)
+
+johndoe@anyisp.net.au
+Sydney, Australia
+MaxDIR v2.21
+Home-Made PC [MSDOS 6.22] {.OR...} MAC [MacOS 8.0, OrangePC, PCDOS 5.0], etc.
+
+Comments:  This program is ok. Please inform me when a new version is out.
+
+--> This means you'll be e-mailed the latest version immediately. <--
+--> Since... the latest version (for now) is MaxDIR v2.29 <--
+
+-----------------------------------------------------------------------------
+  ALL VERSIONS OF MAXDIR ARE VIRUS SCANNED BEFORE RELEASE VIA THE INTERNET.
+-----------------------------------------------------------------------------
+
+I hope you find this a useful utility!  Several Beta-Testers reported sudden
+allergic reactions to the DOS DIR command after getting used to MaxDIR.
+
+                                                        -MSH Softworks
+                                                        -Michael S. Hooper
+
+THIS PROGRAM IS FREEWARE!  COPY IT, DISTRIBUTE IT, GIVE IT AWAY, MASS PRODUCE
+IT, BUT DO NOT SELL IT.  IT IS FREE TO ANYONE AND EVERYONE.
+
+   If you have any suggestions or comments concerning this program, feel
+free to send it to the email address listed on c-shore.com
+
+-----------------------------------------------------------------------------
+
+SINCE THIS PROGRAM IS FREE TO EVERYONE:
+
+   Please upload/copy MaxDIR in its original state, with the three (3) files
+in which it was intended:  DI.EXE, README.TXT, and FILE_ID.DIZ.  Use the file
+you originally downloaded unless you are sure your system is virus-free.
+
+   Just keep them together and untampered with, so everyone who receives it
+will have the opportunity to judge for themselves whether or not it is useful
+for their purposes.   Thank you!
+
+-----------------------------------------------------------------------------
+
+LEGAL MUMBOJUMBO:
+
+   As for legalities...  MaxDIR has been tested on many different systems
+with no problems or complications, But...for the lawyers, if ever one should
+need a new BMW:
+
+   MSH Softworks will accept no liability for data loss, file or directory
+corruption, program failure, system failure, or any problems that are judged
+and/or assumed as being caused by the use of MaxDIR.  Due to the diversity of
+computers and operating systems in use, MaxDIR comes without warranty neither
+expressed nor implied.
+
+
+-----------------------------------------------------------------------------

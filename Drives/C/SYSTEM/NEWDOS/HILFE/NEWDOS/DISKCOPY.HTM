@@ -1,0 +1,165 @@
+<HTML><HEAD><TITLE>DISKCOPY</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>DISKCOPY</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Programm zum Duplizieren (Kopieren) von Disketten (auch Nicht-DOS-Disketten).
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">DISKCOPY [Quelllaufwerk] [Ziellaufwerk] [Parameter]</FONT>
+
+Wenn Ziel-Laufwerk weggelassen wird, geht DISKCOPY davon aus, daá die 
+Zieldiskette in das gleiche Laufwerk eingelegt wird wie die Quelldiskette.
+
+/q   unterdrckt die Aufforderung zum Einlegen der Quelldiskette. Verwenden 
+     Sie /Q, wenn sich die Quelldiskette beim Start von DISKCOPY bereits im 
+     Laufwerk befindet.
+
+/z   unterdrckt die Aufforderung zum Einlegen der Ziel-Diskette. Verwenden 
+     Sie /z, wenn sich die Zieldiskette beim Start von DISKCOPY bereits im 
+     Laufwerk befindet (m”glich, wenn Sie zwei Laufwerke zum Kopieren 
+     verwenden).
+
+/r   fragt, ob Sie eine weitere Diskette kopieren wollen. Sie k”nnen sooft 
+     Disketten duplizieren, bis Sie mit Esc abbrechen. 
+
+/w   fragt, ob sie von der Quelldiskette weitere Kopien anlegen wollen. 
+     Verwenden Sie /z, wenn Sie von einer Diskette mehrere Kopien anlegen 
+     wollen. Die Quelldiskette wird dabei nur ein einziges Mal gelesen - 
+     anschlieáend kann eine Zieldiskette nach der anderen eingelegt werden.
+
+/s   kopiert Disketten mit Sonderformat oder leichten Fehlern. Verwenden Sie 
+     /s, wenn DISKCOPY beim Lesen/Kopieren einen Datentr„gerfehler meldet. 
+     In vielen F„llen kann eine leicht besch„digte Diskette doch noch 
+     kopiert werden. /s verlangsamt jedoch die Ausfhrung.
+
+/t   unterdrckt das abschlieáende L”schen der Imagedatei DISKCOPY.TMP. Um 
+     ohne st„ndiges Wechseln von Quell- und Zieldiskette kopieren zu k”nnen, 
+     legt DISKCOPY den Inhalt der Quelldiskette in der tempor„ren Datei 
+     C:\DISKCOPY.TMP ab, die am Ende automatisch wieder gel”scht wird. Das 
+     L”schen k”nnen Sie mit /t unterbinden. Warum: siehe /i
+
+/i   verwendet zum Kopieren die bei /t erw„hnte Imagedatei statt einer 
+     Quelldiskette. Wenn Sie von einer Diskette zahlreiche Kopien anfertigen 
+     wollen, aber zwischendurch auch noch andere Befehle ausfhren wollen, 
+     dann unterdrcken Sie das L”schen der Image-Datei beim ersten 
+     Kopiervorgang mit Parameter /t. Sie k”nnen DISKCOPY dann beenden und 
+     jederzeit wieder mit /i aufrufen, um weitere Disketten zu beschreiben. 
+     Die Imagedatei bleibt auch nach dem Ausschalten des PC erhalten. Beim 
+     erneuten Einlesen einer QUELLdiskette wird die alte Imagedatei jedoch 
+     durch eine neue ersetzt. Sie k”nnen die alte Datei allerdings vorher 
+     umbenennen, wenn Sie sie sp„ter nochmals ben”tigen.
+
+/g   Erzwingt die Anwendung einer von Ihnen vorgegebenen Datentr„ger-
+     Geometrie. Verwenden Sie /g zum Kopieren von Disketten, die kein
+     DOS-Format haben (Mac, CP/M u.a.). <FONT COLOR="red">/G:9-80-2</FONT> bedeutet, daá die Diskette
+     9 Sektoren je Spur in 80 Spuren auf 2 Seiten hat. Wenn Sie die Werte 
+     der Diskette nicht kennen, geben Sie <FONT COLOR="red">/G:?</FONT> ein - Diskcopy ermittelt
+     diese dann selbst.
+
+/x   beschleunigt das Kopieren nur teilweise gefllter Disketten. Hierbei 
+     werden nur Spuren kopiert, die auch tats„chlich Daten enthalten. Bei 
+     relativ leeren Disketten kann dies zu einem erheblichen Zeitgewinn 
+     fhren. Es werden jedoch immer auch Spuren kopiert, die Datenreste von 
+     gel”schten Dateien enthalten. Eine Wiederherstellung solcher Dateien mit
+     UNDELETE bleibt also auch auf den Zieldisketten m”glich. Bei Disketten, 
+     auf denen h„ufige Dateibewegungen stattgefunden haben, kann es deshalb 
+     sein, daá Sie keinen Zeitgewinn feststellen.
+
+/n   Zieldiskette bekommt die gleiche Nummer wie die Quelldiskette. Dies ist 
+     ntzlich, wenn Sie Disketten ausliefern wollen, die zu Selbst-
+     identifikationszwecken alle die gleiche Seriennummer tragen sollen.
+     Ansonsten bekommt die Ziel-Diskette eine neue Datentr„gernummer, in der
+     aktuelles Datum und Uhrzeit verschlsselt sind. Dieses Datum kann mit
+     dem New-DOS-Dienstprogramm <A HREF="diskdate.htm">Diskdate</A> angezeigt werden.
+
+/o   Diskcopy l„uft ohne Benutzerabfrage durch und protokolliert eventuell
+     auftretende Fehler in der <A HREF="logfile.htm">LOG-Datei</A>. Beachten Sie bitte, daá sich
+     hier alle ben”tigten Disketten bereits in ihren Laufwerken befinden
+     mssen. Empfohlen wird /o fr den Betrieb durch unbeaufsichtigt 
+     ablaufende Batchdateien
+     
+/t:Dateiname
+     Erstellt von der Diskette ein 1:1-Abbild und speichert dieses in einer
+     Datei mit dem angegebenen Namen.
+
+/i:Dateiname
+     Kopiert die angegebene Disketten-Abbild-Datei auf eine Diskette
+
+Mit den letzten beiden Befehlen k”nnen Sie wichtige Diskettens„tze als
+1:1-Abbild in Dateien auf Festplatte oder CD-ROM archivieren und damit
+jederzeit wieder neue identische Diskettens„tze anfertigen. 
+
+<FONT COLOR="red">Hinweis:</FONT>
+Wenn Sie als Datenquelle eine Abbild-Datei (/i:Dateiname) verwenden, sollten
+Sie DISKCOPY von der "nackten" DOS-Kommandozeile aus starten und vorher 
+NICHT das Laufwerk mit der Zieldiskette aufrufen (z.B. mit DIR o.„.). Es
+kann sonst n„mlich passieren, daá DOS durcheinanderkommt und nach dem
+Kopieren zwar alle Verzeichnisse und Dateien anzeigt, die Diskette jedoch 
+als leer annimmt. Solche Diskrepanzen fhren in der Regel zu Fehlverhalten
+von DOS.<HR 
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">DISKCOPY a:</FONT>       oder
+<FONT COLOR="blue">DISKCOPY a: a:</FONT> 
+
+Kopiert den Inhalt der Diskette in A: auf eine Diskette, die nach dem Lesen 
+der Quelldiskette ebenfalls in Laufwerk A: eingelegt wird.
+
+<FONT COLOR="blue">DISKCOPY a: b: /q /z /x</FONT> 
+
+Kopiert den Inhalt von Diskette in A: auf die Diskette in B:. Die 
+Aufforderung zum Einlegen von Quell und Zieldiskette wird nicht angezeigt; 
+er wird also in einem Rutsch kopiert. Parameter /x sorgt fr eine 
+Beschleunigung des Kopiervorganges, da nur Spuren kopiert werden, die auch 
+tats„chlich Daten enthalten. Wenn Sie nur ein Diskettenlaufwerk besitzen, 
+dann erreichen Sie mit folgendem Befehl einen „hnlichen Effekt:
+
+<FONT COLOR="blue">DISKCOPY a: /q /x</FONT> 
+
+Um von einer Diskette mehrere Doubletten zu erzeugen, k”nnen Sie das L”schen 
+der Image-Datei unterdrcken. Starten Sie den ersten Kopiervorgang mit:
+
+<FONT COLOR="blue">DISKCOPY a: /t</FONT> 
+
+Um nun Zieldisketten mit den Daten der Quelldiskette zu beschreiben, geben 
+Sie den Befehl:
+
+<FONT COLOR="blue">DISKCOPY a: /i</FONT> 
+
+DISKCOPY beginnt sofort mit dem Beschreiben der Zieldiskette. Die Daten der 
+Quelldiskette werden aus der Image-Datei entnommen. Auch nach dem 
+zwischenzeitlichen Ausschalten des PC l„át sich dieser Befehl beliebig oft 
+wiederholen (bis das Einlesen einer neuen Quelldiskette die Imagedatei 
+berschreibt).
+
+<FONT COLOR="blue">DISKCOPY a: /t:C:\IMAGES\DISK.IMG</FONT> 
+
+Kopiert den Inhalt der Diskette in A: 1:1 in die Datei C:\IMAGES\DISK.IMG
+
+<FONT COLOR="blue">DISKCOPY a: /i:C:\IMAGES\DISK.IMG</FONT> 
+
+Kopiert die Datei C:\IMAGES\DISK.IMG 1:1 auf die Diskette in A:<HR 
+
+noshade color="silver"><FONT COLOR="green">Trick 17</FONT>
+
+Wenn Sie von einer Diskette zahlreiche Kopien anlegen wollen, dann lohnt sich
+evtl. folgende Vorgehensweise: Kopieren Sie mit <A HREF="xcopy.htm">XCOPY</A> alle Daten von der 
+Quelldiskette herunter und formatieren Sie diese Diskette mit dem Befehl:
+
+<FONT COLOR="blue"><A HREF="help:format">format</A> a: /u</FONT>      (/u ist hier wichtig!)
+
+Anschlieáend kopieren Sie die Dateien wieder auf die Diskette und verwenden 
+DISKCOPY mit dem Parameter /x. (Dies lohnt jedoch nur, wenn die Diskette 
+nicht v”llig mit Daten gefllt ist - je mehr freier Speicherplatz, desto 
+schneller geht's).
+
+<FONT COLOR="green">Anmerkung</FONT>
+
+Beide Disketten mssen das gleiche Format haben. Untersttzt werden nur die 
+Laufwerke A: und B:.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

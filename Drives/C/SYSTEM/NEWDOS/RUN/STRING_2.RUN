@@ -1,0 +1,53 @@
+PROGRAM ConcatStrings;
+{Beispielprogramm fÅr das Kopieren von Zeichenketten einmal mit dem}
+{integrierten Assembler und einmal mit Pascal.}
+
+
+BEGIN-MAIN
+  init;
+
+  !a:= 'Dies ist ein ';            {Beide Quellstrings werden mit}
+  !b:= 'TestString';               {Zeichen gefÅllt}
+
+  @a:= @Length(!a);                {Speichere die LÑnge der beiden}
+  @b:= @Length(!b);                {Quellstings}
+  @c:= @add (@a, @b);              {Ermittle GesamtlÑnge beider Strings}
+
+  ASM
+    les di, !c                     {Lade Adresse des Zielstrings}
+    mov al, @c                     {Lade GesamtlÑnge}
+    stosb                          {Schreibe GesamtlÑnge nach !c[0]}
+
+    lds si, !a[1];                 {Lade Adresse des ersten Quellstrings}
+                                   {Da an !a[0] das LÑngenbyte gespeichert}
+                                   {ist, mu· !a[1] angesetzt werden.}
+
+    mov cx, @a                     {lade LÑnge des ersten Strings in CX}
+    rep movsb                      {kopiere alle Zeichen des ersten Strings}
+                                   {in den Zielstring}
+
+    lds si, !b[1]                  {Lade Adresse des zweiten Strings}
+    mov cx, @b                     {lade LÑnge des zweiten Strings in CX}
+    rep movsb                      {kopiere alle Zeichen des zweiten Strings}
+  END;
+
+  WriteLn (!c);                    {Bildschirmausgabe des Zielstrings}
+
+  getkey;
+
+  {------------------------------------------------------------------------}
+
+  !d:= !concat (!a, !b);          {...und das ganze nochmal in Pascal.}
+  WriteLn (!d);                   {Zielstring ist diesmal !d}
+
+  getkey;
+END.
+
+
+{Anmerkung zum Assemblerbefehl les di, !a[1]. Dieser ist nur im integrierten}
+{Assembler mîglich, bei Maschinencode-Assembler mÅ·te der Befehl so aussehen:}
+{les di, !a       lade Startadresse, also !a[0]}
+{inc di           erhîhe Offset um 1, setze ihn also auf !a[1]}
+
+{Zu beachten wÑre dann auch, da· das DS-Register vor dem LDS-Befehl}
+{gesichert wird (PUSH DS) und am Ende mit POP DS wieder restauriert wird}

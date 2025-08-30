@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>Programm ausfhren mit START:</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Programm ausfhren mit START:</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+
+Mit "Start" befehlen Sie dem Browser, ein externes Programm auszufhren. Im 
+Gegensatz zum Programmstartbefehl "exec" wird der Befehl so ausgefhrt, wie 
+Sie ihn angegeben haben, d.h. der Browser bergibt keine zus„tzlichen 
+Kommandozeilen-Parameter aus einem Formular.
+<P>
+Der Aufrufbefehl des zu startendes Programmes wird nach einem Doppelpunkt an
+die "Start"-Anweisung angeh„ngt.
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>start:edit</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Das Format des Aufruf-Befehles (hier: edit) entspricht genau dem des DOS-
+Prompts. Da sich EDIT in der Regel in einem Suchpfad (PATH-Eintrag in der 
+Autoexec.bat) befindet, kann der vollst„ndige Pfad des Programmes EDIT.COM 
+entfallen. Befindet sich das zu startende Programm nicht in einem Suchpfad, 
+muá dessen kompletter Pfadname inklusive Dateiendung (EXE, COM, BAT) 
+angegeben werden:
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT 
+color=cyan>start:c:\tools\edit.com</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Es sind hier auch <A HREF="../relpath.htm">relative Pfadangaben</A> m”glich.
+<P>
+Zus„tzlich k”nnen dem aufzurufenden Programm Kommandozeilenparameter 
+bergeben werden, z.B. der Name der von EDIT zu ”ffnenden Datei:
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT 
+color=cyan>start:edit autoexec.bat</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Der Befehl "Start" ist also starr und nicht vom Browser bzw. Anwender
+beeinfluábar. Geeignet ist er, wenn ein Programm mit einem festen Befehl 
+gestartet werden muá und das Dokument ein Formular enth„lt, welches jedoch 
+auf keinen Fall als Kommandozeilen-Parameter bergeben werden darf. Ein 
+Beispiel dafr w„re, wenn Ihr Dokument auf irgend eine Weise eine tempor„re 
+Datei angelegt hat, die nicht mehr gebraucht wird und deswegen nun gel”scht 
+werden soll. Im folgenden Beispiel wird dazu das DOS-Kommando DEL bemht.
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT 
+color=cyan>start:del form.tmp</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Der "Start"-Befehl ist nicht geeignet, um extrem groáe Anwendungsprogramme 
+zu starten, da der Browser w„hrend der Ausfhrung vollst„ndig im 
+Arbeitsspeicher verbleibt und dem aufgerufenen Programm m”glicherweise zu 
+wenig Platz brig l„át. Fr Tools ala EDIT oder XCOPY drfte jedoch immer
+gengend Platz da sein. Klicken Sie einmal auf den folgenden Button, um 
+sich vom MEM-Befehl die Speicherverh„ltnisse anzeigen zu lassen.
+<P>
+<INPUT TYPE=button value=" Speicher anzeigen " click="start:mem /c /p;
+wait:"><P>
+Was Sie eben gesehen haben, war die Ausfhrung des hier beschriebenen 
+Befehles "Start". Fahren Sie einmal mit der Maus ber den Button, dann 
+k”nnen Sie in der Statuszeile des Browsers (ganz unten) sehen, welcher 
+Befehl dort noch eingebaut ist.
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

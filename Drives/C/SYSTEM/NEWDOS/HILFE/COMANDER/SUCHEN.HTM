@@ -1,0 +1,130 @@
+<HTML><HEAD><TITLE>Dateien, Verzeichnisse oder Textstellen suchen</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Dateien, Verzeichnisse oder Textstellen suchen</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver"><PRE>Durchsucht das gerade ge”ffnete Verzeichnis samt Unterverzeichnissen
+bzw. einen ganzen Datentr„ger nach Dateien, Textstellen in Dateien und
+Verzeichnissen.
+
+<A HREF="#1"> Beschreibung</A>  
+<A HREF="#2"> Datei oder Verzeichnis suchen</A>  
+<A HREF="#3"> Wort bzw. Textpassage suchen</A> 
+<A HREF="#4"> Optionen</A> 
+<A HREF="#5"> Tricks</A> 
+
+<FONT COLOR="maroon">Schnellkurs</FONT>
+
+1. Taste s drcken oder anklicken.
+2. Dateinamen oder Wildcard eingeben und ENTER drcken.
+3. Suchwort eingeben oder Frage mit ENTER bergehen.
+4. Zweimal nur ENTER oder Esc: Fenster wird wieder geschlossen.
+5. Esc beim Suchvorgang: Suche wird abgebrochen.
+6. Vorkonfigurierung im <A HREF="konfix.htm">Konfix-Men</A> auf <A HREF="konfix.htm#2">Seite 2</A> m”glich.<HR
+
+noshade color="silver"><A Name="1"><A HREF="#top"> </A><FONT COLOR="maroon">Beschreibung</FONT>
+
+Durchsucht wird das gesamte im aktiven Comander-Fenster angezeigte 
+Verzeichnis. Um einen ganzen Datentr„ger abzusuchen, wechseln Sie in 
+dessen Wurzelverzeichnis (z.B. C:\, Drcken Sie dazu einfach Taste c). 
+Ihre Eingabe k”nnen Sie wie normalen Text editieren.
+
+<A NAME="2"><A HREF="#top"> </A><FONT color="green">Datei oder Verzeichnis suchen</FONT>
+
+1. Taste s drcken oder mit der Maus das entsprechende Tastensymbol
+   anklicken.
+
+2. Geben Sie den Namen der Datei oder des Verzeichnisses ein, nach dem
+   gesucht werden soll. M”glich sind auch Ersatzzeichen (Wildcards)
+   nach den DOS-Konventionen, also z.B.
+   *.*   listet alle Dateien und Verzeichnisse (im folgenden Objekte).
+   *.BAK listet alle Objekte mit der Endung BAK.
+   B*.*  listet alle Objekte, deren Name mit B beginnt.
+   Auch das Zeichen ? ist erlaubt.
+
+3. šbergehen Sie die Frage nach dem Suchtext mit ENTER bzw. l”schen Sie ein
+   dort angezeigtes Suchwort mit der Rcktaste.
+
+4. Nach der Suche wird die Datei SUCHE.LOG automatisch im Textbetrachter
+   angezeigt. Diese enth„lt eine bersichtliche Liste aller gefundenen
+   Objekte incl. Gr”áe, Datum, Uhrzeit und Attribute. SUCHE.LOG befindet
+   sich im New-DOS-Verzeichnis und kann sp„ter weiterbearbeitet (z.B.
+   gedruckt) oder gel”scht werden.
+
+
+<A NAME="3"><A HREF="#top"> </A><FONT color="green">Wort bzw. Textpassage suchen.</FONT>
+ 
+1. siehe oben
+
+2. Wie oben. Durch die Eingabe eines m”glichst genauen Dateinamens k”nnen
+   Sie eine Menge Zeit sparen. *.TXT z.B. durchsucht nur Dateien mit der
+   Endung TXT. Zus„tzlich k”nnen Sie noch in das Verzeichnis wechseln, in
+   dem Sie das Gesuchte vermuten.
+
+3. Geben Sie hier das Wort oder eine kurze Textpassage ein, die Sie suchen
+   wollen. Wenn Ihr Suchwort Umlaute oder ein á enthalten UND Sie auch in
+   Windows-Texten fndig werden wollen, mssen Sie im KONFIX-Men (Seite 2)
+   die entsprechende Option aktivieren (Suchkriterien). Windowstexte ent-
+   halten n„mlich statt Umlauten und á eigenartige Sonderzeichen. (Siehe
+   hierzu auch Trick 17)
+
+4. Das Suchergebnis wird auch hier in der Datei SUCHE.LOG gespeichert und
+   automatisch im Textbetrachter gezeigt. Auáer dem Dateinamen wird noch
+   eine einzeilige Leseprobe angezeigt, die das Suchwort enth„lt.
+
+5. Mit Esc schlieáen Sie das Suchfenster, ohne das etwas gesucht wird.
+
+
+<A NAME="4"><A HREF="#top"> </A><FONT color="green">Optionen</FONT> 
+
+Die Suchfunktion kann im KONFIX-Men vorkonfiguriert werden. ™ffnen Sie
+KONFIX und w„hlen Sie dort SEITE 2. Unter SUCHKRITERIEN finden Sie dort
+folgende Einstellungsm”glichkeiten, die Sie durch anklicken aktivieren
+bzw. deaktivieren k”nnen:
+
+i : ist das Feld grn, findet der Comander das gewnschte Wort unabh„ngig
+    davon, ob es groá- oder kleingeschrieben wurde. Diese Funktion abzu-
+    stellen ist dann sinnvoll, wenn Sie haargenau das Wort finden wollen,
+    welches Sie eingegeben haben. 
+
+s : In der Regel sucht man Worte in Textdateien, z.B. "verlegte" Briefe
+    oder Adreádatenbanken. Programmdateien drften da wenig interessieren.
+    Deaktivieren Sie die Option S, und alle Dateien mit der Endung EXE, COM,
+    OVL und DLL werden nicht durchsucht. Sie sparen somit enorm viel Zeit.
+
+w : ist diese Option aktiv, werden Umlaute und das á auch in Windows-Texten
+    richtig erkannt. Schalten Sie diese Funktion ab, wenn Sie nur in DOS-
+    Texten suchen wollen oder w„hlen Sie Suchworte ohne Umlaute, da diese
+    Funktion den Suchvorgang verlangsamt.
+
+
+<A NAME="5"><A HREF="#top"> </A><FONT color="green">Trick 17</FONT>
+ 
+Sollen beim Suchen von Textstellen auch die o.g. Windows-Umlaute richtig
+erkannt werden, so werden Sie besonders bei groáen Datenmengen einen
+Geschwindigkeitsverlust feststellen. Wenn Sie keine Windowstexte durchsuchen
+wollen, sollten Sie diese Option im KONFIX-Men auf jeden Fall abschalten.
+Andernfalls helfen Sie sich, indem Sie ein Suchwort w„hlen, welches keine
+Umlaute oder ein á enth„lt. Der Comander merkt dies und schaltet die
+Windows-Erkennung von sich aus vorbergehend ab, da sie in diesem Falle
+unn”tig ist.
+
+<FONT COLOR="green">Trick 18</FONT>
+
+Falls Sie die Suche in EXE-, COM-, DLL- und OVL-Dateien ausgeschaltet haben,
+Sie aber doch einmal in einer solchen Datei suchen wollen, mssen Sie dies
+nicht extra im KONFIX-Men einschalten. Geben Sie statt dessen als Dateinamen
+im Suchfenster z.B. *.EXE oder *.COM ein. Dann werden auch (und nur) EXE-
+bzw. COM-Dateien durchsucht.
+
+<FONT COLOR="green">Trick 19</FONT>
+
+Um eine Datei auch in gepackten Archiven zu suchen, behelfen Sie sich mit
+folgendem Trick: Geben Sie als Dateinamen die Kennung des Archives an, also
+z.B. *.ZIP , *.LZH oder *.ARJ usw. Den Namen der von Ihnen gesuchten Datei
+geben Sie als Suchwort an. Dateinamen sind in Archiven ungepackt vorhanden
+und werden somit gefunden. Dies funktioniert auch bei selbstextrahierenden
+Archiven: Geben Sie als Dateinamen *.EXE ein (Siehe dazu auch Trick 18).</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

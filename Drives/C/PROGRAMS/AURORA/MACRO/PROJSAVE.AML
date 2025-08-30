@@ -1,0 +1,113 @@
+//--------------------------------------------------------------------
+// PROJSAVE.AML
+// Save Project, (C) 1993-1996 by nuText Systems
+//
+// (see Projsave.dox for user help)
+//
+// This macro saves the current state of the editor as a 'project'. If
+// the filename is not passed as arg 3, then the user is prompted to
+// enter the project filename.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// bookmark history buffer
+constant HISTORY = '_book'
+
+// book field delimiters and regexp patterns
+constant DELIM = '\x00'
+constant FIELD = '{[~' + DELIM + ']+}' + DELIM + '#'
+constant BOOKFIELDS = FIELD + FIELD + FIELD + FIELD + FIELD + FIELD
+
+// mark history buffer
+constant MARK = '_mark'
+
+// temporary bookmark name
+constant tempbook = '@T'
+
+// save bookmarks in all buffers
+buffer = getcurrbuf
+oldbuf = buffer
+while buffer do
+
+  gotobuf buffer
+  name = getbufname
+
+  // delete old bookmarks from the history buffer for this file
+  oldbuf = gotobuf HISTORY
+  if oldbuf then
+    while find DELIM + name + DELIM do
+      delline
+      col 1
+    end
+    gotobuf oldbuf
+  end
+
+  // check for bookmarks in the current buffer
+  bookmark = getcurrbook
+  if bookmark then
+
+    // save the current cursor position and window view in
+    // a temporary bookmark
+    setbook tempbook
+
+    // cycle through the bookmarks for this buffer
+    while bookmark do
+      if bookmark <> tempbook then
+        // move cursor to the bookmark --and change the window view
+        gotobook bookmark
+        addhistory HISTORY bookmark + DELIM + name + DELIM +
+                   getviewleft + DELIM + getviewtop + DELIM +
+                   getcol + DELIM + getrow + DELIM
+      end
+      bookmark = getprevbook bookmark
+    end
+
+    // restore the cursor position and window view
+    // and destroy the temp bookmark
+    gotobook tempbook
+    destroybook tempbook
+  end
+
+  buffer = getprevbuf buffer
+end
+
+// save marked block if present
+if mark? then
+  marktype = getmarktype
+  destroybuf MARK
+  addhistory MARK (concat
+    (case marktype
+       when 'l' 'markline'
+       when 'k' 'markcolumn'
+       when 'c' 'markchar'
+       when 's' 'markstream'
+     end) ' '
+
+    (if marktype <> 'l' then
+       getmarkleft + ' ' + (getmarkright + (if? marktype == 's' 1)) + ' '
+     end)
+    (getmarktop) ' ' (getmarkbot) " '' (findbuf '"
+      (sub '\\' '\\\\' (getbufname (getmarkbuf))) "')"
+  )
+end
+
+file = arg 3
+if not file then
+  file = ask "Save current state to project file" "_load"
+end
+
+if file then
+  currdesk
+  if savehistory (qualify (defext file "prj") (getbufname)) then
+    display
+  else
+    msgbox "Can't save " + file
+  end
+end

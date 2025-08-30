@@ -1,0 +1,337 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// DEFINE.AML
+// Constants and Compile-Time functions (included by Main.aml)
+//
+// If you have made any changes, save this file and select Recompile
+// the Editor from the Set menu. Exit and re-enter the editor for your
+// changes to take effect.
+//--------------------------------------------------------------------
+
+// compile-time macros and constants ---------------------------------
+
+// return a fully qualified boot directory aml/x file
+constant function amlfile (filename)
+  qualfile = bootpath filename + ".x"
+  return  if file? qualfile then
+            qualfile
+          else
+            bootpath filename + ".aml"
+          end
+end
+
+// return a fully qualified macro directory aml file
+constant function macfile (filename)
+  bootpath "macro\\" + filename + ".aml"
+end
+
+// window and config setting values
+constant  ON         =  1
+constant  OFF        =  0
+constant  TOGGLE     = -1
+constant  DEFAULT    =  2
+
+// boolean values
+constant  TRUE       =  1, true = 1
+constant  FALSE      =  0, false = 0
+
+// maximum column
+constant  MAX_COL    =  16000
+
+// for the substring [] operator
+constant  LAST_CHAR  =  0
+constant  TO_END     =  -1
+
+// colors
+constant  black   = 0      constant  darkgray      =  8
+constant  blue    = 1      constant  brightblue    =  9
+constant  green   = 2      constant  brightgreen   = 10
+constant  cyan    = 3      constant  brightcyan    = 11
+constant  red     = 4      constant  brightred     = 12
+constant  magenta = 5      constant  brightmagenta = 13   constant  pink = 13
+constant  brown   = 6      constant  yellow        = 14
+constant  gray    = 7      constant  white         = 15
+
+constant  on = 1
+
+// color calculation (compile-time function)
+constant function  color (foreground on background)
+  return background * 16 + foreground
+end
+
+// window component id's for the setcolor, getcolor functions
+constant border_color       = 0    constant menu_hotkey_color     =  9
+constant corner_color       = 1    constant menu_disable_color    = 10
+constant north_title_color  = 2    constant menu_hilite_color     = 11
+constant south_title_color  = 3    constant endoftext_color       = 12
+constant control_color      = 4    constant border_flash_color    = 13
+constant text_color         = 5    constant fold_color            = 14
+constant mark_color         = 6    constant modified_color        = 15
+constant scroll_color       = 7    constant modified_cursor_color = 16
+constant menu_color         = 8    constant fold_begin_color      = 17
+                                   constant fold_end_color        = 18
+
+// Objects -----------------------------------------------------------
+
+forward object prf
+forward object win
+forward object edit_fmgr
+forward object fmgr
+forward object edit
+
+
+// Library and Extension functions -----------------------------------
+
+// library functions
+forward  about
+forward  addhistory
+forward  ask
+forward  askbox
+forward  askbox1
+forward  askhistory
+forward  askline
+forward  assignkey
+forward  begdesk
+forward  button
+forward  cascade
+forward  close
+forward  copywin
+forward  currdesk
+forward  currwin
+forward  deletewin
+forward  dialog
+forward  dir?
+forward  enddesk
+forward  erasekey
+forward  errormsg
+forward  fbreak
+forward  fcommand
+forward  fgetfile
+forward  fgetopt
+forward  fgetsort
+forward  field
+forward  filelist
+forward  finddlg
+forward  fmark
+forward  fmark?
+forward  fsort
+forward  fstatus
+forward  fup
+forward  fupdate
+forward  getdialog
+forward  gethistname
+forward  gethiststr
+forward  getsettings
+forward  gotobar
+forward  gotobar2
+forward  gotoerror
+forward  gotomatch
+forward  gotomenu
+forward  groupbox
+forward  listbox
+forward  max?
+forward  maximize
+forward  min?
+forward  minimize
+forward  msgbox
+forward  nextfile
+forward  nexthist
+forward  nextwindow
+forward  okbox
+forward  open
+forward  openbuf
+forward  opendesk
+forward  openhistory
+forward  openkey
+forward  opennew
+forward  pankey
+forward  pickfile
+forward  playkey
+forward  pophistory
+forward  popup
+forward  prevfile
+forward  prevhist
+forward  prevwindow
+forward  reopen
+forward  repldlg
+forward  restore
+forward  restoredesk
+forward  save
+forward  savedesk
+forward  savehistory
+forward  savekey
+forward  setdraw
+forward  setgroupbox
+forward  setmenucurs
+forward  setname
+forward  setting
+forward  setting?
+forward  shortbox
+forward  sizekey
+forward  sizewin
+forward  splitwin
+forward  submenu
+forward  tile
+forward  toolbar
+forward  trackmouse
+forward  videomode
+forward  whenenter
+forward  whenselect
+forward  winlist
+forward  yncbox
+
+
+// extension functions
+forward  asciilist
+forward  askasave
+forward  askbook
+forward  askclip
+forward  askcmacro
+forward  askcomplete
+forward  askeval
+forward  askfile
+forward  askfind
+forward  askfindo
+forward  askinsert
+forward  askname
+forward  askopen
+forward  askopenb
+forward  askopenkey
+forward  askrac
+forward  askrepkey
+forward  askrepl
+forward  askrmacro
+forward  askrow
+forward  askrun
+forward  askruncap
+forward  asksaveas
+forward  asksavekey
+forward  askscan
+forward  askx
+forward  autosave
+forward  backsp
+forward  backup
+forward  caseword
+forward  centerline
+forward  clear
+forward  close
+forward  closeall
+forward  commentline
+forward  compilemacro2
+forward  copy
+forward  copyblock2
+forward  cut
+forward  cyclebook
+forward  defext
+forward  delchar2
+forward  deleteblock2
+forward  delword
+forward  enter
+forward  erasekey2
+forward  fattr
+forward  fcopy
+forward  fdelete
+forward  ferror
+forward  fillblock2
+forward  findlast
+forward  findlasto
+forward  finsert
+forward  flopen
+forward  flsave
+forward  fmkdir
+forward  fmove
+forward  fname
+forward  foldall
+forward  foldline
+forward  fopen
+forward  forceext
+forward  formatblock2
+forward  fprint
+forward  fremove
+forward  frename
+forward  frun
+forward  fstat
+forward  ftouch
+forward  fup
+forward  getext
+forward  getmarktext
+forward  getname
+forward  getpath
+forward  getword
+forward  gotobook2
+forward  gotomark
+forward  gotomatch2
+forward  helpmacro
+forward  hiliteword
+forward  insline2
+forward  isearch
+forward  justblock2
+forward  literal
+forward  livewrap
+forward  markeol
+forward  markpara
+forward  markword
+forward  moveblock2
+forward  moveblockover
+forward  nextword
+forward  opencfg
+forward  openkey2
+forward  openlast
+forward  openword
+forward  os
+forward  paste
+forward  pickmacro
+forward  placebook
+forward  play
+forward  prefix
+forward  prevword
+forward  print
+forward  printfile
+forward  printstr
+forward  quickbook
+forward  quickref
+forward  quote
+forward  recompile
+forward  record
+forward  regen
+forward  replver
+forward  row2
+forward  run
+forward  runcap
+forward  runcfg
+forward  runmacro2
+forward  saveblock2
+forward  savecfg
+forward  search
+forward  search2
+forward  shell
+forward  showdialog
+forward  smark
+forward  sortblock2
+forward  splitline2
+forward  swapline
+forward  tabfile
+forward  tableft
+forward  tabright
+forward  timestamp
+forward  togglemode
+forward  write
+forward  writebak
+
+// on-event functions:
+forward  onalarm
+forward  onclose
+forward  oncomment
+forward  onentry
+forward  onexit
+forward  onfocus
+forward  onfound
+forward  onhotkey
+forward  onkillfocus
+forward  onname
+forward  onopen
+forward  onopenproject
+forward  onsave
+forward  onsaveproject
+forward  onsyntax

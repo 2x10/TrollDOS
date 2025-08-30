@@ -1,0 +1,9 @@
+
+ÿÿDELDUP.AML
+ ÿDelete Duplicate Linesÿ
+
+  This macro deletes contiguous duplicate lines in the current edit
+  window. The total number of lines removed is displayed.
+
+  Note: this macro will run faster if Undo is turned Off on the Set menu.
+

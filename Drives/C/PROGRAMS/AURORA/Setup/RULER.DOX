@@ -1,0 +1,12 @@
+
+ÿÿRULER.AML
+ ÿInsert a Ruler Lineÿ
+
+  This macro inserts a ruler line above the current line in an edit
+  window. The ruler line appears as:
+
+    +תתתת1תתתת+תתתת2תתתת+תתתת3תתתת+תתתת4תתתת+תתתת5תתתת+תתתת6תתתת+
+
+  Note that the ruler line is a normal text line within the file, and can
+  be moved, copied, or deleted like ordinary text.
+

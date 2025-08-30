@@ -1,0 +1,197 @@
+
+Template Data File
+------------------
+Template editing allows you include commonly-used blocks of code or text
+(called 'templates') into the current file with just a few keystrokes.
+Templates are selected based on the current file extension, and may
+contain program code, text, or even macro expressions.
+
+This data file contains sample AML and C/C++ templates for use with the
+TEMPLATE.AML macro, and must be placed in the MACRO subdirectory. You
+can easily modify this file for use with other languages or text files.
+
+Templates must be defined in the following format:
+
+template_keyword.extensions  [lines_in_the_template]
+[template data]
+[template data]
+ :
+ :
+
+The template keyword must begin in column one. [lines_in_the_template]
+is only required when the template data contains blank lines, otherwise
+the template data is delimited by the next blank line. A '\c' in the
+template data indicates the position in the template where the cursor
+should be placed when the template is used. For example:
+
+  // if-then-end
+  if.aml
+  if \c then
+  end
+
+To use a template, type in the template keyword and press the template
+expansion key (<ctrl f3> is the default). The template macro will select
+the appropriate template from this file, based on the extension of the
+file you are editing.
+
+Templates defined in TEMPLATE.DAT with an extension of '.' (no
+extension) are active in files with any extension. For example:
+
+  // the 'etc' template works in any file:
+  etc.
+  et cetera
+
+Templates can also be enabled for multiple file extensions by listing
+each extension after the template keyword. For example:
+
+  // the 'struct' template is enabled in .C, .CPP, .H, and .HPP files:
+  struct.c.cpp.h.hpp
+  typedef struct {
+  } \c;
+
+Macro expressions may be also be embedded within a template. When a
+template containing macro expressions is used, each macro expression in
+the template will be evaluated and replaced with its value. Embedded
+expressions must be entered in the following format: \{expression}.
+For example:  The date and time is \{getdate + ' ' + gettime}
+
+========================================================================
+
+
+// AML Templates -------------------------------------------
+
+// case statement
+ca.aml
+case \c
+  when
+  when
+  otherwise
+end
+
+// databuf-end
+db.aml
+databuf "\c"
+end
+
+// define-end
+de.aml
+define
+  \c
+end
+
+// function-end
+fu.aml
+function \c
+end
+
+// if-else-end
+if.aml
+if \c then
+else
+end
+
+// key-end
+ke.aml
+key <\c>
+end
+
+// loop-end
+lo.aml
+loop
+  \c
+end
+
+// menu-item-end
+me.aml
+menu "\c"
+  item ""
+  item ""
+end
+
+// repeat-until
+re.aml
+repeat
+  \c
+until
+
+// while do-end
+wh.aml 3
+while \c do
+
+end
+
+
+// C/C++ Templates -----------------------------------------
+
+// class
+cl.c.cpp.h
+class \c {
+  protected:
+  public:
+}
+
+// do while
+do.c.cpp
+do {
+  \c
+}
+while ();
+
+// for
+fo.c.cpp
+for (\c;;) {
+}
+
+// if
+if.c.cpp
+if (\c) {
+}
+
+// function
+fu.c.cpp
+void \cfunc (void)
+{
+}
+
+// main
+ma.c.cpp
+void main(void) {
+  \c
+}
+
+// struct
+st.c.cpp.h
+typedef struct {
+} \c;
+
+// switch
+sw.c.cpp
+switch (\c) {
+  case :
+    break;
+  case :
+    break;
+}
+
+//union
+un.c.cpp.h
+union {
+} \c;
+
+// while
+wh.c.cpp
+while (\c) {
+}
+
+
+// Templates for any file extension ------------------------
+
+// sample 'tagline' template - illustrates embedded macro expressions
+tag.
++-------------------------------------+-----------------------------------+
+| John Doe                            |  Tel.   123-456-7890              |
+| XYZ Enterprises                     |  Fax:   987-654-3210              |
+| 1234 Oak Street                     |  Email: john.doe@xyz.com          |
+| Washington, DC 20015  USA           |                                   |
++-------------------------------------+-----------------------------------+
+* Message composed with Aurora v\{getversion}, \{gettime + ' ' + getdate}

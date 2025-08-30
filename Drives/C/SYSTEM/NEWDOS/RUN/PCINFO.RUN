@@ -1,0 +1,100 @@
+PROGRAM PC-Info;
+
+
+
+FUNCTION DOS-Ram;
+BEGIN
+  ASM
+    int $12
+    mov @a, ax
+  END;
+  @Result:= @a;
+END;
+
+
+
+FUNCTION DOS-Version;
+BEGIN
+  !Result:= !concat (@Lo(@dosversion), '.', @Hi(@dosversion));
+END;
+
+
+
+FUNCTION DiskSize;
+BEGIN
+  @a:= @DiskSize ('C');
+  @b:= @a;
+  @Result:= @div (@a, 1024);
+END;
+
+
+FUNCTION DiskFree;
+BEGIN
+  @a:= @DiskFree ('C');
+  @c:= @a;
+  @Result:= @div (@a, 1024);
+END;
+
+
+
+FUNCTION DiskUsed;
+BEGIN
+  @Result:= @div (@Sub (@b, @c), 1024);
+END;
+
+
+
+FUNCTION Monitor;
+BEGIN
+  @a:= @VideoMode;
+  If (@a=7)  Then !Result:= 'schwarz/weiá' Else !Result:= 'VGA-Color';
+END;
+
+
+
+PROCEDURE PortAdressen;
+BEGIN
+  For @x:= 0 To 3 Do
+  BEGIN
+    @y:= @mul (@x, 2);
+    GotoXY (28, @WhereY);
+    WriteLn ('COM ', @succ(@x), '   ', !whex (%MemW[$0040:@y]) );
+  ENDFOR;
+
+  WriteLn;
+
+  For @x:= 4 To 7 Do
+  BEGIN
+    @y:= @mul (@x, 2);
+    GotoXY (28, @WhereY);
+    WriteLn ('LPT ', @sub(@x, 3), '   ', !whex (%MemW[$0040:@y]) );
+  ENDFOR;
+END;
+
+
+
+BEGIN-MAIN
+  Init
+  WriteLn ('PC-Info');
+  Line (#196);
+  WriteLn ('Konventioneller Speicher : ', &Dos-Ram,  ' kB');
+  WriteLn ('DOS-Versions-Nummer      : ', &Dos-Version);
+  WriteLn ('Festplatte (gesamt)      : ', &DiskSize, ' kB');
+  WriteLn ('Festplatte (frei)        : ', &DiskFree, ' kB');
+  WriteLn ('Festplatte (belegt)      : ', &DiskUsed, ' kB');
+  WriteLn ('Monitor                  : ', &Monitor);
+  WriteLn ('Kommando-Prozessor       : ', !GetEnv ('COMSPEC'));
+  WriteLn ('Suchpfade                : ', !GetEnv ('PATH'));
+  WriteLn ('laufendes Programm       : ', !ParamStr (0));
+  WriteLn ('laufender Interpreter    : ', !Runpath);
+  Write   (#13#10)
+  Write   ('Portadressen             : ');
+
+  call Portadressen;
+
+  GotoXY (1, 24);
+  Line (#196);
+  Write ('Weiter mit beliebiger Taste');
+  GetKey;
+
+END.

@@ -1,0 +1,37 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGSORT.AML
+// Configuration for Sort Options
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable sortorder, sortcase
+
+// create dialog box
+dialog "Sort Options" 38  9 "cp"
+
+// sort order group box
+groupbox 'Sort Order:' 3 2
+  (menu ''
+     item " ( ) &Ascending"
+     item " ( ) &Descending       "
+   end) '' _SortOpt 'ad'
+
+// case options group box
+groupbox 'Sort Case:' 3 6
+  (menu ''
+     item " ( ) &Case Sensitive"
+     item " ( ) Case &Insensitive "
+   end) '' _SortOpt 'ci'
+
+// ok/cancel buttons
+button "O&k"    28  3 8
+button "Cancel" 28  5 8
+
+// display dialogbox
+if (getdialog ref sortorder ref sortcase) == "Ok" then
+  prf.SortOpt  = sortorder + sortcase
+  return TRUE
+end

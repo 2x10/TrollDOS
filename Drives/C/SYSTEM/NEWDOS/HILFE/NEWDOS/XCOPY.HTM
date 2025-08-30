@@ -1,0 +1,209 @@
+<HTML><HEAD><TITLE>XCOPY</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>XCOPY</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Kopiert Dateien, Verzeichnisse oder ganze Datentr„ger.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">XCOPY [Quelle] [Zielpfad] [Parameter 1..x]</FONT>
+
+/a   kopiert nur Dateien mit gesetztem Archivattribut. Um bestimmte Dateien
+     von Kopiervorg„ngen auszuschlieáen, k”nnen Sie deren Archivattribut
+     mit <A HREF="attrib.htm">ATTRIB</A> [Datei/en] -a oder dem <A HREF="dc.htm">DOS-Comander</A> entfernen.
+
+/m   kopiert nur Dateien mit gesetztem Archivattribut und l”scht dieses
+     Attribut nach dem Kopieren. Bei regelm„áigen Backup-Kopien mit diesem
+     Parameter wird gew„hrleistet, daá immer nur die Dateien kopiert werden,
+     die seit dem letzten Backup ge„ndert oder neu angelegt wurden. DOS
+     versieht jede neue oder ge„nderte Datei automatisch mit dem Archiv-
+     attribut. Dadurch erfolgt auch die richtige Dateiauswahl durch XCOPY
+     mit Parameter /m automatisch.
+
+/h   kopiert auch versteckte Dateien. Diesen Parameter sollten Sie beim
+     Kopieren ganzer Festplatten u.„. verwenden. System-Dateien werden dabei
+     nicht mitkopiert. 
+
+/r   berschreibt beim Kopieren auch gleichnamige schreibgeschtzte Dateien.
+     
+/s   kopiert auch alle (nicht leeren) Unterverzeichnisse und die darin
+     enthaltenen Dateien.
+
+/e   kopiert auch alle leeren Unterverzeichnisse. Dies verbraucht jedoch
+     zus„tzlichen Speicherplatz auf dem Zieldatentr„ger. In einigen F„llen
+     ist das Kopieren von Leerverzeichnissen jedoch erforderlich, da einige
+     Anwendungsprogramme, die ein Leerverzeichnis angelegt haben, dieses
+     oft auch tats„chlich ben”tigen, um laufen zu k”nnen.
+
+/v   Verify: Quell- und Zieldateien werden nach dem Kopieren nochmals voll-
+     st„ndig von den Datentr„gern gelesen und Byte fr Byte miteinander ver-
+     glichen. Wurde eine Datei unbemerkt in einen defekten Datentr„gerbereich
+     kopiert, entdeckt Verify diesen Fehler. Verify von XCOPY ist grndlicher
+     und schneller als das von DOS. Mit dem DOS-Befehl <A HREF="help:verify">VERIFY</A> OFF sollten
+     Sie daher das DOS-interne Verify abschalten, wenn Sie Parameter /v ver-
+     wenden, da ein Kopiervorgang ansonsten sehr langsam vonstatten geht. Um
+     zu berprfen, ob das DOS-Verify eingeschaltet ist, geben Sie an der
+     Eingabeaufforderung den Befehl VERIFY.
+
+/o   Kopierfehler werden in der <A HREF="logfile.htm">LOG-Datei</A> gespeichert. Empfohlen beim
+     Betrieb von XCOPY ohne Aufsicht.
+
+/n   Im Kopierziel bereits existierende Dateien werden nicht kopiert. Dadurch
+     werden bei BackUps nur solche Dateien kopiert, die beim vorherigen
+     Backup noch nicht vorhanden waren.
+
+/k   kopiert ganze Verzeichnisb„ume voller Dateien in ein einziges Ver-
+     zeichnis, die Quell-Verzeichnisstruktur wird also nicht bertragen.
+     Alle Zieldateien befinden sich demzufolge in ein und demselben Verzeich-
+     nis. VORSICHT: Haben mehrere Quelldateien den gleichen Namen, ber-
+     schreiben sie sich im Ziel gegenseitig! Verwenden Sie sicherheitshalber
+     den Parameter /-y , um davor gewarnt zu werden.
+
+/-y  fragt, ob eine bereits vorhandene Datei kopiert werden soll
+
+/y   unterdrckt diese Abfrage
+     Wenn Sie den Parameter /y bzw. /-y ganz weglassen, kopiert XCOPY auch
+     bereits existierende Dateien ohne Rckfrage. Sie k”nnen jedoch die
+     Umgebungsvariable COPYCMD setzen, in der dieser Parameter gespeichert
+     wird. Geben Sie z.B. an der DOS-Eingabeaufforderung den Befehl:
+     <A HREF="help:set">SET</A> COPYCMD=/-Y, dann fragt XCOPY automatisch bei jeder bereits
+     existierenden Datei nach, ob es sie berschreiben soll. Wollen Sie
+     den mit COPYCMD gesetzten Standard (z.B. /-Y) umgehen, dann mssen Sie
+     den Parameter /Y einsetzen, um die Abfrage zu unterdrcken. Das ganze
+     geht natrlich auch umgekehrt. COPYCMD wird brigens auch von <A HREF="move.htm">MOVE</A>
+     verwendet und kann in der Startdatei AUTOEXEC.BAT festgelegt werden.
+
+/w   Fordert bei Beginn zu einem Tastendruck auf. Hiermit k”nnen Sie Batch-
+     Dateien nach jedem XCOPY-Aufruf anhalten. Dieser Parameter ist auch dann
+     ntzlich, wenn Sie XCOPY von einer Diskette starten. Sie haben dann
+     Gelegenheit, die Diskette zu wechseln, bevor XCOPY startet. Auf diese
+     Weise k”nnen Sie auch einen Befehl mehrmals ausfhren, zum Beispiel,
+     wenn Sie einen ganzen Diskettensatz auf die Festplatte kopieren wollen.
+     XCOPY endet erst, wenn Sie Taste n drcken. Warten Sie also, bis XCOPY
+     die Diskette kopiert hat und nachdem die Aufforderung zu einem Tasten-
+     druck erscheint, legen Sie die n„chste Diskette ein und drcken j.
+
+/p   Fragt bei jeder Datei nach, ob sie kopiert werden soll. Wenn Sie gr”áere
+     Dateibest„nde beim Kopieren per Hand selektieren wollen, k”nnen Sie
+     diesen Parameter verwenden. Geben Sie einen "globalen" Kopierbefehl
+     (z.B. XCOPY A:\ C:\DOC /s /p) und w„hlen Sie die gewnschten Dateien
+     w„hrend des Kopierens.
+
+/d   berschreibt eine bereits existierende Datei nur, wenn sie „lter als die
+     Quelldatei ist. Dadurch wird gew„hrleistet, daá nur die Dateien kopiert
+     werden, die nach dem letzten Kopiervorgang ge„ndert wurden - in Name,
+     Datum und Uhrzeit identische Dateien werden also von XCOPY bergangen. 
+     Mit diesem Parameter k”nnen Sie einen einfachen Datentr„ger- oder 
+     Verzeichnisabgleich durchfhren. 
+
+/dg  fhrt einen Datenabgleich zwischen zwei Computern, Datentr„gern oder
+     Verzeichnissen aus. Wie mit Parameter /d werden „ltere Dateien durch
+     aktuellere ersetzt. XCOPY kopiert dabei in beide Richtungen: Zun„chst
+     von der Quelle zum Ziel und danach genau umgekehrt. Somit k”nnen Sie
+     bequem alle Ihre Datentr„ger bzw. PC auf dem aktuellsten Stand halten -
+     auf allen Rechnern befinden sich dann immer die seit dem letzten Daten-
+     austausch neu angelegten oder ge„nderten Dateien. Verwenden Sie diesen
+     Befehl mit Vorsicht, denn bei Planungsfehlern kann es schnell zu Chaos
+     auf allen beteiligten Datentr„gern kommen. Wenn Sie unsicher sind, ver-
+     wenden Sie zus„tzlich den Parameter /p oder gar zun„chst nur /d.
+
+/d:t kopiert nur Dateien, die nicht „lter als t Tage sind oder in den letzten
+     t Tagen ge„ndert wurden. Bei regelm„áigen Backups vermeiden Sie so das
+     wiederholte Kopieren von Dateien, die Sie schon l„ngere Zeit nicht mehr
+     ge„ndert haben. Als Tageszahl k”nnen Sie alle Zahlen von 00 bis 99 ver-
+     wenden. Fhrende Nullen mssen also ggf. mit eingegeben werden (z.B.
+     /d:03 oder /d:21).
+
+     Alternativ dazu k”nnen Sie auch ein Datum eingeben. Es muá folgendes
+     Format haben: TT.MM.JJ, also z.B. /d:02.06.96 oder /d:02-06-96. In
+     diesem Beispiel werden nur Dateien kopiert, die am oder nach dem 2.6.96
+     neu angelegt oder ge„ndert wurden. 2-stellige Jahresangaben k”nnen auch
+     nach dem Jahr 2000 verwendet werden.
+
+/x   kopiert eine Datei nur, wenn sie im Kopierziel bereits vorhanden ist.
+     Verwenden Sie /x, wenn Sie eine Kopie auf mehrere Disketten verteilen 
+     und sicherstellen wollen, daá hinzugekommene Dateien nicht irgendwo, 
+     sondern auf der letzten Diskette gespeichert werden.
+
+/q   unterdrckt das Ermitteln der zu kopierenden Datenmenge. Setzen Sie
+     diesen Parameter ein, wenn Sie extrem viele Dateien und Verzeichnisse
+     kopieren wollen, z.B. ganze Festplatten. Dies verkrzt den Kopiervorgang
+     ganz erheblich. Auf eine Fortschrittssanzeige mssen Sie dann aber
+     verzichten.
+
+Ein Kopiervorgang kann jederzeit mit Taste Esc abgebrochen werden.<HR
+
+
+noshade color="silver"><FONT COLOR="green">1. Beispiel</FONT>
+
+Sie wollen von s„mtlichen Dateien Ihrer Festplatte, die nicht „lter als
+7 Tage sind (/d:07), ein Backup auf Disketten (z.B. in Laufwerk B:) anlegen.
+Eventuelle Kopierfehler sollen in der <A HREF="logfile.htm">LOG-Datei</A> dokumentiert werden (/o)
+und Original und Kopie sollen von Verify miteinander verglichen werden (/v).
+Schreibgeschtzte (/r) (nicht jedoch versteckte) Dateien sollen ebenfalls
+kopiert werden. Der DOS-Befehl lautet:
+
+<FONT COLOR="blue">XCOPY C: B: /s /o /v /r /d:07</FONT>
+
+Die Reihenfolge der Parameter ist egal, nur Quelle und Ziel mssen am Anfang
+stehen. Sobald eine Diskette voll ist, fordert XCOPY Sie auf, einen neuen
+Datentr„ger einzulegen.<HR
+
+
+noshade color="silver"><FONT COLOR="green">2. Beispiel</FONT> 
+
+Sie wollen diese Disketten auf die Festplatte Ihres Zweitrechners kopieren.
+Legen Sie eine der Disketten ins Laufwerk und geben Sie den Befehl:
+
+<FONT COLOR="blue">XCOPY B: C: /s /o /v /r /w</FONT>
+
+XCOPY kopiert nun den Inhalt der Diskette. Wenn es fertig ist, erscheint die
+Meldung "Kopiervorgang starten? (j/n)". Legen Sie die n„chste Diskette
+ins Laufwerk und drcken Sie Taste j oder ENTER. Wenn alle Disketten
+kopiert sind, drcken Sie Taste n.<HR
+
+
+noshade color="silver"><FONT COLOR="green">3. Beispiel</FONT>
+
+Kleine nderung an Beispiel 1: Es sollen nur Dateien mit der Endung *.DOC
+kopiert werden, egal, wie alt sie sind. Der Befehl lautet:
+
+<FONT COLOR="blue">XCOPY C:\*.DOC B: /s /o /v</FONT><HR
+
+
+noshade color="silver"><FONT COLOR="green">4. Beispiel</FONT>
+
+<FONT COLOR="blue">XCOPY C:\ D:\ /dg /s</FONT>
+
+Die Festplatten D: und C: tauschen jetzt alle Dateien aus, die seit dem
+letzten Abgleich neu angelegt ”der ge„ndert worden sind. Dateien „lteren
+Datums werden durch aktuellere Dateien ersetzt.<HR
+
+
+noshade color="silver"><FONT COLOR="green">5. Beispiel</FONT>
+
+Sie wollen einen Verzeichnisbaum auf mehrere Disketten verteilen. Bei 
+sp„teren Backups soll sichergestellt sein, daá neu hinzugekommene Dateien 
+auf der letzten Diskette gespeichert werden sollen. Die Erstbeschreibung 
+des Diskettensatzes nehmen Sie mit
+
+<FONT COLOR="blue">XCOPY DirName a: /s</FONT>
+
+vor. Fr alle weiteren Backups auf diese Disketten verwenden Sie den Befehl
+
+<FONT COLOR="blue">XCOPY DirName a: /d /s /x</FONT>
+
+Der Parameter /x sorgt dafr, daá nur Dateien kopiert werden, die auf der 
+Diskette bereits existieren. Legen Sie nacheinander alle weiteren 
+Disketten ein und wiederholen Sie diesen Befehl. Auf der letzten Diskette 
+sollen nun auch die neu hinzugekommenen Dateien gesichert werden:
+
+<FONT COLOR="blue">XCOPY DirName a: /d:00 /s</FONT>
+
+M”glicherweise werden auch andere Dateien kopiert, die an diesem Tage 
+ge„ndert wurden. Verwenden Sie also weitere geeignete Filter, um die Liste 
+der kopierten Dateien einzugrenzen.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

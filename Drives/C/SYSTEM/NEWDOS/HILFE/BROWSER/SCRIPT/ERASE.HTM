@@ -1,0 +1,55 @@
+<HTML><HEAD><TITLE>Datensatz l”schen mit ERASE:</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Datensatz l”schen mit ERASE:</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+
+Mit "Erase" befehlen Sie dem Browser, einen Datensatz aus der 
+Datenbank-Datei zu l”schen.
+<P>
+Nach der Erase-Anweisung muá der Dateiname der Datenbank angegeben werden. 
+Eine Positionsangabe wie im "<A HREF="read.htm">Read</A>-Befehl ist nicht 
+erforderlich und auch nicht m”glich: Der Erase-Befehl l”scht immer den 
+gerade im Formular angezeigten Datensatz. 
+<P>
+Wichtig: Das L”schen eines Datensatzes kann nicht rckg„ngig gemacht 
+werden! (Siehe dazu Tip am Ende dieser Hilfedatei)<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>erase:daten.bnk</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Befindet sich die Datenbank-Datei nicht im gleichen Verzeichnis wie das 
+Formular, in dem der Datensatz angezeigt wird, muá der Dateiname 
+zus„tzliche Pfadangaben enthalten, z.B.
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>erase:c:\newdos\daten.bnk
+</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Es sind hier auch <A HREF="../relpath.htm">relative Pfadangaben</A> m”glich.
+<P>
+<A Name="tip">
+Tip: Gerade bei der Anwendung von "Erase" und auch "<A HREF="exec.
+htm">Write</A>" kann es dazu kommen, daá versehentlich Daten berschrieben 
+bzw. gel”scht werden. Um dem Anwender die Wiederherstellung seiner 
+ursprnglichen Daten zu erm”glichen, k”nnen Sie im &lt;BODY&gt;-Tag 
+mittels des Event-Handlers "<A HREF="load.htm">Load</A>" den DOS-Befehl "copy" 
+aufrufen und von diesem eine Sicherheitskopie der Datenbank anlegen lassen.
+
+<BR>
+<TABLE><TR><TD bgcolor=teal><FONT 
+COLOR=yellow>&lt;BODY load="<FONT color=cyan>start:copy daten.bnk daten.bak
+</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+In diesem Beispiel wird von der Datenbank-Datei "daten.bnk" eine Kopie mit 
+dem Namen "daten.bak" angelegt.
+
+<HR noshade color="silver">
+ 
+ 
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

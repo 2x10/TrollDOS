@@ -1,0 +1,572 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// KBD.AML
+// Multi-Edit Keyboard definitions (included by Main.aml)
+//
+// If you have made any changes, save this file and select Recompile
+// the Editor from the Set menu. Exit and re-enter the editor for
+// your changes to take effect.
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+// Edit and File Manager windows
+//--------------------------------------------------------------------
+
+object edit_fmgr
+
+  // Controls
+  function  'ð'                                // close window
+    close
+  end
+
+  // Menu activation
+  key  <esc>           gotobar                 // to last menu bar item (me)
+  key  <f10>           gotobar                 // to last menu bar item (me)
+  key  <alt f10>       gotomenu                // goto last pull-down menu
+  key  <alt f>         gotomenu "file"         // to file menu (me)
+  key  <alt w>         gotomenu "window"       // to window menu (me)
+  key  <alt b>         gotomenu "block"        // to block menu (me)
+  key  <alt s>         gotomenu "search"       // to search menu (me)
+  key  <alt o>         gotomenu "fold"         // to fold menu
+  key  <alt e>         gotomenu "edit"         // to edit menu (me)
+  key  <alt c>         gotomenu "clip"         // to clipboard menu
+  key  <alt p>         gotomenu "print"        // to print menu
+  key  <alt t>         gotomenu "set"          // to set menu
+  key  <alt m>         gotomenu "macro"        // to macro menu (me)
+  key  <alt h>         gotomenu "help"         // to help menu (me)
+  key  <f1>            gotomenu "help"         // to help menu (me)
+
+  // Scroll
+  key  <pgdn>          pagedown                // scroll down (me)
+  key  <pgup>          pageup                  // scroll up (me)
+  key  <ctrl pgup>     row (getviewtop)        // to page top (me)
+  key  <ctrl pgdn>     row (getviewbot)        // to page bottom (me)
+  key  <ctrl home>     row 1                   // to file top (me)
+  key  <ctrl end>      row (getlines)          // to file bottom (me)
+  key  <center>        adjustrow               // center cursor
+  key  <ctrl f9>       adjustrow 1             // scroll to page top
+  key  <ctrl f10>      adjustrow (getviewrows) // scroll to page bottom
+  key  <ctrl up>       rollrow -1              // scroll up one line (me)
+  key  <ctrl down>     rollrow  1              // scroll down one line (me)
+  key  <ctrl ->        lastpos                 // to last cursor position
+
+  // File
+  key  <ctrl n>        opennew                 // new edit window
+  key  <f3>            askopen                 // open prompt (me)
+  key  <alt z>         openlast                // open last window
+  key  <alt ->         filelist                // file list
+  key  <alt q>         close                   // close window
+  key  <alt x>         closeall                // close all windows
+  key  <shift f1>      quickref 'qw'           // quick function reference
+  key  <ctrl q><f2>    quickref 'fw'           // function reference
+
+  // Window
+  key  <ctrl f6>       winlist                 // window list (me)
+  key  <alt f6>        maximize                // maximize window (me)
+  key  <alt up>        maximize                // maximize window (me)
+  key  <alt down>      minimize                // minimize window (me)
+  key  <f6>            nextwindow              // next window (me)
+  key  <alt right>     nextwindow              // next window (me)
+  key  <shift f6>      prevwindow              // prev window (me)
+  key  <alt left>      prevwindow              // prev window (me)
+  key  <shift f3>      tile 'v'                // tile vertical
+  key  <shift f4>      tile 'h'                // tile horizontal
+  key  <ctrl k><q>     close                   // close window
+
+  // Search
+  key  <ctrl f>        askscan                 // file scan prompt (me)
+  key  <ctrl e>        gotomark 't'            // find top of block (me)
+  key  <ctrl c>        gotomark 'b'            // find bot of block (me)
+  key  <ctrl 6>        cyclebook               // cycle through bookmarks
+
+  // Print
+  key  <ctrl p>        print                   // print
+
+  // Set
+  key  <ctrl f1>       togglemode              // toggle video mode
+  key  <ctrl k><f2>    recompile               // recompile the editor
+
+  // Macro
+  key  <ctrl v>        askeval                 // macro command prompt
+  key  <alt f9>        askrun                  // Dos command prompt
+  key  <alt f8>        askruncap               // Dos capture prompt
+  key  <f9>            shell                   // exit to Dos
+  key  <shift f12>     pickmacro               // macro picklist
+  key  <ctrl f12>      runmacro2 "maclist"     // macro menu
+
+  // undefined or unnamed keys
+  key <otherkey> (keycode)
+    say (geteventname keycode) + " not defined"
+  end
+
+
+//--------------------------------------------------------------------
+// Prompts and Edit windows
+//--------------------------------------------------------------------
+
+object prompt
+
+  // Controls
+  function  'ð'        close                   // close window
+  end
+
+  function  '*'        enter                   // simulate <enter>
+  end                                          //  (2-line box only)
+
+  // Cursor
+  key  <left>          left                    // move cursor left (me)
+  key  <right>         right                   // move cursor right (me)
+  key  <home>          col 1                   // to column one (me)
+  key  <end>           col  getlinelen + 1     // to end of line (me)
+
+  // Cursor + CUA-marking
+  key  <shift left>    left
+                       smark
+  key  <shift right>   right
+                       smark
+  key  <shift home>    col 1
+                       smark
+  key  <shift end>     col getlinelen + 1
+                       smark
+
+  // Editing
+  key  <ins>           setting 'I' TOGGLE      // toggle insert mode
+  key  <del>           delchar                 // delete character (me)
+  key  <backspace>     backsp                  // delete left character (me)
+
+  key  <ctrl del>                              // erase to end of line (me)
+    if shiftkey? then
+      delchar MAX_COL
+    end
+  end
+
+  key  <alt =>         asciilist               // display ascii chart
+
+  // Block
+  key  <ctrl f7>       markstream              // mark stream (me)
+  key  <shift f7>      markcolumn              // mark column (me)
+  key  <alt 1>         markword                // mark word
+  key  <alt 2>         markeol                 // mark to end of line
+  key  <alt u>         destroymark             // unmark
+
+  // copy block to prompt (me)
+  key  <f8>
+                       instext (getmarktext)
+                       col  getlinelen + 1
+
+  // paste from clipboard to prompt (me)
+  key  <greyenter>
+                       oldmark = usemark _ClipName
+                       instext (getmarktext)
+                       usemark oldmark
+                       col  getlinelen + 1
+
+  // copy from prompt to clipboard (me)
+  key  <grey+>         copy
+  key  <ctrl ins>      copy
+
+  // Prompt history
+  key  <up>            prevhist                // retrieve prev prompt
+  key  <down>          nexthist                // retrieve next prompt
+  key  <pgup>          askhistory              // history popup menu
+  key  <pgdn>          askhistory              // history popup menu
+
+  // Exit
+  key  <esc>           close                   // quit prompt
+  key  <alt q>         close                   // quit prompt
+
+  // non-function keys
+  key  <char> (character)                      // typeable keys
+    write character
+  end
+
+  // filename completion
+  key  <ctrl tab>      askcomplete             // filename completion
+  key  <tab>           askcomplete             // filename completion
+
+
+//--------------------------------------------------------------------
+// Edit windows
+//--------------------------------------------------------------------
+
+object edit
+
+  // Controls
+  function  'ð'
+    close                                      // close window
+  end
+
+  // Menu
+  key  <esc>           gotobar                 // to last menu bar item (me)
+
+  // Cursor
+  key  <up>            up                      // move cursor up (me)
+  key  <down>          down                    // move cursor down (me)
+
+  // Cursor + CUA-marking
+  key  <shift up>      up
+                       smark
+  key  <shift down>    down
+                       smark
+
+  key  <enter>         enter                   // enter key
+  key  <del>           delchar2                // delete character (me)
+  key  <backspace>     backsp                  // delete left char (me)
+
+  key  <ctrl del>
+    if shiftkey? then
+      // pass on to prompt object
+      pass                                     // erase to end-of-line (me)
+    else
+      delword _CSet                            // delete right word (me)
+    end
+  end
+
+  key  <home>                                  // timed-home key (me)
+    if getcol > getlinebeg then
+      col (getlinebeg)
+    else
+      if getcol == 1 then
+        if timer? "_h" then
+          row (if? getrow == getviewtop 1 (getviewtop))
+        end
+      end
+      settimer "_h" 350
+      col 1
+    end
+  end
+
+  key  <end>                                   // timed-end key (me)
+    if timer? "_e" then
+      if getcol == getlinelen + 1 then
+        row (if? getrow == getviewbot (getlines) (getviewbot))
+      end
+    end
+    col getlinelen + 1
+    settimer "_e" 350
+  end
+
+  key  <tab>           tabright                // tab right (me)
+  key  <ctrl i>        tabright                // indent (me)
+  key  <shift tab>     tableft                 // tab left
+
+  key  <ctrl left>     prevword                // find left word (me)
+                       smark                   // cua marking
+  key  <ctrl right>    nextword                // find right word (me)
+                       smark                   // cua marking
+
+  // Scroll
+  key  <pgdn>          pagedown                // page down (me)
+  key  <pgup>          pageup                  // page up (me)
+
+  // Scroll + CUA-marking
+  key  <shift pgdn>    pagedown
+                       smark
+  key  <shift pgup>    pageup
+                       smark
+
+  key  <ctrl pgup>     row (getviewtop)        // to page top (me)
+                       smark
+  key  <ctrl t>        call <ctrl pgup>
+
+  key  <ctrl pgdn>     row (getviewbot)        // to page bottom (me)
+                       smark
+  key  <ctrl b>        call <ctrl pgdn>
+
+  key  <ctrl home>     row 1                   // to file top (me)
+                       smark
+  key  <ctrl end>      row (getlines)          // to file bottom (me)
+                       smark
+
+  key  <ctrl up>       rollrow -1              // scroll up one line (me)
+                       smark
+  key  <ctrl down>     rollrow  1              // scroll down one line (me)
+                       smark
+
+  // File
+  key  <alt i>         askinsert               // open and insert prompt
+  key  <ctrl ]>        openword                // open file at cursor
+  key  <alt n>         askname                 // rename prompt
+  key  <f2>            save                    // save file (me)
+  key  <ctrl f2>       asksaveas               // save file as (me)
+  key  <f4>            open "*.*"              // display file manager
+  key  <alt q>         close                   // close file/window
+  key  <ctrl x>        close 's'               // save & close file/window
+
+  // Window
+  key  <ctrl q><c>     copywin                 // copy window
+  key  <ctrl q><h>     splitwin 'h'            // split window horizontal
+  key  <alt v>         splitwin 'v'            // split window vertical
+
+  // Block
+  key  <f7>            markline                // mark line (me)
+  key  <alt 3>         markpara "tb"           // mark paragraph
+  key  <f8>            copyblock2              // copy block (me)
+  key  <shift f8>      moveblock2              // move block (me)
+  key  <ctrl m>        moveblockover           // move block over
+  key  <ctrl f8>       deleteblock2            // delete block (me)
+  key  <alt f2>        shiftblock -1           // unindent block (me)
+  key  <alt f3>        shiftblock  1           // indent block (me)
+  key  <ctrl k><f>     fillblock2              // fill block with string
+  key  <alt r>         formatblock2            // reformat block
+  key  <alt y>         formatblock2 "rj"       // reformat & right just block
+  key  <shift f2>      saveblock2              // save block (me)
+  key  <ctrl k><o>     sortblock2              // sort block
+  key  <ctrl k><u>     caseblock               // change block to uppercase
+  key  <shift f9>      quote                   // quote a block
+  key  <ctrl k><c>     justblock2 'c'          // center a block
+
+  // Search
+  key  <f5>            askfind                 // find prompt (me)
+  key  <shift f5>      askrepl                 // replace prompt (me)
+  key  <ctrl q><i>     isearch                 // incremental search
+  key  <ctrl h>        askfindo                // find occurrences
+
+  key  <ctrl f5>       findlast                // do last find/replace (me)
+  key  <ctrl 2>        quickbook               // set quick bookmark
+  key  <alt f5>        askrow                  // go to line prompt (me)
+  key  <alt 7>         search2 "f/f"           // go to next fold
+  key  <ctrl [>        gotomatch2              // find matching char
+  key  <alt f7>        gotoerror               // go to compiler error
+
+  // Fold
+  key  <alt 8>         foldline                // fold next line
+  key  <alt 9>         foldline 'u'            // unfold next line
+  key  <alt g>         destroyfold2            // destroy closed/open fold
+  key  <ctrl q><f>     foldblock2              // fold block
+  key  <alt \>                                 // open or close fold
+    if fold? then
+       openfold
+    else
+       closefold
+    end
+  end
+  key  <alt 0>         foldall 'ds'            // destroy all folds
+  key  <alt [>         foldall 'os'            // open all folds
+  key  <alt ]>         foldall 'cs'            // close all folds
+
+  // Edit
+  key  <ctrl enter>    insline2                // insert line
+
+  key  <alt backspace>                         // delete line (me)
+    if shiftkey? then
+      delline
+    else
+      undo                                     // undo last change (me)
+    end
+  end
+  key  <alt enter>     redo                    // redo last change (me)
+
+  key <ctrl backspace>
+    if shiftkey? then                          // backspace to home (me)
+      delchar getcol - 1 1
+      col 1
+    else                                       // backspace a word (me)
+      if getcol > 1 then
+        left
+        c = getchar
+        delchar
+        p = poschar ' ' + _CSet c
+        if p then
+          while getcol > 1 and (poschar (if? c == ' ' ' ' _CSet) (getchar getcol - 1)) do
+            left
+            delchar
+          end
+        end
+      else
+        // let EXT.AML backsp handle config defaults
+        backsp
+      end
+    end
+  end
+
+  key  <alt j>         joinline                // join line
+  key  <alt 4>         copyblock '*l'          // duplicate line
+  key  <alt 5>         swapline                // swap line
+  key  <alt 6>         centerline              // center line
+  key  <alt f1>        commentline             // comment/uncomment line
+  key  <ctrl k><t>     timestamp               // date/time stamp
+  key  <ctrl k><x>     tabfile                 // expand tabs
+  key  <ctrl \>        hiliteword              // highlight words
+
+  // Clipboard
+  key  <grey->         cut                     // cut (me)
+  key  <shift del>     cut                     // cut (me)
+  key  <ctrl grey->    cut 'a'                 // cut append (me)
+  key  <grey+>         copy                    // copy (me)
+
+  key  <ctrl ins>
+    if shiftkey? then
+      paste 'w'                                // paste from Windows (me)
+    else
+      copy                                     // copy (me)
+    end
+  end
+
+  key  <ctrl grey+>    copy 'a'                // copy append (me)
+  key  <greyenter>     paste                   // paste (me)
+  key  <shift ins>     paste                   // paste (me)
+  key  <ctrl grey*>    paste 'o'               // paste over
+  key  <ctrl grey/>    clear                   // clear clipboard
+
+  key  <alt ins>
+    if shiftkey? then                          // copy to Windows (me)
+      copy 'w'
+    else
+      pass
+    end
+  end
+
+  // Set
+  key  <ctrl w>        setting 'L' TOGGLE      // live word wrap toggle
+  key  <ctrl d>        setting 'D' TOGGLE      // line draw toggle
+  key  <alt f4>        setting 'T' TOGGLE      // text translate toggle
+
+  // Macro
+  key  <shift f10>     compilemacro2 (getbufname)  // compile current file
+  key  <shift f11>     runmacro2 (getbufname)      // run current file
+
+  // non-function (typeable) keys
+  key  <char> (character)                      // typeable keys
+    write character
+  end
+
+  // Other
+  key  <ctrl q><q>     askrepkey               // repeat entered keys
+
+  // invoke a spell checker from within an edit window
+  // (replace 'jspell' with your favorite spell checker)
+  key  <f11>
+    save                                       // save the current file
+    run  "jspell " + getbufname  "ck"          // call spellchecker
+    reopen                                     // reopen current file
+  end
+
+//--------------------------------------------------------------------
+// File Manager windows
+//--------------------------------------------------------------------
+
+object fmgr
+
+  // Menu activation
+  key  <tab>           gotobar2                // to drive menu bar
+
+  // Cursor
+  key  <left>          rollcol -1              // scroll left one column
+  key  <right>         rollcol  1              // scroll right one column
+  key  <home>          col 1                   // scroll to column one
+
+  key  <up>            up                      // move cursor up
+  key  <down>          down                    // move cursor down
+
+  key  <shift up>      fmark                   // mark files
+                       up
+  key  <shift down>    fmark                   // mark files
+                       down
+
+  // file manager commands (single character command codes)
+  key  <char> (c)
+
+    // toggle file mark
+    if c == ' ' then
+      fmark
+
+    // <shift-character> commands
+    elseif shiftkey? then
+      case  locase c
+        when 'o'     fopen 'o'                   // open file/directory
+        when 'e'     fopen 'e'                   // open file/directory
+        when 'z'     fopen "ze"                  // open maximized
+        when 'b'     fopen 'b'                   // open binary file
+        when 'y'     fopen "be"                  // open binary in one window
+        when 'f'     flopen (fgetfile)           // open file list
+        when 'k'     openkey2 (fgetfile)         // open key macro file
+        when 'm'     fmove                       // move file
+        when 'c'     fcopy                       // copy file
+        when 'd'     fdelete                     // delete file
+        when 'n'     frename                     // rename file
+        when 'r'     frun 'c'                    // run program/batch file
+        when 'p'     fprint                      // print file
+        when 'l'     fremove                     // remove line
+        when 't'     ftouch                      // touch file
+        when 'a'     fattr                       // change file attributes
+        when 'i'     askscan TRUE                // scan files
+
+        // spell checker
+        when 's'     run "jspell " + fgetfile  "ck"
+
+        // unarchive .Zip or .Lzh files
+        when 'u'
+          f = fgetfile
+          run (if? (pos ".lzh" f 'i') "lha e " "pkunzip ") + f  "ck"
+          reopen
+
+        // view .Zip or .Lzh archives
+        when 'v'
+          f = fgetfile
+          runcap (if? (pos ".lzh" f 'i') "lha v " "pkunzip -v ") + f
+      end
+
+    // hotkey to files
+    else
+      onhotkey c
+    end
+
+  key  <backspace>     onhotkey '\x08'         // undo hotkey
+
+  // File
+  key  <ctrl backspace>   fup                  // parent directory
+
+  // Mark
+  key  <alt m>         fmark "ma"              // mark all files
+  key  <alt u>         fmark "ua"              // unmark all
+
+  // Command
+  key  <enter>         fopen '1'               // open file (one only)
+  key  <ctrl enter>    fopen 'q'               // open file (close fmgr)
+  key  <del>           fdelete                 // delete file
+
+  // Sort
+  key  <alt n>         fsort 'n'               // sort by name
+  key  <alt s>         fsort 's'               // sort by size
+  key  <alt d>         fsort 'd'               // sort by date/time
+  key  <alt o>         fsort 'o'               // no sort (Dos order)
+
+  // Print
+  key  <ctrl p>        print                   // print fmgr contents
+
+
+//--------------------------------------------------------------------
+// Movable/Sizable windows
+//--------------------------------------------------------------------
+
+object win
+
+  // scroll lock down
+  function  scrlockdown            // move/size with kbd (me)
+    sizekey
+    pass
+  end
+  // scroll lock down
+  function  scrlockup              // move/size with kbd (me)
+    sizekey
+    pass
+  end
+
+
+//--------------------------------------------------------------------
+// All windows
+//--------------------------------------------------------------------
+
+object mon
+
+  // key macros
+  key  <ctrl r>        record                  // toggle record setting
+  key  <ctrl q><e>     play                    // play scrap key macro
+
+  // define multi-key prefixes
+  key  <ctrl k>        prefix <ctrl k>         // define <ctrl k> prefix
+  key  <ctrl o>        prefix <ctrl o>         // define <ctrl o> prefix
+  key  <ctrl q>        prefix <ctrl q>         // define <ctrl q> prefix
+

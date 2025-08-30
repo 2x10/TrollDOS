@@ -1,0 +1,34 @@
+<HTML>
+<HEAD>
+  <TITLE>Datei suchen</TITLE>
+</HEAD>
+<BODY bgcolor="white">
+<BR>
+<FONT COLOR="teal">&nbsp;&nbsp;Datei suchen</FONT>
+<HR noshade>
+<FORM>
+<PRE>  zu durchsuchendes Verzeichnis oder Laufwerk
+  <INPUT TYPE=File Name=Verzeichnis Maxlength=79 size=74 Value="">
+
+  zu suchende Datei(en)
+  <INPUT TYPE=Text Name=Dateien Maxlength=79 size=74 Value="*.HTM">
+
+  zu suchende Textpassage (leer=nur Dateien suchen)
+  <INPUT TYPE=Text Name=Inhalt Maxlength=79 size=74 Value="">
+
+  <INPUT TYPE=checkbox Name=SubDirs    Value="/s" checked> durchsucht auch alle Unterverzeichnisse
+  <INPUT TYPE=checkbox Name=IgnoreCase Value="/i" checked> ignoriert Groá- und Kleinschreibung 
+<BR>
+  <INPUT TYPE=checkbox Name=ExeToo     Value="/e"> sucht nach Text auch in Programmdateien 
+  <INPUT TYPE=checkbox Name=WinKon     Value="/w"> konvertiert Windows-Zeichensatz 
+  <INPUT TYPE=checkbox Name=HTMLKon    Value="/h" checked> konvertiert HTML-Zeichensatz 
+ 
+
+  <INPUT TYPE=Button Value="  Ausf&uuml;hren  " 
+   Click="exec:filefind/x; href:../../filefind.htm">  <INPUT TYPE=Button 
+   Value="   Zur&uuml;ck    " Click="back:">  <INPUT TYPE=Button  
+   Value="    Hilfe    " Click="help:filefind">
+ 
+</PRE>
+</FORM>
+</BODY></HTML>

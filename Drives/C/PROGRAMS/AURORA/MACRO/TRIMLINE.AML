@@ -1,0 +1,38 @@
+//--------------------------------------------------------------------
+// TRIMLINE.AML
+// Trim Trailing Blanks and Tabs, (C) 1993-1996 by nuText Systems
+//
+// This macro trims trailing blanks and tabs from lines in the current
+// file. The operation is limited to a marked block if it exists. The
+// number of lines trimmed is displayed.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+// test if a marked block exists in the current file
+block_count = mark? and getmarkbuf == getcurrbuf
+
+// display message
+say "Trimming lines" + (if? block_count " in block") + "..."
+
+// find trailing whitespace using regular expression searching
+count = replace "{ |\x09}+$" '' "axg" + (if? block_count 'b')
+
+// clear the title bar
+display
+
+// display the number of lines trimmed
+shortbox  (if? count (thousands count) "No") + " lines trimmed" +
+          (if? block_count " in the block")

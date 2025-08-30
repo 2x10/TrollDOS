@@ -1,0 +1,58 @@
+//--------------------------------------------------------------------
+// XCMD.AML
+// Syntax highlighting for OS/2 Rexx files (Cmd)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+  'bcfin'                         // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+  '{}[]().=+-*/:;<>|&,~!^?\t'     // symbol set 1
+  ''                              // symbol set 2
+  '\'"'                           // string characters
+  ''                              // string literal char
+  ''                              // numeric char
+  ''      0                       // eol comment 1 / start column
+  ''      0                       // eol comment 2 / start column
+  '/*'    '*/'                    // multi-line comment 1
+  ''      ''                      // multi-line comment 2
+  0                               // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black     // keyword
+  color gray         on cyan      // symbol set 1
+  color gray         on cyan      // symbol set 2
+  color brightred    on black     // string
+  color brightred    on black     // numeric
+  color brightgreen  on black     // eol comment 1
+  color brightgreen  on black     // eol comment 2
+  color brightgreen  on black     // comment 1
+  color brightgreen  on black     // comment 2
+
+keyword
+  abbrev, abs, address, arg, b2x, beep, bitand, bitor, bitxor, c2d, c2x,
+  call, center, centre, charin, charout, chars, compare, condition,
+  copies, d2c, d2x, datatype, date, delstr, delword, digits, directory,
+  do, drop, else, end, endlocal, errortext, exit, filespec, for,
+  forever, form, format, fuzz, if, insert, interpret, iterate, lastpos,
+  leave, left, length, linein, lineout, lines, max, min, nop, numeric,
+  options, overlay, parse, pos, procedure, pull, push, queue, queued,
+  random, return, reverse, right, rxmessagebox, rxqueue, say, select,
+  setlocal, sign, signal, sourceline, space, stream, strip, substr,
+  subword, symbol, syscls, syscreateobject, syscurpos, syscurstate,
+  sysderegisterobjectclass, sysdestroyobject, sysdriveinfo, sysdrivemap,
+  sysdropfuncs, sysfiledelete, sysfilesearch, sysfiletree, sysgetea,
+  sysgetkey, sysgetmessage, sysini, sysmkdir, sysos2ver, sysputea,
+  sysqueryclasslist, sysregisterobjectclass, sysrmdir, syssearchpath,
+  sysseticon, syssetobjectdata, syssleep, systempfilename,
+  systextscreenread, systextscreensize, syswaitnamedpipe, then, time,
+  trace, translate, trunc, until, upper, value, verify, when, while,
+  word, wordindex, wordlength, wordpos, words, x2b, x2c, x2d, xrange

@@ -1,0 +1,150 @@
+PROGRAM Print;
+
+{Programm zum Drucken einer Datei. ZusÑtzlich zum DOS-Befehl PRINT wird}
+{das letzte Blatt automatisch ausgeworfen und der Fortgang des Druckes}
+{kann an einem Laufbalken und einer Prozentanzeige abgelesen werden.}
+{Anmerkungen am Ende dieser Datei.}
+
+
+PROCEDURE FillString;
+BEGIN
+  !x[0]:= #80;                       {StringlÑnge "kÅnstlich" auf 80 setzen}
+  Fillchar (!x[1], 80, #178);        {String ab !x[1] mit 80 mal #178 fÅllen}
+END;
+{Legt einen String an, der als Laufbalken dient}
+
+
+
+PROCEDURE Laufbalken;
+BEGIN
+  If (@FSizeOut=0) Then Exit;                     {wegen Division durch Null}
+  @b:= @div (@mul (@FPosOut, 100), @FSizeOut);
+  If (@b<100) Then GotoXY (76, 17) Else GotoXY (75, 17);
+  Write (@b, ' %');
+  @b:= @succ (@div (@mul (@b, 80), 100));
+  If (@b>80) Then @b:= 80;
+  GotoXY (1, 18);
+  Write (!copy (!x, 1, @b));
+END;
+{erzeugt Laufbalken und die Prozentanzeige fÅr die Dateiposition}
+
+
+
+PROCEDURE Hilfetext;
+BEGIN
+  WriteLn;
+  WriteLn ('PRINT  Druckt eine Datei nach LPT1');
+  WriteLn ('Syntax: PRINT [Dateiname]');
+  Halt;
+END;
+{Gibt einen Hinweistext aus, wenn als Parameter /? eingegeben wurde}
+
+
+
+PROCEDURE Stop;
+BEGIN
+  WriteLn;
+  WriteLn (!a);
+  WriteLn ('Druck-Datei konnte nicht geîffnet werden.', #7);
+  Halt;
+END;
+{Gibt eine Fehlermeldung aus}
+
+
+
+PROCEDURE PrinterError;
+BEGIN
+  If (@error = 160) Then Write ('Drucker nicht bereit.');
+  If (@error = 159) Then Write ('Drucker hat kein Papier.');
+  If (@error < 159) Then Write ('Lesefehler in Druck-Datei.');
+  Write (#7);
+END;
+{Gibt eine Fehlermeldung aus}
+
+
+
+PROCEDURE ReadFileName;
+BEGIN
+  Init;
+  WriteLn ('Welche Datei soll gedruckt werden ?', #13#10);
+  Write   ('Ihre Eingabe : ');
+  ReadLn (!a);
+  !a:= !UpString(!a);
+  If (!a='') Then Halt;
+END;
+{Zeigt eine Eingabezeile, falls kein Parameter angegeben wurde}
+
+
+
+PROCEDURE FirstScreen;
+BEGIN
+  init;
+  Call FillString;
+  WriteLn ('Datei   : ', !a);
+  WriteLn ('Grî·e   : ', @FSizeOut, ' Byte');
+  WriteLn ('Drucker : LPT1');
+  Line (#196);
+  GotoXY (1, 24);
+  Line (#196);
+  Write ('Beenden mit beliebiger Taste');
+  Window (1, 5, 80, 23);
+  CursorOff;
+  GotoXY (1, 18);
+  Line (#176);
+END;
+{Richtet den Start-Bildschirm ein}
+
+
+
+{----------------------------- Hauptprogramm --------------------------------}
+
+BEGIN-MAIN
+  !a:= !UpString (!ParamStr (1));
+  If (!a = '/?')        Then call Hilfetext;
+  If (@Paramcount=0)    Then call ReadFileName;
+
+  OpenOutFile (!a);                                   {îffne Druck-Datei}
+  If (@Error<>0) Then call Stop;
+
+  Call FirstScreen;
+
+  Print (#13);                                        {erzeuge WagenrÅcklauf}
+
+  While (not @EoFOut) and (not @keypressed) and (@Error=0) Do
+  BEGIN
+    ReadOutFile (#a);                                 {lese Zeichen aus Datei}
+    Print (#a);                                       {drucke Zeichen}
+    call Laufbalken;                                  {zeichne Laufbalken}
+  ENDW;
+
+  Print (#12);                                        {erzeuge Blattauswurf}
+
+  CloseOutFile;                                       {schlie·e Druck-Datei}
+
+  GotoXY (1, 1);
+  If (@error<>0) Then Call PrinterError Else Write ('Fertig!');
+  
+  Getkey;
+  Init;
+END.
+
+
+{------------------------- Programm-Ende -----------------------------}
+
+{Statt eines einzelnen Zeichens kann PRINT auch eine ganze Zeile drucken.}
+{Verwenden Sie dann besser PRINTLN, da der Zeilenvorschub dann automatisch}
+{ausgefÅhrt wird. Der Ausdruck geht dann in der Regel deutlich schneller}
+{vonstatten.}
+
+{While (not @EoFOut) and (not @keypressed) and (@Error=0) Do...}
+
+{Diese Schleifenbedingungen berÅcksichtigen im Klartext folgendes:}
+{Weiter gedruckt wird nur, wenn...}
+
+{1. das Ende der Druckdatei noch nicht erreicht ist.}
+{2. inzwischen keine Taste gedrÅckt wurde.}
+{3. Der Drucker keinen Fehler meldete (z.B. Papier fehlt)}
+
+{Ferner wird auch ein Fehler in der Datei selbst gemeldet.}
+
+

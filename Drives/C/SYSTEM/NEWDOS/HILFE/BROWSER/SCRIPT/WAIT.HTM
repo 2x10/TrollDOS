@@ -1,0 +1,35 @@
+<HTML><HEAD><TITLE>Warten auf Anwender-Eingabe mit
+WAIT:</TITLE></HEAD><BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Warten auf Anwender-Eingabe mit WAIT:</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+
+Mit "Wait" fordern Sie den Anwender auf, eine beliebige Taste zu drcken 
+(Tastatur oder Maus).
+
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>start:type 
+c:\autoexec.bat<FONT color=yellow>;</FONT>wait:</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Der Einsatz der "Wait"-Anweisung ist sinnvoll, wenn (wie im obigen Beispiel)
+ein DOS-Befehl ausgefhrt wird, dessen Bildschirmausgabe der Anwender 
+betrachten k”nnen soll, bevor der Browser wieder das dabei ausgeblendete 
+Dokument anzeigt. Der Browser zeigt dabei einen Hinweis, der den 
+Anwender zum Bet„tigen einer Taste auffordert.
+
+<P>
+Probieren Sie es gleich einmal:
+
+<INPUT TYPE=Button click="start:type c:\autoexec.bat;wait:" 
+value=" autoexec.bat anzeigen "> 
+
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

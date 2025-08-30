@@ -1,0 +1,67 @@
+//--------------------------------------------------------------------
+// FLSAVE.AML
+// Save File List, (C) 1993-1996 by nuText Systems
+//
+// This macro copies file/directory names from the current file manager
+// window to a new buffer. The names will be fully qualified.
+//
+// If option 'e' is specified as arg 3, then the buffer is displayed in
+// a new edit window, otherwise the user is prompted for a filename
+// where the buffer should be saved.
+//
+// Usage:
+//
+// This macro can be run by selecting Save List As or Edit List from
+// the file manager File menu.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// fmgr windows only
+if not wintype? "fmgr" then
+  msgbox "File Manager windows only!"
+  return
+end
+
+// get fmgr buffer id and name
+fbuffer = getcurrbuf
+bufname = getbufname
+
+// format fmgr buffer name (for fgetfile below)
+setbufname (onname bufname)
+
+// create edit buffer
+buffer = createbuf
+
+// copy fmgr list to an edit buffer
+gotobuf fbuffer
+pushcursor
+row 1
+repeat
+  addline (fgetfile) '' '' buffer
+until not down
+popcursor
+
+// restore fmgr buffer name
+setbufname bufname fbuffer
+
+// delete first line and parent directory line
+currbuf buffer
+delline
+if getlinelen <= length (getpath bufname) then
+  delline
+end
+
+// edit list
+if pos 'e' (arg 3) then
+  // display the edit buffer in a window
+  setbufname (qualify "temp.txt" bufname)
+  openbuf buffer
+
+// save list
+else
+  setbufname bufname
+  asksaveas '' bufname "lst"
+  destroybuf buffer
+end

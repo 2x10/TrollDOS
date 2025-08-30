@@ -1,0 +1,194 @@
+//--------------------------------------------------------------------
+// CALENDAR.AML
+// Popup Calendar, (C) 1993-1996 by nuText Systems
+//
+// (See Calendar.dox for user help)
+//
+// This macro displays a calendar window for the current year and month.
+// The current day is highlighted.
+//
+// This macro also calls Cfg\Cfgintnl.x.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// define the colors to use
+constant cal_client_color   = color black       on gray
+constant cal_border_color   = color white       on gray
+constant cal_bordera_color  = color brightgreen on gray
+constant cal_title_color    = color brightblue  on gray
+constant cal_today_color    = color brightgreen on gray
+constant cal_control_color  = color yellow
+
+// current year and month
+variable year, month
+
+// keep this object resident
+resident ON
+settype "win"
+
+constant daynames = 1
+constant monthnames = 2
+
+// get day/month names
+names = runmacro (bootpath "cfg\\cfgintnl.x") '' 'n'
+months = names.monthnames
+dayheader = ' '
+for i = 1 to 7 do
+  dayheader = dayheader + names.daynames [i][1..3] + '  '
+end
+
+// function to redraw the calendar for any year and month
+private function  draw
+  variable monthdays
+
+  // set the calendar title based on the year and month
+  settitle months [month] + " " + year  'c'
+
+  // get the day in which the year starts using a perpetual
+  // calendar (0-6, 0=sunday)
+  startday = "5012356013456123460124560234" [year mod 28 + 1]
+
+  // string indicating the days over 28 for each month
+  over28 = concat (if? (not (year mod 4)) "31" "30") "3232332323"
+
+  // get total days in the month
+  maxdays = 28 + over28 [month]
+
+  // get the number of days in previous months
+  for i = 1 to month - 1 do
+    monthdays = monthdays + 28 + over28 [i]
+  end
+
+  // calculate the starting day for the month (0-6, 0=sunday)
+  startday = (startday + monthdays) mod 7
+
+  // set 'today' to today's day number if it's the right
+  // year and month
+  rawtime = getrawtime
+  today = if rawtime [5:2] == month and rawtime [1:4] == year then
+            rawtime [7:2]
+          end
+
+  // clear the window and draw the header
+  gotoxy 1 1
+  fillrect (getviewcols) (getviewrows)
+  writeline dayheader cal_title_color
+
+  // move the video cursor to the start-day position
+  gotoxy 2 + startday * 5
+
+  // write the calendar days
+  for day = 1 to maxdays do
+    writestr day:3 + "  "
+      (if? day == today  cal_today_color  cal_client_color)
+    if getx > 34 then
+      writeline
+      writestr ' '
+    end
+  end
+
+end
+
+// create the calendar window
+createwindow
+setframe ">b"
+setwinctrl 'ð'
+setshadow 2 1
+
+width = 35
+height = 6
+
+// center the window
+ox = (getvidcols - width) / 2
+oy = (getvidrows - height) / 2
+sizewindow ox oy ox + width oy + height "ad"
+
+setborder "1i"
+setcolor  border_color         cal_border_color
+setcolor  border_flash_color   cal_bordera_color
+setcolor  text_color           cal_client_color
+setcolor  control_color        cal_control_color
+
+// current year and month
+year  = getrawtime [1:4]
+month = getrawtime [5:2]
+
+// redraw the calendar window
+draw
+
+event <destroy>
+  // call 'close' in object 'win'
+  close
+end
+
+// macro help
+macrofile = arg 1
+key <f1>
+  helpmacro macrofile
+end
+
+function "ð"  destroyobject
+key <esc>     destroyobject
+
+// mouse click
+key <lbutton>
+  case getregion
+    // close icon
+    when 51
+      destroyobject
+    otherwise
+      pass
+  end
+end
+
+// forward one month
+key <pgdn>
+  month = month + 1
+  if month > 12 then
+    month = 1
+    year = year + 1
+  end
+  draw
+end
+
+// backward one month
+key <pgup>
+  month = month - 1
+  if not month then
+    month = 12
+    year = year - 1
+  end
+  draw
+end
+
+// goto january
+key <ctrl pgup>
+  month = 1
+  draw
+end
+
+// goto december
+key <ctrl pgdn>
+  month = 12
+  draw
+end
+
+// forward one year
+key <right>
+  year = year + 1
+  draw
+end
+
+// backward one year
+key <left>
+  if year then
+    year = year - 1
+  end
+  draw
+end

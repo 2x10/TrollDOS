@@ -1,0 +1,119 @@
+<HTML><HEAD><TITLE>REPLACE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>REPLACE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>ersetzt Dateien durch eine andere oder fÅgt noch nicht vorhandene Dateien 
+einem Verzeichnis hinzu.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">REPLACE [Quelldatei(en)] [Zielverzeichnis(se)/laufwerk(e)] [Parameter]</FONT>
+
+/p  fragt bei jeder Datei, ob sie ersetzt werden soll. Verwenden Sie /p, wenn
+    nicht alle Dateien ersetzt werden sollen oder wenn Sie sich nicht sicher
+    sind, ob nicht doch eine vergessene Datei ungewollt ersetzt werden 
+    kînnte.
+
+/u  ersetzt eine Datei nur, wenn sie Ñlter als die Quelldatei ist. Mit /u 
+    kînnen Sie sicherstellen, da· eine Ñltere Datei nicht versehentlich eine
+    aktuellere ersetzt. (Ziel der Anwendung von Replace ist es ja, alle 
+    vorhandenen Dateien auf den aktuellsten Stand zu bringen.)
+
+/s  ersetzt Dateien auch in Unterverzeichnissen. Alle Unterverzeichnisse 
+    werden nach zu ersetzenden Dateien durchsucht - wenn das Hauptverzeichnis
+    also z.B. C:\ ist, wird die ganze Festplatte abgesucht.
+
+/r  ersetzt auch schreibgeschÅtzte Dateien. Wenn Sie /r weglassen, Åbergeht 
+    Replace das Ersetzen dieser Dateien. Oft ist es jedoch gewollt, da· ALLE 
+    Dateien ersetzt werden.
+
+/h  ersetzt auch versteckte Dateien. Wenn Sie /h weglassen, Åbergeht 
+    Replace das Ersetzen dieser Dateien. Oft ist es jedoch gewollt, da· ALLE 
+    Dateien ersetzt werden. 
+
+/a  kopiert eine Datei nur, wenn sie noch NICHT im Ziel existiert. Hiermit
+    kînnen Sie Dateien einem Verzeichnis hinzufÅgen, die dort noch nicht
+    existieren, ohne da· Sie deren Namen im einzelnen angeben mÅssen.
+    Wenn Sie z.B. *.TXT als Quelldateien angeben, kopiert REPLACE also nur
+    die Dateien, die seit der letzten Aktualisierung des Zielverzeichnisses
+    im Quellverzeichnis neu hinzugekommen sind.
+    /a kann nicht zusammen mit /s /r /h und /u verwendet werden.
+
+/o  REPLACE lÑuft ohne Benutzerabfrage durch und protokolliert evtl. 
+    aufgetretene Fehler in der <A HREF="logfile.htm">LOG-Datei</A>.
+
+/w  Replace wartet, bis der Anwender eine Taste drÅckt. Verwenden Sie
+    /w, wenn Sie Replace von einer Diskette starten und die eigentliche
+    Zieldiskette danach erst einlegen mÅssen.
+ 
+Replace achtet selbstÑndig darauf, da· die Quelldatei nicht als 
+vermeintliche Zieldatei ausgemacht und durch sich selbst ersetzt wird.
+Ebenso werden Dateien nicht kopiert oder ersetzt, wenn die Quelldatei
+0 Byte gro· ist.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendungsgebiete</FONT>
+
+Ziel von Replace ist es, alle auf einem oder mehreren PC und DatentrÑgern
+verteilten Kopien einer Datei oder eines Verzeichnisses auf einen 
+einheitlichen (sprich: aktuellen) Stand zu bringen.
+
+Wenn Sie beispielsweise von einer Textdatei mehrere Versionen (z.B. auf 
+Disketten, Notebook oder in verschiedenen Unterverzeichnissen) besitzen 
+und in einer dieser Dateien eine énderung vornehmen, mÅ·ten Sie die anderen
+Versionen einzeln durch mÅhsames Kopieren auf den neuesten Stand bringen.
+Replace aktualisiert all diese Daten automatisch. Es durchsucht auf Wunsch 
+ganze Festplatten (auch mehrere in einem Durchgang) nach diesen veralteten
+Kopien und ersetzt sie durch die (aktuellere) Quelldatei. 
+
+Oder Sie besitzen von einem Verzeichnis mit Briefen mehrere Versionen
+und es kommt ein neuer Brief hinzu. Dann mÅ·ten Sie diesen ebenfalls per
+Hand in die anderen Verzeichnisse mit den Briefen kopieren. Mit dem o.g.
+Parameter /a prÅft Replace, ob der neue Brief in diesen Verzeichnissen 
+schon enthalten ist. Wenn nicht, fÅgt Replace den neuen Brief hinzu.
+
+Quelle mu· immer eine oder mehrere Datei(en) sein - das Ersetzen eines 
+ganzen Verzeichnisses durch ein anderes ist mit Replace nicht machbar. Dazu 
+verwenden Sie besser den Befehl <A HREF="xcopy.htm">XCOPY</A>.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">REPLACE *.* a: /s</FONT>
+
+ersetzt alle Dateien auf der Diskette in A: durch namensgleiche Dateien,
+die im gerade geîffneten Verzeichnis gefunden wurden.
+
+<FONT COLOR="blue">REPLACE c:\texte\neutext.doc c:\ /s</FONT> 
+
+ersetzt alle auf der Festplatte c: auffindbaren Dateien mit dem Namen 
+NEUTEXT.DOC durch die Version dieser Datei aus dem Verzeichnis C:\TEXTE.
+
+<FONT COLOR="blue">REPLACE c:\windows\*.INI c:\inisave /u</FONT> 
+
+ersetzt alle im Verzeichnis C:\INISAVE (als Sicherheitskopien gespeicherten)
+Windows-INI-Dateien durch (aktuellere) Versionen aus dem Windows-Verzeichnis 
+(z.B. vor oder nach Neuinstallation einer Anwendung).
+
+<FONT COLOR="blue">REPLACE c:\newdos\*.TER C:\+A:\+D:\+E:\ /s</FONT> 
+ 
+Ersetzt alle Termin-Dateien auf den Laufwerken C:\ (lokale Festplatte), A:\
+(lokales Diskettenlaufwerk), D:\ (z.B. zweite Festplatte) und E:\ (z.B.
+die Festplatte eines mit <A HREF="help:interlnk">Interlnk</A> angeschlossenen Laptops) durch 
+die im NEWDOS-Verzeichnis befindliche(n) gleichnamige(n) TER-Dateien.
+
+<FONT COLOR="blue">REPLACE c:\newdos\*.MNU+*.INI+*.LOG+*.TER d:\newdos</FONT> 
+
+Ersetzt alle Dateien mit der Endung MNU, INI, LOG und TER, die sich auf der
+zweiten Festplatte D: im Verzeichnis NEWDOS befinden, durch gleichnamige
+Versionen aus dem Verzeichnis C:\NEWDOS
+
+<FONT COLOR="blue">REPLACE c:\briefe\*.txt d:\briefe+e:\briefe+a:\briefe /a</FONT> 
+
+FÅgt im Verzeichnis C:\BRIEFE neu hinzugekommene Dateien mit der Endung TXT
+den Verzeichnissen d:\briefe, e:\briefe und a:\briefe hinzu, wenn sie dort
+noch nicht existieren.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

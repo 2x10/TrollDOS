@@ -1,0 +1,18 @@
+dbf: c:\nc\dbview !.!
+txt: c:\nc\wpview !:!\!.!
+scn: c:\util\scrpaint !:!\!.!
+mdf: c:\sys\mo !:!\!.!
+prn: copy !:!\!.! prn
+pcx: c:\util\pv !.!
+qfx: d:\ql2fax\viewfax !.!
+rec: d:\ql2fax\viewfax !.!
+tif: c:\nc\bitmap.exe !.!
+bmp: c:\util\pv.exe !.!
+doc: c:\nc\wpview.exe !.!
+wri: c:\nc\wpview !.!
+FLI: c:\util\pv.exe !.!
+TGA: c:\util\pv.exe !.!
+PIC: c:\util\pv !.!
+gif: c:\util\pv !.!
+ans: ans !.!
+pwr: c:\util\powermak !.! +m

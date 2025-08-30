@@ -1,0 +1,96 @@
+<HTML><HEAD><TITLE>TREE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>TREE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>zeigt den Verzeichnisbaum eines Datentr„gers oder eines Verzeichnisses.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">TREE [Laufwerk/Verzeichnis] [gesuchte Datei] [/a /f /p /l /g /s /v]</FONT>
+
+<FONT COLOR="blue">[Laufwerk/Verzeichnis] </FONT>
+    Laufwerkskennung (z.B. A:) oder Verzeichnisname (z.B. C:\WINDOWS) der 
+    auszugebenden Baumstruktur. Wenn Sie nichts eingeben, wird das aktuelle 
+    Verzeichnis angezeigt.
+
+<FONT COLOR="blue">[gesuchte Datei]</FONT>
+    Diese Eingabe ist nicht zwingend erforderlich. Geben Sie einen Namen ein,
+    wenn Sie eine oder mehrere Dateien suchen wollen. M”glich ist die Angabe 
+    eines vollst„ndigen Dateinamens oder von WildCards. (z.B. *.EXE oder 
+    TEXT*.*). 
+
+/a  verwendet einfachen ASCII-Zeichensatz. Benutzen Sie /a, wenn Sie einen 
+    Verzeichnisbaum auf einem Ger„t ausgeben wollen, das nur den ASCII-
+    Zeichensatz bis 127 richtig wiedergibt - z.B. bei Umleitung der Ausgabe 
+    auf einen Drucker. TREE verwendet dann andere "Striche" zur 
+    Baumdarstellung.
+
+/f  zeigt auch alle Dateien. Hier werden auáer den Verzeichnissen auch alle 
+    Dateien angezeigt, die sich in den Verzeichnissen befinden. Wenn Sie nur 
+    bestimmte Dateien anzeigen wollen, geben Sie an der Kommandozeile den 
+    Namen dieser Datei ein (siehe oben) bzw. filtern Sie die Ausgabe mit 
+    Platzhaltern (z.B. *.BAK). Bei Angabe einer gesuchten Datei wird der 
+    Schalter /f automatisch gesetzt.
+
+/p  seitenweise Anzeige. TREE fordert Sie zu einem Tastendruck auf, sobald 
+    der Bildschirm vollst„ndig beschrieben ist. Verwenden Sie /p, wenn der 
+    Verzeichnisbaum l„nger als 25 Zeilen ist, um ein Wegscrollen von Ausgaben
+    zu vermeiden. An Haltepunkten k”nnen Sie TREE auch mit Taste ESC 
+    abbrechen. Der Parameter /p erspart die Verwendung von | MORE.
+
+/l  verwendet Kleinschreibung. Die Verzeichnisnamen im Baumdiagramm werden in
+    Kleinbuchstaben ausgegeben.
+
+/g  verwendet Groáschreibung fr Dateinamen. Im Normalfall verwendet TREE 
+    fr die Ausgabe von Dateinamen wegen der besseren šbersichtlichkeit 
+    Kleinschreibung. Mit /g k”nnen Sie die Groáschreibung veranlassen (so 
+    wie im Original-TREE blich).
+
+/s  schmale Darstellung. Der Verzeichnisbaum wird etwas schmaler ausgegeben. 
+    Verwenden Sie /s, wenn ein Baum so tief verschachtelt ist, daá er fr 
+    eine ordentliche Bildschirm- oder Druckerausgabe zu breit ist. 
+
+/v  sehr schmale Darstellung. Hier ist die Ausgabe noch schmaler, wenn extrem
+    tiefe Verzeichnisstrukturen ausgegeben werden sollen.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">TREE</FONT>
+Gibt das Baumdiagramm des aktuellen Verzeichnisses aus.
+
+<FONT COLOR="blue">TREE C: &gt; c:\baum.txt</FONT> 
+schreibt den gesamten Verzeichnisbaum der Festplatte C: in die Datei 
+BAUM.TXT. In einem Textbetrachter oder Editor kann die Ausgabe nun vor- und
+zurckgerollt werden.
+
+<FONT COLOR="blue">TREE A:\TEXTE /a &gt; LPT1</FONT> 
+Gibt den Verzeichnisbaum von A:\TEXTE auf dem Standard-Drucker aus. Verwendet
+wird einfacher Zeichensatz.
+
+<FONT COLOR="blue">TREE A: *.bak /p</FONT> 
+Gibt den Verzeichnisbaum der Diskette in Laufwerk A: aus und zeigt zus„tzlich
+alle Dateien mit der Endung BAK. /p veranlaát seitenweise Anzeige.
+
+<FONT COLOR="blue">TREE C: /f</FONT> 
+Der gesamte Verzeichnisbaum von C:\ sowie s„mtliche Dateien werden angezeigt.<HR
+
+noshade color="silver"><FONT COLOR="green">Anwendungsbeispiel in einer Batchdatei</FONT>
+
+<FONT COLOR="blue">@echo off
+<FONT COLOR="red">tree</FONT> c: &gt; c:\baum.txt
+edit c:\baum.txt</FONT>
+
+Der Verzeichnisbaum von Laufwerk C: wird in eine Datei ausgegeben, die 
+anschlieáend in den Editor zur Anzeige geladen wird.<HR
+
+noshade color="silver"><FONT COLOR="green">Anmerkung</FONT>
+
+Wenn Sie den Namen einer gesuchten Datei eingeben, mssen Sie auch ein 
+Laufwerk oder Verzeichnis angeben. Der Parameter /f muá in diesem Falle nicht
+extra verwendet werden. Bei der Anzeige von CD-ROM wird der Name des
+Datentr„gers ausgegeben, sonst dessen Nummer.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

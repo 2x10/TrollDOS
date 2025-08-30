@@ -1,0 +1,9 @@
+Changes from 1.50 to 2.00:
+
+ 512x384 now uses double scanning
+1152x864 added
+ 640x400 added
+ 400x300 added
+ 320x200 added
+
+Different memory management (saving 560 Bytes)

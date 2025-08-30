@@ -1,0 +1,34 @@
+[BENUTZER]
+[Farbe cyan]
+W; Windows               ; [W]
+D; Disktools...          ; GOTO DISKTOOLS
+Y; SystemInfo...         ; GOTO SYSTEM
+P; Spiele...             ; GOTO SPIELE
+[ENDE]
+
+[CHDIR]
+[ENDE]
+
+
+[DISKTOOLS]
+D; Defrag C:             ; defrag C: /H /F
+A; Defrag                ; defrag /h
+S; Scandisk              ; scandisk /autofix /surface
+[LINE]
+Q; zum HauptmenÅ...      ; GOTO BENUTZER
+[ENDE]
+
+[SYSTEM]
+M; MSD-Sysinfo           ; msd
+[LINE]
+Q; zum HauptmenÅ...      ; GOTO BENUTZER
+[ENDE]
+
+[SPIELE]
+M; Minesweeper           ; [C]dosmine
+P; Pipeline              ; [C]pipeline
+A; Artillerie            ; [C]art
+[LINE]
+Q; zum HauptmenÅ...      ; GOTO BENUTZER
+[ENDE]
+ 

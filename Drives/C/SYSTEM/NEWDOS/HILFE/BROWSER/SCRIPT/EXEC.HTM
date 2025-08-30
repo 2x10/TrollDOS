@@ -1,0 +1,115 @@
+<HTML><HEAD><TITLE>Programm ausfhren mit EXEC:</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR>
+<FONT COLOR=teal>Programm ausfhren mit EXEC:</FONT>
+<HR noshade color="silver">
+<A HREF="../../../hilfe.htm">Zurck zum Browser-Hilfe-Index</A><BR>
+<A HREF="main.htm">Zurck zur šbersicht "Script-Befehle"</A>
+<HR noshade color="silver">
+
+Mit "Exec" befehlen Sie dem Browser, ein externes Programm auszufhren. Im 
+Gegensatz zum Programmstartbefehl "Start" fgt der Browser hier jedoch eine 
+Kommandozeile in den Befehl ein. Diese Kommandozeile wird aus den 
+zum Startzeitpunkt aktuellen Eingabewerten eines im Dokument befindlichen 
+Formulars ermittelt. Wie eine solche Formular-Zeile aussieht, lesen Sie 
+bitte im Kapitel "<A HREF="formzeil.htm">Format der Formular-Zeile</A>" 
+nach.
+<P>
+Der Aufrufbefehl des zu startendes Programmes wird nach einem Doppelpunkt an
+die "Exec"-Anweisung angeh„ngt.
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>exec:edit</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Das Format des Aufruf-Befehles (hier: edit) entspricht genau dem des DOS-
+Prompts. Da sich EDIT in der Regel in einem Suchpfad (PATH-Eintrag in der 
+Autoexec.bat) befindet, kann der vollst„ndige Pfad des Programmes EDIT.COM 
+entfallen. Befindet sich das zu startende Programm nicht in einem Suchpfad, 
+muá dessen kompletter Pfadname inklusive Dateiendung (EXE, COM, BAT) 
+angegeben werden:
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT 
+color=cyan>exec:c:\tools\edit.com</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Es sind hier auch <A HREF="../relpath.htm">relative Pfadangaben</A> m”glich.
+<P>
+In den beiden bisher gezeigten Beispielen wird die Kommandozeile vom 
+Browser an das Ende des Befehl angeh„ngt. In den folgenden Beispielen 
+ersetzen wir EDIT durch den fr Testzwecke besser geeigneten Befehl TYPE, 
+mit dem eine Datei angezeigt werden kann.
+<P>
+Angenommen, der Anwender hat im Formular als Namen der anzuzeigenden 
+Datei "autoexec.bat" eingegeben, dann wird dieser Name nach einem 
+Leerzeichen an den TYPE-Befehl angeh„ngt, so daá eine gltige 
+DOS-Kommandozeile entsteht.
+<P>
+Aus
+<BR>
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT color=cyan>exec:type</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+macht der Browser intern
+<BR>
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT 
+color=cyan>exec:type autoexec.bat</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Zus„tzlich k”nnen dem aufzurufenden Programm „hnlich wie beim "Start"-Befehl
+auch feste Kommandozeilenparameter bergeben werden. In diesem Falle wird 
+die vom Browser zusammengestellte Kommandozeile jedoch nicht unbedingt 
+hinten angeh„ngt, sondern sie wird am ersten Leerzeichen <FONT 
+color=maroon>eingefgt</FONT>.
+<P>
+Angenommen, der TYPE-Befehl soll die Datei nicht am Bildschirm ausgeben, 
+sondern auf dem Drucker, dann eignet sich dazu der bekannte DOS-Befehl 
+"TYPE dateiname > LPT1". Umgesetzt als EXEC-Anweisung sieht das so aus:
+<BR>
+
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT 
+color=cyan>exec:type &gt; lpt1</FONT>"&gt;</FONT><BR></TD></TR></TABLE>
+Der Browser fgt nun am ersten Leerzeichen den Namen der zu druckenden 
+Datei ein, so daá das Ganze (intern) dann so aussieht: 
+<BR>
+<TABLE><TR><TD bgcolor=teal><FONT COLOR=yellow>
+&lt;INPUT TYPE=Button click="<FONT 
+color=cyan>exec:type autoexec.bat &gt; lpt1</FONT>"&gt;
+</FONT><BR></TD></TR></TABLE>
+Durch geschicktes Setzen des ersten Leerzeichens k”nnen Sie also 
+beinflussen, an welcher Stelle der Browser die zusammengestellte 
+Kommandozeile einfgt. Die unter DOS blichen Kommandoschalter mit dem 
+fhrenden Schr„gstrich (z.B. /p) k”nnen wahlweise durch ein Leerzeichen 
+voneinander getrennt werden oder auch nicht:
+<P>
+mem/c/p<BR>
+mem /c/p<BR>
+mem/c /p
+<P>
+Findet der Browser gar kein Leerzeichen, wird die Kommandozeile wie 
+eingangs beschrieben am Ende angeh„ngt.
+<P>
+Der "Start"-Befehl ist nicht geeignet, um extrem groáe Anwendungsprogramme 
+zu starten, da der Browser w„hrend der Ausfhrung vollst„ndig im 
+Arbeitsspeicher verbleibt und dem aufgerufenen Programm m”glicherweise zu 
+wenig Platz brig l„át. Fr Tools ala TYPE oder XCOPY drfte jedoch immer
+gengend Platz da sein.
+<P>
+Nun k”nnen Sie das gleich einmal ausprobieren. Im nachfolgenden 
+Texteingabefeld steht momentan der Pfadname der Datei Autoexec.bat. Nachdem 
+Sie das erste mal auf den darunter befindlichen Button geklickt haben, 
+k”nnen Sie diesen Namen einmal probeweise durch den Namen einer anderen 
+(existierenden) Datei ersetzen (z.B. c:\config.sys) und den Button ein 
+weiteres mal bet„tigen:<P>
+<FORM>
+<INPUT TYPE=Text Value="c:\autoexec.bat" Name="FileName" Size=75 
+MaxLength=79>
+<P>
+<INPUT TYPE=Button Value=" Datei anzeigen " Click="exec:type;wait:">
+<BR>
+
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+ 
+</BODY></HTML>
+

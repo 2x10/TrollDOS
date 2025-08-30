@@ -1,0 +1,77 @@
+//--------------------------------------------------------------------
+// DRAWBOX.AML
+// Draw a Box, (C) 1993-1996 by nuText Systems
+//
+// This macro draws a box around a column mark in the current edit
+// window. The current Line Style (on the edit window Set menu) is used
+// to draw the box.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include  bootpath "define.aml"
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+// test for mark in current window and column mark
+if getcurrbuf <> getmarkbuf or getmarktype <> 'k' then
+  msgbox "Column block not marked in current window"
+  return
+end
+
+// get the box style from the _LineStyle variable
+style = "Ä³Ú¿ÙÀÍ³Õ¸¾ÔÄºÖ·½ÓÍºÉ»¼È      ±±±±±±" [_LineStyle * 6 + 1 : 6]
+
+topside = getmarktop
+botside = getmarkbot
+leftside = getmarkleft
+rightside = getmarkright
+
+undobegin
+oldmark = usemark 'T'
+
+// right side
+column = rightside + 1
+markcolumn column column topside botside
+fillblock style [2]
+
+// left side
+if leftside > 1 then
+  column = leftside - 1
+  markcolumn column column topside botside
+  fillblock style [2]
+  left_ok = 1
+end
+
+destroymark
+usemark oldmark
+
+// top side
+if topside > 1 then
+  topside = topside - 1
+  ovltext '':getmarkcols:style [1] leftside topside
+  ovltext style [4] rightside + 1 topside
+  if left_ok then
+    ovltext style [3] leftside - 1 topside
+  end
+end
+
+// bottom side
+if botside < getlines then
+  botside = botside + 1
+  ovltext '':getmarkcols:style [1] leftside botside
+  ovltext style [5] rightside + 1 botside
+  if left_ok then
+    ovltext style [6] leftside - 1 botside
+  end
+end
+
+undoend

@@ -1,0 +1,15 @@
+
+ÿÿCOMPARE.AML
+ ÿCompare Filesÿ
+
+  This macro displays a dialog box which allows you to compare two
+  files. By default, the two files are the current file and the
+  associated backup file. The following options can be specified:
+
+     - Show Line Numbers
+     - Ignore Case
+     - Show First and Last Lines Only
+     - Use Open Files if Possible
+
+  The Dos command 'fc' is used to perform the comparision.
+

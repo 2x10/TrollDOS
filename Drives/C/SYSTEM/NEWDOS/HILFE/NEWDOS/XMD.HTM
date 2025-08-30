@@ -1,0 +1,39 @@
+<HTML><HEAD><TITLE>XMD</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>XMD</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Erweiterung des DOS-Befehls <A HREF="help:md">MD (MKDIR)</A>.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">XMD [Verzeichnisbaum]</FONT>
+
+XMD legt den angegebenen Verzeichnisbaum in einem Rutsch an.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiel</FONT>
+
+Sie m”chten auf einer leeren Diskette das Verzeichnis A:\DOC\BRIEF\TEST
+anlegen. Keines der Verzeichnisse existiert also. Der DOS-Befehl MD wrde
+diese Eingabe mit einer Fehlermeldung quittieren. XMD hingegen legt
+zun„chst das Verzeichnis DOC an, darin das Verzeichnis BRIEF und darin
+wiederum das gewnschte Verzeichnis TEST.
+
+<FONT COLOR="blue">XMD A:\DOC\BRIEF\TEST</FONT><HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Fehlercodes</FONT>
+
+In Batchdateien k”nnen folgende <A HREF="help:if">Errorlevel</A> ausgewertet werden:
+
+6 : Parameter fehlte oder es wurde /? eingegeben
+5 : Zugriff verweigert
+4 : Gleichnamige Datei gefunden
+3 : Pfad nicht gefunden
+2 : Unbekannter Fehler
+1 : Verzeichnisbaum existierte bereits
+0 : kein Fehler</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

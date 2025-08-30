@@ -1,0 +1,42 @@
+PROGRAM Rechnen6;
+{Anzeigen der Byte- und Bitwerte der Attribut-Konstanten und ihre Erzeugung}
+
+BEGIN-MAIN
+  Init;
+
+  WriteLn ('Bit-Werte der Datei-Attribute');
+  Line ('-');
+  WriteLn ('ReadOnly    - Bits: ', !BBits(@readOnly),  '  Zahl: ', @readOnly);
+  WriteLn ('Versteckt   - Bits: ', !BBits(@hidden),    '  Zahl: ', @hidden);
+  WriteLn ('System      - Bits: ', !BBits(@sysfile),   '  Zahl: ', @sysfile);
+  WriteLn ('Volume-ID   - Bits: ', !BBits(@volumeID),  '  Zahl: ', @volumeID);
+  WriteLn ('Verzeichnis - Bits: ', !BBits(@directory), '  Zahl: ', @directory);
+  WriteLn ('Archiv      - Bits: ', !BBits(@archive),   '  Zahl: ', @archive);
+  WriteLn ('Anyfile     - Bits: ', !BBits(@anyfile),   '  Zahl: ', @anyfile);
+
+  WriteLn (#13#10, 'Die selben Werte, mit der Funktion @SHL erzeugt.', #13#10);
+
+  @a:= 1;                    {in 1 ist nur das erste Bit gesetzt}
+  For @x:= 1 To 6 Do
+  BEGIN
+    WriteLn (!BBits (@a));
+    @a:= @shl(@a, 1);        {schiebt das Bit jeweils um eine Stelle weiter}
+  ENDFOR;
+
+  dec (@a);                  {Zweierpotenz minus 1 setzt alle Bits "links"}
+  WriteLn (!BBits (@a));
+
+  GetKey;
+END.
+
+{Genaugenommen ist die Darstellung der Bits nicht ganz korrekt. Der Befehl}
+{SHL ( = Shift Left = Schiebe nach LINKS) schiebt hier das Bit nach rechts.}
+{Das erste Bit steht normalerweise auch ganz rechts und nennt sich obendrein}
+{noch das nullte Bit. Um die Darstellung jedoch begreiflicher zu machen,}
+{stellt die Funktion !BBits () die Bits vom niederwertigsten Bit an dar,}
+{also in genau umgekehrter Reihenfolge.}
+
+{Wenn Sie die tatsÑchliche Reihenfolge der Bits anzeigen wollen, verwenden}
+{sie die Funktion !swap, die eine Zeichenkette rÅckwÑrts erzeugt.}
+
+{WriteLn (!Swap (!Bits (@a)));}

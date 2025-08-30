@@ -1,0 +1,34 @@
+a:     Doom 
+       cdd e:\dosgames\g1\doom ^ doom.exe ^ cdd -
+b:     Doom 2
+       cdd e:\dosgames\g1\doom2 ^ doom2.exe ^ cdd -
+c:     Final Doom
+       cdd e:\dosgames\g1\fdoom ^ doom2.exe ^ cdd -
+d:     TNT Doom
+       cdd e:\dosgames\g1\tntdoom ^ doom2.exe ^ cdd -
+e:     Duke Nukem 3D
+       cdd e:\dosgames\g1\duke3d ^ duke3d.exe ^ cdd -
+f:     Rise of the Triad
+       cdd e:\dosgames\g2\rott ^ rott.exe ^ cdd -
+g:     Redneck Rampage
+       cdd e:\dosgames\g3\redneck ^ rr.exe ^ cdd -
+h:     Epic Pinball
+       cdd e:\dosgames\g1\epinball ^ pinball.exe ^ cdd -
+i:     Heretic
+       cdd e:\dosgames\g1\heretic ^ heretic.exe ^ cdd -
+j:     Hexen
+       cdd e:\dosgames\g1\hexen ^ hexen.exe ^ cdd -
+k:     Krypnon EGG
+       cdd e:\dosgames\g1\kegg ^ ke.exe ^ cdd -
+l:     Quake
+       cdd e:\dosgames\g2\quake ^ quake.exe ^ cdd -
+m:     Realms of Chaos
+       cdd e:\dosgames\g2\roc ^ roc.exe ^ cdd -
+n:     Spear of Destiny
+       cdd e:\dosgames\g2\spear ^ spear.exe ^ cdd -
+o:     Wolfenstein 3D
+       cdd e:\dosgames\g2\wolf3d ^ wolf3d.exe ^ cdd -
+p:     Terminal Velocity
+       cdd e:\dosgames\g2\tvc ^ tv.exe ^ cdd -
+q:     Shell Game
+       cdd e:\dosgames\g2\shell ^ shellgame.exe ^ cdd -

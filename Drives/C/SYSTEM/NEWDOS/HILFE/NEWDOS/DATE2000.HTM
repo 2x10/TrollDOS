@@ -1,0 +1,46 @@
+<HTML><HEAD><TITLE>DATE2000</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>DATE2000</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A> 
+<HR noshade color="silver"><PRE>DATE2000 untersttzt den <A HREF="help:date">DATE</A>-Befehl bei der Verarbeitung zweistelliger
+Jahresangaben ab dem Jahr 2000.
+
+<FONT COLOR="maroon">Installation</FONT>
+
+<FONT COLOR="blue">DATE2000</FONT> oder <FONT COLOR="blue"><A HREF="help:lh">LH</A> DATE2000</FONT>
+
+Empfehlenswert ist die Aufnahme dieses Befehles in die AUTOEXEC.BAT<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT> 
+
+Der Fehler, den der DATE-Befehl ab dem Jahr 2000 bei der Eingabe von 
+zweistelligen Jahreszahlen ausl”st, tritt auch dann ein, wenn Ihr PC
+an sich vollkommen jahr-2000-f„hig ist. Dies ist bis zur Version 6.22 
+von MS-DOS also ein reines Software-Problem. 
+
+DATE2000 korrigiert Datumseingaben, die ber den Standard-Befehl "date" 
+eingegeben wurden. Normalerweise reagiert der Date-Befehl mit einer 
+Fehlermeldung, wenn die Datumseingabe eine zweistellige Jahreszahl 
+zwischen 00 und 79 enth„lt. DATE2000 f„ngt derartige Jahresangaben ab, 
+errechnet daraus die Jahreszahlen 2000 bis 2079 und sorgt so dafr, daá das 
+Datum durch "date" korrekt und ohne Fehlermeldung gesetzt wird.
+
+Hintergrund: Der "Date"-Befehl addiert zu allen zweistelligen Jahreszahlen 
+ohne weitere Prfung den Wert 1900 hinzu, was bei Angaben im Bereich 
+00 bis 79 zwangsl„ufig zu einem Fehler fhrt. M”glicherweise fhren auch 
+einige Anwendungsprogramme eine Jahresumrechnung nach diesem Schema durch, 
+so daá DATE2000 auch fr diese Programme eine erfolgreiche Korrektur
+vornimmt.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Grenzen von DATE2000</FONT>  
+
+Das von DATE2000 gesetzte "Zeitfenster" reicht "nur" bis 2079. Danach
+mssen Jahres-Angaben beim "Date"-Befehl wieder 4-stellig ausgefhrt werden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML> 
+
+

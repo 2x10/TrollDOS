@@ -1,0 +1,110 @@
+<HTML><HEAD><TITLE>Dateien mit Anwendungsprogrammen verknpfen</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Dateien mit Anwendungsprogrammen verknpfen</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver"><PRE><FONT COLOR="maroon">Warum verknpfen?</FONT>
+
+Wenn Sie einen Dateityp mit der dazugeh”rigen Anwendung verknpfen, k”nnen 
+Sie sich die Arbeit mit diesem Anwendungsprogramm und den dazugeh”rigen
+Dateien erheblich erleichtern.
+
+Zum besseren Verst„ndnis und als Anregung fr eigene Ideen hier zun„chst vier
+Beispiele:
+
+1. Eine Textdatei soll durch doppeltes Anklicken oder ENTER zusammen mit dem
+   dazugeh”rigen Textverarbeitungsprogramm geladen werden. Angenommen, Ihre
+   Textverarbeitung erzeugt standardm„áig Dateien mit der Endung TXT. Sie
+   k”nnen, wie im folgenden noch beschrieben wird, festlegen, daá immer dann
+   Ihre Textverarbeitung gestartet wird, wenn Sie eine Datei mit der Endung
+   TXT doppelt anklicken.
+
+2. Quelltext soll zusammen mit der dazugeh”rigen Entwicklungsumgebung
+   ”ffnet werden. Verknpfen Sie also die Dateiendung PAS mit Turbo
+   Pascal, die Dateiendung ASM mit dem Assembler usw. Nach Anklicken einer 
+   solchen Datei wird der Editor Ihres Compilers bzw. Ihres Interpreters 
+   geladen und in ihm die ausgew„hlte Datei ge”ffnet.
+
+3. Ein Archiv soll bei Doppelklick automatisch entpackt werden.
+   Hierzu verknpfen Sie z.B. die Dateiendung ZIP mit dem Entpacker
+   PKUNZIP oder die Dateiendung ARJ mit dem Packer ARJ.
+
+4. Verknpfen Sie die symbolische Dateiendung ??_ mit dem Dienstprogramm
+   <A HREF="../newdos/unpack.htm">UNPACK.EXE</A>, das sich im New-DOS-Verzeichnis befindet. Somit k”nnen Sie
+   gepackte DOS-Dateien von den Originaldisketten aus entpacken.
+
+
+<FONT COLOR="maroon">Dateien verknpfen</FONT>
+
+šber die in diesem Abschnitt aufgefhrten Variablen (z.B. [Q] usw) finden
+Sie <A HREF="variab.htm">hier</A> n„here Informationen.
+
+1. Laden Sie die Datei AUTOSTAR.INI (Comander-Verzeichnis) mit F4 in Ihren
+   Editor. Sie enth„lt bereits viele anwendbare Beispiele. Falls AUTOSTAR.INI
+   noch nicht existieren sollte, legen Sie sie mit <A HREF="makefile.htm">MakeFile</A> an.
+
+2. Schreiben Sie jede Verknpfungsanweisung in eine extra Zeile.
+
+3. Eine Zeile muá folgenden Aufbau haben:
+
+   <FONT COLOR="blue">END</FONT>: <FONT COLOR="red">Befehl [Q]</FONT> 
+
+   <FONT COLOR="blue">END</FONT> ist die Dateiendung. Dann folgen ein Doppelpunkt, ein Leerzeichen und
+   der eigentliche <FONT COLOR="red">DOS-Befehl</FONT>. Die Dateiendung muá immer drei Zeichen lang
+   sein, geben Sie also ggf. Leerzeichen ein. Sollen alle Dateien ohne
+   Endung mit einem bestimmten Programm verknpft werden, mssen als Endung
+   drei Leerzeichen eingegeben werden. Die <A HREF="variab.htm#q">Variable [Q]</A> wird vom Comander
+   durch den Namen der angeklickten Datei ersetzt. Nach [Q] k”nnen weitere
+   Parameter oder Variablen folgen. [Q] jedoch ist Grundvoraussetzung fr
+   das Funktionieren der Verknpfung. Vermeiden Sie ansonsten alle unn”tigen
+   Leerzeichen und Leerzeilen.
+
+   Beispiele:
+  
+   <FONT COLOR="blue">ZIP</FONT>: <FONT COLOR="red">C:\ZIP\PKUNZIP [Q]</FONT> 
+   <FONT COLOR="blue">LHA</FONT>: <FONT COLOR="red">C:\PACKER\LHA e [Q]</FONT>
+   <FONT COLOR="blue">??_</FONT>: <FONT COLOR="red">[C]UNPACK [P][Q] [Z]</FONT> 
+
+   Im letzten Beispiel wird ganz besonders deutlich, wie man sich die
+   Variablen zunutze machen kann. Das Anklicken einer DOS-Originaldatei 
+   (Datei mit der Endung ??_) fhrt nun dazu, daá sie in das Verzeichnis 
+   entpackt wird, das im anderen Comander-Fenster ge”ffnet ist. Somit k”nnen 
+   Sie Original-DOS-Programme ohne SETUP bequem nachinstallieren.
+
+   Sie k”nnen auch eine Windows 3.x -Anwendung mit Dateien verknpfen. Um
+   beispielsweise den Windows-Editor WRITE mit Dateien mit der Endung WRI zu
+   verbinden, geben Sie ein:
+
+   <FONT COLOR="blue">WRI</FONT>: <FONT COLOR="red">[W] write [Q]</FONT>
+
+   Windows wird also mit aufgerufen. Es startet dann in der Regel ohne
+   das Er”ffnungs-Logo, das Ganze geht also etwas schneller. L„uft der
+   Comander bereits in einem DOS-Fenster unter Windows 3.x, funktioniert
+   dieses Konstrukt jedoch nicht.
+
+
+<FONT COLOR="green">Trick 17</FONT>
+Sie k”nnen in jedem beliebigen Verzeichnis eine andere Verknpfungs-Datei
+anlegen. Der Comander verarbeitet beim Anklicken einer Datei immer diejenige
+AUTOSTAR.INI, die sich im gerade ge”ffneten Verzeichnis befindet. Nur, wenn
+eine solche nicht existiert, wird die "Hauptdatei" im Comander-Verzeichnis
+ge”ffnet.
+
+Die Idee dabei ist, daá sich auf diese Weise Dateien mit gleicher Endung mit
+verschiedenen Programmen verknpfen lassen. Das mag sinnvoll erscheinen, wenn
+Sie z.B. mehrere Textverarbeitungen benutzen, die Textdateien mit gleicher
+Endung anlegen. Sp„testen beim Aufruf einer BAK-Datei geht das Durcheinander
+los: Welche Textverarbeitung soll diese Sicherheitskopie denn nun laden?
+
+Voraussetzung ist natrlich, daá die verschiedenen Textverarbeitungen ihre
+Dateien auch in verschiedenen Verzeichnissen speichern. In jedem dieser
+Verzeichnisse wird nun eine AUTOSTAR.INI angelegt, die auf die gleiche
+Dateiendung reagiert, jedoch jeweils einen andere Textverarbeitung aufruft.
+
+Wenn Sie die Verknpfungsdateien nicht sehen m”gen, <A HREF="attribut.htm">verstecken</A> Sie sie
+mit Taste V.</PRE>
+
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>
+ 

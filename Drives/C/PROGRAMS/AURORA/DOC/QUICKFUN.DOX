@@ -1,0 +1,951 @@
+
+
+ÿÿAML Function Quick Reference
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  This Quick Reference lists all AML statements and functions and by
+  category, including builtin (A.exe), library (Lib.x), and extension
+  (Ext.aml) functions.
+
+ ÿTo use the Quick Reference within a macro:ÿmove the cursor to a
+  function name or statement keyword and press <shift f1>. This Quick
+  Reference can be used in any text file, including the Language
+  Reference (Language.dox), and the Function Reference (Function.dox).
+
+ ÿTo transfer to the full AML Function Reference:ÿmove the cursor to a
+  function name or statement keyword in this Quick Reference and press
+  <shift f2>. Note that most extension functions are not documented in
+  the Function Reference.
+
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+  Copyright (C) 1996 by nuText Systems.  All rights reserved worldwide.
+  No parts of this document may be copied in part or in whole, except as
+  provided in the License in the accompanying documentation.
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+
+ÿÿLanguage Statements
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  statements:
+   ÿbreakÿ                     // exit loops
+   ÿcaseÿwhen otherwise / end  // complex conditional statement
+   ÿconstant/constÿ            // define a constant or constant function
+   ÿdatabufÿ/ end              // define or add to a data buffer
+   ÿ#execÿ/ #endexec           // define compile-time constants/functions
+   ÿeventÿ/ end                // define an event-handling function
+   ÿforÿto/downto step/by / end // indexed loop
+   ÿforwardÿ                   // declare a function or object symbol
+   ÿfunctionÿ/ end             // define a function
+   ÿ#ifÿ#elseif #else / #end   // conditional compilation
+   ÿifÿelseif else / end       // conditional statement
+   ÿif?ÿ                       // short conditional statement
+   ÿincludeÿ                   // include a macro source file
+   ÿkeyÿ/ end                  // define a key-handling function
+   ÿkeywordÿ                   // define syntax highlighting keywords
+   ÿloopÿtimes / end           // unconditional loop
+   ÿmenuÿitem / end            // define a pull-down or popup menu
+   ÿmenubarÿitem / end         // define a menu bar for a window
+   ÿobjectÿ                    // create object / change current object
+   ÿrefÿ                       // pass a variable by reference
+   ÿrepeatÿ/ until             // repeat-until conditional loop
+   ÿreturnÿ                    // return from a function or macro
+   ÿvariable/varÿ              // declare a local or global variable
+   ÿwhileÿdo / end             // while conditional loop
+
+
+ÿÿObjects:
+  ÄÄÄÄÄÄÄ
+
+  statements:
+   ÿobjectÿ        // create an object or change the current object
+
+  builtin functions:
+   ÿcreateobjectÿ  // create an object
+   ÿdestroyobjectÿ // destroy an object
+   ÿdestroyvarÿ    // destroy a public object variable
+   ÿfunction?ÿ     // test if a public function exists
+   ÿgetcurrobjÿ    // get the current (executing) object
+   ÿgeteventobjÿ   // get the current event object
+   ÿinheritkeysÿ   // enable/disable key inheritance
+   ÿlookupÿ        // get the value of an public object variable
+   ÿobject?ÿ       // test if an object exists
+   ÿobjtype?ÿ      // test object inheritance hierarchy
+   ÿsetÿ           // change the value of a public object variable
+   ÿseteventobjÿ   // change the current event object
+   ÿsetfunctionÿ   // change the definition of a public function
+   ÿsetobjtypeÿ    // change the inheritance path of an object
+   ÿsettypeÿ       // change the inheritance path of the current object
+   ÿvariable?ÿ     // test if a public variable exists
+
+
+ÿÿEvent Handling:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿcallÿ          // dispatch an event in the current object
+   ÿdispatchÿ      // wait for and dispatch the next event
+   ÿendprocessÿ    // return from a recursive invocation of the editor
+   ÿevent?ÿ        // test if one or more events are in the event queue
+   ÿgetcurrobjÿ    // get the current (executing) object
+   ÿgeteventcountÿ // get the number of real events
+   ÿgeteventobjÿ   // get the current event object
+   ÿpassÿ          // call the current function in a parent object
+   ÿpassprevÿ      // call the current function in a preempted object
+   ÿprocessÿ       // invoke the editor recursively
+   ÿpurgequeueÿ    // remove all events from the event queue
+   ÿqueueÿ         // add an event to the event queue
+   ÿqueueobjectÿ   // queue an event to a specific object
+   ÿsendÿ          // dispatch an event in the current event object
+   ÿsendobjectÿ    // dispatch an event to a specified object
+   ÿseteventobjÿ   // change the current event object
+   ÿsizequeueÿ     // change the event queue size
+
+
+ÿÿMacro Compilation and Execution:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿcompilemacroÿ  // compile a macro source file
+   ÿevalÿ          // evaluate a string as macro source code
+   ÿgeterrorÿ      // returns error information
+   ÿgetcurrfileÿ   // get the current filename being executed or compiled
+   ÿloadobjectÿ    // load an object
+   ÿresidentÿ      // force a macro to remain resident or terminate
+   ÿrunmacroÿ      // execute a compiled macro
+   ÿseterrorÿ      // generate a compiler error
+
+  extension functions:
+   ÿaskcmacroÿ     // prompt to compile a macro source file
+   ÿaskevalÿ       // prompt to evaluate a macro expression
+   ÿaskrmacroÿ     // prompt to run a compiled macro file
+   ÿcompilemacro2ÿ // compile a macro source file (with messages)
+   ÿrecompileÿ     // recompile the editor
+   ÿruncfgÿ        // run a macro in the Cfg\ subdirectory (w/prefix cfg)
+   ÿrunmacro2ÿ     // load, execute, and discard a compiled macro
+   ÿsavecfgÿ       // save current config variables and recompile
+
+
+ÿÿStrings:
+  ÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿbin2hexÿ       // convert binary strings to hex strings
+   ÿbin2intÿ       // convert a 1, 2, or 4-byte string to an integer
+   ÿcharÿ          // convert integers to 1-byte strings
+   ÿchar2ÿ         // convert integers to 2-byte strings
+   ÿchar4ÿ         // convert integers to 4-byte strings
+   ÿconcatÿ        // concatenate strings together
+   ÿcopystrÿ       // duplicate a string one or more times
+   ÿflipcaseÿ      // toggle the case of each character in a string
+   ÿhex2binÿ       // convert hex strings to binary strings
+   ÿicompareÿ      // test strings for equality, ignoring case
+   ÿjoinstrÿ       // combine strings into a 'multistring'
+   ÿlocaseÿ        // convert a string to lower case
+   ÿparseÿ         // parse substrings (or substring positions) into variables
+   ÿposÿ           // search for a string within another string
+   ÿposcharÿ       // search for a character class in string
+   ÿposnotÿ        // search for ~character class in string
+   ÿsplitstrÿ      // split a 'multistring' into substrings
+   ÿsubÿ           // replace a substring within another string
+   ÿthousandsÿ     // convert a number to a thousands-separated string
+   ÿupcaseÿ        // convert a string to upper case
+
+
+ÿÿMiscellaneous:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿargÿ           // access function arguments
+   ÿarrayÿ         // create an array
+   ÿarray?ÿ        // test if an array exists
+   ÿbaseÿ          // convert a number to a string in a new base
+   ÿbeepÿ          // beep the PC speaker
+   ÿdelayÿ         // suspend execution of a macro
+   ÿevalÿ          // evaluate a string as macro source code
+   ÿhaltÿ          // exit to Dos immediately
+   ÿmachineÿ       // execute machine-level code
+   ÿpeekÿ          // return a copy of a Dos memory area
+   ÿpokeÿ          // modify a Dos memory area
+   ÿrandÿ          // generate a random number
+   ÿsystemÿ        // execute a Dos program
+
+
+ÿÿBuffers:
+  ÄÄÄÄÄÄÄ
+
+  statements:
+   ÿdatabufÿ       // define or add to a data buffer
+
+  builtin functions:
+   ÿactualcolÿ     // get the actual column for an apparent column
+   ÿactualrowÿ     // get the actual row over an apparent distance
+   ÿaddlineÿ       // add a line to the end of a buffer
+   ÿapparentcolÿ   // get the apparent column of an actual column
+   ÿapparentrowÿ   // get the apparent row over an actual distance
+   ÿasciibufÿ      // create a buffer of Ascii characters
+   ÿbufchanged?ÿ   // test if buffer is modified
+   ÿbuffer?ÿ       // test if a buffer exists
+   ÿbufferflagÿ    // change/get buffer flags
+   ÿcreatebbufÿ    // create a new binary buffer
+   ÿcreatebufÿ     // create a new buffer
+   ÿcurrbufÿ       // change the current buffer
+   ÿdelcharÿ       // delete text on a line
+   ÿdellineÿ       // delete a line
+   ÿdestroybufÿ    // destroy a buffer
+   ÿfindbufÿ       // find a buffer with a given buffer name
+   ÿgetbinarylenÿ  // get binary line length used to load a buffer
+   ÿgetbufnameÿ    // get the buffer name
+   ÿgetbuftabsÿ    // get the buffer tab width
+   ÿgetcharÿ       // get a character from a buffer
+   ÿgetcurrbufÿ    // get the current bufferid
+   ÿgetlinebegÿ    // get the starting column of a line
+   ÿgetlinelenÿ    // get the length of a line
+   ÿgetlinesÿ      // get the total number of lines in buffer
+   ÿgetlinesizeÿ   // get the actual length of a line
+   ÿgetloadinfoÿ   // get directory information after loadbuf/insertbuf
+   ÿgetprevbufÿ    // get the previous bufferid
+   ÿgetrealtextÿ   // get a line or a portion of a line from a buffer
+   ÿgettextÿ       // get a line or a portion of a line from a buffer
+   ÿgotobufÿ       // change the default buffer for builtin functions
+   ÿinsaboveÿ      // insert a line before another line
+   ÿinsertbufÿ     // insert a file into a buffer
+   ÿinslineÿ       // insert a line after another line
+   ÿinstextÿ       // insert a string into a line
+   ÿjoinlineÿ      // join two lines into one line
+   ÿlineflagÿ      // change/get line flags
+   ÿloadbufÿ       // create a new buffer from a file or directory
+   ÿovltextÿ       // overlay a string onto a line
+   ÿprintbufÿ      // print a buffer
+   ÿsavebufÿ       // save a buffer to a file
+   ÿsetbufnameÿ    // set the name associated with a buffer
+   ÿsetbuftabsÿ    // set the buffer tab width
+   ÿsplitlineÿ     // split a line into two lines
+   ÿundosizeÿ      // set the undo stack size for a buffer
+   ÿwritetextÿ     // insert or overlay a string in a line
+
+  extension functions:
+   ÿbackspÿ        // delete char to the left (with joinline)
+   ÿcasewordÿ      // change the case of the word at the cursor
+   ÿcenterlineÿ    // center the line at the cursor
+   ÿcommentlineÿ   // comment the line at the cursor
+   ÿdelchar2ÿ      // delete the char at the cursor (with joinline)
+   ÿdelwordÿ       // delete right word at the cursor
+   ÿenterÿ         // enter key
+   ÿgetwordÿ       // get the word at the cursor or at a column
+   ÿinsline2ÿ      // insert a line with autoindent
+   ÿliteralÿ       // prompt to enter the next character literally
+   ÿlivewrapÿ      // live word wrap support
+   ÿsplitline2ÿ    // split a line with autoindent
+   ÿswaplineÿ      // swap lines at the cursor
+   ÿtabfileÿ       // detab or entab the current file
+   ÿtimestampÿ     // enter the date and time at the cursor
+   ÿwriteÿ         // enter a string at the cursor
+
+
+ÿÿCursors:
+  ÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿcolÿ           // move the cursor to a column
+   ÿcolorcursorÿ   // change the cursor color
+   ÿcreatecursorÿ  // create a cursor
+   ÿcurrcursorÿ    // change the current cursor
+   ÿcursor?ÿ       // test if a cursor exists
+   ÿdestroycursorÿ // destroy a cursor and any associated window
+   ÿdownÿ          // move the cursor down
+   ÿgetcolÿ        // get the cursor column
+   ÿgetcurrcursÿ   // get the current cursor
+   ÿgetcurswinÿ    // get window associated with a cursor
+   ÿgetprevcursÿ   // get the previous cursor
+   ÿgetrowÿ        // get the cursor row
+   ÿgotoposÿ       // move the cursor (absolute)
+   ÿinsert?ÿ       // get cursor insert/overstrike mode
+   ÿlastposÿ       // move the cursor to the last cursor position
+   ÿleftÿ          // move the cursor left
+   ÿmoveposÿ       // move the cursor (relative)
+   ÿpopcursorÿ     // restore the cursor position from the cursor stack
+   ÿpushcursorÿ    // save the cursor position on the cursor stack
+   ÿrightÿ         // move the cursor right
+   ÿrowÿ           // move the cursor to a row
+   ÿsetcursorÿ     // create a new cursor or change the cursor state
+   ÿupÿ            // move the cursor up
+
+  extension functions:
+   ÿenterÿ         // the enter key
+   ÿnextwordÿ      // find the next word
+   ÿprevwordÿ      // find the previous word
+   ÿtableftÿ       // tab left
+   ÿtabrightÿ      // tab right
+
+
+ÿÿBookmarks:
+  ÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿbook?ÿ         // test if bookmark exists
+   ÿcurrbookÿ      // change the current bookmark
+   ÿdestroybookÿ   // destroy a bookmark
+   ÿgetbookbufÿ    // get the buffer associated with a bookmark
+   ÿgetcurrbookÿ   // get the current bookmark for a buffer
+   ÿgetprevbookÿ   // get the previous bookmark in the buffer
+   ÿgotobookÿ      // move the cursor to a bookmark
+   ÿsetbookÿ       // create a new bookmark or move an existing bookmark
+
+  extension functions:
+   ÿaskbookÿ       // prompt for a bookmark to move to
+   ÿcyclebookÿ     // cycle though all existing bookmarks
+   ÿgotobook2ÿ     // move cursor to a bookmark (with messages)
+   ÿplacebookÿ     // set a bookmark (with messages)
+   ÿquickbookÿ     // place a 'quick' bookmark
+
+
+ÿÿMarks:
+  ÄÄÄÄÄ
+
+  builtin functions:
+   ÿcolormarkÿ     // change the mark color
+   ÿcopymarkÿ      // mark a copy of a mark
+   ÿcurrmarkÿ      // change the current (top) mark
+   ÿdestroymarkÿ   // destroy a mark
+   ÿextendmarkÿ    // extend the current mark to the cursor position
+   ÿgetcurrmarkÿ   // get the current mark for a buffer
+   ÿgetmarkbotÿ    // get the bottom row of a mark
+   ÿgetmarkbufÿ    // get the buffer associated with the mark
+   ÿgetmarkcolsÿ   // get the mark width
+   ÿgetmarkleftÿ   // get the left column of mark
+   ÿgetmarkrightÿ  // get the right column of mark
+   ÿgetmarkrowsÿ   // get the mark height
+   ÿgetmarktopÿ    // get top row of a mark
+   ÿgetmarktypeÿ   // get the mark type
+   ÿgetmarkuseÿ    // get the default markid
+   ÿgetprevmarkÿ   // get the previous mark
+   ÿinmark?ÿ       // test if a cursor position is inside a mark
+   ÿmark?ÿ         // test if a mark exists
+   ÿmarkcharÿ      // begin or extend a char mark
+   ÿmarkcolumnÿ    // begin or extend a column mark
+   ÿmarklineÿ      // begin or extend a line mark
+   ÿmarkstreamÿ    // begin or extend a stream mark
+   ÿstopmarkÿ      // stop the cursor extension of a mark
+   ÿusemarkÿ       // change the default markid
+
+  extension functions:
+   ÿgetmarktextÿ   // get top line of text in a mark
+   ÿmarkeolÿ       // mark to the end of the current line
+   ÿmarkparaÿ      // mark the paragraph at the cursor
+   ÿmarkwordÿ      // mark the word at the cursor
+   ÿsmarkÿ         // allow CUA <shift> marking after cursor movement
+
+
+ÿÿBlocks:
+  ÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿcaseblockÿ     // change the case of text in a mark
+   ÿcopyblockÿ     // copy the text in a mark
+   ÿcopyblockoverÿ // overlay the text in a mark over other text
+   ÿdeleteblockÿ   // delete the text in a mark
+   ÿfillblockÿ     // fill a mark with a repeating character or string
+   ÿfoldblockÿ     // manipulate folds in a mark
+   ÿformatblockÿ   // reformat the text in a mark
+   ÿjustblockÿ     // justify the text in a mark
+   ÿmoveblockÿ     // move the text in a mark
+   ÿprintblockÿ    // print the text in a mark
+   ÿsaveblockÿ     // save the text in a mark
+   ÿshiftblockÿ    // shift the text in a mark left or right
+   ÿsortblockÿ     // sort the text in a mark
+   ÿtabblockÿ      // detab or entab the text in a mark
+
+  extension functions:
+   ÿcopyblock2ÿ    // copy a block (or a line) of text
+   ÿdeleteblock2ÿ  // delete a block of text
+   ÿfillblock2ÿ    // prompt to fill a mark with a string
+   ÿformatblock2ÿ  // reformat a block or paragraph
+   ÿjustblock2ÿ    // justify a block text between margins
+   ÿmoveblock2ÿ    // move a block of text
+   ÿmoveblockoverÿ // move a block of text over other text
+   ÿquoteÿ         // quote a paragraph or a block of text
+   ÿsaveblock2ÿ    // prompt to save a block of text
+   ÿsortblock2ÿ    // sort a block of text
+
+
+ÿÿClipboards:
+  ÄÄÄÄÄÄÄÄÄÄ
+
+  extension functions:
+   ÿaskclipÿ       // prompt to change the current clipboard
+   ÿclearÿ         // erase the contents of a clipboard
+   ÿcopyÿ          // copy or copy-append to a clipboard
+   ÿcutÿ           // cut or cut-append to a clipboard
+   ÿpasteÿ         // paste or paste-over from a clipboard
+
+
+ÿÿUndo and Redo:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿredoÿ          // redo the last change or group of changes
+   ÿundoÿ          // undo the last change or group of changes
+   ÿundobeginÿ     // start a group of undoable operations
+   ÿundocursorÿ    // save the cursor position on the undo/redo stack
+   ÿundoendÿ       // end a group of undoable operations
+   ÿundosizeÿ      // associate an undo/redo stack with a buffer
+
+
+ÿÿSearch and Replace:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿfindÿ          // search for a string
+   ÿreplaceÿ       // search for a string, replace with another string
+
+  library functions:
+   ÿgotoerrorÿ     // go to the compiler error on the current line
+   ÿgotomatchÿ     // find the matching character
+   ÿsearchÿ        // search or replace within the current file
+
+  extension functions:
+   ÿaskfindÿ       // prompt for a search (multistring)
+   ÿaskfindoÿ      // prompt for find occurrences of a string
+   ÿaskreplÿ       // prompt for search and replace (multistring)
+   ÿaskrowÿ        // prompt for a row to go to
+   ÿaskscanÿ       // prompt to scan files for a string
+   ÿfindlastÿ      // repeat the last search/replace
+   ÿfindlastoÿ     // find occurrences of the last search string
+   ÿfindoÿ         // find occurrences of a string
+   ÿgotomarkÿ      // go to an edge of a mark
+   ÿgotomatch2ÿ    // find the matching char (with highlight)
+   ÿisearchÿ       // incremental search
+   ÿrow2ÿ          // go to a row (absolute or relative +/-)
+   ÿsearch2ÿ       // search/replace with messages and highlighting
+
+
+ÿÿFolds:
+  ÄÄÄÄÄ
+
+  builtin functions:
+   ÿclosefoldÿ     // close a fold (and optionally, subfolds)
+   ÿcreatefoldÿ    // create a one-line 'open' fold
+   ÿdestroyfoldÿ   // destroy a fold (and optionally, subfolds)
+   ÿfold?ÿ         // test if a fold exists
+   ÿfoldblockÿ     // manipulate folds within a mark
+   ÿfoldoptionsÿ   // set options for displaying closed folds
+   ÿgetfoldÿ       // get information about a fold
+   ÿopenfoldÿ      // open a fold (and optionally, subfolds)
+
+  extension functions:
+   ÿfoldallÿ       // manipulate all folds in a buffer
+   ÿfoldlineÿ      // fold or unfold a line
+
+
+ÿÿTimers:
+  ÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿdestroytimerÿ  // destroy a timer
+   ÿsetalarmÿ      // set an alarm timer
+   ÿsetrepeatÿ     // set a repeating interval timer
+   ÿsettimerÿ      // set a non-repeating interval timer
+   ÿtimer?ÿ        // test if a timer exists
+
+
+ÿÿWindows:
+  ÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿcreatewindowÿ  // create a new window
+   ÿdestroywindowÿ // destroy a window
+   ÿdisplayÿ       // update the display
+   ÿeotstringÿ     // change the 'end-of-text' line in a window
+   ÿframe?ÿ        // test for window frame components
+   ÿgetborderÿ     // get window border information
+   ÿgetbotwinÿ     // get the windowid of the bottommost window
+   ÿgetchildÿ      // get a child windowid
+   ÿgetcolorÿ      // get window colors
+   ÿgetcoordÿ      // get window dimensions and coordinates
+   ÿgetcurrwinÿ    // get the windowid of the topmost window
+   ÿgetnextwinÿ    // get the windowid of the next window
+   ÿgetparentÿ     // get a parent windowid
+   ÿgetprevwinÿ    // get the windowid of the previous window
+   ÿgetregionÿ     // get a window region from virtual coordinates
+   ÿgettitleÿ      // get a window title
+   ÿgetviewbotÿ    // get the bottommost visible row in window
+   ÿgetviewcolsÿ   // get the visible window width
+   ÿgetviewleftÿ   // get the leftmost column in window
+   ÿgetviewrightÿ  // get the rightmost visible column in window
+   ÿgetviewrowsÿ   // get the visible window height
+   ÿgetviewtopÿ    // get the topmost row in a window
+   ÿgetwinbufÿ     // get the bufferid associated with a window
+   ÿgetwincountÿ   // get the number of windows or child windows
+   ÿgetwinctrlÿ    // get a title bar control
+   ÿgetwincursÿ    // get the cursorid attached to a window
+   ÿgetwinobjÿ     // get object name associated with a window
+   ÿgetwinscrÿ     // get a scroll bar position from virtual coords
+   ÿgotowindowÿ    // change the default window for builtin functions
+   ÿhidecursorÿ    // hide a cursor (temporarily for buffer windows)
+   ÿhidewindowÿ    // hide a window temporarily
+   ÿhiliteÿ        // highlight text in a window
+   ÿmovewindowÿ    // move a window to a new location
+   ÿsetborderÿ     // change the window borders
+   ÿsetcolorÿ      // change the window colors
+   ÿsetframeÿ      // add or remove window frame components
+   ÿsetnextwinÿ    // set the next window
+   ÿsetparentÿ     // set the parent window
+   ÿsetprevwinÿ    // set the previous window
+   ÿsetshadowÿ     // set the window shadow
+   ÿsetshadow2ÿ    // set the 1/2 window shadow
+   ÿsettitleÿ      // change a window title
+   ÿsetwinctrlÿ    // define window title bar controls
+   ÿsetwincursÿ    // attach a cursor (and a buffer) to a window
+   ÿsetwinobjÿ     // associate a window with an object
+   ÿshowcursorÿ    // show a cursor
+   ÿshowwindowÿ    // show a hidden window
+   ÿsizewindowÿ    // change the size of a window
+   ÿtilewindowÿ    // tile windows
+   ÿvirtocolÿ      // convert a virtual X-coordinate to a column
+   ÿvirtorowÿ      // convert a virtual Y-coordinate to a row
+   ÿwindow?ÿ       // test if a window exists
+   ÿwindowflagÿ    // change/get window flags
+   ÿwintype?ÿ      // test the window event object hierarchy
+
+    Note: the following builtin video functions are only meaningful in
+    video output windows (windows which do not display a buffer):
+
+   ÿfillrectÿ      // fill a rectangle with a character
+   ÿgetattrÿ       // get a color attribute from a video window
+   ÿgetstrÿ        // get a string from a video window
+   ÿgetxÿ          // get the column of video window cursor
+   ÿgetyÿ          // get the row of video window cursor
+   ÿgotoscreenÿ    // route video functions to the physical screen
+   ÿgotoxyÿ        // move the cursor of video window
+   ÿwritelineÿ     // display a string and CR in a video window
+   ÿwritestrÿ      // display a string in a video window
+
+  library functions:
+   ÿcascadeÿ       // cascade all windows
+   ÿcopywinÿ       // copy the current edit window
+   ÿcurrwinÿ       // change the current window
+   ÿdeletewinÿ     // delete the current window
+   ÿgetsettingsÿ   // get the current window settings
+   ÿmax?ÿ          // test if the current window is maximized
+   ÿmaximizeÿ      // maximize the current window
+   ÿmin?ÿ          // test if the current window is minimized
+   ÿminimizeÿ      // minimize the current window
+   ÿnextwindowÿ    // switch to the next window
+   ÿpankeyÿ        // pan the video background with the keyboard
+   ÿprevwindowÿ    // switch to a previous window
+   ÿrestoreÿ       // restore the current window
+   ÿsetdrawÿ       // set the window line-drawing style
+   ÿsettingÿ       // change a window setting
+   ÿsetting?ÿ      // test if specified window settings are ON
+   ÿsizekeyÿ       // resize or move the current window with the kbd
+   ÿsizewinÿ       // resize or move the current window
+   ÿsplitwinÿ      // split the current edit window
+   ÿtileÿ          // tile all windows horizontally or vertically
+   ÿtoolbarÿ       // display a toolbar on the current window
+   ÿwinlistÿ       // display a popup menu of open windows
+
+
+ÿÿScrolling:
+  ÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿadjustcolÿ     // adjust left window view offset
+   ÿadjustrowÿ     // adjust top window view offset
+   ÿpagedownÿ      // scroll down one page
+   ÿpageupÿ        // scroll up one page
+   ÿrollcolÿ       // scroll left or right by a relative amount
+   ÿrollrowÿ       // scroll up or down by a relative amount
+   ÿscrollcolÿ     // scroll directly to a column
+   ÿscrollrowÿ     // scroll directly to a row
+
+
+ÿÿVideo:
+  ÄÄÄÄÄ
+
+  builtin functions:
+   ÿblinkÿ         // enable or disable the video blink mode
+   ÿgetpaletteÿ    // return a color attribute or the entire palette
+   ÿgetvidbotÿ     // return the bottom edge of the virtual screen
+   ÿgetvidcolsÿ    // return the screen width
+   ÿgetvidleftÿ    // return the left edge of the virtual screen
+   ÿgetvidrightÿ   // return the right edge of the virtual screen
+   ÿgetvidrowsÿ    // return the screen height
+   ÿgetvidtopÿ     // return the top edge of the virtual screen
+   ÿmono?ÿ         // test for a monochrome display
+   ÿpanÿ           // pan the virtual screen (relative)
+   ÿpantoÿ         // pan the virtual screen (absolute)
+   ÿsetdisplayÿ    // enable/disable display updating
+   ÿsetpaletteÿ    // define the color palette
+   ÿsetvideoÿ      // change video mode/background
+   ÿshowentryÿ     // show the entry screen when the editor was started
+   ÿvideoborderÿ   // change the video overscan border color
+
+  library functions:
+   ÿvideomodeÿ     // change the video mode
+
+  extension functions:
+   ÿtogglemodeÿ    // toggle the video mode between 80x25 and 80x50
+   ÿwritebakÿ      // write a string on the video background
+
+
+ÿÿSyntax Highlighting:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  statements:
+   ÿkeywordÿ       // define syntax highlighting keywords
+
+  builtin functions:
+   ÿgetsyntaxÿ     // get the window syntax object
+   ÿsetsyntaxÿ     // enable or disable syntax highlighting for a window
+   ÿsyntaxÿ        // define a syntax highlighting template for the
+                   //   current object
+
+  extension functions:
+   ÿonsyntaxÿ      // called by the editory library (LIB.X) to get the
+                   // syntax highlighting object for a filename
+   ÿhilitewordÿ    // dynamically define the word at the cursor as
+                   // a syntax highlighting keyword
+
+ÿÿFile Handling:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿbootpathÿ      // get a filename in terms of the editor bootpath
+   ÿclosefileÿ     // close an open file
+   ÿcopyfileÿ      // copy a file
+   ÿcreatedirÿ     // create a new directory
+   ÿcurrpathÿ      // change the current drive and/or path
+   ÿdeletefileÿ    // delete a file
+   ÿdirectory?ÿ    // test if a directory exists
+   ÿfile?ÿ         // test if a file exists
+   ÿfileattr?ÿ     // test file attributes
+   ÿfileposÿ       // change the position in an open file
+   ÿgetbootpathÿ   // get the editor invocation path
+   ÿgetcurrpathÿ   // get the current Dos path
+   ÿgetdiskÿ       // get disk drive information
+   ÿlocatefileÿ    // search for a file or directory in a path
+   ÿopenfileÿ      // open a file and return a file handle
+   ÿqualifyÿ       // get a fully qualified filename
+   ÿreadfileÿ      // read from an open file
+   ÿrenamefileÿ    // rename a file
+   ÿscanfileÿ      // scan a file for a string
+   ÿsetbootpathÿ   // change the bootpath
+   ÿsetfileattrÿ   // change file attributes
+   ÿtouchfileÿ     // update the date and time of a file
+   ÿwritefileÿ     // write to an open file
+
+  library functions:
+   ÿdir?ÿ          // test if a filespec is a directory
+
+  extension functions:
+   ÿdefextÿ        // append a default extension if no extension
+   ÿforceextÿ      // force a filename to have an extension
+   ÿgetextÿ        // get the extension portion of a filespec
+   ÿgetnameÿ       // get the name & extension portion of a filespec
+   ÿgetpathÿ       // get the drive & path portion of a filespec
+
+
+ÿÿSystem Initialization:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿcursorsizeÿ    // set the insert and overstrike cursor size
+   ÿinternationalÿ // define international date and time formats
+   ÿkbdoptionsÿ    // set keyboard options
+   ÿmaxemsÿ        // define the amount of EMS memory to use
+   ÿmaxxmsÿ        // define the amount of XMS memory to use
+   ÿmemoptionsÿ    // set memory usage options
+   ÿprintformatÿ   // define the initial printer settings
+   ÿpriorityÿ      // set the event dispatching priority
+   ÿspeakerÿ       // enable or disable the PC speaker
+   ÿswapfilesÿ     // define the swapfiles to use
+
+
+ÿÿSystem Information:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿgetdateÿ       // return the date in international format
+   ÿgetenvÿ        // return the value of a Dos environment variable
+   ÿgetexeÿ        // return the editor .Exe file name
+   ÿgetfileinfoÿ   // return file/directory information
+   ÿgetosÿ         // return the operating system version
+   ÿgetrawtimeÿ    // return the time and date in raw format
+   ÿgettimeÿ       // return the time in international format
+   ÿgetversionÿ    // return the current version of the editor
+
+
+ÿÿKeyboard:
+  ÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿbreak?ÿ        // test if <ctrl break> was pressed
+   ÿbreakoffÿ      // clear the <ctrl break> flag
+   ÿgeteventcodeÿ  // get a keycode for keyname
+   ÿgeteventnameÿ  // get a keyname for a keycode
+   ÿgetkeyÿ        // wait for a key and return a keycode
+   ÿinheritkeysÿ   // enable or disable keyboard event inheritance
+   ÿkbdoptionsÿ    // set keyboard options
+   ÿkeyhit?ÿ       // test if a key was pressed
+   ÿqueuekeyÿ      // push keycode(s) onto the event queue
+   ÿsendkeyÿ       // execute keycode(s) immediately
+   ÿshiftkey?ÿ     // test the shift key state
+
+  extension functions:
+   ÿaskrepkeyÿ     // prompt to repeat a key or keys
+   ÿprefixÿ        // generate multi-key events
+
+
+ÿÿMouse:
+  ÄÄÄÄÄ
+
+  builtin functions:
+   ÿbutton?ÿ       // test the mouse button state
+   ÿclosemouseÿ    // disable the mouse
+   ÿgetmousexÿ     // get the mouse virtual X coordinate
+   ÿgetmouseyÿ     // get the mouse virtual Y coordinate
+   ÿgetregionÿ     // get the window region at the mouse position
+   ÿhidemouseÿ     // hide the mouse cursor
+   ÿmouseposÿ      // change the mouse pointer position
+   ÿmousesenseÿ    // change the mouse sensitivity
+   ÿopenmouseÿ     // enable the mouse
+   ÿshowmouseÿ     // show the mouse cursor
+   ÿvirtocolÿ      // convert a virtual X coordinate to a column
+   ÿvirtorowÿ      // convert a virtual Y coordinate to a row
+
+  library functions:
+   ÿtrackmouseÿ    // move the cursor to the mouse pointer position
+
+
+ÿÿMenus:
+  ÄÄÄÄÄ
+
+  statements:
+   ÿmenuÿ          // define a pull-down or popup menu
+   ÿmenubarÿ       // define a menu bar for a window
+
+  builtin functions:
+   ÿgetmenuÿ       // get menu information
+   ÿgetmenubarÿ    // get menu bar information
+   ÿhilitebarÿ     // highlight menu bar item
+
+  library functions:
+   ÿgotobarÿ       // highlight a menu bar item
+   ÿgotobar2ÿ      // highlight a toolbar or drive menu item
+   ÿgotomenuÿ      // display a pull-down menu
+   ÿpopupÿ         // display a popup menu
+   ÿsubmenuÿ       // display a submenu
+
+
+ÿÿDesktop:
+  ÄÄÄÄÄÄÄ
+
+  library functions:
+   ÿbegdeskÿ       // mark the beginning of the current desktop
+   ÿcurrdeskÿ      // set the current desktop to the window layout
+   ÿenddeskÿ       // mark the end of the current desktop
+   ÿopendeskÿ      // load a desktop and make it the current desktop
+   ÿopenhistoryÿ   // load history buffers and the current desktop
+   ÿrestoredeskÿ   // set the window layout to the current desktop
+   ÿsavedeskÿ      // save the current desktop to a file
+   ÿsavehistoryÿ   // save all history buffers and the current desktop
+
+
+ÿÿPrompts and Dialog boxes:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿsayÿ           // display a message on the window title bar
+
+  library functions:
+   ÿaboutÿ         // display an about dialog box
+   ÿaskboxÿ        // prompt the user for a string (2-line box)
+   ÿaskbox1ÿ       // prompt the user for a string (1-line box)
+   ÿasklineÿ       // prompt the user for a string (command-line prompt)
+   ÿmsgboxÿ        // display a message in a window
+   ÿokboxÿ         // display an Ok-Cancel message box
+   ÿpickfileÿ      // display a file selection picklist
+   ÿshortboxÿ      // display a message box without an 'Ok' button
+   ÿyncboxÿ        // display a Yes-No-Cancel message box
+
+    Note: the following library functions are used for creating custom
+    dialog boxes:
+
+   ÿbuttonÿ        // create a button control
+   ÿdialogÿ        // create a main dialog box window
+   ÿfieldÿ         // create an edit field control
+   ÿgetdialogÿ     // display a modal dialog box and get return values
+   ÿgroupboxÿ      // create a groupbox control
+   ÿlistboxÿ       // create a listbox control
+   ÿsetgroupboxÿ   // re-initialize a groupbox
+   ÿshowdialogÿ    // make a dialog box modeless
+   ÿwhenenterÿ     // define an <enter> handler for a control
+   ÿwhenselectÿ    // define a select handler for a groupbox/listbox
+
+  extension functions:
+   ÿasciilistÿ     // display an Ascii chart (with char entry)
+   ÿaskÿ           // prompt the user for a string
+   ÿaskcÿ          // generic prompt to change a config variable
+   ÿaskcompleteÿ   // filename completion within an open prompt
+   ÿaskprthdrÿ     // change the print header/footer
+   ÿaskracÿ        // replace/append/cancel popup menu
+   ÿaskxÿ          // generic prompt (with command execution)
+   ÿfinddlgÿ       // display a find dialog box
+   ÿrepldlgÿ       // display a replace dialog box
+   ÿpickfile2ÿ     // display a file selection picklist
+
+
+ÿÿPrompt History:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  library functions:
+   ÿaddhistoryÿ    // add a string to a history buffer
+   ÿaskhistoryÿ    // display a history menu for the current prompt
+   ÿgethistnameÿ   // get the history buffer for the current prompt
+   ÿgethiststrÿ    // get the most recent string in a history buffer
+   ÿnexthistÿ      // display the next history string in prompt
+   ÿopenhistoryÿ   // load history buffers and the current desktop
+   ÿpophistoryÿ    // display a popup history menu
+   ÿprevhistÿ      // display the previous history string in prompt
+   ÿsavehistoryÿ   // save all history buffers and the current desktop
+
+
+ÿÿPrimary Editing:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  library functions:
+   ÿcloseÿ         // close the current edit or file manager window
+   ÿfilelistÿ      // display a popup menu of open buffers
+   ÿnextfileÿ      // display the next buffer in the current window
+   ÿopenÿ          // open a new edit or file manager window
+   ÿopenbufÿ       // display a buffer in an edit window
+   ÿopennewÿ       // open a new edit window with an empty buffer
+   ÿprevfileÿ      // display the previous buffer in the current window
+   ÿreopenÿ        // refresh the current edit or file manager window
+   ÿsaveÿ          // save the buffer in the current edit window
+   ÿsetnameÿ       // rename the current edit window and buffer
+
+  extension functions:
+   ÿaskasaveÿ      // prompt to set the autosave time interval
+   ÿaskinsertÿ     // prompt to insert a file at the cursor
+   ÿasknameÿ       // prompt to change the current file name
+   ÿaskopenÿ       // prompt to open an edit or file manager window
+   ÿaskopenbÿ      // prompt to open a file in binary mode
+   ÿasksaveasÿ     // prompt to save the current file under a new name
+   ÿautosaveÿ      // set the autosave time interval
+   ÿcloseÿ         // close the current window (higher level)
+   ÿcloseallÿ      // close all windows
+   ÿhelpmacroÿ     // display macro help
+   ÿopencfgÿ       // open an AML configuration file
+   ÿopenlastÿ      // open the last file closed
+   ÿopenwordÿ      // open the filename at the cursor
+   ÿprintÿ         // print current file or marked block
+   ÿprintfileÿ     // print a file on disk
+   ÿprintstrÿ      // send a string to the printer
+   ÿquickrefÿ      // display the function reference or quick reference
+
+
+ÿÿDos Shell:
+  ÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿsystemÿ        // execute a Dos program (low level)
+
+  extension functions:
+   ÿaskrunÿ        // prompt to execute a Dos command
+   ÿaskruncapÿ     // prompt to capture Dos command output
+   ÿosÿ            // execute a Dos program (change and restore path)
+   ÿrunÿ           // execute a Dos command
+   ÿruncapÿ        // execute a Dos command and capture output
+   ÿshellÿ         // shell to Dos
+
+
+ÿÿKey Macros:
+  ÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿplaying?ÿ      // test if a key macro is currently playing
+
+  library functions:
+   ÿassignkeyÿ     // assign the scrap macro to a key
+   ÿerasekeyÿ      // erase the scrap macro or all key macros
+   ÿopenkeyÿ       // load key macros in a file
+   ÿplaykeyÿ       // execute a key macro
+   ÿsavekeyÿ       // save all key macros to a file
+   ÿsettingÿ       // turn record mode ON and OFF
+
+  extension functions:
+   ÿaskopenkeyÿ    // prompt to open a key macro file
+   ÿasksavekeyÿ    // prompt to save current key macros
+   ÿerasekey2ÿ     // erase key macros (with messages)
+   ÿopenkey2ÿ      // open a key macro file (with messages)
+   ÿplayÿ          // play the current scrap macro
+   ÿrecordÿ        // toggle the record setting
+
+
+ÿÿFile Manager:
+  ÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  library functions:
+   ÿfbreakÿ        // break out of the 'fcommand' function
+   ÿfcommandÿ      // execute a function for all marked files
+   ÿfgetfileÿ      // get the filespec at the current line
+   ÿfgetoptÿ       // get options
+   ÿfgetsortÿ      // get sort order
+   ÿfmarkÿ         // mark or unmark files
+   ÿfmark?ÿ        // test if files are marked
+   ÿfsortÿ         // sort files
+   ÿfstatusÿ       // update status line
+   ÿfupÿ           // display the parent directory
+   ÿfupdateÿ       // update file manager
+
+  extension functions:
+   ÿfattrÿ         // change the attributes of a file or marked files
+   ÿfcopyÿ         // copy a file or marked files
+   ÿfdeleteÿ       // delete a file or marked files
+   ÿflopenÿ        // open a file list
+   ÿflsaveÿ        // save a file list
+   ÿfmkdirÿ        // create a new directory
+   ÿfmoveÿ         // move a file or marked files
+   ÿfopenÿ         // open a file or marked files
+   ÿfprintÿ        // print a file or marked files
+   ÿfremoveÿ       // remove lines
+   ÿfrenameÿ       // rename a file
+   ÿfrunÿ          // execute a file
+   ÿfstatÿ         // display statistics
+   ÿftouchÿ        // update date/time of a file or marked files
+
+
+ÿÿInternal Events:
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  builtin functions:
+   ÿ<compiling>ÿ   // sent while compiling a file
+   ÿ<destroy>ÿ     // sent before an object is destroyed
+   ÿ<display>ÿ     // sent after the display is updated
+   ÿ<loading>ÿ     // sent while loading a file
+   ÿ<paint>ÿ       // sent after drawing the window client area
+   ÿ<printing>ÿ    // sent while printing a file
+   ÿ<saving>ÿ      // sent while saving a file
+   ÿ<status>ÿ      // sent before drawing the window status line
+
+  library functions:
+   ÿonalarmÿ       // sent to sound the PC speaker
+   ÿoncloseÿ       // sent before closing a file or fmgr window
+   ÿonclosedlgÿ    // sent when a dialog box is closed
+   ÿoncommentÿ     // returns language comments for a filename
+   ÿondeskÿ        // sent after the desktop is restored
+   ÿondialogÿ      // sent when unrecognized dialog box events occur
+   ÿonentryÿ       // sent after starting the editor
+   ÿonexitÿ        // sent before exiting the editor
+   ÿonfocusÿ       // sent after switching to another file or window
+   ÿonfoundÿ       // sent after a string is found
+   ÿonhotkeyÿ      // sent after a filelist hotkey char is entered
+   ÿonkillfocusÿ   // sent before before a window loses the focus
+   ÿonnameÿ        // sent to format a filename
+   ÿonopenÿ        // sent after loading a new file or fmgr window
+   ÿonsyntaxÿ      // returns a syntax object for a filename
+
+  extension functions:
+   ÿonsaveÿ        // sent before a file is saved
+

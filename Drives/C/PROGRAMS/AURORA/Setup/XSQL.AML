@@ -1,0 +1,55 @@
+//--------------------------------------------------------------------
+// XSQL.AML
+// Syntax highlighting for SQL files (Sql)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+  'bcfin'                         // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+  '()=+-*/<>|&^.[]:_$@\t'         // symbol set 1
+  ''                              // symbol set 2
+  ''                              // string characters
+  ''                              // string literal char
+  ''                              // numeric char
+  '//'    0                       // eol comment 1 / start column
+  ''      0                       // eol comment 2 / start column
+  '/*'    '*/'                    // multi-line comment 1
+  ''      ''                      // multi-line comment 2
+  0                               // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black     // keyword
+  color gray         on cyan      // symbol set 1
+  color gray         on cyan      // symbol set 2
+  color brightred    on black     // string
+  color brightred    on black     // numeric
+  color brightgreen  on black     // eol comment 1
+  color brightgreen  on black     // eol comment 2
+  color brightgreen  on black     // comment 1
+  color brightgreen  on black     // comment 2
+
+keyword
+  add, all, alter, and, any, as, asc, avg, begin, between, break,
+  browse, bulk, by, checkpoint, clustered, commit, compute, confirm,
+  continue, controlrow, convert, count, create, database, dbcc, debug,
+  declare, default, delete, desc, disk, distinct, drop, dummy, dump,
+  else, end, errlvl, error, except, exec, execute, exists, exit, file,
+  fillfactor, for, from, getdefault, goto, grant, group, having,
+  holdlock, if, in, index, init, insert, intersect, into, is, kill,
+  like, lineno, load, max, min, mirrorexit, noinit, nonclustered, not,
+  nounload, null, off, offsets, on, once, or, order, over, perm,
+  permanent, plan, print, proc, procedure, processexit, public,
+  raiserror, readtext, reconfigure, repare, return, revoke, rigger,
+  rollback, rowcount, rule, save, select, set, setuser, statistics, sum,
+  table, tape, temp, temporary, textsize, to, tran, transaction,
+  truncate, tsequal, union, unique, unload, update, use, values, view,
+  waitfor, where, while, with, writetext

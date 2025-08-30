@@ -1,0 +1,123 @@
+//--------------------------------------------------------------------
+// SWEEP.AML
+// Sweep Directories, (C) 1993-1996 by nuText Systems
+//
+// This macro will traverse a directory and all it's subdirectories,
+// performing one or more of the following operations:
+//
+//   - copying files and directories
+//   - deleting files and directories
+//   - obtaining statistics
+//
+// Usage:
+//
+// This macro is intended for use as a utility by other macros, not as a
+// standalone macro. Sweep is used by the file manager to mopy, copy, and
+// delete entire directories, and to obtain directory statistics.
+//
+// When called from runmacro, arguments to this macro will be as follows:
+//
+//   arg 1: the filename of this macro
+//   arg 2: the object name of this macro
+//   arg 3: the source directory
+//   arg 4: the destination directory
+//   arg 5: option codes
+//
+// All directories must have a terminating backslash. The following
+// table shows what arguments must be passed (from runmacro) for each
+// sweep function:
+//
+//   function      arg 3      arg 4      arg 5
+//   --------      -----      -----      -----
+//   move          source\    dest\      'cd'
+//   copy          source\    dest\      'c'
+//   delete        source\    null       'd'
+//   statistics    source\    null       null
+//
+// This macro will also return a 3-element array consisting of:
+//
+//   element 1:    the total number of directories
+//   element 2:    the total number of files
+//   element 3:    the total size of all files
+//
+// If anything fails, this macro returns null.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+variable totaldirs, totalfiles, totalsize
+
+loadoptions = "dfhvs" + _NameStyle
+
+// scan directories recursively
+// directories must have a terminating backslash
+private function sweep (spath dpath options)
+  // get a directory listing
+  if loadbuf spath + "*.*" '' '' loadoptions then
+    totaldirs = totaldirs + (getloadinfo 'd')
+    totalfiles = totalfiles + (getloadinfo 'f')
+    totalsize = totalsize + (getloadinfo 's')
+    c = pos 'c' options
+    d = pos 'd' options
+    if c then
+      if not (createdir dpath) and not (directory? dpath) then
+        destroybuf
+        return
+      end
+    end
+    if getlinelen then
+      repeat
+        file = gettext
+        sfile = spath + file
+        if file [LAST_CHAR] == '\\' then
+          if not sweep sfile dpath + file options then
+            destroybuf
+            return
+          end
+        else
+          if c then
+            if not copyfile sfile dpath + file then
+              destroybuf
+              return
+            end
+          end
+          if d then
+            // delete the file even if it's read-only
+            if not deletefile sfile then
+              setfileattr sfile
+              if not deletefile sfile then
+                destroybuf
+                return
+              end
+            end
+          end
+        end
+      until not down
+    end
+
+    // delete the source directory
+    if d then
+      // delete the file even if it's read-only
+      if not deletefile spath then
+        spath [LAST_CHAR] = ''
+        setfileattr spath
+        if not deletefile spath then
+          destroybuf
+          return
+        end
+      end
+    end
+
+    destroybuf
+  end
+  return TRUE
+end
+
+// move:   source\ dest\ 'cd'
+// copy:   source\ dest\ 'c'
+// delete: source\ ''    'd'
+// stats:  source\ ''    ''
+if sweep (arg 3) (arg 4) (arg 5) then
+  return {totaldirs totalfiles totalsize}
+end

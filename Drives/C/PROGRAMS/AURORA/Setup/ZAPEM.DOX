@@ -1,0 +1,74 @@
+
+ÿÿZAPEM.AML
+ ÿShoot'em-up Gameÿ
+
+  ZapEm plays a grid-based game where you shoot at computer generated
+  enemies. But be careful, they shoot back! You have the advantage in
+  mobility, but they have the advantage in numbers and strength.
+
+  ZapEm has 9 levels, starting at level 1. You must destroy all the
+  enemies at each level before proceeding to the next level.
+
+  Firing and movement can only occur in 4 directions: north, south,
+  east, and west (diagonal firing and movement are not permitted). Use
+  the cursor keys are for movement and the shift-cursor for firing. Your
+  position is indicated by a plus character (+).
+
+  Enemies are destroyed by firing at them until their energy level is
+  zero. Enemies will also try to destroy you in the same manner. The
+  amount of energy deducted for each hit is determined by the enemy
+  strength (or your strength, if you are firing). For example, a shot
+  fired at strength 5 deducts 5 energy units from the object being hit.
+
+  Each shot fired will cost you 1 energy unit for level 1, 2 energy
+  units for level 2, and so on, which means that rapid firing can be
+  expensive (enemies also pay this price).
+
+  When starting the game at level 1, you are given an initial strength
+  of 5 and an energy level of 100 units. Your energy level can be
+  increased by destroying an enemy or by advancing to the next level.
+  Your strength can be increased by destroying an enemy stronger than
+  yourself, or by advancing to the next level. Your current strength and
+  energy level are always displayed on the game status line.
+
+  Enemy strengths and energy levels are based on the enemy type:
+
+    Type  Strength  Energy
+    ÄÄÄÄ  ÄÄÄÄÄÄÄÄ  ÄÄÄÄÄÄ
+      A      5       100
+      B     10       200
+      C     15       300
+      :
+      :
+
+  At higher levels of the game, enemies become stronger, faster, and
+  more numerous.
+
+  Each level is also populated with 'stars' (indicated by asterisks)
+  which can be used as terrain for strategy and blocking. Stars also
+  have an energy level and can be destroyed by repeated firing. Brighter
+  stars have a higher energy level.
+
+  Play can be suspended by moving the game window behind another window
+  on the desktop, or by viewing help with <f1>.
+
+
+ÿÿKeys:
+  ÄÄÄÄ
+ ÿMovementÿ
+    <up>               // move up
+    <down>             // move down
+    <left>             // move left
+    <right>            // move right
+
+ ÿFiringÿ
+    <shift up>         // fire up
+    <shift down>       // fire down
+    <shift left>       // fire left
+    <shift right>      // fire right
+
+ ÿOtherÿ
+    <ctrl s>           // sound On/Off
+    <f1>               // help
+    <esc>              // exit
+

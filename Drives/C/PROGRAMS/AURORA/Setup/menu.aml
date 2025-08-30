@@ -1,0 +1,438 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// MENU.AML
+// Aurora Menu definitions (included by Main.aml)
+//
+// If you have made any changes, save this file and select Recompile
+// the Editor from the Set menu. Exit and re-enter the editor for
+// your changes to take effect.
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+// Edit Window menu bar and tool bar
+//--------------------------------------------------------------------
+
+function  EditMen
+
+  // menu bar
+  menubar "" 1
+    item "&File"     "editFile"
+    item "&Window"   "editWindow"
+    item "&Block"    "editBlock"
+    item "&Search"   "editSearch"
+    item "F&old"     "editFold"
+    item "&Edit"     "editEdit"
+    item "&Clip"     "editClip"
+    item "&Print"    "editPrint"
+    item "Se&t"      "editSet"
+    item "M&acro"    "editMacro"
+    item "&Help"     "editHelp"
+  end
+
+  // tool bar
+  menubar "" 2
+    item "<&&ð>"     toolbar                 // close tool bar
+    item "<&&?>"     quickref 'u' 'f'        // users guide
+    item "<&&*>"     open "*.*"              // display file manager
+    item "<&&/>"     copywin                 // copy window
+    item "<&&Ä>"     splitwin 'h'            // split window horz
+    item "<&&|>"     splitwin 'v'            // split window vert
+    item "<&&o>"     askopen                 // open prompt
+    item "<&&s>"     save                    // save file
+    item "<&&F>"     askfind                 // find prompt
+    item "<&&f>"     findlast                // do last find/replace
+    item "<&&r>"     formatblock2            // reformat block
+    item "<&&®>"     undo                    // undo last change
+    item "<&&¯>"     redo                    // redo last change
+    item "<&&>>"     foldblock2              // fold block
+    item "<&&<>"     destroyfold2            // unfold line
+  end
+end
+
+
+//--------------------------------------------------------------------
+// Edit Window pulldown menus
+//--------------------------------------------------------------------
+
+menu  "editFile"
+  item " &New                  <ctrl n>"  opennew
+  item " &Open..                <alt e>"  askopen
+  item " Open &Binary.."                  askopenb
+  item " Open and &Insert..     <alt i>"  askinsert
+  //item " Open Last&..           <alt z>"  openlast
+  item " &Rename..              <alt n>"  askname
+  item " &Save                     <f3>"  save
+  item " Sa&ve As.."                      asksaveas
+  item "-"
+  item " &File Manager..           <f4>"  open "*.*"
+  item " &Tree.."                         runmacro2 "tree"
+  item " Ne&xt               <ctrl del>"  nextfile
+  item " &Prev               <ctrl ins>"  prevfile
+  item " &List..                <alt ->"  filelist
+  item "Ä"
+  item " &Close                 <alt q>"  close
+  item " Close &All             <alt x>"  closeall
+  item " Sav&e and Close       <ctrl x>"  close 's'
+  item " Save an&d Close All"             closeall 's'
+  item "Ä"
+  item " Abo&ut.."                        about
+end
+
+
+menu  "editWindow"
+  item " &Restore"                       restore
+  item " &Move/Size         <ctrl f5>"   sizekey
+  item " P&an               <ctrl f6>"   pankey
+  item " M&inimize"                      minimize
+  item " Ma&ximize           <ctrl z>"   maximize
+  item " &Next               <ctrl a>"   nextwindow
+  item " &Prev"                          prevwindow
+  item " &List..              <alt w>"   winlist
+  item "Ä"
+  item " &Copy               <ctrl c>"   copywin
+  item " Split Hor&z          <alt h>"   splitwin 'h'
+  item " Split Ver&t          <alt v>"   splitwin 'v'
+  item "Ä"
+  item " Ca&scade          <shift f5>"   cascade
+  item " Tile &Horz        <shift f4>"   tile 'h'
+  item " Tile &Vert        <shift f3>"   tile 'v'
+  item "Ä"
+  item " Tool &Bar          <ctrl f8>"   toolbar
+  item " Pr&ompt Style.."                runcfg "prom"
+end
+
+menu  "editMark"
+  item " Mark &Line         <alt l>"   markline
+  item " Mark &Column       <alt b>"   markcolumn
+  item " Mark C&haracter    <alt a>"   markchar
+  item " Mark &Word         <alt 1>"   markword
+  item " Mark to &EOL       <alt 2>"   markeol
+  item " Mark &Paragraph    <alt 3>"   markpara "tb"
+  item "Ä"
+  item " &Unmark            <alt u>"   destroymark
+end
+
+menu  "editBlock"
+  item " Mar&k..                    "    submenu "editMark"
+  item " &Copy                <alt c>"    copyblock2
+  item " &Move                <alt m>"    moveblock2
+  item " Copy &Over           <alt o>"    copyblockover
+  item " Mo&ve Over          <ctrl m>"    moveblockover
+  item " &Delete              <alt d>"    deleteblock2
+  item " &Indent           <shift f8>"    shiftblock  1
+  item " UnInden&t         <shift f7>"    shiftblock -1
+  item "Ä"
+  item " &Fill            <ctrl k><f>"    fillblock2
+  item " S&ave..          <ctrl k><s>"    saveblock2
+  item " &Sort            <ctrl k><o>"    sortblock2
+  item " Lo&wercase"                      caseblock 'l'
+  item " U&ppercase       <ctrl k><u>"    caseblock
+  item "Ä"
+  item " Ce&nter          <ctrl k><c>"    justblock2 'c'
+  item " &Left Justify"                   justblock2 'l'
+  item " Ri&ght Justify"                  justblock2 'r'
+  item " &Reformat            <alt r>"    formatblock2
+  item " R&eformat Right      <alt y>"    formatblock2 "rj"
+end
+
+menu  "editSearch"
+  item " &Find..         <f5> or <ctrl f>"   askfind
+  item " Re&place..              <ctrl g>"   askrepl
+  item " &Repeat Last Find/Repl  <ctrl l>"   findlast
+  item " &Scan Files..           <ctrl s>"   askscan
+  item " &Incremental Search     <ctrl i>"   isearch
+  item " Find &Occurrences..     <ctrl h>"   askfindo
+  item "Ä"
+  item " &Quick Bookmark         <ctrl 2>"   quickbook
+  item " Pre&v Bookmark          <ctrl 6>"   cyclebook
+  item " Place &Bookmark.."                  placebook
+  item " &Go to Bookmark.."                  askbook
+  item "Ä"
+  item " Go to &Line..           <ctrl j>"   askrow
+  item " Go to Bloc&k Start      <ctrl b>"   gotomark 't'
+  item " Go to Block En&d"                   gotomark 'b'
+  item " Go to Ne&xt Fold         <alt 7>"   search2 "f/f"
+  item "Ä"
+  item " Find &Matching Char     <alt f3>"   gotomatch2
+  item " Go to Compiler &Error   <alt f7>"   gotoerror
+end
+
+menu  "editFold"
+  item " &Fold Next Line          <alt 8>"    foldline
+  item " &Unfold Next Line        <alt 9>"    foldline 'u'
+  item "Ä"
+  item " Crea&te Fold"                        createfold
+  item " &Open Fold               <alt \\>"   openfold
+  item " &Close Fold              <alt \\>"   closefold
+  item " &Remove Fold             <alt g>"    destroyfold2
+  item "Ä"
+  item " Fold Bloc&k              <alt f>"    foldblock2
+  item " Fold Block Fl&at"                    foldflat
+  item " O&pen Block Folds"                   foldblock 'os'
+  item " C&lose Block Folds"                  foldblock 'cs'
+  item " Re&move Block Folds"                 foldblock 'ds'
+  item "Ä"
+  item " Ope&n All Folds          <alt [>"    foldall 'os'
+  item " Clo&se All Folds         <alt ]>"    foldall 'cs'
+  item " Remo&ve All Folds        <alt 0>"    foldall 'ds'
+  item "Ä"
+  item " &Export without Folds.."             asksaveas 'x'
+  item " E&xport Block without Folds.."       saveblock2 'x'
+end
+
+menu  "editEdit"
+  item " &Undo                  <ctrl u>"   undo
+  item " &Redo                  <ctrl y>"   redo
+  item "Ä"
+  item " &Insert Line       <ctrl enter>"   insline2
+  item " &Delete Line       <ctrl baksp>"   delline
+  item " &Join Line              <alt j>"   joinline
+  item " &Split Line             <alt s>"   splitline2
+  item "Ä"
+  item " Ce&nter Line            <alt 6>"   centerline
+  item " &Comment Line          <alt f1>"   commentline
+  item " Delete Right &Word     <ctrl t>"   delword
+  item " Du&plicate Line         <alt 4>"   copyblock '*l'
+  item " &Erase to End              <f6>"   delchar MAX_COL
+  item " Sw&ap Lines             <alt 5>"   swapline
+  item "Ä"
+  item " Ascii C&hart..          <alt =>"   asciilist
+  item " Date/&Time Stamp    <ctrl k><t>"   timestamp
+  item " Enter &Literal..       <ctrl [>"   literal
+  item " E&xpand Tabs        <ctrl k><x>"   tabfile
+  item " Hi&ghlight Word        <ctrl \\>"  hiliteword
+end
+
+menu  "editClip"
+  item " Cu&t                          <grey->"  cut
+  item " Cut &Append              <ctrl grey->"  cut 'a'
+  item "Ä"
+  item " &Copy                         <grey+>"  copy
+  item " Cop&y Append             <ctrl grey+>"  copy 'a'
+  item " Copy to &Windows      <ctrl k><grey+>"  copy 'w'
+  item "Ä"
+  item " &Paste                        <grey*>"  paste
+  item " Paste &Over              <ctrl grey*>"  paste 'o'
+  item " Paste &from Windows   <ctrl k><grey*>"  paste 'w'
+  item "Ä"
+  item " C&lear                   <ctrl grey/>"  clear
+  item " Current Clip&board..|*"                 askclip
+end
+
+menu  "editPrint"
+  item " &Print             <ctrl p>"       print
+  item " Print &Block        <alt p>"       print 'b'
+  item " Print &Formfeed"                   printstr '\x0C'
+  item "-"
+  item " &Header/Footer..|*"                askprthdr
+  item " Printer &Settings..|*"             runcfg "print"
+end
+
+// Note: do not change the first 13 lines of this menu
+// (except for key definitions)
+menu  "editSet"
+  item " &AutoIndent"                        setting 'A' TOGGLE
+  item " &Backup"                            setting 'B' TOGGLE
+  item " Line &Draw              <ctrl d>"   setting 'D' TOGGLE
+  item " Line St&yle..                  "   submenu "LineStyle"
+  item " &Hex View"                          setting 'H' TOGGLE
+  item " &Match Character"                   setting 'M' TOGGLE
+  item " &Smart Tabs"                        setting 'S' TOGGLE
+  item " Synta&x Highlighting"               setting 'X' TOGGLE
+  item " &Translate              <alt f4>"   setting 'T' TOGGLE
+  item " &Undo"                              setting 'U' TOGGLE
+  item " &Variable Tabs"                     setting 'V' TOGGLE
+  item " &Word Wrap"                         setting 'W' TOGGLE
+  item " &Live Word Wrap         <ctrl w>"   setting 'L' TOGGLE
+  item "Ä"
+  item " Mar&gins and Tabs.."                runcfg "marg"
+  item " L&ine Delimiter Options.."          runcfg "ldlm"
+  item "Ä"
+  item " &Configuration and Setup..|*"       runcfg "main"
+  item " Save Co&nfiguration"                savecfg
+  item " &Recompile the Editor   <alt f2>"   recompile
+end
+
+// Note: do not change this menu (except for key definitions)
+menu  "LineStyle"
+  item " &Single               ÚÄÄ¿"    setdraw 0
+  item " Double &Horizontal    ÕÍÍ¸"    setdraw 1
+  item " Double &Vertical      ÖÄÄ·"    setdraw 2
+  item " &Double               ÉÍÍ»"    setdraw 3
+  item " &Eraser                   "    setdraw 4
+end
+
+menu  "editMacro"
+  item " &Record Toggle        <ctrl r>"    record
+  item " &Play                 <ctrl e>"    play
+  item " &Erase"                            erasekey
+  item " Era&se All"                        erasekey 'a'
+  item " Ope&n.."                           askopenkey
+  item " Sa&ve.."                           asksavekey
+  item " &Assign to Key.."                  assignkey
+  item "Ä"
+  item " &Macro List..       <ctrl f12>"    runmacro2 "maclist"
+  item " &Key Assignments.."                opencfg "kbd"
+  item " Sho&w Available Keys.."            runmacro2 "keydef"
+  item "Ä"
+  item " Macro E&xpression..   <ctrl v>"    askeval
+  item " R&un Macro.."                      askrmacro
+  item " Compi&le Macro.."                  askcmacro
+  item "Ä"
+  item " &Dos Command..        <alt f9>|*"  askrun
+  item " D&os Capture..        <alt f8>"    askruncap
+  item " Dos S&hell                <f9>|*"  shell
+end
+
+menu  "editHelp"
+  item " &User's Guide Topics"                     runmacro2 "helpuser"
+  item " User's &Guide"                            quickref 'u'
+  item " User &Tips"                               quickref 't'
+  item "-"
+  item " &Language Reference Topics"               runmacro2 "helplang"
+  item " Language &Reference"                      quickref 'l'
+  item "-"
+  item " &Function Reference          <shift f2>"  quickref 'f'
+  item " Function &Quick Reference    <shift f1>"  quickref 'q'
+  item "-"
+  item " &Ordering Information"                    quickref 'o'
+end
+
+//--------------------------------------------------------------------
+// File Manager window menu bar
+//--------------------------------------------------------------------
+
+function  FmgrMen
+  menubar "" 1
+    item "&File"    "fmgrFile"
+    item "&Window"  "fmgrWindow"
+    item "&Mark"    "fmgrMark"
+    item "&Command" "fmgrCommand"
+    item "&Sort"    "fmgrSort"
+    item "&Print"   "fmgrPrint"
+    item "Se&t"     "fmgrSet"
+    item "M&acro"   "editMacro"
+    item "&Help"    "editHelp"
+  end
+end
+
+
+//--------------------------------------------------------------------
+// File Manager window pulldown menus
+//--------------------------------------------------------------------
+
+menu  "fmgrFile"
+  item " &New                 <ctrl n>"  opennew
+  item " &Open..               <alt e>"  askopen
+  item " Open &Binary.."                 askopenb
+  item " Open Last&..          <alt z>"  openlast
+  item " &Parent          <ctrl baksp>"  fup
+  item " R&efresh"                       reopen
+  item " &Tree.."                        runmacro2 "tree"
+  item "Ä"
+  item " E&dit List"                     flsave 'e'
+  item " Open &List.."                   flopen
+  item " &Replace List.."                flopen '' 'r'
+  item " &Save List As.."                flsave
+  item "Ä"
+  item " &Close                <alt q>"  close
+  item " Close &All            <alt x>"  closeall
+  item "Ä"
+  item " Abo&ut.."                       about
+end
+
+menu  "fmgrWindow"
+  item " &Restore"                      restore
+  item " &Move/Size        <ctrl f5>"   sizekey
+  item " P&an              <ctrl f6>"   pankey
+  item " M&inimize"                     minimize
+  item " Ma&ximize          <ctrl z>"   maximize
+  item " &Next              <ctrl a>"   nextwindow
+  item " &Prev"                         prevwindow
+  item " &List..             <alt w>"   winlist
+  item "Ä"
+  item " Ca&scade         <shift f5>"   cascade
+  item " Tile &Horz       <shift f4>"   tile 'h'
+  item " Tile &Vert       <shift f3>"   tile 'v'
+  item "Ä"
+  item " Pr&ompt Style.."               runcfg "prom"
+end
+
+menu  "fmgrMark"
+  item " Mark &Toggle     <space>"     fmark
+  item "Ä"
+  item " &Mark All        <alt m>"     fmark "ma"
+  item " &Unmark All      <alt u>"     fmark "ua"
+end
+
+menu  "fmgrCommand"
+  item " &Open                  <enter>"    fopen
+  item " Open &Binary         <shift b>"    fopen 'b'
+  item " Open &File List      <shift f>"    flopen (fgetfile)
+  item " Open &Key Macro      <shift k>"    openkey2 (fgetfile)
+  item "Ä"
+  item " &Move..              <shift m>"    fmove
+  item " &Copy..              <shift c>"    fcopy
+  item " &Delete     <del> or <shift d>"    fdelete
+  item " Re&name..            <shift n>"    frename
+  item "Ä"
+  item " &Run                 <shift r>"    frun 'c'
+  item " &Print               <shift p>"    fprint
+  item " Remove &Line         <shift l>"    fremove
+  item " &Statistics.."                     fstat
+  item "Ä"
+  item " &Touch               <shift t>"    ftouch
+  item " &Attributes..        <shift a>"    fattr
+  item " Scan F&iles..        <shift i>"    askscan TRUE
+  item " Cr&eate Directory.."               fmkdir
+end
+
+menu  "fmgrSort"
+  item " &Name           <alt n>"    fsort 'n'
+  item " &Extension"                 fsort 'e'
+  item " &Size           <alt s>"    fsort 's'
+  item " &Date-Time      <alt d>"    fsort 'd'
+  item " D&os Order      <alt o>"    fsort 'o'
+end
+
+menu  "fmgrSet"
+  item " &File Manager Options.."                runcfg "fmgr"
+  item " &Line Delimiter Options.."              runcfg "ldlm"
+  item "-"
+  item " &Configuration and Setup..|*"           runcfg "main"
+  item " Save Co&nfiguration"                    savecfg
+  item "-"
+  item " &Recompile the Editor   <alt f2>"       recompile
+end
+
+menu  "fmgrPrint"
+  item " &Print             <ctrl p>"   print
+  item " Print &Formfeed"               printstr '\x0C'
+  item " Print &Settings..|*"           runcfg "print"
+end
+
+
+//--------------------------------------------------------------------
+// Miscellaneous menus
+//--------------------------------------------------------------------
+
+// yes/no/cancel popup menu
+menu  "ync"
+  item " &Yes"
+  item " &No"
+  item " &Cancel"
+end
+
+// ok/cancel popup menu
+menu  "ok"
+  item " O&k"
+  item " &Cancel"
+end
+
+// replace/append/cancel popup menu
+menu  "rac"
+  item " &Replace"
+  item " &Append"
+  item " &Cancel"
+end

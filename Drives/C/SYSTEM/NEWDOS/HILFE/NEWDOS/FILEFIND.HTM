@@ -1,0 +1,81 @@
+<HTML><HEAD><TITLE>FILEFIND</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>FILEFIND</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>Durchsucht ein Verzeichnis samt Unterverzeichnissen bzw. einen ganzen 
+DatentrÑger nach Dateien bzw. sucht Textstellen in Dateien. 
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">FILEFIND [Verzeichnis] [Datei/en] [Suchtext] [/s /i /e /h /w /b:Verzeichnis]</FONT>
+
+Verzeichnis: Verzeichnis, das nach der Datei durchsucht werden soll
+Datei/en   : Datei(en), die gesucht/durchsucht werden soll(en)
+Suchtext   : Text, nach dem in den Dateien gesucht werden soll. Wenn Sie 
+             keinen Suchtext eingeben, wird nur nach den Dateien gesucht -
+             eine InhaltsprÅfung erfolgt nicht.
+
+/s    durchsucht auch alle Unterverzeichnisse 
+
+/i    ignoriert Gro·- und Kleinschreibung. Der Suchtext wird auch dann in 
+      der Datei gefunden, wenn er in Gro·- und Kleinschreibung nicht mit 
+      Ihrer Eingabe Åbereinstimmt.
+
+/e    Suchtext wird auch in Programmdateien (EXE, COM, DLL, OVL) gesucht
+
+/h    Umlaute, das · und andere Sonderzeichen in HTML-Dateien werden
+      richtig erkannt
+ 
+/w    Umlaute, das · und andere Sonderzeichen in Windows-Text-Dateien werden
+      richtig erkannt
+
+Nach Abschlu· der Suche wird die Datei FILEFIND.LOG im internen 
+Textbetrachter von FILEFIND angezeigt. Diese Datei enthÑlt das vollstÑndige 
+Suchergebnis und kann spÑter editiert oder gedruckt werden usw. 
+
+/b:Verzeichnis
+      Dieser Parameter ist fÅr interne Zwecke gedacht (Suchmaschine der 
+      New-DOS-Hilfe), kann aber auch von Ihnen verwendet werden. Hinter
+      /B: wird das zu durchsuchende Verzeichnis angegeben. Ein Suchwort
+      kann ebenfalls eingegeben werden. FILEFIND legt das Suchergebnis im 
+      HTML-Format in der Datei FILEFIND.HTM im New-DOS-Verzeichnis ab.<HR
+
+ 
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">FILEFIND c:\ *.* Computer /s /i</FONT>
+sucht in Laufwerk C: und allen Unterverzeichnissen in allen Dateien nach dem 
+Wort "Computer".
+
+<FONT COLOR="blue">FILEFIND C:\ *.bat /s</FONT> 
+sucht in Laufwerk C: und allen Unterverzeichnissen nach Dateien mit der 
+Endung BAT.
+
+<FONT COLOR="blue">FILEFIND . *.txt /s</FONT> 
+sucht im gerade geîffneten Verzeichnis und allen Unterverzeichnissen nach 
+Dateien mit der Endung TXT.
+ 
+<FONT COLOR="blue">FILEFIND c:\texte *.doc Hallo</FONT> 
+sucht im Verzeichnis C:\TEXTE in allen Dateien mit der Endung DOC nach dem 
+Wort "Hallo".<HR
+
+
+noshade color="silver"><FONT COLOR="green">Trick 17</FONT> 
+Sollen beim Suchen von Textstellen auch Windows-Umlaute richtig erkannt 
+werden, so werden Sie besonders bei gro·en Datenmengen einen 
+Geschwindigkeitsverlust feststellen. Wenn Sie keine Windowstexte durchsuchen
+wollen, sollten Sie diese Option auf jeden Fall weglassen. Haben Sie ein 
+Suchwort gewÑhlt, welches keine Umlaute oder ein · enthÑlt, schaltet FILEFIND
+die Windows-Erkennung von sich aus ab, da sie in diesem Falle unnîtig ist.
+
+<FONT COLOR="green">Trick 18</FONT>
+Um eine Datei auch in gepackten Archiven zu suchen, behelfen Sie sich mit
+folgendem Trick: Geben Sie als Dateinamen die Kennung des Archives an, also
+z.B. *.ZIP , *.LZH oder *.ARJ usw. Den Namen der von Ihnen gesuchten Datei
+geben Sie als Suchwort an. Dateinamen sind in Archiven ungepackt vorhanden
+und werden somit gefunden. Dies funktioniert auch bei selbstextrahierenden
+Archiven: Geben Sie als Dateinamen *.EXE ein.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

@@ -1,0 +1,163 @@
+//--------------------------------------------------------------------
+// BOOKLIST.AML
+// List all Bookmarks, (C) 1993-1996 by nuText Systems
+//
+// (See Booklist.dox for user help)
+//
+// This macro lists all bookmarks in the current edit session. For each
+// bookmark, the following data is displayed:
+//
+//   - bookmark name
+//   - filename containing the bookmark
+//   - bookmark column
+//   - bookmark line
+//   - text at the bookmark location
+//
+// A menu is also displayed which allows you to goto a bookmark, delete a
+// bookmark, and delete all bookmarks.
+//
+// Note: this macro will not handle bookmark names longer than 9 chars.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// initial popup window dimensions
+constant book_width  = 68
+constant book_height = 13
+
+// maximum bookmark name length handled by this macro
+constant book_length = 9
+
+// colors
+constant book_title_color        = color black on gray
+constant book_menu_color         = color white on blue
+constant book_menu_hotkey_color  = color yellow on blue
+constant book_menu_hilite_color  = color white on cyan
+
+// temporary bookmark name
+constant tempbook = '@T'
+
+// inherit from the 'popup' object
+settype "popup"
+
+// delete bookmark at the cursor
+function delbook
+  mark = gettext 1 book_length
+  if destroybook mark [1 : posnot ' ' mark 'r'] then
+    delline
+    return 1
+  end
+end
+
+// delete all bookmarks
+function delallbook
+  row 1
+  while delbook do end
+end
+
+// add a south menu to the popup window
+function onopen
+  setcolor north_title_color  book_title_color
+  setcolor menu_color         book_menu_color
+  setcolor menu_hotkey_color  book_menu_hotkey_color
+  setcolor menu_hilite_color  book_menu_hilite_color
+  setframe "+4"
+  menubar '' 4
+    item "{Enter}=Goto"             call <enter>
+    item "{Del}=Delete"             delbook
+    item "{Ctrl-D}=Delete All"      delallbook
+    item "{Esc}=Exit"               close
+  end
+  if (getcoord 'y') + 2 <= getvidrows then
+    sizewindow 0 0 0 2
+  end
+  setwinctrl "ð" 2
+end
+
+// macro help
+macrofile = arg 1
+key <f1>
+  helpmacro macrofile
+end
+
+key <del>     delbook
+key <ctrl d>  delallbook
+end
+
+// save the current bufferid
+oldbuffer = getcurrbuf
+buffer = oldbuffer
+
+// create a popup menu buffer
+bookbuf = createbuf
+
+// cycle through all buffers
+while buffer do
+
+  // make 'buffer' the current buffer
+  gotobuf buffer
+
+  // get the top bookmark
+  bookmark = getcurrbook
+  if bookmark then
+
+    tempcursor = createcursor 'TC'
+
+    // save the current cursor position and window view in
+    // a temporary bookmark (can't use pushcursor because it
+    // won't save the window view - gotobook changes the
+    // window view)
+    setbook tempbook
+
+    // cycle through the bookmarks for this buffer
+    while bookmark do
+      if bookmark <> tempbook then
+        // move cursor to the bookmark (and change the window view)
+        gotobook bookmark
+        addline bookmark:-book_length +
+                (onname (getbufname [1..20]:-20)) + '  ' +
+                ('C' + getcol):-5 + ' ' +
+                ('L' + getrow):-8 + ' ' +
+                (gettext (getlinebeg))
+                '' '' bookbuf
+      end
+      bookmark = getprevbook bookmark
+    end
+
+    // restore the cursor position and window view
+    // and destroy the temp bookmark
+    gotobook tempbook
+    destroybook tempbook
+    destroycursor tempcursor
+  end
+  buffer = getprevbuf
+end
+
+// make the popup menu buffer the current buffer
+gotobuf bookbuf
+
+if getlines == 1 then
+  addline " <no bookmarks found>"
+end
+
+// delete the first blank line
+delline 1 1
+
+// sort based on bookmark id
+sortblock 'i' '*a'
+
+// display the menu
+mark = popup bookbuf "Bookmarks"  book_width book_height (getcurrobj)
+
+destroybuf bookbuf
+gotobuf oldbuffer
+
+// goto the bookmark if it was selected
+if mark then
+  queue "gotobook2" mark [1 : posnot ' ' mark [1:book_length] 'r']
+end

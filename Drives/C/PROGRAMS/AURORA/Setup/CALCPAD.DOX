@@ -1,0 +1,37 @@
+
+ÿÿCALCPAD.AML
+ ÿCalculator Padÿ
+
+  This macro displays a simple calculator pad with basic arithmetic
+  operations, a memory, and four display lines. Floating point numbers
+  are not supported.
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <esc>              // exit
+  <enter>            // repeat last operation
+  <backspace>, <b>   // delete last digit
+  <ctrl grey*>       // paste number from the clipboard
+  <ctrl enter>, <t>  // enter number into an edit window
+
+  <c>                // clear display
+  <e>                // clear entry line
+  <s>                // store
+  <r>                // recall
+  <z>                // store + memory
+  <i>                // change sign
+
+  <+>                // add
+  <->                // subtract
+  <*>                // multiply
+  </>                // divide
+  <m>                // mod
+  <=>                // do operation
+
+  <0-9>              // enter digit
+
+ÿÿMouse:
+  ÄÄÄÄÄ
+  Single Click on:
+    button           // perform indicated operation
+

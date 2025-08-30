@@ -1,0 +1,55 @@
+//--------------------------------------------------------------------
+// XIPF.AML
+// Syntax highlighting for IPF (GML) documents (Ipf)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+  'bcfin'                         // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+  '\t'                            // symbol set 1
+  ''                              // symbol set 2
+  ''                              // string characters
+  ''                              // string literal char
+  ''                              // numeric char
+  '.*'    0                       // eol comment 1 / start column
+  ''      0                       // eol comment 2 / start column
+  ''      ''                      // multi-line comment 1
+  ''      ''                      // multi-line comment 2
+  0                               // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black     // keyword
+  color gray         on cyan      // symbol set 1
+  color gray         on cyan      // symbol set 2
+  color brightred    on black     // string
+  color brightred    on black     // numeric
+  color brightgreen  on black     // eol comment 1
+  color brightgreen  on black     // eol comment 2
+  color brightgreen  on black     // comment 1
+  color brightgreen  on black     // comment 2
+
+keyword
+  :acviewport, :address, :afnref, :ahdref, :ainform, :alaunch, :aline,
+  :area, :artlink, :artwork, :aspotref, :author, :backm, :body, :c,
+  :caution, :cgraphic, :color, :ctrl, :ctrldef, :danger, :dd, :ddf,
+  :ddhd, :defn, :detable, :deuserdoc, :dfn, :dfname, :dl, :dlinenum,
+  :dln, :docprof, :dt, :dthd, :eaddress, :earea, :eartlink, :ecaution,
+  :ecgraphic, :ectrldef, :edanger, :edl, :efig, :efn, :eh, :ehelp,
+  :ehide, :ehp, :ehpart, :ehpt, :einfo, :elines, :elink, :ent, :eol,
+  :eparml, :eprolog, :eregion, :esl, :etable, :etitle, :eul, :euserdoc,
+  :ewarning, :exmp, :fig, :figcap, :fn, :fnref, :font, :frontm, :h1,
+  :h2, :h3, :h4, :h5, :h6, :h7, :h8, :h9, :hdref, :hide, :hp1, :hp2,
+  :hp3, :hp4, :hp5, :hp6, :hp7, :hp8, :hp9, :hpart, :hpt, :i1, :i2,
+  :icmd, :index, :info, :inform, :isyn, :launch, :li, :lines, :link,
+  :lm, :lp, :note, :nt, :ol, :p, :parml, :pbutton, :pd, :prolog, :pt,
+  :region, :rm, :row, :sl, :spot, :spotref, :table, :tipage, :title,
+  :tline, :toc, :ul, :userdoc, :warning, :xmp

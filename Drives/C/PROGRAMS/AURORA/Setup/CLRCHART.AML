@@ -1,0 +1,273 @@
+//--------------------------------------------------------------------
+// CLRCHART.AML
+// Color Chart, (C) 1993-1996 by nuText Systems
+//
+// (See Clrchart.dox for user help)
+//
+// This macro displays a color chart with color attribute codes in
+// decimal and hexidecimal.
+//
+// If Clrchart is run from within an edit window and a color is
+// selected, then the color description (i.e. 'cyan on black') is
+// entered into the edit window text at the cursor.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//
+// When called as a utility from other macros, the following parameters
+// can be passed:
+//
+//   arg 3: Initial x-position on the screen, relative to 0,0
+//   arg 4: Initial y-position on the screen, relative to 0,0
+//   arg 5: Initial attibute to be selected
+//   arg 6: Object to send the 'oncolor' event to, when the color
+//          changes. When 'oncolor' is called, the new color attribute
+//          is passed as the first parameter.
+//
+// Clrchart is called as a utility from the Cfgcolor and Hilitewd
+// macros.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+constant display_str  = '  '
+
+// define an array of color attribute names
+attrname = { "black"     "blue"        "green"        "cyan"
+             "red"       "magenta"     "brown"        "gray"
+             "darkgray"  "brightblue"  "brightgreen"  "brightcyan"
+             "brightred" "pink"        "yellow"       "white" }
+
+variable basecolor, foreground, background, lforeground, lbackground,
+         xbackground, retvalue, colorstring
+
+xposition    = arg 3
+yposition    = arg 4
+initialattr  = arg 5
+notifyobject = arg 6
+
+if initialattr then
+  foreground = initialattr & 0fh
+  background = (initialattr & 0f0h) shr 4
+  if background > 7 then
+    background = background - 8
+    basecolor  = 128
+  end
+end
+
+// inherit window handling from 'win' object
+settype "win"
+
+
+// create the color chart window
+createwindow
+setframe ">b"
+setcolor  border_color         color gray  on black
+setcolor  text_color           color black on black
+setcolor  border_flash_color   color brightgreen on black
+settitle "Color Chart"
+setwinctrl (if? basecolor "ð" "ð") 2
+
+if xposition then
+  sizewindow xposition yposition xposition + 23 yposition + 17
+             "a1" '' (getprevwin)
+else
+  // center the window
+  width = 24
+  height = 18
+  ox = (getvidcols - width) / 2
+  oy = (getvidrows - height) / 2
+  sizewindow ox oy ox + width - 1 oy + height - 1 "ad"
+end
+setborder "1f"
+
+// draw the color chart
+private function drawchart
+  variable b, f
+  gotoxy 1 1
+  for f = 0 to 15 do
+    for b = 0 to 7 do
+      writestr display_str  (b * 16 + f) + basecolor
+    end
+    writeline
+  end
+  gotoxy 19 17
+  writestr "  O" (color black on green)
+  writestr "k  " (color red   on green)
+end
+
+drawchart
+
+
+private function draw
+
+  // clear the old bracket cursor
+  if xbackground then
+    writestr display_str lforeground + (lbackground * 16) + basecolor   xbackground - 1
+  end
+
+  attr = foreground + (background * 16) + basecolor
+  colorstring = attrname [foreground + 1] + ' on ' + attrname [background + 1 + (if? basecolor 8)]
+
+  // write color info at the bottom of the chart
+  writestr ('[dec=' + attr + ',hex=' + (base attr 16) + ']'):-16
+           (color gray on black) 1 17
+  writestr  colorstring:-24 (color gray on black) 1 18
+
+  // move the cursor to the appropriate color cell
+  xbackground = background * 3 + 2
+  gotoxy xbackground foreground + 1
+
+  // write the bracket [ ] cursor
+  attr = (if? background + (if? basecolor 8) > brightblue black white) + (background * 16) + basecolor
+  writestr '[' attr  xbackground - 1
+  writestr ']' attr  xbackground + 1
+  gotoxy xbackground foreground + 1
+
+  lforeground = foreground
+  lbackground = background
+
+  // notify the caller of this macro
+  sendobject notifyobject "oncolor" (getattr)
+end
+
+draw
+showcursor 50 99
+
+// toggle background base color
+private function togglebase
+  if basecolor then
+    basecolor = 0
+    setwinctrl 'ð' 2
+  else
+    basecolor = 128
+    setwinctrl 'ð' 2
+  end
+  xbackground = 0
+  drawchart
+  draw
+end
+
+
+// local close function for this window
+function close (value)
+  // call 'close' in object 'win'
+  pass
+  retvalue = if? (arg) value -1
+  endprocess
+end
+
+function "ð"
+  close
+end
+
+// exit the chart
+key <esc>
+  close
+end
+
+// exit the chart when switching windows
+function onkillfocus
+  close
+end
+
+// enter the color description in an edit window and exit
+key <enter>
+  if not notifyobject then
+    queue "write" colorstring
+  end
+  close (getattr)
+end
+
+// macro help
+macrofile = arg 1
+key <f1>
+  helpmacro macrofile
+end
+
+event <lbutton> (m)
+  pass
+  case getregion
+    // client area
+    when 1
+      if virtorow <= 16 then
+        foreground = (virtorow - 1) mod 16
+      else
+        // Ok button
+        if not m and virtorow == 17 and virtocol >= 19 then
+          call <enter>
+        end
+        return
+      end
+      background = (virtocol - 1) / 3
+      draw
+    when 52
+      togglebase
+  end
+end
+
+event <move>
+  pass
+  if (button? 1) and getregion == 1 then
+    send <lbutton> 1
+  end
+end
+
+event <ldouble>
+  call <enter>
+end
+
+// check for 'Ok' hotkey
+key <char> (c)
+  if icompare c 'k' then
+    call <enter>
+  else
+    pass
+  end
+end
+
+// move the cursor around in the chart
+key <left>
+  if not background then
+    togglebase
+  end
+  background = if? background (background - 1) 7
+  draw
+end
+
+key <right>
+  if background == 7 then
+    togglebase
+  end
+  background = (background + 1) mod 8
+  draw
+end
+
+key <up>
+  foreground = if? foreground (foreground - 1) 15
+  draw
+end
+
+key <down>
+  foreground = (foreground + 1) mod 16
+  draw
+end
+
+// toggle background base color
+key <tab>
+  togglebase
+end
+
+// toggle background base color
+key <shift tab>
+  togglebase
+end
+
+// invoke the editor recursively
+// wait for endprocess to return here
+process
+
+// return the ascii value
+return retvalue

@@ -1,0 +1,53 @@
+<HTML><HEAD><TITLE>CLOCK</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>CLOCK</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A><BR>
+<A HREF="ddd.htm">Allgemeines zu DDD</A> 
+<HR noshade color="silver"><PRE>Speicherresidente Uhr mit Alarmfunktion (Wecker). Zeigt in jeder DOS-
+Anwendung im Textmodus in der rechten oberen Ecke eine laufende Uhr an 
+und/oder lîst zur eingestellten Zeit akustischen Alarm aus.
+
+<FONT COLOR="maroon">Installation</FONT>
+
+<FONT COLOR="blue">CLOCK [/aHH:MM | /vHH:MM]</FONT> oder <A HREF="help:lh">LH</A> <FONT COLOR="blue">CLOCK [/aHH:MM | /vHH:MM]</FONT> 
+      
+/aHH:MM   z.B. /a09:05. Um 9:05 Systemzeit wird der Alarm ausgelîst
+
+/vHH:MM   wie /a, aber die sonst eingeblendete Uhrzeit wird nicht angezeigt. 
+          Der Wecker lÑuft dann also vîllig unsichtbar im Hintergrund.
+
+Clock ohne Parameter zeigt lediglich eine laufende Uhr.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Steuerung</FONT>
+
+Mit folgenden Standard-DDD-Parametern kann CLOCK nach der Installation 
+gesteuert werden:
+
+/x  aus dem Speicher entfernen
+/s  stillegen
+/r  reaktivieren<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT>
+ 
+Um das Alarmsignal auszuschalten, beenden Sie Clock mit dem Befehl
+<FONT COLOR="blue">CLOCK /x</FONT>. Sie kînnen auch mehrere Alarme setzen, indem Sie CLOCK mehrmals 
+hintereinander mit einer jeweils anderen Alarmzeit installieren. Die Uhren 
+sollten praktischerweise in der Reihenfolge ihrer Alarmzeiten geladen werden,
+wobei die CLOCK, die den ersten Alarm auslîst, als letzte installiert wird.
+Somit ist gewÑhrleistet, da· mit CLOCK /x immer der gerade ertînende Alarm 
+ausgeschaltet wird.
+
+Soll bei mehreren Alarmen auch die Uhrzeit eingeblendet werden, sollten Sie 
+nur die erste CLOCK (also die mit dem letzten Alarm) mit /a starten und die 
+folgenden mit /v.
+
+Benîtigen Sie tÑglich zur gleichen Zeit wiederkehrende Weckrufe, so kînnen 
+Sie den CLOCK-Befehl auch in der AUTOEXEC.BAT oder NEWDOS.BAT eintragen,
+soda· der bzw. die Alarm(e) bei jedem Rechnerstart automatisch installiert
+werden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

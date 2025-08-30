@@ -1,0 +1,34 @@
+//--------------------------------------------------------------------
+// LONGDATE.AML
+// Get Current Date in Long Format, (C) 1993-1996 by nuText Systems
+//
+// (see Longdate.dox for user help)
+//
+// This macro displays the current date and time in long format, i.e.
+// '2:18pm Friday, December 20, 1996'.
+//
+// Longdate can be run from an edit window or file manager window. If
+// run from an edit window, the user will be prompted to enter the date
+// into the edit window text.
+//
+// This macro calls Cfg\Cfgintnl.x to retrieve the date in international
+// format.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// get the long date in international format
+datestr = runmacro (bootpath "cfg\\cfgintnl.x") '' 'f'
+if wintype? "edit" then
+  if (okbox datestr + ":  Enter into text?" "Long Date") == "Ok" then
+    write datestr
+  end
+else
+  msgbox datestr "Long Date"
+end

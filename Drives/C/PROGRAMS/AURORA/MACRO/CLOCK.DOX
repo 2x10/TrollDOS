@@ -1,0 +1,15 @@
+
+ÿÿCLOCK.AML
+ ÿDigital Clockÿ
+
+  This macro displays a digital clock window, using large digits for the
+  current time. The current date is also displayed in long format (see
+  the Longdate macro).
+
+  The time and date are updated continuously. The clock window is
+  modeless, allowing you to switch windows while the clock is running.
+
+ÿÿKeys:
+  ÄÄÄÄ
+  <esc>              // exit
+

@@ -1,0 +1,37 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGFORM.AML
+// Configuration for Text Reformatting
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable formatopt, paraopt
+
+// create dialog box
+dialog "Text Reformatting Options" 53 10 "cp"
+
+// default options
+groupbox 'Default Options:' 3 2
+  (menu ''
+     item " [ ] &Justify both Left and Right     "
+     item " [ ] &Keep &Spaces"
+     item " [ ] Keep First-Line &Indent/Outdent"
+   end) '' _FormatOpt "jkrc"
+
+// paragraph options
+groupbox 'When no Mark:' 3 7
+  (menu ''
+     item " [ ] Advance &Cursor "
+     item " [ ] Format to &End-of-Paragraph Only "
+   end) '' _FormatOpt "ce"
+
+// ok/cancel buttons
+button "O&k"    43  3 8
+button "Cancel" 43  5 8
+
+// display dialog box
+if (getdialog ref formatopt ref paraopt) == "Ok" then
+  prf.FormatOpt = formatopt + paraopt
+end

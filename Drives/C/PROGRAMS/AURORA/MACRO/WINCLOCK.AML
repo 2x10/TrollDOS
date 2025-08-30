@@ -1,0 +1,75 @@
+//--------------------------------------------------------------------
+// WINCLOCK.AML
+// Edit Window Clock, (C) 1993-1996 by nuText Systems
+//
+// This macro displays a real-time clock on an edit window. The clock is
+// displayed on the horizontal scroll bar, or on the menu bar if the
+// horizontal scroll bar is not present.
+//
+// Winclock updates the clock every 300 milliseconds, when the top
+// window is an edit window and no mouse buttons are pressed down.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>. Run this macro again to remove
+// the clock.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// clock update delay in milliseconds
+constant update_delay = 300
+constant timer_id = "wclock"
+
+// called when this object is destroyed
+event <destroy>
+  if prf.slock == getcurrobj then
+    destroytimer timer_id
+    // flag window to be updated later
+    setframe '+'
+  end
+end
+
+// check for a previous install
+if object? prf.sclock then
+  if (okbox "Winclock already installed. Remove it?") == 'Ok' then
+    destroyobject prf.sclock
+  end
+
+// ensure that edit windows have the appropriate style
+elseif not poschar 'hm' _EditStyle then
+  msgbox "For Winclock to run, edit windows must have \neither a horizontal scrollbar or a menubar."
+
+// install the status clock
+else
+  setrepeat timer_id update_delay (getcurrobj) "winclock"
+  resident ON
+  prf.sclock = getcurrobj
+end
+
+
+// the function handles the 'wclock' timer
+function winclock
+  if (wintype? "edit") and not button? and (getcoord 'x1') > 15 then
+
+    // write directly on the screen
+    gotoscreen
+
+    x = (getcoord 'r1d') - getvidleft
+    y = (getcoord 'b1')
+
+    // try the horz scroll bar
+    if frame? 'h' then
+      writestr (gettime -1)  (getpalette 22 )
+               x - 11 (getcoord 'b1') - getvidtop + 2
+
+    // try the menu bar/toolbar
+    elseif frame? 'm2' then
+      writestr '  ' + (gettime -1) + '   ' (getpalette 18)
+               x - 12  (getcoord 't1') - getvidtop
+    end
+
+    gotowindow
+  end
+end

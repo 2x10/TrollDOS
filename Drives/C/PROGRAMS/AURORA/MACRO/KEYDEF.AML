@@ -1,0 +1,264 @@
+//--------------------------------------------------------------------
+// KEYDEF.AML
+// Show Assigned State of all Keys, (C) 1993-1996 by nuText Systems
+//
+// (see Keydef.dox for user help)
+//
+// This macro displays a popup menu showing assigned and unassigned keys
+// for the current window type (edit windows or file manager windows).
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//
+// This macro can also be run by selecting Show Available Keys from the
+// Macro menu.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// create a data buffer with all the keynames
+databuf "keynames"
+  "<alt '>"
+  "<alt ,>"
+  "<alt ->"
+  "<alt .>"
+  "<alt />"
+  "<alt 0>"
+  "<alt 1>"
+  "<alt 2>"
+  "<alt 3>"
+  "<alt 4>"
+  "<alt 5>"
+  "<alt 6>"
+  "<alt 7>"
+  "<alt 8>"
+  "<alt 9>"
+  "<alt ;>"
+  "<alt =>"
+  "<alt a>"
+  "<alt b>"
+  "<alt backspace>"
+  "<alt c>"
+  "<alt d>"
+  "<alt del>"
+  "<alt down>"
+  "<alt e>"
+  "<alt end>"
+  "<alt enter>"
+  "<alt esc>"
+  "<alt f10>"
+  "<alt f11>"
+  "<alt f12>"
+  "<alt f1>"
+  "<alt f2>"
+  "<alt f3>"
+  "<alt f4>"
+  "<alt f5>"
+  "<alt f6>"
+  "<alt f7>"
+  "<alt f8>"
+  "<alt f9>"
+  "<alt f>"
+  "<alt g>"
+  "<alt grey*>"
+  "<alt grey+>"
+  "<alt grey->"
+  "<alt grey/>"
+  "<alt greyenter>"
+  "<alt h>"
+  "<alt home>"
+  "<alt i>"
+  "<alt ins>"
+  "<alt j>"
+  "<alt k>"
+  "<alt l>"
+  "<alt left>"
+  "<alt m>"
+  "<alt n>"
+  "<alt o>"
+  "<alt p>"
+  "<alt pgdn>"
+  "<alt pgup>"
+  "<alt q>"
+  "<alt r>"
+  "<alt right>"
+  "<alt s>"
+  "<alt t>"
+  "<alt tab>"
+  "<alt u>"
+  "<alt up>"
+  "<alt v>"
+  "<alt w>"
+  "<alt x>"
+  "<alt y>"
+  "<alt z>"
+  "<alt [>"
+  "<alt \\>"
+  "<alt ]>"
+  "<alt `>"
+  "<backspace>"
+  "<center>"
+  "<char>"
+  "<ctrl ->"
+  "<ctrl 2>"
+  "<ctrl 6>"
+  "<ctrl a>"
+  "<ctrl b>"
+  "<ctrl backspace>"
+  "<ctrl c>"
+  "<ctrl center>"
+  "<ctrl d>"
+  "<ctrl del>"
+  "<ctrl down>"
+  "<ctrl e>"
+  "<ctrl end>"
+  "<ctrl enter>"
+  "<ctrl f10>"
+  "<ctrl f11>"
+  "<ctrl f12>"
+  "<ctrl f1>"
+  "<ctrl f2>"
+  "<ctrl f3>"
+  "<ctrl f4>"
+  "<ctrl f5>"
+  "<ctrl f6>"
+  "<ctrl f7>"
+  "<ctrl f8>"
+  "<ctrl f9>"
+  "<ctrl f>"
+  "<ctrl g>"
+  "<ctrl grey*>"
+  "<ctrl grey+>"
+  "<ctrl grey->"
+  "<ctrl grey/>"
+  "<ctrl greyenter>"
+  "<ctrl h>"
+  "<ctrl home>"
+  "<ctrl i>"
+  "<ctrl ins>"
+  "<ctrl j>"
+  "<ctrl k>"
+  "<ctrl l>"
+  "<ctrl left>"
+  "<ctrl m>"
+  "<ctrl n>"
+  "<ctrl o>"
+  "<ctrl p>"
+  "<ctrl pgdn>"
+  "<ctrl pgup>"
+  "<ctrl prtsc>"
+  "<ctrl q>"
+  "<ctrl r>"
+  "<ctrl right>"
+  "<ctrl s>"
+  "<ctrl t>"
+  "<ctrl tab>"
+  "<ctrl u>"
+  "<ctrl up>"
+  "<ctrl v>"
+  "<ctrl w>"
+  "<ctrl x>"
+  "<ctrl y>"
+  "<ctrl z>"
+  "<ctrl [>"
+  "<ctrl \\>"
+  "<ctrl ]>"
+  "<del>"
+  "<down>"
+  "<end>"
+  "<enter>"
+  "<esc>"
+  "<f10>"
+  "<f11>"
+  "<f12>"
+  "<f1>"
+  "<f2>"
+  "<f3>"
+  "<f4>"
+  "<f5>"
+  "<f6>"
+  "<f7>"
+  "<f8>"
+  "<f9>"
+  "<grey*>"
+  "<grey+>"
+  "<grey->"
+  "<greyenter>"
+  "<home>"
+  "<ins>"
+  "<left>"
+  "<otherkey>"
+  "<pgdn>"
+  "<pgup>"
+  "<right>"
+  "<shift center>"
+  "<shift del>"
+  "<shift down>"
+  "<shift end>"
+  "<shift f10>"
+  "<shift f11>"
+  "<shift f12>"
+  "<shift f1>"
+  "<shift f2>"
+  "<shift f3>"
+  "<shift f4>"
+  "<shift f5>"
+  "<shift f6>"
+  "<shift f7>"
+  "<shift f8>"
+  "<shift f9>"
+  "<shift home>"
+  "<shift ins>"
+  "<shift left>"
+  "<shift pgdn>"
+  "<shift pgup>"
+  "<shift right>"
+  "<shift tab>"
+  "<shift up>"
+  "<shiftkey>"
+  "<tab>"
+  "<up>"
+end
+
+// get the window event object
+obj = getwinobj
+
+// do for all lines in the data buffer
+repeat
+  // check for the key function in the window object path
+  if function? (gettext) obj then
+    ovltext "Assigned" 19
+  end
+until not down
+
+// display the buffer in a popup menu and get the key selected
+keystr = popup (getcurrbuf) obj + " window keys" 26
+
+// destroy the key data buffer
+destroybuf
+
+// key string was selected
+if keystr then
+
+  // if assigned, then go to the keydef in Kbd.aml
+  if keystr [0] <> '>' then
+    keystr = keystr [1 : pos '>' keystr 'r']
+    open (bootpath "kbd.aml")
+    gotopos 1 1
+    if objtype? "fmgr" obj then
+      find "object fmgr"
+    end
+    if find keystr then
+      send "onfound" length keystr
+    else
+      gotopos 1 1
+    end
+
+  // if not assigned, then write the key string at the cursor
+  else
+    send "write" keystr
+  end
+end

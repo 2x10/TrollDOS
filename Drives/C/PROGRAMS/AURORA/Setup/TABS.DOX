@@ -1,0 +1,14 @@
+
+ÿÿTABS.AML
+ ÿEntab/Detabÿ
+
+  This macro converts tab characters to spaces (Detab), or converts
+  spaces to tab characters (Entab) in the current edit window. The
+  conversion is limited to a marked block, if it exists in the edit
+  window.
+
+  The current tab width (the value of the _TabWidth configuration
+  variable) is used as the tab width for the conversion.
+
+  Note: this macro will run faster if Undo is turned Off on the Set menu.
+

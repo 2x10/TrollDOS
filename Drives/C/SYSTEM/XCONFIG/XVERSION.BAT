@@ -1,0 +1,2 @@
+echo.
+echo 4DOS 7.01A  DOS 5.00  TrollDOS 13.101  XCONFIG 14.00

@@ -1,0 +1,50 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGMISC.AML
+// Configuration for Miscellaneous Editing Options
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable cset, tilesplit, menucursor, namestyle
+
+// create dialog box
+dialog "Miscellaneous Options" 57 12 "cp"
+
+groupbox 'Filename Style:' 3 2
+  (menu ''
+     item " ( ) &Lowercase    c:\\sample\\filename.ext"
+     item " ( ) &Capitalized  C:\\Sample\\Filename.ext"
+     item " ( ) &Uppercase    C:\\SAMPLE\\FILENAME.EXT "
+     item " ( ) &As-is        c:\\sAMPle\\fileNAME.exT "
+   end) '' (if? _NameStyle _NameStyle ' ') "lcu "
+
+// hardware cursor on menus
+groupbox 'Menu Cursor:' 3 8
+  (menu ''
+     item " ( ) &Hidden"
+     item " ( ) &Insert Size"
+     item " ( ) &Overstrike Size "
+   end) '' (if? _MenuCursor _MenuCursor 'h') "hio"
+
+// default word char set
+field "&Default Char Set for Words: "  27 8 28 _CSet
+
+// number of tiles before second orthogonal split
+field "&Tile Split Threshold:  >"  27 11 5 _TileSplit
+
+// ok/cancel buttons
+button "O&k"    47  3 8
+button "Cancel" 47  5 8
+
+// display dialog box
+if (getdialog ref namestyle ref menucursor ref cset
+              ref tilesplit) == 'Ok' then
+  prf.NameStyle  = namestyle
+  prf.CSet       = cset
+  prf.TileSplit  = tilesplit
+  prf.MenuCursor = menucursor
+  // change actual menucursor immediately
+  setmenucurs menucursor
+end

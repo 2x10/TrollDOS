@@ -1,0 +1,64 @@
+//--------------------------------------------------------------------
+// XFOR.AML
+// Syntax highlighting for Microsoft Fortran files (For, Inc)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+  'bcfin'                         // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+  '()=+-/*.:,\t'                  // symbol set 1
+  ''                              // symbol set 2
+  '\''                            // string characters
+  ''                              // string literal char
+  ''                              // numeric symbol
+  'C'           1                 // eol comment 1 / start column
+  ''            0                 // eol comment 2 / start column
+  ''            ''                // multi-line comment 1
+  ''            ''                // multi-line comment 2
+  0                               // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black     // keyword
+  color gray         on cyan      // symbol set 1
+  color gray         on cyan      // symbol set 2
+  color brightred    on black     // string
+  color brightred    on black     // numeric
+  color brightgreen  on black     // eol comment 1
+  color brightgreen  on black     // eol comment 2
+  color brightgreen  on black     // comment 1
+  color brightgreen  on black     // comment 2
+
+keyword
+  abs, acos, aimag, aint, allocated, allocate, alog10, alog, amax0,
+  amax1, amin0, amin1, amod, and, anint, array, asin, atan2, atan,
+  automatic, backspace, block, btest, cabs, call, case, ccos, cdabs,
+  cdcos, cdexp, cdlog, cdsin, cdsqrt, cexp, character, char, clog,
+  close, cmplx, common, complex, conjg, continue, cos, cotan, csin,
+  csqrt, cycle, dabs, dacos, dasin, datan2, datan, data, dble,
+  dcmplx, dconjg, dcosh, dcos, dcotan, ddim, deallocate, dexp,
+  dfloat, dimag, dimension, dim, dint, dlog10, dlog, dmax1, dmin1,
+  dmod, dnint, double, do, dprod, dreal, dsign, dsinh, dsin, dsqrt,
+  dtanh, dtan, elseif, else, endfile, endif, end, eoflocnear, eof,
+  epsilon, equivalence, eq, err, exp, external, false, filefloat,
+  file, format, function, getdat, gettim, ge, goto, gt, hfix, huge,
+  iabs, iand, ibchng, ibclr, ibset, ichar, idim, idint, idnint,
+  ieor, ifix, if, imag, implicit, include, index, inquire, int1,
+  int2, int4, intc, integer, interface, intrinsic, int, ior, iostat,
+  isha, ishc, ishft, ishl, isign, jfix, len_trim, len, le, lge, lgt,
+  lle, llt, locfar, locking, lockmode, loc, logical, lt, lun, map,
+  max0, max1, maxexponent, max, min0, min1, minexponent, min, mod,
+  namelist, nearest, ne, nint, not, open, or, parameter, pause,
+  precision, print, program, random, read, real, records, record,
+  return, rewind, save, scan, seed, select, setdat, settim, sign,
+  sinh, sin, sngl, sqrt, status, stop, structure, struct,
+  subroutine, tanh, tan, then, tiny, true, union, unit, verify,
+  while, write, xor

@@ -1,0 +1,18 @@
+
+ÿÿSTOPWTCH.AML
+ ÿStopwatch Timerÿ
+
+  This macro displays a stopwatch window with start, stop, and reset
+  buttons. The time is displayed in the following format:
+
+    hh:mm:ss uu   // hh=hours, mm=minutes, ss=seconds, uu=hundredths
+
+  A real-time clock is also displayed in the upper-right hand corner.
+
+  Pressing the Command button allows you measure how long it takes to
+  execute an editor keyboard command. The command will be executed and
+  the time will be displayed in the stopwatch window.
+
+  The stopwatch window is modeless, allowing you to switch windows while
+  the stopwatch is running.
+

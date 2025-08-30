@@ -1,0 +1,155 @@
+VBEHzCFG
+========
+
+
+For the default settings you need a monitor with at least 82 kHz horizontal
+scan frequency.
+If you use automatical configuration, I suggest not to use more than 130 Hz
+refresh rate, even if your monitor could display that.
+
+
+Note: 512x384 now uses double scanning as default. In this mode the refresh
+      rate can only be half as high as in normal mode.
+
+
+The RefreshRate field:
+----------------------
+Some BIOSes do not use the RefreshRate field set in VBEHz, they calculate
+their own refresh rates:
+
+                         Pixel clock
+RefreshRate = ---------------------------------
+              Horizontal_total * Vertical_total
+
+
+
+Maximum refresh rates for the modes in VBEHz:
+(I suggest to use 3-5 Hz less)
+
++------------------------------------------------------------------------+
+|max horiz. freq.| max refresh rate (non-interlaced) of your monitor for |
+|                |                                                       |
+|of your monitor | 640x480 | 800x600 | 1024x768 | 1280x1024 | 1600x1200  |
+|                |         |   and   |          |           |            |
+|                |         | 400x300 |          |           |            |
++----------------+---------+---------+----------+-----------+------------+
+|    30 kHz      |   58 Hz |   46 Hz |    36 Hz |     27 Hz |     23 Hz  |
+|    35 kHz      |   67 Hz |   54 Hz |    42 Hz |     32 Hz |     27 Hz  |
+|    40 kHz      |   77 Hz |   62 Hz |    48 Hz |     37 Hz |     31 Hz  |
+|    45 kHz      |   87 Hz |   70 Hz |    54 Hz |     41 Hz |     35 Hz  |
+|    50 kHz      |   97 Hz |   78 Hz |    60 Hz |     46 Hz |     39 Hz  |
+|    55 kHz      |  106 Hz |   85 Hz |    67 Hz |     51 Hz |     43 Hz  |
+|    60 kHz      |  116 Hz |   93 Hz |    73 Hz |     55 Hz |     47 Hz  |
+|    65 kHz      |  126 Hz |  101 Hz |    79 Hz |     60 Hz |     51 Hz  |
+|    70 kHz      |  136 Hz |  119 Hz |    85 Hz |     65 Hz |     55 Hz  |
+|    75 kHz      |  145 Hz |  117 Hz |    91 Hz |     69 Hz |     59 Hz  |
+|    80 kHz      |  155 Hz |  125 Hz |    97 Hz |     74 Hz |     63 Hz  |
+|    85 kHz      |  165 Hz |  133 Hz |   103 Hz |     79 Hz |     67 Hz  |
+|    90 kHz      |  175 Hz |  141 Hz |   110 Hz |     83 Hz |     71 Hz  |
+|    95 kHz      |  185 Hz |  148 Hz |   116 Hz |     88 Hz |     75 Hz  |
+|   100 kHz      |  194 Hz |  156 Hz |   122 Hz |     93 Hz |     80 Hz  |
+|   105 kHz      |  204 Hz |  164 Hz |   128 Hz |     97 Hz |     84 Hz  |
+|   110 kHz      |  214 Hz |  172 Hz |   134 Hz |    102 Hz |     88 Hz  |
+|   115 kHz      |  224 Hz |  180 Hz |   140 Hz |    107 Hz |     92 Hz  |
+|   120 kHz      |  233 Hz |  188 Hz |   146 Hz |    112 Hz |     96 Hz  |
+|   125 kHz      |  243 Hz |  196 Hz |   153 Hz |    116 Hz |    100 Hz  |
+|   130 kHz      |  253 Hz |  203 Hz |   159 Hz |    121 Hz |    104 Hz  |
++----------------+---------+---------+----------+-----------+------------+
+|max horiz. freq.| max refresh rate (non-interlaced) of your monitor for |
+|                |                                                       |
+|of your monitor | 320x240 | 512x384 |  80x60 | 132x25 | 132x43 | 132x50 |
+|                |         | single  |        |        |        |        |
+|                |         | scanned |        |        |        |        |
++----------------+---------+---------+--------+--------------------------+
+|    30 kHz      |   58 Hz |   73 Hz |  56 Hz |  66 Hz |  66 Hz |  66 Hz |
+|    35 kHz      |   68 Hz |   85 Hz |  66 Hz |  77 Hz |  77 Hz |  77 Hz |
+|    40 kHz      |   78 Hz |   97 Hz |  75 Hz |  88 Hz |  88 Hz |  88 Hz |
+|    45 kHz      |   88 Hz |  110 Hz |  85 Hz |  99 Hz |  99 Hz |  99 Hz |
+|    50 kHz      |   98 Hz |  122 Hz |  94 Hz | 110 Hz | 110 Hz | 110 Hz |
+|    55 kHz      |  108 Hz |  134 Hz | 104 Hz | 121 Hz | 121 Hz | 121 Hz |
+|    60 kHz      |  118 Hz |  146 Hz | 113 Hz | 133 Hz | 133 Hz | 133 Hz |
+|    65 kHz      |  127 Hz |  159 Hz | 123 Hz | 144 Hz | 144 Hz | 144 Hz |
+|    70 kHz      |  137 Hz |  171 Hz | 132 Hz | 155 Hz | 155 Hz | 155 Hz |
+|    75 kHz      |  147 Hz |  183 Hz | 142 Hz | 166 Hz | 166 Hz | 166 Hz |
+|    80 kHz      |  157 Hz |  196 Hz | 151 Hz | 177 Hz | 177 Hz | 177 Hz |
+|    85 kHz      |  167 Hz |  208 Hz | 161 Hz | 188 Hz | 188 Hz | 188 Hz |
+|    90 kHz      |  177 Hz |  220 Hz | 170 Hz | 199 Hz | 199 Hz | 199 Hz |
+|    95 kHz      |  187 Hz |  232 Hz | 180 Hz | 211 Hz | 211 Hz | 211 Hz |
+|   100 kHz      |  197 Hz |  245 Hz | 189 Hz | 222 Hz | 222 Hz | 222 Hz |
+|   105 kHz      |  207 Hz |  257 Hz | 199 Hz | 233 Hz | 233 Hz | 233 Hz |
+|   110 kHz      |  216 Hz |  269 Hz | 209 Hz | 244 Hz | 244 Hz | 244 Hz |
+|   115 kHz      |  226 Hz |  282 Hz | 218 Hz | 255 Hz | 255 Hz | 255 Hz |
+|   120 kHz      |  236 Hz |  294 Hz | 228 Hz | 266 Hz | 266 Hz | 266 Hz |
+|   125 kHz      |  246 Hz |  306 Hz | 237 Hz | 277 Hz | 277 Hz | 277 Hz |
+|   130 kHz      |  256 Hz |  318 Hz | 247 Hz | 288 Hz | 288 Hz | 288 Hz |
++----------------+---------+---------+--------+--------+--------+--------+
+|max horiz. freq.| max refresh rate (non-interlaced) of your monitor for |
+|                |                                                       |
+|of your monitor |  132x60 | 512x384 | 400x300 | 320x200 |   1152x864    |
+|                |         | double  |   and   |   and   |               |
+|                |         | scanned | 800x600 | 640x400 |               |
++----------------+---------+---------+---------+---------+---------------+
+|    30 kHz      |   53 Hz |   36 Hz |   46 Hz |   68 Hz |     32 Hz     |
+|    35 kHz      |   62 Hz |   42 Hz |   54 Hz |   80 Hz |     38 Hz     |
+|    40 kHz      |   71 Hz |   48 Hz |   62 Hz |   91 Hz |     43 Hz     |
+|    45 kHz      |   81 Hz |   54 Hz |   70 Hz |  103 Hz |     49 Hz     |
+|    50 kHz      |   90 Hz |   60 Hz |   78 Hz |  114 Hz |     54 Hz     |
+|    55 kHz      |   99 Hz |   67 Hz |   85 Hz |  126 Hz |     60 Hz     |
+|    60 kHz      |  108 Hz |   73 Hz |   93 Hz |  138 Hz |     65 Hz     |
+|    65 kHz      |  117 Hz |   79 Hz |  101 Hz |  149 Hz |     71 Hz     |
+|    70 kHz      |  126 Hz |   85 Hz |  109 Hz |  161 Hz |     76 Hz     |
+|    75 kHz      |  135 Hz |   91 Hz |  117 Hz |  172 Hz |     82 Hz     |
+|    80 kHz      |  144 Hz |   97 Hz |  125 Hz |  184 Hz |     87 Hz     |
+|    85 kHz      |  153 Hz |  103 Hz |  133 Hz |  195 Hz |     93 Hz     |
+|    90 kHz      |  162 Hz |  110 Hz |  141 Hz |  207 Hz |     98 Hz     |
+|    95 kHz      |  171 Hz |  116 Hz |  148 Hz |  218 Hz |    104 Hz     |
+|   100 kHz      |  180 Hz |  122 Hz |  156 Hz |  230 Hz |    109 Hz     |
+|   105 kHz      |  189 Hz |  128 Hz |  164 Hz |  241 Hz |    115 Hz     |
+|   110 kHz      |  198 Hz |  134 Hz |  172 Hz |  253 Hz |    120 Hz     |
+|   115 kHz      |  207 Hz |  140 Hz |  180 Hz |  265 Hz |    126 Hz     |
+|   120 kHz      |  216 Hz |  146 Hz |  188 Hz |  276 Hz |    131 Hz     |
+|   125 kHz      |  225 Hz |  153 Hz |  196 Hz |  288 Hz |    137 Hz     |
+|   130 kHz      |  235 Hz |  159 Hz |  203 Hz |  299 Hz |    142 Hz     |
++----------------+---------+---------+---------+---------+---------------+
+
+These values are only for the pre-defined sizes, if you change
+horizontal_total you have to calculate your own values:
+
+                   max_horiz_scan_rate_of_the_monitor
+max_refresh_rate = ----------------------------------
+                            vertical_total
+
+
+
+Notes:
+ - The refresh max refresh rate may also be limited by the RAMDAC on your
+   video board. In this case the BIOS will use the highest possible
+   pixelclock which is lower than the one requestet by VBEHz.
+ - Most monitors do not support higher refresh rates than 150 Hz.
+ - Too high refresh rates will limit the performance of your video card,
+   with a NVIDIA RIVA 128 this happens at about 142 Hz.
+
+
+
+The Flag field:
+-----------------
+Bit 0: Double Scan Mode    (1=enabled)	This has to be set if the vertical
+					resolution is 300 pixels or less
+Bit 1: Interlaced          (1=enabled)
+Bit 2: Horiz sync polarity (1=negative)
+Bit 3: Vert sync polarity  (1=negative)
+
+However, you cannot enter bits, you have to enter integers:
+
+input_value = (Bit 0) + 2*(Bit 1) + 4*(Bit 2) + 8*(Bit 3)
+
+
+
+
+
+
+To activate the changes you made, you have to reload VBEHz, which can
+be done by starting it with "/r" (vbehz /r) or rebooting.
+(Or closing the DOS-Box under Win 9x if you didn't load VBEHz in your
+AUTOEXEC.BAT file)
+

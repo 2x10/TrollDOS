@@ -1,0 +1,122 @@
+//--------------------------------------------------------------------
+// MACHINE.AML
+// Machine Code Interface Examples, (C) 1993-1996 by nuText Systems
+//
+// This macro shows how to call machine code written in assembly
+// language, and how to pass arguments and retrieve return values
+// (see also Machine.asm and documentation for the builtin 'machine'
+// function).
+//
+// See each example for details.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// This function returns the contents of a .Bin file (in the same path
+// as the this source file) as a macro language string at compile-time.
+constant function binaryfile (file)
+  sourcefile = getcurrfile
+  binfile = sourcefile [1..pos "\\" sourcefile 'r'] + file + ".bin"
+  if (openfile binfile) <> -1 then
+    binstring = readfile
+    closefile
+    // .BIN file must be less than 16000 bytes
+    if length binstring < 16000 then
+      return binstring
+    end
+  end
+  seterror 1501 file
+end
+
+
+variable arg1, arg2, arg3, value
+
+// display results
+private function results (test)
+  msgbox "Machine Code Test Results #" + test + ":\n" +
+         "(see Machine.aml/Machine.asm)\n" +
+         ("\nReturn = " + value) :-40 +
+         ("\nArg 1  = " + arg1)  :-40 +
+         ("\nArg 2  = " + arg2)  :-40 +
+         ("\nArg 3  = " + arg3)  :-40
+end
+
+
+//-------------------------------------------------------------------
+// Example #1 -- Executing Embedded Machine Code
+//-------------------------------------------------------------------
+
+// set up test arguments for the call to 'machine'
+arg1 = " Test string"
+arg2 = 37
+arg3 = 14
+
+// Execute the machine code. Note that when this macro is compiled,
+// the 'binaryfile' compile-time function will load the contents of
+// Machine.bin and embed it as a string in Machine.x.
+value = machine (binaryfile "machine") arg1 arg2 ref arg3
+
+// display the results
+results 1
+
+
+//-------------------------------------------------------------------
+// Example #2 -- Embedding Machine Code in a Function
+//-------------------------------------------------------------------
+
+// Wrapping a function definition around the machine call makes it
+// reusable and more convenient to use, and also ensures that a fixed
+// number of arguments are passed.
+
+private function testcall (str num numref)
+  machine (binaryfile "machine") str num ref numref
+end
+
+// set up test arguments
+arg1 = " Test string"
+arg2 = 37
+arg3 = 14
+
+// execute the machine code
+value = testcall arg1 arg2 ref arg3
+
+// display the results
+results 2
+
+
+//-------------------------------------------------------------------
+// Example #3 -- Dynamic Loading and Execution of Machine Code
+//-------------------------------------------------------------------
+
+// This run-time function returns the contents of a .Bin file (in the same
+// path as this executable file) as a macro language string.
+private function loadbinary (file)
+  xfile = getcurrfile
+  binfile = xfile [1..pos "\\" xfile 'r'] + file + ".bin"
+  if (openfile binfile) <> -1 then
+    binstring = readfile
+    closefile
+    // .BIN file must be less than 16000 bytes
+    if (length binstring) < 16000 then
+      return binstring
+    end
+  end
+end
+
+// set up test arguments for the call to 'machine'
+arg1 = " Test string"
+arg2 = 37
+arg3 = 14
+
+// Execute the machine code. The 'loadbinary' function will load
+// the contents of Machine.bin at run-time, and the 'machine' function
+// will execute it.
+value = machine (loadbinary "machine") arg1 arg2 ref arg3
+
+// display the results
+results 3

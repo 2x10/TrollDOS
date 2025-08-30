@@ -1,0 +1,147 @@
+//--------------------------------------------------------------------
+// CLOCK.AML
+// Digital Clock, (C) 1993-1996 by nuText Systems
+//
+// (See Clock.dox for user help)
+//
+// This macro displays a digital clock window, using large digits for
+// the current time. The current date is also displayed in long format
+// obtained from calling Cfg\Cfgintnl.x.
+//
+// The time and date are updated continuously. The clock window is
+// modeless, allowing you to switch windows while the clock is running.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// clock colors
+constant clock_digit_color      = color brightred   on black
+constant clock_separator_color  = color green       on black
+constant clock_ampm_color       = color green       on black
+constant clock_date_color       = color green       on darkgray
+
+constant clock_separator_char   = '.'
+constant clock_digit_width      = 4
+
+// clock timer
+constant clock_timer_delay  = 1000
+
+variable clockwin, timerid
+
+// keep this macro resident
+resident ON
+settype "win"
+
+// large digits
+digits = {
+  " __      __  __      __  __  __  __  __     "
+  "|  |  |  __| __||__||__ |__    ||__||__|    "
+  "|__|  | |__  __|   | __||__|   ||__|   |    "
+}
+
+variable datestr, lasttime
+
+// write a large digit string at x,y
+private function writedigits (digitstr x y)
+  for j = 1 to length digitstr do
+    k = digitstr [j]
+    if k == ' ' then
+      k = 10
+    end
+    k = (k * clock_digit_width) + 1
+    for i = 1 to length digits do
+      writestr digits [i][k : 4] clock_digit_color x y + i - 1
+    end
+    x = x + clock_digit_width
+  end
+end
+
+
+// called every second to update the date and time
+function tick
+  oldwindow = gotowindow clockwin
+
+  // format: YYYYMMDDWhhmmssuu
+  time = getrawtime
+
+  hours = time [10:2]
+
+  // hours have changed
+  if hours <> lasttime [10:2] then
+    itime = gettime
+    if itime [1] == '0' then
+      itime [1] = ' '
+    end
+    // date has changed
+    if not lasttime or hours == 0 then
+      datestr = runmacro (bootpath "cfg\\cfgintnl.x") '' 'f'
+      writestr (datestr + ' ') : 35  clock_date_color 4 6
+    end
+    // am/pm/24hr indicator
+    writestr (if? itime [LAST_CHAR] <> 'm' '24'
+               (if? hours >= 12 'PM' 'AM')) clock_ampm_color 36 4
+    // write hours in international format
+    writedigits itime [1..2] 5 2
+  end
+
+  // minutes
+  if time [12:2] <> lasttime [12:2] then
+    writedigits time [12:2] 16 2
+  end
+
+  // seconds
+  writedigits time [14:2] 27 2
+
+  lasttime = time
+
+  gotowindow oldwindow
+end
+
+// initial clock display
+private function firsttick
+  // clock background
+  oldwindow = gotowindow clockwin
+  hilite 35 4 clock_digit_color 4 2
+  writestr clock_separator_char clock_ampm_color 14 3
+  writestr clock_separator_char clock_ampm_color 14 4
+  writestr clock_separator_char clock_ampm_color 25 3
+  writestr clock_separator_char clock_ampm_color 25 4
+  gotowindow oldwindow
+  tick
+end
+
+event <destroy>
+  destroytimer timerid
+end
+
+// display the clock dialog box
+private function clockdlg (zero)
+  clockwin = dialog "Clock" 41 7 "c" (getcurrobj)
+  // start the clock timer
+  // (generate a unique timerid since there may be multiple instances)
+  timerid = setrepeat '' clock_timer_delay (getcurrobj) "tick"
+  firsttick
+  showdialog
+end
+
+// called by Lib.x when the dialog box is closed
+function onclosedlg
+  destroyobject
+end
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+clockdlg

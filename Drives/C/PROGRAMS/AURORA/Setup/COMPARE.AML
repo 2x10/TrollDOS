@@ -1,0 +1,131 @@
+//--------------------------------------------------------------------
+// COMPARE.AML
+// Compare Files, (C) 1993-1996 by nuText Systems
+//
+// (See Compare.dox for user help)
+//
+// This macro displays a dialog box which allows you to compare two
+// files, with various options. The Dos command 'fc' is used to perform
+// the comparision.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable file2, options
+
+// set default filenames
+file1 = getbufname
+file2 = if _BackupDir then
+          qualify (getname file1) (qualify _BackupDir)
+        else
+          forceext file1 _BackupExt
+        end
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+// compare dialog box
+dialog "Compare Files" 65 10 "c"
+field "&Compare: >"  3  2 40 (onname file1) "_load"
+field "&With:    >"  3  4 40 (onname file2) "_load"
+
+// initialize to previous options, if possible
+options = if variable? "cmpopt" 'prf' then
+            prf.cmpopt
+          else
+            "lo"
+          end
+
+// compare options group box
+groupbox '' 3 6
+  (menu ''
+     item " [ ] Show &Line Numbers"
+     item " [ ] &Ignore Case"
+     item " [ ] Show &First and Last Lines Only "
+     item " [ ] Use &Open Files if Possible"
+   end) '' options "lifo"
+
+// ok/cancel buttons
+button "O&k"      55 2 8
+button "Cancel"   55 4 8
+
+// display dialog box and get control values
+if (getdialog ref file1 ref file2 ref options) == 'Ok' then
+
+  // save options for next time
+  prf.cmpopt = options
+
+  oldbuf = getcurrbuf
+
+  // use open files
+  if pos 'o' options then
+
+    // file 1
+    buffer = findbuf file1
+    if buffer then
+      oldfile1 = file1
+      file1 = (getpath file1) + "@@@@cmp1"
+      gotobuf buffer
+      ok = save file1
+      gotobuf oldbuf
+      if not ok then
+        msgbox "Save Error!"
+        return
+      end
+    end
+
+    // file 2
+    buffer = findbuf file2
+    if buffer then
+      oldfile2 = file2
+      file2 = (getpath file2) + "@@@@cmp2"
+      gotobuf buffer
+      ok = save file2
+      gotobuf oldbuf
+      if not ok then
+        msgbox "Save Error!"
+        return
+      end
+    end
+  end
+
+  // run the Dos 'FC' command and capture the output
+  runcap "fc " + file1 + ' ' + file2 +
+         (if? (pos 'l' options) ' /n') +
+         (if? (pos 'f' options) ' /a') +
+         (if? (pos 'i' options) ' /c')
+
+  if getcurrbuf <> oldbuf then
+    // change temporary filenames back to actual filenames in
+    // the comparison report
+    if oldfile1 then
+      replace file1 oldfile1 '*ag'
+    end
+    if oldfile2 then
+      replace file2 oldfile2 '*ag'
+    end
+    // turn off the buffer modified flag
+    bufferflag '-m'
+  end
+
+  // cleanup temporary files
+  if oldfile1 then
+    deletefile file1
+  end
+  if oldfile2 then
+    deletefile file2
+  end
+
+end

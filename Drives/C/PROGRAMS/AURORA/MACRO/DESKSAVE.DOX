@@ -1,0 +1,17 @@
+
+ÿÿDESKSAVE.AML
+ ÿSave Desktopÿ
+
+  This macro saves the current desktop layout. The desktop layout can be
+  restored later with the Deskopen macro.
+
+  You will be prompted to enter the desktop file name. If no file
+  extension is specified, the file extension .Dst is assumed.
+
+  The following desktop items are saved by this macro:
+
+    - all open file names
+    - window sizes and positions
+    - window settings
+    - cursor states and positions
+

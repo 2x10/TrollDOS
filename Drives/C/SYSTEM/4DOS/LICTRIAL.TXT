@@ -1,0 +1,124 @@
+
+        SOFTWARE LICENSE AGREEMENT AND LIMITED WARRANTY
+                        for Trial Copies
+
+                        JP Software Inc.
+                         P.O. Box 1470
+                  E. Arlington, MA 02474, USA
+
+                         (781) 646-3975
+                       fax (781) 646-0904
+                     Email sales@jpsoft.com
+                   Web http://www.jpsoft.com/
+
+If you don't agree with the terms below, you should not use or
+evaluate this Software.
+
+In this agreement:
+
+   "Software" means the JP Software product(s) you have obtained
+   for evaluation, including the software, documentation, and
+   other materials;
+
+   "Trial Copy" means a copy of the Software for which you have
+   not paid a fee to us or one of our authorized dealers (Trial
+   Copies are typically described as "trial" or "shareware"
+   copies in the Software's sign-on messages);
+
+   "Purchased Copy" means a copy of the Software for which you
+   have paid a fee to us or to one of our authorized dealers,
+   and which is not described as a trial or shareware copy in
+   the Program's sign-on messages;
+
+   "we" or "us" means JP Software Inc., a corporation based in
+   Arlington, Massachusetts, USA;
+
+   "you" means the evaluator or end user of the Software;
+
+(1) Legal Agreement.  This legal agreement allows you to
+evaluate the Software under the terms and conditions below.
+
+(2) Ownership.  We or our licensors own the Software under
+copyright, trade secret and all other laws that may apply.  All
+JP Software product names, designs, and logos are trademarks of
+JP Software Inc.
+
+(3) Evaluation Period.  You may use a Trial Copy of the Software
+for an evaluation period of up to 21 days, as explained in the
+file TRIAL.TXT, in order to determine whether the Software meets
+your needs before purchasing a license.  Your evaluation period
+begins when you first install the Software on one or more
+computers for evaluation purposes.  Once the evaluation period
+ends, you agree to either purchase a license for the Software,
+or to stop using it.  If you have ordered a Purcahsed Copy of
+the Software from us or from one of our authorized dealers you
+may continue to use your Trial Copy until your Purchased Copy
+arrives.
+
+(4) Use of the Software.  While you are evaluating the Software,
+you may use it on as many computers as are required to perform
+your evaluation.  However, once the evaluation period is over
+and you purchase a license for the Software, your use will be
+restricted to the number of computers for which you have
+purchased licenses, under the license agreement which applies to
+your Purchased Copy.
+
+(5) Making and Distributing Trial Copies of the Software.  You
+may make copies of your Trial Copy of the Software to give to
+others, as long as you include all of the files that you
+originally received with your Trial Copy.  You agree not to sell
+Trial Copies of the Software or distribute them to others for
+any kind of compensation or fee.
+
+(6) License for Purchased Copies.  Purchased copies are governed
+by the terms in the file LICPURCH.TXT.  YOU AGREE TO REVIEW THAT
+LICENSE AND TO BE BOUND BY ITS TERMS if you purchase the
+software.  However, if a separate license is included with your
+purchased copy then that included license will supersede the
+terms in LICPURCH.TXT.
+
+(7) DISCLAIMERS, LIMITATIONS, and RESTRICTED RIGHTS.
+
+  >> DISCLAIMERS:  YOU ARE NOT PAYING FOR THE TRIAL USE LICENSE
+     FOR YOUR TRIAL COPY OF THE PROGRAM.  ACCORDINGLY THE TRIAL
+     COPY IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND
+     WHATSOEVER, INCLUDING ANY IMPLIED WARRANTIES OF
+     MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+     YOU ASSUME FULL RESPONSIBILITY FOR THE SELECTION AND USE OF
+     THE SOFTWARE TO ACHIEVE YOUR INTENDED RESULTS, AND
+     ACKNOWLEDGE THAT IF YOU USE THE SOFTWARE IMPROPERLY OR
+     AGAINST OUR INSTRUCTIONS YOU CAN CAUSE DAMAGE TO YOUR
+     FILES, SOFTWARE AND DATA.
+
+  >> HIGH RISK ACTIVITIES.  THE SOFTWARE IS NOT FAULT-TOLERANT
+     AND IS NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE AS
+     ONLINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS
+     REQUIRING FAIL-SAFE PERFORMANCE, such as in the operation
+     of nuclear facilities, aircraft navigation or communication
+     systems, air traffic control, direct life support machines,
+     or weapons systems, or any other environment in which the
+     failure of the Software could lead directly to death,
+     personal injury, or severe physical or environmental damage
+     ("High Risk Activities").  WE SPECIFICALLY DISCLAIM ANY
+     EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK
+     ACTIVITIES FOR THE SOFTWARE OR ANY PORTION THEREOF.
+
+  >> LIMITATION OF LIABILITY:  IN NO EVENT SHALL WE BE LIABLE
+     FOR ANY INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES
+     WHATSOEVER ARISING OUT OF USE OF THE PROGRAM OR YOUR
+     RELATIONSHIP WITH US.  Some jurisdictions do not allow
+     exclusion or limitation of liability for incidental or
+     consequential damages, therefore the above limitation may
+     not apply to you.
+
+  >> EXPORT.  You may use the Software in any country, except
+     countries that are subject to U.S. export restrictions.
+     You are solely responsible for determining whether any
+     planned export relating to the Software is legal under U.S.
+     and other applicable laws.
+
+  >> RESTRICTED RIGHTS LEGEND:  Use, duplication, or disclosure
+     by the U.S. Government subject to the restrictions set
+     forth in DFARS 252.227-7013 (c)(1)(ii) and FAR 52.227-19.
+

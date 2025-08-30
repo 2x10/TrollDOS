@@ -1,0 +1,521 @@
+//--------------------------------------------------------------------
+// EXAMPLE.AML
+// AML examples and code fragments (C), 1993-1996 by nuText Systems
+//
+// This file is not an executable macro. It contains AML examples and
+// code fragments which can be used in other macro files.
+//--------------------------------------------------------------------
+
+// Example 1 ---------------------------------------------------------
+
+// mark the entire file - assign to the <f12> key
+key <f12>
+  markline 1 (getlines)
+end
+
+
+// Example 2 ---------------------------------------------------------
+
+// block marking without having the cursor resize the mark
+
+// mark line
+key <alt l>
+  markline
+  stopmark    // stopmark closes the mark
+end
+
+// mark character
+key <alt a>
+  markchar
+  stopmark
+end
+
+// mark column
+key <alt b>
+  markcolumn
+  stopmark
+end
+
+
+// Example 3 ---------------------------------------------------------
+
+// block copy without moving the mark
+key <alt c>
+  undobegin                // group together as one undoable operation
+  copymark curr_mark 'T'   // create temp copy of original mark
+  oldmark = usemark 'T'    // use the temp mark
+  copyblock2               // copy marked text (moves the mark also)
+  destroymark              // destroy the temp mark
+  usemark oldmark          // switch back to the original mark
+  undoend
+end
+
+
+// Example 4 ---------------------------------------------------------
+
+// automark example - creates a temporary paragraph mark if
+// no mark exists
+
+// begin automark
+function begauto
+  if not mark? then        // if no mark exists...
+    _am = ON               // set a flag
+    markpara               // mark the current paragraph
+  end
+end
+
+// end automark
+function endauto
+  if _am then              // if flag was set..
+    _am = OFF            // unset flag
+    destroymark            // destroy the temporary mark
+  end
+end
+
+// usage example (indent a block)
+key <shift f8>
+  begauto
+  shiftblock 1
+  endauto
+end
+
+
+// Example 5 ---------------------------------------------------------
+
+// Repeat Last Find with wrap around
+function findlastw
+
+  variable search_str, options
+
+  // get last find string
+  history_str = gethiststr "_find"
+
+  // do the search
+  if not search2 history_str '' TRUE then
+
+    // not found, wrap to top or bottom
+    if (splitstr '' history_str ref search_str ref options ) >= 2 and
+       (pos 'r' options) then
+      row (getlines)
+      col getlinelen + 1
+    else
+      gotopos 1 1
+    end
+
+    // repeat the search
+    search2 history_str
+  end
+end
+
+// usage example
+key <ctrl l>  findlastw
+
+
+// Example 6 ---------------------------------------------------------
+
+// change the left and right cursor keys to wrap to the previous or
+// next line
+
+// cursorleft with wrap
+key <left>
+  if getcol == 1 then             // wrap if at column 1
+    if up then                    // ..and not at first line
+      col getlinelen + 1
+    end
+  else
+    left
+  end
+end
+
+// cursorright with wrap
+key <right>
+  if getcol > getlinelen then     // wrap if at end-of-line
+    if down then                  // ..and not at last line
+      col 1
+    end
+  else
+    right
+  end
+end
+
+
+// Example 7 ---------------------------------------------------------
+
+// change the <del> key to delete a block if marked, otherwise
+// delete a character
+
+key <del>
+  if mark? then
+    deleteblock      // delete block if it exists,
+  else
+    delchar2         // otherwise delete a character
+  end
+end
+
+
+// Example 8 ---------------------------------------------------------
+
+// find the word at the cursor - assigned to <ctrl f11>
+key <ctrl f11>
+  wordstr = getword           // get word using the default charset
+  if wordstr then
+    search2 wordstr           // find the word
+  else
+    say "no word at the cursor" 'b'
+  end
+end
+
+
+// Example 9 ---------------------------------------------------------
+
+// emulate the QEdit 'GetPrev' command:  copies characters from
+// the line above the current line - assigned to <alt 4> key.
+key <alt 4>
+  if getrow > 1 then                         // if after first line...
+    writetext (getchar (getcol) getrow - 1)  // get char and write it
+  end
+end
+
+
+// Example 10 --------------------------------------------------------
+
+// emulation of Brief-style <home> and <end> keys. These keys should
+// be placed in the 'edit' object.
+
+// brief <home> key emulation
+key <home>
+  col 1                                      // goto column 1
+  smark                                      // cua marking
+  keycode = getkey                           // get next key
+  if keycode == <home> then                  // <home> pressed 2nd time?
+    row (getviewtop)                         // goto to page top
+    smark                                    // cua marking
+    keycode = getkey                         // get next key
+    if keycode == <home> then                // <home> pressed 3rd time?
+      row 1                                  // goto to top of file
+      smark                                  // cua marking
+    else
+      queuekey keycode                       // execute key normally
+    end
+  else
+    queuekey keycode                         // execute key normally
+  end
+end
+
+// brief <end> key emulation (br)
+key <end>
+  col getlinelen + 1                         // goto end-of-line
+  smark                                      // cua marking
+  keycode = getkey                           // get next key
+  if keycode == <end> then                   // <end> pressed 2nd time?
+    row (getviewbot)                         // goto to page bottom
+    smark                                    // cua marking
+    keycode = getkey                         // get next key
+    if keycode == <end> then                 // <end> pressed 3rd time?
+      row (getlines)                         // goto to bottom of file
+      smark                                  // cua marking
+    else
+      queuekey keycode                       // execute key normally
+    end
+  else
+    queuekey keycode                         // execute key normally
+  end
+end
+
+
+// Example 11 --------------------------------------------------------
+
+// shows how to 'double-up' key usage for some keys by testing
+// for the <shift> key
+
+key <alt k>
+  if shiftkey? then      // <alt shift k>
+    :
+  else                   // <alt k>
+    :
+  end
+end
+
+
+// Example 12 --------------------------------------------------------
+
+// prompts the user for the name of a program and passes the word
+// at the cursor to it as the first parameter.
+
+key <shift f12>
+  parm = getword _CSetB                  // get word using charset CSetB
+  if parm then
+    program = ask "Program to execute"   // prompt user for program
+    if program then                      // program entered?
+      run program + ' ' + parm  "ck"     // concatenate program with word
+    end                                  //   and execute it
+  else
+    say "no word at the cursor" 'b'      // no word found at the cursor
+  end
+end
+
+
+// Example 13 --------------------------------------------------------
+
+// strip leading or trailing spaces from a string
+
+// return string 'charstring' without leading spaces
+function stripl (charstring)
+  return charstring [posnot ' ' charstring : -1]
+end
+
+// return string 'charstring' without trailing spaces
+function stript (charstring)
+  return charstring [1 : posnot ' ' charstring 'r']
+end
+
+
+// Example 14 --------------------------------------------------------
+
+// attach 'properties' to a string value in the current object
+
+// set a property
+function setprop (string prop value)
+  this [string + '-' + prop] = value
+end
+
+// get a property
+function getprop (string prop)
+  this [string + '-' + prop]
+end
+
+// delete a property
+function delprop (string prop)
+  destroyvar string + '-' + prop
+end
+
+
+// Example 15 --------------------------------------------------------
+
+// modify the save-as prompt to change the file name
+// (replaces the function "asksaveas" in EXT.AML)
+
+function asksaveas (options name dext)
+  file = ask "Save " + (if? name name (getname (getbufname))) + " as"  "_load"
+  if file then
+    file = qualify file (getbufname)
+    if dext then
+      file = defext file dext
+    end
+    addhistory "_load" file
+    action = locase (askrac file)
+    if pos action "ra" then
+      save file options + (if? action == 'a' 'a')
+      // name current file 'file'
+      send "setname" file
+    end
+  end
+end
+
+
+// Example 16 --------------------------------------------------------
+
+// compute the factorial of a number (illustrates recursion)
+function fact (x)
+  if? x <= 1  1  x * (fact x - 1)
+end
+
+// display the factorial of 6
+say (fact 6)
+
+
+// Example 17 --------------------------------------------------------
+
+// generate a random number between a and b
+// (demonstrates the use of the rand function)
+
+function random (a b)
+  a + (rand mod b - a + 1)
+end
+
+// display a random number between 500 and 3000
+say (random 500 3000)
+
+
+// Example 18 --------------------------------------------------------
+
+// asynchronous beep - set a timer to stop the beep
+// (demonstrates the use of timers)
+
+function beep2 (freq duration)
+  if not arg then
+    // stop the beep
+    beep
+  else
+    // beep indefinitely
+    beep freq
+    // call this function again after 'duration' milliseconds
+    settimer "beep" duration '' "beep2"
+  end
+end
+
+
+// Example 19 --------------------------------------------------------
+
+// toggle the case of the character at the cursor - assign to <alt k>
+key <alt k>
+  ovltext (flipcase (getchar))     // toggle the character
+  right                            // move right one column
+end
+
+
+// Example 20 --------------------------------------------------------
+
+// transpose the characters at the cursor - assigned to <alt k>
+
+// method 1: using a marked block
+key <alt k>
+  undobegin              // beginning of an undoable group
+  oldmark = usemark 'T'  // use temporary mark 'T'
+  markchar               // create a character mark
+  stopmark               // stop the cursor from extending the mark
+  right 2                // move right two columns
+  moveblock              // move the marked character
+  destroymark            // destroy the mark
+  usemark oldmark        // switch back to old mark
+  undoend                // end of an undoable group
+end
+
+// method 2: using a string
+key <alt k>
+  twochars = gettext (getcol) 2
+  ovltext (if? twochars [2] twochars [2] ' ') + twochars [1]
+  right
+end
+
+
+// Example 21 --------------------------------------------------------
+
+// macro code fragment to synchronously dispatch all the events
+// currently in the event queue
+
+endprocess      // queue an internal 'quit process' event
+process         // process all events and return
+
+
+// Example 22 --------------------------------------------------------
+
+// macro code fragment to display a timed message box
+
+// set a timer (t1) to simulate the <esc> key one second from now
+settimer "t1" 1000 '' <esc>
+
+// display a short-style message box
+shortbox "This message lasts for one second..."
+
+
+// Example 23 --------------------------------------------------------
+
+// modify the prompt history menu to automatically enter selected
+// strings into the prompt:
+
+// replace the <pgup> and <pgdn> keys in the 'prompt' object
+// in KBD.AML
+
+key <pgup>
+  if askhistory then
+    queue <enter>
+  end
+end
+
+key <pgdn>  call <pgup>
+
+// ..also modify the <lbutton> function in the 'prompt' object
+// in MOUSE.AML to handle mouse clicks on the prompt retrieve tab
+
+// left button down
+function <lbutton>
+   :
+   :
+  case getregion
+
+    // modify this 'when' clause
+    when 14
+      if askhistory then
+        queue <enter>
+      end
+       :
+       :
+
+// Example 24 --------------------------------------------------------
+
+// The following is an example of an external macro which can
+// be run from the command line, without actually starting the
+// editor environment in A.X. This macro replaces all occurrences
+// of a search string in a file:
+
+// get command-line arguments
+file      = arg 2
+searchstr = arg 3
+replstr   = arg 4
+options   = arg 5
+
+if loadbuf file then                        // load a file
+  replace searchstr replstr options + 'a*'  // replace all string(s)
+  savebuf                                   // save the file
+end
+
+// assuming this macro was compiled to 'replace.x', the following
+// command will run the macro from the Dos command line:
+
+C>a -xreplace.x "myfile.txt" "apples" "oranges" 'i'
+       // replaces all occurrences of 'apples' with 'oranges',
+       // in 'myfile.txt', ignoring case
+
+
+// Example 25 --------------------------------------------------------
+
+// The following example shows how to locate a file in a path
+// defined by a Dos environment string:
+
+// 'PATH' must be in caps
+file = locatefile "program.exe" (getenv 'PATH')
+
+// filename is fully qualified
+msgbox "Filename is: " + file
+
+
+// Example 26 --------------------------------------------------------
+
+// The following macro code shows how set an alarm to go off every
+// hour on the hour in edit windows and file manager windows
+
+object edit_fmgr
+   :
+  // called on the hour (Big Ben clock chime)
+  function  onhour
+    beep 330  600
+    beep 262  600
+    beep 294  600
+    beep 196 1200
+    beep 196  600
+    beep 294  600
+    beep 330  600
+    beep 262 1200
+  end
+   :
+   :
+end
+
+// called when the editor is started
+function onentry
+   :
+  // set an alarm timer to call 'onhour' every hour on the hour
+  setalarm 'hr'
+     -1           // any year
+     -1           // any month
+     -1           // any day
+     -1           // any weekday
+     -1           // any hour
+      0           // only at zero minutes past the hour
+      0           // only at zero seconds past zero minutes
+     ''           // dispatch in the current event object
+     'onhour'     // execute the function 'onhour'
+   :
+   :
+end

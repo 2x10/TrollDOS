@@ -1,0 +1,104 @@
+//--------------------------------------------------------------------
+// COMPRESS.AML
+// Find Occurrences via Folding, (C) 1993-1996 by nuText Systems
+//
+// (See Compress.dox for user help)
+//
+// This macro hides all lines (via folding) in the current edit window,
+// where a search string is not found.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+// prompt the user for the search string in multi-string format
+string_and_opt = ask "[string/birswx] Display occurrences of"  "_find"
+if not string_and_opt then
+  return
+end
+
+// add the search string to _find history buffer
+addhistory "_find" string_and_opt
+
+variable search_string, options, o
+
+// parse the search multi-string
+n = splitstr '' string_and_opt
+             ref search_string  ref options  ref o
+
+// initialize search options
+if n >= 2 then
+  if n > 2 then
+    options = o
+  end
+else
+  options = _SearchOpt
+end
+if pos 'g' options then
+  options = sub 'g' '' options
+end
+options = options + '*'
+
+// initialize last line number and fold-count
+lastline = 1
+count = 0
+
+// group undo, and use a temporary mark
+undobegin
+oldmark = usemark 'T'
+
+// save cursor position and move the cursor to the top of the file
+pushcursor
+gotopos 1 1
+
+// do for all lines where the search string is found
+while find  search_string options  do
+  thisline = getrow
+
+  // fold the lines from the last line to the current line
+  if thisline > lastline then
+    markline lastline thisline - 1
+    foldblock
+    count = count + 1
+  end
+
+  lastline = thisline
+  col MAX_COL
+end
+breakoff
+
+// fold the last block, if applicable
+if count then
+  if getlines > lastline then
+    markline lastline (getlines)
+    foldblock
+  end
+end
+
+// restore the cursor position
+popcursor
+
+// destroy the temp mark and use the default mark
+destroymark
+usemark oldmark
+
+// end of undo group
+undoend
+
+// display the number of lines where the search string is found
+display
+if count then
+  say count + " lines found"
+else
+  say "'" + string_and_opt + "'" + " not found" 'b'
+end

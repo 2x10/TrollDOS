@@ -1,0 +1,55 @@
+<HTML><HEAD><TITLE>SETVER</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>SETVER</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A><BR>
+<A HREF="ddd.htm">Allgemeines zu DDD</A> 
+<HR noshade color="silver"><PRE>SETVER tÑuscht Programmen gegenÅber eine andere DOS-Versions-Nummer vor.
+
+<FONT COLOR="maroon>Installation</FONT>
+
+<FONT COLOR="blue">SETVER [/vHHLL]</FONT> oder <A HREF="help:lh">LH</A> <FONT COLOR="blue">SETVER [/vHHLL]</FONT>    
+
+/vHHLL  gibt die gewÅnschte DOS-Versionsnummer an, <FONT COLOR="blue">/v0622</FONT> z.B. bedeutet, da·
+        Sie die DOS-Version 6.22 vortÑuschen wollen, <FONT COLOR="blue">/v0500</FONT> die Version 5.0 
+
+FÅhrende Nullen mÅssen angegeben werden, soda· die Versions-Angabe immer aus
+insgesamt 4 Ziffern besteht. 
+
+Um die Original-Versionsnummer wieder zu aktivieren, entfernen Sie SETVER
+mit dem Befehl <FONT COLOR="blue">SETVER /x</FONT> oder legen Sie es mit <FONT COLOR="blue">SETVER /s</FONT> still.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Steuerung</FONT>
+
+Mit folgenden Standard-DDD-Parametern kann SETVER nach der Installation
+gesteuert werden:
+
+/x  aus dem Speicher entfernen
+/s  stillegen
+/r  reaktivieren<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT> 
+
+Mit SETVER bringen Sie auch Programme zum Laufen, die sich mit der 
+Fehlermeldung "Falsche DOS-Version" verabschieden.
+
+Wenn Sie SETVER geladen haben, gilt die neue Versions-Nummer fÅr das gesamte 
+System, soda· sich nun ganz andere Programme Åber die falsche DOS-Version 
+beschweren kînnten. Da sich SETVER jedoch beliebig laden und entladen lÑ·t,
+kînnen Sie es ganz gezielt dann einsetzen, wenn Sie es benîtigen und 
+anschlie·end wieder entladen. Dazu bietet sich der Start der "stîrrischen" 
+Anwendung Åber eine Batch-Datei an, die nach folgendem Schema aufgebaut ist:
+
+<FONT COLOR="red">setver /v0500</FONT> 
+<FONT COLOR="blue">programm.exe</FONT>
+<FONT COLOR="red">setver /x</FONT>
+
+Diese Batch-Datei lÑdt zunÑchst SETVER, welches die DOS-Version 5.0
+vortÑuschen soll und anschlie·end das Anwendungsprogramm. Nach Beendigung
+der Anwendung wird SETVER deinstalliert und die Original-Versionsnummer
+wieder aktiviert.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

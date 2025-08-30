@@ -1,0 +1,276 @@
+<HTML><HEAD><TITLE>Packer</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Packer</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver">
+
+<A HREF="#1"> Schnellkurs</A><BR>
+<A HREF="#2"> Beschreibung</A><BR> 
+<A HREF="#3"> Packermen einrichten</A><BR> 
+<A HREF="#4"> Zus„tzlichen Packer einrichten</A><BR> 
+<A HREF="#5"> Auswahl der zu packenden/entpackenden Dateien</A><BR> 
+<A HREF="#6"> Starten des Packvorganges</A><BR> 
+<A HREF="#7"> Entpacken von Archiven</A><BR> 
+<A HREF="#8"> Tricks</A> 
+
+<HR noshade color="silver"><PRE><A NAME="1"><A HREF="#top"> </A><FONT COLOR="maroon">Schnellkurs</FONT>
+
+1. Einrichten des Packermens erfolgt automatisch w„hrend der Erst-
+   installation oder nach Aufruf im Hilfemen durch das Programm SETUP.
+
+2. Pack-Manager untersttzt vier der gebr„uchlichsten Packer sowie einen frei
+   w„hlbaren.
+
+3. Packen, Entpacken usw. auf Knopfdruck.
+
+4. Datei(en) und/oder Verzeichnis(se) mit Lichtbalken anw„hlen bzw. mit roten
+   K„stchen markieren, Pack-Men ”ffnen, Optionen w„hlen, ENTER drcken.
+
+5. Archive k”nnen z.B. direkt ins UpLoad-Verzeichnis des DFš-Terminals
+   umgeleitet werden.
+
+6. Einbinden eines zus„tzlichen beliebigen Packers (Beispieldatei
+   USERPACK.IN_ in USERPACK.INI umbenennen und nach Wunsch ab„ndern).
+
+7. Wichtig: šberprfen Sie bitte jedes Archiv nach dem Packen mit der
+   Funktion "Archiv ansehen" und lassen Sie vor allem verschachtelte Archive
+   probehalber entpacken. Es kommt z.B. vor, daá mit PKZIP gepackte
+   Verzeichnisb„ume nach der Umwandlung in ein Selbstentpack-Archiv nicht
+   mehr in der ursprnglichen Form erhalten sind.<HR
+
+noshade color="silver"><A NAME="2"><A HREF="#top"> </A><FONT COLOR="maroon">Beschreibung</FONT>  
+
+Um Platz auf Datentr„gern zu schaffen, k”nnen Sie beliebige Dateien mit einem
+Packprogramm auf etwa die H„lfte ihrer ursprnglichen Gr”áe zusammendrcken.
+Wenn Sie diese Daten wieder in alter Form ben”tigen, werden sie vom Pack-
+programm wieder entpackt.
+
+Der Comander selbst enth„lt keinen Packer. Um das Packer-Men benutzen zu
+k”nnen, mssen Sie sich also ein Packprogramm besorgen. Packprogramme finden
+Sie im Internet, auf PC-Zeitungs-CD oder in BTX (*WDR#).
+
+Bekannte und vielbenutzte DOS-Packer sind ARJ, PKZIP, LHARC, LHA und einige
+andere. Die eben genannten Programme werden auch vom Comander untersttzt.
+Ein Menpunkt ist offen: Dort k”nnen Sie einen weiteren Packer oder zus„tz-
+liche Befehle fr die genannten Packer unterbringen. Eine weitere
+M”glichkeit, Packer einzubinden, finden Sie im Hilfetext zur Taste F2.
+
+Packprogramme mssen in der Regel mhselig ber lange und schwer zu merkende
+Kommandozeilen bedient werden. Diese Arbeit nimmt Ihnen der Comander ab. Mit
+ihm steuern Sie Ihre Packoperationen so, als ob Sie Dateien kopieren oder
+betrachten wollen. Datei/en anklicken - Packermen ”ffnen - Packbefehl an-
+klicken. Fertig.<HR
+
+noshade color="silver"><A NAME="3"><A HREF="#top"> </A><FONT COLOR="maroon">Packermen einrichten</FONT>
+
+Das einfachste Verfahren ist, wenn Sie hierzu das Einrichtungs-Programm <A HREF="../newdos/setup.htm">SETUP</A>
+im Hilfe-Men (F1) starten. Sie k”nnen auch am DOS-Prompt den Befehl setup /b
+eingeben. Mit dem Befehl setup /c binden Sie das Uploadverzeichnis Ihres
+DFš-Terminals ein.<HR
+
+noshade color="silver"><A NAME="4"><A HREF="#top"> </A><FONT COLOR="maroon">Zus„tzlichen Packer einrichten</FONT>
+
+Der erste Menpunkt im Pack-Men ist wie gesagt frei belegbar. Es muá sich
+jedoch um einen Kommandozeilenpacker handeln - Packer mit eigener Oberfl„che
+eignen sich nicht zum Einbau in das Men. Sollten Sie mit dem Befehlsumfang
+des Packmens nicht zufrieden sein, k”nnen Sie auch einen bereits 
+installierten Packer hier nochmals anmelden.
+
+Die Konfigurationsdatei fr Ihren eigenen Packer heiát USERPACK.IN_ und
+befindet sich ebenfalls im Verzeichnis Comander. Wenn nicht, er”ffnen Sie mit
+MakeFile eine neue. Ansonsten benennen Sie diese Datei in USERPACK.INI um.
+Laden Sie USERPACK.INI dann in einen Editor.
+
+Schreiben Sie nun jeden Befehl, den Ihr Packer ausfhren k”nnen soll, in eine
+extra Zeile. Die Bezeichnung des Befehls muá vorangestellt werden, damit der
+Comander weiá, welchen Befehl er wann ausfhren soll. Auáerdem k”nnen Sie bei
+sp„teren nderungen ersehen, was welcher Befehl bedeutet.
+
+Standardm„áig sind folgende Kommentare vorgeschrieben:
+
+EINPACK= (hier folgt der Packbefehl, z.B. C:\PACKER\LHA a)
+AUSPACK= (Befehl zum Entpacken, z.B. C:\ZIP\PKUNZIP)
+SELFEXT= (Befehl, um einen Selbstextraktor anzulegen)
+LISTARC= (Befehl zum Anzeigen des gepackten Archives)
+FILEEND= (Dateiendung, die Ihr Packer an Archive vergibt, z.B. ZIP usw.)
+
+Um den Befehlsumfang Ihres Packprogrammes herauszubekommen, geben Sie am
+DOS-Prompt folgenden Befehl ein (Beispiel):
+
+C:\PACKER\LHA /?
+
+Dann wird der Hilfetext des jeweiligen Packers angezeigt. Komfortabler geht
+es mit dem Befehl:
+
+C:\PACKER\LHA /? &gt;&gt; C:\COMANDER\USERPACK.INI.
+
+In diesem Falle wird der Hilfetext an Ihre Konfigurations-Datei angeh„ngt, 
+die danach aber noch wie oben beschrieben umgearbeitet werden muá.<HR
+
+noshade color="silver"><A NAME="5"><A HREF="#top"> </A><FONT COLOR="maroon">Auswahl der zu packenden/entpackenden Dateien</FONT>
+
+1. Bewegen Sie den Lichtbalken auf die entsprechende Datei bzw. das
+   entsprechende Verzeichnis.
+
+2. Wenn Sie mehrere Dateien bearbeiten wollen, markieren Sie die Objekte mit
+   einem roten K„stchen (rechte Maustaste oder Taste EINFG bzw. INS oder 0
+   (Nulltaste)). Bearbeitet werden entweder NUR die markierten Objekte ODER
+   (wenn keine Markierung erfolgte) die Datei im Lichtbalken.<HR
+
+noshade color="silver"><A NAME="6"><A HREF="#top"> </A><FONT COLOR="maroon">Starten des Packvorganges</FONT>
+
+1. ™ffnen Sie nun das PACKER-Men. Beim allerersten Mal werden die
+   Standardeinstellungen angezeigt, die Sie wie folgt „ndern k”nnen.
+
+2. W„hlen Sie den Packer, den Sie benutzen wollen.
+
+3. W„hlen Sie, ob Sie den Packvorgang innerhalb der Comander-Oberfl„che oder
+   im Vollbild mitverfolgen wollen.
+
+4. W„hlen Sie, ob die ausgew„hlten Dateien gemeinsam in ein einziges Archiv
+   oder jede einzeln fr sich gepackt werden soll.
+
+5. W„hlen Sie, wo die Packarchive angelegt werden sollen. (Im gerade
+   ge”ffneten Verzeichnis, im Verzeichnis im anderen Fenster des Comanders
+   oder im Upload-Verzeichnis (dazu sp„ter mehr)).
+
+5. W„hlen Sie den Befehl an den Packer.
+
+6. Klicken Sie auf Okay.
+
+Die Reihenfolge, in der Sie die Optionen eingeben, ist gleichgltig,
+lediglich OKAY muá als allerletztes folgen. Die gew„hlte Option ist immer mit
+einem grnen K„stchen gekennzeichnet, w„hrend die weiáen K„stchen auf
+inaktive Befehle verweisen.
+
+
+<FONT COLOR="green">Was passiert dann:</FONT>
+
+Zun„chst beginnt der Packer mit seiner Arbeit. Warten Sie mit Tasten- bzw.
+Mauseingaben solange, bis im Kopf des Fensters die Fertigmeldung erscheint.
+Wenn es soweit ist, drcken Sie ENTER oder eine Maustaste.
+
+
+<FONT COLOR="green">Nach dem Packen von Dateien/Verzeichnissen</FONT>
+
+Haben Sie alle Objekte einzel packen lassen, tragen die Archive (also die
+gepackten Dateien) den gleichen Namen wie das Original, versehen allerdings
+mit der vom Packprogramm automatisch angeh„ngten Endung.
+
+LZH: vom LHA oder LHARC gepackt
+ZIP: von PKZIP gepackt
+ARJ: von ARJ gepackt
+
+Beispiel: Aus der Datei TEXTE.DOC hat LHA das Archiv TEXTE.LZH angefertigt.
+
+Die Originaldateien sind in jedem Falle ebenfalls noch vorhanden. Wenn Sie
+also nicht weniger, sondern mehr Platz auf dem Datentr„ger haben wollen,
+mssen Sie die Originale l”schen. Sie k”nnen sich erfahrungsgem„á darauf
+verlassen, daá alle bekannten Packer Ihre Dateien fehlerfrei wiederher-
+stellen.
+
+Wenn Sie mehrere Dateien zu einem einzigen Archiv zusammengefaát haben (und
+das spart meist noch mehr Speicherplatz), finden Sie folgendes Resultat vor:
+Neben den Originaldateien existiert ein Archiv mit dem Namen PACKBOX, das die
+Endung des benutzten Packers tr„gt. Der Comander erkennt brigens, ob ein
+solches Archiv bereits existiert und gibt einer weiteren PACKBOX eine Nummer.
+Insgesamt k”nnen Sie pro Verzeichnis zehn Packboxen in einem Arbeitsgang
+anlegen. Die Packboxen tragen dann die Namen PACKBOX, PACKBOX1 bis PACKBOX9.
+
+Beim Entpacken einer Packbox werden die Daten wieder auf die einzelnen
+Dateien aufgeteilt.
+
+
+<FONT COLOR="green">Nach dem Anlegen eines Selbstextraktors (SFX-Archiv)</FONT>
+
+Ein Selbstextraktor ist ein Packarchiv, das sich selbst entpacken kann, ohne
+daá Sie dafr das dazugeh”rige Packprogramm ben”tigen. Dies ist immer dann
+vorteilhaft, wenn Sie gepackte Daten an andere weitergeben, die selbst kein
+Packprogramm besitzen, um die Daten wieder auszupacken. Ein solches Archiv
+tr„gt logischerweise die Endung EXE. Sie selbst k”nnen Selbstextraktoren ohne
+das Packermen wieder entpacken, indem Sie sie im Comander mit der Maus
+doppelt anklicken oder den Lichtbalken darauf fahren und ENTER drcken. Oder
+Sie geben am DOS-Prompt den Namen des SFX-Archives ein.
+
+Selbstextraktoren sind z.T. wesentlich gr”áer als normal gepackte Archive.
+Hier bietet sich z.B. LHA an, der solche SFX-Archive sehr klein h„lt.
+
+Im Normalfall muá ein Selbstextraktor ber den Umweg eines Normalarchives
+erstellt werden, daá heiát, erst muá eine Datei gepackt und dann in einem
+weiteren Arbeitsgang in einen Selbstextraktor verwandelt werden.
+
+Der Comander vereinfacht das Anlegen von SFX-Archiven, indem er die Dateien
+zun„chst packen und gleich darauf umwandeln l„át. Die Zwischenarchive werden
+auáerdem automatisch gel”scht. Dabei erkennt er, ob Sie eine ungepackte oder
+bereits gepackte Datei in einen Selbstextraktor verwandeln wollen und erteilt
+selbst„ndig die richtigen Befehle an den Packer. Auch SFX-Archive k”nnen
+Sie einzeln oder als Packbox anlegen.<HR
+
+noshade color="silver"><A NAME="7"><A HREF="#top"> </A><FONT COLOR="maroon">Das Entpacken von Archiven</FONT>
+
+Einen Selbstextraktor sollten Sie wie gesagt wie ein Programm starten, ohne
+das Packer-Men zu benutzen, und ihn sich selbst entpacken lassen. Normal-
+archive (incl. Packboxen) entpacken Sie so, wie Sie sie gepackt haben.
+Steuern Sie sie mit dem Lichtbalken an und w„hlen Sie im Packermen den
+Befehl "Entpacken" und "Okay".
+
+Der Comander erkennt brigens an der Dateiendung des Archives, welches Pack-
+programm er zum Entpacken aufrufen muá. Sie k”nnen also auch mehrere Archive
+von unterschiedlichen Packern in einem Rutsch entpacken; der Comander
+wechselt ggf. w„hrend der Laufzeit automatisch den Packer.
+
+Im Prinzip brauchen Sie den Entpacker also nicht auszuw„hlen, allerdings gibt
+es eine Ausnahme: Die Packer LHARC und LHA verwenden beide die gleiche Endung
+beim Anlegen der Archive (LZH), k”nnen sich jedoch ihre Archive manchmal
+nicht gegenseitig entpacken. Wenn Sie nicht mehr wissen, wer von beiden
+welches Archiv gepackt hat, mssen Sie es halt ausprobieren oder mit dem
+Textbetrachter einen Blick ins Archiv werfen. Dort steht der Name des
+Packers.
+
+Eine M”glichkeit, Archive noch einfacher zu entpacken, besteht darin, daá Sie
+die Archive mit den dazugeh”rigen Packern <A HREF="verknpf.htm">verknpfen</A>. Hierbei gengt es dann,
+ein Archiv im Comander doppelt anzuklicken, damit es entpackt wird.
+
+
+<FONT COLOR="green">UPLOAD-Verzeichnis</FONT>
+
+Die meisten Programme zur Datenfernbertragung (DFš, BTX usw.) ben”tigen ein
+extra Verzeichnis (Upload-Verzeichnis), in das die zu sendenden Dateien
+vorher hineinkopiert werden mssen. Aus Kostengrnden bietet es sich an,
+Dateien vor dem Senden zu packen. Der Comander kann die Archive ohne
+zus„tzlichen Aufwand gleich im Upload-Verzeichnis anlegen lassen.
+
+
+<A NAME="8"><A HREF="#top"> </A><FONT COLOR="green">Trick 17</FONT>
+
+Da Sie jedes beliebige Verzeichnis als Upload einsetzen k”nnen, l„át sich
+diese Comander-Funktion auch zweckentfremden. Falls Sie ”fter Dateien in
+gepackter Form auf Disketten bertragen, setzen Sie einfach Ihr Disketten-
+laufwerk als Upload-Verzeichnis ein. Sie k”nnen dann aus beiden Fenstern des
+Comanders Festplatten-Dateien direkt auf Disketten packen lassen. Tragen Sie
+als Uploadverzeichnis B:\ bzw: A:\ ein. Eine weitere M”glichkeit besteht
+darin, den Papierkorb als Upload einzutragen. Dadurch wird ein platzsparendes
+Wegwerfen von Dateien m”glich.
+
+<FONT COLOR="green">Trick 18</FONT>
+
+Das Zusammenfassen einer gr”áeren Anzahl von (mit roten K„stchen markierten)
+Dateien zu einem gemeinsamen Archiv dauert z.T. sehr lange, da der Packer das
+Archiv st„ndig umkopieren muá. Sie sparen ein mehrfaches an Zeit, wenn Sie
+die zu packenden Dateien in ein extra angelegtes Verzeichnis namens PACKBOX
+verschieben, das Verzeichnis schlieáen und es dann packen lassen.
+
+<FONT COLOR="green">Trick 19</FONT>
+
+Den DOS-Entpacker <A HREF="help:expand">EXPAND.EXE</A> k”nnen sie ebenfalls installieren, indem Sie das
+New-DOS-Dienstprogramm <A HREF="../newdos/unpack.htm">UNPACK.EXE</A> mit der Dateiendung ??_ in der AUTOSTAR.INI
+verknpfen.
+
+<FONT COLOR="green">Trick 20</FONT>
+
+Wuáten Sie, daá man auch WinZIP-Archive (inkl. Selbstextraktoren) mit dem 
+DOS-Entpacker PKUNZIP entpacken kann?</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

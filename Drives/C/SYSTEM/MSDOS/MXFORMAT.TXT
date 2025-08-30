@@ -1,0 +1,195 @@
+
+Nr: TN-9612-003	  Model:  N/A	   Product:   MAXLLF.EXE    Version:   1.1
+=================================================================================================
+Subject:        Using Maxtor's Low Level Format (MAXLLF.EXE) Utility
+Summary:        Step by step procedure to perform the a Low Level Format on a Maxtor hard drive.
+Description:	The MAXLLF.EXE program is designed and intended to be used only with Maxtor 
+                IDE/AT hard drives. This program will Low Level format the hard drive and restore 
+                the media to it's original factory format. 
+
+WARNING:
+All data on the drive will be lost when using this utility. Back up the data on the hard drive 
+before running this utility. Maxtor recommends removing any other hard drives from the system 
+before running this utility.
+
+NOTICE:
+The MAXLLF.EXE program is provided as is without any warranty of any kind, either expressed or 
+implied. The entire risk as to the quality and performance of the program is with the user. In 
+no event will MAXTOR CORPORATION be liable to you for any damages, including any loss of profit 
+or savings, arising out of the use or inability to use this software. Maxtor Corporation makes 
+no representations or warranties with respect to the contents hereof and specifically disclaims 
+any implied warranties of merchantability or fitness for any particular purpose.
+
+Purpose:
+The Low Level Format utility is designed to return the surface of the media to manufacturing 
+specifications and format the hard drive as it was shipped from the factory.
+
+Maxtor's Low Level Format Utility can be obtained from the following:
+   *  Maxtor Utilities diskette (MUD)
+   *  Maxtor's Bulletin Board Service (BBS). Telephone number is (303) 678-2222. 
+      Standard BBS Settings are:
+      Terminal Emulation: ANSI, Data Bits: 8, Parity: None 
+      Stop Bits: 1, Baud Rate: 1200 to 14.4 K
+   *  Maxtor's World Wide Web site. Direct address to the Web page containing the Maxtor Low 
+      Level program file location is:  http://www.maxtor.com:80/bbs-main.html
+
+=================================================================================================
+Downloading from Maxtor's BBS or World Wide Web Site:
+Refer to the system's modem settings (and associated software) for proper connection procedures. 
+Upon successful modem connection, download the file named "LLFUTIL.EXE".
+
+Extracting LLFUTIL.EXE
+This file is compressed, and self extracting. Prior to extraction, Maxtor recommends that users 
+copy LLFUTIL.EXE to a blank, DOS (5.0 or higher) or Windows 95, formatted 3.5" floppy diskette.
+
+   *  Insert the floppy disk containing LLFUTIL.EXE in the appropriate floppy drive and 
+      establish operations at that drive's DOS prompt.
+   *  At the command prompt, type "LLFUTIL" and press the [Enter] key. At this point, two files 
+      will be extracted to the floppy disk:
+      1. MAXLLF.EXE - Maxtor's Low Level Format Utility
+      2. MAXLLF.TXT - Text file giving procedures to run MAXLLF.EXE
+         Note: MAXLLF.TXT contains this document.
+=================================================================================================
+Low Level Formatting a Maxtor Hard Drive:
+1. Clean Boot the system to the "A:\>" prompt with a bootable DOS or Windows 95 system diskette.
+   Note: a Clean Boot is defined as booting to a system diskette that loads no software drivers 
+   into memory.
+2. Insert the Maxtor Utility Diskette or the diskette containing the downloaded files in the 
+   appropriate Floppy Disk Drive and establish operations at that drive's DOS prompt. 
+3. If using the Maxtor Utilities Diskette, type "cd lowlevel" and press the [Enter] key. The DOS 
+   prompt will change to {drive}:\lowlevel>.
+   Note: Skip step 3 if using the extracted files downloaded from Maxtor's BBS or World Wide Web 
+   Site.
+4. Type "MAXLLF" and press the [Enter] key. This will execute the low level format program and 
+   bring up the Maxtor Disclaimer Screen.
+5. To Accept the conditions of the Maxtor Disclaimer, type "Y" to continue or press any other key
+   to exit the utility.
+
+Options Menu:
+If "Y" was chosen to continue, the following Options Menu will be displayed. The Menu is 
+comprised of the following Windows:
+
+                          *************************************
+                          *           Select Device           *
+                          *  Low Level Format Current Device  *
+                          *               EXIT                *
+                          *************************************
+                                  (Main Options Window)
+
+                          (Red MESSAGE WINDOW will appear here)
+
+
+*************************************************************************************************
+*                                                                                               *
+*  Current Device:	0                                                                       *
+*    Model     #:                                                                               *
+*    Serial    #:                                                                               *
+*    Firmware  #:                                                                               *
+*                                                                                               *
+*  CYL:                 HDS:                 SPT:                                               *
+*  MAXLBA:                                                                                      *
+*                                                                                               *
+*************************************************************************************************
+                                  (Current Device Window)
+
+*************************************************************************************************
+*                                                                                               *
+*  HELP WINDOW:                                                                                 *
+*  Use the arrow keys to select the option you want, the press the enter                        *
+*  or the return key.                                                                           *
+*                                                                                               *
+*************************************************************************************************
+                                       (HELP WINDOW)
+
+Note: A red MESSAGE WINDOW will appear during portions of the utility's execution. The Message 
+      Window prompts the user to press a specific key before continuing with the next process. 
+      The red MESSAGE WINDOW, will appear between the Main Options and the Current Device 
+      Windows.
+
+1. Highlight "Select Device" and press the [Enter] key. The following message will appear in the 
+   red MESSAGE WINDOW:
+
+                       Which Device would you like to select? (0,1,2,3)
+
+   The following describes the device numbers:
+   *  Device 0 - (primary master)
+   *  Device 1 - (primary slave)
+   *  Device 2 - (secondary master)
+   *  Device 3 - (secondary slave)
+
+2. Type the specific device number and press the [Enter] key.
+   After the device number has been properly selected, the Current Device Window will display 
+   specific information on the selected hard drive (e.g., drive model, serial number, firmware 
+   revision number and the selected hard drive's parameters).
+
+   CAUTION: Be careful when selecting which hard drive to low level format. Improper selection 
+            will result in IMMEDIATE data loss on the selected hard drive. Typing a device number
+            that is not present in the system will be returned to the Main Menu.
+
+3. From the Main Options Window, select "Low Level Format Current Device" and press the [Enter] 
+   key. The following will appear in the red MESSAGE WINDOW:
+
+                   Do you want to use LBA Mode (if not sure, press N) (Y/N)?
+
+   The program default for this is "N" (no), as some older System BIOS's do not support Logical 
+   Block Addressing (LBA) Mode.
+
+4. If the hard drive's capacity exceeds 504 MB, type "Y". If the hard drive's capacity does not 
+   exceed 504 MB, type "N".
+
+   NOTE: Improper selection will result in the hard drive not formatting correctly.
+
+5. Once the user has selected the method to low level format the device in step 4, the red 
+   MESSAGE WINDOW then prompts with:
+
+                Warning!!! All data will be lost. Are you absolutely sure? (Y/N)
+
+   Type "N" or press any other key to return to the Main Menu. Choose this option if not 
+   absolutely sure that the selection made in Step 4 was correct  -  OR  - type "Y" to start the 
+   low level format program.
+
+   During the execution of the low level format program:
+   *  A digital readout will be displayed in the red MESSAGE WINDOW
+   *  The Help Window will display "Press the [Esc] key to low level. . ."
+
+WARNING:  Typing "Y" will start the execution of the Low Level Format program and IMMEDIATELY 
+          DESTROY THE DATA ON THE DEVICE.
+
+   To terminate the execution of the Low Level Format program press the [Esc] key. If the program
+   is stopped data on the hard drive is lost even if only the first sector of the drive is low 
+   level formatted. This will return the program to the Main Menu.
+
+   The low level format will take between 4 and 30 minutes, depending on the capacity and the 
+   speed of the hard drive, and the speed of the computer and it's interface.
+
+   Upon successful completion of the low level format of the hard drive, the red MESSAGE WINDOW 
+   displays the following message:
+   *  The Low Level format completed with no errors.
+   *  Press a key to return to the main menu.
+
+Note: If any error is encountered and MAXLLF.EXE returns an Error Code, contact Maxtor Technical 
+      Assistance at 1-800-2MAXTOR for further help.
+
+6. Press the [Esc] key (or press any other key) to return to the Main Menu.
+
+7. Select "EXIT" and press the [Enter] key close the low level format utility. This will return 
+   the user to the operating system's command prompt.
+
+8. If the format completes with No-Errors, partition and high level format using the operating 
+   system. 
+
+=================================================================================================
+Disclaimer: This Document is provided as is without any warranty of any kind, either expressed or
+            implied. In no event will MAXTOR CORPORATION be liable to you for any damages, 
+            including any loss of profit or savings, arising out of the use or inability to use 
+            the information contained in this document. Maxtor Corporation makes no 
+            representations or warranties with respect to the contents hereof and specifically 
+            disclaims any implied warranties of merchantability or fitness for any particular 
+            purpose.
+
+MAXLLF.TXT
+Revision 00
+Jon W. Lawley
+Date - 19 December 1996
+
+

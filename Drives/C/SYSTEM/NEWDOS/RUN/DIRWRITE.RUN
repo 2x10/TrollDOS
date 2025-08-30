@@ -1,0 +1,33 @@
+PROGRAM DirectWrite;
+{Beispielprogramm fÅr das schnelle Schreiben von Zeichen direkt in den}
+{Bildschirmspeicher mit dem integrierten Assemblers.}
+
+
+BEGIN-MAIN
+  Init;
+  Write ('DrÅcken Sie jetzt und am Ende eine beliebige Taste');
+  GetKey;
+
+  ASM
+    mov es, @VideoSeg           {Segment des Bildschirmspeichers in ES}
+    mov di, $000                {Offset des Bildschirmspeichers  in DI}
+    mov cx, 2000                {SchleifenzÑhler nach CX}
+
+    mov al, 'X'                 {FÅllzeichen nach AL}
+    mov ah, 112                 {FÅllfarbe nach AH}
+
+    cld                         {Richtung der Abarbeitung festlegen}  
+    rep StosW                   {schreibe AX 2000 mal auf den Bildschirm}
+  END;
+
+  Getkey
+  Init;
+END.
+
+
+{Bei der "echten" Assemblerprogrammierung wÑre es zusÑtzlich notwendig,}
+{das DS-Register vor jeder énderung durch den Programmierer mit PUSH DS}
+{zwischenzuspeichern und so bald wie nur mîglich mit POP DS wieder zu}
+{restaurieren.}
+
+{Diese Aufgaben werden vom iAssembler jedoch automatisch ausgefÅhrt.}

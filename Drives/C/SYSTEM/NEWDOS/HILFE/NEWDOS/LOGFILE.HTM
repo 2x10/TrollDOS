@@ -1,0 +1,38 @@
+<HTML><HEAD><TITLE>LOG-Datei</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>LOG-Datei</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver">
+<PRE>Die LOG-Datei ist eine zentrale New-DOS-Datei, in der auf Wunsch alle
+Fehler protokolliert werden, die w„hrend des Betriebes einiger
+New-DOS-Dienstprogramme auftreten k”nnen. Die LOG-Datei tr„gt den Namen
+
+<FONT COLOR="blue">DOSERROR.LOG</FONT>
+
+und wird im Wurzelverzeichnis des Laufwerkes angelegt, auf dem auch New-DOS
+installiert ist (z.B. C:\DOSERROR.LOG).
+
+Einige New-DOS-Programme werden in der Praxis h„ufig auch unbeaufsichtigt
+betrieben, z.B. wenn ber Nacht alle Laufwerke eines Netzwerkes mit 
+<A HREF="scandrv.htm">Scandrive</A> geprft werden oder wenn mehrere Programme hintereinander durch
+eine Batch-Datei ausgefhrt werden. Hier ist es erforderlich, daá die
+entsprechenden Programme bei Fehlern nicht auf Anwender-Eingaben warten,
+sondern durchlaufen k”nnen. Damit jedoch Fehlermeldungen nicht bersehen
+werden, k”nnen diese in der besagten LOG-Datei gespeichert werden. Dazu 
+mssen die Programme mit dem zus„tzlichen <FONT COLOR="red">Parameter /o</FONT> aufgerufen werden.
+
+Welche Programme den Parameter /o untersttzen, finden Sie in der Hilfe
+zu dem jeweiligen Programm.
+
+Nach Ablauf des Vorganges k”nnen Sie den Gang der Dinge in der LOG-Datei
+nachlesen. Dort werden jedoch nur Fehler gespeichert - hat ein Programm
+also keine Meldung hinterlassen, dann hat es keinen Fehler bemerkt und wenn
+am Ende gar keine LOG-Datei existiert, dann haben alle Programme fehlerfrei
+arbeiten k”nnen.
+
+Die LOG-Datei kann am Ende gel”scht werden, da sie im Bedarfsfalle 
+automatisch neu angelegt wird.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

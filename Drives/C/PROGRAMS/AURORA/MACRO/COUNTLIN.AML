@@ -1,0 +1,148 @@
+//--------------------------------------------------------------------
+// COUNTLIN.AML
+// Count Lines in Multiple Files, (C) 1993-1996 by nuText Systems
+//
+// (See Countlin.dox for user help)
+//
+// This macro counts the total number of lines and blank lines in
+// multiple files on disk. You will be prompted to enter a directory or
+// filespec.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// disable <loading> in Ext.aml while this macro is running
+event <loading> end
+
+// inherit from the 'popup' object
+settype "popup"
+
+// create status window
+private function createstatus (filespec)
+  createwindow
+  setframe ">b"
+  setcolor  border_color   color white on gray
+  setcolor  text_color     color black on gray
+  settitle "Counting lines in '" + (onname filespec 't') + "'" 'c'
+  setborder "1i"
+  setshadow 2 1
+
+  // center the window
+  width = 70
+  height = 16
+  ox = (getvidcols - width) / 2
+  oy = (getvidrows - height) / 2
+  sizewindow ox oy ox + width oy + height "ad"
+
+  // write header line
+  writestr "Total lines   Blank lines" (color black on gray) (getcoord 'x1') - 25
+end
+
+// macro help
+macrofile = arg 1
+function <f1>
+  helpmacro macrofile
+end
+
+// get filespec to count
+filespec = ask "Enter filespec where lines should be counted"
+
+if not filespec then
+  return
+end
+// <enter> was pressed
+if filespec == ' ' then
+  filespec = "*.*"
+end
+
+filespec = onname (qualify filespec (getbufname))
+path = getpath filespec
+
+// initialize total lines and blank lines to zero
+totallines = 0
+totalblank = 0
+
+// create result buffer initialize the first line
+resultbuf = createbuf
+ovltext "ננננננ Select this line to edit line counts ננננננ"
+
+// load the directory
+if not (loadbuf filespec '' '' 'hvs' + _NameStyle) or
+   not getlinelen then
+  destroybuf resultbuf
+  display
+  say filespec + " not found" 'b'
+  return
+end
+
+// sort by name
+sortblock '' '*a'
+
+// create progress window
+createstatus filespec
+
+// count lines for all files in the directory
+repeat
+  file = path + gettext
+  if loadbuf file  then
+    lines = getlines
+    totallines = totallines + lines
+    blanklines = find "^ *$" "x*a"
+    totalblank = totalblank + blanklines
+    status = (thousands (if? lines lines '0')):7 +
+             (thousands (if? blanklines blanklines '0' )):14
+
+    writeline
+    writestr file
+    writestr status (color black on gray) (getcoord 'x1') - 21
+    display
+
+    addline file:-52 + status '' '' resultbuf
+    destroybuf
+  end
+until not down
+breakoff
+
+// destroy the directory
+destroybuf
+
+// destroy the status window
+destroywindow
+
+currbuf resultbuf
+
+// insert line count totals into the result buffer
+insline '' '' 1
+insline "Total lines:            " + (thousands totallines) '' 2
+insline "Total non-blank lines:  " +
+        (thousands totallines - totalblank) '' 3
+insline "Blank lines:            " +
+        (totalblank * 100) / totallines + '%'  '' 4
+insline '' '' 5
+insline "File" + "":44 + "Total lines   Blank lines" '' 6
+insline "----" + "":44 + "-----------   -----------" '' 7
+
+// display the results in a popup menu
+file = popup resultbuf "Line counts for '" + filespec + "'" 74 '' (getcurrobj)
+if file then
+
+  // edit linecounts
+  if file [1] == 'נ' then
+    delline 1 1 resultbuf
+    setbufname (qualify "lines.txt" (getbufname (getwinbuf))) resultbuf
+    openbuf resultbuf
+    return
+  end
+
+  // open the selected file
+  if file [2] == ':' then
+    open file [1 : (pos ' ' file) - 1]
+  end
+end
+destroybuf resultbuf

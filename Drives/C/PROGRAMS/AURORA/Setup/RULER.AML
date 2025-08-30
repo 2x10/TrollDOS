@@ -1,0 +1,40 @@
+//--------------------------------------------------------------------
+// RULER.AML
+// Insert a Ruler Line, (C) 1993-1996 by nuText Systems
+//
+// (see Ruler.dox for user help)
+//
+// This macro inserts a ruler line above the current line in an edit
+// window.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// ruler text pattern
+constant rulertext = "תתתת+תתתת"
+
+// extra columns beyond the right edge of the edit window
+constant extracolumns = 60
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+pushcursor
+undobegin
+insabove
+column = getcol
+up
+col 1
+for i = 1 to (getviewright + extracolumns) / 10 do
+  writetext rulertext + i mod 10
+end
+undoend
+popcursor

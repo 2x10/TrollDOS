@@ -1,0 +1,32 @@
+UNIT Test;
+
+
+PROCEDURE FirstScreen;
+BEGIN
+  CursorOff
+  TextBackGround (lightgray); TextColor (black)
+  Window (1, 2, 80, 24);
+  FillWin (#176)
+  Window (1, 1, 80, 25);
+  GotoXY (1, 1)
+  TextBackGround (green); TextColor (yellow);
+  ClrEOL
+  Write (' Quickstarter');
+  GotoXY (1, 25); ClrEOL
+  Write (' DrÅcken Sie eine Taste oder klicken Sie mit der Maus in die gewÅnschte Zeile');
+END;
+
+ 
+
+PROCEDURE Alarm
+BEGIN
+  For @c:= 1 To 3 Do
+  BEGIN
+    Sound (880);
+    Delay (200);
+    Sound (440);
+    Delay (50);
+    Nosound;
+    Delay (300);
+  ENDFOR;
+END;

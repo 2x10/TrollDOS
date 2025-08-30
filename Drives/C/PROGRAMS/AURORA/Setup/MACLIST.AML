@@ -1,0 +1,157 @@
+//--------------------------------------------------------------------
+// MACLIST.AML
+// Macro List, (C) 1993-1996 by nuText Systems
+//
+// This macro displays a scrollable list of macros, showing the macro
+// name and description for each macro in the list. Selecting a macro
+// from the list will run the macro. Pressing the <f1> key will display
+// a help window for the macro at the cursor.
+//
+// This macro calls the Helpmac macro.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// initial popup window dimensions
+constant maclist_width  = 72
+
+// colors
+constant maclist_title_color        = color black on gray
+constant maclist_menu_color         = color white on blue
+constant maclist_menu_hotkey_color  = color yellow on blue
+constant maclist_menu_hilite_color  = color white on cyan
+
+// load the macro list buffer
+maclist = loadbuf (bootpath "macro\\maclist.dat")
+if not maclist then
+  msgbox "Maclist.dat not found." "Error!"
+  return
+end
+
+settype "popup"
+
+// add macro
+// (duplicates allowed, any order)
+function add
+  variable macro, desc
+  dialog "Add Macro to List" 72 5 "c"
+  field "&Macro File:  >"  3  2 44 '' "_load"
+  field "&Description: >"  3  4 41
+  button "O&k"      62 2 8
+  button "Cancel"   62 4 8
+  if (getdialog ref macro ref desc) == 'Ok' and macro then
+    mpath = getbootpath + "macro\\"
+    macro = qualify (forceext macro 'x') mpath
+    if file? macro then
+      name = getname macro
+      dest = qualify name mpath
+      // copy macro, help, and source (if available)
+      if dest <> macro then
+        copyfile macro dest
+        copyfile (forceext macro 'dox') (forceext dest 'dox')
+        copyfile (forceext macro 'aml') (forceext dest 'aml')
+      end
+      name = name [1..(pos '.' name) - 1]
+      insline ' ' + name:-11 + desc
+      savebuf
+    else
+      msgbox (onname macro) + " not found"
+    end
+  end
+end
+
+// remove macro
+function remove
+  line = gettext
+  macro = line [2..posnot ' ' line [1 : 11] 'r']
+  oldwindow = gotowindow (getprevwin)
+  // confirmation prompt
+  if (icompare _ConDel 'n') or
+     (icompare (popup "ok" "Delete " + macro + '?') "ok") then
+    delline
+    savebuf
+  end
+  gotowindow oldwindow
+end
+
+// change macro description
+function change
+  line = gettext
+  macro = line [2..posnot ' ' line [1 : 11] 'r']
+  desc = line [13..TO_END]
+  desc = ask macro + " description" '' desc
+  if desc then
+    delchar MAX_COL 13
+    instext desc 13
+    savebuf
+  end
+end
+
+function help
+  line = gettext
+  helpmacro line [2..pos ' ' line [2:11]]
+end
+
+// keys
+// (note: <esc> and <enter> handled by popup window)
+key <ins>    add
+key <del>    remove
+key <ctrl c> change
+key <f1>     help
+
+function onopen
+  setcolor north_title_color  maclist_title_color
+  setcolor menu_color         maclist_menu_color
+  setcolor menu_hotkey_color  maclist_menu_hotkey_color
+  setcolor menu_hilite_color  maclist_menu_hilite_color
+  setframe "+4"
+  menubar '' 4
+    item "{Enter}=Run"      call <enter>
+    item "{Ins}=Add"        add
+    item "{Del}=Remove"     remove
+    item "{Ctrl-C}=Change"  change
+    item "{F1}=Help"        help
+    item "{Esc}=Exit"       close
+  end
+  if (getcoord 'y') + 2 <= getvidrows then
+    sizewindow 0 0 0 2
+  end
+  setwinctrl "ð" 2
+end
+
+// display the popup menu
+line = popup maclist "Macro    Description"
+             maclist_width getvidrows - 10 (getcurrobj)
+
+// destroy the menu
+destroybuf maclist
+
+// run the selected macro
+if line then
+  macro = line [1..posnot ' ' line [1 : 11] 'r']
+
+  // separate file and parameter (if any)
+  variable parameter
+  splitstr ' ' macro ref macro ref parameter
+
+  // queue for execution to minimize interpreter stack usage
+  case locase macro
+    // full installation
+    when "install"
+      queue "runmacro" (bootpath macro + ".x")
+
+    // lite installation
+    when "installs"
+      queue "runmacro" (bootpath macro [1..7] + ".x") '' "installs.dat" "Lite "
+
+    otherwise
+      queue "runmacro" getbootpath + "macro\\" + macro + ".x"  '' parameter
+  end
+
+end

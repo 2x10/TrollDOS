@@ -1,0 +1,31 @@
+//--------------------------------------------------------------------
+// DESKOPEN.AML
+// Open Desktop, (C) 1993-1996 by nuText Systems
+//
+// (see Deskopen.dox for user help)
+//
+// This macro opens and restores a desktop layout saved previously with
+// the Desksave macro. If the filename is not passed as arg 3, then the
+// user is prompted to enter the filename of the desktop layout.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+file = arg 3
+if not file
+  file = ask "Restore desktop from file" "_load"
+end
+
+if file then
+  if opendesk (qualify (defext file "dst") (getbufname)) then
+    restoredesk 'c'
+  else
+    msgbox "Can't open " + file
+  end
+end

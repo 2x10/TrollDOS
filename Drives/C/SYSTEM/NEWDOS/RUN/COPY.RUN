@@ -1,0 +1,154 @@
+PROGRAM Copy;
+
+
+PROCEDURE FillString;
+BEGIN
+  !x[0]:= #80;                       {StringlÑnge "kÅnstlich" auf 80 setzen}
+  Fillchar (!x[1], 80, #178);        {String ab !x[1] mit 80 mal #178 fÅllen}
+END;
+{Legt einen String an, der als Laufbalken dient}
+
+
+
+PROCEDURE Laufbalken;
+BEGIN
+  If (@FSizeOut=0) Then Exit;                     {wegen Division durch Null}
+  @b:= @div (@mul (@FPosOut, 100), @FSizeOut);
+  If (@b<100) Then GotoXY (76, 17) Else GotoXY (75, 17);
+  Write (@b, ' %');
+  @b:= @succ (@div (@mul (@b, 80), 100));
+  If (@b>80) Then @b:= 80;
+  GotoXY (1, 18);
+  Write (!copy (!x, 1, @b));
+END;
+{erzeugt Laufbalken und die Prozentanzeige fÅr die Dateiposition}
+
+
+
+
+
+PROCEDURE Hilfetext;
+BEGIN
+  WriteLn;
+  WriteLn ('COPY  Kopiert eine Datei');
+  WriteLn ('Syntax: COPY [Quelldatei] [Zieldatei]');
+  Halt;
+END;
+{Gibt einen Hinweistext aus, wenn kein Parameter oder /? eingegeben wurde}
+
+
+
+PROCEDURE QuellFileError;
+BEGIN
+  WriteLn;
+  WriteLn (!a);
+  WriteLn ('Fehler in Quelldatei.', #7);
+END;
+{Gibt eine Fehlermeldung aus}
+
+
+PROCEDURE ZielFileError;
+BEGIN
+  WriteLn;
+  WriteLn (!b);
+  WriteLn ('Fehler in Zieldatei.', #7);
+END;
+{Gibt eine Fehlermeldung aus}
+
+
+
+PROCEDURE CheckFileExist;
+BEGIN
+  OpenOutFile (!b);
+  CloseOutFile;
+  If (@error<>0) Then Exit;
+
+  #t:= #0;
+  While (#t<>#Esc) and (#t<>'J') and (#t<>'N') Do
+  BEGIN
+    WriteLn;
+    WriteLn (!b);
+    WriteLn ('Zieldatei existiert bereits. Datei Åberschreiben? (j/n)');
+    #t:= #Upcase(#Readkey);
+  ENDW;
+  If (#t=#Esc) or (#t='N') Then Halt;
+END;
+
+
+
+PROCEDURE ReadQuellFileName;
+BEGIN
+  Write ('Name der Quelldatei: ');
+  ReadLn (!a);
+  !a:= !UpString (!a);
+  If (!a='') Then Halt;
+END;
+{Zeigt eine Eingabezeile, falls kein Parameter angegeben wurde}
+
+
+
+PROCEDURE ReadZielFileName;
+BEGIN
+  Write ('Name der Zieldatei: ');
+  ReadLn (!b);
+  !b:= !UpString (!b);
+  If (!b='') Then Halt;
+END;
+{Zeigt eine Eingabezeile, falls kein Parameter angegeben wurde}
+
+
+
+PROCEDURE FirstScreen;
+BEGIN
+  Init;
+  Call FillString;
+  WriteLn ('Quelldatei : ', !a);
+  WriteLn ('Zieldatei  : ', !b);
+  Line (#196);
+  GotoXY (1, 24);
+  Line (#196);
+  Write ('Beenden mit beliebiger Taste');
+  Window (1, 4, 80, 23);
+  CursorOff;
+  GotoXY (1, 18);
+  Line (#176);
+END;
+{Richtet den Bildschirm ein}
+
+
+
+{----------------------------- Hauptprogramm --------------------------------}
+
+BEGIN-MAIN
+  Init;
+  !a:= !UpString (!ParamStr (1));
+  If (!a = '/?')  Then call Hilfetext;
+  If (!a = '')  Then call ReadQuellFileName;
+  !b:= !UpString (!ParamStr (2));
+  If (!b = '')  Then call ReadZielFileName;
+
+  Call CheckFileExist;
+
+
+  OpenOutFile (!a); If (@Error<>0) Then call QuellFileError;
+  OpenInFile  (!b); If (@Error<>0) Then call ZielFileError;
+
+  Call FirstScreen;
+
+  While (not @EofOut) and (not @keypressed) and (@error=0) Do
+  BEGIN
+    ReadOutFile (%Block); If (@Error<>0) Then call QuellFileError;
+    PutInFile (%Block);   If (@Error<>0) Then call ZielFileError;
+    call LaufBalken;
+  ENDW;
+
+  CloseInFile;
+  CloseOutFile;
+  GotoXY (1, 1);
+  If (@error=0) Then Write ('Fertig!');
+  CursorOn;
+  GetKey;
+  init;
+END.
+
+{------------------------- Programm-Ende -----------------------------}

@@ -1,0 +1,382 @@
+
+                     JP Software Support Plans
+
+                          JP Software Inc.
+                           P.O. Box 1470
+                    E. Arlington, MA 02474, USA
+
+                           (781) 646-3975
+                         fax (781) 646-0904
+                       Email sales@jpsoft.com
+                     Web http://www.jpsoft.com/
+
+
+We offer three support plans for our products, designed to meet a
+range of support and service needs.  The first part of this file
+explains the features of these plans.  The second part lists the
+detailed terms and conditions which apply to each plan.
+
+   * Standard Support is offered with all product purchases and is
+     available at no additional charge.
+     
+   * Extended Support is a paid plan available on an annual basis,
+     and includes Standard Support benefits plus private support via
+     email or telephone, a monthly email newsletter, and electronic
+     delivery of all major upgrades.
+     
+   * Premium Support is a paid plan available on an annual basis,
+     and includes most Extended Support benefits, plus a 4-hour
+     response time to support incidents, and physical delivery of
+     all upgrades.
+
+====================================================================
+
+Standard Support
+
+   This plan is included with your product purchase and continues as
+   long as it is offered by JP Software.  It includes:
+   
+      * Access to JP Software's online support forum, available as a
+        newsgroup, an email list, and a web-based archive.  (Also
+        available to prospective customers using trial versions of
+        our software.)
+        
+      * Email notification of minor and major upgrades.
+        
+      * Downloadable maintenance upgrades.
+   
+   Standard Support does not include private email or telephone
+   support, major upgrades, or any physical shipments.
+   
+   There is no annual fee for this plan.  Major upgrades may be
+   purchased at our standard rates (shipping for physical copies is
+   additional):
+   
+      * Single-system upgrades:  $34.95 for one product, $54.95 for
+        two or more.
+        
+      * Multi-system license upgrades:  Approximately 30% of current
+        license price (contact us or see our web site for exact
+        pricing).
+
+
+Extended Support
+
+   This plan must be purchased on an annual basis.  It includes:
+   
+      * All services listed under our Standard Support plan.
+        
+      * All major upgrades issued during the plan year.  Upgrades
+        will be provided through email delivery of registration
+        codes and related materials.
+        
+      * Up to five private support incidents per plan year.  Support
+        incidents are normally handled through private email;
+        telephone support is also available on a callback basis
+        within the US and Canada.
+        
+      * Monthly email technical newsletter, with notification of
+        major and minor upgrades.
+   
+   The annual fees for this plan are:
+   
+      * Single-system:  $29.95 for one product, $39.95 for two or
+        more.
+        
+      * Multi-system license:  Approximately 20% of current license
+        price per year, with a minimum of $39.95 (contact us or see
+        our web site for exact pricing).
+
+   
+Premium Support
+   
+   This plan must be purchased on an annual basis.  It includes:
+   
+      * All services listed under our Standard and Extended Support
+        plans (except the private support incidents available under
+        Extended Support).
+        
+      * 4-hour response time to email or phone calls during Premium
+        Support business hours (see the Support Plan Terms and
+        Conditions for details).
+        
+      * Response outside normal business hours when available (not
+        guaranteed).
+        
+      * A flat fee for each incident, regardless of the time
+        required to resolve the issue.
+        
+      * Automatic physical shipment of all major upgrades, including
+        standard printed documentation, plus automatic physical
+        shipment of all minor upgrades for which physical media are
+        updated.
+   
+   The fees for this plan are:
+   
+      * Single-system:  Annual fee $100 (minimum).
+        
+      * Multi-system license:  Annual fee approximately 30% of
+        current license price per year, with a minimum of $100
+        (contact us or see our web site for exact pricing).
+        
+      * Incident charge (in addition to the annual fee) of $100 per
+        incident, regardless of the amount of time it takes to
+        answer the question or resolve the problem.
+        
+      * Additional surcharge of $20 for each call we make to
+        customers outside the US and Canada who request Premium
+        Support by telephone.
+
+====================================================================
+
+           JP Software Support Plan Terms and Conditions
+
+This section explains the terms and conditions for each of our
+support plans.  It should assist you in understanding clearly how
+each support plan works and what its limitations are.
+
+The following terms and conditions apply to ALL support plans (also
+see the disclaimers and limitations at the end of this document):
+
+   * Response Time:  Our goal is to respond to support questions
+     within one business day, and in practice our responses have
+     generally been much faster than this.  However, we do not
+     promise or guarantee any specific response time, except as
+     detailed elsewhere for Premium Support customers.
+     
+   * Problem Resolution:  We will attempt to resolve your problem or
+     answer your question using our normal support procedures.  Our
+     efforts are necessarily limited by the information you provide
+     us, and the wide range of possible environments in which our
+     products are used.  As a result we cannot guarantee that we
+     will resolve your problem - only that we will review it and
+     provide you with any information or suggestions we believe will
+     be useful.  While we always welcome your input, the final
+     determination of whether a problem should be resolved by
+     providing information to you about how to use the product to
+     meet your needs, by modifying our product to address a problem,
+     by suggesting a workaround, by adjusting the documentation, or
+     by some other method, is solely up to us.  We also reserve the
+     right to close a support issue at our discretion if in our
+     judgment we cannot provide any additional useful information
+     despite repeated attempts.
+     
+   * Bug Fixes:  If we find a bug or documentation error in one of
+     our products in the course of resolving your problem we will
+     address it as part of our normal maintenance procedures; we do
+     not provide bug fixes to individual customers for specific
+     problems..  We will determine at our discretion whether a
+     problem you report is a bug or program error, or is due to some
+     other cause.
+     
+   * Problems in Operating Systems and Other Products:  When you
+     report a problem to us we will work with you to determine if,
+     in our best judgment, the problem is related to our product or
+     to another company's software or hardware, or to another
+     computer.  If we determine that the problem is not with our
+     product then we will not be able to assist you further to
+     resolve it, except to the extent that we may be able to suggest
+     how to use our product's features to work around the other
+     product's limitations.  If the problem appears to be a conflict
+     with another specific product and you have a support contact
+     for that product, we will attempt to work with the other
+     manufacturer to resolve the issue if in our judgment they are
+     responsive to us.
+     
+   * Requests for Information and Testing:  In order to understand
+     your question or problem we may need additional information
+     from you.  If this information is not provided responsively and
+     in a timely fashion we may not be able to assist you further.
+     We may also ask you to perform tests or other experiments;
+     while we will do our best to make these non-destructive we
+     cannot know the conditions on your system.  It is up to you to
+     review the instructions you receive, ask clarifying questions
+     if necessary, keep backup copies of all programs and data, and
+     verify that the tests or experiments we request or the
+     solutions we offer will not cause problems in your environment.
+
+   * Products:  These plans apply only to products created and
+     published by JP Software Inc. They do not apply to products of
+     other companies which JP Software Inc. sells or resells.  In
+     addition, Extended and Premium Support are not available for
+     "legacy" products to which we are no longer adding major new
+     features (4OS2, Take Command for OS/2, and Take Command/16).
+
+   * Forum and Email Access:  The electronic resources you use to
+     connect to our support staff (our forums, email boxes, etc.)
+     are hosted by third parties and are not fully under our
+     control.  While we work with our third party providers to keep
+     these resources available to you, their availability, and our
+     ability to access them in order to respond to you, is not
+     guaranteed.
+     
+The following terms and conditions apply to both the EXTENDED
+SUPPORT and PREMIUM SUPPORT plans:
+     
+   * Plan Term and Renewals:  Extended and Premium Support are
+     purchased on an annual basis.  Service begins the day we charge
+     your credit card or invoice you for the support plan, and
+     terminates the previous day of the year, one year later.  This
+     period of time is called a "plan year".  For example, if your
+     order is processed on September 5, 2001 then your plan year
+     ends on September 4, 2002, unless the plan is renewed prior to
+     that date.  Renewal rates may be changed from time to time by
+     JP Software at our discretion.
+     
+   * Incidents:  Each initial contact with our support department by
+     private email or telephone on a new issue counts as one
+     incident, except when the issue is determined to be
+     non-technical and is forwarded to another department (e.g.
+     Customer Service) for assistance.  Follow-up contact on the
+     same issue while it is in progress or within one month
+     thereafter does not count as a new incident, and questions
+     posted through our support forum do not count as Extended or
+     Premium Support incidents.  If you request Extended or Premium
+     Support for multiple issues at the same time, and in our view
+     the issues are unrelated and are complex enough to require
+     significant effort, we may require that these be counted as
+     multiple incidents.
+     
+   * Email and Telephone Support:  You may request Extended or
+     Premium Support via email or telephone.  In most cases email is
+     the preferred method and will give you the fastest response
+     times.  However we also offer telephone support on a callback
+     basis to Extended Support customers in the US and Canada, and
+     to Premium Support customers worldwide (subject to
+     international call surcharges, see below).  If you request
+     telephone support it is crucial that you provide us with
+     telephone numbers where we can reliably reach you directly
+     during our normal business hours at the time your request is
+     made.  If your issue requires us to review the content of files
+     (batch files, configuration files, etc.) then we may request
+     that you handle it by email, as it is usually very difficult to
+     transfer such information by telephone.
+     
+   * Upgrade Shipments:  Any registration codes or physical product
+     shipments sent to you under this plan will be sent as part of
+     our normal shipping process, via methods we select.  While we
+     will deliver the electronic and physical upgrade shipments, if
+     any, which come with your plan in what we believe is a timely
+     fashion, no specific delivery schedule is guaranteed.
+     
+The following condition applies only to the EXTENDED SUPPORT plan:
+     
+   * Refunds and Termination:  Extended Support is purchased on an
+     annual basis and cannot be terminated or refunded after
+     purchase.  However, if we feel we are unable to service your
+     needs we may choose to terminate your Extended Support plan at
+     any time.  If we do so we will notify you in writing, and will
+     refund to you within 30 days an amount equal to your most
+     recent support plan fee, less a pro-rated charge for any
+     incidents already used.
+     
+The following terms and conditions apply only to the PREMIUM SUPPORT
+plan:
+     
+   * Incident and Telephone Charges:  Each Premium Support incident
+     will incur an incident charge, plus an international call
+     surcharge for any required telephone callbacks outside the US
+     and Canada.  Per-incident charges will be made at the rate set
+     when you most recently purchased or renewed Premium Support,
+     and will not change during your plan year.  International call
+     surcharges may be changed form time to time by JP Software at
+     our discretion.  Prior to requesting Premium Support you must
+     have a current, valid credit card on file with us to cover
+     these charges, and we may at our option delay response to your
+     support request, without failing to meet our response time
+     obligations, if proper credit card authorization cannot be
+     obtained.
+     
+   * Response Time:  If a technician is not available immediately
+     when you contact us, we will respond within four Premium
+     Support business hours (8:30 AM - 5:00 PM eastern US time).
+     This applies to both your initial contact and each follow-up
+     contact on any incident.  If your request arrives less than
+     four hours prior to the end of our Premium Support business
+     hours, we may not respond until the next business day.  We may
+     make reasonable changes to the Premium Support business hours
+     at any time, as long as we notify you of the change via email
+     or through information on our web site.  Requests which arrive
+     outside of these hours will receive a response in the first
+     four Premium Support business hours of the following business
+     day.  While we may respond prior to that time, response outside
+     of normal business hours is not guaranteed.
+     
+        We will meet our obligation to respond if we send you a
+        substantive reply by email, or respond by telephone, within
+        the required time, even if you are not available to receive
+        the message when we respond, or the response does not
+        resolve your question or problem.  If we can verify your
+        contact with us, and do not respond within the promised
+        response time at any point during our work on an incident,
+        there will be no incident charge for that incident
+        (international phone charges, if applicable, will still
+        apply).  However, once an incident is opened, if we notify
+        you that additional time is required for investigation of an
+        issue then failure to respond to a subsequent contact within
+        four hours will not trigger a refund of the incident charge.
+        Your receipt of support with no incident charge is your ONLY
+        remedy for any failure on our part to respond within the
+        4-hour response time.  Our response time commitment is also
+        subject to all of the other terms and conditions set forth
+        herein.
+     
+   * Blackout Periods:  We may have occasional periods during which
+     Premium Support is not available due to illness, staffing, or
+     other similar issues.  We will use our best efforts to notify
+     you of such periods in advance via email or through information
+     on our web site.  During a blackout period you will be eligible
+     to receive Extended Support services.  If blackout periods
+     total more than two weeks during your plan year we will, at
+     your request prior to the original end of the plan year, extend
+     the renewal date for your plan by an amount equal to the total
+     number of days of all blackout periods which occurred during
+     the current plan year.
+
+   * Refunds and Termination:  Premium Support comes with a
+     satisfaction guarantee for incident charges.  If you feel that
+     the assistance we provided to you for any incident did not meet
+     your needs or expectations please contact us within 15 days
+     after your last communication from us regarding the incident in
+     question.  If we cannot resolve your concerns to your
+     satisfaction we will refund the incident charge in full (less
+     any international telephone charges).  Annual fees are not
+     refundable.  However, if we feel we are unable to service your
+     needs we may choose to terminate your Premium Support plan at
+     any time.  If we do so we will notify you in writing, and will
+     refund the unused portion of your annual fee, pro-rated for the
+     portion of the year not yet completed.
+
+The following disclaimers and limitations apply to ALL support
+plans:
+     
+   DISCLAIMER:  We disclaim any and all warranties for all support
+   provided under any of our support plans, express or implied,
+   including any implied warranties of merchantability or fitness
+   for a particular purpose.  You assume full responsibility for the
+   implementation of any suggestions you receive from us, for the
+   results thereof, for keeping backup copies of all programs and
+   data, and for the safe conduct of any tests we request on your
+   system.
+   
+   LIMITATION OF LIABILITY.  In no event shall we be liable, in
+   connection with any support, software, or other materials or
+   services offered or provided to you under any support plan, for:
+   (a) any incidental, consequential, or punitive damages
+   whatsoever; or (b) for any amount in excess of the most recent
+   annual fee you have paid us, if any, for your support plan, over
+   and above the purchase or upgrade price of your software.
+   
+   Support Plans Subject to Change:  All terms of, rates for, and
+   services provided under any support plan may be changed at any
+   time by JP Software at our sole discretion, and are not
+   guaranteed, and any plan may be eliminated or discontinued at any
+   time at our discretion.  However, we will not discontinue or
+   change the terms or services for support plans for which you have
+   paid an annual fee except at renewal time, or when, in our best
+   judgment, the new terms and services are equal to or better than
+   the old terms and services.
+
+
+[06/18/01]
+

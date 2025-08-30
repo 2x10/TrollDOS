@@ -1,0 +1,8 @@
+
+ÿÿMACHINE.AML
+ ÿExamples for Calling Machine-Level Codeÿ
+
+  This macro shows how to call machine code written in assembly
+  language, and how to pass arguments and retrieve return values. See
+  Machine.aml and Machine.asm for details.
+

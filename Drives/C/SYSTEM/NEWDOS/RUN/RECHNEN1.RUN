@@ -1,0 +1,27 @@
+PROGRAM Rechnen1;
+{Wirkungsweise der mathematischen Funktionen}
+
+BEGIN-MAIN
+  Init;
+  DebugOn;                    {schalte schrittweise ProgrammausfÅhrung EIN}
+
+  WriteLn (@mul (12, 2, 2));  {Funktionsergebnis: Produkt aus 12 mal 2 mal 2}
+
+  WriteLn (@div (12, 2, 2));  {Funktionsergebnis: Quotient aus 12 durch 2 durch 2}
+
+  @a:= 5;
+  @b:= 6;
+  WriteLn (@add (@a, 2, @b)); {Funktionsergebnis: Summe aus @a + 2 + @b}
+
+  @a:= @add (@sub (3, 1), @mul (2, 2)); 
+  WriteLn (@a);               {Beispiel fÅr Verschachtelung}
+                              {@a:= (3-1) + (2 mal 2) }
+
+
+  @a:= 5;
+  @a:= @add (@a, 4);
+  WriteLn (@a);               {schrittweises Vorgehen... @a = @a + 4 }
+
+  DebugOff;                   {schalte schrittweise ProgrammausfÅhrung AUS}
+
+END.

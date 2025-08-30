@@ -1,0 +1,395 @@
+//--------------------------------------------------------------------
+// SCAN2.AML
+// Scan files for all Occurrences, (C) 1993-1996 by nuText Systems
+//
+// (see Scan2.dox for user help)
+//
+// This macro searches multiple files on disk for all occurrences of a
+// search string or regular expression pattern.
+//
+// The following search options can be specified:
+//
+//   i - ignore case
+//   u - search within subdirectories also
+//   w - whole words only
+//   x - regular expressions
+//
+// If a directory buffer is passed to the macro (arg 3), then only then
+// only the files in the directory buffer are searched, otherwise the
+// user us prompted to enter a directory or file specification where
+// files will be searched.
+//
+// After the search has completed, a window is be displayed showing each
+// line in each file where the search string was found. A menu is also
+// displayed which allows the user to goto the line at cursor, edit all
+// displayed lines, and print all displayed lines.
+//
+// Scan2 can be used as an alternative to the Scan macro. Unlike Scan,
+// Scan2 searches each file for all occurrences of the search string.
+// For this reason, Scan2 may be slightly slower than Scan.
+//
+// This macro calls the Scandlg macro.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+// scan window colors
+constant scan_border_color        = color black on gray
+constant scan_title_color         = color black on gray
+constant scan_text_color          = color black on gray
+constant scan_border_flash_color  = color brightgreen on gray
+constant scan_cursor_color        = color black on brightgreen
+constant scan_menu_color          = color white on blue
+constant scan_menu_hotkey_color   = color yellow on blue
+constant scan_menu_hilite_color   = color white on cyan
+
+// status window colors
+constant status_border_color      = color white on gray
+constant status_text_color        = color black on gray
+constant status_found_color       = color brightgreen on gray
+
+// status window dimensions
+constant status_qwidth  = 70  // (for fully qualified scans only)
+constant status_height  = 16
+
+
+forward gotoline
+forward editlines
+
+// use fmgr files if run from the file manager
+if wintype? "fmgr" then
+  passedbuf = getcurrbuf
+end
+
+// disable <loading> in Ext.aml while this macro is running
+event <loading> end
+
+// create status window
+private function createstatus (width)
+  createwindow
+  setframe ">b"
+  setcolor  border_color  status_border_color
+  setcolor  text_color    status_text_color
+  settitle "Scanning" 'c'
+  setborder "1i"
+  setshadow 2 1
+
+  // center the window
+  height = status_height
+  ox = (getvidcols - width) / 2
+  oy = (getvidrows - height) / 2
+  sizewindow ox oy ox + width oy + height "ad"
+end
+
+
+macrofile = arg 1
+
+// called by Lib.x when a key is entered in the dialog box
+function ondialog (keycode)
+  // macro help
+  if keycode == <f1> then
+    helpmacro macrofile
+  end
+end
+
+
+variable searchstr, filespec, options
+variable fileoptions, diroptions, subdir
+
+// get scan multi-string from the user
+scanstring = runmacro (bootpath "macro\\scandlg.x") ''
+                      passedbuf "Scan for Occurrences"
+
+// use defaults if needed
+n = splitstr '' scanstring ref searchstr ref filespec ref options
+if n < 3 then
+  options = _SearchOpt
+end
+if not filespec then
+  filespec = '.'
+end
+
+if not scanstring or not searchstr then
+  return
+end
+
+// add the scan string to _scan history buffer
+addhistory "_scan" scanstring
+addhistory "_find" (joinstr '' searchstr options)
+
+options = options + '*'
+
+// copy passed buffer
+if passedbuf then
+  markline 1 (getlines) 'T' passedbuf
+  scanbuf = if? (getbinarylen passedbuf) (createbbuf) (createbuf)
+  copyblock 'T'
+  destroymark 'T'
+  delline
+  filespec = onname (getbufname passedbuf)
+  setbufname filespec
+
+// load new buffer if none passed
+else
+  subdir = pos 'u' options
+  filespec = onname (qualify filespec (getbufname))
+  fileoptions = (sub 'd' '' _FmgrOpt) + 'f' + _NameStyle + (if? subdir 'vq' '')
+  scanbuf = loadbuf filespec '' '' fileoptions
+  if subdir then
+    diroptions = (sub 'f' '' fileoptions) + 'd'
+    insertbuf (qualify "*.*" filespec) '' '' diroptions '' '' (getlines)
+  end
+end
+
+if not scanbuf then
+  return
+end
+if not getlinelen or not (dir? filespec) then
+  destroybuf
+  display
+  queue "msgbox" filespec + " not found"
+  return
+end
+
+// create buffer to hold occurrences
+resultbuf = createbuf
+
+currbuf scanbuf
+fmgr.fsort 'n'
+
+// create the status window
+createstatus (if? (getbinarylen)
+                  length (getpath filespec) + 24 status_qwidth)
+display
+
+// set line delimiter to use
+delimit = hex2bin _LineDlm
+
+// do for all files in the scan buffer
+repeat
+
+  // get the next file
+  file = fmgr.fgetfile
+
+  // check for subdirectories
+  if file [LAST_CHAR] == '\\' then
+    if subdir and not (pos ".." file) then
+      insertbuf file + (getname filespec) '' '' fileoptions '' '' (getlines)
+      while not (getlinelen (getlines)) do
+        delline 1 (getlines)
+      end
+      insertbuf file + "*.*" '' '' diroptions  '' '' (getlines)
+    end
+
+  elseif loadbuf file '' delimit then
+    lines = getlines resultbuf
+    name = if? subdir file (getname file)
+
+    // display scan progress
+    writestr file
+    display
+
+    // find all occurrences of the search string in the file
+    while find searchstr options do
+      addline name + '(' + getrow + "): " + gettext  '' '' resultbuf
+      col MAX_COL
+    end
+
+    // remove the file from memory
+    destroybuf
+
+    // if found, show it on the status window
+    if lines < (getlines resultbuf) then
+      writestr "FOUND" status_found_color (getcoord 'x1') - 7
+    end
+
+    writeline
+    display
+  end
+until not down
+
+breakoff
+
+// delete the status window
+destroywindow
+
+// destroy the scan buffer
+destroybuf
+
+// check if anything was found
+gotobuf resultbuf
+lines = getlines
+if lines <= 1 then
+  destroybuf
+  display
+  queue "msgbox"  "'" + searchstr + "' not found"
+  return
+end
+
+// create find occurrences window
+resultwin = createwindow
+setframe ">bv"
+setcolor  border_color        scan_border_color
+setcolor  north_title_color   scan_title_color
+setcolor  text_color          scan_text_color
+setcolor  border_flash_color  scan_border_flash_color
+setcolor  menu_color          scan_menu_color
+setcolor  menu_hotkey_color   scan_menu_hotkey_color
+setcolor  menu_hilite_color   scan_menu_hilite_color
+settitle "Occurrences of '" + searchstr + "' in " +
+         (onname filespec 't') + " - " + ((getlines resultbuf) - 1) + " lines"
+setwinctrl "ð" 2
+setborder "1i"
+setshadow 2 1
+
+// create south menu bar
+setframe "+4"
+menubar '' 4
+  item "{Enter}=Goto+Exit"  gotoline 'x'
+  item "{Ctrl-G}=Goto"      gotoline
+  item "{Ctrl-E}=Edit"      editlines
+  item "{Ctrl-P}=Print"     print
+  item "{Esc}=Exit"         destroyobject
+end
+
+// center the window
+width  = getvidcols - 5
+height = getvidrows - 10
+height = (if? lines >= height height lines) + 2
+ox = (getvidcols - width) / 2
+oy = (getvidrows - height) / 2
+sizewindow ox oy ox + width oy + height "ad"
+
+delline 1 1
+cursor = createcursor
+colorcursor scan_cursor_color
+setwincurs cursor
+setbuftabs _TabWidth
+
+// this object inherits from the 'win' object
+settype "win"
+resident ON
+
+//--------------------------------------------------------------------
+// functions
+//--------------------------------------------------------------------
+
+// goto the line displayed at the cursor
+function gotoline (gloptions)
+  variable name, linenumber
+  parse "{.+} *({[0-9]*}):" (gettext) 'x' ref name ref linenumber
+  if open (qualify name filespec) then
+    // exit occurrences window, if specified
+    if pos 'x' gloptions then
+      oldwindow = gotowindow resultwin
+      close
+      gotowindow oldwindow
+      resultwin = ''
+      destroyobject
+    end
+    gotopos 1 linenumber
+    send "onfound" (find searchstr options + '*l')
+  end
+end
+
+// copy the list of occurrences to a new edit window
+function editlines
+  editbuf = createbuf
+  setbufname (qualify "temp.txt" filespec)
+  gotobuf resultbuf
+  copyblock '*a' editbuf 1 1
+  gotobuf editbuf
+  delline
+  openbuf editbuf
+end
+
+//--------------------------------------------------------------------
+// events
+//--------------------------------------------------------------------
+
+variable client?
+
+event <move>
+  if client? then
+    trackmouse
+  end
+  pass
+end
+
+event <lbutton>
+  if getregion == 1 then
+    client? = TRUE
+    trackmouse
+  end
+  pass
+end
+
+event <lbuttonup>
+  client? = FALSE
+  pass
+end
+
+// double-click
+event <ldouble>
+  client? = FALSE
+  if getregion == 1 then
+    call <enter>
+  end
+  pass
+end
+
+event <destroy>
+  if resultwin then
+    close
+  end
+  if resultbuf then
+    destroybuf resultbuf
+  end
+end
+
+function 'ð'
+  destroyobject
+end
+
+//--------------------------------------------------------------------
+// keys
+//--------------------------------------------------------------------
+
+// macro help
+macrofile = arg 1
+key <f1>
+  helpmacro macrofile
+end
+
+key <up>           up
+key <down>         down
+key <left>         rollcol -1
+key <right>        rollcol  1
+key <home>         col 1
+
+key <pgup>         pageup
+key <pgdn>         pagedown
+key <ctrl pgup>    row 1                // to list top
+key <ctrl pgdn>    row (getlines)       // to list bottom
+key <ctrl home>    row (getviewtop)     // to page top
+key <ctrl end>     row (getviewbot)     // to page bottom
+
+// window functions
+key <f6>           nextwindow
+key <ctrl a>       nextwindow
+key <ctrl z>       maximize
+key <shift f3>     tile 'v'             // tile vertical
+key <shift f4>     tile 'h'             // tile horizontal
+key <shift f5>     cascade              // cascade
+
+// south menu commands
+key <enter>        gotoline 'x'
+key <ctrl g>       gotoline
+key <ctrl e>       editlines
+key <ctrl p>       print
+key <esc>          destroyobject

@@ -1,0 +1,52 @@
+<HTML><HEAD><TITLE>RECOVER</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>RECOVER</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>kopiert besch„digte Dateien in ein Sicherungsverzeichnis (C:\RECOVER.SAV)
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">RECOVER [Quelldatei(en)] [anderes Sicherungsverzeichnis] [/o]</FONT>
+
+/o  Recover l„uft ohne Benutzerabfrage durch und protokolliert evtl. 
+    aufgetretene Fehler in der <A HREF="logfile.htm">LOG-Datei</A>.
+ 
+Anstelle des Standard-Sicherungsverzeichnisses k”nnen Sie ein alternatives 
+Verzeichnis w„hlen, was sich immer dann anbietet, wenn Sie Fehler auf 
+Laufwerk C:\ vermuten bzw. bereits gefunden haben.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendungsgebiete</FONT>
+
+Zum Wiederherstellen von Dateien auf besch„digten Disketten wird in der Regel
+der Einsatz von <A HREF="help:scandisk">SCANDISK</A> oder „hnlichen Programmen empfohlen. Recover 
+arbeitet nach einem anderen Prinzip, das in bestimmten F„llen erfolgreicher 
+sein kann. Bevor Sie eine Diskette mit ScanDisk bearbeiten, sollten Sie es
+mit Recover versuchen. Scandisk markiert defekte Sektoren als gesperrt und 
+darauf kann Recover dann nicht mehr zugreifen. Die Praxis hat gezeigt, daá 
+solche Sektoren nach ein paar Wiederholungsversuchen oft doch noch lesbar
+waren. Recover ver„ndert den besch„digten Datentr„ger NICHT und kann daher 
+gefahrlos eingesetzt werden, bevor ScanDisk zum Einsatz kommt.
+
+Recover kann jedoch keine Unterverzeichnisse kopieren. Diese mssen dann 
+ge”ffnet und Recover wiederholt werden.
+
+St”át Recover beim Kopieren einer besch„digten Datei mittendrin auf nicht 
+lesbare Stellen (Sektoren), fllt es diesen Bereich mit dem Zeichen #.
+Die Zieldatei ist am Ende also genauso groá wie die Quelldatei.<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiel</FONT>
+
+<FONT COLOR="blue">RECOVER A:\*.*</FONT>
+
+kopiert alle Dateien aus dem Verzeichnis A:\ ins Sicherungsverzeichnis 
+C:\RECOVER.SAV (welches automatisch angelegt wird). Kopiert werden also auch 
+nichtbesch„digte Dateien. Wenn Sie anschlieáend Dateien aus einem 
+Unterverzeichnis von A: herauskopieren wollen, achten Sie bitte darauf, 
+daá gerade gerettete Dateien nicht von evtl. gleichnamigen Dateien wieder 
+berschrieben werden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

@@ -1,0 +1,29 @@
+
+ÿÿSCAN2.AML
+ ÿScan files for all Occurrencesÿ
+
+  This macro searches multiple files on disk for all occurrences of a
+  search string or regular expression pattern. You will be prompted to
+  enter the search string and search options.
+
+  The following search options can be specified:
+
+    i - ignore case
+    u - search within subdirectories also
+    w - whole words only
+    x - regular expressions
+
+  If this macro is run by selecting Scan Files from the file manager
+  Command menu, then only the files listed in the file manager are
+  searched, otherwise you will be prompted to enter a directory or file
+  specification where files will be searched.
+
+  After the search has completed, a window will be displayed showing
+  each line in each file where the search string was found. A menu is
+  also displayed which allows you to goto the line at cursor, edit all
+  displayed lines, and print all displayed lines.
+
+  Scan2 can be used as an alternative to the Scan macro. Unlike Scan,
+  Scan2 searches each file for all occurrences of the search string. For
+  this reason, Scan2 may be slightly slower than Scan.
+

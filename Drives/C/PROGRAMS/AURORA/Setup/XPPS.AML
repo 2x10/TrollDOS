@@ -1,0 +1,78 @@
+//--------------------------------------------------------------------
+// XPPS.AML
+// Syntax highlighting for PCBoard Script files (Pps)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+  'bcfn'                          // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+  '{}[]().=+-*/:<>|&,~!^?\t'      // symbol set 1
+  ''                              // symbol set 2
+  '"'                             // string characters
+  '\\'                            // string literal char
+  ''                              // numeric char
+  '\';'   0                       // eol comment 1 / start column
+  ''      0                       // eol comment 2 / start column
+  ''      ''                      // multi-line comment 1
+  ''      ''                      // multi-line comment 2
+  0                               // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black     // keyword
+  color gray         on cyan      // symbol set 1
+  color gray         on cyan      // symbol set 2
+  color brightred    on black     // string
+  color brightred    on black     // numeric
+  color brightgreen  on black     // eol comment 1
+  color brightgreen  on black     // eol comment 2
+  color brightgreen  on black     // comment 1
+  color brightgreen  on black     // comment 2
+
+keyword
+  ABORT, ABS, ADJTIME, AND, ANSION, ANSIPOS, ASC, AUTO, B2W, BACKUP,
+  BELL, BLT, BOOLEAN, BROADCAST, BYE, CALL, CALLID, CALLNUM, CARRIER,
+  CCTYPE, CDCHKOFF, CDCHKON, CDON, CHAT, CHR, CLOSECAP, CLREOL, CLS,
+  COLOR, CONFFLAG, CONFUNFLAG, CURCOLOR, CURCONF, CURSEC, DATE, DAY,
+  DBGLEVEL, DEC, DEFCOLOR, DEFS, DELAY, DELETE, DELUSER, DIR, DISPFILE,
+  DISPSTR, DISPTEXT, DOINTR, DOW, DTROFF, DTRON, ECHODOTS, ELSE, ELSEIF,
+  END, ENDIF, ENDWHILE, ERASELINE, EXIST, FALSE, FAPPEND, FCL, FCLOSE,
+  FCREATE, FERR, FGET, FIELDLEN, FILEINF, FMTCC, FNS, FOPEN, FOR,
+  FORWARD, FPUT, FPUTLN, FPUTPAD, FRESHLINE, FREWIND, F_EXP, F_MW,
+  F_REG, F_SEL, F_SYS, GETENV, GETTOKEN, GETUSER, GETX, GETY, GOODBYE,
+  GOSUB, GOTO, GRAFMODE, GRAPH, GUIDE, HANGUP, HELPPATH, HIGHASCII,
+  HOUR, I2S, IF, INC, INKEY, INPUT, INPUTCC, INPUTDATE, INPUTINT,
+  INPUTMONEY, INPUTSTR, INPUTTEXT, INPUTTIME, INPUTYN, INSTR, INTEGER,
+  JOIN, KBDCHKOFF, KBDCHKON, KBDFILE, KBDSTUFF, KINKEY, LANG, LANGEXT,
+  LEFT, LEN, LET, LFAFTER, LFBEFORE, LOG, LOGGEDON, LOGIT, LOGITLEFT,
+  LOWER, LTRIM, MASK_ALNUM, MASK_ALPHA, MASK_ASCII, MASK_FILE, MASK_NUM,
+  MASK_PATH, MASK_PWD, MAXNODE, MESSAGE, MGETBYTE, MID, MIN, MINKEY,
+  MINLEFT, MINON, MKADDR, MKDATE, MODEM, MONEY, MONTH, MORE, MPRINT,
+  MPRINTLN, NC, NEWLINE, NEWLINES, NEWPWD, NEXT, NOCHAR, NOCLEAR, NOT,
+  ONLOCAL, OPENCAP, OPTEXT, OR, O_RD, O_RW, O_WR, PAGEOFF, PAGEON,
+  PAGESTAT, PCBDAT, PCBNODE, PEEKB, PEEKDW, PEEKW, POKEB, POKEDW, POKEW,
+  POP, PPENAME, PPEPATH, PRINT, PRINTLN, PROMPTSTR, PSA, PUSH, PUTUSER,
+  QUEST, RANDOM, RDUNET, RDUSYS, READLINE, REGAH, REGAL, REGAX, REGBH,
+  REGBL, REGBX, REGCF, REGCH, REGCL, REGCX, REGDH, REGDI, REGDL, REGDS,
+  REGDX, REGES, REGF, REGSI, RENAME, REPLACE, RESETDISP, RESTSCRN,
+  RETURN, RIGHT, RTRIM, S2I, SAVESCRN, SCRTEXT, SEC, SENDMODEM, SHELL,
+  SHOWOFF, SHOWON, SHOWSTAT, SLPATH, SOUND, SPACE, SPRINT, SPRINTLN,
+  STACKED, STARTDISP, STOP, STRING, STRIP, STRIPATX, SYSOPSEC, S_DB,
+  S_DN, S_DR, S_DW, TEMPPATH, THEN, TIME, TIMEAP, TOKCOUNT, TOKENIZE,
+  TOKENSTR, TRIM, TRUE, UN_CITY, UN_NAME, UN_OPER, UN_STAT, UPCASE,
+  UPPER, U_ADDR, U_ALIAS, U_BDL, U_BDLDAY, U_BDPHONE, U_BUL, U_CITY,
+  U_CLS, U_CMNT1, U_CMNT2, U_DEF79, U_EXPDATE, U_EXPERT, U_EXPSEC,
+  U_FDL, U_FSE, U_FSEP, U_FUL, U_HVPHONE, U_INCONF, U_LDATE, U_LDIR,
+  U_LOGONS, U_LONGHDR, U_LTIME, U_MSGRD, U_MSGWR, U_NAME, U_NOTES,
+  U_PAGELEN, U_PWD, U_PWDEXP, U_PWDHIST, U_PWDLC, U_PWDTC, U_RECNUM,
+  U_SCROLL, U_SEC, U_STAT, U_TIMEON, U_TRANS, U_VER, VALCC, VALDATE,
+  VALTIME, VARADDR, VAROFF, VARSEG, VER, WAIT, WAITFOR, WHILE, WORDWRAP,
+  WRUNET, WRUSYS, XOR, YEAR, YESCHAR, YESNO

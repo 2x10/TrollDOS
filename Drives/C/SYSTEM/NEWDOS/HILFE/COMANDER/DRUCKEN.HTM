@@ -1,0 +1,249 @@
+<HTML><HEAD><TITLE>Datei drucken</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>Datei drucken</FONT>
+<HR noshade color="silver">
+<A HREF="main.htm">Zurck zur šbersicht</A>
+<HR noshade color="silver"><PRE><FONT COLOR="maroon">Schnellkurs</FONT> 
+
+1. Druckt unformatierte Text-Dateien auf beliebigem Drucker.
+2. Drucker kann mit <A HREF="konfix.htm">Konfix</A> eingerichtet werden.
+3. Dort sind auch nderungen des Druckbildes m”glich: Blocksatz,
+   R„nder, Fuázeile, Seitenzahl usw.
+4. CTRL+U druckt ausgew„hlte Datei im Hintergrund.<HR
+noshade color="silver"><FONT 
+COLOR="maroon">Beschreibung</FONT>
+
+<A HREF="#m”gli"> M”glichkeiten</A>
+<A HREF="#schrift"> Einstellen der Schrift</A>
+<A HREF="#format"> Einstellen des Druckformates</A>
+<A HREF="#drucken"> Druckvorgang</A>
+<A HREF="#spool"> Hintergrunddruck</A> 
+<A HREF="#trick"> Trick 17</A><HR 
+
+noshade color="silver"><A NAME="m”gli"><A HREF="#top"> </A><FONT COLOR="maroon">M”glichkeiten</FONT>
+     
+Der interne Druckmanager ist vor allem fr das schnelle Ausdrucken
+unformatierter Textdateien auf beliebigen Druckern konzipiert. Er 
+verwendet zur Steuerung eines Druckers nur Befehle, die jeder
+handelsbliche Drucker versteht, muá also nicht extra eingerichtet werden.
+Trotzdem k”nnen Sie das Druckbild unformatierter Dateien erheblich
+beeinflussen. Die folgenden Einstellungen k”nnen Sie im <A HREF="konfix.htm">Konfix</A>-Men 
+vornehmen.
+
+<FONT COLOR="green">1. R„nder</FONT>
+   Sie k”nnen die Breite von allen vier R„ndern einstellen (also Kopf-, Fuá-,
+   linker und rechter Rand).
+
+<FONT COLOR="green">2. Zeilenumbruch</FONT> 
+   Viele Texte enthalten Zeilen von erheblicher L„nge. Laserdrucker drucken
+   eine solche Zeile oft bis zum Papierrand und fahren eine Zeile tiefer mit
+   dem Beginn der n„chsten Zeile fort. Dadurch fehlt natrlich eine Menge
+   Text. Der Druckmanager fgt automatisch einen Zeilenumbruch ein, wenn der
+   von Ihnen eingestellte Rand erreicht ist. Umgebrochen wird an der
+   letztm”glichen Leerstelle.
+
+<FONT COLOR="green">3. Blocksatz</FONT> 
+   Hier werden die einzelnen Zeilen gestreckt, so daá sie bis zum rechten
+   Rand reichen. Dadurch verbessert sich das Druckbild.
+
+<FONT COLOR="green">4. Fuázeile</FONT> 
+   Wenn Sie die Option "Fuázeile ein" gew„hlt haben, fgt der Druckmanager am
+   unteren Rand jeder Druckseite eine Zeile ein, die etwa so aussieht:
+
+   Datei: DATEIN.AME       Seite - 1
+
+   Das heiát, es wird sowohl der Name der gedruckten Datei, als auch eine
+   durchlaufende Seitennumerierung ausgedruckt.
+
+<FONT COLOR="green">5. Seitennummer</FONT> 
+   Sie k”nnen die Seitenummer der ersten gedruckten Seite festlegen. Dies ist
+   vor allem dann ntzlich, wenn Sie mehrere Dateien mit durchlaufender
+   Numerierung drucken wollen.
+
+<FONT COLOR="green">6. Zahl der zu druckenden Seiten</FONT> 
+   Wenn Sie hier NULL angeben, wird die gesamte Datei ausgedruckt, ansonsten
+   beginnt der Druck am Beginn der Datei und endet, wenn die von Ihnen
+   angegebene Seitenzahl erreicht ist. Hiermit k”nnen Sie also u.a.
+   Probeausdrucke einer einzelnen Seite anfertigen, um zun„chst das Aussehen
+   zu berprfen.
+
+<FONT COLOR="green">7. Seitenvorschub</FONT> 
+   Oftmals weigern sich Drucker, die letzte Seite einer ASCII-Datei
+   auszugeben. Der Druckmanager sorgt dafr, daá auch die letzte Seite
+   automatisch ausgeworfen wird.
+
+<FONT COLOR="green">6. Druckerschnittstelle</FONT> 
+   Der Druckmanager kann drei parallele Schnittstellen (LPT1/PRN, LPT2 und
+   LPT3) und somit auch drei Drucker pro PC ansteuern.
+
+Ferner wird fehlendes Papier oder ein nicht bereiter Drucker gemeldet.<HR 
+
+noshade color="silver"><A NAME="schrift"><A HREF="#top"> </A><FONT COLOR="maroon">Einstellen der Schrift</FONT>
+
+Auf jedem Drucker ist eine Schrift voreingestellt. Wird dem Drucker kein
+besonderer Schriftartbefehl bermittelt, druckt er automatisch mit dieser
+Standardschrift. Um die Kompatibilit„t zu m”glichst allen Druckertypen zu
+wahren, sendet auch der Druckmanager keinen solchen Befehl. Wenn Sie also
+eine andere Schriftart w„hlen m”chten, mssen Sie diese direkt am Drucker
+einstellen.
+
+Achten Sie darauf, daá ein gel„ufiger Zeichensatz eingestellt ist, damit auch
+deutsche Umlaute, das á und Rahmen richtig dargestellt werden. Ein passender
+Zeichensatz ist hier die sogenannte IBM Codepage 437.
+
+Der Druckmanager ist wie gesagt fr reine Textdateien gedacht. Texte im
+Originalformat Ihres Textverarbeitungsprogrammes enthalten oft zahlreiche
+Sonderzeichen. Wenn Sie eine bestimmte Datei wiederholt drucken wollen, ohne
+jedesmal Ihre Textverarbeitung starten zu mssen, k”nnen Sie sie zus„tzlich
+als reinen ASCII-Text abspeichern. Diese Datei wird dann auch richtig
+ausgedruckt.<HR 
+
+noshade color="silver"><A NAME="format"><A HREF="#top"> </A><FONT COLOR="maroon">Einstellen des Druckformates</FONT>
+
+Im Schaltpult des Comanders befindet sich eine Taste namens <A HREF="konfix.htm">Konfix</A>. Wenn Sie
+Taste x drcken oder mit der Maus darauf klicken, erscheint zun„chst das
+Konfigurationsmen des Comanders. Dort finden Sie auch die Taste "Drucker
+einrichten". Wenn Sie diese bet„tigen, gelangen Sie ins Konfigurationsmen
+des Druckmanagers.
+
+1. W„hlen Sie im oberen Bereich dieses Mens die "Steckdose", an der Ihr
+   Drucker angeschlossen ist. In der Regel ist dies LPT1. Das ist auch die
+   Standardeinstellung. Drcken Sie zum Einstellen die Tasten 1, 2 oder 3
+   oder klicken Sie mit der Maus auf das entsprechende Symbol. Aktiv ist
+   immer die farblich hervorgehobene Einstellung. Bei Eingabe einer 4 wird
+   die Datei auf die Festplatte "gedruckt". (Druckdatei C:\PRINT.$$). Diese
+   Datei enth„lt das von Ihnen eingestellte Format und kann im Hintergrund
+   gedruckt werden.
+
+2. Darunter befinden sich die Tasten, mit denen Sie den Blocksatz und die
+   Fuázeile ein- und ausschalten k”nnen. Ihre Auswahl wird im jeweiligen
+   Tastensymbol angezeigt (EIN, AUS).
+
+3. Format
+   Hier sind jeder Einstellungsm”glichkeit je zwei nebeneinanderliegende
+   Tastensymbole zugeordnet. Je nachdem, welche der beiden Tasten Sie
+   drcken bzw. anklicken, wird der dazugeh”rige Wert auf- oder abw„rts
+   gez„hlt. Er wird in einem kleinen Fenster angezeigt.
+
+   a)Leerzeilen am oberen Rand
+     Erzeugt einen Kopfrand. Dieser orientiert sich an der voreingestellten
+     Schrifth”he und am Zeilenabstand. Eine Randh”he von 3 erzeugt also an
+     der Oberkante des Blattes drei Leerzeilen.
+    
+   b)Leerzeichen am linken Rand
+     Die Maáeinheit fr die Einstellung der Seitenr„nder ist ein Zeichen.
+     Daher ergibt sich die Breite der R„nder aus der Gr”áe der am Drucker
+     eingestellten Schrift. Wenn Sie z.B. als Rand die Zahl 5 w„hlen,
+     erhalten Sie einen linken Rand, der genau so breit ist wie 5 Buchstaben.
+
+   c)Buchstaben je Zeile
+     Durch diese Einstellung ergibt sich automatisch die Breite des rechten
+     Randes.
+
+   d)Textzeilen je Seite
+     Gedruckt wird die von Ihnen eingegebene Zeilenzahl, angefangen am
+     unteren Ende des oberen Randes. Daraus ergibt sich die Breite des
+     unteren Randes.
+
+   e)Leerzeile ber Fuázeile
+     Gibt an, wieviel Platz zwischen unterem Textrand und Fuázeile eingefgt
+     wird.
+  
+   f)Nummer der ersten Seite
+
+   g)Zahl der zu druckenden Seiten
+     Wenn alle Seiten gedruckt werden sollen, geben Sie 0 ein.
+
+   šbrigens brauchen Sie bei der Einstellung des unteren Randes bzw. des
+   Fuárandes nicht viel nachrechnen. Nicht druckbare Angaben werden
+   automatisch korrigiert.
+
+
+Schlieáen Sie das Men mit ENTER. Dann werden Ihre Einstellungen dauerhaft
+gespeichert. Wenn Sie mit Esc beenden, bleiben die vorherigen Einstellungen
+erhalten. Schlieáen Sie dann Konfix mit Esc.
+
+Drucken Sie nun eine Testseite und regeln Sie ggf. nach. Nun k”nnen Sie
+beliebige Textdateien drucken, ohne nochmals etwas einstellen zu mssen.<HR 
+
+noshade color="silver"><A NAME="drucken"><A HREF="#top"> </A><FONT COLOR="maroon">Druckvorgang</FONT>
+
+Bewegen Sie den Lichtbalken des Comanders auf die zu druckende Datei. Wenn
+Sie mehrere Dateien drucken wollen, drcken Sie nun die Einfg- bzw. Ins-Taste
+oder die rechte Maustaste. Die Datei wird nun mit einem roten K„stchen
+markiert. Auf diese Weise k”nnen Sie weitere Dateien markieren bzw. eine
+Markierung wieder entfernen.
+
+Gedruckt werden die Dateien, die rot markiert sind <FONT COLOR="red">oder</FONT> (wenn keine markiert
+ist) die Datei, auf der sich der Lichtbalken befindet.
+
+Bet„tigen Sie nun die Taste <FONT COLOR="blue">Drucke</FONT> im Schaltpult des Comanders.
+
+W„hrend die Daten zum Drucker gesendet werden, sehen Sie ein Fenster, in dem
+dies grafisch dargestellt ist. Wenn dieses Fenster verschwindet, ist die
+Datenbertragung abgeschlossen. Sie k”nnen dann normal auf Ihrem Computer
+weiterarbeiten, auch wenn der Drucker noch besch„ftigt ist.
+
+ltere Drucker haben meist nur einen kleinen Datenpuffer. Hier kann es
+vorkommen, daá die Datenfluáanzeige des Druckmanagers stehenbleibt, weil der
+Puffer voll ist. Hat der Drucker die Zeichen in seinem Puffer abgearbeitet,
+setzt der Datenfluá wieder ein.<HR 
+
+noshade color="silver"><A NAME="spool"><A HREF="#top"> </A><FONT COLOR="maroon">Hintergrunddruck</FONT>
+
+Mit der Tastenkombination STRG+U wird das Drucken der ausgew„hlten Datei im
+Hintergrund ausgefhrt. Beachten Sie bitte, daá hierbei KEINE Formatierung
+vorgenommen wird. Wenn Sie formatierten Ausdruck wnschen, so w„hlen Sie im
+Druckermen mit Taste 4 die Druckdatei PRINT.$$ als Druckziel und drucken die
+markierte Datei ganz normal mit Taste U. Anschlieáend wechseln Sie mit Taste
+C ins Wurzelverzeichnis Ihrer Festplatte und bewegen den Lichtbalken auf die
+Datei PRINT.$$. Drucken Sie diese nun im Hintergrund mit STRG+U bzw. CTRL+U.
+Wenn der Druck nach LPT1 erfolgen soll, brauchen Sie im Druckermen keine
+nderung vorzunehmen. Ist dort als Druckziel die Datei PRINT.$$ eingestellt,
+wird im Hintergrund IMMER nach LPT1 gedruckt. Soll der Hintergrunddruck zu
+einer anderen Schnittstelle geleitet werden, dann allerdings mssen Sie dies
+im Druckermen einstellen.
+
+Sie k”nnen auch dann drucken, wenn Sie im Hintergrund bereits einen Kopier-
+vorgang zu laufen haben. Dieser wird der Druckprozedur jedoch nur wenig
+Rechenzeit briglassen, so das sie erst dann richtig in Gang kommt, wenn die
+Kopieraktion beendet ist. Bei Vordergrunddruck hingegen wird der Kopier-
+vorgang gestoppt und erst anschlieáend weitergefhrt.
+
+Der Comander blockiert w„hrend des Hintergrunddruckes einige Funktionen, die
+nur unn”tig Rechenzeit verbrauchen (Uhr, Bildschirmschoner) oder nicht
+ausgefhrt werden <FONT COLOR="red">drfen</FONT>. Dazu z„hlt der Vordergrunddruck, das Beenden des
+Comanders mit ESC, F10, CTRL+BREAK oder durch Starten von externen
+Anwendungsprogrammen. M”glich sind alle Standard-Befehle des Comanders und
+auch das Starten von Hintergrundkopien. Ggf. werden Hintergrundprozesse
+unterbrochen, wenn "vorn" die volle Rechenleistung ben”tigt wird.
+
+Bei vollem Druckerpuffer kann es vorkommen, daá das System vollst„ndig
+blockiert wird, bis der Drucker wieder Daten aufnehmen kann. Aber auch
+ansonsten kann es zu Verz”gerungen kommen. Besonders die Maus reagiert auf
+fehlende Rechenzeit mit Teilnahmslosigkeit.
+
+Vom Druck im Hintergrund ist auf dem Monitor nichts zu sehen. Lediglich
+anhand von akustischen Signalen k”nnen Sie den Stand der Dinge mitverfolgen:
+
+Kurzer Piepton : Start des Druckvorganges sowie fehlerfreie Beendigung.
+Alarmsirene    : Druck wurde wegen eines Fehlers abgebrochen.
+
+Die Piept”ne unterscheiden sich von denen der Hintergrundkopie durch die
+Tonh”he - die Alarmsirene bei Kopierfehlern hat eine gleichbleibende
+Frequenz, bei Druckerfehlern steigt diese an.<HR 
+
+noshade color="silver"><A NAME="trick"><A HREF="#top"> </A><FONT COLOR="green">Trick 17</FONT>
+Falls Sie eine Datei ohne Formatierung ausdrucken wollen, brauchen Sie
+im Druckermen hierzu keine nderungen vorzunehmen. Drucken Sie sie
+einfach im Hintergrund, da hier keine Formatierung vorgenommen wird.
+Eine weitere Idee zu Hintergrundprozessen finden Sie im Hilfetext zur
+Taste F5 (Kopieren) unter Trick 18.
+
+<FONT COLOR="green">Trick 18</FONT>
+Wenn Sie trotz laufendem Hintergrundprozeá doch mal kurz ins DOS wollen,
+k”nnen Sie mit CTRL+E das DOS-Gateway aktivieren. Mehr zum Gateway erfahren
+Sie im Hilfetext unter Taste ALT+Q oder im Hilfemen (F1) unter Taste U.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

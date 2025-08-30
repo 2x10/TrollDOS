@@ -1,0 +1,239 @@
+
+\              // Main directory
+a.exe          // Aurora/386
+a.x            // Compiled editor environment
+color.aml      // Color definitions
+config.aml     // Configuration settings
+define.aml     // Compile-time declarations, constants, functions
+ext.aml        // Extension source
+features.doc   // Features List
+file_id.diz    // BBS description
+install.x      // Installation macro
+installs.dat   // Installation file list (lite)
+lib.x          // Compiled editor library
+license.doc    // Copyright, License, and Restrictions
+main.aml       // Main macro source
+mouse.aml      // Mouse definitions
+orderfrm.doc   // Ordering information and order form
+read.me        // Introduction and last-minute information
+syntax.aml     // Syntax highlighting definitions
+system.aml     // System settings
+tran.aml       // Translation sample definitions
+vendor.doc     // Distribution restrictions
+ver30c.doc     // New features in v3.0c
+whatsnew.doc   // New features in this version
+
+startup.aml    // Optional startup macros
+user.aml       // Optional user extension source
+
+cfg\           // Configuration macros
+cfgcolor.x     // Color configuration
+cfgdesk.x      // Desktop
+cfgedit1.x     // Edit Options 1
+cfgedit2.x     // Edit Options 2
+cfgfind.x      // Search/Replace
+cfgfmgr.x      // File Manager
+cfgform.x      // Text Reformatting
+cfgintnl.x     // International Options
+cfgldlm.x      // Line Delimiter
+cfgmain.x      // Main Configuration
+cfgmarg.x      // Margins and Tabs
+cfgmisc.x      // Miscellaneous
+cfgmouse.x     // Mouse
+cfgopen.x      // Open
+cfgprint.x     // Print
+cfgprom.x      // Prompt
+cfgsave.x      // Save
+cfgsort.x      // Sort
+cfgstyl2.x     // Edit and File Manager window styles
+cfgstyle.x     // Dialog box and Prompt window styles
+cfgupd.x       // Save Configuration
+cfgvideo.x     // Video
+
+doc\           // Documenation
+regexp.dox     // Regular Expression Searching Reference
+tips.dox       // Miscellaneous User Tips
+user.dox       // The Aurora Editor User's Guide
+
+macro\         // External macros
+alarm.dat      // Set alarm data
+alarm.dox
+alarm.x        // Set alarm
+ascii2.dox
+ascii2.x       // 2-Dimensional ASCII chart
+bookauto.dox
+bookauto.x     // Save/Restore bookmarks automatically
+booklist.dox
+booklist.x     // List all bookmarks
+calcpad.dox
+calcpad.x      // Calculator pad
+calen4.dox
+calen4.x       // 4-month calendar
+calendar.dox
+calendar.x     // Popup calendar
+capital.dox
+capital.x      // Capitalize words
+clipview.dox
+clipview.x     // Clipboard viewer
+clock.dox
+clock.x        // Digital clock
+clrchart.dox
+clrchart.x     // Color chart
+compare.dox
+compare.x      // Compare files
+compress.dox
+compress.x     // Find occurrences via folding
+countchr.dox
+countchr.x     // Count characters
+countlin.dox
+countlin.x     // Count lines in multiple files
+countwrd.dox
+countwrd.x     // Count words
+delblank.dox
+delblank.x     // Delete blank lines
+deldup.dox
+deldup.x       // Delete duplicate lines
+deskopen.dox
+deskopen.x     // Open desktop
+desksave.dox
+desksave.x     // Save desktop
+dlgdemo.dox
+dlgdemo.x      // Dialog box demo
+drawbox.dox
+drawbox.x      // Draw a box
+erroraml.x     // AML rrror codes
+fattr.dox
+fattr.x        // Change attributes
+fcopy.dox
+fcopy.x        // Copy/Move file(s)
+filestat.dox
+filestat.x     // Display file/directory statistics
+fillnum.dox
+fillnum.x      // Fill block with a numeric sequence
+findo.dox
+findo.x        // Find cccurrences
+flopen.x       // Open file list
+flsave.x       // Save file list
+globrepl.dox
+globrepl.x     // Global Search and Replace
+helplang.x     // Language Reference Topics menu
+helpmac.x      // Macro help
+helpuser.x     // User's Guide Topics menu
+hilitewd.dox
+hilitewd.x     // Hilite a word
+install.dox    // Install help
+installs.dox
+keycodes.dox
+keycodes.x     // Display keycodes
+keydef.dox
+keydef.x       // Show assigned state of all keys
+logevent.dox
+logevent.x     // Log editor events
+longdate.dox
+longdate.x     // Get the date and time in long format
+longline.dox
+longline.x     // Find the longest line
+maclist.dat
+maclist.x      // Macro list
+palette.dox
+palette.x      // Change color palette
+paragrph.dox
+paragrph.x     // Find next/prev paragraph
+projopen.dox
+projopen.x     // Open project
+projsave.dox
+projsave.x     // Save project
+ruler.dox
+ruler.x        // Insert a ruler line above the current line
+saveall.dox
+saveall.x      // Save all open files
+scan.dox
+scan.x         // Scan files
+scan2.dox
+scan2.x        // Scan files for all occurrences
+scandlg.x      // Scan dialog box
+scrsaver.dox
+scrsaver.x     // Screen saver
+sieve.dox
+sieve.x        // Sieve of Eratosthenes Demo
+sortstr.dox
+sortstr.x      // Sort a string
+status.dox
+status.x       // Custom status line example
+stopwtch.dox
+stopwtch.x     // Stopwatch timer
+style.dox
+style.x        // Change editor style
+sumblock.dox
+sumblock.x     // Add up numbers in a block
+sweep.x        // Sweep directories
+synch.dox
+synch.x        // Synchronized scrolling
+tabauto.dox
+tabauto.x      // Expand tabs automatically
+tabs.dox
+tabs.x         // Entab/Detab
+template.dat   // Template data
+template.dox
+template.x     // Template editing
+tree.dox
+tree.x         // Directory tree
+trimline.dox
+trimline.x     // Trim trailing blanks and tabs
+vcursor.dox
+vcursor.x      // Vertical cursor line
+where.dox
+where.x        // Where-is utility
+winclock.dox
+winclock.x     // Edit window clock
+zapem.dox
+zapem.x        // ZapEm Game
+
+palette\       // Color palettes
+blugreen.aml   // Blue and green
+fluoresc.aml   // Fluorescent
+greench.aml    // Green charcoal
+redblue.aml    // Red and blue
+wimbledn.aml   // Wimbledon
+
+style\         // Styles
+aukbd.aml      // Aurora-style keyboard layout and functions
+aumenu.aml     // Aurora-style menu definitions
+brkbd.aml      // Brief-style keyboard layout and functions
+brmenu.aml     // Brief-style menu definitions
+cukbd.aml      // Aurora/CUA/Windows-style keyboard definitions
+cumenu.aml     // Aurora/CUA/Windows-style menu definitions
+mekbd.aml      // MultiEdit-style keyboard definitions
+memenu.aml     // MultiEdit-style menu definitions
+qekbd.aml      // QEdit/TSE-style keyboard layout and functions
+qemenu.aml     // QEdit/TSE-style menu definitions
+wpkbd.aml      // WordPerfect-style keyboard layout and functions
+wpmenu.aml     // WordPerfect-style menu definitions
+wskbd.aml      // WordStar/Borland IDE keyboard layout and functions
+wsmenu.aml     // WordStar/Borland IDE menu definitions
+
+syn\           // Syntax highlighting objects
+xada.x         // ADA
+xaml.aml       // AML macro language
+xasm.x         // 80x86 assembly language
+xbas.x         // Basic
+xbat.x         // Dos .Bat files
+xc.aml         // C/C++
+xcbl.x         // Cobol
+xcmd.x         // Rexx
+xdox.aml       // Aurora .Dox files
+xfor.x         // Fortran
+xhtm.aml       // Hypertext Markup Language (HTML)
+xipf.x         // IPF (GML)
+xjav.aml       // Java
+xlsp.x         // Lisp
+xmak.x         // Make files
+xmod.x         // Modula2
+xpas.x         // Pascal
+xpps.x         // PCBoard PPL
+xprg.x         // dBase
+xrc.x          // Windows Resource Files
+xsql.x         // SQL
+xsys.x         // Config.sys
+xtex.x         // LaTex
+xword.aml      // Used by hiliteword command

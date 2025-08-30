@@ -1,0 +1,313 @@
+//--------------------------------------------------------------------
+// FINDO.AML
+// Find Occurrences, (C) 1993-1996 by nuText Systems
+//
+// (See Findo.dox for user help)
+//
+// This macro searches the current edit window for all occurrences of a
+// search string or regular expression pattern.
+//
+// The search string and search options can be passed to this macro, (as
+// the multistring: search/options). If nothing is passed, the user will
+// be prompted to enter the search string and options.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//
+// This macro can also be run by selecting Find Occurrences from the
+// Search menu.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include bootpath "define.aml"
+
+// colors
+constant findo_border_color        = color black on gray
+constant findo_title_color         = color black on gray
+constant findo_text_color          = color black on gray
+constant findo_border_flash_color  = color brightgreen on gray
+constant findo_cursor_color        = color black on brightgreen
+constant findo_menu_color          = color white on blue
+constant findo_menu_hotkey_color   = color yellow on blue
+constant findo_menu_hilite_color   = color white on cyan
+
+// test for edit windows
+if not wintype? "edit" then
+  msgbox "Edit windows only!"
+  return
+end
+
+forward gotoline
+forward editlines
+
+variable search_string, options, o
+
+// edit fields/groupbox windows
+variable f1, g1, g2
+
+// retrieve history in dlgbox edit fields and options
+function updatehist
+  variable searchstr, replstr, options
+  n = splitstr '' (gettext) ref searchstr ref replstr ref options
+  if n == 2 then
+    options = replstr
+  end
+
+  // search string
+  buffer = getwinbuf f1
+  delchar MAX_COL 1 '' buffer
+  instext searchstr 1 '' buffer
+
+  // default options
+  if not options and n <= 1 then
+    options = _SearchOpt
+  end
+
+  setgroupbox options "iwx" g1
+  setgroupbox options "bs"  g2
+  col getlinelen + 1
+end
+
+
+// display find dialog box
+function findodlg (s title)
+  variable searchstr, options1, options2
+  dialog "Find Occurrences" 66 7 'cp'
+  f1 = field "&Search for: >" 3 2  38 s "_find" whenselect "updatehist"
+  // group box 1
+  g1 = groupbox '' 3 4
+    (menu ''
+       item " [ ] &Ignore Case"
+       item " [ ] &Whole Words"
+       item " [ ] Regular E&Xpression "
+     end ) '' _SearchOpt 'iwx'
+  // group box 2
+  g2 = groupbox '' 29 4
+    (menu ''
+       item " [ ] Marked &Block Only  "
+       item " [ ] Skip &Folds"
+     end) '' _SearchOpt 'bs'
+  button "O&k"    56 2 8
+  button "Cancel" 56 4 8
+  if (getdialog ref searchstr ref options1 ref options2) == 'Ok' then
+    joinstr '' searchstr options1 + options2
+  end
+end
+
+// prompt for a search string if none specified
+string_and_opt = arg 3
+if not string_and_opt then
+  string_and_opt = if _PromptStyle == 'd' then
+                     findodlg
+                   else
+                     ask "[string/biswx] Find occurrences of"  "_find"
+                   end
+  if not string_and_opt then
+    return
+  end
+  addhistory "_find" string_and_opt
+end
+
+n = splitstr '' string_and_opt ref search_string ref options ref o
+
+// initialize search options
+if n >= 2 then
+  if n > 2 then
+    options = o
+  end
+else
+  options = _SearchOpt
+end
+if pos 'g' options then
+  options = sub 'g' '' options
+end
+options = options + '*'
+
+// do the search
+resultbuf = createbuf
+setbuftabs (getbuftabs (getprevbuf))
+gotobuf (getprevbuf)
+pushcursor
+gotopos 1 1
+while find search_string options do
+  addline  getrow + ": " + gettext  '' '' resultbuf
+  col MAX_COL
+end
+popcursor
+
+// check if anything was found
+lines = getlines resultbuf
+if lines <= 1 then
+  destroybuf resultbuf
+  display
+  say  "'" + string_and_opt + "' not found"  'b'
+  return
+end
+
+bname = getbufname
+
+// create find occurrences window
+resultwin = createwindow
+setframe ">bv"
+setcolor  border_color        findo_border_color
+setcolor  north_title_color   findo_title_color
+setcolor  text_color          findo_text_color
+setcolor  border_flash_color  findo_border_flash_color
+setcolor  menu_color          findo_menu_color
+setcolor  menu_hotkey_color   findo_menu_hotkey_color
+setcolor  menu_hilite_color   findo_menu_hilite_color
+settitle "Occurrences of '" + search_string + "' in " +
+         (onname (getname bname)) + " - " + ((getlines resultbuf) - 1) +
+         " lines"
+setwinctrl "ð" 2
+setborder "1i"
+setshadow 2 1
+
+// create south menu bar
+setframe "+4"
+menubar '' 4
+  item "{Enter}=Goto+Exit"   gotoline 'x'
+  item "{Ctrl-G}=Goto"       gotoline
+  item "{Ctrl-E}=Edit"       editlines
+  item "{Ctrl-P}=Print"      print
+  item "{Esc}=Exit"          destroyobject
+end
+
+// center the window
+width  = getvidcols - 5
+height = getvidrows - 10
+height = (if? lines >= height height lines) + 2
+ox = (getvidcols - width) / 2
+oy = (getvidrows - height) / 2
+sizewindow ox oy ox + width oy + height "ad"
+
+gotobuf resultbuf
+delline 1 1
+cursor = createcursor
+colorcursor findo_cursor_color
+setwincurs cursor
+
+// this object inherits from the 'win' object
+settype "win"
+resident ON
+
+//--------------------------------------------------------------------
+// functions
+//--------------------------------------------------------------------
+
+// goto the line displayed at the cursor
+function gotoline (gloptions)
+  line = gettext
+  if open bname then
+    // close occurrences window, if specified
+    if pos 'x' gloptions then
+      oldwindow = gotowindow resultwin
+      close
+      gotowindow oldwindow
+      resultwin = ''
+      destroyobject
+    end
+    gotopos 1 line [1..(pos ':' line) - 1]
+    send "onfound" (find search_string options + '*lg')
+  end
+end
+
+// copy the list of occurrences to a new edit window
+function editlines
+  editbuf = createbuf
+  setbufname (qualify "findo.txt" bname)
+  gotobuf resultbuf
+  copyblock '*a' editbuf 1 1
+  gotobuf editbuf
+  delline
+  openbuf editbuf
+end
+
+//--------------------------------------------------------------------
+// events
+//--------------------------------------------------------------------
+
+variable client?
+
+event <move>
+  if client? then
+    trackmouse
+  end
+  pass
+end
+
+event <lbutton>
+  if getregion == 1 then
+    client? = TRUE
+    trackmouse
+  end
+  pass
+end
+
+event <lbuttonup>
+  client? = FALSE
+  pass
+end
+
+// double-click
+event <ldouble>
+  client? = FALSE
+  if getregion == 1 then
+    call <enter>
+  end
+  pass
+end
+
+event <destroy>
+  if resultwin then
+    close
+  end
+  if resultbuf then
+    destroybuf resultbuf
+  end
+end
+
+function 'ð'
+  destroyobject
+end
+
+//--------------------------------------------------------------------
+// keys
+//--------------------------------------------------------------------
+
+// macro help
+macrofile = arg 1
+key <f1>
+  helpmacro macrofile
+end
+
+key <up>           up
+key <down>         down
+key <left>         rollcol -1
+key <right>        rollcol  1
+key <home>         col 1
+
+key <pgup>         pageup
+key <pgdn>         pagedown
+key <ctrl pgup>    row 1                // to list top
+key <ctrl pgdn>    row (getlines)       // to list bottom
+key <ctrl home>    row (getviewtop)     // to page top
+key <ctrl end>     row (getviewbot)     // to page bottom
+
+// window functions
+key <f6>           nextwindow
+key <ctrl a>       nextwindow
+key <ctrl z>       maximize
+key <shift f3>     tile 'v'             // tile vertical
+key <shift f4>     tile 'h'             // tile horizontal
+key <shift f5>     cascade              // cascade
+
+// south menu commands
+key <enter>        gotoline 'x'
+key <ctrl g>       gotoline
+key <ctrl e>       editlines
+key <ctrl p>       print
+key <ctrl p>       print
+key <esc>          destroyobject

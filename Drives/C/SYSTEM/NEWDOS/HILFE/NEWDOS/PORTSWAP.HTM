@@ -1,0 +1,65 @@
+<HTML><HEAD><TITLE>PORTSWAP</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>PORTSWAP</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">ZurÅck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>éndert, tauscht oder zeigt die Port-Adressen der seriellen und parallelen 
+Schnittstellen.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">PORTSWAP [Port1] [Port2 | Portadresse]</FONT>
+
+Als [Port1..2] sind COM1 bis COM4 und LPT1 bis LPT4 mîglich. Wenn Sie als 
+Port2 ebenfalls eine Schnittstellenbezeichnung (z.B. COM2) angeben, werden 
+die Portadressen der beiden Schnittstellen untereinander ausgetauscht. Statt
+Port2 kînnen Sie auch eine Adresse angeben; in diesem Falle bekommt die als
+Port1 angegebene Schnittstelle diese Adresse zugewiesen. Die Adresse mu· in
+Hexadezimalschreibweise mit fÅhrendem $-Zeichen angegeben werden (z.B. $2F8).<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">PORTSWAP Com1 Com3</FONT>  -&gt; die Portadressen von COM1 und COM3 werden vertauscht
+<FONT COLOR="blue">PORTSWAP Com4 $2E8</FONT>  -&gt; Com4 bekommt die Portadresse 2E8 hex zugewiesen
+<FONT COLOR="blue">PORTSWAP /S</FONT>         -&gt; zeigt die aktuelle Konfiguration, ohne sie zu Ñndern<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Anwendung</FONT>
+
+Ports sind computerinterne Schnittstellen, Åber die Software mit Hardware 
+kommunizieren kann. Jeder Port hat eine Nummer, die sog. Portadresse. Wenn 
+Sie den Befehl Portswap /S geben, werden die Portadressen der seriellen und 
+parallelen Schnittstellen angezeigt. Serielle Schnittstellen tragen den Namen
+COM, parallele hei·en LPT. Die erste serielle Schnittstelle (COM1) wird auch 
+als AUX bezeichnet, die erste parallele (LPT1) als PRN. An COM1 hÑngt meist 
+die Maus, an COM2 z.B. ein Modem und an LPT1 ist - wenn vorhanden - meist der
+Drucker angeschlossen. Die hier genannten Namen werden z.B. benîtigt, wenn 
+eine Dateiausgabe auf einen Drucker umgeleitet (<A HREF="help:type">type</A> text.doc &gt; lpt1) 
+wird. 
+
+Das éndern der zu jeder Schnittstelle gehîrigen Portadresse ist in der Regel 
+nicht nîtig und sollte im Åbrigen nur mit Sorgfalt vorgenommen werden (falls 
+Ihnen hierbei ein Fehler unterlaufen sollte, starten Sie den Rechner neu, um 
+die Originalkonfiguration wieder herzustellen).
+
+Ein klassisches Beispiel fÅr eine notwendige AdressÑnderung ist z.B. ein 
+Programm, das nur nach LPT1 drucken kann, Sie aber zwei Drucker angeschlossen
+haben (also einen an LPT1 und einen an LPT2). Um das lÑstige Umstecken zu 
+vermeiden, verlegen Sie mit PORTSWAP immer den Drucker nach LPT1, den Sie 
+benutzen wollen:
+
+<FONT COLOR="blue">PORTSWAP lpt1 lpt2</FONT>
+
+Jedes mal, wenn Sie diesen Befehl geben, werden die Drucker getauscht. In der
+Regel kînnen so auch serielle Drucker betrieben werden. Tauschen Sie die
+serielle Schnittstelle, an der der Drucker angeschlossen ist mit der
+parallelen Schnittstelle, zu der Sie drucken wollen/mÅssen:
+
+<FONT COLOR="blue">PORTSWAP com2 lpt1</FONT>
+ 
+Nun kînnen Sie Druck-Daten nach LPT1 schicken, die auf einem Drucker an
+COM2 ausgegeben werden.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> ZurÅck zum Anfang</A>
+</BODY></HTML>

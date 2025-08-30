@@ -1,0 +1,796 @@
+//--------------------------------------------------------------------
+// DIRTREE.AML
+// Directory Tree, (C) 1993-1996 by nuText Systems
+//
+// (see Tree.dox for user help)
+//
+// This macro displays an expandable/collapsable directory tree for your
+// computer.
+//
+// Usage:
+//
+// Select this macro from the Macro List (on the Macro menu), or run it
+// from the macro picklist <shift f12>.
+//
+// This macro can also be run by selecting 'Tree..' on the File menu.
+//--------------------------------------------------------------------
+
+// compile time macros and function definitions
+include  bootpath "define.aml"
+
+// initial tree window width
+constant tree_width  = 42
+
+// colors
+constant tree_border_color        = color black on gray
+constant tree_border_flash_color  = color brightgreen on gray
+constant tree_south_title_color   = color black on green
+constant tree_text_color          = color black on gray
+constant tree_cursor_color        = color black on brightgreen
+constant tree_plus_color          = color brown on gray
+constant tree_menu_color          = color black on green
+constant tree_menu_hotkey_color   = color red
+constant tree_menu_hilite_color   = color black on brightgreen
+
+// syntax object for directory tree window
+object xtree
+
+  syntax
+    'bcfd'                          // options:
+                                    //   b=show through marked block
+                                    //   c=highlight cursor line
+                                    //   d=show through closed folds
+                                    //   f=use only foreground colors
+                                    //   i=ignore keyword case
+                                    //   n=highlight numbers
+    'ÀÄÃ³-'                         // symbol set 1
+    '+'                             // symbol set 2
+    ''                              // string characters
+    ''                              // string literal char
+    ''                              // numeric symbol
+    ''            0                 // eol comment 1 / start column
+    ''            0                 // eol comment 2 / start column
+    ''            ''                // multi-line comment 1
+    ''            ''                // multi-line comment 2
+    0                               // number of lines to scan backward
+
+    // colors
+    color brightcyan   on black        // keyword
+    color darkgray     on gray         // symbol set 1
+    color brown        on gray         // symbol set 2
+    color brightred    on brightred    // string
+    color brightred    on brightred    // numeric
+    color darkgray     on gray         // eol comment 1
+    color yellow       on yellow       // eol comment 2
+    color brightgreen  on brightgreen  // comment 1
+    color brightcyan   on brightcyan   // comment 2
+
+// go back to original object
+object entry
+
+forward opendir
+forward edittree
+forward refreshtree
+
+forward insertdir
+forward deletedir
+forward renamedir
+forward printdir
+forward statdir
+
+forward openbr
+forward openall
+forward closebr
+forward closeblock
+forward closeall
+
+forward printtree
+forward helptree
+
+
+variable treewindow, resultbuf, dircount, currentdrive, nomsg, initialpath
+variable showfiles
+
+
+leftmargin = 1
+
+// create the dirtree window
+private function createtreewin
+
+  treewindow = createwindow
+  setframe  ">bsmvh"
+  setcolor  border_color        tree_border_color
+  setcolor  north_title_color   tree_border_color
+  setcolor  text_color          tree_text_color
+  setcolor  fold_color          tree_text_color
+  setcolor  border_flash_color  tree_border_flash_color
+  setcolor  south_title_color   tree_south_title_color
+  setcolor  menu_color          tree_menu_color
+  setcolor  menu_hotkey_color   tree_menu_hotkey_color
+  setcolor  menu_hilite_color   tree_menu_hilite_color
+  settitle "Tree"
+  setwinctrl "ð" 2
+  setborder "1"
+  setshadow 2 1
+  setsyntax ON "xtree"
+  prf.dirtree = prf.dirtree + 1
+
+  menubar '' 1
+    item "&File"           "Tfile"
+    item "&View"           "Tview"
+    item "&Print"          "Tprint"
+    item "&Window"         "Twin"
+    item "&Help"           "Thelp"
+  end
+
+  menu "Tfile"
+    item " &Open             <enter>"  opendir
+    item " &Print"                     printdir
+    item " &Statistics..    <ctrl v>"  statdir
+    item "-"
+    item " &Delete             <del>"  deletedir
+    item " &Insert..           <ins>"  insertdir
+    item " Re&name..        <ctrl n>"  renamedir
+    item "Ä"
+    item " &Edit Tree       <ctrl e>"  edittree
+    item " &Refresh..       <ctrl r>"  refreshtree
+    item "-"
+    item " &Close              <esc>"  destroyobject
+  end
+
+  menu "Tview"
+    item " &Close Branch                <shift left>"   closebr
+    item " Close &All Branches            <alt left>"   closeall
+    item "-"
+    item " &Open Branch                <shift right>"   openbr '' 1
+    item " Open Branch with &Files      <ctrl right>"   openbr 'f' 1
+    item " Open All &Branches            <alt right>"   openall
+    item " O&pen All Branches with Files"               openall 'f'
+  end
+
+  menu "Tprint"
+    item " &Print Tree        <ctrl p>"   printtree
+    item " Print &Formfeed"               printstr '\x0C'
+    item " Print &Settings..|*"           runcfg "print"
+  end
+
+  menu "Twin"
+    item " &Restore"                       restore
+    item " &Move/Size         <ctrl f5>"   sizekey
+    item " M&inimize"                      minimize
+    item " Ma&ximize           <ctrl z>"   maximize
+    item " &Next               <ctrl a>"   nextwindow
+    item "Ä"
+    item " Ca&scade          <shift f5>"   cascade
+    item " Tile &Horz        <shift f4>"   tile 'h'
+    item " Tile &Vert        <shift f3>"   tile 'v'
+  end
+
+  menu "Thelp"
+    item " &Keys and Mouse.."    helptree
+  end
+
+  // tile with file manager windows
+  if wintype? "fmgr" (getprevwin) then
+    txd = getvidcols / 3 + (if? (pos 'v' _FmgrOpt) -1 3)
+    bottom = getvidrows - 1
+    sizewin 0   0 txd - 1        bottom 1 'ad' treewindow
+    sizewin txd 0 getvidcols - 1 bottom 1 'ad' (getprevwin)
+  // otherwise center the window
+  else
+    width  = tree_width
+    height = getvidrows - 5
+    ox = (getvidcols - width) / 2
+    oy = (getvidrows - height) / 2
+    sizewindow ox oy ox + width oy + height "ad"
+  end
+end
+
+diroptions = 'dhvs' + _NameStyle
+fileoptions = 'dfhvs' + _NameStyle
+
+private function scandir (path directory treestr expand)
+
+  addline treestr + directory '' '' resultbuf
+
+  // scan window status line
+  dircount = dircount + 1
+  if not nomsg then
+    settitle  "Directories/Files: " + dircount 'sl' 2
+    display
+  end
+
+  // get a directory listing
+  path = path + directory + '\\'
+
+  // load files if specified
+  if expand and showfiles then
+    if loadbuf path + "*.*" '' '' fileoptions then
+      if getloadinfo 'f' then
+        treestrfile = treestr
+        if length treestrfile > leftmargin then
+          treestrfile [length treestrfile - 3..TO_END] =
+            if? treestrfile [length treestrfile - 3] == 'À'  "    "  "³   "
+        end
+        treestrfile = treestrfile + (if? (getloadinfo 'd') "³   " "    ")
+        // sort the listing
+        sortblock '' "*a"
+        repeat
+          line = gettext
+          if not pos '\\' line then
+            addline treestrfile + line '' '' resultbuf
+          end
+        until not down
+      end
+      destroybuf
+    end
+  end
+
+  if loadbuf path + "*.*" '' '' diroptions then
+    if getloadinfo 'd' then
+      if not expand then
+        if initialpath and (pos path initialpath) == 1 and
+           length path < length initialpath then
+          expand = 1
+        elseif length treestr > leftmargin then
+          ovltext "+ "  (length treestr - 1) (getlines resultbuf) resultbuf
+        end
+      end
+      if expand then
+        if length treestr > leftmargin then
+          treestr [length treestr - 3..TO_END] =
+            if? treestr [length treestr - 3] == 'À'  "    "  "³   "
+        end
+
+        // sort the directory listing
+        sortblock '' "*a"
+        repeat
+          scandir path gettext [1 : getlinelen - 1]
+                  treestr + (if? getrow == getlines "ÀÄÄ " "ÃÄÄ ") expand - 1
+        until not down
+      end
+    end
+    destroybuf
+  end
+
+end
+
+
+// get system drives (except floppies)
+drives = sub 'B' '' (sub 'A' '' (getdisk 'm'))
+ndrives = length drives
+
+// scan drives for filespec
+private function scandrives (expandpath)
+
+  if not treewindow then
+    // setup status window
+    createtreewin
+  end
+
+  windowflag '-p'
+
+  // create buffer to hold located files
+  resultbuf = createbuf
+  ovltext '':leftmargin + (onname "Tree")
+
+  // attach buffer to window
+  cursor = createcursor
+  setwincurs cursor
+
+  // scan each drive
+  initialpath = expandpath
+  for i = 1 to ndrives do
+    scandir '' (onname drives [i]) + ":"  '':leftmargin + (if? (i == ndrives) "ÀÄÄ " "ÃÄÄ ")
+  end
+  breakoff
+
+  // find the initial path
+  if initialpath then
+    repeat
+      p = pos '\\' initialpath
+      if p then
+        if find ' ' + initialpath [1..p - 1] then
+          initialpath [1..p] = ''
+        else
+          break
+        end
+      end
+    until not p
+    adjustrow
+    initialpath = ''
+  end
+
+  // process window <paint> events
+  windowflag '+p'
+end
+
+
+// get full path name at the cursor
+private function getfullname
+  pushcursor
+  column = MAX_COL
+  repeat
+    newcolumn = posnot " ÀÄÃ³+\\-" (gettext)
+    if newcolumn < column then
+      column = newcolumn
+      name = (gettext column) +
+               (if? (getchar newcolumn - 2) <> ' ' '\\' + name)
+    end
+  until column <= 5 + leftmargin or not up
+  popcursor
+  return name
+end
+
+private function setstatus
+  dircount = (apparentrow getlines - 1 1) - 1
+  settitle  "Directories/Files: " + dircount 'sl' 2
+end
+
+function closebr
+  pushcursor
+  if getrow > 1 then
+    column = posnot " ÀÄÃ³+\\-" (gettext)
+    oldmark = usemark 'T'
+    markline
+    loop
+      if not down
+        break
+      end
+      p = pos (getchar column) ' ÃÀ³'
+      if p then
+        i = i + 1
+        if p > 1 then
+          plus = TRUE
+        end
+      else
+        up
+        break
+      end
+    end
+  end
+  if i then
+    foldblock 'k'
+    if plus then
+      ovltext "+ " column - 2
+    end
+    setstatus
+  end
+  destroymark
+  usemark oldmark
+  popcursor
+  return i
+end
+
+function closeblock (column)
+  if not closebr then
+    if not column then
+      column = (posnot " ÀÄÃ³+\\-" (gettext)) - 4
+    end
+    if column >= 5 + leftmargin then
+      while pos (getchar column) 'ÀÃ³ ' do
+        up
+      end
+      closebr
+    end
+  end
+end
+
+function closeall
+  pushcursor
+  row 1
+  repeat
+    if pos "Ä " (gettext) then
+      closebr
+    end
+  until not down
+  popcursor
+end
+
+function openbr (files levels)
+  column = posnot " ÀÄÃ³+\\-" (gettext)
+  if (getchar column - 2) <> ' ' and
+    (fold? or not (pos (getchar column getrow + 1)  ' ³ÀÃ')) then
+    if fold? then
+      lines = getfold 's'
+      destroyfold
+      // add new file lines
+      if files then
+        if not (pos (getchar column getrow + 1) ' ³') then
+          markline getrow + 1 getrow + lines - 1 'T'
+          deleteblock 'T'
+          openbr 'f' 1
+          return
+        end
+      // delete file lines
+      else
+        pushcursor
+        down
+        while (pos (getchar column) ' ³') do delline end
+        popcursor
+      end
+    else
+      treestr = gettext 1 column - 1
+      path = getfullname
+      path = path [1..length path - 1]
+      name = getname path
+      path = getpath path
+      treebuf = getcurrbuf
+      resultbuf = createbuf
+      if files then
+        showfiles = TRUE
+      end
+      scandir path name treestr levels
+      showfiles = FALSE
+      delline 2 1
+      if getlinelen then
+        copyblock '*a' treebuf
+      end
+      destroybuf resultbuf
+    end
+    ovltext "Ä " column - 2
+    setstatus
+  // can't expand this node
+  else
+    beep 200 70
+  end
+end
+
+function openall (files)
+  pushcursor
+  row 1
+  nomsg = TRUE
+  repeat
+    if pos "+ " (gettext) then
+      openbr files -1
+    end
+  until not down
+  nomsg = FALSE
+  popcursor
+end
+
+
+function opendir (options)
+  if getrow > 1 then
+    name = getfullname
+    if name [0] == '\\' then
+      name = name + "*.*"
+      if wintype? "fmgr" (getprevwin) then
+        currwin (getprevwin)
+        seteventobj (getwinobj)
+        open name 'r'
+        return
+      end
+    end
+    open name options + (if? (shiftkey? 04h) 'b' '')
+    txd = getvidcols / 3 + (if? (pos 'v' _FmgrOpt) -1 3)
+    bottom = getvidrows - 1
+    sizewin 0   0 txd - 1        bottom 1 'ad' treewindow
+    sizewin txd 0 getvidcols - 1 bottom 1 'ad'
+  else
+    edittree
+  end
+end
+
+function insertdir
+  column = posnot " ÀÄÃ³+\\-" (gettext)
+  if down then
+    first = pos (getchar column) 'ÀÃ'
+    up
+  end
+  if getrow > 1 and (getlinelen > 6 + leftmargin or first) then
+    if first then
+      down
+    end
+    name = getfullname
+    if name [0] == '\\' then
+      name = getpath name [1..length name - 1]
+      newdir = onname (ask "New Directory to insert in " + name)
+      if newdir then
+        closebr
+        column = posnot " ÀÄÃ³+\\-" (gettext)
+        name = name + newdir
+        if createdir name then
+          treestr = (gettext 1 column - 3) + "Ä " + newdir
+          if first then
+            insabove treestr
+          else
+            insline treestr
+            if (getchar column - 4) == 'À' then
+              ovltext 'Ã' column - 4
+            end
+          end
+          setstatus
+        else
+          msgbox "Can't create " + name  "Error!"
+        end
+      end
+    end
+    if first then
+      up
+    end
+  end
+end
+
+function deletedir
+  if getrow > 1 and (getlinelen > 6 + leftmargin) then
+    name = getfullname
+    if name [0] == '\\' then
+      if (okbox "Deleting: " + name +
+                "\nCAUTION!! All files and subdirectories will be deleted. Proceed?"
+                "Warning!") == 'Ok' then
+        closebr
+        ok = TRUE
+        success = runmacro (bootpath "macro\\sweep.x") '' name '' 'd'
+      end
+    else
+      if (okbox "Are you sure you want to delete: " +
+                (if? length name > 40 '\n') + name + '?') == 'Ok' then
+        ok = TRUE
+        success = deletefile name
+      end
+    end
+    if ok then
+      if success then
+        column = posnot " ÀÄÃ³+\\-" (gettext)
+        c = getchar column - 4
+        delline
+        if up then
+          if c == 'À' and (getchar column - 4) == 'Ã' then
+            ovltext 'À' column - 4
+          end
+          down
+        end
+        setstatus
+      else
+        msgbox "Can't delete " + name  "Error!"
+      end
+    end
+  end
+end
+
+function renamedir
+  if getrow > 1 and (getlinelen > 6 + leftmargin) then
+    column = posnot " ÀÄÃ³+\\-" (gettext)
+    fulloldname = getfullname
+    if fulloldname [0] == '\\' then
+      fulloldname [0] = ''
+    end
+    newname = onname (ask  "Rename " + (getname fulloldname) + " to"  "_load")
+    if newname then
+      if not (poschar ':\\' newname) and
+         (renamefile fulloldname (getpath fulloldname) + newname) then
+        delchar 512 column
+        ovltext newname column
+      else
+        msgbox "Rename Failed" "Error!"
+      end
+    end
+  end
+end
+
+function printdir
+  if getrow > 1 then
+    name = getfullname
+    printfile name + (if? name [0] == '\\' "*.*")
+  end
+end
+
+function statdir
+  if getrow > 1 then
+    runmacro (bootpath "macro\\filestat.x") '' (getfullname)
+  end
+end
+
+// copy tree buffer and remove hidden fold lines
+private function copytreebuf
+  markline 1 (getlines) 'T'
+  createbuf
+  setbufname (qualify "temp.txt" (getcurrpath))
+  copyblock 'T'
+  delline
+  destroymark 'T'
+  // remove hidden fold lines
+  while find 'f' 'f*' do
+    insabove (gettext)
+    delline
+  end
+  gotopos 1 1
+end
+
+function printtree
+  copytreebuf
+  // replace graphics chars
+  //replace 'Ä' '-' 'a'
+  //replace '³ÃÀ' '|' '[a'
+  print
+  destroybuf
+end
+
+function edittree
+  copytreebuf
+  openbuf (getcurrbuf)
+end
+
+function refreshtree
+  path = onname (ask "Refresh Tree and Move Cursor to:" _load (getpath (getfullname)))
+  if path [0] <> '\\' and (directory? path) then
+    path = path + '\\'
+  end
+  // disconnect buffer from the window
+  setwincurs
+  // destroy the old buffer
+  destroybuf resultbuf
+  display
+  dircount = 0
+  scandrives path
+end
+
+macrofile = arg 1
+function helptree
+  helpmacro macrofile
+end
+
+function close
+  if treewindow then
+    prf.dirtree = prf.dirtree - 1
+    // disconnect the buffer from the window
+    setwincurs
+    // pass on to 'close' function in win object
+    pass
+    treewindow = ''
+    destroybuf resultbuf
+    // destroy menus on the last instance
+    if not prf.dirtree then
+      destroybuf "Tfile"
+      destroybuf "Tview"
+      destroybuf "Tprint"
+      destroybuf "Twin"
+      destroybuf "Thelp"
+    end
+  end
+end
+
+event <destroy>
+  close
+end
+
+//--------------------------------------------------------------------
+// mouse behavior
+//--------------------------------------------------------------------
+
+event <move>
+  if _client then
+    trackmouse
+  end
+  pass
+end
+
+event <lbutton>
+  if getregion == 1 then
+    _client = TRUE
+    trackmouse
+    if pos (getchar) "À³Ã" then
+      closeblock (getcol)
+    elseif pos (getchar) "Ä+-" then
+      column = posnot " ÀÄÃ³+\\-" (gettext)
+      case getchar column - 2
+        when '+'
+          openbr '' 1
+        //when '-'
+        when 'Ä'
+          if not fold? and (posnot " ÀÄÃ³+\\-" (gettext '' '' getrow + 1)) > column then
+            closebr
+          else
+            openbr 'f' 1
+          end
+      end
+    end
+  end
+  pass
+end
+
+event <lbuttonup>
+  _client = FALSE
+  pass
+end
+
+// left button double-click
+event <ldouble>
+  _client = FALSE
+  if getregion == 1 then
+    if getcol >= (posnot " ÀÄÃ³+\\-" (gettext)) - 1 then
+      opendir
+    end
+  else
+    pass
+  end
+end
+
+//--------------------------------------------------------------------
+// keys & events
+//--------------------------------------------------------------------
+
+// highlight the directory name after the window is drawn
+event <paint>
+  column = posnot " ÀÄÃ³+\\-" (gettext)
+  hilite getlinelen - column + 3 1 tree_cursor_color column - 1
+end
+
+// menu activation
+key <alt f>        gotomenu "file"
+key <alt v>        gotomenu "view"
+key <alt p>        gotomenu "print"
+key <alt w>        gotomenu "window"
+key <alt h>        helptree
+
+function 'ð'       destroyobject
+key <esc>          destroyobject
+key <alt q>        destroyobject
+
+key <up>           up
+key <down>         down
+key <left>         rollcol -1
+key <right>        rollcol  1
+key <home>         col 1
+
+key <pgup>         pageup
+key <pgdn>         pagedown
+key <ctrl pgup>    row 1                // to tree top
+key <ctrl pgdn>    row (getlines)       // to tree bottom
+key <ctrl home>    row (getviewtop)     // to page top
+key <ctrl end>     row (getviewbot)     // to page bottom
+
+// file menu keys
+key <enter>        opendir
+key <ctrl v>       statdir
+
+key <ins>          insertdir
+key <ctrl i>       insertdir
+key <del>          deletedir
+key <ctrl d>       deletedir
+key <ctrl n>       renamedir
+key <ctrl e>       edittree
+key <ctrl r>       refreshtree
+
+// view menu keys
+key <shift left>   closeblock
+key <ctrl left>    closeblock
+key <alt left>     closeall
+key <shift right>  openbr '' 1
+key <ctrl right>   openbr 'f' 1
+key <alt right>    openall
+
+// window menu keys
+key <f6>           nextwindow
+key <ctrl a>       nextwindow
+key <ctrl z>       maximize
+key <shift f3>     tile 'v'             // tile vertical
+key <shift f4>     tile 'h'             // tile horizontal
+key <shift f5>     cascade              // cascade
+
+key <ctrl p>       printtree
+key <f1>           helptree
+
+key <char> (character)
+  if shiftkey? then
+    case locase character
+      when 'o'  opendir
+      when 'b'  opendir 'b'
+      when 'i'  insertdir
+      when 'd'  deletedir
+      when 'n'  renamedir
+      when 'p'  printdir
+      when 'v'  statdir
+    end
+  end
+end
+
+// inherit from 'win' object
+settype "win"
+
+// stay resident
+resident ON
+
+// build directory tree
+scandrives (onname (getpath (getbufname)))

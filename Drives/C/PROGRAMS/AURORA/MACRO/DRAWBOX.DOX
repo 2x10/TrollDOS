@@ -1,0 +1,8 @@
+
+ÿÿDRAWBOX.AML
+ ÿDraw a Boxÿ
+
+  This macro draws a box around a column mark in the current edit
+  window. The current Line Style (on the edit window Set menu) is used
+  to draw the box.
+

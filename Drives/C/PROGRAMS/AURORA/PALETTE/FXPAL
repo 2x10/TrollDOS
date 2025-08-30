@@ -1,0 +1,122 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// COLOR.AML
+// Blue-green color definitions (included by Main.aml)
+//
+// If you have made any changes, save this file and select Recompile
+// the Editor from the Set menu. Exit and re-enter the editor for your
+// changes to take effect.
+//--------------------------------------------------------------------
+
+setpalette 1 (char
+
+// background
+color brightblue   on gray         //  1 screen background
+
+
+// edit windows
+color brown        on black        //  2 edit text
+color brightred    on black        //  3 edit modified text
+color brightred    on black        //  4 edit cursor line
+color pink         on black        //  5 edit cursor line & modified text
+color white        on blue         //  6 edit text highlight
+color brightcyan   on blue         //  7 edit end-of-text line
+
+color gray         on blue         //  8 edit search highlight
+color white        on magenta      //  9 edit search highlight in mark
+
+color brightgreen  on blue         // 10 edit closed fold
+color darkgray     on brightgreen  // 11 edit open fold top mark
+color black        on green        // 12 edit open fold bot mark
+
+color darkgray     on gray         // 13 edit border
+color darkgray     on brightgreen  // 14 edit border flash
+color gray         on darkgray     // 15 edit corner
+
+color brightcyan   on brightblue   // 16 edit title bar
+color yellow       on black        // 17 edit title bar controls
+
+color black        on gray         // 18 edit menu
+color brightgreen  on gray         // 19 edit menu flash
+color red          on black        // 20 edit menu char highlight
+color black        on brightgreen  // 21 edit menu bar highlight
+
+color black        on gray         // 22 edit scroll bar
+
+color darkgray     on gray         // 23 edit inactive border
+color darkgray     on gray         // 24 edit inactive corner
+color gray         on brightblue   // 25 edit inactive title
+color black        on gray         // 26 edit inactive menu
+color darkgray     on gray         // 27 edit inactive scroll
+
+color black        on black        // 28 edit user-defined
+color black        on black        // 29 edit user-defined
+color black        on black        // 30 edit user-defined
+
+
+// file manager windows
+color white        on green        // 31 file mgr text
+color black        on brightgreen  // 32 file mgr cursor line
+color darkgray     on green        // 33 file mgr file-mark
+color darkgray     on brightgreen  // 34 file mgr file-mark & cursor line
+
+color darkgray     on gray         // 35 file mgr border
+color darkgray     on brightgreen  // 36 file mgr border flash
+color gray         on darkgray     // 37 file mgr corner
+
+color white        on green        // 38 file mgr title bar
+color yellow       on black        // 39 file mgr title bar controls
+
+color black        on gray         // 40 file mgr menu
+color brightgreen  on gray         // 41 file mgr menu flash
+color red          on black        // 42 file mgr menu char highlight
+color black        on brightgreen  // 43 file mgr menu bar highlight
+
+color black        on gray         // 44 file mgr scroll
+
+color darkgray     on gray         // 45 file mgr inactive border
+color darkgray     on gray         // 46 file mgr inactive corner
+color gray         on green        // 47 file mgr inactive title
+color black        on gray         // 48 file mgr inactive menu
+color darkgray     on gray         // 49 file mgr inactive scroll
+
+color black        on black        // 50 file mgr user-defined
+
+
+// prompts
+// (-1=window title bar color)
+color white        on white        // 51 prompt text
+color black        on gray         // 52 prompt text highlight
+color white        on white        // 53 prompt border
+color brightgreen  on gray         // 54 prompt flash
+color white        on white        // 55 prompt title
+color white        on white        // 56 prompt controls
+
+color black        on black        // 57 prompt user-defined
+
+
+// dialog boxes
+color black        on gray         // 58 dialog box
+color white        on gray         // 59 dialog box active field
+color red          on black        // 60 dialog box char highlight
+color white        on gray         // 61 dialog box border
+color brightgreen  on gray         // 62 dialog box flash
+color yellow       on black        // 63 dialog box control
+
+color black        on green        // 64 button
+color white        on green        // 65 button active
+
+color white        on blue         // 66 edit field
+color white        on cyan         // 67 edit field highlight
+color black        on green        // 68 edit field history tab
+
+color black        on cyan         // 69 group box
+color white        on cyan         // 70 group box active
+
+color black        on cyan         // 71 list box
+color brightgreen  on blue         // 72 list box active
+color brightgreen  on cyan         // 73 list box inactive
+color black        on gray         // 74 list box scroll bar
+
+)

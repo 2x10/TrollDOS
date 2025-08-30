@@ -1,0 +1,12 @@
+
+ÿÿCOUNTCHR.AML
+ ÿCount Charactersÿ
+
+  This macro counts the number of characters in the current file and
+  displays the result. The count is limited to a marked block if it
+  exists.
+
+  The total number of characters reported is the number of bytes that
+  the file or marked block would occupy on disk if it were saved,
+  including line delimiter characters.
+

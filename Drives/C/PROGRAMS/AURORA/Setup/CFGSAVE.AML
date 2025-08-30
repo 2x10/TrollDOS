@@ -1,0 +1,43 @@
+//--------------------------------------------------------------------
+// The Aurora Editor v3.0, Copyright (C) 1993-1996 nuText Systems
+//
+// CFGSAVE.AML
+// Configuration for Save Options
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+variable saveopt, backupdir, foldsign, bakext, autoint
+
+dialog "Save Options" 61 11 "cp"
+
+// save options group box
+groupbox 'Save Options:' 3 2
+  (menu ''
+     item " [ ] &Entab on Save"
+     item " [ ] &Trim Trailing Blanks "
+     item " [ ] E&xclude Fold Comments "
+     item " [ ] Append Ctrl-&Z"
+   end) '' _SaveOpt 'etxz'
+
+// edit fields
+field "Backup &Directory:"        33  2 27 _BackupDir
+field "&Fold Comment Signature:"  33  5 27 _FoldSign
+
+field "&Backup Extension:   >"  3  9  7 _BackupExt
+field "&Autosave Interval:  >"  3 10  7 _AutoSave
+
+// ok/cancel buttons
+button "O&k"    37  9 8
+button "Cancel" 48  9 8
+
+// display dialog box
+if (getdialog ref saveopt ref backupdir ref foldsign
+              ref bakext  ref autoint) == 'Ok' then
+  prf.SaveOpt    = saveopt
+  prf.BackupDir  = backupdir
+  prf.FoldSign   = foldsign
+  prf.BackupExt  = bakext
+  prf.AutoSave   = autoint
+  sendobject "edit" "autosave" autoint
+end

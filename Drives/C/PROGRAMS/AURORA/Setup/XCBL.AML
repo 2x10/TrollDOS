@@ -1,0 +1,77 @@
+//--------------------------------------------------------------------
+// XCBL.AML
+// Syntax highlighting for Cobol files (Cbl, Cpy)
+//
+// After making changes, save this file and compile with <shift f10>.
+//--------------------------------------------------------------------
+
+include bootpath "define.aml"
+
+syntax
+  'bcfin'                         // options:
+                                  //   b=show through marked block
+                                  //   c=highlight cursor line
+                                  //   d=show through closed folds
+                                  //   f=use only foreground colors
+                                  //   i=ignore keyword case
+                                  //   n=highlight numbers
+  '():,-.+=*/<>$\t'               // symbol set 1
+  ''                              // symbol set 2
+  '\''                            // string characters
+  ''                              // string literal char
+  ''                              // numeric char
+  '*'     7                       // eol comment 1 / start column
+  '/'     7                       // eol comment 2 / start column
+  ''      ''                      // multi-line comment 1
+  ''      ''                      // multi-line comment 2
+  0                               // number of lines to scan backward
+
+  // colors
+  color brightcyan   on black     // keyword
+  color gray         on cyan      // symbol set 1
+  color gray         on cyan      // symbol set 2
+  color brightred    on black     // string
+  color brightred    on black     // numeric
+  color brightgreen  on black     // eol comment 1
+  color brightgreen  on black     // eol comment 2
+  color brightgreen  on black     // comment 1
+  color brightgreen  on black     // comment 2
+
+keyword
+  accept, access, add, address, advancing, after, all, alphabet,
+  alphabetic, alphanumeric, also, alter, alternate, and, any, apply,
+  are, area, areas, arithmetic, ascending, assign, at, author, basis,
+  before, beginning, binary, bit, bits, blank, block, boolean, bottom,
+  by, call, cancel, cbl, character, characters, class, close, cobol,
+  code, collating, com, comma, common, compiled, computational, compute,
+  computer, configuration, contains, content, contents, continue,
+  control, converting, copy, core, corr, corresponding, count, counter,
+  currency, data, date, day, dbcs, debug, debugging, decimal,
+  declaratives, delete, delimited, delimiter, depending, descending,
+  display, divide, divide, division, down, duplicates, dynamic, edited,
+  egcs, eject, else, end, ending, enter, entry, environment, eop, equal,
+  error, evaluate, every, exception, exit, exor, extend, external,
+  false, fd, file, file, filler, first, footing, for, from, giving,
+  global, go, goback, greater, high, id, identification, if, in, index,
+  indexed, initial, initialize, input, insert, inspect, installation,
+  into, invalid, is, item, just, justified, kanji, key, label, labels,
+  leading, left, length, less, limit, linage, line, lines, linkage,
+  lock, low, lower, memory, merge, message, mode, modules, more, move,
+  multiple, multiply, names, native, negative, next, no, not, null,
+  nulls, number, numeric, object, occurs, of, off, omitted, on, only,
+  open, optional, or, order, organization, other, out, output, overflow,
+  packed, padding, page, password, perform, pic, picture, point,
+  pointer, position, positive, procedure, procedures, proceed,
+  processing, program, purge, quote, quotes, random, read, ready,
+  receive, record, recording, records, redefines, reel, reference,
+  references, reg, relative, release, reload, remainder, removal,
+  renames, replace, replacing, rerun, reserve, reset, return, reverse,
+  rewind, rewrite, right, rounded, run, sd, search, section, security,
+  segment, select, sentence, separate, sequence, sequential, service,
+  set, shift, sign, size, skip1, skip2, skip3, sort, source, space,
+  spaces, special, standard,  start, start, status, stop, storage,
+  string, subtract, sum, suppress, symbolic, syn, sync, synchronized,
+  tally, tallying, tape, test, than, then, through, thru, time, times,
+  to, top, trace, trailing, true, unit, unstring, until, up, upon,
+  upper, usage, use, using, value, values, varying, when, with, words,
+  working, write, zero, zeroes, zeros

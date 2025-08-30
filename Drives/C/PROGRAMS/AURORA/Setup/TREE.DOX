@@ -1,0 +1,101 @@
+
+ÿÿTREE.AML
+ ÿDirectory Treeÿ
+
+  This macro displays a directory tree for your computer and allows you
+  to navigate through the tree, opening and closing branches with either
+  the mouse or the keyboard. You can modify the tree by inserting,
+  deleting, and renaming directories. Other functions, such as printing,
+  editing, and viewing statistics are also provided.
+
+  When the Tree macro is initially run, it displays the tree with all
+  branches closed, except for the branches leading to the current
+  directory. Directories prefixed with a '+' character contain
+  subdirectories.
+
+  The Tree macro is designed to work closely with file manager windows
+  and edit windows. For example, double clicking on a directory in a
+  tree window will display the file manager for the directory, and
+  double clicking on a file will display the file in an edit window.
+  Both windows will be tiled on the desktop for easy viewing.
+
+
+ÿÿMouse:
+  ÄÄÄÄÄ
+ ÿSingle Click on:ÿ
+
+    Closed Branch      // open the branch and list files and sub-branches
+    Opened Branch      // close the branch
+    Vertical Spine     // close the branch
+
+ ÿDouble Click on:ÿ
+
+    Tree Root          // edit directory tree
+    Directory          // open a file manager window
+    File               // open a edit window
+                       //   (open binary if <ctrl> is pressed)
+
+ÿÿKeys:
+  ÄÄÄÄ
+ ÿMenu Activationÿ
+    <alt f>            // file menu
+    <alt v>            // view menu
+    <alt p>            // print menu
+    <alt w>            // window menu
+    <alt h>            // help menu
+
+ ÿCursorÿ
+    <up>               // up
+    <down>             // down
+    <left>             // scroll left
+    <right>            // scroll right
+    <home>             // to column one
+
+ ÿScrollingÿ
+    <pgup>             // page up
+    <pgdn>             // page down
+    <ctrl pgup>        // to tree top
+    <ctrl pgdn>        // to tree bottom
+    <ctrl home>        // to page top
+    <ctrl end>         // to page bottom
+
+ ÿFile Menuÿ
+    <enter>            // open directory/file
+    <shift o>          // open directory/file
+    <shift b>          // open directory/file (binary mode)
+    <shift p>          // print directory
+    <shift v>          // directory/file statistics
+    <ins>              // insert new directory
+    <ctrl i>           // insert new directory
+    <shift i>          // insert new directory
+    <del>              // delete directory
+    <ctrl d>           // delete directory
+    <shift d>          // delete directory
+    <ctrl n>           // rename directory
+    <ctrl e>           // edit directory tree
+    <ctrl r>           // refresh directory tree
+    <alt q>            // exit
+    <esc>              // exit
+
+ ÿView Menuÿ
+    <shift left>       // collapse branch
+    <ctrl left>        // collapse branch
+    <alt left>         // collapse all top-level branches
+    <shift right>      // expand branch
+    <ctrl right>       // expand branch with files
+    <alt right>        // expand all branches
+
+ ÿWindow Menuÿ
+    <f6>               // next window
+    <ctrl a>           // next window
+    <ctrl z>           // maximize
+    <shift f3>         // tile vertical
+    <shift f4>         // tile horizontal
+    <shift f5>         // cascade
+
+ ÿPrint Menuÿ
+    <ctrl p>           // print directory tree
+
+ ÿHelp Menuÿ
+    <f1>               // help
+

@@ -1,0 +1,51 @@
+<HTML><HEAD><TITLE>LABEL</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>LABEL</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>zeigt, l”scht oder „ndert den Namen eines Datentr„gers.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">LABEL [Laufwerksbezeichnung:Datentr„gername] [/v]</FONT>
+
+Wenn Sie nur die Laufwerksbezeichnung eingeben (LABEL A:), fragt LABEL nach 
+Anzeige der vorgefundenen Daten, ob Sie den Datentr„gernamen „ndern wollen. 
+Drcken Sie nur ENTER, wenn der Name gel”scht werden soll bzw. geben Sie 
+einen neuen Namen ein (max. 11 Stellen, berz„hlige Zeichen werden 
+automatisch abgeschnitten). Anschlieáend fragt LABEL, ob Sie die nderung 
+durchfhren wollen.
+
+Sie k”nnen die Prozedur abkrzen, indem Sie den neuen Datentr„gernamen 
+gleich mit angeben:
+
+<FONT COLOR="blue">LABEL A:Diskette1</FONT>
+
+In diesem Falle werden keine Benutzerabfragen angezeigt und die Diskette 
+bekommt den Namen "Diskette1".
+
+<FONT COLOR="blue">LABEL A: /v </FONT>
+
+Dieser Befehl zeigt die vorgefundenen Daten lediglich an. Eine Aufforderung 
+zur nderung erscheint nicht..<HR
+
+
+noshade color="silver"><FONT COLOR="maroon">Unterschiede zum Originalbefehl LABEL</FONT>
+
+Ein Disketten-Name darf im Gegensatz zum Original-Befehl auch 
+Kleinbuchstaben und Sonderzeichen enthalten. LABEL speichert
+den Diskettennamen auf eine andere Art und Weise als der Original-Befehl.
+Aus diesem Grunde kann der DOS-Befehl VOL und auch der DIR-Befehl den
+Datentr„gernamen nicht anzeigen - verwenden Sie dazu stattdessen den Befehl
+<FONT COLOR="blue">LABEL /v</FONT>.<HR
+
+
+noshade color="silver"><FONT COLOR="green">Trick 17</FONT>
+
+Wenn Sie ber die M”glichkeit verfgen, Disketten-Etiketten zu bedrucken, 
+dann k”nnen Sie mit dem Befehl LABEL A: /v &gt;&gt; ETIKETT.TXT die gewnschten 
+Angaben in eine Datei umleiten, diese mit einem Editor formatieren und 
+anschlieáend ausdrucken.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

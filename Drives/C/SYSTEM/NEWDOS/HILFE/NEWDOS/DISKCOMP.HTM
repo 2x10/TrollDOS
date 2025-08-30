@@ -1,0 +1,67 @@
+<HTML><HEAD><TITLE>DISKCOMP</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>DISKCOMP</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>DISKCOMP vergleicht zwei oder mehrere Disketten miteinander.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">DISKCOMP [Quelllaufwerk] [Ziellaufwerk] [/q /r /z /m /s /b]</FONT>
+
+Wenn Ziel-Laufwerk weggelassen wird, geht DISKCOMP davon aus, daá die 
+Zieldiskette in das gleiche Laufwerk eingelegt wird wie die Quelldiskette.
+
+/q  unterdrckt die Aufforderung zum Einlegen der Erst-Diskette. Verwenden 
+    Sie /Q, wenn sich die Quelldiskette beim Start von DISKCOMP bereits im 
+    Laufwerk befindet.
+
+/z  unterdrckt die Aufforderung zum Einlegen der Zweit-Diskette. Verwenden 
+    Sie /z, wenn die Zieldiskette in einem anderen Laufwerk steckt als die 
+    Quelldiskette (also nach dem Lesen der Quelldisk sofort verfgbar ist).
+
+/r  fragt, ob Sie noch zwei Disketten vergleichen wollen. Der Vergleich 
+    einer weiteren Quelldiskette mit einer weiteren Zieldiskette wird ohne 
+    Neustart von DISKCOMP ausgefhrt.
+
+/m  fragt, ob Sie noch eine Diskette mit der Erst-Diskette vergleichen 
+    wollen. Verwenden Sie /m, wenn Sie weitere Disketten mit der 
+    Quelldiskette vergleichen m”chten (Gleichheit von mehreren Disketten 
+    testen). Die Quelldiskette braucht also nur einmal eingelesen zu werden. 
+
+/s  vergleicht Disketten mit Sonderformat oder leichten Fehlern. Meldet 
+    DISKCOMP einen Datentr„gerfehler, versuchen Sie es mit diesem Parameter 
+    nochmals. Die Verarbeitung geht jedoch etwas langsamer vonstatten.
+
+/b  vergleicht auch die beiden Boot-Sektoren. Auch Disketten, die die 
+    gleichen Dateien enthalten, unterscheiden sich fast immer im Bootsektor 
+    voneinander (z.B. durch die unterschiedliche Datentr„ger-Nummer). 
+    DISKCOMP bezieht den Bootsektor normalerweise nicht in den Vergleich mit 
+    ein, da sonst bei jeder Diskette ein Unterschied gemeldet werden wrde. 
+    Bei "geklonten" Disketten kann ein Bootsektorvergleich jedoch erwnscht 
+    sein. Verwenden Sie dann den Schalter /b.
+
+/o  DISKCOMP l„uft ohne Benutzerabfrage durch und protokolliert evtl. 
+    aufgetretene Fehler in der <A HREF="logfile.htm">LOG-Datei</A>.<HR 
+
+noshade color="silver"><FONT COLOR="maroon">Beispiele</FONT>
+
+<FONT COLOR="blue">DISKCOMP a:</FONT>        oder
+<FONT COLOR="blue">DISKCOMP a: a:</FONT> 
+
+vergleicht zwei Disketten in Laufwerk A:. Nach dem Einlesen der 
+Erst-Diskette werden Sie zum Einlegen der Zweit-Diskette aufgefordert.
+
+<FONT COLOR="blue">DISKCOMP a: b: /z</FONT> 
+
+vergleicht die Diskette in A: mit der Diskette in B:. Die Aufforderung zum
+Einlegen der Diskette in B wird nicht gezeigt - beim Start von DISKCOMP
+sollten sich beide Disketten bereits im Laufwerk befinden.
+
+<FONT COLOR="green">Anmerkung</FONT>
+
+Beide Disketten mssen das gleiche Format haben. Untersttzt werden nur die 
+Laufwerke A: und B:.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

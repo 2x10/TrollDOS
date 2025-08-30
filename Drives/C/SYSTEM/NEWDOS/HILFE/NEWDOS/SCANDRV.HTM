@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>SCANDRIVE</TITLE></HEAD>
+<BODY><A NAME="top">
+<BR><FONT COLOR=teal>SCANDRIVE</FONT>
+<HR noshade color="silver">
+<A HREF="../../index.htm">Zurck zum Hilfe-Index</A>
+<HR noshade color="silver"><PRE>prft Datentr„ger und kopiert besch„digte Dateien in ein Sicherungs-
+verzeichnis namens SCANDRV.XXX.
+
+<FONT COLOR="maroon">Syntax</FONT>
+
+<FONT COLOR="blue">SCANDRV [Laufwerk(e)] [Sicherungslaufwerk] [/n /o]</FONT>
+
+<FONT COLOR="blue">[Laufwerk(e)]</FONT>
+Geben Sie hier das oder die Laufwerke an, die Scandrive berprfen soll.
+Mehrere Laufwerksangaben mssen mit einem + verbunden werden, z.B.
+A:+C:+D:.
+
+<FONT COLOR="blue">[Sicherungslaufwerk]</FONT>
+Laufwerk, auf dem ScanDrive die Rettungskopien von fehlerhaften Dateien
+ablegen kann. 
+
+/o  Scandrive l„uft ohne Benutzerabfrage durch (vorteilhaft im Batchbetrieb)
+    und legt eine kurze Meldung in der <A HREF="logfile.htm">LOG-Datei</A> ab, wenn ein Fehler
+    gefunden wurde.
+
+/w  Scandrive l„uft durch - ist jedoch ein Fehler gefunden worden, wartet 
+    Scandrive am Ende und zeigt den Prfbericht.
+    
+Voraussetzung fr einen ungehinderten Durchlauf ist jedoch, daá Sie alle 
+o.g. Laufwerke vollst„ndig angegeben haben.<HR 
+
+noshade color="silver"><FONT COLOR="maroon">Anwendungsgebiete</FONT>
+
+Zum Wiederherstellen von Dateien auf besch„digten Disketten wird in der Regel
+der Einsatz von <A HREF="help:scandisk">SCANDISK</A> oder „hnlichen Programmen empfohlen. Scandrive 
+arbeitet nach einem anderen Prinzip, das in speziellen F„llen erfolgreicher 
+ist. Bevor Sie eine Diskette mit ScanDisk bearbeiten, sollten Sie es mit 
+Scandrive versuchen. Scandisk markiert defekte Sektoren als gesperrt und 
+darauf kann Scandrive dann nicht mehr zugreifen. Die Praxis hat gezeigt, daá
+solche Sektoren nach ein paar Wiederholungsversuchen oft doch noch lesbar 
+waren. Scandrive ver„ndert den besch„digten Datentr„ger NICHT und kann daher
+gefahrlos eingesetzt werden, bevor ScanDisk zum Einsatz kommt.
+
+Scandrive fertigt ber den gesamten Scanvorgang einen detaillierten Bericht
+an, der am Ende angezeigt wird. Sie k”nnen den Bericht mit Taste F4 in das
+<A HREF="clipbrd.htm">Clipboard</A> kopieren. Die Berichtsdatei selbst heiát SCANDRV.LOG,
+befindet sich im New-DOS-Verzeichnis und bleibt solange dort erhalten, bis
+sie bei einem erneuten Scanvorgang neu angelegt wird.
+
+Scandrive kann auch auf virtuellen Laufwerken (<A HREF="help:append">Append</A>), RAMDisks, 
+Netzlaufwerken, CD-ROM u.„. eingesetzt werden. Sollte die Prfung einer CD
+anf„nglich nicht m”glich sein, fahren Sie das Laufwerks-"Shuttle" bitte 
+einmal aus- und wieder ein und versuchen Sie es danach erneut.
+
+St”át Scandrive beim Sichern einer besch„digten Datei mittendrin auf nicht 
+lesbare Stellen (Sektoren), fllt es diesen Bereich mit dem Zeichen #.
+Die Zieldatei ist am Ende also genauso groá wie die Quelldatei.
+
+<FONT COLOR="green"><A HREF="help:if">Errorlevel</A> fr den Batchbetrieb</FONT> 
+0   - Scandrive hat keine Fehler gefunden und sich normal beendet
+2   - interner Fehler (Speichermangel oder das Rettungs-Verzeichnis 
+      SCANDRV.XXX oder die Log-Datei SCANDRV.LOG konnte nicht angelegt 
+      werden).
+3   - Vorzeitiger Abbruch durch Anwender
+254 - Scandrive hat Probleme gefunden, konnte sie aber vollst„ndig beheben
+255 - Scandrive hat Probleme gefunden, konnte sie aber nicht alle beheben
+
+Die Errorlevel entsprechend weitgehend denen von SCANDISK.</PRE>
+<HR noshade color="silver">
+<A HREF="#top"> Zurck zum Anfang</A>
+</BODY></HTML>

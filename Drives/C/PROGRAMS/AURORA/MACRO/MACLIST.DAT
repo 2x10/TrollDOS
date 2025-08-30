@@ -1,0 +1,63 @@
+ Alarm      Set up to four alarms
+ Ascii2     2-Dimensional Ascii chart
+ Bookauto   Save and Restore bookmarks automatically
+ Booklist   List all bookmarks
+ Calcpad    Calculator
+ Calen4     Four-month calendar
+ Calendar   One-month calendar
+ Capital    Capitalize words
+ Clipview   Clipboard Viewer
+ Clock      Digital clock with large digits
+ Clrchart   Color chart
+ Compare    Compare two files
+ Compress   Display occurrences of a search string by folding lines
+ Countchr   Count the characters in a file or block
+ Countlin   Count the lines in multiple files
+ Countwrd   Count the words in a file or block
+ Delblank   Delete blank Lines in a file or block
+ Deldup     Delete duplicate lines in a file
+ Deskopen   Open and restore a previously saved desktop layout
+ Desksave   Save the current desktop layout to a file
+ Dlgdemo    Dialog Box demo with dialog box controls
+ Drawbox    Draw a box around a column mark
+ Fattr      Change file/directory attributes
+ Fcopy      Copy file/directory
+ Filestat   Display file or directory statistics
+ Fillnum    Fill a block with a numeric sequence
+ Findo      Find Occurrences of a string or pattern
+ Globrepl   Global multi-file search and replace
+ Hilitewd   Highlight the word at the cursor
+ Install    Full Installation
+ Installs   Lite Installation
+ Keycodes   Display various keycodes for any key pressed
+ Keydef     Display the assigned state of each assignable key
+ Logevent   Start editor event log or display event log
+ Longdate   Display the current date and time in long format
+ Longline   Go to the longest line in the current file
+ Machine    Examples for calling 80x86 machine code
+ Palette    Change the color palette
+ Paragrph   Find next/prev paragraph
+ Projopen   Open and restore a previously saved project
+ Projsave   Save the current editor state as a project
+ Ruler      Insert a ruler line above the current line
+ Saveall    Save all open files
+ Scan       Scan files for a string
+ Scan2      Find all occurrences of a string in a directory/filespec
+ Scrsaver   Screen Saver install or remove
+ Sieve      Sieve of Eratosthenes demo
+ Sortstr    Sort a string
+ Status     Custom status line example install or remove
+ Stopwtch   Stopwatch timer
+ Style      Change the editor keyboard/menu style
+ Sumblock   Add up numbers in a marked block
+ Synch      Synchronized scrolling toggle
+ Tabauto    Expand tabs automatically when opening files
+ Tabs       Detab a file or block
+ Tabs e     Entab a file or block
+ Template   Template Editing install or remove
+ Tree       Directory Tree
+ Trimline   Trim trailing blanks and tabs
+ Vcursor    Vertical cursor line install or remove
+ Where      Where-is utility: locate files on any disk drive
+ Winclock   Edit window clock install or remove
+ ZapEm      Shoot'em-up game for those unproductive sessions

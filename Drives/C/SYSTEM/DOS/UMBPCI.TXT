@@ -1,0 +1,451 @@
+
+UMBPCI V3.63
+============
+
+
+Original 8/91-11/95 c't-Magazin fuer Computertechnik
+
+
+Bugfixes und Anpassung fuer alle neueren Chipsaetze, fuer die Datenblaetter
+aufzutreiben waren, Intel Pentium Pro und AMD K7
+02/1997-12/2004 Uwe Sieber
+
+=======================================================================
+
+UMBPCI.SYS ist ein Upper-Memory-Treiber fuer MS-DOS ab Version 5.0, und
+damit ein Ersatz fuer EMM386.
+UMBPCI erweitert den XMS-Treiber HIMEM.SYS um die Funktion 'Request
+XMS-UMB'. Das ist genau das, was EMM386 macht, wenn er mit dem Parameter
+RAM oder NOEMS geladen wird.
+
+UMBPCI 'missbraucht' fuer die UMBs Speicher, der fuer's Shadow-RAM gedacht
+und normalerweise abgeschaltet ist, also brachliegt. Er selbst belegt nur
+160 Bytes - das ist alles. UMBPCI ist abhÑngig vom verwendeten Chipsatz,
+erzeugt weniger UMBs als EMM386 und bereitet verschiedene Probleme...
+
+EMM386 holt sich den Speicher fuer die UMBs dagegen vom Exteded Memory,
+braucht selbst noch gut 150K XMS, 4K unteren DOS-Speicher, sowie 7K UMBs
+und schaltet die CPU in den Protected Mode, um die Memory Management Unit
+(MMU) der >386-CPUs benutzten zu koennen.
+
+
+Die Ur-Version dieses Treibers ist UMBADD, stammt von 1991 und ist von
+Peter Siering (c't Magazin). Fuer freie Speicherbloecke musste man noch
+selbst sorgen.
+Ende 1995 kam dann UMBPCI, der den /I= Parameter kennt und ohne weiteres
+Zutun auf den damals aktuellen Intel-Chipsaetzen funktionierte.
+
+Seit damals gibt es von der c't keine frei verfuegbaren Updates.
+
+
+Diese Version von UMBPCI unterstuetzt zusaetzlich alle gÑngigen Chipsaetze
+fuer die Datenblaetter aufzutreiben waren, ist optimiert fÅr Intel Pentium Pro
+und hoeher, sowie fÅr AMDs K7 und K8.
+
+
+Dank freundlicher und geduldiger Unterstuetzung von Uwe Milde
+sind die UMBs auch bei Rechnern mit Penium Pro, Pentium II, III, 4 cacheable.
+
+Dank Sergei Shtylyov und Serg Svetlov funktioniert UMBPCI seit Version 3.50
+auch mit AMDs K7-Serie (Athlons, Durons) und warscheinlich auch auf den K8-CPUs
+(Opterons, Athlon 64).
+
+Ab Version 3.54 funktioniert UMBPCI auch wieder mit VMware und AMD K7/K8.
+VMWare unterstuetzt (noch?) nicht das Aktivieren von Shadow-RAM mittels der
+MTRRs des AMD K7/K8. Es simuliert aber immer einen Intel-Chipsatz und auf den
+greift UMBPCI zurueck.
+
+Der Intel 420EX 'Aries' wird erkannt, funktionierte in einem ersten
+Test aber aus unbekanntem Grund nicht, ebenso SiS-491 und SiS-501.
+Das ist wohl beim allen PCI-Chipsaetzen der ersten Generation so, mangels
+vollstaendigem PCI-BIOS.
+
+Beim 450KX/GX koennte es Probleme geben, weil PCI-Bridge und
+Memory-Controller separat programmiert werden koennen.
+Bei einem ersten Test ging es leider nicht. Wenn mir jemand
+verraten kann, wie man hier ordentlich Shadow-RAM freischaltet,
+moege er es tun.
+
+Die Bugfixes aus c't 2/96 sind drin - der 430FX funktioniert
+wirklich.
+
+Ausserdem wurde gegenueber dem c't-Original folgendes veraendert:
+
+-konkrete Meldung, welcher Chipsatz bzw. wenn kein
+ unterstuetzter Chipsatz gefunden wurde
+-als Trennzeichen fuer die Bereichsangaben geht jetzt
+ wirklich nur der Trennstrich (bisher konnte man jedes
+ beliebige Zeichen nehmen)
+-korrekte Nennung des Formates der Bereichsangaben im
+ Fehlerfall (bisher fehlten die '='-Zeichen)
+-der Treiber wird jetzt durchgaengig UMBPCI genannt
+ (bisher tauchte noch hier und da noch UMBADD auf)
+
+
+Mit der UnterstÅtzung fÅr PPro und hoeher habe ich Versionsnummern eingefuehrt.
+Ich habe mit 2.xx begonnen, weil die PPro-Unterstuetzung genug Arbeit
+fuer eine neue Hauptversionsnummer gemacht hat und ich damals nichtmal einen
+hatte ;-)
+
+Mit der automatischen Suche nach freien Bereichen bin ich zu 3.xx
+uebergegangen.
+
+
+
+Noch einige (wichtige) Hinweise:
+
+
+CONFIG.SYS
+----------
+
+HIMEM.SYS muss in der CONFIG.SYS stehen, auch wenn das DOS 7.x von
+Win95 HIMEM.SYS automatisch laed. Das tut es naemlich erst als letzten
+Treiber - also in jedem Fall nach UMBPCI.
+UMBPCI muss hinter HIMEM.SYS stehen. Die Position des Schalters DOS=HIGH,UMB
+ist dagegen voellig egal (wie bei allen Schaltern in der config.sys).
+Der /I= Parameter  der einzige den UMBPCI kennt, er ist ab V3.00 nicht mehr
+Plicht - UMBPCI sucht sich selbst die freien Bereiche. Wird der Parameter /I=
+benutzt, wird die Automatik vollstaendig deaktiviert, nur die angegebenen
+Bereiche werden benutzt.
+Die unterste zulaessige Adresse ist C800 (C000 fuer Rechner ohne VGA-Karte),
+die hoechste EFFF. Es sind nur ganze 16K-Bloecke erlaubt, bei AMD K7/K8 
+4K-Bloecke.
+EMM386 kann zur Bereitstellung von EMS eingesetzt werden, sollte dann aber
+hinter UMBPCI stehen. 64K Platz fuer den Pageframe muss UMBPCI natuerlich
+lassen, am besten das E-Segment, wenn man nicht gerade auf das bei vielen 
+Intel-ChipsÑtzen nur dort moegliche ISA-DMA angewiesen ist (s.unten).
+
+Beispiel fuer die CONFIG.SYS und der Annahme, dass Win9x in c:\windows
+und UMBPCI in c:\umbpci liegt:
+
+dos=high,umb
+device=c:\windows\himem.sys
+device=c:\umbpci\umbpci.sys
+devicehigh=
+installhigh=
+
+
+Mit EMM386 fÅr EMS auf VGA-Karten mit 32K VGA BIOS.
+
+device=c:\windows\himem.sys /testmem:off /q
+device=c:\umbpci\umbpci.sys /i=d800-efff
+device=c:\windows\emm386.exe x=d800-efff x=b800-c7ff i=c800-d7ff i=b000-b7ff ram
+
+
+Mit EMM386 fÅr EMS auf VGA-Karten mit 48K VGA BIOS (z.B. GeForce).
+
+device=c:\windows\himem.sys /testmem:off /q
+device=c:\umbpci\umbpci.sys /i=dc00-efff
+device=c:\windows\emm386.exe x=dc00-efff x=b800-c7ff i=cc00-dbff i=b000-b7ff ram
+
+
+
+
+
+----------------------------------------------------------------------------
+
+Nicht cacheable UMBs
+--------------------
+
+Auf Sockel-7-Chipsaetzen die nicht von Intel stammen sind die UMBs nicht
+cacheable und damit reichlich langsam.
+Sie reichen sicher fuer CD-ROM-Treiber samt MSCDEX, sowie und Maus-
+und Tastatur-Treiber.
+
+Da Win95 aber automatisch performancetraechtige Sachen wie Buffers, Files
+und Stacks hochlaed, sollte man das ggf. unterbinden, indem man in der
+CONFIG.SYS den Schalter DOS=NOAUTO setzt. Damit werden dann auch HIMEM.SYS
+und IFSHLP.SYS nicht mehr automatisch geladen. Die muessen dann in die
+CONFIG.SYS geschrieben werden.
+
+Das koennte dann z.B. so aussehen:
+
+files=50
+buffers=20
+stacks=9,256
+dos=high, umb, noauto
+device=c:\windows\ifshlp.sys
+device=c:\windows\himem.sys
+device=umbpci.sys
+devicehigh=...
+installhigh=...
+
+
+----------------------------------------------------------------------------
+
+Power Management
+----------------------
+
+Suspend to Disk funktioniert nicht wenn UMBPCI geladen ist. Vermutlich werden
+die UMBs nicht gesichert und wiederhergestellt, weil verwendeten Algorithmen
+nichts von UMBs wissen, die mit UMBPCI erzeugt wurden.
+
+
+----------------------------------------------------------------------------
+
+
+PCI Busmastering im UMB-Bereich
+---------------------------------
+
+Bei AMD K7-CPUs (Athlon, Duron) funktioniert in den UMBs kein PCI-Busmastering.
+Separate PCI IDE-Controller, z.B. von Promise, Highpoint u.a. arbeiten dank
+ihres speziellen BIOS auch unter DOS mit PCI-Busmastering.
+Beim MS-DOS 7.x von Windows 95 und hîher hilft hier manchmal DoubleBuffer=1 in
+der MSDOS.SYS. Bei anderen DOS-Versionen gibts die gleichen Probleme wie sonst
+mit ISA-DMA.
+
+
+----------------------------------------------------------------------------
+
+
+ISA-DMA im UMB-Bereich
+----------------------
+
+Je nach Chipsatz funktoniert in Teilen oder im gesamten UMB-Bereich kein
+ISA-DMA, ueber das z.B. Zugriffe auf Floppy-Laufwerke laufen. Bei VIA-
+Chipsaetzen ab VP3 gibt es keine Probleme, bei den meisten Intel-Chipsaetzen
+der 400er-Serie funktioniert ISA-DMA nur im E-Segment und denen anderer
+Hersteller geht ISA-DMA garnicht.
+
+In UMBs die kein ISA-DMA koennen, duerfen also keine Programme geladen werden,
+die etwas mit ISA-DMA zu tun haben. Das sind insbesondere Floppy-Caches,
+Treiber zum SCSI-Controller Adaptec 1542, sowie Soundblaster-Treiber
+(falls es sowas gibt...)
+
+SMARTDRV sollte wegen dieser Einschraenkung ggf. mittels Parameter /L in
+den unteren Speicher geladen werden. Es kann aber trotzdem 
+LOADHIGH bzw. INSTALLHIGH benutzt werden. Es scheint, dass SMARTDRV
+dann nur seine Transfer-Puffer in den unteren Speicher laed, der Rest aber
+im UMB landet:
+
+INSTALLHIGH=C:\WINDOWS\SMARTDRV.EXE 4096 64 /L
+
+So belegt SMARTDRV genau 16K unteren und ca. 20K hohen Speicher. Mit
+den Parameter /E und /B lÑsst sich der Speicherverbrauch reduzieren:
+Minimalversion mit moeglichem Performance-Verlust, die den Speicherverbrauch
+auf 2048 Byte unteren und ca. 16KB hohen Speicher reduziert:
+
+INSTALLHIGH=C:\WINDOWS\SMARTDRV.EXE 4096 64 /L /E:1024 /B:2048 
+
+Der B(uffer)-Wert muss ein Vielfaches des E(lemet)-Wertes sein.
+
+Entgegen den frueher an dieser Stelle gemachten Angaben darf er 
+NICHT gleich sein. Smartdrv akzeptiert dies zwar, es soll dann 
+vereinzelt zu Datenfehlern kommen.
+
+1024 ist etwas extrem und verhindert das cachen von CDROMs weil ein Sektor
+auf einer CDROM 2048 Bytes gross ist. /B:4096 /E:2048 sind ein guter Kompromiss
+und bremsen allenfalls Uralt-Rechner ein wenig.
+
+Auf grossen FAT32-Laufwerken kann das Reduzieren von Buffer- und Elementgroesse
+zu Datenfehlern fÅhren. Ein 
+dir xxxx.* /s 
+aus dem Stammverzeichnis ausgefÅhrt, ist ein guter Test. Bei Problemen gibt dann
+einen 'Fehler in der Verzeichnisstruktur' oder so.
+
+Default scheint uebrigens /E:8192 /B:16384 zu sein.
+
+
+
+Alternativ kann man auch den Floppy-Cache per A- B- abschalten oder bei
+passenden Intel-Chipsaetzen dafuer sorgen, dass SMARTDRV im E-Segment landet.
+
+Um auf Intel-Chipsaetzen ein gezieltes Laden ins E-Segment zu ermoeglichen,
+kann man durch separate Angabe des E-Segments erreichen, dass dafuer ein
+extra UMB angelegt wird (z.B: /I=c800-dfff /I=e000-efff). In der CONFIG.SYS
+kann man dann mit DEVICE /L:2 TREIBER.SYS ins E-Segment laden,
+vorrausgesetzt dessen 64K reichen aus, was z.B bei SMARTDRV i.d.R.
+der Fall ist, also
+
+INSTALLHIGH /L:2 C:\WINDOWS\SMARTDRV.EXE 4096 64 /L
+
+
+-----------------------------------------------------------------------------
+
+CPUs / Chipsaetze und ihre bekannten Probleme:
+
+AMD K7/K8 (Athlon,       => kein ISA-DMA, kein PCI Busmastering
+Duron, Opteron)
+
+Intel
+Saturn, Mercury, Neptune => keine Probleme, ausser bei EISA-Bridge
+Neptune mit EISA-Slots   => kein ISA-DMA
+430xX, 440xX             => ISA-DMA nur im E-Segment (E000-EFFF)
+420EX, 430MX, 450xX, 810 => kein ISA-DMA
+815, 820, 830MP, 845,
+845G, 850, 860, 865      => keine Probleme
+840                      => ungetestet
+
+VIA bis VP2/97           => nicht cacheable, kein ISA-DMA
+VIA VP3, MVP3, MVP4      => nicht cacheable
+VIA Pentium2	         => keine Probleme, soweit unterstÅtzt
+VIA P4X266, P4M266       => nicht unterstuetzt, da keine Infos
+
+ALI II, III, IV, V       => nicht cacheable, ISA-DMA ok
+ALI Pentium2		 => ISA-DMA ungetestet
+
+SiS Socket7              => nicht cacheable, ISA-DMA ungetestet
+SiS Pentium2		 => kein ISA-DMA im E-Segment (E000-EFFF)
+
+
+
+
+Um die Funktion von ISA-DMA zu ueberpruefen ist DMACHK.COM gedacht
+(Dank an Heiko Nocon). Dazu ist UMBPCI in der CONFIG.SYS zu laden.
+Wo ist egal, ebenso ob die UMBs benutzt werden. DMACHK zeigt dann,
+in welchen Bereichen ISA-DMA funktioniert.
+
+Wenn UMBPCI auf einer Bootdisk (Floppy) benutzt wird, sollten nur
+Bereiche benutzt werden, in denen ISA-DMA funktioniert. Auf neueren
+Intel-Chipsaetzen (430xX, 440xX) ist der geeignetet Parameter fÅr UMBPCI
+/I=E000-EFFF. Auf Chipsaetzen die kein ISA-DMA in den UMBs beherrschen,
+sollte UMBPCI nicht auf Bootdisketten eingesetzt werden. Beim
+ersten Versuch einen Treiber oder ein Programm > 512 Bytes hochzuladen,
+bleibt der Rechner stehen.
+Konkret ist es so, dass man kein Programm direkt von Diskette in einen
+betroffenen UMB laden kann. Programme die sich selbst hochladen
+sind dagegen kein Problem.
+Auf einem Board mit NVidia nForce2 ging es trozdem - keine Ahnung warum...
+
+Die Probleme mit Floppy-Zugriffen und ISA-DMA lassen sich mit dem Treiber
+LOWDMA von Henrik Haftmann umgehen, siehe LOWDMA.TXT.
+
+
+Win9x bindet aller verbliebenen UMBs in seine Speicherverwaltung
+als normalen Speicher ein. Wie oben beschrieben ist der Speicher
+aber oft nicht ganz normal...
+Um Win9x von den UMBs fernzuhalten habe ich UMBFILL geschrieben.
+Es belegt alle freien UMBs. Es sollte ggf. nach allen residenten
+Programmen in der AUTOEXEC.BAT stehen. Es darf selbst nicht
+hochgeladen werden.
+Wer ein Programm schreiben kann, das hochgeaden alle UMBs belegt,
+moege sich bei mir melden...
+
+Die Zeile LocalLoadHigh=1 im Abschnitt [386Enh] der SYSTEM.INI
+fuehrt dazu, dass Win9x nur einen kleinen Teil der UMBs benutzt,
+was wohl unkritisch ist. Verlaessliche Infos dazu habe ich aber
+nicht.
+
+
+Die 'Suspend to RAM'-Funktion funtioniert offenbar nicht, wenn
+UMBPCI geladen ist. Vermutlich werden die von UMBPCI erzeugten
+UMBs beim Sichern und Wiederherstellen Åbersehen...
+
+
+
+DR DOS / Novell DOS / Caldera Open DOS
+--------------------------------------
+
+Findet UMBPCI beim Laden keinen XMS-Treiber ohne die Funktion
+'Request XMS-UMB', sprich keinen HIMEM.SYS aus MS-DOS, werden
+die Speicherbereiche nur aktiviert und UMBPCI beendet sich.
+Aus den aktivierten Speicherbereichen kann dann z.B. HIDOS.SYS
+aus DR-DOS UMBs machen. Ggf. kînnen HIDOS/HIMEM noch die
+Parameter 
+/chipset=ram /use=c800-efff
+mitgegeben werden, wobei beim Parameter use= genau das stehen
+sollte, was UMBPCI beim Start meldet bzw. was UMBPCI mit dem
+Parameter /I= genannt wurde.
+
+Ist die XMS-Funktion 'Request XMS-UMB' dagegen schon vorhanden,
+bricht UMBPCI mit Fehlermeldung ab.
+
+
+Windows ME
+----------
+
+Bei Windows ME ist der DOS-Teil weitgehend lahmgelegt, auch die
+CONFIG.SYS wird nicht abgearbeitet. 
+
+Mit der von Windows ME und XP erzeugten Boot-Diskette hat
+UMBPCI beim mir funktioniert. Es gibt aber auch Berichte, 
+dass es beim Laden stehenbleibt.
+HIMEM.SYS ist hier in den DOS-Kern integriert, kann also
+in der CONFIG.SYS entfallen.
+
+
+
+
+
+Belegte UMB-Bereiche
+--------------------
+
+Wenn, warum auch immer, der Parameter /I= benutzt wird, ist man
+selbst dafuer verantwortlich, dass die angegebenen Bereiche wirklich
+frei sind.
+Benutzte UMB-Bereiche sind natuerlich von der Nutzung durch
+UMBPCI auszuschliessen. Wenn z.B. ein 18K grosses Adaptec-SCSI-BIOS
+bei c800-cdff liegt, muss der Anfangsparameter fuer UMBPCI mindestens
+d000 sein, da UMBPCI nur ganze 16K-Bloecke verwalten kann. Bei AMD K7/K8
+sieht es dank 4K-Bloeken besser aus - hier kann es bei ceff losgehen.
+                                                                     
+öberlappen sich BIOS und UMB-Parameter wird der entsprechende Teil
+des BIOS gnadenlos ueberschrieben, was unweigerlich zum Absturz
+fuehrt, wenn der ueberschriebene BIOS-Teil noch benutzt wird.
+
+Vor der ersten Benutzung des Paramters /I= sollte UMBPCI zunaechst
+ohne Parameter geladen, und dessen Meldung beim booten beobachtet
+werden, z.B.
+Benutze CC00-EFFF
+
+Das hiesse z.B., dass bei C800-CBFF etwas ROM liegt, z.B. fuer eine
+USB-Tastatur.
+Will man z.B. 64K freilassen, damit Windows in der DOS-Box EMS
+anbieten kann, waere der geeignete Parameter /I=CC00-DFFF
+
+Es kann auch bei sauber gebootetem System, unter reinem DOS UMBCHK.EXE
+gestartet werden.
+Es findet belegte Bereiche und gibt eine Empfehlung fÅr die UMBPCI-
+Kommandozeile.
+
+
+EMS Page-Frame
+--------------
+
+Wenn der gesamte obere Speicher von UMBPCI benutzt wird, ist natuerlich
+kein Platz mehr fuer eine EMS-Page-Frame, so dass weder EMM386 unter DOS 
+noch Windows 3.1 oder Windows 95 im DOS-Fenster EMS bereitstellen koennen.
+Dafuer muessen 64K am Anfang oder am Ende des oberen Speichers von der
+Nutzung durch UMBPCI.SYS ausschliessen, und das jeweilige Programm am
+besten aus Windows heraus starten:
+In Win31 braucht man fuer EMS ein PIF-File, in Win95 sollte das automatisch
+gehen.
+
+Beispiele (Voraussetzung: Bereich von C800 bis EFFF ist ungenutzt):
+
+/i=d800-efff, so dass Windows c800-d7ff fuer 64K Page-Frame hat,
+oder /i=c800-dfff, fuer 64K Page-Frame bei e000-efff, was man
+Windows ggf. in der SYSTEM.INI im Abschnitt [386Enh] mit
+EMMPageFrame=C800 bzw. E000 nochmal unter die Nase reiben kann.
+Laesst man dagegen nichts frei, wird Windows sich zu Recht
+weigern EMS bereitzustellen, ebenso wenn die Luecke mittendrin
+ist. Dann hilft auch EMMPageFrame=xxxx nicht.
+
+Win95 kommt dann unter 'Eigenschaften fuer DOS-Prompt' mit einem
+Spruch 'Dieser Computer ist nicht fuer Expansionsspeicher
+in MS-DOS Sitzungen konfiguriert' oder so aehnlich.
+
+Es kann auch vorkommen, dass Windows im DOS-Fenster freien EMS-
+Speicher meldet, dieser aber wegen fehlender Page-Frame nicht
+funktioniert: MSD.EXE meldet dann "no Page Frame", andere 
+Programme fallen moeglicherweise auf die Nase.
+
+
+
+Homepage:
+
+http://www.uwe-sieber.de
+
+oder zur Not bei
+
+http://www.altavista.com
+nach "Uwe Sieber's Homepage" oder auch "UMBPCI" suchen.
+
+
+
+eMail:
+
+mail@uwe-sieber.de
+
+
+Uwe Sieber
